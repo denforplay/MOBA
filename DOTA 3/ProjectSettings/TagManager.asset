@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: OverlayUI
+    uniqueID: 2908260885
+    locked: 0
+  - name: World
+    uniqueID: 675223465
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

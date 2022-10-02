@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Models.Factories
 {
-    public class PopupFactory<T> : PlaceholderFactory<UnityEngine.Object, Transform, T> where T : Popup
+    public class PopupFactory<T> : PlaceholderFactory<Object, Transform, T> where T : Popup
     {
         readonly DiContainer _container;
 

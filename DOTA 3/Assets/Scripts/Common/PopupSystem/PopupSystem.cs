@@ -37,7 +37,7 @@ namespace Common.PopupSystem
         public T SpawnPopup<T>(int layer = 0) where T : Popup
         {
             Popup popupPrefab = _popupSystemConfig.PopupPrefabs.Find(a => a.GetType() == typeof(T));
-            var canvas = _canvases.Find(x => x.sortingOrder == layer);
+            var canvas = _canvases[layer];
             Popup popup = _container.Resolve<PopupFactory<T>>().Create(popupPrefab, canvas.transform);
             popup.Closing += (popup) => DeletePopUp();
             _popups.Push(popup);

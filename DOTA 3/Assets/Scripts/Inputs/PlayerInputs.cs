@@ -35,6 +35,33 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseFirstSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""768f87cf-f673-40b5-bfc9-4819fecbc097"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseSecondSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2c7f207-79e6-427a-8e54-ad5ff6f983fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseThirdSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b283b8e-7fb8-407e-96d1-773b1740cc89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +75,39 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05aa9e2c-dc81-4e26-b942-aa4a6279f751"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseFirstSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9aa38d6b-cef7-43dc-9fbd-8502d6165a94"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseSecondSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f38da2a-afb8-4949-a7d3-19b149edfaa4"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseThirdSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +117,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         // Character
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
+        m_Character_UseFirstSkill = m_Character.FindAction("UseFirstSkill", throwIfNotFound: true);
+        m_Character_UseSecondSkill = m_Character.FindAction("UseSecondSkill", throwIfNotFound: true);
+        m_Character_UseThirdSkill = m_Character.FindAction("UseThirdSkill", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -117,11 +180,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Character;
     private ICharacterActions m_CharacterActionsCallbackInterface;
     private readonly InputAction m_Character_Move;
+    private readonly InputAction m_Character_UseFirstSkill;
+    private readonly InputAction m_Character_UseSecondSkill;
+    private readonly InputAction m_Character_UseThirdSkill;
     public struct CharacterActions
     {
         private @PlayerInputs m_Wrapper;
         public CharacterActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Character_Move;
+        public InputAction @UseFirstSkill => m_Wrapper.m_Character_UseFirstSkill;
+        public InputAction @UseSecondSkill => m_Wrapper.m_Character_UseSecondSkill;
+        public InputAction @UseThirdSkill => m_Wrapper.m_Character_UseThirdSkill;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -134,6 +203,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
+                @UseFirstSkill.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseFirstSkill;
+                @UseFirstSkill.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseFirstSkill;
+                @UseFirstSkill.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseFirstSkill;
+                @UseSecondSkill.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseSecondSkill;
+                @UseSecondSkill.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseSecondSkill;
+                @UseSecondSkill.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseSecondSkill;
+                @UseThirdSkill.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseThirdSkill;
+                @UseThirdSkill.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseThirdSkill;
+                @UseThirdSkill.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseThirdSkill;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -141,6 +219,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @UseFirstSkill.started += instance.OnUseFirstSkill;
+                @UseFirstSkill.performed += instance.OnUseFirstSkill;
+                @UseFirstSkill.canceled += instance.OnUseFirstSkill;
+                @UseSecondSkill.started += instance.OnUseSecondSkill;
+                @UseSecondSkill.performed += instance.OnUseSecondSkill;
+                @UseSecondSkill.canceled += instance.OnUseSecondSkill;
+                @UseThirdSkill.started += instance.OnUseThirdSkill;
+                @UseThirdSkill.performed += instance.OnUseThirdSkill;
+                @UseThirdSkill.canceled += instance.OnUseThirdSkill;
             }
         }
     }
@@ -148,5 +235,8 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     public interface ICharacterActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnUseFirstSkill(InputAction.CallbackContext context);
+        void OnUseSecondSkill(InputAction.CallbackContext context);
+        void OnUseThirdSkill(InputAction.CallbackContext context);
     }
 }

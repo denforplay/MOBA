@@ -1,4 +1,5 @@
 using Common.Abstracts;
+using Cysharp.Threading.Tasks;
 using Models;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,7 +13,8 @@ namespace Controllers
         private NavMeshAgent _navigation;
         private PlayerInputs _inputs;
         private readonly Character _controlledCharacter;
-
+        private Vector3 _skillPosition;
+        
         public CharacterController(Camera camera, NavMeshAgent navAgent, Character controlledCharacter)
         {
             _camera = camera;
@@ -28,6 +30,13 @@ namespace Controllers
             {
                 _navigation.speed = _controlledCharacter.Speed;
                 _navigation.SetDestination(hit.point);
+            }
+        }
+
+        public async UniTask ObserveFirstSkillCoordinates(Vect)
+        {
+            while (true)
+            {
             }
         }
     }
