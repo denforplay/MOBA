@@ -5,14 +5,15 @@ using Configurations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using Views.UI.Images;
 
 namespace Views.UI.Panels
 {
     public class SkillPanel : MonoBehaviour
     {
         [SerializeField] private Image _panel;
-        [SerializeField] private List<SkillImage> _skillImages;
+        [SerializeField] private List<SkillView> _skillImages;
+
+        public List<SkillView> SkillViews => _skillImages;
 
         public void SetSkill(SkillConfiguration skillConfig)
         {
@@ -26,12 +27,9 @@ namespace Views.UI.Panels
             }
         }
 
-        private void OnEnable()
+        public void ResetSkill(int skillId)
         {
-        }
-
-        private void OnDisable()
-        {
+            _skillImages.First(x => x.Id == skillId).Countdown();
         }
     }
 }

@@ -19,6 +19,13 @@ namespace Views.UI.Panels
             }
         }
 
+        public List<SkillView> SkillViews => _skillPanel.SkillViews;
+
+        public void ResetSkill(int skillId)
+        {
+            _skillPanel.ResetSkill(skillId);
+        }
+
         private void OnEnable()
         {
         }

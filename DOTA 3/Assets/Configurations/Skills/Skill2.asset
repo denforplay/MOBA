@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1
   _skillSprite: {fileID: 341611710, guid: 2ad9e28b8265520408000e374f34ce10, type: 3}
-  _countdownTime: 10
+  _countdownTime: 1
+  _skillType: 1

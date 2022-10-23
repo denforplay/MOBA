@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3adc720bf94e6a838436fe688a2eb7, type: 3}
+  m_Name: WitchDoctorInfo
+  m_EditorClassIdentifier: 
+  _id: 0
+  _speed: 5
+  _skillConfigurations:
+  - {fileID: 11400000, guid: b5242efe874db1548b0aa84e14f9aa97, type: 2}
+  - {fileID: 11400000, guid: 5b51f3ad03d5a4b4f8001454dcc8a28e, type: 2}
+  - {fileID: 11400000, guid: c17ae342fde4a964ba6d40fefd170bef, type: 2}
+  _combatType: 0
+  _attackRange: 4
+  _animations:
+  - {fileID: 11400000, guid: 4865a6fd31c29e244a75f26a2b29af91, type: 2}
+  - {fileID: 11400000, guid: 6d58671e178cddf429c55c1f61b816fe, type: 2}
+  - {fileID: 11400000, guid: 5692559ea68a0ba40ac42c78997b3411, type: 2}
+  - {fileID: 11400000, guid: 06a59c71e2490ff438ea6691f6c352f9, type: 2}
+  - {fileID: 11400000, guid: db16d40b4140a1b47a13dbfb799c7c93, type: 2}
