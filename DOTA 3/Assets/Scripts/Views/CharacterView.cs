@@ -5,7 +5,6 @@ using System.Threading;
 using Common.Abstracts;
 using Configurations;
 using Controllers;
-using Controllers.AnimationStateControllers;
 using Controllers.CombatControllers;
 using Inputs;
 using Models;
@@ -80,7 +79,7 @@ namespace Views
             var skill = Skills.FirstOrDefault(x => x.Id == skillId);
             _currentSkillControlBase = _skillControls.FirstOrDefault(x => x.SkillType == skill.SkillType);
             if (skill is null || _currentSkillControlBase is null)
-                throw new Exception("Ты что дебил блять?");
+                throw new Exception("");
 
             _cancellationToken?.Dispose();
             _cancellationToken = new CancellationTokenSource();

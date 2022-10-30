@@ -1,6 +1,5 @@
 ﻿using System;
 using Common.Enums;
-using Controllers.AnimationStateControllers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Views;
@@ -10,13 +9,13 @@ namespace Controllers.CombatControllers
 {
     public class MeleeCharacterCombatController : CharacterCombatController
     {
-        private EnemyView _previousTarget;
+        private TargetableView _previousTarget;
         
         public MeleeCharacterCombatController(CharacterController characterController, CharacterInfo characterInfo) : base(characterController, characterInfo)
         {
         }
         
-        public override void Attack(EnemyView target)
+        public override void Attack(TargetableView target)
         {
             if (target is null)
             {
@@ -28,28 +27,15 @@ namespace Controllers.CombatControllers
             
             target.SetAsTarget(true);
             _previousTarget = target;
-            
-            if (!CheckAttackRange(target))
-            {
-                var relativePosition = target.transform.position - _navigationAgent.gameObject.transform.position;
-                Quaternion rotationToLookAt = Quaternion.LookRotation(relativePosition);
-                float rotationY = Mathf.SmoothDampAngle(_navigationAgent.gameObject.transform.eulerAngles.y,
-                    rotationToLookAt.y,
-                    ref _rotateVelocity,
-                    _rotateAttackSpeed * (Time.deltaTime * 5)
-                );
 
-                _navigationAgent.gameObject.transform.eulerAngles = new Vector3(0, rotationY, 0);
-                _navigationAgent.SetDestination(_navigationAgent.gameObject.transform.position);
-                if (_canAttack)
-                {
-                    Attack();
-                    Debug.Log("Melee attack");
-                }
+            if (IsInAttackRange(_navigationAgent.transform.position, target.transform.position, _attackRange) && _canAttack)
+            {
+                UniTask.Create(Attack);
+                Debug.Log("Melee attack");
             }
         }
 
-        private async UniTask Attack()
+        protected override async UniTask Attack()
         {
             _canAttack = false;
             _characterController.SetState(AnimationType.Attack);
@@ -58,6 +44,7 @@ namespace Controllers.CombatControllers
                 Debug.Log(_characterController.GetCurrentStateInfo().normalizedTime);
                 await UniTask.Delay(TimeSpan.FromMilliseconds(50));
             }
+
             _canAttack = true;
         }
     }

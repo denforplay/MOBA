@@ -1,15 +1,15 @@
 ﻿using System;
-using Common.Abstracts;
 using Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Views;
+using Views.UI;
 
 namespace Inputs
 {
     public class EnemyTargetingInputs
     {
-        public event Action<EnemyView> OnTargetedEnemy;
+        public event Action<TargetableView> OnTargetedEnemy;
         
         private Character _currentCharacter;
         private readonly Camera _camera;
@@ -23,7 +23,7 @@ namespace Inputs
         {
             if (Physics.Raycast(_camera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var hit, Mathf.Infinity))
             {
-                if (hit.collider.TryGetComponent(out EnemyView enemy))
+                if (hit.collider.TryGetComponent(out TargetableView enemy))
                 {
                     OnTargetedEnemy?.Invoke(enemy);
                 }

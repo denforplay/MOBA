@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Common.Abstracts;
+﻿using System.Collections.Generic;
 using Common.Enums;
 using UnityEngine;
 
-namespace Controllers.AnimationStateControllers
+namespace Controllers
 {
     public class AnimationController
     {

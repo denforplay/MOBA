@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9162a90d9e1644f08cae91da82246530, type: 3}
+  m_Name: LittleCreepConfiguration
+  m_EditorClassIdentifier: 
+  _creepAnimations:
+  - {fileID: 11400000, guid: 7e9ffb8fa4b64544e9db182140c2c524, type: 2}
+  - {fileID: 11400000, guid: 85333e5b4f415f34688f3f96f19c8436, type: 2}
+  - {fileID: 11400000, guid: ac74f5be87462a34ea8a4d6fad0a03d2, type: 2}
+  _observingRadius: 10
+  _attackDistance: 3
