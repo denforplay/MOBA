@@ -2,7 +2,7 @@
 
 namespace Models.Enemies
 {
-    public class MinionEnemy : EnemyBase
+    public class Minion : EnemyBase
     {
     }
 }

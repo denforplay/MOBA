@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.AI;
 using Views;
 
-namespace Controllers.CombatControllers.AI
+namespace Controllers.CombatControllers.AI.CreepCombatAI
 {
     public abstract class AICombatControllerBase : BaseCombatController
     {

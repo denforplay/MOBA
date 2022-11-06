@@ -1,8 +1,6 @@
 ﻿using Common.Abstracts;
-using UnityEngine;
 using UnityEngine.AI;
 using Views;
-using Views.UI;
 using CharacterInfo = Configurations.Character.CharacterInfo;
 
 namespace Controllers.CombatControllers
@@ -13,11 +11,13 @@ namespace Controllers.CombatControllers
         protected float _attackRange;
         protected CharacterController _characterController;
         protected readonly NavMeshAgent _navigationAgent;
+        protected readonly CharacterInfo _characterInfo;
 
         public CharacterCombatController(CharacterController characterController, CharacterInfo characterInfo)
         {
             _attackRange = characterInfo.AttackRange;
             _characterController = characterController;
+            _characterInfo = characterInfo;
             _navigationAgent = _characterController.NavigantionAgent;
         }
 

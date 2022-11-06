@@ -1,9 +1,7 @@
 ﻿using System;
-using Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Views;
-using Views.UI;
 
 namespace Inputs
 {
@@ -11,11 +9,12 @@ namespace Inputs
     {
         public event Action<TargetableView> OnTargetedEnemy;
         
-        private Character _currentCharacter;
+        private CharacterView _currentCharacter;
         private readonly Camera _camera;
 
-        public EnemyTargetingInputs(Camera camera)
+        public EnemyTargetingInputs(Camera camera, CharacterView characterView)
         {
+            _currentCharacter = characterView;
             _camera = camera;
         }
         
@@ -23,7 +22,7 @@ namespace Inputs
         {
             if (Physics.Raycast(_camera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var hit, Mathf.Infinity))
             {
-                if (hit.collider.TryGetComponent(out TargetableView enemy))
+                if (hit.collider.TryGetComponent(out TargetableView enemy) && enemy.Team != _currentCharacter.Team)
                 {
                     OnTargetedEnemy?.Invoke(enemy);
                 }

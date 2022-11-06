@@ -1,7 +1,14 @@
-﻿namespace Common.Abstracts
+﻿using Views.Abstracts.FactoryRequirements;
+
+namespace Common.Abstracts
 {
-    public interface IFactory<out T>
+    public interface IFactoryRequirement
     {
-        T Create();
+        
+    }
+    
+    public interface IFactory<out T, in TFactoryRequirement> where TFactoryRequirement : IFactoryRequirement
+    {
+        T Create(TFactoryRequirement requirement);
     }
 }

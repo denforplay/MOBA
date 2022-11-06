@@ -23,7 +23,8 @@ namespace Controllers
         private CancellationTokenSource _cancellationObserveToken;
         private bool _isObserved = false;
         private bool _isWasObserved = false;
-        
+        private readonly CreepView _creepView;
+
         public NavMeshAgent Navigation => _navMeshAgent;
         public AnimationController AnimationController => _animationController;
 
@@ -32,8 +33,9 @@ namespace Controllers
             _animationController.ChangeAnimation(animationType);
         }
         
-        public CreepController(NavMeshAgent navMeshAgent, CreepConfiguration configuration, AnimationController animationController, WayPoint startWayPoint, Direction direction)
+        public CreepController(NavMeshAgent navMeshAgent, CreepConfiguration configuration, AnimationController animationController, WayPoint startWayPoint, Direction direction, CreepView creepView)
         {
+            _creepView = creepView;
             _animationController = animationController;
             _navMeshAgent = navMeshAgent;
             _currentWayPoint = startWayPoint;
@@ -52,13 +54,20 @@ namespace Controllers
         {
             while (!_cancellationObserveToken.IsCancellationRequested)
             {
-                var something = Physics.OverlapSphere(_navMeshAgent.transform.position, _configuration.ObservingRadius);
-                var characterView =
-                    something.FirstOrDefault(x => x.gameObject.TryGetComponent(out CharacterView _));
+                var foundedTargets = Physics.OverlapSphere(_navMeshAgent.transform.position, _configuration.ObservingRadius);
+                var target = foundedTargets.
+                    Select(x => x.GetComponent<TargetableView>()).
+                    Where(x => x is not null && x.Team != _creepView.Team).
+                    OrderBy(t => (t.transform.position - _creepView.transform.position).sqrMagnitude).
+                    FirstOrDefault();
                 
-                if (characterView is not null)
+                if (target is not null)
                 {
-                    _navMeshAgent.SetDestination(characterView.transform.position);
+                    _navMeshAgent.SetDestination(target.transform.position);
+                    if (_navMeshAgent.remainingDistance <= _configuration.AttackDistance)
+                    {
+                        OnAttack?.Invoke();
+                    }
                     
                     _isObserved = true;
                 }

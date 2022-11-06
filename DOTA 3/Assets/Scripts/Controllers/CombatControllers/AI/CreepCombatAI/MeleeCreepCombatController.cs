@@ -4,7 +4,7 @@ using Configurations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Controllers.CombatControllers.AI
+namespace Controllers.CombatControllers.AI.CreepCombatAI
 {
     public class CreepCombatController : AICombatControllerBase
     {

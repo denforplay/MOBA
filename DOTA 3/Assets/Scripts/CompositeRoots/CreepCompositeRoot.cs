@@ -6,6 +6,7 @@ using Configurations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Views;
+using Views.Abstracts.FactoryRequirements;
 using Views.Factories;
 
 namespace CompositeRoots
@@ -47,7 +48,7 @@ namespace CompositeRoots
         {
             for (int i = 0; i < packageSize; i++)
             {
-                var newCreep = _creepViewFactory.CreateOnPosition(startWayPoint.transform.position);
+                var newCreep = _creepViewFactory.CreateOnPosition(startWayPoint.transform.position, new DefaultFactoryRequirement());
                 ConfigureCreep(newCreep, direction, startWayPoint);
                 await UniTask.Delay(TimeSpan.FromSeconds(_creepSpawnConfiguration.SecondsBetweenCreep));
             }
@@ -76,6 +77,11 @@ namespace CompositeRoots
         private void ConfigureCreep(CreepView creepView, Direction direction, WayPoint wayPoint)
         {
             creepView.SetStartWayPoint(direction, wayPoint);
+            
+            if (direction == Direction.Left)
+                creepView.SetTeam(Team.Red);
+            else if (direction == Direction.Right)
+                creepView.SetTeam(Team.Blue);
         }
     }
 }

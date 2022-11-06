@@ -2,7 +2,9 @@
 {
     public enum Team
     {
+        Neutral,
         Red,
-        Blue
+        Blue,
+        Tower,
     }
 }
