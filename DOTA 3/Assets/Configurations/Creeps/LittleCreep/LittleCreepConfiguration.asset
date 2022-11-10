@@ -19,6 +19,6 @@ MonoBehaviour:
   _combatType: 0
   _observingRadius: 10
   _attackDistance: 4
-  _attackDelay: 0.7
+  _attackDelay: 0.5
   _maxHealth: 100
   _damage: 100

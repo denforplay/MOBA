@@ -12,7 +12,6 @@ namespace Controllers.CombatControllers.Character
     public class RangeCharacterCombatController : CharacterCombatController
     {
         private ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> _projectileFactory;
-        private TargetableView _previousTarget;
         private ProjectileFactoryRequirement _projectileFactoryRequirement;
 
         public void Initialize(ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> projectileFactory, ProjectileFactoryRequirement requirement)
@@ -28,41 +27,41 @@ namespace Controllers.CombatControllers.Character
         protected override async UniTask Attack(CancellationToken cancellationToken)
         {
             _canAttack = false;
-            _characterController.SetState(AnimationType.Attack);
-            var projectile = _projectileFactory.CreateOnPosition(_navigationAgent.transform.position, _projectileFactoryRequirement);
-            projectile.Rigidbody.velocity =
-                GetDirection(_navigationAgent.transform.position, _previousTarget.transform.position).normalized * 20;
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(_character.AttackDelay));
+            _navigationAgent.stoppingDistance = _character.AttackRange;
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                try
+                {
+                    if (IsInAttackRange(_navigationAgent.transform.position, _previousTarget.transform.position,
+                            _character.AttackRange))
+                    {
+                        _characterController.SetState(AnimationType.Attack);
+                        var projectile = _projectileFactory.CreateOnPosition(_navigationAgent.transform.position, _projectileFactoryRequirement);
+                        projectile.Rigidbody.velocity =
+                            GetDirection(_navigationAgent.transform.position, _previousTarget.transform.position).normalized * 20;
+                        await UniTask.Delay(TimeSpan.FromSeconds(_character.AttackDelay));
+                    }
+                    else
+                    {
+                        await UniTask.Delay(TimeSpan.FromMilliseconds(20),  cancellationToken: cancellationToken);
+                    }
+                }
+                catch (OperationCanceledException _)
+                {
+                    break;
+                }
+            }
+
+            _navigationAgent.stoppingDistance = 0;
             _canAttack = true;
         }
 
-        private Vector3 GetDirection(Vector3 from, Vector3 to)
+        private static Vector3 GetDirection(Vector3 from, Vector3 to)
         {
             var heading = to - from;
             var distance = heading.magnitude;
             var direction = heading / distance;
             return direction;
-        }
-        
-        public override void Attack(TargetableView target)
-        {
-            if (target is null)
-            {
-                if (_previousTarget is not null)
-                    _previousTarget.SetAsTarget(false);
-                
-                return;
-            }
-            
-            target.SetAsTarget(true);
-            _previousTarget = target;
-
-            if (IsInAttackRange(_navigationAgent.transform.position, target.transform.position, _character.AttackRange) && _canAttack)
-            {
-                UniTask.Create(() => Attack(CancellationToken.None));
-                Debug.Log("Melee attack");
-            }
         }
     }
 }

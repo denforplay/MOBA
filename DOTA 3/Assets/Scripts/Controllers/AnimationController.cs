@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Common.Enums;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Controllers
@@ -26,7 +28,15 @@ namespace Controllers
             _animator.Play(_animations[animationType]);
         }
 
-        public AnimatorStateInfo GetCurrentStateInfo()
+        public async UniTask CancelCurrentAnimationAsync(TimeSpan time)
+        {
+            while (GetCurrentStateInfo().normalizedTime < 1)
+            {
+                await UniTask.Delay(time);
+            }
+        }
+
+        private AnimatorStateInfo GetCurrentStateInfo()
         {
             return _animator.GetCurrentAnimatorStateInfo(0);
         }

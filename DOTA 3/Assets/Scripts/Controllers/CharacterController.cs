@@ -80,11 +80,6 @@ namespace Controllers
         {
             _animationController.ChangeAnimation(animationType);
         }
-
-        public AnimatorStateInfo GetCurrentStateInfo()
-        {
-            return _animationController.GetCurrentStateInfo();
-        }
         
         public void SetSkillUseState(int skillId, bool canBeUsed)
         {
