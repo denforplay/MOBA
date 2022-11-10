@@ -1,5 +1,8 @@
-﻿using Configurations;
+﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
+using Models.Enemies;
+using UnityEngine;
 using UnityEngine.AI;
 using Views;
 
@@ -7,30 +10,94 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
 {
     public abstract class AICombatControllerBase : BaseCombatController
     {
-        private CharacterView _targetCharacter;
-        private readonly CreepConfiguration _creepConfiguration;
+        protected TargetableView _target;
+        protected readonly Creep _creep;
         protected readonly NavMeshAgent _navMeshAgent;
-        private readonly float _attackRange;
-
-        public AICombatControllerBase(CreepController creepController, CreepConfiguration creepConfiguration)
+        private CancellationTokenSource _observingTokenSource;
+        private CancellationTokenSource _attackingTokenSource;
+        
+        public AICombatControllerBase(CreepController creepController, Creep creep)
         {
-            _attackRange = creepConfiguration.AttackDistance;
             _navMeshAgent = creepController.Navigation;
-            _creepConfiguration = creepConfiguration;
+            _creep = creep;
+            _navMeshAgent.stoppingDistance = creep.AttackDistance;
         }
 
-        public void Attack(CharacterView characterView)
+        private async UniTask ObserveAttackingDistance(TargetableView targetableView, CancellationToken cancellationToken)
         {
-            if (_targetCharacter is null)
+            try
             {
-                _targetCharacter = characterView;
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    
+                    if (IsInAttackRange(_navMeshAgent.transform.position, targetableView.transform.position,
+                            _creep.AttackDistance))
+                    {
+                        if (_canAttack)
+                        {
+                            Debug.Log("Start attack target");
+                            if (_attackingTokenSource is null)
+                                _attackingTokenSource = new CancellationTokenSource();
+
+                            UniTask.Create(() => Attack(_attackingTokenSource.Token));
+                        }
+                    }
+                    else
+                    {
+                        if (_attackingTokenSource is not null)
+                        {
+                            Debug.Log("Stop attacking target");
+                            DeatachAttacking();
+                            await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: cancellationToken);
+                        }
+                    }
+                    
+                    _navMeshAgent.SetDestination(_target.transform.position);
+                    await UniTask.Delay(TimeSpan.FromMilliseconds(25), cancellationToken: cancellationToken);
+                }
+            }
+            catch (Exception e)
+            {
+                return;
             }
             
-            if (IsInAttackRange(_navMeshAgent.transform.position, characterView.transform.position, _attackRange) &&
-                _canAttack)
-            {
-                UniTask.Create(Attack);
-            }
+        }
+
+        public void Attack(TargetableView targetableView)
+        {
+            if (targetableView is null || _target is not null)
+                return;
+
+            Debug.Log("new target");
+            _target = targetableView;
+            _target.OnUntargeted += DeatachTarget;
+            _observingTokenSource = new CancellationTokenSource();
+            UniTask.Create(() => ObserveAttackingDistance(targetableView, _observingTokenSource.Token));
+        }
+
+        private void DeatachAttacking()
+        {
+            _attackingTokenSource.Cancel();
+            _attackingTokenSource.Dispose();
+            _attackingTokenSource = null;
+        }
+
+        private void DeatachObserving()
+        {
+            _observingTokenSource.Cancel();
+            _observingTokenSource.Dispose();
+            _observingTokenSource = null;
+        }
+
+        private void DeatachTarget()
+        {
+            _target.OnUntargeted -= DeatachTarget;
+            _target = null;
+            DeatachObserving();
+            if (_attackingTokenSource is not null)
+                DeatachAttacking();
+
+            _canAttack = true;
         }
     }
 }

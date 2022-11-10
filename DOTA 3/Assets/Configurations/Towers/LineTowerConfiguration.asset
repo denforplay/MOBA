@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3108c87e5a784b09b49dda9e79ee31aa, type: 3}
   m_Name: LineTowerConfiguration
   m_EditorClassIdentifier: 
-  _health: 1000
+  _maxHeatlh: 500
   _damage: 5
   _observableRange: 15
   _rotationSpeed: 100

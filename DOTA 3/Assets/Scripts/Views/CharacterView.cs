@@ -6,7 +6,6 @@ using Common.Abstracts;
 using Common.Enums;
 using Configurations;
 using Controllers;
-using Controllers.CombatControllers;
 using Controllers.CombatControllers.Character;
 using Inputs;
 using Models;
@@ -27,37 +26,42 @@ namespace Views
         [SerializeField] private CharacterInfo _characterInfo;
         [SerializeField] private NavMeshAgent _navigationAgent;
         [SerializeField] private ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> _projectileViewFactory;
-        
+        [SerializeField] private List<SkillControlBase> _skillControls;
+
         private CharacterController _characterController;
         private CharacterCombatController _characterCombatController;
         private Character _character;
         private Camera _camera;
         private PlayerInputs _playerInputs;
-        [SerializeField] private List<SkillControlBase> _skillControls;
-
         private ISkillObserver _currentSkillObserver;
         private SkillControlBase _currentSkillControlBase;
         private CancellationTokenSource _cancellationToken;
         private EnemyTargetingInputs _targetingInputs;
         private AnimationController _animationController;
+        
         public List<SkillConfiguration> Skills => _characterInfo.SkillConfigurations;
-
         public Team Team => _targetableView.Team;
 
-        private Dictionary<CombatType, Func<CharacterController, CharacterInfo, CharacterCombatController>>
+        private Dictionary<CombatType, Func<CharacterController, Character, CharacterCombatController>>
             CombatFactory;
+
+        private void Awake()
+        {
+            _character = new Character(_characterInfo);
+            _targetableView.AttachHealthableModel(_character);
+        }
 
         public void Initialize(Camera camera)
         {
             //TODO: REFACTORING
             _targetableView.SetTeam(Team.Blue);
-            CombatFactory = new Dictionary<CombatType, Func<CharacterController, CharacterInfo, CharacterCombatController>>()
+            CombatFactory = new Dictionary<CombatType, Func<CharacterController, Character, CharacterCombatController>>()
             {
-                { CombatType.Melee, (controller, info) => new MeleeCharacterCombatController(controller, info) },
+                { CombatType.Melee, (controller, character) => new MeleeCharacterCombatController(controller, character) },
                 {
-                    CombatType.Range, (controller, info) =>
+                    CombatType.Range, (controller, character) =>
                     {
-                        var combatController = new RangeCharacterCombatController(controller, info);
+                        var combatController = new RangeCharacterCombatController(controller, character);
                         combatController.Initialize(_projectileViewFactory, new ProjectileFactoryRequirement {ProjectileType = _characterInfo.ProjectileType} );
                         return combatController;
                     }
@@ -70,11 +74,11 @@ namespace Views
             _character = new Character(_characterInfo);
             _animationController = new AnimationController(_characterInfo.AnimationsInfo, _animator);
             _characterController = new CharacterController(_camera, _navigationAgent, _character, _animationController);
-            _characterCombatController = CombatFactory[_characterInfo.CombatType].Invoke(_characterController, _characterInfo);
+            _characterCombatController = CombatFactory[_characterInfo.CombatType].Invoke(_characterController, _character);
             _playerInputs = new PlayerInputs();
-            _playerInputs.Character.Move.performed += _ => _targetingInputs.CheckTargetOnClick();
+            _playerInputs.Character.Move.canceled += _ => _targetingInputs.CheckTargetOnClick();
             _targetingInputs.OnTargetedEnemy += _characterCombatController.Attack;
-            _playerInputs.Character.Move.performed += _ => _characterController.Move();
+            _playerInputs.Character.Move.canceled += _ => _characterController.Move();
             _playerInputs.Character.UseFirstSkill.started += _ => StartObserveSkill(0);
             _playerInputs.Character.UseFirstSkill.canceled += _ => StopObserveSkill(0);
             

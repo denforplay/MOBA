@@ -1,5 +1,7 @@
 ﻿using Common.PopupSystem;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Views.UI.Panels;
 
 namespace Views.Popups
@@ -7,6 +9,8 @@ namespace Views.Popups
     public class HudPopup : Popup
     {
         [SerializeField] private HeroPanel _heroPanel;
+        [SerializeField] private Image _heroImage;
+        [SerializeField] private TextMeshProUGUI _heroName;
         
         public void Initialize(CharacterView characterView)
         {

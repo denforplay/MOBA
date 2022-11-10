@@ -10,6 +10,12 @@ namespace Configurations.Character
     {
         [SerializeField] private int _id;
         [SerializeField] private float _speed;
+        [SerializeField] private float _maxHealth;
+        [SerializeField] private float _basePhysicalDamage;
+        [SerializeField] private float _baseMagicalDamage;
+        [SerializeField] private float _baseStrength;
+        [SerializeField] private float _baseAgility;
+        [SerializeField] private float _baseIntelligence;
         [SerializeField] private List<SkillConfiguration> _skillConfigurations;
         [SerializeField] private CombatType _combatType;
         [SerializeField] private ProjectileType _projectileType;
@@ -19,6 +25,12 @@ namespace Configurations.Character
             
         private int Id => _id;
         public float Speed => _speed;
+        public float MaxHealth => _maxHealth;
+        public float BasePhysicalDamage => _basePhysicalDamage;
+        public float BaseMagicalDamage => _baseMagicalDamage;
+        public float BaseStrength => _baseStrength;
+        public float BaseIntelligence => _baseIntelligence;
+        public float BaseAgility => _baseAgility;
         public float AttackRange => _attackRange;
         public float AttackDelay => _attackDelay;
         public ProjectileType ProjectileType => _projectileType;

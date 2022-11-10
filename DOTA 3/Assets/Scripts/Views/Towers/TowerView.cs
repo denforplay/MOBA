@@ -10,6 +10,7 @@ namespace Views.Towers
 {
     public class TowerView : MonoBehaviour
     {
+        [SerializeField] private TargetableView _targetableView;
         [SerializeField] private TowerConfiguration _configuration;
         [SerializeField] private GameObject _towerHead;
         [SerializeField] private Transform _towerGun;
@@ -19,17 +20,15 @@ namespace Views.Towers
         private Tower _tower;
         private TowerCombatController _combatController;
 
+        public Transform TowerGun => _towerGun;
+        public Transform TowerHead => _towerHead.transform;
+        
         public Team Team => _team;
         private void Awake()
         {
-            _tower = new Tower()
-            {
-                Damage = _configuration.Damage,
-                Range = _configuration.ObservableRange,
-                Health = _configuration.Health,
-                ShootingDelay = _configuration.ShootDelay,
-            };
-
+            _tower = new Tower(_configuration);
+            _targetableView.AttachHealthableModel(_tower);
+            _targetableView.SetTeam(_team);
             _combatController = new TowerCombatController(this, _tower, _projectileFactory, new ProjectileFactoryRequirement{ProjectileType = ProjectileType.CannonBall});
             _combatController.OnAttack += Attack;
             _combatController.StartObserve();

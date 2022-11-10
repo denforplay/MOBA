@@ -1,4 +1,5 @@
-﻿using Common.Abstracts;
+﻿using System.Threading;
+using Common.Abstracts;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -19,6 +20,6 @@ namespace Controllers.CombatControllers
             return true;
         }
         
-        protected abstract UniTask Attack();
+        protected abstract UniTask Attack(CancellationToken cancellationToken);
     }
 }

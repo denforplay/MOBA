@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Threading;
 using Common.Enums;
-using Configurations;
 using Cysharp.Threading.Tasks;
+using Models.Enemies;
 using UnityEngine;
 
 namespace Controllers.CombatControllers.AI.CreepCombatAI
@@ -10,22 +11,30 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
     {
         private readonly CreepController _creepController;
 
-        public CreepCombatController(CreepController creepController, CreepConfiguration creepConfiguration) : base(creepController, creepConfiguration)
+        public CreepCombatController(CreepController creepController, Creep creep) : base(creepController, creep)
         {
             _creepController = creepController;
         }
 
-        protected override async UniTask Attack()
+        protected override async UniTask Attack(CancellationToken cancellationToken)
         {
             _canAttack = false;
             _creepController.SetState(AnimationType.Attack);
-            while (_creepController.AnimationController.GetCurrentStateInfo().normalizedTime < 1)
+            try
             {
-                Debug.Log(_creepController.AnimationController.GetCurrentStateInfo().normalizedTime);
-                await UniTask.Delay(TimeSpan.FromMilliseconds(50));
+                await UniTask.Delay(TimeSpan.FromSeconds(_creep.AttackDelay), cancellationToken: cancellationToken);
+                _target.ApplyDamage(_creep.Damage);
             }
-
-            _canAttack = true;
+            finally
+            {
+                while (_creepController.AnimationController.GetCurrentStateInfo().normalizedTime < 1)
+                {
+                    await UniTask.Delay(10);
+                }
+                
+                _creepController.SetState(AnimationType.Walk);
+                _canAttack = true;
+            }
         }
     }
 }

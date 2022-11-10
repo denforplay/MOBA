@@ -16,5 +16,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e9ffb8fa4b64544e9db182140c2c524, type: 2}
   - {fileID: 11400000, guid: 85333e5b4f415f34688f3f96f19c8436, type: 2}
   - {fileID: 11400000, guid: ac74f5be87462a34ea8a4d6fad0a03d2, type: 2}
+  _combatType: 0
   _observingRadius: 10
-  _attackDistance: 3
+  _attackDistance: 4
+  _attackDelay: 0.7
+  _maxHealth: 100
+  _damage: 100

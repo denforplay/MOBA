@@ -1,6 +1,4 @@
-﻿using Views.Abstracts.FactoryRequirements;
-
-namespace Common.Abstracts
+﻿namespace Common.Abstracts
 {
     public interface IFactoryRequirement
     {

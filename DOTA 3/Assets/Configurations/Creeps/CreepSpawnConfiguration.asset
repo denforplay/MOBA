@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b038256dce46328eebf55cd82e28fb, type: 3}
   m_Name: CreepSpawnConfiguration
   m_EditorClassIdentifier: 
-  _packageSize: 5
-  _secondsBetweenPackages: 25
-  _secondsBetweenCreep: 1.1
+  _packageSize: 1
+  _secondsBetweenPackages: 40
+  _secondsBetweenCreep: 2

@@ -45,8 +45,8 @@ namespace Controllers.CombatControllers.AI.TowersAI
                     FirstOrDefault();
                 if (foundedTarget is not null)
                 {
-                    var direction = GetDirection(_towerView.transform.position, foundedTarget.transform.position);
-                    _towerView.RotateInDirection(direction);
+                    var direction = GetDirection(_towerView.TowerGun.position, foundedTarget.transform.position);
+                    _towerView.RotateInDirection(new Vector3(direction.x, 0, direction.z));
                     if (_canAttack)
                     {
                         UniTask.Create(() => Attack(direction));

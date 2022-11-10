@@ -1,23 +1,18 @@
-﻿using Common.Abstracts;
-using UnityEngine.AI;
+﻿using UnityEngine.AI;
 using Views;
-using CharacterInfo = Configurations.Character.CharacterInfo;
 
-namespace Controllers.CombatControllers
+namespace Controllers.CombatControllers.Character
 {
     public abstract class CharacterCombatController : BaseCombatController
     {
-        private EnemyBase _targetedEnemy;
-        protected float _attackRange;
         protected CharacterController _characterController;
         protected readonly NavMeshAgent _navigationAgent;
-        protected readonly CharacterInfo _characterInfo;
+        protected readonly Models.Character _character;
 
-        public CharacterCombatController(CharacterController characterController, CharacterInfo characterInfo)
+        public CharacterCombatController(CharacterController characterController, Models.Character character)
         {
-            _attackRange = characterInfo.AttackRange;
+            _character = character;
             _characterController = characterController;
-            _characterInfo = characterInfo;
             _navigationAgent = _characterController.NavigantionAgent;
         }
 

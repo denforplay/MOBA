@@ -90,7 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthObject: {fileID: 2988109331662850664}
-  _healthDisplayMaterial: {fileID: -876546973899608171, guid: 6b6a271b4cf90854aa6b410c0910220e, type: 3}
+  _healthMaterialPrefab: {fileID: -876546973899608171, guid: 6b6a271b4cf90854aa6b410c0910220e, type: 3}
+  _healthImage: {fileID: 2521330228651567746}
 --- !u!1 &2521330229129331051
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7e6f2cb13241c6893cb9e05acf73d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthView: {fileID: 3358793858379676628}
   _configuration: {fileID: 11400000, guid: 2b18a355b376740489426a1a6832219c, type: 2}
   _navMeshAgent: {fileID: 3725546254430638263}
   _animator: {fileID: 2988109331655440858}
@@ -198,6 +198,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minion
       objectReference: {fileID: 0}
+    - target: {fileID: 1247036299659210647, guid: 4d1309a4cc2d6cd409dbf1cf11fe5b29, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8413641619192183811, guid: 4d1309a4cc2d6cd409dbf1cf11fe5b29, type: 3}
+      propertyPath: _healthView
+      value: 
+      objectReference: {fileID: 3358793858379676628}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d1309a4cc2d6cd409dbf1cf11fe5b29, type: 3}

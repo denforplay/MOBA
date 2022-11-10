@@ -14,14 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _speed: 5
+  _maxHealth: 1000
+  _basePhysicalDamage: 10
+  _baseMagicalDamage: 10
+  _baseStrength: 2
+  _baseAgility: 2
+  _baseIntelligence: 2
   _skillConfigurations:
   - {fileID: 11400000, guid: b5242efe874db1548b0aa84e14f9aa97, type: 2}
   - {fileID: 11400000, guid: 5b51f3ad03d5a4b4f8001454dcc8a28e, type: 2}
   - {fileID: 11400000, guid: c17ae342fde4a964ba6d40fefd170bef, type: 2}
-  _combatType: 1
+  _combatType: 0
   _projectileType: 1
-  _attackRange: 19.91
-  _attackDelay: 4
+  _attackRange: 4
+  _attackDelay: 0.5
   _animations:
   - {fileID: 11400000, guid: 4865a6fd31c29e244a75f26a2b29af91, type: 2}
   - {fileID: 11400000, guid: 6d58671e178cddf429c55c1f61b816fe, type: 2}

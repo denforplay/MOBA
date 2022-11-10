@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Threading;
 using Common.Enums;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Views;
 using Views.Abstracts;
 using Views.Abstracts.FactoryRequirements;
-using CharacterInfo = Configurations.Character.CharacterInfo;
 
 namespace Controllers.CombatControllers.Character
 {
@@ -21,11 +21,11 @@ namespace Controllers.CombatControllers.Character
             _projectileFactoryRequirement = requirement;
         }
         
-        public RangeCharacterCombatController(CharacterController characterController, CharacterInfo characterInfo) : base(characterController, characterInfo)
+        public RangeCharacterCombatController(CharacterController characterController, Models.Character character) : base(characterController, character)
         {
         }
-
-        protected override async UniTask Attack()
+        
+        protected override async UniTask Attack(CancellationToken cancellationToken)
         {
             _canAttack = false;
             _characterController.SetState(AnimationType.Attack);
@@ -33,7 +33,7 @@ namespace Controllers.CombatControllers.Character
             projectile.Rigidbody.velocity =
                 GetDirection(_navigationAgent.transform.position, _previousTarget.transform.position).normalized * 20;
             
-            await UniTask.Delay(TimeSpan.FromSeconds(_characterInfo.AttackDelay));
+            await UniTask.Delay(TimeSpan.FromSeconds(_character.AttackDelay));
             _canAttack = true;
         }
 
@@ -58,9 +58,9 @@ namespace Controllers.CombatControllers.Character
             target.SetAsTarget(true);
             _previousTarget = target;
 
-            if (IsInAttackRange(_navigationAgent.transform.position, target.transform.position, _attackRange) && _canAttack)
+            if (IsInAttackRange(_navigationAgent.transform.position, target.transform.position, _character.AttackRange) && _canAttack)
             {
-                UniTask.Create(Attack);
+                UniTask.Create(() => Attack(CancellationToken.None));
                 Debug.Log("Melee attack");
             }
         }

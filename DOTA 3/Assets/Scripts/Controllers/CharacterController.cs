@@ -45,12 +45,23 @@ namespace Controllers
             var ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
             {
-                _navigation.speed = _controlledCharacter.Speed;
-                _navigation.SetDestination(hit.point);
-                _animationController.ChangeAnimation(AnimationType.Walk);
-                if (!_isMoving)
-                    ObserveMovingAnimation();
+                var distance = Vector3.Distance(_navigation.transform.position, hit.point);
+                if (distance > _navigation.stoppingDistance)
+                {
+                    _navigation.speed = _controlledCharacter.Speed;
+                    _navigation.SetDestination(hit.point);
+                    _animationController.ChangeAnimation(AnimationType.Walk);
+                    if (!_isMoving)
+                        UniTask.Create(ObserveMovingAnimation);
+                }
             }
+        }
+
+        public void MoveTo(Vector3 point)
+        {
+            _navigation.ResetPath();
+            point.y = _navigation.transform.position.y;
+            _navigation.destination = point;
         }
 
         private async UniTask ObserveMovingAnimation()
@@ -58,7 +69,7 @@ namespace Controllers
             _isMoving = true;
             while (Math.Abs(_navigation.remainingDistance - _navigation.stoppingDistance) > 0.1f)
             {
-                await UniTask.Delay(TimeSpan.FromMilliseconds(50));
+                await UniTask.Delay(TimeSpan.FromMilliseconds(10));
             }
 
             _animationController.ChangeAnimation(AnimationType.Idle);

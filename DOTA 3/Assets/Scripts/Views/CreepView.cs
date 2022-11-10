@@ -4,6 +4,7 @@ using Common.Enums;
 using Configurations;
 using Controllers;
 using Controllers.CombatControllers.AI.CreepCombatAI;
+using Models.Enemies;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +12,6 @@ namespace Views
 {
     public class CreepView : MonoBehaviour
     {
-        [SerializeField] private HealthView _healthView;
         [SerializeField] private CreepConfiguration _configuration;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private Animator _animator;
@@ -20,17 +20,25 @@ namespace Views
         private CreepController _creepController;
         private AICombatControllerBase _combatController;
         private AnimationController _animationController;
+        private Creep _creep;
 
-        private Dictionary<CombatType, Func<CreepController, CreepConfiguration, AICombatControllerBase>> _combatControllersConfiguration =
-            new Dictionary<CombatType, Func<CreepController, CreepConfiguration, AICombatControllerBase>>
+        private Dictionary<CombatType, Func<CreepController, Creep, AICombatControllerBase>> _combatControllersConfiguration =
+            new Dictionary<CombatType, Func<CreepController, Creep, AICombatControllerBase>>
             {
-                { CombatType.Melee, (controller, config) => new CreepCombatController(controller, config) },
+                { CombatType.Melee, (controller, creep) => new CreepCombatController(controller, creep) },
             };
 
         private AICombatControllerBase _creepCombatController;
 
         public Team Team => _targetableView.Team;
-        
+
+        private void Awake()
+        {
+            _creep = new Creep(_configuration);
+            _creep.OnHealthEnded += () => Destroy(this.gameObject);
+            _targetableView.AttachHealthableModel(_creep);
+        }
+
         public void SetTeam(Team team)
         {
             _targetableView.SetTeam(team);
@@ -40,8 +48,9 @@ namespace Views
         {
             _startWayPoint = wayPoint;
             _animationController = new AnimationController(_configuration.AnimationsInfo, _animator);
-            _creepController = new CreepController(_navMeshAgent, _configuration, _animationController, _startWayPoint, direction, this);
-            _creepCombatController = _combatControllersConfiguration[_configuration.CombatType].Invoke(_creepController, _configuration);
+            _creepController = new CreepController(_navMeshAgent, _creep, _animationController, _startWayPoint, direction, this);
+            _creepCombatController = _combatControllersConfiguration[_configuration.CombatType].Invoke(_creepController, _creep);
+            _creepController.OnAttack += _creepCombatController.Attack;
             _creepController.StartMove();
         }
     }
