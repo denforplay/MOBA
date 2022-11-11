@@ -4483,7 +4483,7 @@ GameObject:
   - component: {fileID: 1106048726683837611}
   - component: {fileID: 1106048726683837613}
   - component: {fileID: 1106048726683837610}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5408,6 +5408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultTower_2
       objectReference: {fileID: 0}
+    - target: {fileID: 5179254505598235294, guid: 8e936d6e75f557f42b52a4806c7c1903, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.29
+      objectReference: {fileID: 0}
     - target: {fileID: 5179254505598246722, guid: 8e936d6e75f557f42b52a4806c7c1903, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -5478,7 +5482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5240239419649272434, guid: 8e936d6e75f557f42b52a4806c7c1903, type: 3}
       propertyPath: _team
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5240239419649272434, guid: 8e936d6e75f557f42b52a4806c7c1903, type: 3}
       propertyPath: _targetableView

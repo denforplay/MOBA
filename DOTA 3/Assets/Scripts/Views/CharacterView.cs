@@ -67,11 +67,14 @@ namespace Views
                     }
                 }
             };
-            
+
             _skillControls.ForEach(x => x.gameObject.SetActive(false));
             _camera = camera;
             _targetingInputs = new EnemyTargetingInputs(_camera, this);
-            _character = new Character(_characterInfo);
+            _character = new Character(_characterInfo)
+            {
+                Team = Team.Blue
+            };
             _animationController = new AnimationController(_characterInfo.AnimationsInfo, _animator);
             _characterController = new CharacterController(_camera, _navigationAgent, _character, _animationController);
             _characterCombatController = CombatFactory[_characterInfo.CombatType].Invoke(_characterController, _character);

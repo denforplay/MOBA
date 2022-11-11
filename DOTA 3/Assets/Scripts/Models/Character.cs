@@ -61,6 +61,7 @@ namespace Models
         public float CurrentDamage => Strength * BasePhysicalDamage;
         public float MaxHealth => _maxHealth;
         public float CurrentHealth => _currentHealth;
+        public Team Team { get; set; }
         public event Action<float> OnHealthChanged;
         public event Action OnHealthEnded;
         public void ChangeHealth(float value)

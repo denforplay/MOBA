@@ -67,6 +67,7 @@ namespace Controllers
 
                     if (_previousTarget is null && target is not null)
                     {
+                        _creepView.SubscribeOnDestroy(StopObserving);
                         OnAttack?.Invoke(target);
                         _previousTarget = target;
                         _navMeshAgent.SetDestination(target.transform.position);
@@ -74,10 +75,7 @@ namespace Controllers
                     }
                     else if (target is null && _isObserved)
                     {
-                        _previousTarget.SetAsTarget(false);
-                        _previousTarget = null;
-                        _isWasObserved = true;
-                        _isObserved = false;
+                        StopObserving();
                     }
 
                     await UniTask.Delay(TimeSpan.FromSeconds(0.1));
@@ -88,6 +86,15 @@ namespace Controllers
                 throw;
             }
             
+        }
+
+        private void StopObserving()
+        {
+            _creepView.UnSubscribeOnDestroy(StopObserving);
+            _previousTarget.SetAsTarget(false);
+            _previousTarget = null;
+            _isWasObserved = true;
+            _isObserved = false;
         }
 
         private async UniTask Move()

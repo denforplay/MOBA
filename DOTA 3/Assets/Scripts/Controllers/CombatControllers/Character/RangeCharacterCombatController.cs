@@ -39,6 +39,7 @@ namespace Controllers.CombatControllers.Character
                         var projectile = _projectileFactory.CreateOnPosition(_navigationAgent.transform.position, _projectileFactoryRequirement);
                         projectile.Rigidbody.velocity =
                             GetDirection(_navigationAgent.transform.position, _previousTarget.transform.position).normalized * 20;
+                        projectile.Setup(_character.CurrentDamage, _character.Team);
                         await UniTask.Delay(TimeSpan.FromSeconds(_character.AttackDelay));
                     }
                     else

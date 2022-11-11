@@ -28,6 +28,16 @@ namespace Views
                 { CombatType.Melee, (controller, creep) => new CreepCombatController(controller, creep) },
             };
 
+        public void SubscribeOnDestroy(Action action)
+        {
+            _targetableView.Healthable.OnHealthEnded += action;
+        }
+        
+        public void UnSubscribeOnDestroy(Action action)
+        {
+            _targetableView.Healthable.OnHealthEnded -= action;
+        }
+
         private AICombatControllerBase _creepCombatController;
 
         public Team Team => _targetableView.Team;
