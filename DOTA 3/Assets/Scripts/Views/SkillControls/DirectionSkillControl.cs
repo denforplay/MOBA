@@ -1,5 +1,4 @@
-﻿using Common.Abstracts;
-using Common.Enums;
+﻿using Common.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 using Views.Abstracts;
@@ -13,8 +12,8 @@ namespace Views.SkillControls
         public override void UpdateSkillView(Vector3 newPosition)
         {
             Quaternion rotation = Quaternion.LookRotation(newPosition - transform.position);
-            rotation *= Quaternion.Euler(new Vector3(90, 0, 0));
-            _controlImage.transform.rotation = rotation;
+            rotation.eulerAngles = new Vector3(90, rotation.eulerAngles.y, rotation.eulerAngles.z);
+            _controlImage.transform.rotation = Quaternion.Lerp(rotation, _controlImage.transform.rotation, 0);
         }
 
         public override SkillType SkillType { get => SkillType.Directed; }

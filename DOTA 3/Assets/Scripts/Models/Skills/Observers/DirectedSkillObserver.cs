@@ -23,7 +23,8 @@ namespace Models.Skills.Observers
             {
                 var mousePosition = Mouse.current.position.ReadValue();
                 Ray ray = _camera.ScreenPointToRay(mousePosition);
-                if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity))
+                var layerMask = LayerMask.GetMask("Terrain");
+                if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity, layerMask))
                 {
                     var skillPosition = new Vector3(raycastHit.point.x, raycastHit.point.y, raycastHit.point.z);
                     OnObservedPositionChanged?.Invoke(skillPosition);
