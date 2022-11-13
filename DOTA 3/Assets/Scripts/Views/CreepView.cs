@@ -45,7 +45,11 @@ namespace Views
         private void Awake()
         {
             _creep = new Creep(_configuration);
-            _creep.OnHealthEnded += () => Destroy(this.gameObject);
+            _creep.OnHealthEnded += () =>
+            {
+                _creepController.Cancel();
+                Destroy(this.gameObject);
+            };
             _targetableView.AttachHealthableModel(_creep);
         }
 

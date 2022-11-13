@@ -35,8 +35,7 @@ namespace Controllers.CombatControllers.Character
 
             target.Healthable.OnHealthEnded += DeatachTarget;
             _cancellationTokenSource = new CancellationTokenSource();
-            target.SetAsTarget(true);
-            target.OnUntargeted += () => _navigationAgent.stoppingDistance = 0;
+            target.Subscribe(_character, OnUntargeted, true);
             _previousTarget = target;
             if (_canAttack)
             {
@@ -48,6 +47,11 @@ namespace Controllers.CombatControllers.Character
             }
             
             UniTask.Create(() => Move(_cancellationTokenSource.Token));
+        }
+
+        private void OnUntargeted()
+        {
+            _navigationAgent.stoppingDistance = 0;
         }
         
         protected async UniTask Move(CancellationToken cancellationToken)
@@ -79,7 +83,7 @@ namespace Controllers.CombatControllers.Character
                 _characterController.SetState(AnimationType.Walk);
                 _previousTarget.Healthable.OnHealthEnded -= DeatachTarget;
                 _cancellationTokenSource.Cancel();
-                _previousTarget.SetAsTarget(false);
+                _previousTarget.UnSubscribe(_character, true);
                 _previousTarget = null;
             }
         }

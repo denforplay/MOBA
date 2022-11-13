@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.Abstracts;
 using Common.Enums;
 using UnityEngine;
@@ -8,23 +9,68 @@ namespace Views
 {
     public class TargetableView : MonoBehaviour
     {
-        public event Action OnUntargeted;
-        
         [SerializeField] private Image _targetMark;
         [SerializeField] private HealthView _healthView;
-        
+        private Dictionary<object, Action> _isTargetFor;
+
         private IHealthable _healthable;
         
         private Team _team;
 
         public Team Team => _team;
-
-        public IHealthable Healthable => _healthable;
         
         private void Awake()
         {
             _targetMark.enabled = false;
+            _isTargetFor = new Dictionary<object, Action>();
         }
+        
+        public void Subscribe(object subscriber, Action callBack, bool isMarked = true)
+        {
+            if (!_isTargetFor.TryGetValue(subscriber, out var previousCallback))
+            {
+                if (isMarked)
+                {
+                    _targetMark.enabled = true;
+                    _targetMark.gameObject.SetActive(true);
+                }
+                _isTargetFor.Add(subscriber, callBack);
+            }
+            else
+            {
+                _isTargetFor[subscriber] += callBack;
+            }
+        }
+
+        public void UnSubscribe(object subscriber, bool isMarked)
+        {
+            _isTargetFor[subscriber]?.Invoke();
+            
+            _isTargetFor.Remove(subscriber);
+
+            if (_isTargetFor.Count == 0 && isMarked)
+            {
+                try
+                {
+                    _targetMark.enabled = false;
+                    _targetMark.gameObject.SetActive(false);
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+        
+        public void UnSubscribeAll()
+        {
+            foreach (var action in _isTargetFor.Values)
+                action?.Invoke();
+
+            _isTargetFor.Clear();
+        }
+
+        public IHealthable Healthable => _healthable;
         
         public void AttachHealthableModel(IHealthable healthable)
         {
@@ -48,14 +94,6 @@ namespace Views
         public void SetTeam(Team team)
         {
             _team = team;
-        }
-        
-        public void SetAsTarget(bool isTarget)
-        {
-            _targetMark.enabled = isTarget;
-            _targetMark.gameObject.SetActive(isTarget);
-            if (!isTarget)
-                OnUntargeted?.Invoke();
         }
     }
 }

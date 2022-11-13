@@ -65,15 +65,19 @@ namespace Controllers
                         FirstOrDefault();
                 
 
-                    if (_previousTarget is null && target is not null)
+                    if (target is not null)
                     {
-                        _creepView.SubscribeOnDestroy(StopObserving);
+                        if (_previousTarget is not null)
+                            _creepView.UnSubscribeOnDestroy(StopObservingAll);
+                        
+                        _creepView.SubscribeOnDestroy(StopObservingAll);
                         OnAttack?.Invoke(target);
                         _previousTarget = target;
-                        _navMeshAgent.SetDestination(target.transform.position);
+                        if (_navMeshAgent.enabled)
+                            _navMeshAgent.SetDestination(target.transform.position);
                         _isObserved = true;
                     }
-                    else if (target is null && _isObserved)
+                    else if (_isObserved)
                     {
                         StopObserving();
                     }
@@ -91,40 +95,71 @@ namespace Controllers
         private void StopObserving()
         {
             _creepView.UnSubscribeOnDestroy(StopObserving);
-            _previousTarget.SetAsTarget(false);
+            _previousTarget.UnSubscribe(_creep, true);
             _previousTarget = null;
             _isWasObserved = true;
             _isObserved = false;
         }
+        
+        private void StopObservingAll()
+        {
+            if (_previousTarget is not null)
+            {
+                _creepView.UnSubscribeOnDestroy(StopObservingAll);
+                _previousTarget.UnSubscribeAll();
+                _previousTarget = null;
+                _isWasObserved = true;
+                _isObserved = false;
+            }
+        }
 
         private async UniTask Move()
         {
-            while (_currentWayPoint is not null)
+            try
             {
-                if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance + 0.5 && !_isObserved)//todo: refactoring
+                while (_currentWayPoint is not null && !_cancellationObserveToken.Token.IsCancellationRequested)
                 {
-                    if (_isWasObserved)
+                    if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance + 0.5 && !_isObserved)//todo: refactoring
                     {
-                        _isWasObserved = false;
-                        _navMeshAgent.SetDestination(_currentWayPoint.transform.position);
-                        continue;
-                    }
+                        if (_isWasObserved)
+                        {
+                            Debug.Log("Continue moving");
+                            _isWasObserved = false;
+                            _navMeshAgent.SetDestination(_currentWayPoint.transform.position);
+                            continue;
+                        }
                     
-                    if (_direction == Direction.Right)
-                    {
-                        _currentWayPoint = _currentWayPoint.NextRightWayPoint;
-                    }
-                    else if (_direction == Direction.Left)
-                    {
-                        _currentWayPoint = _currentWayPoint.NextLeftWayPoint;
+                        if (_direction == Direction.Right)
+                        {
+                            if (_currentWayPoint.NextRightWayPoint is not null)
+                            {
+                                _currentWayPoint = _currentWayPoint.NextRightWayPoint;
+                            }
+                        }
+                        else if (_direction == Direction.Left)
+                        {
+                            if (_currentWayPoint.NextLeftWayPoint is not null)
+                            {
+                                _currentWayPoint = _currentWayPoint.NextLeftWayPoint;
+                            }
+                        }
+
+                        _navMeshAgent.SetDestination(_currentWayPoint.transform.position);
+                        _animationController.ChangeAnimation(AnimationType.Walk);
                     }
 
-                    _navMeshAgent.SetDestination(_currentWayPoint.transform.position);
-                    _animationController.ChangeAnimation(AnimationType.Walk);
+                    await UniTask.Delay(TimeSpan.FromMilliseconds(100));
                 }
-
-                await UniTask.Delay(TimeSpan.FromMilliseconds(100));
             }
+            catch (Exception e)
+            {
+                Debug.Break();
+            }
+        }
+
+        public void Cancel()
+        {
+            _cancellationObserveToken.Cancel();
         }
     }
 }

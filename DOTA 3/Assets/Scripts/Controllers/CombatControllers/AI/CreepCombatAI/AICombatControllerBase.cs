@@ -31,7 +31,7 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
                 {
                     
                     if (IsInAttackRange(_navMeshAgent.transform.position, targetableView.transform.position,
-                            _creep.AttackDistance))
+                            _creep.AttackDistance + 0.5f))
                     {
                         if (_canAttack)
                         {
@@ -51,12 +51,13 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
                             await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: cancellationToken);
                         }
                     }
-                    
-                    _navMeshAgent.SetDestination(_target.transform.position);
+
+                    if (_navMeshAgent.enabled)
+                        _navMeshAgent.SetDestination(_target.transform.position);
                     await UniTask.Delay(TimeSpan.FromMilliseconds(25), cancellationToken: cancellationToken);
                 }
             }
-            catch (Exception e)
+            catch (OperationCanceledException _)
             {
                 return;
             }
@@ -65,33 +66,32 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
 
         public void Attack(TargetableView targetableView)
         {
-            if (targetableView is null || _target is not null)
+            if (targetableView is null)
                 return;
 
             Debug.Log("new target");
             _target = targetableView;
-            _target.OnUntargeted += DeatachTarget;
+            _target.Subscribe(_creep, DeatachTarget, false);
             _observingTokenSource = new CancellationTokenSource();
             UniTask.Create(() => ObserveAttackingDistance(targetableView, _observingTokenSource.Token));
         }
 
         private void DeatachAttacking()
         {
-            _attackingTokenSource.Cancel();
-            _attackingTokenSource.Dispose();
+            _attackingTokenSource?.Cancel();
+            _attackingTokenSource?.Dispose();
             _attackingTokenSource = null;
         }
 
         private void DeatachObserving()
         {
-            _observingTokenSource.Cancel();
-            _observingTokenSource.Dispose();
+            _observingTokenSource?.Cancel();
+            _observingTokenSource?.Dispose();
             _observingTokenSource = null;
         }
 
         private void DeatachTarget()
         {
-            _target.OnUntargeted -= DeatachTarget;
             _target = null;
             DeatachObserving();
             if (_attackingTokenSource is not null)

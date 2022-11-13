@@ -27,7 +27,6 @@ namespace Models.Skills.Observers
                 if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity, mask))
                 {
                     var skillPosition = new Vector3(raycastHit.point.x, 0.15f, raycastHit.point.z);
-                    Debug.Log(LayerMask.LayerToName(raycastHit.collider.gameObject.layer));
                     OnObservedPositionChanged?.Invoke(skillPosition);
                 }
                 

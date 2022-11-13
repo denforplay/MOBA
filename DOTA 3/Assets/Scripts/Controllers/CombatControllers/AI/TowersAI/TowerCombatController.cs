@@ -71,10 +71,11 @@ namespace Controllers.CombatControllers.AI.TowersAI
             var direction = heading / distance;
             return direction;
         }
-        
-        public void StopObserve()
+
+        public void Dispose()
         {
-            _observeCancellationToken.Cancel();
+            _observeCancellationToken?.Cancel();
+            _observeCancellationToken?.Dispose();
         }
     }
 }
