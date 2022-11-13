@@ -11,11 +11,13 @@ namespace Views.Popups
         [SerializeField] private HeroPanel _heroPanel;
         [SerializeField] private Image _heroImage;
         [SerializeField] private TextMeshProUGUI _heroName;
+        [SerializeField] private TextMeshProUGUI _coinText;
         
         public void Initialize(CharacterView characterView)
         {
             _heroPanel.SetSkills(characterView.Skills);
             characterView.OnSkillActivated += _heroPanel.ResetSkill;
+            characterView.SubscribeOnMoneyChanged((money) => _coinText.text = money.ToString());
             foreach (var skillView in _heroPanel.SkillViews)
             {
                 skillView.OnSkillUseStateChanged += characterView.SetSkillUseState;

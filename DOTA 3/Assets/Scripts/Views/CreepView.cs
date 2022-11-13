@@ -51,6 +51,7 @@ namespace Views
                 Destroy(this.gameObject);
             };
             _targetableView.AttachHealthableModel(_creep);
+            _targetableView.AttachCostableModel(_creep);
         }
 
         public void SetTeam(Team team)

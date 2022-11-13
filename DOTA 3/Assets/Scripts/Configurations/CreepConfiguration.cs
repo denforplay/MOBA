@@ -15,6 +15,7 @@ namespace Configurations
         [SerializeField] private float _attackDelay;
         [SerializeField] private float _maxHealth;
         [SerializeField] private float _damage;
+        [SerializeField] private int _cost;
         
         public CombatType CombatType => _combatType;
         public Dictionary<AnimationType, string> AnimationsInfo => _creepAnimations.Select(x => x.AnimationInfo).ToDictionary(x => x.Key, x => x.Value);
@@ -23,5 +24,6 @@ namespace Configurations
         public float AttackDelay => _attackDelay;
         public float Damage => _damage;
         public float MaxHealth => _maxHealth;
+        public int Cost => _cost;
     }
 }

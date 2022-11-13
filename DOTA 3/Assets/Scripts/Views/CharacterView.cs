@@ -21,6 +21,7 @@ namespace Views
     public class CharacterView : MonoBehaviour
     {
         public event Action<int> OnSkillActivated;
+        
         [SerializeField] private TargetableView _targetableView;
         [SerializeField] private Animator _animator;
         [SerializeField] private CharacterInfo _characterInfo;
@@ -94,6 +95,11 @@ namespace Views
             _playerInputs.Enable();
         }
 
+        public void SubscribeOnMoneyChanged(Action<int> action)
+        {
+            _character.OnMoneyChanged += action;
+        }
+        
         public void SetSkillUseState(int skillId, bool canBeUsed)
         {
             _characterController.SetSkillUseState(skillId, canBeUsed);

@@ -22,3 +22,4 @@ MonoBehaviour:
   _attackDelay: 0.5
   _maxHealth: 100
   _damage: 100
+  _cost: 25

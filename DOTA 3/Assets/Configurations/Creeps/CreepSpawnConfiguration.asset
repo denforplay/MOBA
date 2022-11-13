@@ -15,3 +15,4 @@ MonoBehaviour:
   _packageSize: 5
   _secondsBetweenPackages: 40
   _secondsBetweenCreep: 2
+  _cost: 25

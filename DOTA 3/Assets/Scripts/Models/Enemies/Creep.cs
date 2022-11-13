@@ -4,13 +4,14 @@ using Configurations;
 
 namespace Models.Enemies
 {
-    public class Creep : IHealthable
+    public class Creep : IHealthable, ICostable
     {
         public event Action<float> OnHealthChanged;
         public event Action OnHealthEnded;
         
         private float _maxHealth;
         private float _currentHealth;
+        private int _cost;
         
         public float MaxHealth => _maxHealth;
         public float CurrentHealth => _currentHealth;
@@ -27,6 +28,7 @@ namespace Models.Enemies
             AttackDistance = configuration.AttackDistance;
             Damage = configuration.Damage;
             AttackDelay = configuration.AttackDelay;
+            _cost = configuration.Cost;
         }
 
         public void ChangeHealth(float value)
@@ -35,6 +37,11 @@ namespace Models.Enemies
             OnHealthChanged?.Invoke(_currentHealth);
             if (_currentHealth <= 0)
                 OnHealthEnded?.Invoke();
+        }
+
+        public int GetCost()
+        {
+            return _cost;
         }
     }
 }

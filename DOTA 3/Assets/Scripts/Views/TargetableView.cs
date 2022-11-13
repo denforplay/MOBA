@@ -14,6 +14,7 @@ namespace Views
         private Dictionary<object, Action> _isTargetFor;
 
         private IHealthable _healthable;
+        private ICostable _costable;
         
         private Team _team;
 
@@ -71,6 +72,12 @@ namespace Views
         }
 
         public IHealthable Healthable => _healthable;
+        public ICostable Costable => _costable;
+
+        public void AttachCostableModel(ICostable costable)
+        {
+            _costable = costable;
+        }
         
         public void AttachHealthableModel(IHealthable healthable)
         {
@@ -84,7 +91,11 @@ namespace Views
         {
             _healthable.ChangeHealth(-value);
         }
-        
+
+        public int GetCost()
+        {
+            return _costable?.GetCost() ?? 0;
+        }
 
         private void SetCurrentHealth(float value)
         {

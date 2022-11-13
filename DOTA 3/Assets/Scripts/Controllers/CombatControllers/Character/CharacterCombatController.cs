@@ -80,6 +80,7 @@ namespace Controllers.CombatControllers.Character
         {
             if (_previousTarget is not null)
             {
+                _character.Money += _previousTarget.GetCost();
                 _characterController.SetState(AnimationType.Walk);
                 _previousTarget.Healthable.OnHealthEnded -= DeatachTarget;
                 _cancellationTokenSource.Cancel();
