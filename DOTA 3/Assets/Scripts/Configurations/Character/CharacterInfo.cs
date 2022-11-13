@@ -22,6 +22,7 @@ namespace Configurations.Character
         [SerializeField] private float _attackRange;
         [SerializeField] private float _attackDelay;
         [SerializeField] private List<AnimationConfiguration> _animations;
+        [SerializeField] private int _inventorySize;
             
         private int Id => _id;
         public float Speed => _speed;
@@ -37,5 +38,6 @@ namespace Configurations.Character
         public CombatType CombatType => _combatType;
         public Dictionary<AnimationType, string> AnimationsInfo => _animations.Select(x => x.AnimationInfo).ToDictionary(x => x.Key, x => x.Value);
         public List<SkillConfiguration> SkillConfigurations => _skillConfigurations;
+        public int InventorySize => _inventorySize;
     }
 }

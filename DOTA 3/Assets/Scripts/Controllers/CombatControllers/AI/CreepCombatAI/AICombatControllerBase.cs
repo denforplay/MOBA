@@ -29,7 +29,6 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
             {
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    
                     if (IsInAttackRange(_navMeshAgent.transform.position, targetableView.transform.position,
                             _creep.AttackDistance + 0.5f))
                     {
@@ -98,6 +97,12 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
                 DeatachAttacking();
 
             _canAttack = true;
+        }
+
+        public void Cancel()
+        {
+            DeatachAttacking();
+            DeatachObserving();
         }
     }
 }

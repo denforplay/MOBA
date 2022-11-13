@@ -18,7 +18,6 @@ namespace Views
         [SerializeField] private TargetableView _targetableView;
         private WayPoint _startWayPoint;
         private CreepController _creepController;
-        private AICombatControllerBase _combatController;
         private AnimationController _animationController;
         private Creep _creep;
 
@@ -47,6 +46,7 @@ namespace Views
             _creep = new Creep(_configuration);
             _creep.OnHealthEnded += () =>
             {
+                _creepCombatController.Cancel();
                 _creepController.Cancel();
                 Destroy(this.gameObject);
             };

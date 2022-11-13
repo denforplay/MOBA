@@ -4,6 +4,7 @@ using Common.Abstracts;
 using Common.Enums;
 using Configurations;
 using Configurations.Character;
+using Models.Items;
 using Models.Skills;
 
 namespace Models
@@ -16,6 +17,7 @@ namespace Models
         private float _maxHealth;
         private int _money;
         private List<ISkill> _skills;
+        private Inventory _inventory;
         
         public Character(CharacterInfo characterInfo)
         {
@@ -29,6 +31,7 @@ namespace Models
             Intelligence = characterInfo.BaseIntelligence;
             AttackDelay = characterInfo.AttackDelay;
             AttackRange = characterInfo.AttackRange;
+            _inventory = new Inventory(characterInfo.InventorySize);
         }
 
         private void InitializeSkills(List<SkillConfiguration> skillConfigurations)
@@ -63,6 +66,8 @@ namespace Models
             }
             
         }
+
+        public Inventory Inventory => _inventory;
         public List<ISkill> Skills => _skills;
         public float BasePhysicalDamage { get; set; }
         public float Speed { get; set; }

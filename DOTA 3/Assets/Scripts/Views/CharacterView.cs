@@ -9,6 +9,7 @@ using Controllers;
 using Controllers.CombatControllers.Character;
 using Inputs;
 using Models;
+using Models.Items;
 using UnityEngine;
 using UnityEngine.AI;
 using Views.Abstracts;
@@ -42,19 +43,20 @@ namespace Views
         
         public List<SkillConfiguration> Skills => _characterInfo.SkillConfigurations;
         public Team Team => _targetableView.Team;
+        public Character Character => _character;
 
         private Dictionary<CombatType, Func<CharacterController, Character, CharacterCombatController>>
             CombatFactory;
 
-        private void Awake()
-        {
-            _character = new Character(_characterInfo);
-            _targetableView.AttachHealthableModel(_character);
-        }
-
         public void Initialize(Camera camera)
         {
             //TODO: REFACTORING
+            _character = new Character(_characterInfo)
+            {
+                Team = Team.Blue
+            };
+            
+            _targetableView.AttachHealthableModel(_character);
             _targetableView.SetTeam(Team.Blue);
             CombatFactory = new Dictionary<CombatType, Func<CharacterController, Character, CharacterCombatController>>()
             {
@@ -72,10 +74,6 @@ namespace Views
             _skillControls.ForEach(x => x.gameObject.SetActive(false));
             _camera = camera;
             _targetingInputs = new EnemyTargetingInputs(_camera, this);
-            _character = new Character(_characterInfo)
-            {
-                Team = Team.Blue
-            };
             _animationController = new AnimationController(_characterInfo.AnimationsInfo, _animator);
             _characterController = new CharacterController(_camera, _navigationAgent, _character, _animationController);
             _characterCombatController = CombatFactory[_characterInfo.CombatType].Invoke(_characterController, _character);
@@ -95,10 +93,6 @@ namespace Views
             _playerInputs.Enable();
         }
 
-        public void SubscribeOnMoneyChanged(Action<int> action)
-        {
-            _character.OnMoneyChanged += action;
-        }
         
         public void SetSkillUseState(int skillId, bool canBeUsed)
         {
@@ -133,6 +127,16 @@ namespace Views
             _currentSkillObserver = null;
             _currentSkillControlBase = null;
             OnSkillActivated?.Invoke(skillId);
+        }
+        
+        public void SubscribeOnMoneyChanged(Action<int> action)
+        {
+            _character.OnMoneyChanged += action;
+        }
+        
+        public void SubscribeOnInventoryChanged(Action<int, Item> action)
+        {
+            _character.Inventory.OnItemChanged += action;
         }
         
         private void OnEnable()
