@@ -12,13 +12,13 @@ namespace Configurations.Items
         [SerializeField] private int _cost;
         [SerializeField] private string _itemDescription;
         [SerializeField] private Sprite _itemSprite;
-        [SerializeField] private List<ItemValueConfiguration> _itemValueConfigurations;
+        [SerializeField] private List<CharacteristicValueConfiguration> _itemValueConfigurations;
 
         public Sprite ItemSprite => _itemSprite;
         public ItemType ItemType => _itemType;
         public string ItemName => _itemName;
         public string ItemDescription => _itemDescription;
         public int Cost => _cost;
-        public List<ItemValueConfiguration> ItemValueConfigurations => _itemValueConfigurations;
+        public List<CharacteristicValueConfiguration> ItemValueConfigurations => _itemValueConfigurations;
     }
 }

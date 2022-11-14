@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Abstracts;
 using Common.Enums;
 using Configurations;
@@ -76,7 +77,39 @@ namespace Models
         public float Intelligence { get; set; }
         public float AttackDelay { get; set; }
         public float AttackRange { get; set; }
-        public float CurrentDamage => Strength * BasePhysicalDamage;
+        public float CurrentDamage()
+        {
+            float currentDamage = Strength * BasePhysicalDamage;
+            float additionalPercents = 0;
+            
+            for (int i = 0; i < _inventory.Items.Length; i++)
+            {
+                var currentItem = _inventory.Items[i];
+
+                if (currentItem is not null)
+                {
+                    foreach (var valueConfig in currentItem.ValueConfigurations.Where(x => x.Characteristic == Characteristic.Damage))
+                    {
+                        switch (valueConfig.ItemValueType)
+                        {
+                            case ItemValueType.Value:
+                            {
+                                currentDamage += BasePhysicalDamage;
+                                break;
+                            }
+                            case ItemValueType.Percentage:
+                            {
+                                additionalPercents += valueConfig.Value;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return currentDamage + currentDamage * additionalPercents;
+        }
+
         public float MaxHealth => _maxHealth;
         public float CurrentHealth => _currentHealth;
         public Team Team { get; set; }

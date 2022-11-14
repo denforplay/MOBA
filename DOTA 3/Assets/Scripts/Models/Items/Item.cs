@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using System.Collections.Generic;
+using Common.Enums;
 using Configurations.Items;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Models.Items
         public Sprite Sprite { get; }
         public ItemType ItemType { get; }
         public int Cost { get; }
+        public List<CharacteristicValueConfiguration> ValueConfigurations { get; }
 
         public Item(ItemConfiguration itemConfiguration)
         {
@@ -19,6 +21,7 @@ namespace Models.Items
             Sprite = itemConfiguration.ItemSprite;
             Cost = itemConfiguration.Cost;
             ItemType = itemConfiguration.ItemType;
+            ValueConfigurations = itemConfiguration.ItemValueConfigurations;
         }
     }
 }

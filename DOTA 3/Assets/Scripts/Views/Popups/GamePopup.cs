@@ -32,6 +32,7 @@ namespace Views.Popups
         {
             var shopPopup = _popupSystem.SpawnPopup<ShopPopup>();
             shopPopup.Initialize(_shopItemsConfiguration, _characterView.Character);
+            shopPopup.Closing += _ => _characterView.EnableInput();
         }
         
         public override void EnableInput()

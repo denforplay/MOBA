@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: MiddleHookItem
   m_EditorClassIdentifier: 
   _itemType: 0
-  _itemName: Hook 2
+  _itemName: Harrowing crescent
   _cost: 500
-  _itemDescription: Better than hook 1
-  _itemSprite: {fileID: -516590069, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
-  _itemValueConfigurations: []
+  _itemDescription: 
+  _itemSprite: {fileID: -13184425, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
+  _itemValueConfigurations:
+  - {fileID: 11400000, guid: f9e5a5f7ee761914ebad6ce231eaabec, type: 2}
+  - {fileID: 11400000, guid: e756f95b0e04d5449bb858711ed6e8db, type: 2}
+  - {fileID: 11400000, guid: 4c5c3a74921cf6243af9ff08ecb3f53a, type: 2}

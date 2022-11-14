@@ -25,7 +25,7 @@ namespace Controllers.CombatControllers.Character
                     {
                         _characterController.SetState(AnimationType.Attack);
                         await UniTask.Delay(TimeSpan.FromSeconds(_character.AttackDelay), cancellationToken: cancellationToken);
-                        _previousTarget.ApplyDamage(_character.CurrentDamage);
+                        _previousTarget.ApplyDamage(_character.CurrentDamage());
                     }
                     else
                     {

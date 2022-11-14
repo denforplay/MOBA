@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c3b94d1b6434d40a899892fac87f097, type: 3}
-  m_Name: BaseHookItem
+  m_Name: MaxHookConfiguration
   m_EditorClassIdentifier: 
   _itemType: 0
-  _itemName: Spectral sickle
-  _cost: 50
+  _itemName: Black mist scythe
+  _cost: 1500
   _itemDescription: 
-  _itemSprite: {fileID: 427606887, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
+  _itemSprite: {fileID: -516590069, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:
-  - {fileID: 11400000, guid: 5266ef6584ada6841939f5fb3b22fb98, type: 2}
-  - {fileID: 11400000, guid: b37c8dc89125d91458135c401326e7e2, type: 2}
+  - {fileID: 0}

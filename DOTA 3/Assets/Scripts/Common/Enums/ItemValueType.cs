@@ -2,6 +2,7 @@
 {
     public enum ItemValueType
     {
-        Damage,
+        Value,
+        Percentage
     }
 }

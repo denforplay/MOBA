@@ -18,9 +18,11 @@ namespace Views.Popups
         [SerializeField] private TextMeshProUGUI _coinText;
         [SerializeField] private Button _shopButton;
         [SerializeField] private InventoryView _inventoryView;
-        
+        private CharacterView _characterView;
+
         public void Initialize(CharacterView characterView)
         {
+            _characterView = characterView;
             _heroPanel.SetSkills(characterView.Skills);
             characterView.OnSkillActivated += _heroPanel.ResetSkill;
             characterView.SubscribeOnMoneyChanged((money) => _coinText.text = money.ToString());
@@ -30,7 +32,13 @@ namespace Views.Popups
                 skillView.OnSkillUseStateChanged += characterView.SetSkillUseState;
             }
             
-            _shopButton.onClick.AddListener(() => OnShopCalled?.Invoke());
+            _shopButton.onClick.AddListener(OnShopPopupCalled);
+        }
+
+        public void OnShopPopupCalled()
+        {
+            _characterView.DisableInput();
+            OnShopCalled?.Invoke();
         }
 
         private void UpdateInventoryView(int slot, Item item)

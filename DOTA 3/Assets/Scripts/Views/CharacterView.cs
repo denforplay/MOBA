@@ -12,6 +12,7 @@ using Models;
 using Models.Items;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using Views.Abstracts;
 using Views.Abstracts.FactoryRequirements;
 using CharacterController = Controllers.CharacterController;
@@ -78,9 +79,21 @@ namespace Views
             _characterController = new CharacterController(_camera, _navigationAgent, _character, _animationController);
             _characterCombatController = CombatFactory[_characterInfo.CombatType].Invoke(_characterController, _character);
             _playerInputs = new PlayerInputs();
-            _playerInputs.Character.Move.canceled += _ => _targetingInputs.CheckTargetOnClick();
+            _playerInputs.Character.Move.canceled += _ =>
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())//check if click is over ui
+                {
+                    _targetingInputs.CheckTargetOnClick();
+                }
+            };
             _targetingInputs.OnTargetedEnemy += _characterCombatController.Attack;
-            _playerInputs.Character.Move.canceled += _ => _characterController.Move();
+            _playerInputs.Character.Move.canceled += _ =>
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())//check if click is over ui
+                {
+                    _characterController.Move();
+                }
+            };
             _playerInputs.Character.UseFirstSkill.started += _ => StartObserveSkill(0);
             _playerInputs.Character.UseFirstSkill.canceled += _ => StopObserveSkill(0);
             
@@ -137,6 +150,16 @@ namespace Views
         public void SubscribeOnInventoryChanged(Action<int, Item> action)
         {
             _character.Inventory.OnItemChanged += action;
+        }
+
+        public void EnableInput()
+        {
+            _playerInputs.Enable();
+        }
+
+        public void DisableInput()
+        {
+            _playerInputs.Disable();
         }
         
         private void OnEnable()
