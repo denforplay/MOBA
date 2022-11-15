@@ -5,12 +5,13 @@ using Common.Abstracts;
 using Common.Enums;
 using Configurations;
 using Configurations.Character;
+using Configurations.Levels;
 using Models.Items;
 using Models.Skills;
 
 namespace Models
 {
-    public class Character : IHealthable, IManable
+    public class Character : IHealthable, IManable, ILevelable
     {
         #region Health
         public event Action<float> OnHealthChanged;
@@ -81,6 +82,49 @@ namespace Models
         
         #endregion
 
+        #region Level-Experience
+
+        private int _currentLevel;
+        private float _currentExperience;
+        private float _needForNextLevelExperience;
+        private List<LevelConfiguration> _levels;
+        
+        public event Action<float> OnCurrentExperienceChanged;
+        public event Action<float> OnNeedForNextLevelExperienceChanged; 
+        public event Action<int> OnLevelChanged;
+        public int CurrentLevel => _currentLevel;
+        public float CurrentExperience => _currentExperience;
+        public float NeedForNextLevelExperience => _needForNextLevelExperience;
+        public void AddExperience(float value)
+        {
+            _currentExperience += value;
+            if (_currentExperience >= NeedForNextLevelExperience)
+            {
+                if (CurrentLevel < _levels.Count)
+                {
+                    _currentLevel++;
+                    OnLevelChanged?.Invoke(_currentLevel);
+
+                }
+
+                _currentExperience -= NeedForNextLevelExperience;
+                _needForNextLevelExperience = _levels[_currentLevel - 1].ExperienceNeeded;
+                OnNeedForNextLevelExperienceChanged?.Invoke(_needForNextLevelExperience);
+            }
+            
+            OnCurrentExperienceChanged?.Invoke(_currentExperience);
+        }
+
+        private void InitializeLevels(LevelsConfiguration levelsConfiguration)
+        {
+            _levels = levelsConfiguration.LevelsConfigurations;
+            _currentLevel = 1;
+            _needForNextLevelExperience = _levels[_currentLevel - 1].ExperienceNeeded;
+            _currentExperience = 0;
+        }
+
+        #endregion
+
         private List<ISkill> _skills;
         private Inventory _inventory;
         
@@ -90,6 +134,7 @@ namespace Models
             _currentHealth = _maxHealth;
             _maxMana = characterInfo.MaxMana;
             _currentMana = _maxMana;
+            InitializeLevels(characterInfo.LevelsConfiguration);
             Speed = characterInfo.Speed;
             InitializeSkills(characterInfo.SkillConfigurations);
             BasePhysicalDamage = characterInfo.BasePhysicalDamage;
@@ -166,7 +211,6 @@ namespace Models
 
             return currentDamage + currentDamage * additionalPercents;
         }
-
        
         public Team Team { get; set; }
     }

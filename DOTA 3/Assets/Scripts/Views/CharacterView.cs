@@ -24,6 +24,7 @@ namespace Views
     {
         public event Action<int> OnSkillActivated;
 
+        [SerializeField] private LevelView _levelView;
         [SerializeField] private ManaView _manaView;
         [SerializeField] private TargetableView _targetableView;
         [SerializeField] private Animator _animator;
@@ -58,6 +59,7 @@ namespace Views
                 Team = Team.Blue
             };
 
+            _levelView.AttachLevelableModel(_character);
             _manaView.AttachManaModel(_character);
             _targetableView.AttachHealthableModel(_character);
             _targetableView.SetTeam(Team.Blue);

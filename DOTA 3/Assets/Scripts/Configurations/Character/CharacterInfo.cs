@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Enums;
+using Configurations.Levels;
 using UnityEngine;
 
 namespace Configurations.Character
@@ -24,6 +25,7 @@ namespace Configurations.Character
         [SerializeField] private List<AnimationConfiguration> _animations;
         [SerializeField] private int _inventorySize;
         [SerializeField] private float _maxMana;
+        [SerializeField] private LevelsConfiguration _levelsConfiguration;
             
         private int Id => _id;
         public float Speed => _speed;
@@ -41,5 +43,6 @@ namespace Configurations.Character
         public List<SkillConfiguration> SkillConfigurations => _skillConfigurations;
         public int InventorySize => _inventorySize;
         public float MaxMana => _maxMana;
+        public LevelsConfiguration LevelsConfiguration => _levelsConfiguration;
     }
 }

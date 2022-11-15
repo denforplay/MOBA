@@ -81,6 +81,7 @@ namespace Controllers.CombatControllers.Character
             if (_previousTarget is not null)
             {
                 _character.Money += _previousTarget.GetCost();
+                _character.AddExperience(_previousTarget.GetCost());//TODO:REFACTORING
                 _characterController.SetState(AnimationType.Walk);
                 _previousTarget.Healthable.OnHealthEnded -= DeatachTarget;
                 _cancellationTokenSource.Cancel();
