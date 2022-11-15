@@ -10,13 +10,77 @@ using Models.Skills;
 
 namespace Models
 {
-    public class Character : IHealthable
+    public class Character : IHealthable, IManable
     {
-        public event Action<int> OnMoneyChanged; 
-
+        #region Health
+        public event Action<float> OnHealthChanged;
+        public event Action OnHealthEnded;
+        public event Action<float> OnMaxHealthChanged;
+        
         private float _currentHealth;
         private float _maxHealth;
+        
+        public float CurrentHealth => _currentHealth;
+        
+        public float MaxHealth
+        {
+            get => _maxHealth;
+            set
+            {
+                _maxHealth = value;
+                OnMaxHealthChanged?.Invoke(_maxHealth);
+            }
+        }
+        
+        public void ChangeHealth(float value)
+        {
+            _currentHealth += value;
+            if (_currentHealth > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+            }
+            
+            OnHealthChanged?.Invoke(_currentHealth);
+            if (_currentHealth <= 0)
+            {
+                OnHealthEnded?.Invoke();
+            }
+        }
+        #endregion
+
+        #region Money
+        public event Action<int> OnMoneyChanged; 
+        
         private int _money;
+
+        public int Money 
+        { 
+            get => _money;
+            set
+            {
+                _money = value;
+                OnMoneyChanged?.Invoke(_money);
+            }
+        }
+
+        #endregion
+
+        #region Mana
+
+        private float _maxMana;
+        private float _currentMana;
+        public event Action<float> OnMaxManaChanged;
+        public event Action<float> OnManaChanged;
+        public float MaxMana => _maxMana;
+        public float CurrentMana => _currentMana;
+        public void ChangeMana(float value)
+        {
+            _currentMana += value;
+            OnManaChanged?.Invoke(_currentMana);
+        }
+        
+        #endregion
+
         private List<ISkill> _skills;
         private Inventory _inventory;
         
@@ -24,6 +88,8 @@ namespace Models
         {
             _maxHealth = characterInfo.MaxHealth;
             _currentHealth = _maxHealth;
+            _maxMana = characterInfo.MaxMana;
+            _currentMana = _maxMana;
             Speed = characterInfo.Speed;
             InitializeSkills(characterInfo.SkillConfigurations);
             BasePhysicalDamage = characterInfo.BasePhysicalDamage;
@@ -57,16 +123,7 @@ namespace Models
             }
         }
 
-        public int Money 
-        { 
-            get => _money;
-            set
-            {
-                _money = value;
-                OnMoneyChanged?.Invoke(_money);
-            }
-            
-        }
+        
 
         public Inventory Inventory => _inventory;
         public List<ISkill> Skills => _skills;
@@ -110,19 +167,7 @@ namespace Models
             return currentDamage + currentDamage * additionalPercents;
         }
 
-        public float MaxHealth => _maxHealth;
-        public float CurrentHealth => _currentHealth;
+       
         public Team Team { get; set; }
-        public event Action<float> OnHealthChanged;
-        public event Action OnHealthEnded;
-        public void ChangeHealth(float value)
-        {
-            _currentHealth += value;
-            OnHealthChanged?.Invoke(_currentHealth);
-            if (_currentHealth <= 0)
-            {
-                OnHealthEnded?.Invoke();
-            }
-        }
     }
 }

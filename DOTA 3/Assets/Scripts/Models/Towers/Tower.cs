@@ -6,6 +6,8 @@ namespace Models.Towers
 {
     public class Tower : IHealthable
     {
+        public event Action<float> OnMaxHealthChanged;
+        
         private float _currentHealth;
         private float _maxHealth;
 

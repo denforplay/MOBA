@@ -6,6 +6,7 @@ namespace Models.Enemies
 {
     public class Creep : IHealthable, ICostable
     {
+        public event Action<float> OnMaxHealthChanged;
         public event Action<float> OnHealthChanged;
         public event Action OnHealthEnded;
         

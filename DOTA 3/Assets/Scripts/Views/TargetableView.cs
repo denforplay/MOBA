@@ -25,7 +25,7 @@ namespace Views
             _targetMark.enabled = false;
             _isTargetFor = new Dictionary<object, Action>();
         }
-        
+
         public void Subscribe(object subscriber, Action callBack, bool isMarked = true)
         {
             if (!_isTargetFor.TryGetValue(subscriber, out var previousCallback))

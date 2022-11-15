@@ -10,11 +10,19 @@ namespace Views
         [SerializeField] private GameObject _healthObject;
         [SerializeField] private Material _healthMaterialPrefab;
         [SerializeField] private Image _healthImage;
+        private bool _isRecreated;
         
-        private void Awake()
+        private void Start()
         {
-            var newMaterial = Instantiate(_healthMaterialPrefab);
+            if (!_isRecreated)
+                RecreateMaterial();
+        }
+
+        private void RecreateMaterial()
+        {
+            var newMaterial = new Material(_healthMaterialPrefab);
             _healthImage.material = newMaterial;
+            _isRecreated = true;
         }
 
         private void Update()
@@ -25,11 +33,17 @@ namespace Views
 
         public void SetMaxHealth(float value)
         {
+            if (!_isRecreated)
+                RecreateMaterial();
+            
             _healthImage.material.SetFloat(MAX_HEALTH_MATERIAL_VARIABLE, value);
         }
 
         public void SetHealth(float value)
         {
+            if (!_isRecreated)
+                RecreateMaterial();
+            
             _healthImage.material.SetFloat(HEALTH_MATERIAL_VARIABLE, value);
         }
     }

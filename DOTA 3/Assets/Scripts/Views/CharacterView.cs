@@ -23,7 +23,8 @@ namespace Views
     public class CharacterView : MonoBehaviour
     {
         public event Action<int> OnSkillActivated;
-        
+
+        [SerializeField] private ManaView _manaView;
         [SerializeField] private TargetableView _targetableView;
         [SerializeField] private Animator _animator;
         [SerializeField] private CharacterInfo _characterInfo;
@@ -56,7 +57,8 @@ namespace Views
             {
                 Team = Team.Blue
             };
-            
+
+            _manaView.AttachManaModel(_character);
             _targetableView.AttachHealthableModel(_character);
             _targetableView.SetTeam(Team.Blue);
             CombatFactory = new Dictionary<CombatType, Func<CharacterController, Character, CharacterCombatController>>()
@@ -71,7 +73,7 @@ namespace Views
                     }
                 }
             };
-
+            
             _skillControls.ForEach(x => x.gameObject.SetActive(false));
             _camera = camera;
             _targetingInputs = new EnemyTargetingInputs(_camera, this);
