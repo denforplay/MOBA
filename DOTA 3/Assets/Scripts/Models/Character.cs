@@ -63,7 +63,6 @@ namespace Models
                 OnMoneyChanged?.Invoke(_money);
             }
         }
-
         #endregion
 
         #region Mana
