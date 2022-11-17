@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.PopupSystem.Configurations;
 using Models.Factories;
@@ -11,7 +10,6 @@ namespace Common.PopupSystem
 {
     public class PopupSystem : MonoBehaviour
     {
-        public event Action OnMainPopupVisible;
         [SerializeField] private List<Canvas> _canvases;
         [SerializeField] private Popup _startPopup;
         private readonly Stack<Popup> _popups = new Stack<Popup>();
@@ -49,9 +47,14 @@ namespace Common.PopupSystem
         {
             Popup popup = _popups.Pop();
             popup.Hide();
-            if (_popups.Count == 1)
+        }
+
+        public void DeleteAllPopups()
+        {
+            while (_popups.Count > 0)
             {
-                OnMainPopupVisible?.Invoke();
+                var deletedPopup = _popups.Pop();
+                deletedPopup.Hide();
             }
         }
     }

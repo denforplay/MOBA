@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using Common.Abstracts;
 using Common.Enums;
+using Common.EventBus;
+using Common.EventBus.Events;
 using Configurations;
 using Controllers;
 using Controllers.CombatControllers.Character;
@@ -58,7 +60,7 @@ namespace Views
             {
                 Team = Team.Blue
             };
-
+            EventBusManager.GetInstance.Subscribe<OnGameEndedEvent>(DestroyOnGameEnded);
             _levelView.AttachLevelableModel(_character);
             _manaView.AttachManaModel(_character);
             _targetableView.AttachHealthableModel(_character);
@@ -133,6 +135,17 @@ namespace Views
             _currentSkillControlBase.gameObject.SetActive(true);
         }
 
+        private void Destroy()
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnGameEndedEvent>(DestroyOnGameEnded);
+            _characterCombatController.Cancel();
+        }
+
+        private void DestroyOnGameEnded(OnGameEndedEvent e)
+        {
+            Destroy();
+        }
+        
         private void StopObserveSkill(int skillId)
         {
             if (_currentSkillObserver is null) 

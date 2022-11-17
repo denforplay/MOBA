@@ -34,7 +34,6 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
                     {
                         if (_canAttack)
                         {
-                            Debug.Log("Start attack target");
                             if (_attackingTokenSource is null)
                                 _attackingTokenSource = new CancellationTokenSource();
 
@@ -45,7 +44,6 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
                     {
                         if (_attackingTokenSource is not null)
                         {
-                            Debug.Log("Stop attacking target");
                             DeatachAttacking();
                             await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: cancellationToken);
                         }
@@ -56,7 +54,7 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
                     await UniTask.Delay(TimeSpan.FromMilliseconds(25), cancellationToken: cancellationToken);
                 }
             }
-            catch (OperationCanceledException _)
+            catch (Exception _) //There should be operation canceled exception
             {
                 return;
             }
@@ -68,7 +66,6 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
             if (targetableView is null)
                 return;
 
-            Debug.Log("new target");
             _target = targetableView;
             _target.Subscribe(_creep, DeatachTarget, false);
             _observingTokenSource = new CancellationTokenSource();

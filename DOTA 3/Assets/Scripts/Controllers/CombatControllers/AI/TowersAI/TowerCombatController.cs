@@ -72,7 +72,7 @@ namespace Controllers.CombatControllers.AI.TowersAI
             return direction;
         }
 
-        public void Dispose()
+        public void Cencel()
         {
             _observeCancellationToken?.Cancel();
             _observeCancellationToken?.Dispose();

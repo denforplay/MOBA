@@ -89,5 +89,10 @@ namespace Controllers.CombatControllers.Character
                 _previousTarget = null;
             }
         }
+
+        public void Cancel()
+        {
+            _cancellationTokenSource?.Cancel();
+        }
     }
 }

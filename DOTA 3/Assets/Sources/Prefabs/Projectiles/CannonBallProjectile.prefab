@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8573747468070238226}
   - component: {fileID: 8573747468070238230}
   - component: {fileID: 8573747468070238225}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: CannonBallProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8573747468070238236}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 8573747468070238225}
   _projectileType: 3
+  _lifeTime: 0
 --- !u!54 &8573747468070238225
 Rigidbody:
   m_ObjectHideFlags: 0

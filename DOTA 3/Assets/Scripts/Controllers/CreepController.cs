@@ -87,7 +87,7 @@ namespace Controllers
             }
             catch (Exception e)
             {
-                throw;
+                return;
             }
             
         }
@@ -123,7 +123,6 @@ namespace Controllers
                     {
                         if (_isWasObserved)
                         {
-                            Debug.Log("Continue moving");
                             _isWasObserved = false;
                             _navMeshAgent.SetDestination(_currentWayPoint.transform.position);
                             continue;

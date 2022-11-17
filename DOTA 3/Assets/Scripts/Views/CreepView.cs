@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Enums;
+using Common.EventBus;
+using Common.EventBus.Events;
 using Configurations;
 using Controllers;
 using Controllers.CombatControllers.AI.CreepCombatAI;
 using Models.Enemies;
 using UnityEngine;
 using UnityEngine.AI;
+using Object = UnityEngine.Object;
 
 namespace Views
 {
@@ -43,15 +46,24 @@ namespace Views
 
         private void Awake()
         {
+            EventBusManager.GetInstance.Subscribe<OnGameEndedEvent>(DestroyOnGameEnded);
             _creep = new Creep(_configuration);
-            _creep.OnHealthEnded += () =>
-            {
-                _creepCombatController.Cancel();
-                _creepController.Cancel();
-                Destroy(this.gameObject);
-            };
+            _creep.OnHealthEnded += Destroy;
             _targetableView.AttachHealthableModel(_creep);
             _targetableView.AttachCostableModel(_creep);
+        }
+
+        private void Destroy()
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnGameEndedEvent>(DestroyOnGameEnded);
+            _creepCombatController.Cancel();
+            _creepController.Cancel();
+            Destroy(this.gameObject);
+        }
+        
+        private void DestroyOnGameEnded(OnGameEndedEvent e)
+        {
+            Destroy();
         }
 
         public void SetTeam(Team team)
