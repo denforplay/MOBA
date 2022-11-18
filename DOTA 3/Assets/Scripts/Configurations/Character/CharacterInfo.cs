@@ -10,13 +10,15 @@ namespace Configurations.Character
     public class CharacterInfo : ScriptableObject
     {
         [SerializeField] private int _id;
+        [SerializeField] private string _heroName;
         [SerializeField] private float _speed;
         [SerializeField] private float _maxHealth;
         [SerializeField] private float _basePhysicalDamage;
         [SerializeField] private float _baseMagicalDamage;
-        [SerializeField] private float _baseStrength;
-        [SerializeField] private float _baseAgility;
-        [SerializeField] private float _baseIntelligence;
+        [SerializeField] private int _baseStrength;
+        [SerializeField] private int _baseDefense;
+        [SerializeField] private int _baseAgility;
+        [SerializeField] private int _baseIntelligence;
         [SerializeField] private List<SkillConfiguration> _skillConfigurations;
         [SerializeField] private CombatType _combatType;
         [SerializeField] private ProjectileType _projectileType;
@@ -26,14 +28,17 @@ namespace Configurations.Character
         [SerializeField] private int _inventorySize;
         [SerializeField] private float _maxMana;
         [SerializeField] private LevelsConfiguration _levelsConfiguration;
-            
+        [SerializeField] private Sprite _characterIcon;
+
+        public string HeroName => _heroName;
         private int Id => _id;
         public float Speed => _speed;
         public float MaxHealth => _maxHealth;
         public float BasePhysicalDamage => _basePhysicalDamage;
         public float BaseMagicalDamage => _baseMagicalDamage;
-        public float BaseStrength => _baseStrength;
-        public float BaseIntelligence => _baseIntelligence;
+        public int BaseStrength => _baseStrength;
+        public int BaseDefense => _baseDefense;
+        public int BaseIntelligence => _baseIntelligence;
         public float BaseAgility => _baseAgility;
         public float AttackRange => _attackRange;
         public float AttackDelay => _attackDelay;
@@ -44,5 +49,6 @@ namespace Configurations.Character
         public int InventorySize => _inventorySize;
         public float MaxMana => _maxMana;
         public LevelsConfiguration LevelsConfiguration => _levelsConfiguration;
+        public Sprite CharacterIcon => _characterIcon;
     }
 }

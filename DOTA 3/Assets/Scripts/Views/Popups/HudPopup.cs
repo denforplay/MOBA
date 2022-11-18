@@ -13,7 +13,6 @@ namespace Views.Popups
     {
         public event Action OnShopCalled;
         [SerializeField] private HeroPanel _heroPanel;
-        [SerializeField] private Image _heroImage;
         [SerializeField] private TextMeshProUGUI _heroName;
         [SerializeField] private TextMeshProUGUI _coinText;
         [SerializeField] private Button _shopButton;
@@ -23,7 +22,13 @@ namespace Views.Popups
         public void Initialize(CharacterView characterView)
         {
             _characterView = characterView;
-            _heroPanel.SetSkills(characterView.Skills);
+            _heroPanel.SetCharacterIcon(characterView.CharacterInfo.CharacterIcon);
+            _heroPanel.SetSkills(characterView.CharacterInfo.SkillConfigurations);
+            _heroPanel.SetCharacterStrength(characterView.CharacterInfo.BaseStrength);
+            _heroPanel.SetCharacterDefense(characterView.CharacterInfo.BaseDefense);
+            _heroPanel.SetCharacterIntelligence(characterView.CharacterInfo.BaseIntelligence);
+            _heroPanel.SetCharacterLevel(characterView.Character.CurrentLevel);
+            _heroName.text = characterView.CharacterInfo.HeroName;
             characterView.OnSkillActivated += _heroPanel.ResetSkill;
             characterView.SubscribeOnMoneyChanged((money) => _coinText.text = money.ToString());
             characterView.SubscribeOnInventoryChanged(UpdateInventoryView);
@@ -32,7 +37,24 @@ namespace Views.Popups
                 skillView.OnSkillUseStateChanged += characterView.SetSkillUseState;
             }
             
+            SubscribeOnCharacterEvents();
             _shopButton.onClick.AddListener(OnShopPopupCalled);
+        }
+
+        public void SubscribeOnCharacterEvents()
+        {
+            _characterView.Character.OnStrengthChanged += _heroPanel.SetCharacterStrength;
+            _characterView.Character.OnDefenseChanged += _heroPanel.SetCharacterDefense;
+            _characterView.Character.OnIntelligenceChanged += _heroPanel.SetCharacterIntelligence;
+            _characterView.Character.OnLevelChanged += _heroPanel.SetCharacterLevel;
+        }
+
+        public void UnsubscribeFromCharacterEvents()
+        {
+            _characterView.Character.OnStrengthChanged -= _heroPanel.SetCharacterStrength;
+            _characterView.Character.OnDefenseChanged -= _heroPanel.SetCharacterDefense;
+            _characterView.Character.OnIntelligenceChanged -= _heroPanel.SetCharacterIntelligence;
+            _characterView.Character.OnLevelChanged -= _heroPanel.SetCharacterLevel;
         }
 
         public void OnShopPopupCalled()

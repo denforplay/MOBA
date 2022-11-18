@@ -38,8 +38,12 @@ namespace Views
                 targetableView.Team != _team)
             {
                 targetableView.ApplyDamage(_damage);
-                _cancellationTokenSource.Cancel();
-                _cancellationTokenSource.Dispose();
+                if (!_cancellationTokenSource.IsCancellationRequested)
+                {
+                    _cancellationTokenSource?.Cancel();
+                    _cancellationTokenSource?.Dispose();
+                }
+
                 Destroy(this.gameObject);
             }
         }

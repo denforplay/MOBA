@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Common.Enums;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -28,11 +29,18 @@ namespace Controllers
             _animator.Play(_animations[animationType]);
         }
 
-        public async UniTask CancelCurrentAnimationAsync(TimeSpan time)
+        public async UniTask CancelCurrentAnimationAsync(TimeSpan time, CancellationToken cancellationToken)
         {
             while (GetCurrentStateInfo().normalizedTime < 1)
             {
-                await UniTask.Delay(time);
+                try
+                {
+                    await UniTask.Delay(time, cancellationToken: cancellationToken);
+                }
+                catch (OperationCanceledException _)
+                {
+                    return;
+                }
             }
         }
 

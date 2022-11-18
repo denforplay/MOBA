@@ -27,7 +27,7 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
             }
             finally
             {
-                await _creepController.AnimationController.CancelCurrentAnimationAsync(TimeSpan.FromMilliseconds(10));
+                await _creepController.AnimationController.CancelCurrentAnimationAsync(TimeSpan.FromMilliseconds(10), cancellationToken);
                 _creepController.SetState(AnimationType.Walk);
                 _canAttack = true;
             }

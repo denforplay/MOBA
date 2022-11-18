@@ -124,6 +124,46 @@ namespace Models
 
         #endregion
 
+        #region BaseParameters
+
+        private int _strength;
+        private int _intelligence;
+        private int _defense;
+        public event Action<int> OnStrengthChanged;
+        public event Action<int> OnIntelligenceChanged;
+        public event Action<int> OnDefenseChanged;
+
+        public int Strength
+        {
+            get => _strength;
+            set
+            {
+                _strength = value;
+                OnStrengthChanged?.Invoke(_strength);
+            }
+        }
+        public int Intelligence
+        {
+            get => _intelligence;
+            set
+            {
+                _intelligence = value;
+                OnIntelligenceChanged?.Invoke(_intelligence);
+            }
+        }
+        
+        public int Defense
+        {
+            get => _defense;
+            set
+            {
+                _defense = value;
+                OnDefenseChanged?.Invoke(_intelligence);
+            }
+        }
+
+        #endregion
+
         private List<ISkill> _skills;
         private Inventory _inventory;
         
@@ -140,6 +180,7 @@ namespace Models
             Strength = characterInfo.BaseStrength;
             Agility = characterInfo.BaseAgility;
             Intelligence = characterInfo.BaseIntelligence;
+            Defense = characterInfo.BaseDefense;
             AttackDelay = characterInfo.AttackDelay;
             AttackRange = characterInfo.AttackRange;
             _inventory = new Inventory(characterInfo.InventorySize);
@@ -173,9 +214,7 @@ namespace Models
         public List<ISkill> Skills => _skills;
         public float BasePhysicalDamage { get; set; }
         public float Speed { get; set; }
-        public float Strength { get; set; }
         public float Agility { get; set; }
-        public float Intelligence { get; set; }
         public float AttackDelay { get; set; }
         public float AttackRange { get; set; }
         public float CurrentDamage()
@@ -212,5 +251,23 @@ namespace Models
         }
        
         public Team Team { get; set; }
+
+        public void CancelAllEvents()
+        {
+            foreach(var method in OnHealthEnded.GetInvocationList())
+            {
+                OnHealthEnded -= (Action)method;
+            }
+            
+            foreach(var method in OnHealthChanged.GetInvocationList())
+            {
+                OnHealthChanged -= (Action<float>)method;
+            }
+            
+            foreach(var method in OnNeedForNextLevelExperienceChanged.GetInvocationList())
+            {
+                OnNeedForNextLevelExperienceChanged -= (Action<float>)method;
+            }
+        }
     }
 }

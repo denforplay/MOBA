@@ -2,6 +2,8 @@
 using System.Threading;
 using Common.Abstracts;
 using Common.Enums;
+using Common.EventBus;
+using Common.EventBus.Events;
 using Configurations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -21,36 +23,52 @@ namespace CompositeRoots
         private void Awake()
         {
             Compose();
+            EventBusManager.GetInstance.Subscribe<OnGameEndedEvent>(CancelOnGameEnded);
         }
 
         public override void Compose()
         {
             _cancellationToken = new CancellationTokenSource();
-            UniTask.Create(() => StartCreepsSpawn(_cancellationToken));
+            UniTask.Create(() => StartCreepsSpawn(_cancellationToken.Token));
         }
 
-        private async UniTask StartCreepsSpawn(CancellationTokenSource cancellationToken)
+        private async UniTask StartCreepsSpawn(CancellationToken cancellationToken)
         {
-            while (!cancellationToken.IsCancellationRequested)
+            try
             {
-                var packageSize = _creepSpawnConfiguration.PackageSize;
-                //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.TopLineWayPoint, Direction.Left), Direction.Left));
-                UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.MidLineWayPoint, Direction.Left), Direction.Left));
-                //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.BottomLineWayPoint, Direction.Left), Direction.Left));
-                //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.TopLineWayPoint, Direction.Right), Direction.Right));
-                UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.MidLineWayPoint, Direction.Right), Direction.Right));
-                //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.BottomLineWayPoint, Direction.Right), Direction.Right));
-                await UniTask.Delay(TimeSpan.FromSeconds(_creepSpawnConfiguration.SecondsBetweenPackages));
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    var packageSize = _creepSpawnConfiguration.PackageSize;
+                    //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.TopLineWayPoint, Direction.Left), Direction.Left));
+                    UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.MidLineWayPoint, Direction.Left), Direction.Left, cancellationToken));
+                    //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.BottomLineWayPoint, Direction.Left), Direction.Left));
+                    //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.TopLineWayPoint, Direction.Right), Direction.Right));
+                    UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.MidLineWayPoint, Direction.Right), Direction.Right, cancellationToken));
+                    //UniTask.Create(() => CreateCreepsPackage(packageSize, GetStartWayPoint(_wayPointsWrapper.BottomLineWayPoint, Direction.Right), Direction.Right));
+                    await UniTask.Delay(TimeSpan.FromSeconds(_creepSpawnConfiguration.SecondsBetweenPackages), cancellationToken: cancellationToken);
+                }
+            }
+            catch (OperationCanceledException _)
+            {
+                return;
             }
         }
 
-        private async UniTask CreateCreepsPackage(int packageSize, WayPoint startWayPoint, Direction direction)
+        private async UniTask CreateCreepsPackage(int packageSize, WayPoint startWayPoint, Direction direction, CancellationToken cancellationToken)
         {
             for (int i = 0; i < packageSize; i++)
             {
-                var newCreep = _creepViewFactory.CreateOnPosition(startWayPoint.transform.position, new DefaultFactoryRequirement());
+                var newCreep = _creepViewFactory.CreateOnPosition(startWayPoint.transform.position,
+                    new DefaultFactoryRequirement());
                 ConfigureCreep(newCreep, direction, startWayPoint);
-                await UniTask.Delay(TimeSpan.FromSeconds(_creepSpawnConfiguration.SecondsBetweenCreep));
+                try
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(_creepSpawnConfiguration.SecondsBetweenCreep), cancellationToken: cancellationToken);
+                }
+                catch (OperationCanceledException _)
+                {
+                    return;
+                }
             }
         }
 
@@ -82,6 +100,12 @@ namespace CompositeRoots
                 creepView.SetTeam(Team.Red);
             else if (direction == Direction.Right)
                 creepView.SetTeam(Team.Blue);
+        }
+
+        private void CancelOnGameEnded(OnGameEndedEvent e)
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnGameEndedEvent>(CancelOnGameEnded);
+            _cancellationToken.Cancel();
         }
     }
 }

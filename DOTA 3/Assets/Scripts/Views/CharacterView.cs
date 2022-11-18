@@ -6,7 +6,6 @@ using Common.Abstracts;
 using Common.Enums;
 using Common.EventBus;
 using Common.EventBus.Events;
-using Configurations;
 using Controllers;
 using Controllers.CombatControllers.Character;
 using Inputs;
@@ -45,8 +44,8 @@ namespace Views
         private CancellationTokenSource _cancellationToken;
         private EnemyTargetingInputs _targetingInputs;
         private AnimationController _animationController;
-        
-        public List<SkillConfiguration> Skills => _characterInfo.SkillConfigurations;
+
+        public CharacterInfo CharacterInfo => _characterInfo;
         public Team Team => _targetableView.Team;
         public Character Character => _character;
 
@@ -120,7 +119,7 @@ namespace Views
 
         private void StartObserveSkill(int skillId)
         {
-            var skill = Skills.FirstOrDefault(x => x.Id == skillId);
+            var skill = _characterInfo.SkillConfigurations.FirstOrDefault(x => x.Id == skillId);
             _currentSkillControlBase = _skillControls.FirstOrDefault(x => x.SkillType == skill.SkillType);
             if (skill is null || _currentSkillControlBase is null)
                 throw new Exception("");
