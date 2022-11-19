@@ -34,8 +34,8 @@ namespace Controllers
             _inputs = new PlayerInputs();
             _controlledCharacter = controlledCharacter;
             _skillObservers = new Dictionary<SkillType, ISkillObserver>();
-            _skillObservers.Add(SkillType.Directed, new DirectedSkillObserver(_camera));
-            _skillObservers.Add(SkillType.RangeTargetZone, new RangeTargetZoneSkillObserver(_camera));
+            _skillObservers.Add(SkillType.Dash, new DirectedSkillObserver(_camera));
+            //_skillObservers.Add(SkillType.RangeTargetZone, new RangeTargetZoneSkillObserver(_camera));
         }
 
         public NavMeshAgent NavigantionAgent => _navigation;

@@ -8,6 +8,9 @@ using Configurations.Character;
 using Configurations.Levels;
 using Models.Items;
 using Models.Skills;
+using Models.Skills.Abstracts;
+using Models.Skills.Skills;
+using UnityEngine.AI;
 
 namespace Models
 {
@@ -166,8 +169,11 @@ namespace Models
 
         private List<ISkill> _skills;
         private Inventory _inventory;
-        
-        public Character(CharacterInfo characterInfo)
+        private readonly NavMeshAgent _navMeshAgent;
+
+        public NavMeshAgent NavMeshAgent => _navMeshAgent;
+
+        public Character(CharacterInfo characterInfo, NavMeshAgent navMeshAgent)
         {
             _maxHealth = characterInfo.MaxHealth;
             _currentHealth = _maxHealth;
@@ -175,7 +181,7 @@ namespace Models
             _currentMana = _maxMana;
             InitializeLevels(characterInfo.LevelsConfiguration);
             Speed = characterInfo.Speed;
-            InitializeSkills(characterInfo.SkillConfigurations);
+            InitializeSkills(characterInfo.SkillConfigurations, navMeshAgent);
             BasePhysicalDamage = characterInfo.BasePhysicalDamage;
             Strength = characterInfo.BaseStrength;
             Agility = characterInfo.BaseAgility;
@@ -184,9 +190,10 @@ namespace Models
             AttackDelay = characterInfo.AttackDelay;
             AttackRange = characterInfo.AttackRange;
             _inventory = new Inventory(characterInfo.InventorySize);
+            _navMeshAgent = navMeshAgent;
         }
 
-        private void InitializeSkills(List<SkillConfiguration> skillConfigurations)
+        private void InitializeSkills(List<SkillConfiguration> skillConfigurations, NavMeshAgent navMeshAgent)
         {
             _skills = new List<ISkill>();
 
@@ -194,21 +201,14 @@ namespace Models
             {
                 switch (skill.SkillType)
                 {
-                    case SkillType.Directed:
+                    case SkillType.Dash:
                     {
-                        _skills.Add(new DirectedSkill(skill.Id, 0));
-                        continue;
-                    }
-                    case SkillType.RangeTargetZone:
-                    {
-                        _skills.Add(new RangeTargetZoneSkill(skill.Id, 0));
+                        _skills.Add(new DashSkill(skill.Id, skill.EffectValue, this));
                         continue;
                     }
                 }
             }
         }
-
-        
 
         public Inventory Inventory => _inventory;
         public List<ISkill> Skills => _skills;

@@ -11,11 +11,13 @@ namespace Configurations
         [SerializeField] private float _countdownTime;
         [SerializeField] private SkillType _skillType;
         [SerializeField] private AnimationClip _skillAnimation;
+        [SerializeField] private float _effectValue;
         
         public int Id => _id;
         public Sprite SkillSprite => _skillSprite;
         public float CountDowntime => _countdownTime;
         public SkillType SkillType => _skillType;
         public AnimationClip SkillAnimation => _skillAnimation;
+        public float EffectValue => _effectValue;
     }
 }

@@ -1,29 +1,27 @@
 ﻿using Common.Abstracts;
 using Common.Enums;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Models.Skills
+namespace Models.Skills.Abstracts
 {
-    public class DirectedSkill : ISkill
+    public abstract class DirectedSkill : ISkill
     {
-        private float _effectValue;
+        protected float _effectValue;
 
         public DirectedSkill(int skillId, float effectValue)
         {
             Id = skillId;
             _effectValue = effectValue;
-            CanBeUsed = false;
+            CanBeUsed = true;
         }
 
         public bool CanBeUsed { get; set; }
 
-        public void Apply(Vector3 direction)
-        {
-            
-        }
+        public abstract UniTask Apply(Vector3 direction);
 
         public int Id { get; }
 
-        public SkillType SkillType { get => SkillType.Directed; }
+        public abstract SkillType SkillType { get; }
     }
 }

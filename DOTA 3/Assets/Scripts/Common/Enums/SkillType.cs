@@ -2,7 +2,7 @@
 {
     public enum SkillType
     {
-        Directed,
-        RangeTargetZone,
+        Dash,
+        
     }
 }

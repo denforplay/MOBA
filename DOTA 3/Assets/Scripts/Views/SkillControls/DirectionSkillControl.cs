@@ -16,6 +16,6 @@ namespace Views.SkillControls
             _controlImage.transform.rotation = Quaternion.Lerp(rotation, _controlImage.transform.rotation, 0);
         }
 
-        public override SkillType SkillType { get => SkillType.Directed; }
+        public override SkillType SkillType { get => SkillType.Dash; }
     }
 }

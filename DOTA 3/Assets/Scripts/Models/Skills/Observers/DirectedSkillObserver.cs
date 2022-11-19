@@ -10,6 +10,7 @@ namespace Models.Skills.Observers
     public class DirectedSkillObserver : ISkillObserver
     {
         public event Action<Vector3> OnObservedPositionChanged;
+        public event Action<Vector3> OnSkillCalled;
         private readonly Camera _camera;
 
         public DirectedSkillObserver(Camera camera)
@@ -19,18 +20,28 @@ namespace Models.Skills.Observers
 
         public async UniTask ObserveSkill(CancellationTokenSource cancellationToken)
         {
-            while (!cancellationToken.IsCancellationRequested)
+            Vector3 lastPosition = Vector3.zero;
+            try
             {
-                var mousePosition = Mouse.current.position.ReadValue();
-                Ray ray = _camera.ScreenPointToRay(mousePosition);
-                var layerMask = LayerMask.GetMask("Terrain");
-                if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity, layerMask))
+                while (!cancellationToken.IsCancellationRequested)
                 {
-                    var skillPosition = new Vector3(raycastHit.point.x, raycastHit.point.y, raycastHit.point.z);
-                    OnObservedPositionChanged?.Invoke(skillPosition);
+                    var mousePosition = Mouse.current.position.ReadValue();
+                    Ray ray = _camera.ScreenPointToRay(mousePosition);
+                    var layerMask = LayerMask.GetMask("Terrain");
+                    if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity, layerMask))
+                    {
+                        var skillPosition = new Vector3(raycastHit.point.x, raycastHit.point.y, raycastHit.point.z);
+                        lastPosition = skillPosition;
+                        OnObservedPositionChanged?.Invoke(skillPosition);
+                    }
+
+                    await UniTask.Delay(TimeSpan.FromSeconds(0.01f), cancellationToken: cancellationToken.Token);
                 }
-                
-                await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            }
+            finally
+            {
+                OnSkillCalled?.Invoke(lastPosition);
+
             }
         }
     }

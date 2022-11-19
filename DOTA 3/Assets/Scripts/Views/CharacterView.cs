@@ -8,6 +8,7 @@ using Common.EventBus;
 using Common.EventBus.Events;
 using Controllers;
 using Controllers.CombatControllers.Character;
+using Cysharp.Threading.Tasks;
 using Inputs;
 using Models;
 using Models.Items;
@@ -24,7 +25,6 @@ namespace Views
     public class CharacterView : MonoBehaviour
     {
         public event Action<int> OnSkillActivated;
-
         [SerializeField] private LevelView _levelView;
         [SerializeField] private ManaView _manaView;
         [SerializeField] private TargetableView _targetableView;
@@ -55,7 +55,7 @@ namespace Views
         public void Initialize(Camera camera)
         {
             //TODO: REFACTORING
-            _character = new Character(_characterInfo)
+            _character = new Character(_characterInfo, _navigationAgent)
             {
                 Team = Team.Blue
             };
@@ -131,7 +131,15 @@ namespace Views
                 return;
             
             _currentSkillObserver.OnObservedPositionChanged += _currentSkillControlBase.UpdateSkillView;
+            var skillModel = _character.Skills.First(x => x.Id == skillId);
+            _currentSkillObserver.OnSkillCalled += pos => UseSkill(skillId, pos);
             _currentSkillControlBase.gameObject.SetActive(true);
+        }
+
+        private void UseSkill(int skillId, Vector3 onPosition)
+        {
+            var skillModel = _character.Skills.First(x => x.Id == skillId);
+            UniTask.Create(() => skillModel.Apply(onPosition));
         }
 
         private void Destroy()
@@ -153,6 +161,7 @@ namespace Views
             _currentSkillControlBase.gameObject.SetActive(false);
             _cancellationToken.Cancel();
             _currentSkillObserver.OnObservedPositionChanged -= _currentSkillControlBase.UpdateSkillView;
+            //_currentSkillObserver.OnSkillCalled -= _character.Skills.FirstOrDefault(x => x.Id == skillId).Apply;
             _currentSkillObserver = null;
             _currentSkillControlBase = null;
             OnSkillActivated?.Invoke(skillId);

@@ -21,6 +21,6 @@ namespace Views.SkillControls
             _rangeCircle.transform.position = newPosition;
         }
 
-        public override SkillType SkillType { get => SkillType.RangeTargetZone; }
+        public override SkillType SkillType { get; }
     }
 }
