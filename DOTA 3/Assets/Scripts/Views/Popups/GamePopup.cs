@@ -1,38 +1,57 @@
-﻿using Cinemachine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Cinemachine;
 using Common.PopupSystem;
 using Configurations.Items;
 using UnityEngine;
+using Views.Abstracts;
+using Views.Abstracts.FactoryRequirements;
 using Zenject;
+using CharacterInfo = Configurations.Character.CharacterInfo;
 
 namespace Views.Popups
 {
     public class GamePopup : Popup
     {
         [SerializeField] private ShopItemsConfiguration _shopItemsConfiguration;
-        [SerializeField] private CharacterView _characterView;
+        [SerializeField] private List<Transform> _startPositions;
+        [SerializeField] private ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> _projectileViewFactory;
+        
         private Camera _camera;
         private HudPopup _hudPopup;
         private PopupSystem _popupSystem;
+        private CharacterView _controlledCharacterView;
+        private CinemachineVirtualCamera _virtualCamera;
 
         [Inject]
-        public void Initialize(PopupSystem popupSystem, CinemachineVirtualCamera virtualCamera, Camera camera)
+        public void Inject(PopupSystem popupSystem, CinemachineVirtualCamera virtualCamera, Camera camera)
         {
             _popupSystem = popupSystem;
             _camera = camera;
-            _characterView.Initialize(camera);
-            var characterTransform = _characterView.transform;
-            virtualCamera.LookAt = characterTransform;
-            virtualCamera.Follow = characterTransform;
-            _hudPopup = popupSystem.SpawnPopup<HudPopup>(0);
-            _hudPopup.Initialize(_characterView);
+            _virtualCamera = virtualCamera;
+        }
+
+        public void Initialize(CharacterInfo characterInfo)
+        {
+            var character = Instantiate(characterInfo.CharacterPrefab, transform);
+            character.transform.position = _startPositions.First().position;
+            _controlledCharacterView = character.GetComponentInChildren<CharacterView>();
+            _controlledCharacterView.Inject(_projectileViewFactory);
+            _hudPopup = _popupSystem.SpawnPopup<HudPopup>(0);
+            _controlledCharacterView.Initialize(_camera);
+            var characterTransform = _controlledCharacterView.transform;
+            _virtualCamera.LookAt = characterTransform;
+            _virtualCamera.Follow = characterTransform;
+            _hudPopup.Initialize(_controlledCharacterView);
             _hudPopup.OnShopCalled += ShowShopPopup;
+
         }
 
         private void ShowShopPopup()
         {
             var shopPopup = _popupSystem.SpawnPopup<ShopPopup>();
-            shopPopup.Initialize(_shopItemsConfiguration, _characterView.Character);
-            shopPopup.Closing += _ => _characterView.EnableInput();
+            shopPopup.Initialize(_shopItemsConfiguration, _controlledCharacterView.Character);
+            shopPopup.Closing += _ => _controlledCharacterView.EnableInput();
         }
         
         public override void EnableInput()

@@ -23,7 +23,7 @@ namespace Views.Popups
             _startGameButton.onClick.AddListener(() =>
             {
                 _popupSystem.DeletePopUp();
-                _popupSystem.SpawnPopup<GamePopup>(1);
+                _popupSystem.SpawnPopup<ChooseCharacterPopup>();
             });
         }
 

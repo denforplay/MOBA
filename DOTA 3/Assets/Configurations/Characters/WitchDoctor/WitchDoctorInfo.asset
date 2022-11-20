@@ -40,3 +40,4 @@ MonoBehaviour:
   _maxMana: 125
   _levelsConfiguration: {fileID: 11400000, guid: 2deff7f442be9d8439f437e9dd1a1b9b, type: 2}
   _characterIcon: {fileID: 1377604591, guid: ced08c8d15c46da47aa386d9a8544787, type: 3}
+  _characterPrefab: {fileID: 4335943977640594344, guid: 35757af557a4c374da77d08dd8b35023, type: 3}

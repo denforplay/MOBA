@@ -47,6 +47,13 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.fbx
+*.prefab
+*.meta
+*.png
+*.terrainlayer
+*.userdata
+
 
 # Unity3D generated file on crash reports
 sysinfo.txt

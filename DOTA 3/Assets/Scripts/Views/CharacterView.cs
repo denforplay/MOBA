@@ -17,6 +17,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using Views.Abstracts;
 using Views.Abstracts.FactoryRequirements;
+using Zenject;
 using CharacterController = Controllers.CharacterController;
 using CharacterInfo = Configurations.Character.CharacterInfo;
 
@@ -31,9 +32,9 @@ namespace Views
         [SerializeField] private Animator _animator;
         [SerializeField] private CharacterInfo _characterInfo;
         [SerializeField] private NavMeshAgent _navigationAgent;
-        [SerializeField] private ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> _projectileViewFactory;
         [SerializeField] private List<SkillControlBase> _skillControls;
 
+        private ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> _projectileViewFactory;
         private CharacterController _characterController;
         private CharacterCombatController _characterCombatController;
         private Character _character;
@@ -51,6 +52,12 @@ namespace Views
 
         private Dictionary<CombatType, Func<CharacterController, Character, CharacterCombatController>>
             CombatFactory;
+
+        [Inject]
+        public void Inject(ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> projectileViewFactory)
+        {
+            _projectileViewFactory = projectileViewFactory;
+        }
 
         public void Initialize(Camera camera)
         {
@@ -181,16 +188,6 @@ namespace Views
         }
 
         public void DisableInput()
-        {
-            _playerInputs.Disable();
-        }
-        
-        private void OnEnable()
-        {
-            _playerInputs.Enable();
-        }
-
-        private void OnDisable()
         {
             _playerInputs.Disable();
         }

@@ -29,6 +29,7 @@ namespace Configurations.Character
         [SerializeField] private float _maxMana;
         [SerializeField] private LevelsConfiguration _levelsConfiguration;
         [SerializeField] private Sprite _characterIcon;
+        [SerializeField] private GameObject _characterPrefab;
 
         public string HeroName => _heroName;
         private int Id => _id;
@@ -50,5 +51,6 @@ namespace Configurations.Character
         public float MaxMana => _maxMana;
         public LevelsConfiguration LevelsConfiguration => _levelsConfiguration;
         public Sprite CharacterIcon => _characterIcon;
+        public GameObject CharacterPrefab => _characterPrefab;
     }
 }
