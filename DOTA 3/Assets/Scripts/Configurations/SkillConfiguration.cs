@@ -12,6 +12,8 @@ namespace Configurations
         [SerializeField] private SkillType _skillType;
         [SerializeField] private AnimationClip _skillAnimation;
         [SerializeField] private float _effectValue;
+        [SerializeField] private float _range;
+        [SerializeField] private ParticleSystem _particle;
         
         public int Id => _id;
         public Sprite SkillSprite => _skillSprite;
@@ -19,5 +21,7 @@ namespace Configurations
         public SkillType SkillType => _skillType;
         public AnimationClip SkillAnimation => _skillAnimation;
         public float EffectValue => _effectValue;
+        public float Range => _range;
+        public ParticleSystem ParticleSystem => _particle;
     }
 }

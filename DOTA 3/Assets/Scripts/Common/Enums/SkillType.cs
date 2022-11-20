@@ -3,6 +3,7 @@
     public enum SkillType
     {
         Dash,
-        
+        RangeDamage,
+        Self
     }
 }

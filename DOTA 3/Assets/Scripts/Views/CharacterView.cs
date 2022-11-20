@@ -54,8 +54,8 @@ namespace Views
 
         public void Initialize(Camera camera)
         {
-            //TODO: REFACTORING
-            _character = new Character(_characterInfo, _navigationAgent)
+            _camera = camera;
+            _character = new Character(_characterInfo, _navigationAgent, _camera)
             {
                 Team = Team.Blue
             };
@@ -78,7 +78,6 @@ namespace Views
             };
             
             _skillControls.ForEach(x => x.gameObject.SetActive(false));
-            _camera = camera;
             _targetingInputs = new EnemyTargetingInputs(_camera, this);
             _animationController = new AnimationController(_characterInfo.AnimationsInfo, _animator);
             _characterController = new CharacterController(_camera, _navigationAgent, _character, _animationController);
@@ -105,8 +104,8 @@ namespace Views
             _playerInputs.Character.UseSecondSkill.started += _ => StartObserveSkill(1);
             _playerInputs.Character.UseSecondSkill.canceled += _ => StopObserveSkill(1);
             
-            _playerInputs.Character.UseThirdSkill.started += _ => { };
-            _playerInputs.Character.UseThirdSkill.canceled += _ => { };
+            _playerInputs.Character.UseThirdSkill.started += _ => StartObserveSkill(2);
+            _playerInputs.Character.UseThirdSkill.canceled += _ => StopObserveSkill(2);
             
             _playerInputs.Enable();
         }
@@ -131,7 +130,6 @@ namespace Views
                 return;
             
             _currentSkillObserver.OnObservedPositionChanged += _currentSkillControlBase.UpdateSkillView;
-            var skillModel = _character.Skills.First(x => x.Id == skillId);
             _currentSkillObserver.OnSkillCalled += pos => UseSkill(skillId, pos);
             _currentSkillControlBase.gameObject.SetActive(true);
         }

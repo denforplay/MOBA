@@ -4,13 +4,12 @@ using System.Linq;
 using Common.Abstracts;
 using Common.Enums;
 using Configurations;
-using Configurations.Character;
 using Configurations.Levels;
 using Models.Items;
-using Models.Skills;
-using Models.Skills.Abstracts;
 using Models.Skills.Skills;
+using UnityEngine;
 using UnityEngine.AI;
+using CharacterInfo = Configurations.Character.CharacterInfo;
 
 namespace Models
 {
@@ -173,7 +172,7 @@ namespace Models
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
-        public Character(CharacterInfo characterInfo, NavMeshAgent navMeshAgent)
+        public Character(CharacterInfo characterInfo, NavMeshAgent navMeshAgent, Camera camera)
         {
             _maxHealth = characterInfo.MaxHealth;
             _currentHealth = _maxHealth;
@@ -181,7 +180,7 @@ namespace Models
             _currentMana = _maxMana;
             InitializeLevels(characterInfo.LevelsConfiguration);
             Speed = characterInfo.Speed;
-            InitializeSkills(characterInfo.SkillConfigurations, navMeshAgent);
+            InitializeSkills(characterInfo.SkillConfigurations);
             BasePhysicalDamage = characterInfo.BasePhysicalDamage;
             Strength = characterInfo.BaseStrength;
             Agility = characterInfo.BaseAgility;
@@ -193,7 +192,7 @@ namespace Models
             _navMeshAgent = navMeshAgent;
         }
 
-        private void InitializeSkills(List<SkillConfiguration> skillConfigurations, NavMeshAgent navMeshAgent)
+        private void InitializeSkills(List<SkillConfiguration> skillConfigurations)
         {
             _skills = new List<ISkill>();
 
@@ -203,7 +202,12 @@ namespace Models
                 {
                     case SkillType.Dash:
                     {
-                        _skills.Add(new DashSkill(skill.Id, skill.EffectValue, this));
+                        _skills.Add(new DashSkill(skill.Id, skill, this));
+                        continue;
+                    }
+                    case SkillType.RangeDamage:
+                    {
+                        _skills.Add(new RangeDamageSkill(skill.Id, skill, this));
                         continue;
                     }
                 }

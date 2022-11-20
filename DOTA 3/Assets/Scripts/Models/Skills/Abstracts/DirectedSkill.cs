@@ -1,5 +1,6 @@
 ﻿using Common.Abstracts;
 using Common.Enums;
+using Configurations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -7,12 +8,12 @@ namespace Models.Skills.Abstracts
 {
     public abstract class DirectedSkill : ISkill
     {
-        protected float _effectValue;
+        protected readonly SkillConfiguration _skillConfiguration;
 
-        public DirectedSkill(int skillId, float effectValue)
+        public DirectedSkill(int skillId, SkillConfiguration skillConfiguration)
         {
             Id = skillId;
-            _effectValue = effectValue;
+            _skillConfiguration = skillConfiguration;
             CanBeUsed = true;
         }
 

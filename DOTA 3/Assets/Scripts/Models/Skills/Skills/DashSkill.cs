@@ -1,9 +1,9 @@
 ﻿using System;
 using Common.Enums;
+using Configurations;
 using Cysharp.Threading.Tasks;
 using Models.Skills.Abstracts;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Models.Skills.Skills
 {
@@ -11,7 +11,7 @@ namespace Models.Skills.Skills
     {
         private readonly Character _character;
 
-        public DashSkill(int skillId, float effectValue, Character character) : base(skillId, effectValue)
+        public DashSkill(int skillId, SkillConfiguration skillConfiguration, Character character) : base(skillId, skillConfiguration)
         {
             _character = character;
         }
@@ -24,7 +24,7 @@ namespace Models.Skills.Skills
             _character.NavMeshAgent.ResetPath();
             await UniTask.Delay(TimeSpan.FromSeconds(0.05));
             _character.NavMeshAgent.speed = _character.Speed;
-            var newVelocity = _effectValue * direction;
+            var newVelocity = _skillConfiguration.EffectValue * direction;
             _character.NavMeshAgent.velocity = newVelocity;
         }
         
