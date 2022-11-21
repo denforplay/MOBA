@@ -6,6 +6,7 @@ using Common.Abstracts;
 using Common.Enums;
 using Common.EventBus;
 using Common.EventBus.Events;
+using Common.PopupSystem;
 using Controllers;
 using Controllers.CombatControllers.Character;
 using Cysharp.Threading.Tasks;
@@ -17,6 +18,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using Views.Abstracts;
 using Views.Abstracts.FactoryRequirements;
+using Views.Popups;
 using Zenject;
 using CharacterController = Controllers.CharacterController;
 using CharacterInfo = Configurations.Character.CharacterInfo;
@@ -53,19 +55,28 @@ namespace Views
         private Dictionary<CombatType, Func<CharacterController, Character, CharacterCombatController>>
             CombatFactory;
 
-        [Inject]
-        public void Inject(ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> projectileViewFactory)
+        private PopupSystem _popupSystem;
+        private Transform _startPosition;
+        
+        public void Inject(PopupSystem popupSystem, ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> projectileViewFactory)
         {
+            _popupSystem = popupSystem;
             _projectileViewFactory = projectileViewFactory;
         }
 
-        public void Initialize(Camera camera)
+        public void Initialize(Camera camera, Transform startPosition)
         {
+            _startPosition = startPosition;
+            gameObject.transform.parent.gameObject.SetActive(false);
+            gameObject.transform.position = startPosition.position;
+            gameObject.transform.parent.gameObject.SetActive(true);
             _camera = camera;
             _character = new Character(_characterInfo, _navigationAgent, _camera)
             {
                 Team = Team.Blue
             };
+
+            _character.OnHealthEnded += DisableCharacter;
             EventBusManager.GetInstance.Subscribe<OnGameEndedEvent>(DestroyOnGameEnded);
             _levelView.AttachLevelableModel(_character);
             _manaView.AttachManaModel(_character);
@@ -113,10 +124,23 @@ namespace Views
             
             _playerInputs.Character.UseThirdSkill.started += _ => StartObserveSkill(2);
             _playerInputs.Character.UseThirdSkill.canceled += _ => StopObserveSkill(2);
-            
             _playerInputs.Enable();
         }
 
+        private void DisableCharacter()
+        {
+            gameObject.transform.parent.gameObject.SetActive(false);
+            var revivingPopup = _popupSystem.SpawnPopup<DeadPlayerPopup>();
+            revivingPopup.Initialize(TimeSpan.FromSeconds(10));
+            revivingPopup.OnRevive += EnableCharacter;
+        }
+
+        private void EnableCharacter()
+        {
+            _character.ChangeHealth(_character.MaxHealth - _character.CurrentHealth);
+            gameObject.transform.position = _startPosition.position;
+            gameObject.transform.parent.gameObject.SetActive(true);
+        }
         
         public void SetSkillUseState(int skillId, bool canBeUsed)
         {

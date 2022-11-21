@@ -33,18 +33,17 @@ namespace Views.Popups
 
         public void Initialize(CharacterInfo characterInfo)
         {
+            var spawnPosition = _startPositions.First();
             var character = Instantiate(characterInfo.CharacterPrefab, transform);
-            character.transform.position = _startPositions.First().position;
             _controlledCharacterView = character.GetComponentInChildren<CharacterView>();
-            _controlledCharacterView.Inject(_projectileViewFactory);
+            _controlledCharacterView.Inject(_popupSystem, _projectileViewFactory);
             _hudPopup = _popupSystem.SpawnPopup<HudPopup>(0);
-            _controlledCharacterView.Initialize(_camera);
+            _controlledCharacterView.Initialize(_camera, spawnPosition);
             var characterTransform = _controlledCharacterView.transform;
             _virtualCamera.LookAt = characterTransform;
             _virtualCamera.Follow = characterTransform;
             _hudPopup.Initialize(_controlledCharacterView);
             _hudPopup.OnShopCalled += ShowShopPopup;
-
         }
 
         private void ShowShopPopup()
