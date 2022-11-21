@@ -38,6 +38,11 @@ namespace Models.Skills.Skills
                 {
                     var resultDamage = _skillConfiguration.EffectValue * (_skillConfiguration.Range - Vector3.Distance(position, collider.transform.position)) / _skillConfiguration.Range;
                     targetable.ApplyDamage(resultDamage);
+                    if (targetable.Healthable.CurrentHealth < 0)
+                    {
+                        _character.Money += targetable.GetCost();
+                        _character.AddExperience(targetable.GetCost());
+                    }
                 }
             }
         }

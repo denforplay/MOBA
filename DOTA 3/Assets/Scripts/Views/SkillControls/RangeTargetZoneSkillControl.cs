@@ -18,6 +18,7 @@ namespace Views.SkillControls
             float distance = Vector3.Distance(newPosition, transform.position);
             distance = Mathf.Min(distance, _maxDistance);
             newPosition = _player.transform.position + hitDirection * distance;
+            newPosition.y = _rangeCircle.transform.position.y;
             _rangeCircle.transform.position = newPosition;
         }
 

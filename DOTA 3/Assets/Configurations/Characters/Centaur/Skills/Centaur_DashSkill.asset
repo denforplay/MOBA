@@ -17,6 +17,6 @@ MonoBehaviour:
   _countdownTime: 5
   _skillType: 0
   _skillAnimation: {fileID: 0}
-  _effectValue: 35
+  _effectValue: 20
   _range: 0
   _particle: {fileID: 0}

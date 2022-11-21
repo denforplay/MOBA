@@ -15,7 +15,7 @@ namespace Models.Skills.Abstracts
         {
             _skillConfiguration = skillConfiguration;
             Id = skillId;
-            CanBeUsed = true;
+            CanBeUsed = false;
         }
 
         public abstract UniTask Apply(Vector3 position);

@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _heroName: Witch doctor
+  _heroDescription: "In primitive society, the witch doctor (medicine man) was a
+    person who had mystical powers that enabled him to detect witches and to combat
+    their evil actions. The witch doctor usually had a triple function\u2014that
+    of physician, magician, and priest. These responsibilities stemmed from the primitive
+    belief that all physical phenomena were controlled by supernatural powers. These
+    beliefs persist in primitive cultures today."
   _speed: 5
   _maxHealth: 1000
   _basePhysicalDamage: 50

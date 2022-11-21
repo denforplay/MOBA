@@ -11,6 +11,7 @@ namespace Configurations.Character
     {
         [SerializeField] private int _id;
         [SerializeField] private string _heroName;
+        [SerializeField] private string _heroDescription;
         [SerializeField] private float _speed;
         [SerializeField] private float _maxHealth;
         [SerializeField] private float _basePhysicalDamage;
@@ -32,6 +33,7 @@ namespace Configurations.Character
         [SerializeField] private GameObject _characterPrefab;
 
         public string HeroName => _heroName;
+        public string HeroDescription => _heroDescription;
         private int Id => _id;
         public float Speed => _speed;
         public float MaxHealth => _maxHealth;

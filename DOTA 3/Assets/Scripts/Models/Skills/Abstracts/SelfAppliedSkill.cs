@@ -15,6 +15,7 @@ namespace Models.Skills.Abstracts
         {
             _skillConfiguration = skillConfiguration;
             _character = character;
+            CanBeUsed = false;
         }
         
         public bool CanBeUsed { get; set; }

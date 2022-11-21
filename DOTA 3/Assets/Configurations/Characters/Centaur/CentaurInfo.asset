@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1
   _heroName: Centaur
-  _speed: 5
+  _heroDescription: A centaur was a creature from Greek mythology which was half-man
+    and half-horse. The head, arms and torso of a centaur were human and joined at
+    the waist to the body and legs of a horse. They represented barbarism and unbridled
+    chaos and were frequently represented in Greek architectural sculpture and pottery
+    decoration.
+  _speed: 10
   _maxHealth: 1000
   _basePhysicalDamage: 30
   _baseMagicalDamage: 30
