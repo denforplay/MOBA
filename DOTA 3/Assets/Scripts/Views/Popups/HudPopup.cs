@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.PopupSystem;
 using Models.Items;
 using TMPro;
@@ -13,6 +14,7 @@ namespace Views.Popups
     {
         public event Action OnShopCalled;
         [SerializeField] private HeroPanel _heroPanel;
+        [SerializeField] private BattlegroundPanel _battlegroundPanel;
         [SerializeField] private TextMeshProUGUI _heroName;
         [SerializeField] private TextMeshProUGUI _coinText;
         [SerializeField] private Button _shopButton;
@@ -39,6 +41,12 @@ namespace Views.Popups
             
             SubscribeOnCharacterEvents();
             _shopButton.onClick.AddListener(OnShopPopupCalled);
+        }
+
+        public void InitializeBattleGroundPanel(List<Configurations.Character.CharacterInfo> leftTeamCharacters,
+            List<Configurations.Character.CharacterInfo> rightTeamCharacters)
+        {
+            _battlegroundPanel.Initialize(leftTeamCharacters, rightTeamCharacters);
         }
 
         public void SubscribeOnCharacterEvents()

@@ -45,7 +45,10 @@ namespace Views
 
         public void UnSubscribe(object subscriber, bool isMarked)
         {
-            _isTargetFor[subscriber]?.Invoke();
+            if (_isTargetFor.TryGetValue(subscriber, out var callback))
+            {
+                callback?.Invoke();
+            }
             
             _isTargetFor.Remove(subscriber);
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
+using Common.Enums;
 using Common.PopupSystem;
 using Configurations;
 using Configurations.Character;
@@ -101,7 +103,22 @@ namespace Views.Popups
                 
                 OnClosing();
                 var popup = _popupSystem.SpawnPopup<GamePopup>(1);
-                popup.Initialize(_currentCharacterInfo);
+                
+                var leftTeam = new List<CharacterInfo>
+                {
+                    _currentCharacterInfo,
+                    _charactersConfiguration.CharacterInfos[1],
+                    _charactersConfiguration.CharacterInfos[0]
+                };
+
+                var rightTeam = new List<CharacterInfo>()
+                {
+                    _charactersConfiguration.CharacterInfos[1],
+                    _charactersConfiguration.CharacterInfos[0],
+                    _charactersConfiguration.CharacterInfos[0]
+                };
+                
+                popup.Initialize(leftTeam, rightTeam);
             }
 
         }

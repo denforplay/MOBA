@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Common.Enums;
+using Controllers.Interfaces;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,23 +11,34 @@ namespace Controllers.CombatControllers.Character
 {
     public abstract class CharacterCombatController : BaseCombatController
     {
-        protected CharacterController _characterController;
+        protected ICharacterController _characterController;
         protected readonly NavMeshAgent _navigationAgent;
         protected readonly Models.Character _character;
         protected TargetableView _previousTarget;
         protected CancellationTokenSource _cancellationTokenSource; 
 
-        public CharacterCombatController(CharacterController characterController, Models.Character character)
+        public CharacterCombatController(ICharacterController characterController, Models.Character character)
         {
             _character = character;
             _characterController = characterController;
-            _navigationAgent = _characterController.NavigantionAgent;
+            _navigationAgent = _characterController.NavigationAgent;
         }
 
         public virtual void Attack(TargetableView target)
         {
             if (target == _previousTarget)
+            {
+                if (_canAttack)
+                {
+                    UniTask.Create(() => Attack(_cancellationTokenSource.Token));
+                }
+                else
+                {
+                    _navigationAgent.stoppingDistance = _character.AttackRange;
+                }
+                
                 return;
+            }
             
             DeatachTarget();
             

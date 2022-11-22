@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Threading;
 using Common.Enums;
+using Controllers.Interfaces;
 using Cysharp.Threading.Tasks;
 
 namespace Controllers.CombatControllers.Character
 {
     public class MeleeCharacterCombatController : CharacterCombatController
     {
-        public MeleeCharacterCombatController(CharacterController characterController, Models.Character character) : base(characterController, character)
+        public MeleeCharacterCombatController(ICharacterController characterController, Models.Character character) : base(characterController, character)
         {
         }
         

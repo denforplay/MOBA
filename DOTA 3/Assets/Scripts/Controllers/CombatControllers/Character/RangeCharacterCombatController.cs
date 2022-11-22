@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Common.Enums;
+using Controllers.Interfaces;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Views;
@@ -20,7 +21,7 @@ namespace Controllers.CombatControllers.Character
             _projectileFactoryRequirement = requirement;
         }
         
-        public RangeCharacterCombatController(CharacterController characterController, Models.Character character) : base(characterController, character)
+        public RangeCharacterCombatController(ICharacterController characterController, Models.Character character) : base(characterController, character)
         {
         }
         

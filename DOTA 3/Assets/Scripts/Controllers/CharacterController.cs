@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using Common.Abstracts;
 using Common.Enums;
+using Controllers.Interfaces;
 using Cysharp.Threading.Tasks;
 using Models;
 using Models.Skills.Observers;
@@ -13,7 +14,7 @@ using UnityEngine.InputSystem;
 
 namespace Controllers
 {
-    public class CharacterController : IController
+    public class CharacterController : ICharacterController
     {
         private Camera _camera;
         private NavMeshAgent _navigation;
@@ -23,7 +24,6 @@ namespace Controllers
         private Dictionary<SkillType, ISkillObserver> _skillObservers;
         private readonly AnimationController _animationController;
         private bool _isMoving;
-        public AnimationController AnimationController => _animationController;
 
         public CharacterController(Camera camera, NavMeshAgent navAgent, Character 
             controlledCharacter, AnimationController animationController)
@@ -38,7 +38,7 @@ namespace Controllers
             _skillObservers.Add(SkillType.RangeDamage, new RangeTargetZoneSkillObserver(_camera));
         }
 
-        public NavMeshAgent NavigantionAgent => _navigation;
+        public NavMeshAgent NavigationAgent => _navigation;
 
         public void Move()
         {
@@ -63,6 +63,7 @@ namespace Controllers
             point.y = _navigation.transform.position.y;
             _navigation.destination = point;
         }
+
 
         private async UniTask ObserveMovingAnimation()
         {

@@ -14,7 +14,6 @@ namespace Controllers
     public class CreepController : IController
     {
         public event Action<TargetableView> OnAttack;
-        
         private readonly AnimationController _animationController;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Direction _direction;
@@ -24,7 +23,9 @@ namespace Controllers
         private bool _isWasObserved = false;
         private readonly CreepView _creepView;
         private readonly Creep _creep;
-
+        
+        private TargetableView _previousTarget;
+        
         public NavMeshAgent Navigation => _navMeshAgent;
         public AnimationController AnimationController => _animationController;
 
@@ -50,7 +51,6 @@ namespace Controllers
             UniTask.Create(ObserveEnemies);
         }
 
-        private TargetableView _previousTarget;
         private async UniTask ObserveEnemies()
         {
             try

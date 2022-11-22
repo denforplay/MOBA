@@ -34,7 +34,7 @@ MonoBehaviour:
   _combatType: 0
   _projectileType: 0
   _attackRange: 4
-  _attackDelay: 1
+  _attackDelay: 1.25
   _animations:
   - {fileID: 11400000, guid: 458d2037696ede84a87dadf99d8ebbe4, type: 2}
   - {fileID: 11400000, guid: ab6d9f6367292a14dbff10c0f13f785a, type: 2}
