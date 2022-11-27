@@ -1,5 +1,7 @@
 ﻿using System;
 using Common.Enums;
+using Common.EventBus;
+using Common.EventBus.Events;
 using Configurations.Towers;
 using Controllers.CombatControllers.AI.TowersAI;
 using Models.Towers;
@@ -25,6 +27,10 @@ namespace Views.Towers
         public Transform TowerHead => _towerHead.transform;
         
         public Team Team => _team;
+
+
+        private bool isDestroyed;
+        public bool IsDestroyed => isDestroyed;
         private void Awake()
         {
             _tower = new Tower(_configuration);
@@ -34,6 +40,7 @@ namespace Views.Towers
             _combatController = new TowerCombatController(this, _tower, _projectileFactory, new ProjectileFactoryRequirement{ProjectileType = ProjectileType.CannonBall});
             _combatController.OnAttack += Attack;
             _combatController.StartObserve();
+            EventBusManager.GetInstance.Subscribe<OnGameEndedEvent>(Destroy);
         }
         
         
@@ -55,10 +62,27 @@ namespace Views.Towers
 
         private void Destroy()
         {
-            _combatController.Cencel();
-            _combatController.OnAttack -= Attack;
-            _tower.OnHealthEnded -= Destroy;
-            Destroy(this.gameObject);
+            if (!isDestroyed)
+            {
+                isDestroyed = true;
+                _combatController.Cencel();
+                _combatController.OnAttack -= Attack;
+                _tower.OnHealthEnded -= Destroy;
+                Destroy(this.gameObject);
+            }
+        }
+        
+        private void Destroy(OnGameEndedEvent gameEndedEvent)
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnGameEndedEvent>(Destroy);
+            if (!isDestroyed)
+            {
+                isDestroyed = true;
+                _combatController.Cencel();
+                _combatController.OnAttack -= Attack;
+                _tower.OnHealthEnded -= Destroy;
+                Destroy(this.gameObject);
+            }
         }
 
         private void Attack(Vector3 direction)

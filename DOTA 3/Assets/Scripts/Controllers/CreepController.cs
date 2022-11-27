@@ -25,13 +25,15 @@ namespace Controllers
         private readonly Creep _creep;
         
         private TargetableView _previousTarget;
-        
+
+        public bool IsDestroyed => _creepView.IsDestroyed;
         public NavMeshAgent Navigation => _navMeshAgent;
         public AnimationController AnimationController => _animationController;
 
         public void SetState(AnimationType animationType)
         {
-            _animationController.ChangeAnimation(animationType);
+            if (!_creepView.IsDestroyed)
+                _animationController.ChangeAnimation(animationType);
         }
         
         public CreepController(NavMeshAgent navMeshAgent, Creep creep, AnimationController animationController, WayPoint startWayPoint, Direction direction, CreepView creepView)

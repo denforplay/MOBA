@@ -9,7 +9,6 @@ using Controllers.CombatControllers.AI.CreepCombatAI;
 using Models.Enemies;
 using UnityEngine;
 using UnityEngine.AI;
-using Object = UnityEngine.Object;
 
 namespace Views
 {
@@ -23,6 +22,10 @@ namespace Views
         private CreepController _creepController;
         private AnimationController _animationController;
         private Creep _creep;
+
+        private bool isDestroyed;
+        public bool IsDestroyed => isDestroyed;
+        public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
         private Dictionary<CombatType, Func<CreepController, Creep, AICombatControllerBase>> _combatControllersConfiguration =
             new Dictionary<CombatType, Func<CreepController, Creep, AICombatControllerBase>>
@@ -55,15 +58,22 @@ namespace Views
 
         private void Destroy()
         {
-            EventBusManager.GetInstance.Unsubscribe<OnGameEndedEvent>(DestroyOnGameEnded);
-            _creepCombatController.Cancel();
-            _creepController.Cancel();
-            Destroy(this.gameObject);
+            if (!isDestroyed)
+            {
+                isDestroyed = true;
+                EventBusManager.GetInstance.Unsubscribe<OnGameEndedEvent>(DestroyOnGameEnded);
+                _creepCombatController.Cancel();
+                _creepController.Cancel();
+                Destroy(this.gameObject);
+            }
         }
-        
+
         private void DestroyOnGameEnded(OnGameEndedEvent e)
         {
-            Destroy();
+            if (!isDestroyed)
+            {
+                Destroy();
+            }
         }
 
         public void SetTeam(Team team)

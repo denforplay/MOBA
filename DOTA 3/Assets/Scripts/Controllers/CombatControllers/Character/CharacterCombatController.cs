@@ -26,15 +26,12 @@ namespace Controllers.CombatControllers.Character
 
         public virtual void Attack(TargetableView target)
         {
-            if (target == _previousTarget)
+            if (target == _previousTarget && target is not null)
             {
-                if (_canAttack)
+
+                if (_canAttack && !(_cancellationTokenSource is null || _cancellationTokenSource.IsCancellationRequested))
                 {
                     UniTask.Create(() => Attack(_cancellationTokenSource.Token));
-                }
-                else
-                {
-                    _navigationAgent.stoppingDistance = _character.AttackRange;
                 }
                 
                 return;
@@ -68,7 +65,7 @@ namespace Controllers.CombatControllers.Character
         
         protected async UniTask Move(CancellationToken cancellationToken)
         {
-            while (!cancellationToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested && _characterController.IsDestroyed)
             {
                 var distance = Vector3.Distance(_navigationAgent.gameObject.transform.position,
                     _previousTarget.gameObject.transform.position);

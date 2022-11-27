@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Common.Enums;
 using Common.PopupSystem;
 using Configurations;
 using Configurations.Character;
@@ -44,7 +43,7 @@ namespace Views.Popups
         {
             _chooseCancellationTokenSource = new CancellationTokenSource();
             _finallyChooseCharacterButton.onClick.AddListener(ChooseCharacter);
-            _finallyChooseCharacterButton.enabled = false;
+            _finallyChooseCharacterButton.gameObject.SetActive(false);
         }
 
         private void ChooseCharacter()
@@ -73,7 +72,7 @@ namespace Views.Popups
 
         private void DisplayCharacterInfo(CharacterInfo characterInfo)
         {
-            _finallyChooseCharacterButton.enabled = true;
+            _finallyChooseCharacterButton.gameObject.SetActive(true);
             _currentCharacterInfo = characterInfo;
             _chooseCharacterInfoPanel.DisplayCharacterInfo(characterInfo);
         }
@@ -92,6 +91,30 @@ namespace Views.Popups
             }
             finally
             {
+                var leftTeam = new List<CharacterInfo>
+                {
+                    _currentCharacterInfo,
+                    _charactersConfiguration.CharacterInfos[1],
+                    _charactersConfiguration.CharacterInfos[0]
+                };
+
+                for (int i = 0; i < _leftTeamPanel.CharactersImages.Count; i++)
+                {
+                    _leftTeamPanel.CharactersImages[i].sprite = leftTeam[i].CharacterIcon;
+                }
+                
+                var rightTeam = new List<CharacterInfo>()
+                {
+                    _charactersConfiguration.CharacterInfos[1],
+                    _charactersConfiguration.CharacterInfos[0],
+                    _charactersConfiguration.CharacterInfos[0]
+                };
+                
+                for (int i = 0; i < _rightTeamPanel.CharactersImages.Count; i++)
+                {
+                    _rightTeamPanel.CharactersImages[i].sprite = rightTeam[i].CharacterIcon;
+                }
+                
                 _timer = TimeSpan.Zero;
                 _timer += TimeSpan.FromSeconds(_chooseCharacterConfiguration.SecondsBeforeStart);
                 while (_timer.TotalSeconds > 0)
@@ -103,20 +126,6 @@ namespace Views.Popups
                 
                 OnClosing();
                 var popup = _popupSystem.SpawnPopup<GamePopup>(1);
-                
-                var leftTeam = new List<CharacterInfo>
-                {
-                    _currentCharacterInfo,
-                    _charactersConfiguration.CharacterInfos[1],
-                    _charactersConfiguration.CharacterInfos[0]
-                };
-
-                var rightTeam = new List<CharacterInfo>()
-                {
-                    _charactersConfiguration.CharacterInfos[1],
-                    _charactersConfiguration.CharacterInfos[0],
-                    _charactersConfiguration.CharacterInfos[0]
-                };
                 
                 popup.Initialize(leftTeam, rightTeam);
             }

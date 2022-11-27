@@ -1,7 +1,5 @@
-﻿using System;
-using Common.PopupSystem;
+﻿using Common.PopupSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -10,6 +8,10 @@ namespace Views.Popups
     public class MainMenuPopup : Popup
     {
         [SerializeField] private Button _startGameButton;
+        [SerializeField] private Button _exitGameButton;
+        [SerializeField] private Button _settingsButton;
+        [SerializeField] private Button _newsButton;
+        
         private PopupSystem _popupSystem;
 
         [Inject]
@@ -17,7 +19,7 @@ namespace Views.Popups
         {
             _popupSystem = popupSystem;
         }
-        
+
         private void Awake()
         {
             _startGameButton.onClick.AddListener(() =>
@@ -25,7 +27,10 @@ namespace Views.Popups
                 _popupSystem.DeletePopUp();
                 _popupSystem.SpawnPopup<ChooseCharacterPopup>();
             });
+
+            _exitGameButton.onClick.AddListener(Application.Quit);
         }
+
 
         public override void EnableInput()
         {

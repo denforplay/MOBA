@@ -3,7 +3,6 @@ using System.Threading;
 using Common.Enums;
 using Cysharp.Threading.Tasks;
 using Models.Enemies;
-using UnityEngine;
 
 namespace Controllers.CombatControllers.AI.CreepCombatAI
 {
@@ -23,12 +22,17 @@ namespace Controllers.CombatControllers.AI.CreepCombatAI
             try
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_creep.AttackDelay), cancellationToken: cancellationToken);
-                _target.ApplyDamage(_creep.Damage);
+                if (_target is not null)
+                    _target.ApplyDamage(_creep.Damage);
             }
             finally
             {
-                await _creepController.AnimationController.CancelCurrentAnimationAsync(TimeSpan.FromMilliseconds(10), cancellationToken);
-                _creepController.SetState(AnimationType.Walk);
+                if (!_creepController.IsDestroyed)
+                {
+                    await _creepController.AnimationController.CancelCurrentAnimationAsync(TimeSpan.FromMilliseconds(10), cancellationToken);
+                    _creepController.SetState(AnimationType.Walk);
+                }
+
                 _canAttack = true;
             }
         }

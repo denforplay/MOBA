@@ -46,7 +46,9 @@ namespace Controllers
 
         private AnimatorStateInfo GetCurrentStateInfo()
         {
-            return _animator.GetCurrentAnimatorStateInfo(0);
+            if (_animator is not null && _animator.gameObject.activeSelf)
+                return _animator.GetCurrentAnimatorStateInfo(0);
+            else return new AnimatorStateInfo();
         }
     }
 }

@@ -49,11 +49,13 @@ namespace Views
         private CancellationTokenSource _cancellationToken;
         private EnemyTargetingInputs _targetingInputs;
         private AnimationController _animationController;
-
+        private bool _isDestroyed;
+        public bool IsDestroyed => _isDestroyed;
         public CharacterInfo CharacterInfo => _characterInfo;
         public Team Team => _targetableView.Team;
         public Character Character => _character;
         public AnimationController AnimationController => _animationController;
+        public NavMeshAgent NavigationAgent => _navigationAgent;
 
         private Dictionary<CombatType, Func<ICharacterController, Character, CharacterCombatController>>
             CombatFactory;
@@ -108,7 +110,7 @@ namespace Views
             _skillControls.ForEach(x => x.gameObject.SetActive(false));
             _targetingInputs = new EnemyTargetingInputs(_camera, this);
             _animationController = new AnimationController(_characterInfo.AnimationsInfo, _animator);
-            _characterController = new CharacterController(_camera, _navigationAgent, _character, _animationController);
+            _characterController = new CharacterController(_camera, this, _character, _animationController);
             _characterCombatController =
                 CombatFactory[_characterInfo.CombatType].Invoke(_characterController, _character);
             _playerInputs = new PlayerInputs();
@@ -191,23 +193,28 @@ namespace Views
 
         private void DisableCharacter()
         {
-            gameObject.transform.parent.gameObject.SetActive(false);
-            if (_characterType == CharacterType.Player)
+            if (!_isDestroyed)
             {
-                var revivingPopup = _popupSystem.SpawnPopup<DeadPlayerPopup>();
-                revivingPopup.Initialize(TimeSpan.FromSeconds(10));
-                revivingPopup.OnRevive += EnableCharacter;
+                _isDestroyed = true;
+                _characterCombatController.Cancel();
+                gameObject.transform.parent.gameObject.SetActive(false);
+                if (_characterType == CharacterType.Player)
+                {
+                    var revivingPopup = _popupSystem.SpawnPopup<DeadPlayerPopup>();
+                    revivingPopup.Initialize(TimeSpan.FromSeconds(10));
+                    revivingPopup.OnRevive += EnableCharacter;
+                }
+                else
+                {
+                    Timer timer = new Timer(TimeSpan.FromSeconds(10));
+                    timer.OnTimerEnded += EnableCharacter;
+                }
             }
-            else
-            {
-                Timer timer = new Timer(TimeSpan.FromSeconds(10));
-                timer.OnTimerEnded += EnableCharacter;
-            }
-
         }
 
         private void EnableCharacter()
         {
+            _isDestroyed = false;
             _character.ChangeHealth(_character.MaxHealth - _character.CurrentHealth);
             gameObject.transform.position = _startPosition.position;
             gameObject.transform.parent.gameObject.SetActive(true);

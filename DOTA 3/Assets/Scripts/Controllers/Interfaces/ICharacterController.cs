@@ -14,5 +14,6 @@ namespace Controllers.Interfaces
         void MoveTo(Vector3 position);
         NavMeshAgent NavigationAgent { get; }
         void SetState(AnimationType animationType);
+        bool IsDestroyed { get; }
     }
 }

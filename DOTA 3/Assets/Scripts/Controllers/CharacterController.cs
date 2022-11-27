@@ -11,6 +11,7 @@ using Models.Skills.Observers;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using Views;
 
 namespace Controllers
 {
@@ -24,12 +25,14 @@ namespace Controllers
         private Dictionary<SkillType, ISkillObserver> _skillObservers;
         private readonly AnimationController _animationController;
         private bool _isMoving;
+        private readonly CharacterView _characterView;
 
-        public CharacterController(Camera camera, NavMeshAgent navAgent, Character 
+        public CharacterController(Camera camera, CharacterView characterView, Character 
             controlledCharacter, AnimationController animationController)
         {
             _camera = camera;
-            _navigation = navAgent;
+            _characterView = characterView;
+            _navigation = characterView.NavigationAgent;
             _animationController = animationController;
             _inputs = new PlayerInputs();
             _controlledCharacter = controlledCharacter;
@@ -38,6 +41,7 @@ namespace Controllers
             _skillObservers.Add(SkillType.RangeDamage, new RangeTargetZoneSkillObserver(_camera));
         }
 
+        public bool IsDestroyed => _characterView.IsDestroyed;
         public NavMeshAgent NavigationAgent => _navigation;
 
         public void Move()
@@ -81,7 +85,8 @@ namespace Controllers
         {
             _animationController.ChangeAnimation(animationType);
         }
-        
+
+
         public void SetSkillUseState(int skillId, bool canBeUsed)
         {
             var skill = _controlledCharacter.Skills.FirstOrDefault(x => x.Id == skillId);

@@ -28,6 +28,7 @@ namespace Controllers
         private readonly CharacterView _characterView;
 
         public NavMeshAgent NavigationAgent => _navMeshAgent;
+        public bool IsDestroyed => _characterView.IsDestroyed;
 
         public CharacterAIController(Camera camera, NavMeshAgent navAgent, CharacterView characterView, Direction direction, WayPoint startWayPoint)
         {
@@ -185,5 +186,6 @@ namespace Controllers
         {
             _animationController.ChangeAnimation(animationType);
         }
+
     }
 }
