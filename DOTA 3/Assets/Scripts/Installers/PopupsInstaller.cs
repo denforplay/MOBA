@@ -19,6 +19,7 @@ namespace Installers
             Container.BindFactory<Object, Transform, GameResultsPopup, PopupFactory<GameResultsPopup>>().AsTransient();
             Container.BindFactory<Object, Transform, ChooseCharacterPopup, PopupFactory<ChooseCharacterPopup>>().AsTransient();
             Container.BindFactory<Object, Transform, DeadPlayerPopup, PopupFactory<DeadPlayerPopup>>().AsTransient();
+            Container.BindFactory<Object, Transform, VideoPopup, PopupFactory<VideoPopup>>().AsTransient();
             Container.Bind<PopupSystem>().FromInstance(_popupSystem).AsSingle();
             _popupSystem.Initialize(Container);
         }

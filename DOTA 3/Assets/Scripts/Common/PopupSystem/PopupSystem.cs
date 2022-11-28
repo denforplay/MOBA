@@ -24,6 +24,17 @@ namespace Common.PopupSystem
 
         private void Awake()
         {
+            var cutScene = SpawnPopup<VideoPopup>();
+            cutScene.OnVideoEnded += () =>
+            {
+                cutScene.Hide();
+                ShowStartPopup();
+            };
+
+        }
+
+        private void ShowStartPopup()
+        {
             if (_startPopup)
             {
                 Popup popupPrefab = _popupSystemConfig.PopupPrefabs.Find(a => a.GetType() == _startPopup.GetType());
