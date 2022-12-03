@@ -47,13 +47,13 @@ namespace Views
             
             if (_cancellationToken.IsCancellationRequested)
             {
-                _darkImage.fillAmount = 1;
+                _darkImage.fillAmount = 0;
             }
             else 
             {
                 if (_countdownTime != _startTime)
                 {
-                    _darkImage.fillAmount = (_startTime - _countdownTime) / _startTime;
+                    _darkImage.fillAmount = (_countdownTime) / _startTime;
                 }
                 else
                 {
@@ -75,6 +75,7 @@ namespace Views
             _cancellationToken = new CancellationTokenSource();
             OnSkillUseStateChanged?.Invoke(_id, false);
             _darkImage.fillAmount = 1;
+            _countdownTime = _startTime;
             var reduceAmountPerTick = 1 / (_countdownTime * 10);
             while (_countdownTime > 0)
             {
@@ -85,7 +86,6 @@ namespace Views
                 _countdownTime -= 0.1f;
             }
 
-            _countdownTime = _startTime;
             _countDownText.text = "";
             _cancellationToken.Cancel();
             if (_isManaEnough)
