@@ -1,0 +1,5 @@
+@startuml
+class ProviderUtil <<static>> {
+    + {static} GetTypeToInstantiate(contractType:Type, concreteType:Type) : Type
+}
+@enduml

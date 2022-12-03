@@ -1,0 +1,34 @@
+@startuml
+class LensFlareCommonSRP <<sealed>> {
+    + {static} maxLensFlareWithOcclusion : int = 128
+    + {static} maxLensFlareWithOcclusionTemporalSample : int = 8
+    + {static} mergeNeeded : int = 1
+    {static} + Initialize() : void
+    {static} + Dispose() : void
+    + GetData() : System.Collections.Generic.List<LensFlareComponentSRP>
+    + IsEmpty() : bool
+    + AddData(newData:LensFlareComponentSRP) : void
+    {static} + ShapeAttenuationPointLight() : float
+    {static} + ShapeAttenuationDirLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationSpotConeLight(forward:Vector3, wo:Vector3, spotAngle:float, innerSpotPercent01:float) : float
+    {static} + ShapeAttenuationSpotBoxLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationSpotPyramidLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationAreaTubeLight(lightPositionWS:Vector3, lightSide:Vector3, lightWidth:float, cam:Camera) : float
+    {static} + ShapeAttenuationAreaRectangleLight(forward:Vector3, wo:Vector3) : float
+    {static} + ShapeAttenuationAreaDiscLight(forward:Vector3, wo:Vector3) : float
+    {static} + GetFlareData0(screenPos:Vector2, translationScale:Vector2, rayOff0:Vector2, vLocalScreenRatio:Vector2, angleDeg:float, position:float, angularOffset:float, positionOffset:Vector2, autoRotate:bool) : Vector4
+    {static} GetLensFlareRayOffset(screenPos:Vector2, position:float, globalCos0:float, globalSin0:float) : Vector2
+    {static} WorldToViewport(camera:Camera, isLocalLight:bool, isCameraRelative:bool, viewProjMatrix:Matrix4x4, positionWS:Vector3) : Vector3
+    {static} WorldToViewportLocal(isCameraRelative:bool, viewProjMatrix:Matrix4x4, cameraPosWS:Vector3, positionWS:Vector3) : Vector3
+    {static} WorldToViewportDistance(cam:Camera, positionWS:Vector3) : Vector3
+    {static} + ComputeOcclusion(lensFlareShader:Material, lensFlares:LensFlareCommonSRP, cam:Camera, actualWidth:float, actualHeight:float, usePanini:bool, paniniDistance:float, paniniCropToFit:float, isCameraRelative:bool, cameraPositionWS:Vector3, viewProjMatrix:Matrix4x4, cmd:Rendering.CommandBuffer, taaEnabled:bool, _FlareOcclusionTex:int, _FlareOcclusionIndex:int, _FlareTex:int, _FlareColorValue:int, _FlareData0:int, _FlareData1:int, _FlareData2:int, _FlareData3:int, _FlareData4:int) : void
+    {static} + DoLensFlareDataDrivenCommon(lensFlareShader:Material, lensFlares:LensFlareCommonSRP, cam:Camera, actualWidth:float, actualHeight:float, usePanini:bool, paniniDistance:float, paniniCropToFit:float, isCameraRelative:bool, cameraPositionWS:Vector3, viewProjMatrix:Matrix4x4, cmd:Rendering.CommandBuffer, colorBuffer:Rendering.RenderTargetIdentifier, GetLensFlareLightAttenuation:System.Func<Light, Camera, Vector3, float>, _FlareOcclusionTex:int, _FlareOcclusionIndex:int, _FlareTex:int, _FlareColorValue:int, _FlareData0:int, _FlareData1:int, _FlareData2:int, _FlareData3:int, _FlareData4:int, debugView:bool) : void
+    + RemoveData(data:LensFlareComponentSRP) : void
+    {static} DoPaniniProjection(screenPos:Vector2, actualWidth:float, actualHeight:float, fieldOfView:float, paniniProjectionCropToFit:float, paniniProjectionDistance:float) : Vector2
+    {static} CalcViewExtents(actualWidth:float, actualHeight:float, fieldOfView:float) : Vector2
+    {static} CalcCropExtents(actualWidth:float, actualHeight:float, fieldOfView:float, d:float) : Vector2
+    {static} Panini_Generic_Inv(projPos:Vector2, d:float) : Vector2
+}
+LensFlareCommonSRP o-> "occlusionRT" RTHandle
+LensFlareCommonSRP --> "Instance" LensFlareCommonSRP
+@enduml

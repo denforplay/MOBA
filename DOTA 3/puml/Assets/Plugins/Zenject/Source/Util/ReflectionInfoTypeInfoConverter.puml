@@ -1,0 +1,15 @@
+@startuml
+class ReflectionInfoTypeInfoConverter <<static>> {
+    + {static} ConvertMethod(injectMethod:ReflectionTypeInfo.InjectMethodInfo) : InjectTypeInfo.InjectMethodInfo
+    + {static} ConvertConstructor(injectConstructor:ReflectionTypeInfo.InjectConstructorInfo, type:Type) : InjectTypeInfo.InjectConstructorInfo
+    + {static} ConvertField(parentType:Type, injectField:ReflectionTypeInfo.InjectFieldInfo) : InjectTypeInfo.InjectMemberInfo
+    + {static} ConvertProperty(parentType:Type, injectProperty:ReflectionTypeInfo.InjectPropertyInfo) : InjectTypeInfo.InjectMemberInfo
+    {static} TryCreateFactoryMethod(type:Type, reflectionInfo:ReflectionTypeInfo.InjectConstructorInfo) : ZenFactoryMethod
+    {static} TryCreateFactoryMethodCompiledLambdaExpression(type:Type, constructor:ConstructorInfo) : ZenFactoryMethod
+    {static} TryCreateActionForMethod(methodInfo:MethodInfo) : ZenInjectMethod
+    {static} GetAllFields(t:Type, flags:BindingFlags) : IEnumerable<FieldInfo>
+    {static} GetOnlyPropertySetter(parentType:Type, propertyName:string) : ZenMemberSetterMethod
+    {static} GetSetter(parentType:Type, memInfo:MemberInfo) : ZenMemberSetterMethod
+    {static} TryGetSetterAsCompiledExpression(parentType:Type, memInfo:MemberInfo) : ZenMemberSetterMethod
+}
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Queue(source:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "QueueOperator`1"<TSource> <<sealed>> {
+    + QueueOperator(source:IUniTaskAsyncEnumerable<TSource>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Queue <<sealed>> {
+    channelClosed : bool
+    + _Queue(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    {static} <<async>> ConsumeAll(self:_Queue, enumerator:IUniTaskAsyncEnumerator<TSource>, writer:ChannelWriter<TSource>) : UniTaskVoid
+    + <<async>> DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Channel`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "QueueOperator`1"
+"QueueOperator`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"QueueOperator`1" +-- _Queue
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _Queue
+_Queue --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_Queue --> "cancellationToken" CancellationToken
+_Queue --> "channel<TSource>" "Channel`1"
+_Queue --> "channelEnumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_Queue --> "sourceEnumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_Queue --> "Current" TSource
+@enduml

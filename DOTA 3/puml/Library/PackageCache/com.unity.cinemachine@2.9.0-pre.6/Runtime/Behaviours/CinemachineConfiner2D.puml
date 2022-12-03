@@ -1,0 +1,27 @@
+@startuml
+class CinemachineConfiner2D {
+    + m_Damping : float
+    + m_MaxWindowSize : float
+    + InvalidateCache() : void
+    + ValidateCache(cameraAspectRatio:float) : bool
+}
+class VcamExtraState {
+}
+class ShapeCache <<struct>> {
+    + Invalidate() : void
+    + ValidateCache(boundingShape2D:Collider2D, maxWindowSize:float, aspectRatio:float, confinerStateChanged:bool) : bool
+}
+class "List`1"<T> {
+}
+CinemachineExtension <|-- CinemachineConfiner2D
+CinemachineConfiner2D --> "m_BoundingShape2D" Collider2D
+CinemachineConfiner2D +-- VcamExtraState
+VcamExtraState --> "m_PreviousDisplacement" Vector3
+VcamExtraState --> "m_DampedDisplacement" Vector3
+VcamExtraState --> "m_vcam" CinemachineVirtualCameraBase
+CinemachineConfiner2D +-- ShapeCache
+ShapeCache --> "m_confinerOven" ConfinerOven
+ShapeCache --> "m_OriginalPath<List<Vector2>>" "List`1"
+ShapeCache --> "m_DeltaWorldToBaked" Matrix4x4
+ShapeCache --> "m_DeltaBakedToWorld" Matrix4x4
+@enduml

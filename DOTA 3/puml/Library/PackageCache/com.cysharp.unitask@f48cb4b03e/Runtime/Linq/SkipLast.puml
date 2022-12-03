@@ -1,0 +1,38 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} SkipLast(source:IUniTaskAsyncEnumerable<TSource>, count:Int32) : IUniTaskAsyncEnumerable<TSource>
+}
+class "SkipLast`1"<TSource> <<sealed>> {
+    <<readonly>> count : int
+    + SkipLast(source:IUniTaskAsyncEnumerable<TSource>, count:int)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _SkipLast <<sealed>> {
+    <<readonly>> count : int
+    continueNext : bool
+    + _SkipLast(source:IUniTaskAsyncEnumerable<TSource>, count:int, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "Queue`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "SkipLast`1"
+"SkipLast`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"SkipLast`1" +-- _SkipLast
+MoveNextSource <|-- _SkipLast
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _SkipLast
+_SkipLast o-> "MoveNextCoreDelegate<object>" "Action`1"
+_SkipLast --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_SkipLast --> "cancellationToken" CancellationToken
+_SkipLast --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_SkipLast --> "queue<TSource>" "Queue`1"
+_SkipLast --> "Current" TSource
+@enduml

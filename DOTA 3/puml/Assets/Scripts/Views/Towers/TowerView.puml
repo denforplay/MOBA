@@ -1,0 +1,11 @@
+@startuml
+class TowerView {
+    + IsDestroyed : bool <<get>>
+    + RotateInDirection(direction:Vector3) : void
+    + SubscribeOnHealthEnded(action:Action) : void
+}
+MonoBehaviour <|-- TowerView
+TowerView --> "TowerGun" Transform
+TowerView --> "TowerHead" Transform
+TowerView --> "Team" Team
+@enduml

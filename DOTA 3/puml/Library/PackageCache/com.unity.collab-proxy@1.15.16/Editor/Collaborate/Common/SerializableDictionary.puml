@@ -1,0 +1,16 @@
+@startuml
+class "SerializableDictionary`2"<TKey,TValue> {
+    + SerializableDictionary()
+    + SerializableDictionary(input:IDictionary<TKey, TValue>)
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+"Dictionary`2" "<TKey,TValue>" <|-- "SerializableDictionary`2"
+ISerializationCallbackReceiver <|-- "SerializableDictionary`2"
+"SerializableDictionary`2" o-> "m_Keys<TKey>" "List`1"
+"SerializableDictionary`2" o-> "m_Values<TValue>" "List`1"
+@enduml

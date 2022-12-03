@@ -1,0 +1,22 @@
+@startuml
+class NoiseSettings <<sealed>> {
+    + {static} GetCombinedFilterResults(noiseParams:TransformNoiseParams[], time:float, timeOffsets:Vector3) : Vector3
+    + <<override>> SignalDuration : float <<get>>
+    + <<override>> GetSignal(timeSinceSignalStart:float, pos:Vector3, rot:Quaternion) : void
+}
+class NoiseParams <<struct>> {
+    + Frequency : float
+    + Amplitude : float
+    + Constant : bool
+    + GetValueAt(time:float, timeOffset:float) : float
+}
+class TransformNoiseParams <<struct>> {
+    + GetValueAt(time:float, timeOffsets:Vector3) : Vector3
+}
+SignalSourceAsset <|-- NoiseSettings
+NoiseSettings +-- NoiseParams
+NoiseSettings +-- TransformNoiseParams
+TransformNoiseParams --> "X" NoiseParams
+TransformNoiseParams --> "Y" NoiseParams
+TransformNoiseParams --> "Z" NoiseParams
+@enduml

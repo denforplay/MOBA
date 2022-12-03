@@ -1,0 +1,6 @@
+@startuml
+enum CharacterType {
+    Player,
+    AI,
+}
+@enduml

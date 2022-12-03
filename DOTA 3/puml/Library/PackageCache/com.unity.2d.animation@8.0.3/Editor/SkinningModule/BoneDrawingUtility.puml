@@ -1,0 +1,8 @@
+@startuml
+class BoneDrawingUtility <<static>> {
+    + {static} GetBoneRadius(position:Vector3, scale:float) : float
+    + {static} DrawBoneNode(position:Vector3, forward:Vector3, color:Color, scale:float) : void
+    + {static} DrawBone(position:Vector3, endPosition:Vector3, forward:Vector3, color:Color, scale:float) : void
+    + {static} DrawBoneOutline(position:Vector3, endPosition:Vector3, forward:Vector3, color:Color, outlineScale:float, scale:float) : void
+}
+@enduml

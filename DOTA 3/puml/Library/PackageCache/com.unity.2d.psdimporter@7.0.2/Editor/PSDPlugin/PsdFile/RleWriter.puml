@@ -1,0 +1,6 @@
+@startuml
+class RleWriter {
+    + RleWriter(stream:Stream)
+    + Write(data:byte[], offset:int, count:int) : int
+}
+@enduml

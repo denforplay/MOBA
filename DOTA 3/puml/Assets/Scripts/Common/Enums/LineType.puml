@@ -1,0 +1,7 @@
+@startuml
+enum LineType {
+    Top,
+    Middle,
+    Bottom,
+}
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class TrackExtensions <<static>> {
+    {static} <<readonly>> kMinOverlapTime : double
+    + {static} IsCollapsed(track:TrackAsset) : bool
+    + {static} SetCollapsed(track:TrackAsset, collapsed:bool) : void
+    + {static} IsVisibleInHierarchy(track:TrackAsset) : bool
+    {static} Overlaps(blendOut:TimelineClip, blendIn:TimelineClip) : bool
+    {static} UpdateClipIntersection(blendOutClip:TimelineClip, blendInClip:TimelineClip) : void
+    {static} RecursiveSubtrackClone(source:TrackAsset, duplicate:TrackAsset, sourceTable:IExposedPropertyTable, destTable:IExposedPropertyTable, assetOwner:PlayableAsset) : void
+    {static} GetFlattenedChildTracks(asset:TrackAsset, list:List<TrackAsset>) : void
+}
+@enduml

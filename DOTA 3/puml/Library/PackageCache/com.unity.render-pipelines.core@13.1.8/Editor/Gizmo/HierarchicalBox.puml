@@ -1,0 +1,39 @@
+@startuml
+class HierarchicalBox {
+    <<const>> k_HandleSizeCoef : float = 0.05f
+    m_MonoHandle : bool = true
+    + monoHandle : bool <<get>> <<set>>
+    + SetBaseColor(color:Color) : void
+    {static} Slider1D(controlID:int, handlePosition:Vector3, handleOrientation:Vector3, snapScale:float, color:Color) : void
+    + HierarchicalBox(baseColor:Color, polychromeHandleColors:Color[], parent:HierarchicalBox)
+    + DrawHull(filled:bool) : void
+    + DrawHandle() : void
+    GetHandleColor(name:NamedFace) : Color
+}
+enum NamedFace {
+    Right,
+    Top,
+    Front,
+    Left,
+    Bottom,
+    Back,
+    None,
+}
+HierarchicalBox --> "k_Material_Cache" Material
+HierarchicalBox --> "k_Material" Material
+HierarchicalBox --> "k_MeshQuad_Cache" Mesh
+HierarchicalBox --> "k_MeshQuad" Mesh
+HierarchicalBox --> "m_Material" Material
+HierarchicalBox --> "m_Parent" HierarchicalBox
+HierarchicalBox --> "m_MonochromeFillColor" Color
+HierarchicalBox --> "m_MonochromeHandleColor" Color
+HierarchicalBox --> "m_WireframeColor" Color
+HierarchicalBox --> "m_WireframeColorBehind" Color
+HierarchicalBox --> "material" Material
+HierarchicalBox --> "center" Vector3
+HierarchicalBox --> "size" Vector3
+HierarchicalBox --> "baseColor" Color
+HierarchicalBox o-> "k_Slider1D" Type
+HierarchicalBox o-> "k_Slider1D_Do" MethodInfo
+HierarchicalBox +-- NamedFace
+@enduml

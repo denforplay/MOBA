@@ -1,0 +1,23 @@
+@startuml
+class "FactorySubContainerBinder`11"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TContract> {
+    + FactorySubContainerBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, subIdentifier:object)
+    + ByMethod(installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewGameObjectMethod(installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabMethod(prefabGetter:Func<InjectContext, UnityEngine.Object>, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabMethod(prefab:UnityEngine.Object, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResourceMethod(resourcePath:string, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+class "FactorySubContainerBinderWithParams`1"<T> {
+}
+"FactorySubContainerBinderWithParams`1" "<TContract>" <|-- "FactorySubContainerBinder`11"
+@enduml

@@ -10,5 +10,7 @@ namespace Common.Abstracts
         event Action<Vector3> OnSkillCalled;
         event Action<Vector3> OnObservedPositionChanged;
         UniTask ObserveSkill(CancellationTokenSource cancellationToken);
+
+        void ClearSkillLCalled();
     }
 }

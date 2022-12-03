@@ -1,0 +1,11 @@
+@startuml
+class TMP_SpriteAnimator {
+    Awake() : void
+    OnEnable() : void
+    OnDisable() : void
+    + StopAllAnimations() : void
+    + DoSpriteAnimation(currentCharacter:int, spriteAsset:TMP_SpriteAsset, start:int, end:int, framerate:int) : void
+    DoSpriteAnimationInternal(currentCharacter:int, spriteAsset:TMP_SpriteAsset, start:int, end:int, framerate:int) : IEnumerator
+}
+MonoBehaviour <|-- TMP_SpriteAnimator
+@enduml

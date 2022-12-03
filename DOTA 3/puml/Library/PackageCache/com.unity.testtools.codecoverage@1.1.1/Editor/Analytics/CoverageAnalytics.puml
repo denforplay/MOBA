@@ -1,0 +1,18 @@
+@startuml
+class Timer {
+    + Start() : void
+    + elapsedTimeMs : long <<get>>
+}
+class CoverageAnalytics {
+    + ResetEvents() : void
+    + StartTimer() : void
+    + AddResult(resultId:ResultID) : void
+    + SendCoverageEvent(success:bool) : void
+    + RegisterEvents() : bool
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<CoverageAnalytics>" <|-- CoverageAnalytics
+CoverageAnalytics --> "CurrentCoverageEvent" CoverageAnalyticsEvent
+CoverageAnalytics --> "CoverageTimer" Timer
+@enduml

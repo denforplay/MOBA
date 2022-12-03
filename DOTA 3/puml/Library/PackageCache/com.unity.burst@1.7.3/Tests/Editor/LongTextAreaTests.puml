@@ -1,0 +1,12 @@
+@startuml
+class LongTextAreaTests {
+    + SetUp() : void
+    + GetStartingColorTagTest(tag:string, text:string, textIdx:int, syntaxHighlight:bool) : void
+    + GetEndingColorTagTest(tag:string, text:string, textIdx:int, syntaxHighlight:bool) : void
+    + GetEndIndexOfColoredLineTest(text:string, line:int, resTotal:int, resRel:int) : void
+    + GetEndIndexOfPlainLineTest(text:string, line:int, resTotal:int, resRel:int) : void
+    + WithinRangeTest(start:float, end:float, num:float, res:bool) : void
+    + BumpSelectionXByColortagTest(text:string, lineNum:int, charsIn:int, colourTagFiller:int) : void
+    + SelectAllTest(text:string, useDisassembler:bool) : void
+}
+@enduml

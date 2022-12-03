@@ -1,0 +1,43 @@
+@startuml
+class VectorsBinOpFloat4 <<partial>> {
+    + {static} Add() : float
+    + {static} AddFloatRight() : float
+    + {static} AddFloatLeft() : float
+    + {static} AddByArgs(left:float4, right:float4) : float
+    + {static} Sub() : float
+    + {static} SubFloatLeft() : float
+    + {static} SubFloatRight() : float
+    + {static} SubByArgs(left:float4, right:float4) : float
+    + {static} Mul() : float
+    + {static} MulFloatLeft() : float
+    + {static} MulFloatRight() : float
+    + {static} MulByArgs(left:float4, right:float4) : float
+    + {static} Div() : float
+    + {static} DivFloatLeft() : float
+    + {static} DivFloatRight() : float
+    + {static} DivByArgs(left:float4, right:float4) : float
+    + {static} Mod() : float
+    + {static} ModFloatLeft() : float
+    + {static} ModFloatRight() : float
+    + {static} ModByArgs(left:float4, right:float4) : float
+    + {static} Neg() : float
+    + {static} Positive() : float
+    + {static} Equality(a:float, b:float) : int
+    + {static} EqualityFloat4(a:float4, b:float4) : int
+    + {static} Inequality(a:float, b:float) : int
+    + {static} InequalityFloat4(a:float4, b:float4) : int
+    + {static} GreaterThan(a:float, b:float) : int
+    + {static} GreaterThanFloat4(a:float4, b:float4) : int
+    + {static} GreaterThanFloat4Float(a:float4, b:float) : int
+    + {static} <<unsafe>> GreaterThanFloat4FloatUnsafe(a:float4, b:float) : bool
+    + {static} GreaterThanOrEqual(a:float, b:float) : int
+    + {static} GreaterThanOrEqualFloat4(a:float4, b:float4) : int
+    + {static} LessThan(a:float, b:float) : int
+    + {static} LessThanFloat4(a:float4, b:float4) : int
+    + {static} LessThanFloat4Float(a:float4, b:float) : int
+    + {static} LessThanOrEqual(a:float, b:float) : int
+    + {static} LessThanOrEqualFloat4(a:float4, b:float4) : int
+    + {static} ImplicitFloat(a:float) : float
+    + {static} ImplicitInt4(a:int4) : float
+}
+@enduml

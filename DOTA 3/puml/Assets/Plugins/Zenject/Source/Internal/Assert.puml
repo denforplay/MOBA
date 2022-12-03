@@ -1,0 +1,42 @@
+@startuml
+class Assert <<static>> {
+    + {static} That(condition:bool) : void
+    + {static} IsNotEmpty(str:string) : void
+    + {static} IsEmpty(list:IList<T>) : void
+    + {static} IsEmpty(sequence:IEnumerable<T>) : void
+    + {static} IsType(obj:object) : void
+    + {static} IsType(obj:object, message:string) : void
+    + {static} DerivesFrom(type:Type) : void
+    + {static} DerivesFromOrEqual(type:Type) : void
+    + {static} DerivesFrom(childType:Type, parentType:Type) : void
+    + {static} DerivesFromOrEqual(childType:Type, parentType:Type) : void
+    + {static} IsEqual(left:object, right:object) : void
+    + {static} IsEqual(left:object, right:object, messageGenerator:Func<string>) : void
+    + {static} IsApproximately(left:float, right:float, epsilon:float) : void
+    + {static} IsEqual(left:object, right:object, message:string) : void
+    + {static} IsNotEqual(left:object, right:object) : void
+    + {static} IsNotEqual(left:object, right:object, messageGenerator:Func<string>) : void
+    + {static} IsNull(val:object) : void
+    + {static} IsNull(val:object, message:string) : void
+    + {static} IsNull(val:object, message:string, p1:object) : void
+    + {static} IsNotNull(val:object) : void
+    + {static} IsNotNull(val:object, message:string) : void
+    + {static} IsNotNull(val:object, message:string, p1:object) : void
+    + {static} IsNotNull(val:object, message:string, p1:object, p2:object) : void
+    + {static} IsNotEmpty(val:IEnumerable<T>, message:string) : void
+    + {static} IsNotEqual(left:object, right:object, message:string) : void
+    + {static} Warn(condition:bool) : void
+    + {static} Warn(condition:bool, messageGenerator:Func<string>) : void
+    + {static} That(condition:bool, message:string) : void
+    + {static} That(condition:bool, message:string, p1:object) : void
+    + {static} That(condition:bool, message:string, p1:object, p2:object) : void
+    + {static} That(condition:bool, message:string, p1:object, p2:object, p3:object) : void
+    + {static} Warn(condition:bool, message:string) : void
+    + {static} Throws(action:Action) : void
+    + {static} Throws(action:Action) : void
+    + {static} CreateException() : ZenjectException
+    + {static} CreateException(message:string) : ZenjectException
+    + {static} CreateException(message:string, parameters:object[]) : ZenjectException
+    + {static} CreateException(innerException:Exception, message:string, parameters:object[]) : ZenjectException
+}
+@enduml

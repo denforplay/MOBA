@@ -1,0 +1,145 @@
+@startuml
+class UniTaskObservableExtensions <<static>> {
+    + {static} ToUniTask(source:IObservable<T>, useFirstValue:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} ToObservable(task:UniTask<T>) : IObservable<T>
+    + {static} ToObservable(task:UniTask) : IObservable<AsyncUnit>
+    {static} <<async>> Fire(subject:AsyncSubject<T>, task:UniTask<T>) : UniTaskVoid
+    {static} <<async>> Fire(subject:AsyncSubject<AsyncUnit>, task:UniTask) : UniTaskVoid
+}
+class EmptyDisposable {
+    EmptyDisposable()
+    + Dispose() : void
+}
+class SingleAssignmentDisposable <<sealed>> {
+    <<readonly>> gate : object
+    disposed : bool
+    + IsDisposed : bool <<get>>
+    + Dispose() : void
+}
+class "AsyncSubject`1"<T> <<sealed>> {
+    observerLock : object
+    lastValue : T
+    hasValue : bool
+    isStopped : bool
+    isDisposed : bool
+    + Value : T <<get>>
+    + HasObservers : bool <<get>>
+    + IsCompleted : bool <<get>>
+    + OnCompleted() : void
+    + OnError(error:Exception) : void
+    + OnNext(value:T) : void
+    + Subscribe(observer:IObserver<T>) : IDisposable
+    + Dispose() : void
+    ThrowIfDisposed() : void
+}
+class "ListObserver`1"<T> {
+    + ListObserver(observers:ImmutableList<IObserver<T>>)
+    + OnCompleted() : void
+    + OnError(error:Exception) : void
+    + OnNext(value:T) : void
+}
+class "EmptyObserver`1"<T> {
+    EmptyObserver()
+    + OnCompleted() : void
+    + OnError(error:Exception) : void
+    + OnNext(value:T) : void
+}
+class "ThrowObserver`1"<T> {
+    ThrowObserver()
+    + OnCompleted() : void
+    + OnError(error:Exception) : void
+    + OnNext(value:T) : void
+}
+class "DisposedObserver`1"<T> {
+    DisposedObserver()
+    + OnCompleted() : void
+    + OnError(error:Exception) : void
+    + OnNext(value:T) : void
+}
+class "ImmutableList`1"<T> {
+    ImmutableList()
+    + ImmutableList(data:T[])
+    + Add(value:T) : ImmutableList<T>
+    + Remove(value:T) : ImmutableList<T>
+    + IndexOf(value:T) : int
+}
+class "ToUniTaskObserver`1"<T> {
+    hasValue : bool
+    latestValue : T
+    + ToUniTaskObserver(promise:UniTaskCompletionSource<T>, disposable:SingleAssignmentDisposable, cancellationToken:CancellationToken)
+    {static} OnCanceled(state:object) : void
+    + OnNext(value:T) : void
+    + OnError(error:Exception) : void
+    + OnCompleted() : void
+}
+class "FirstValueToUniTaskObserver`1"<T> {
+    hasValue : bool
+    + FirstValueToUniTaskObserver(promise:UniTaskCompletionSource<T>, disposable:SingleAssignmentDisposable, cancellationToken:CancellationToken)
+    {static} OnCanceled(state:object) : void
+    + OnNext(value:T) : void
+    + OnError(error:Exception) : void
+    + OnCompleted() : void
+}
+class "ReturnObservable`1"<T> {
+    <<readonly>> value : T
+    + ReturnObservable(value:T)
+    + Subscribe(observer:IObserver<T>) : IDisposable
+}
+class "ThrowObservable`1"<T> {
+    + ThrowObservable(value:Exception)
+    + Subscribe(observer:IObserver<T>) : IDisposable
+}
+class "IObservable`1"<T> {
+}
+class "IObserver`1"<T> {
+}
+class Subscription {
+    <<readonly>> gate : object
+    + Subscription(parent:AsyncSubject<T>, unsubscribeTarget:IObserver<T>)
+    + Dispose() : void
+}
+class "Action`1"<T> {
+}
+class "UniTaskCompletionSource`1"<T> {
+}
+IDisposable <|-- EmptyDisposable
+EmptyDisposable o-> "Instance" EmptyDisposable
+IDisposable <|-- SingleAssignmentDisposable
+SingleAssignmentDisposable --> "current" IDisposable
+SingleAssignmentDisposable --> "Disposable" IDisposable
+"IObservable`1" "<T>" <|-- "AsyncSubject`1"
+"IObserver`1" "<T>" <|-- "AsyncSubject`1"
+"AsyncSubject`1" --> "lastError" Exception
+"AsyncSubject`1" o-> "outObserver<T>" "IObserver`1"
+"IObserver`1" "<T>" <|-- "ListObserver`1"
+"IObserver`1" "<T>" <|-- "EmptyObserver`1"
+"EmptyObserver`1" o-> "Instance<T>" "EmptyObserver`1"
+"IObserver`1" "<T>" <|-- "ThrowObserver`1"
+"ThrowObserver`1" o-> "Instance<T>" "ThrowObserver`1"
+"IObserver`1" "<T>" <|-- "DisposedObserver`1"
+"DisposedObserver`1" o-> "Instance<T>" "DisposedObserver`1"
+"ImmutableList`1" o-> "Empty<T>" "ImmutableList`1"
+UniTaskObservableExtensions +-- "ToUniTaskObserver`1"
+"IObserver`1" "<T>" <|-- "ToUniTaskObserver`1"
+"ToUniTaskObserver`1" o-> "callback<object>" "Action`1"
+"ToUniTaskObserver`1" --> "promise<T>" "UniTaskCompletionSource`1"
+"ToUniTaskObserver`1" --> "disposable" SingleAssignmentDisposable
+"ToUniTaskObserver`1" --> "cancellationToken" CancellationToken
+"ToUniTaskObserver`1" --> "registration" CancellationTokenRegistration
+UniTaskObservableExtensions +-- "FirstValueToUniTaskObserver`1"
+"IObserver`1" "<T>" <|-- "FirstValueToUniTaskObserver`1"
+"FirstValueToUniTaskObserver`1" o-> "callback<object>" "Action`1"
+"FirstValueToUniTaskObserver`1" --> "promise<T>" "UniTaskCompletionSource`1"
+"FirstValueToUniTaskObserver`1" --> "disposable" SingleAssignmentDisposable
+"FirstValueToUniTaskObserver`1" --> "cancellationToken" CancellationToken
+"FirstValueToUniTaskObserver`1" --> "registration" CancellationTokenRegistration
+UniTaskObservableExtensions +-- "ReturnObservable`1"
+"IObservable`1" "<T>" <|-- "ReturnObservable`1"
+UniTaskObservableExtensions +-- "ThrowObservable`1"
+"IObservable`1" "<T>" <|-- "ThrowObservable`1"
+"ThrowObservable`1" --> "value" Exception
+"AsyncSubject`1" +-- Subscription
+IDisposable <|-- Subscription
+Subscription --> "parent<T>" "AsyncSubject`1"
+Subscription --> "unsubscribeTarget<T>" "IObserver`1"
+@enduml

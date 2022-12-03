@@ -1,0 +1,16 @@
+@startuml
+class "FactorySubContainerBinderWithParams`1"<TContract> {
+    + FactorySubContainerBinderWithParams(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, subIdentifier:object)
+    + ByNewPrefab(installerType:Type, prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewContextPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewContextPrefab(installerType:Type, prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResource(installerType:Type, resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewContextPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewContextPrefabResource(installerType:Type, resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+class "FactorySubContainerBinderBase`1"<T> {
+}
+"FactorySubContainerBinderBase`1" "<TContract>" <|-- "FactorySubContainerBinderWithParams`1"
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+class UnityServicesInternal {
+    + UnityServicesInternal(registry:CoreRegistry, metrics:CoreMetrics, diagnostics:CoreDiagnostics)
+    + <<async>> InitializeAsync(options:InitializationOptions) : Task
+    HasRequestedInitialization() : bool
+    <<async>> InitializeServicesAsync() : Task
+}
+class "TaskCompletionSource`1"<T> {
+}
+IUnityServices <|-- UnityServicesInternal
+UnityServicesInternal --> "State" ServicesInitializationState
+UnityServicesInternal --> "Options" InitializationOptions
+UnityServicesInternal --> "m_Initialization<object>" "TaskCompletionSource`1"
+UnityServicesInternal --> "Registry" CoreRegistry
+UnityServicesInternal --> "Metrics" CoreMetrics
+UnityServicesInternal --> "Diagnostics" CoreDiagnostics
+@enduml

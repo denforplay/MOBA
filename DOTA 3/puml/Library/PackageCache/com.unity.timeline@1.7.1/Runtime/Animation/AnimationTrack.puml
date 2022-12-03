@@ -1,0 +1,81 @@
+@startuml
+enum MatchTargetFields {
+    PositionX= 1 << 0,
+    PositionY= 1 << 1,
+    PositionZ= 1 << 2,
+    RotationX= 1 << 3,
+    RotationY= 1 << 4,
+    RotationZ= 1 << 5,
+}
+enum TrackOffset {
+    ApplyTransformOffsets,
+    ApplySceneOffsets,
+    Auto,
+}
+enum AppliedOffsetMode {
+    NoRootTransform,
+    TransformOffset,
+    SceneOffset,
+    TransformOffsetLegacy,
+    SceneOffsetLegacy,
+    SceneOffsetEditor,
+    SceneOffsetLegacyEditor,
+}
+class MatchTargetFieldConstants <<static>> {
+    + {static} HasAny(me:MatchTargetFields, fields:MatchTargetFields) : bool
+    + {static} Toggle(me:MatchTargetFields, flag:MatchTargetFields) : MatchTargetFields
+}
+class AnimationTrack <<partial>> {
+    <<const>> k_DefaultInfiniteClipName : string = "Recorded"
+    <<const>> k_DefaultRecordableClipName : string = "Recorded"
+    m_InfiniteClipTimeOffset : double
+    m_InfiniteClipRemoveOffset : bool
+    m_InfiniteClipApplyFootIK : bool = true
+    m_ApplyAvatarMask : bool = true
+    + applyOffsets : bool <<get>> <<set>>
+    + applyAvatarMask : bool <<get>> <<set>>
+    + inClipMode : bool <<get>>
+    ResetOffsets() : void
+    + CreateClip(clip:AnimationClip) : TimelineClip
+    + CreateInfiniteClip(infiniteClipName:string) : void
+    + CreateRecordableClip(animClipName:string) : TimelineClip
+    CompileTrackPlayable(graph:PlayableGraph, track:AnimationTrack, go:GameObject, tree:IntervalTree<RuntimeElement>, mode:AppliedOffsetMode) : Playable
+    CreateLayerMixer(graph:PlayableGraph, go:GameObject, inputCount:int) : Playable
+    RequiresMotionXPlayable(mode:AppliedOffsetMode, gameObject:GameObject) : bool
+    {static} UsesAbsoluteMotion(mode:AppliedOffsetMode) : bool
+    HasController(gameObject:GameObject) : bool
+    {static} CreateGroupMixer(graph:PlayableGraph, go:GameObject, inputCount:int) : AnimationLayerMixerPlayable
+    CreateInfiniteTrackPlayable(graph:PlayableGraph, go:GameObject, tree:IntervalTree<RuntimeElement>, mode:AppliedOffsetMode) : Playable
+    ApplyTrackOffset(graph:PlayableGraph, root:Playable, go:GameObject, mode:AppliedOffsetMode) : Playable
+    AssignAnimationClip(clip:TimelineClip, animClip:AnimationClip) : void
+    + <<override>> GatherProperties(director:PlayableDirector, driver:IPropertyCollector) : void
+    GetOffsetMode(go:GameObject, animatesRootTransform:bool) : AppliedOffsetMode
+}
+class "IEnumerable`1"<T> {
+}
+MatchTargetFieldConstants o-> "All" MatchTargetFields
+MatchTargetFieldConstants o-> "None" MatchTargetFields
+MatchTargetFieldConstants o-> "Position" MatchTargetFields
+MatchTargetFieldConstants o-> "Rotation" MatchTargetFields
+TrackAsset <|-- AnimationTrack
+ILayerable <|-- AnimationTrack
+AnimationTrack o-> "m_InfiniteClipOffsetPosition" Vector3
+AnimationTrack o-> "m_InfiniteClipOffsetEulerAngles" Vector3
+AnimationTrack o-> "m_MatchTargetFields" MatchTargetFields
+AnimationTrack o-> "m_Position" Vector3
+AnimationTrack o-> "m_EulerAngles" Vector3
+AnimationTrack --> "m_AvatarMask" AvatarMask
+AnimationTrack o-> "m_TrackOffset" TrackOffset
+AnimationTrack --> "m_InfiniteClip" AnimationClip
+AnimationTrack --> "position" Vector3
+AnimationTrack --> "rotation" Quaternion
+AnimationTrack --> "eulerAngles" Vector3
+AnimationTrack --> "trackOffset" TrackOffset
+AnimationTrack --> "matchTargetFields" MatchTargetFields
+AnimationTrack --> "infiniteClip" AnimationClip
+AnimationTrack --> "avatarMask" AvatarMask
+AnimationTrack --> "outputs<PlayableBinding>" "IEnumerable`1"
+AnimationTrack --> "infiniteClipOffsetPosition" Vector3
+AnimationTrack --> "infiniteClipOffsetRotation" Quaternion
+AnimationTrack --> "infiniteClipOffsetEulerAngles" Vector3
+@enduml

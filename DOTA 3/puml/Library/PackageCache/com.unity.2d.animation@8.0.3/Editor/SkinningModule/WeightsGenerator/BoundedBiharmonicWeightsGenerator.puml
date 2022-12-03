@@ -1,0 +1,16 @@
+@startuml
+class BoundedBiharmonicWeightsGenerator {
+    <<const>> k_NumIterations : int = 100
+    <<const>> k_NumSamples : int = 4
+    <<const>> k_LargestTriangleAreaFactor : float = 0.4f
+    <<const>> k_MeshAreaFactor : float = 0.004f
+    {static} <<extern>> Bbw(iterations:int, vertices:IntPtr, vertexCount:int, originalVertexCount:int, indices:IntPtr, indexCount:int, controlPoints:IntPtr, controlPointsCount:int, boneEdges:IntPtr, boneEdgesCount:int, pinIndices:IntPtr, pinIndexCount:int, weights:IntPtr) : int
+    + Calculate(name:string, vertices:float2[], indices:int[], edges:int2[], controlPoints:float2[], bones:int2[], pins:int[]) : BoneWeight[]
+    {static} SanitizeEdges(edges:int2[], noOfVertices:int) : int2[]
+    {static} Round(data:float2[]) : void
+    {static} CalculateInternal(inputVertices:float2[], inputIndices:int[], inputEdges:int2[], inputControlPoints:float2[], inputBones:int2[], inputPins:int[], numSamples:int, subdivide:bool, done:bool) : BoneWeight[]
+    + DebugMesh(spriteMeshData:BaseSpriteMeshData, vertices:float2[], edges:int2[], controlPoints:float2[], bones:int2[], pins:int[]) : void
+    {static} SampleBones(points:float2[], edges:int2[], numSamples:int) : float2[]
+}
+IWeightsGenerator <|-- BoundedBiharmonicWeightsGenerator
+@enduml

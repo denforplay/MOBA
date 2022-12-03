@@ -1,0 +1,5 @@
+@startuml
+interface "ISnapping`1"<T> {
+    Snap(value:T) : T
+}
+@enduml

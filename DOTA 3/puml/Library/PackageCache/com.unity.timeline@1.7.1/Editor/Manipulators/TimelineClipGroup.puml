@@ -1,0 +1,9 @@
+@startuml
+class TimelineClipGroup {
+    + start : double <<get>> <<set>>
+    + end : double <<get>>
+    + TimelineClipGroup(clips:IEnumerable<TimelineClip>)
+}
+TimelineClipGroup --> "m_LeftMostClip" TimelineClip
+TimelineClipGroup --> "m_RightMostClip" TimelineClip
+@enduml

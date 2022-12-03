@@ -1,0 +1,76 @@
+@startuml
+class CinemachineBlend {
+    + TimeInBlend : float
+    + BlendWeight : float <<get>>
+    + IsValid : bool <<get>>
+    + Duration : float
+    + IsComplete : bool <<get>>
+    + Description : string <<get>>
+    + Uses(cam:ICinemachineCamera) : bool
+    + CinemachineBlend(a:ICinemachineCamera, b:ICinemachineCamera, curve:AnimationCurve, duration:float, t:float)
+    + UpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+}
+class CinemachineBlendDefinition <<struct>> {
+    + m_Time : float
+    + BlendTime : float <<get>>
+    + CinemachineBlendDefinition(style:Style, time:float)
+    CreateStandardCurves() : void
+}
+class StaticPointVirtualCamera {
+    + StaticPointVirtualCamera(state:CameraState, name:string)
+    + SetState(state:CameraState) : void
+    + Name : string <<get>>
+    + Description : string <<get>>
+    + Priority : int <<get>> <<set>>
+    + IsValid : bool <<get>>
+    + IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + UpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    + OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+}
+class BlendSourceVirtualCamera {
+    + BlendSourceVirtualCamera(blend:CinemachineBlend)
+    + Name : string <<get>>
+    + Description : string <<get>>
+    + Priority : int <<get>> <<set>>
+    + IsValid : bool <<get>>
+    + IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + CalculateNewState(deltaTime:float) : CameraState
+    + UpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    + OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+}
+enum Style {
+    Cut,
+    EaseInOut,
+    EaseIn,
+    EaseOut,
+    HardIn,
+    HardOut,
+    Linear,
+    Custom,
+}
+CinemachineBlend --> "CamA" ICinemachineCamera
+CinemachineBlend --> "CamB" ICinemachineCamera
+CinemachineBlend --> "BlendCurve" AnimationCurve
+CinemachineBlend --> "State" CameraState
+CinemachineBlendDefinition --> "m_Style" Style
+CinemachineBlendDefinition --> "m_CustomCurve" AnimationCurve
+CinemachineBlendDefinition --> "BlendCurve" AnimationCurve
+ICinemachineCamera <|-- StaticPointVirtualCamera
+StaticPointVirtualCamera --> "LookAt" Transform
+StaticPointVirtualCamera --> "Follow" Transform
+StaticPointVirtualCamera --> "State" CameraState
+StaticPointVirtualCamera --> "VirtualCameraGameObject" GameObject
+StaticPointVirtualCamera --> "ParentCamera" ICinemachineCamera
+ICinemachineCamera <|-- BlendSourceVirtualCamera
+BlendSourceVirtualCamera --> "Blend" CinemachineBlend
+BlendSourceVirtualCamera --> "LookAt" Transform
+BlendSourceVirtualCamera --> "Follow" Transform
+BlendSourceVirtualCamera --> "State" CameraState
+BlendSourceVirtualCamera --> "VirtualCameraGameObject" GameObject
+BlendSourceVirtualCamera --> "ParentCamera" ICinemachineCamera
+CinemachineBlendDefinition +-- Style
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+class SpriteShapeEditor {
+    + selectedIndex : int <<get>> <<set>>
+    isSelectedIndexValid : bool <<get>>
+    + previewAngle : float <<get>> <<set>>
+    + RegisterUndo(name:string) : void
+    OnReset(obj:UnityEngine.U2D.SpriteShape) : void
+    InitCache() : void
+    + OnEnable() : void
+    + OnDisable() : void
+    + <<override>> RequiresConstantRepaint() : bool
+    + DrawHeader(content:GUIContent) : void
+    + <<override>> OnInspectorGUI() : void
+}
+class Contents <<static>> {
+}
+class "List`1"<T> {
+}
+Editor <|-- SpriteShapeEditor
+IAngleRangeCache <|-- SpriteShapeEditor
+SpriteShapeEditor --> "angleRanges<AngleRange>" "List`1"
+SpriteShapeEditor +-- Contents
+Contents o-> "fillTextureLabel" GUIContent
+Contents o-> "fillScaleLabel" GUIContent
+Contents o-> "useSpriteBorderLabel" GUIContent
+Contents o-> "cornerTypeLabel" GUIContent
+Contents o-> "controlPointsLabel" GUIContent
+Contents o-> "fillLabel" GUIContent
+Contents o-> "cornerLabel" GUIContent
+Contents o-> "cornerListLabel" GUIContent
+Contents o-> "cornerSpriteTypeLabel" GUIContent
+Contents o-> "angleRangesLabel" GUIContent
+Contents o-> "spritesLabel" GUIContent
+Contents o-> "angleRangeLabel" GUIContent
+Contents o-> "wrapModeErrorLabel" GUIContent
+Contents o-> "createRangeButtonLabel" GUIContent
+Contents o-> "proBackgroundColor" Color
+Contents o-> "proBackgroundRangeColor" Color
+Contents o-> "proColor1" Color
+Contents o-> "proColor2" Color
+Contents o-> "defaultColor1" Color
+Contents o-> "defaultColor2" Color
+Contents o-> "defaultBackgroundColor" Color
+@enduml

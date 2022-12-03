@@ -1,0 +1,9 @@
+@startuml
+class ItemEdge {
+    + ItemEdge(itemEdgeConfiguration:ItemEdgeConfiguration)
+}
+class "List`1"<T> {
+}
+ItemEdge --> "CurrentItem" Item
+ItemEdge --> "NextItems<ItemEdge>" "List`1"
+@enduml

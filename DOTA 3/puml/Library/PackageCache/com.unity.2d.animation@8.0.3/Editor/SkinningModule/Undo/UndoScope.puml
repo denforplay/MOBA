@@ -1,0 +1,7 @@
+@startuml
+class UndoScope {
+    + UndoScope(cacheUndo:ICacheUndo, operationName:string, incrementGroup:bool)
+    + Dispose() : void
+}
+IDisposable <|-- UndoScope
+@enduml

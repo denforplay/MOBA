@@ -1,0 +1,16 @@
+@startuml
+class FunctionPointerTests {
+    + TestCompileFunctionPointerNoArgsGenericReturnType() : void
+    + TestCompileFunctionPointerDelegateNoArgsGenericReturnType() : void
+    + TestCompileFunctionPointerDelegateNoArgsGenericDeclaringType() : void
+    + TestDelegateWithCustomAttributeThatIsNotUnmanagedFunctionPointerAttribute() : void
+}
+class "GenericClass`1"<T> <<static>> {
+}
+class MyCustomAttributeAttribute <<sealed>> {
+    + MyCustomAttributeAttribute(param:string)
+}
+FunctionPointerTests +-- "GenericClass`1"
+FunctionPointerTests +-- MyCustomAttributeAttribute
+Attribute <|-- MyCustomAttributeAttribute
+@enduml

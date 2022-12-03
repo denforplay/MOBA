@@ -1,0 +1,17 @@
+@startuml
+class EditorSpriteGUIUtility <<static>> {
+    + {static} GetOriginalSpriteTexture(sprite:Sprite) : Texture
+    + {static} GetOriginalSpriteUvs(sprite:Sprite) : Vector2[]
+    + {static} DrawSpriteInRectPrepare(rect:Rect, sprite:Sprite, fitMode:FitMode, excludeBorders:bool, forceQuad:bool, mesh:Mesh) : void
+    + {static} DrawMesh(mesh:Mesh, material:Material, position:Vector3, rotation:Quaternion, scale:Vector3) : void
+}
+enum FitMode {
+    BestFit,
+    FitHorizontal,
+    FitVertical,
+    Fill,
+    Tiled,
+}
+EditorSpriteGUIUtility --> "spriteMaterial" Material
+EditorSpriteGUIUtility +-- FitMode
+@enduml

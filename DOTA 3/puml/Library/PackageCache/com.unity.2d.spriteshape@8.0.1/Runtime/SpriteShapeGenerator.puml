@@ -1,0 +1,192 @@
+@startuml
+enum SpriteShapeGeneratorResult {
+    ErrorDefaultQuadCreated= -5,
+    ErrorNativeDataOverflow= -4,
+    ErrorSpritesWrongBorder= -3,
+    ErrorSpritesTightPacked= -2,
+    ErrorVertexLimitReached= -1,
+    Success= 0,
+}
+class SpriteShapeGeneratorStats <<struct>> {
+}
+class SpriteShapeGenerator <<struct>> {
+    m_IndexDataCount : int
+    m_VertexDataCount : int
+    m_ColliderDataCount : int
+    m_ActiveIndexCount : int
+    m_ActiveVertexCount : int
+    kModeLinear : int
+    kModeContinous : int
+    kModeBroken : int
+    kModeUTess : int
+    kCornerTypeOuterTopLeft : int
+    kCornerTypeOuterTopRight : int
+    kCornerTypeOuterBottomLeft : int
+    kCornerTypeOuterBottomRight : int
+    kCornerTypeInnerTopLeft : int
+    kCornerTypeInnerTopRight : int
+    kCornerTypeInnerBottomLeft : int
+    kCornerTypeInnerBottomRight : int
+    kControlPointCount : int
+    kEpsilon : float
+    kEpsilonOrder : float
+    kEpsilonRelaxed : float
+    kExtendSegment : float
+    kRenderQuality : float
+    kOptimizeRender : float
+    kColliderQuality : float
+    kOptimizeCollider : float
+    kLowestQualityTolerance : float
+    kHighestQualityTolerance : float
+    GetSpriteInfo(index:int) : JobSpriteInfo
+    GetCornerSpriteInfo(index:int) : JobSpriteInfo
+    GetAngleRange(index:int) : JobAngleRange
+    GetControlPoint(index:int) : JobControlPoint
+    GetContourPoint(index:int) : JobContourPoint
+    GetSegmentInfo(index:int) : JobSegmentInfo
+    GetContourIndex(index:int) : int
+    GetEndContourIndexOfSegment(isi:JobSegmentInfo) : int
+    SetResult(result:SpriteShapeGeneratorResult) : void
+    {static} CopyToNativeArray(from:NativeArray<T>, length:int, to:NativeArray<T>) : void
+    {static} SafeDispose(na:NativeArray<T>) : void
+    {static} IsPointOnLine(epsilon:float, a:float2, b:float2, c:float2) : bool
+    {static} IsPointOnLines(epsilon:float, p1:float2, p2:float2, p3:float2, p4:float2, r:float2) : bool
+    {static} Colinear(p:float2, q:float2, r:float2) : bool
+    {static} Det(epsilon:float, p:float2, q:float2, r:float2) : int
+    {static} LineIntersectionTest(epsilon:float, p1:float2, q1:float2, p2:float2, q2:float2) : bool
+    {static} LineIntersection(epsilon:float, p1:float2, p2:float2, p3:float2, p4:float2, result:float2) : bool
+    {static} AngleBetweenVector(a:float2, b:float2) : float
+    {static} GenerateColumnsBi(a:float2, b:float2, whsize:float2, flip:bool, rt:float2, rb:float2, cph:float, pivot:float) : bool
+    {static} GenerateColumnsTri(a:float2, b:float2, c:float2, whsize:float2, flip:bool, rt:float2, rb:float2, cph:float, pivot:float) : bool
+    AppendCornerCoordinates(corners:NativeArray<float2>, cornerCount:int, a:float2, b:float2, c:float2, d:float2) : void
+    <<unsafe>> PrepareInput(shapeParams:SpriteShapeParameters, maxArrayCount:int, shapePoints:NativeArray<ShapeControlPoint>, optimizeGeometry:bool, updateCollider:bool, optimizeCollider:bool, colliderOffset:float, colliderDetail:float) : void
+    TransferSprites(spriteInfos:NativeArray<JobSpriteInfo>, sprites:Sprite[], maxCount:int) : void
+    PrepareSprites(edgeSprites:Sprite[], cornerSprites:Sprite[]) : void
+    PrepareAngleRanges(angleRanges:AngleRangeInfo[]) : void
+    PrepareControlPoints(shapePoints:NativeArray<ShapeControlPoint>, metaData:NativeArray<SplinePointMetaData>) : void
+    WithinRange(angleRange:JobAngleRange, inputAngle:float) : bool
+    AngleWithinRange(t:float, a:float, b:float) : bool
+    {static} BezierPoint(st:float2, sp:float2, ep:float2, et:float2, t:float) : float2
+    {static} SlopeAngle(dirNormalized:float2) : float
+    {static} SlopeAngle(start:float2, end:float2) : float
+    ResolveAngle(angle:float, activeIndex:int, renderOrder:float, spriteIndex:int, firstSpriteIndex:int) : bool
+    GetSpriteIndex(index:int, previousIndex:int, resolved:int) : int
+    GenerateSegments() : void
+    UpdateSegments() : void
+    GetSegmentBoundaryColumn(segment:JobSegmentInfo, sprInfo:JobSpriteInfo, whsize:float2, startPos:float2, endPos:float2, end:bool, top:float2, bottom:float2) : bool
+    GenerateControlPoints() : void
+    SegmentDistance(isi:JobSegmentInfo) : float
+    GenerateContour() : void
+    TessellateContour() : void
+    TessellateContourMainThread() : void
+    CalculateBoundingBox() : void
+    CalculateTexCoords() : void
+    CopyVertexData(outPos:NativeSlice<Vector3>, outUV0:NativeSlice<Vector2>, outTan:NativeSlice<Vector4>, outIndex:int, inVertices:NativeArray<JobShapeVertex>, inIndex:int, sOrder:float) : void
+    CopySegmentRenderData(ispr:JobSpriteInfo, outPos:NativeSlice<Vector3>, outUV0:NativeSlice<Vector2>, outTan:NativeSlice<Vector4>, outCount:int, indexData:NativeArray<ushort>, indexCount:int, inVertices:NativeArray<JobShapeVertex>, inCount:int, sOrder:float) : int
+    GetLineSegments(sprInfo:JobSpriteInfo, segment:JobSegmentInfo, whsize:float2, vlt:float2, vlb:float2, vrt:float2, vrb:float2) : void
+    TessellateSegment(segmentIndex:int, sprInfo:JobSpriteInfo, segment:JobSegmentInfo, whsize:float2, border:float4, pxlWidth:float, vertices:NativeArray<JobShapeVertex>, vertexCount:int, useClosure:bool, validHead:bool, validTail:bool, firstSegment:bool, finalSegment:bool, outputVertices:NativeArray<JobShapeVertex>, outputCount:int) : void
+    SkipSegment(isi:JobSegmentInfo) : bool
+    InterpolateLinear(a:float, b:float, t:float) : float
+    InterpolateSmooth(a:float, b:float, t:float) : float
+    TessellateSegments() : void
+    FetchStretcher(segmentIndex:int, sprInfo:JobSpriteInfo, segment:JobSegmentInfo, whsize:float2, validHead:bool, validTail:bool, stretcher:float4) : bool
+    StretchCorners(segment:JobSegmentInfo, vertices:NativeArray<JobShapeVertex>, vertexCount:int, validHead:bool, validTail:bool, stretcher:float4) : void
+    ExtendSegment(l0:float2, r0:float2) : void
+    GetIntersection(cp:int, ct:int, ispr:JobSpriteInfo, lt0:float2, lb0:float2, rt0:float2, rb0:float2, lt1:float2, lb1:float2, rt1:float2, rb1:float2, tp:float2, bt:float2) : bool
+    AttachCorner(cp:int, ct:int, ispr:JobSpriteInfo, newPoints:NativeArray<JobControlPoint>, activePoint:int) : bool
+    CornerTextureCoordinate(cornerType:int, index:int) : float2
+    CalculateCorner(index:int, angle:float, lt:float2, rt:float2) : int
+    InsertCorner(index:int, cpSpriteIndices:NativeArray<int2>, newPoints:NativeArray<JobControlPoint>, activePoint:int, cornerConsidered:bool) : bool
+    TessellateCorners() : void
+    AreCollinear(a:float2, b:float2, c:float2, t:float) : bool
+    OptimizePoints(tolerance:float, pointSet:NativeArray<float2>, pointCount:int) : void
+    AttachCornerToCollider(isi:JobSegmentInfo, pivot:float, colliderPoints:NativeArray<float2>, colliderPointCount:int) : void
+    UpdateCollider(isi:JobSegmentInfo, ispr:JobSpriteInfo, vertices:NativeArray<JobShapeVertex>, count:int, colliderPoints:NativeArray<float2>, colliderPointCount:int) : float2
+    TrimOverlaps(cpCount:int) : void
+    OptimizeCollider() : void
+    + Prepare(controller:UnityEngine.U2D.SpriteShapeController, shapeParams:SpriteShapeParameters, maxArrayCount:int, shapePoints:NativeArray<ShapeControlPoint>, metaData:NativeArray<SpriteShapeMetaData>, angleRanges:AngleRangeInfo[], segmentSprites:Sprite[], cornerSprites:Sprite[]) : void
+    + Execute() : void
+    + Cleanup() : void
+}
+class JobParameters <<struct>> {
+}
+class JobSpriteInfo <<struct>> {
+}
+class JobAngleRange <<struct>> {
+}
+class JobControlPoint <<struct>> {
+}
+class JobContourPoint <<struct>> {
+}
+class JobIntersectPoint <<struct>> {
+}
+class JobSegmentInfo <<struct>> {
+}
+class JobCornerInfo <<struct>> {
+}
+class JobShapeVertex <<struct>> {
+}
+class "NativeArray`1"<T> {
+}
+class "NativeSlice`1"<T> {
+}
+SpriteShapeGeneratorStats --> "status" SpriteShapeGeneratorResult
+IJob <|-- SpriteShapeGenerator
+SpriteShapeGenerator --> "generateGeometry" ProfilerMarker
+SpriteShapeGenerator --> "generateCollider" ProfilerMarker
+SpriteShapeGenerator --> "m_VertexData<JobShapeVertex>" "NativeArray`1"
+SpriteShapeGenerator --> "m_OutputVertexData<JobShapeVertex>" "NativeArray`1"
+SpriteShapeGenerator --> "m_IndexArray<ushort>" "NativeArray`1"
+SpriteShapeGenerator --> "m_PosArray<Vector3>" "NativeSlice`1"
+SpriteShapeGenerator --> "m_Uv0Array<Vector2>" "NativeSlice`1"
+SpriteShapeGenerator --> "m_TanArray<Vector4>" "NativeSlice`1"
+SpriteShapeGenerator --> "m_GeomArray<SpriteShapeSegment>" "NativeArray`1"
+SpriteShapeGenerator --> "m_ColliderPoints<float2>" "NativeArray`1"
+SpriteShapeGenerator --> "m_Bounds<Bounds>" "NativeArray`1"
+SpriteShapeGenerator --> "m_Stats<SpriteShapeGeneratorStats>" "NativeArray`1"
+SpriteShapeGenerator --> "m_FirstLT" float2
+SpriteShapeGenerator --> "m_FirstLB" float2
+SpriteShapeGenerator --> "m_Transform" float4x4
+SpriteShapeGenerator +-- JobParameters
+JobParameters --> "shapeData" int4
+JobParameters --> "splineData" int4
+JobParameters --> "curveData" float4
+JobParameters --> "fillData" float4
+SpriteShapeGenerator +-- JobSpriteInfo
+JobSpriteInfo --> "texRect" float4
+JobSpriteInfo --> "texData" float4
+JobSpriteInfo --> "uvInfo" float4
+JobSpriteInfo --> "metaInfo" float4
+JobSpriteInfo --> "border" float4
+SpriteShapeGenerator +-- JobAngleRange
+JobAngleRange --> "spriteAngles" float4
+JobAngleRange --> "spriteData" int4
+SpriteShapeGenerator +-- JobControlPoint
+JobControlPoint --> "cpData" int4
+JobControlPoint --> "exData" int4
+JobControlPoint --> "cpInfo" float2
+JobControlPoint --> "position" float2
+JobControlPoint --> "tangentLt" float2
+JobControlPoint --> "tangentRt" float2
+SpriteShapeGenerator +-- JobContourPoint
+JobContourPoint --> "position" float2
+JobContourPoint --> "ptData" float2
+SpriteShapeGenerator +-- JobIntersectPoint
+JobIntersectPoint --> "top" float2
+JobIntersectPoint --> "bottom" float2
+SpriteShapeGenerator +-- JobSegmentInfo
+JobSegmentInfo --> "sgInfo" int4
+JobSegmentInfo --> "spriteInfo" float4
+SpriteShapeGenerator +-- JobCornerInfo
+JobCornerInfo --> "bottom" float2
+JobCornerInfo --> "top" float2
+JobCornerInfo --> "left" float2
+JobCornerInfo --> "right" float2
+JobCornerInfo --> "cornerData" int2
+SpriteShapeGenerator +-- JobShapeVertex
+JobShapeVertex --> "pos" float2
+JobShapeVertex --> "uv" float2
+JobShapeVertex --> "tan" float4
+JobShapeVertex --> "meta" float2
+JobShapeVertex --> "sprite" int4
+@enduml

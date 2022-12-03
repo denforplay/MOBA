@@ -1,0 +1,11 @@
+@startuml
+enum ShapeType {
+    Polygon,
+    Spline,
+}
+interface IShape {
+    isOpenEnded : bool <<get>>
+    ToControlPoints() : ControlPoint[]
+}
+IShape --> "type" ShapeType
+@enduml

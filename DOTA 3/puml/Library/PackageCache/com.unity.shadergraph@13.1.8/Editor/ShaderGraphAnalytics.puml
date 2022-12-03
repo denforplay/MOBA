@@ -1,0 +1,19 @@
+@startuml
+class ShaderGraphAnalytics {
+    {static} s_EventRegistered : bool = false
+    <<const>> k_MaxEventsPerHour : int = 1000
+    <<const>> k_MaxNumberOfElements : int = 1000
+    <<const>> k_VendorKey : string = "unity.shadergraph"
+    <<const>> k_EventName : string = "uShaderGraphUsage"
+    {static} EnableAnalytics() : bool
+    + {static} SendShaderGraphEvent(assetGuid:string, graph:GraphData) : void
+    {static} DictionaryToJson(dict:Dictionary<string, int>) : string
+}
+class AnalyticsData <<struct>> {
+    + nodes : string
+    + node_count : int
+    + asset_guid : string
+    + subgraph_count : int
+}
+ShaderGraphAnalytics +-- AnalyticsData
+@enduml

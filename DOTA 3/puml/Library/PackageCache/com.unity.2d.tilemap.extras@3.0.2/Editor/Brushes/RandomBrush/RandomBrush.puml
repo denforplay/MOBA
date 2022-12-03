@@ -1,0 +1,32 @@
+@startuml
+class RandomBrush {
+    + pickRandomTiles : bool
+    + addToRandomTiles : bool
+    + <<override>> Paint(grid:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> Pick(gridLayout:GridLayout, brushTarget:GameObject, bounds:BoundsInt, pickStart:Vector3Int) : void
+}
+class RandomBrushEditor {
+    + <<override>> PaintPreview(grid:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> ClearPreview() : void
+    + <<override>> OnPaintInspectorGUI() : void
+}
+class SizeEnumerator <<struct>> {
+    + SizeEnumerator(min:Vector3Int, max:Vector3Int, delta:Vector3Int)
+    + GetEnumerator() : SizeEnumerator
+    + MoveNext() : bool
+    + Reset() : void
+    Current : object <<get>>
+    Dispose() : void
+}
+class RandomTileSet <<struct>> {
+}
+class "IEnumerator`1"<T> {
+}
+GridBrush <|-- RandomBrush
+RandomBrush o-> "randomTileSetSize" Vector3Int
+GridBrushEditor <|-- RandomBrushEditor
+RandomBrush +-- SizeEnumerator
+"IEnumerator`1" "<Vector3Int>" <|-- SizeEnumerator
+SizeEnumerator --> "Current" Vector3Int
+RandomBrush +-- RandomTileSet
+@enduml

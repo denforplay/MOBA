@@ -1,0 +1,15 @@
+@startuml
+class CreepConfiguration {
+    + ObservingRadius : float <<get>>
+    + AttackDistance : float <<get>>
+    + AttackDelay : float <<get>>
+    + Damage : float <<get>>
+    + MaxHealth : float <<get>>
+    + Cost : int <<get>>
+}
+class "Dictionary`2"<T1,T2> {
+}
+ScriptableObject <|-- CreepConfiguration
+CreepConfiguration --> "CombatType" CombatType
+CreepConfiguration --> "AnimationsInfo<AnimationType,string>" "Dictionary`2"
+@enduml

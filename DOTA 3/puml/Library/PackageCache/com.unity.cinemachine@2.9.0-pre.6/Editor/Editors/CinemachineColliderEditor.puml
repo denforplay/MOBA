@@ -1,0 +1,8 @@
+@startuml
+class CinemachineColliderEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineCollider>" <|-- CinemachineColliderEditor
+@enduml

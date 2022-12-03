@@ -1,0 +1,8 @@
+@startuml
+class ProfileAnalyzerAPITests {
+    + ProfileAnalyzer_EmptyAnalysis_HasNoThreads() : void
+    + ProfileAnalyzer_EmptyAnalysis_HasNoProgress() : void
+    + ProfileAnalyzer_EmptyAnalysis_ReturnsNullForAnalysis() : void
+}
+ProfileAnalyzerBaseTest <|-- ProfileAnalyzerAPITests
+@enduml

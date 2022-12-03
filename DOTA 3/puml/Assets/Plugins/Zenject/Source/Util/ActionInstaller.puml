@@ -1,0 +1,12 @@
+@startuml
+class ActionInstaller {
+    + ActionInstaller(installMethod:Action<DiContainer>)
+    + <<override>> InstallBindings() : void
+}
+class "Installer`1"<T> {
+}
+class "Action`1"<T> {
+}
+"Installer`1" "<ActionInstaller>" <|-- ActionInstaller
+ActionInstaller --> "_installMethod<DiContainer>" "Action`1"
+@enduml

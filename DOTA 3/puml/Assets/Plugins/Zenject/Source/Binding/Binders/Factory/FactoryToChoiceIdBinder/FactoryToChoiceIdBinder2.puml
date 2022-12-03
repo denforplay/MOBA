@@ -1,0 +1,9 @@
+@startuml
+class "FactoryToChoiceIdBinder`3"<TParam1,TParam2,TContract> {
+    + FactoryToChoiceIdBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + WithId(identifier:object) : FactoryArgumentsToChoiceBinder<TParam1, TParam2, TContract>
+}
+class "FactoryArgumentsToChoiceBinder`3"<T1,T2,T3> {
+}
+"FactoryArgumentsToChoiceBinder`3" "<TParam1,TParam2,TContract>" <|-- "FactoryToChoiceIdBinder`3"
+@enduml

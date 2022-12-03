@@ -1,0 +1,10 @@
+@startuml
+class TelemetryConfig {
+    + TargetUrl : string
+    + ServicePath : string
+    + PayloadExpirationSeconds : double
+    + PayloadSendingMaxIntervalSeconds : double
+    + SafetyPersistenceIntervalSeconds : double
+    + MaxMetricCountPerPayload : int
+}
+@enduml

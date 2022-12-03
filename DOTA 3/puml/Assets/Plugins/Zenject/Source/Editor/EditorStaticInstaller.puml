@@ -1,0 +1,6 @@
+@startuml
+abstract class "EditorStaticInstaller`1"<T> {
+    + {static} Install() : void
+}
+InstallerBase <|-- "EditorStaticInstaller`1"
+@enduml

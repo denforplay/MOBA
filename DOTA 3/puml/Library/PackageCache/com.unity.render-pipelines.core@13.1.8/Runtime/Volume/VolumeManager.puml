@@ -1,0 +1,48 @@
+@startuml
+class VolumeManager <<sealed>> {
+    {static} FilterVolumeComponentTypes(types:Type[], currentPipelineType:Type) : List<(string, Type)>
+    <<const>> k_MaxLayerCount : int = 32
+    VolumeManager()
+    + CreateStack() : VolumeStack
+    + ResetMainStack() : void
+    + DestroyStack(stack:VolumeStack) : void
+    ReloadBaseTypes() : void
+    + Register(volume:Volume, layer:int) : void
+    + Unregister(volume:Volume, layer:int) : void
+    + IsComponentActiveInMask(layerMask:LayerMask) : bool
+    OverrideData(stack:VolumeStack, components:List<VolumeComponent>, interpFactor:float) : void
+    ReplaceData(stack:VolumeStack, components:List<VolumeComponent>) : void
+    + CheckBaseTypes() : void
+    + CheckStack(stack:VolumeStack) : void
+    + Update(trigger:Transform, layerMask:LayerMask) : void
+    + Update(stack:VolumeStack, trigger:Transform, layerMask:LayerMask) : void
+    + GetVolumes(layerMask:LayerMask) : Volume[]
+    GrabVolumes(mask:LayerMask) : List<Volume>
+    {static} SortByPriority(volumes:List<Volume>) : void
+    {static} IsVolumeRenderedByCamera(volume:Volume, camera:Camera) : bool
+}
+class VolumeIsolationScope <<struct>> {
+    + VolumeIsolationScope(unused:bool)
+    Dispose() : void
+}
+class "Lazy`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+VolumeManager o-> "s_Instance<VolumeManager>" "Lazy`1"
+VolumeManager --> "instance" VolumeManager
+VolumeManager --> "stack" VolumeStack
+VolumeManager --> "baseComponentTypes<Type>" "IEnumerable`1"
+VolumeManager o-> "s_SupportedVolumeComponentsForRenderPipeline<Type,List<(string, Type)>>" "Dictionary`2"
+VolumeManager --> "m_SortedVolumes<int,List<Volume>>" "Dictionary`2"
+VolumeManager --> "m_Volumes<Volume>" "List`1"
+VolumeManager --> "m_SortNeeded<int,bool>" "Dictionary`2"
+VolumeManager --> "m_ComponentsDefaultState<VolumeComponent>" "List`1"
+VolumeManager --> "m_TempColliders<Collider>" "List`1"
+VolumeManager o-> "m_DefaultStack" VolumeStack
+IDisposable <|-- VolumeIsolationScope
+@enduml

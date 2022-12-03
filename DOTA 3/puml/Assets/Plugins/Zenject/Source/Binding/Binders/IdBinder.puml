@@ -1,0 +1,7 @@
+@startuml
+class IdBinder {
+    + IdBinder(bindInfo:BindInfo)
+    + WithId(identifier:object) : void
+}
+IdBinder --> "_bindInfo" BindInfo
+@enduml

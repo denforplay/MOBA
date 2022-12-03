@@ -1,0 +1,47 @@
+@startuml
+class TMP_InputFieldEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class m_foldout <<struct>> {
+    + {static} textInput : bool = true
+    + {static} fontSettings : bool = true
+    + {static} extraSettings : bool = true
+}
+SelectableEditor <|-- TMP_InputFieldEditor
+TMP_InputFieldEditor --> "m_TextViewport" SerializedProperty
+TMP_InputFieldEditor --> "m_TextComponent" SerializedProperty
+TMP_InputFieldEditor --> "m_Text" SerializedProperty
+TMP_InputFieldEditor --> "m_ContentType" SerializedProperty
+TMP_InputFieldEditor --> "m_LineType" SerializedProperty
+TMP_InputFieldEditor --> "m_LineLimit" SerializedProperty
+TMP_InputFieldEditor --> "m_InputType" SerializedProperty
+TMP_InputFieldEditor --> "m_CharacterValidation" SerializedProperty
+TMP_InputFieldEditor --> "m_InputValidator" SerializedProperty
+TMP_InputFieldEditor --> "m_RegexValue" SerializedProperty
+TMP_InputFieldEditor --> "m_KeyboardType" SerializedProperty
+TMP_InputFieldEditor --> "m_CharacterLimit" SerializedProperty
+TMP_InputFieldEditor --> "m_CaretBlinkRate" SerializedProperty
+TMP_InputFieldEditor --> "m_CaretWidth" SerializedProperty
+TMP_InputFieldEditor --> "m_CaretColor" SerializedProperty
+TMP_InputFieldEditor --> "m_CustomCaretColor" SerializedProperty
+TMP_InputFieldEditor --> "m_SelectionColor" SerializedProperty
+TMP_InputFieldEditor --> "m_HideMobileKeyboard" SerializedProperty
+TMP_InputFieldEditor --> "m_HideMobileInput" SerializedProperty
+TMP_InputFieldEditor --> "m_Placeholder" SerializedProperty
+TMP_InputFieldEditor --> "m_VerticalScrollbar" SerializedProperty
+TMP_InputFieldEditor --> "m_ScrollbarScrollSensitivity" SerializedProperty
+TMP_InputFieldEditor --> "m_OnValueChanged" SerializedProperty
+TMP_InputFieldEditor --> "m_OnEndEdit" SerializedProperty
+TMP_InputFieldEditor --> "m_OnSelect" SerializedProperty
+TMP_InputFieldEditor --> "m_OnDeselect" SerializedProperty
+TMP_InputFieldEditor --> "m_ReadOnly" SerializedProperty
+TMP_InputFieldEditor --> "m_RichText" SerializedProperty
+TMP_InputFieldEditor --> "m_RichTextEditingAllowed" SerializedProperty
+TMP_InputFieldEditor --> "m_ResetOnDeActivation" SerializedProperty
+TMP_InputFieldEditor --> "m_RestoreOriginalTextOnEscape" SerializedProperty
+TMP_InputFieldEditor --> "m_OnFocusSelectAll" SerializedProperty
+TMP_InputFieldEditor --> "m_GlobalPointSize" SerializedProperty
+TMP_InputFieldEditor --> "m_GlobalFontAsset" SerializedProperty
+TMP_InputFieldEditor --> "m_CustomColor" AnimBool
+TMP_InputFieldEditor +-- m_foldout
+@enduml

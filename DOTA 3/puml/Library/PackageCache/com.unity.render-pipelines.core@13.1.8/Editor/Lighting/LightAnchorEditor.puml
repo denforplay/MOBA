@@ -1,0 +1,71 @@
+@startuml
+class LightAnchorEditor {
+    m_Yaw : float
+    m_Pitch : float
+    m_Roll : float
+    m_Distance : float
+    m_CamLightForwardDot : float
+    m_CamLightRightDot : float
+    m_EnableClickCatcher : bool = false
+    m_FoldoutPreset : bool = true
+    + <<override>> OnInspectorGUI() : void
+    OnEnable() : void
+    EditorToolsOnactiveToolChanged() : void
+    OnDisable() : void
+    EnableClickCatcher(enable:bool) : void
+    UpdateCache() : void
+    IsCacheInvalid(manipulator:LightAnchor) : bool
+    GetAngleFieldState(id:int) : AngleFieldState
+    AngleField(knobRect:Rect, label:string, angle:float, offset:float, sectionColor:Color, enabled:bool) : float
+    {static} DrawAngleWidget(center:Vector2, radius:float, angleDegrees:float, offset:float, sectionColor:Color, enabled:bool) : void
+    {static} SliceRectVertical(r:Rect, min:float, max:float) : Rect
+}
+class AngleFieldState {
+    + radius : float
+}
+class LightAnchorStyles <<static>> {
+    {static} + inspectorWidthPadding : float = 60f
+    {static} + presetButtonCount : float = 9f
+    {static} + k_IconFolder : string = @"Packages/com.unity.render-pipelines.core/Editor/Lighting/Icons/"
+    {static} + BackgroundIconColor() : Color
+    {static} + DiskBackgroundAngleColor() : Color
+    {static} + WireDiskAngleColor() : Color
+    {static} LightAnchorStyles()
+}
+Editor <|-- LightAnchorEditor
+LightAnchorEditor --> "m_CamToLight" Vector3
+LightAnchorEditor --> "m_GameViewRootElement" VisualElement
+LightAnchorEditor --> "m_ClickCatcher" VisualElement
+LightAnchorEditor --> "m_DistanceProperty" SerializedProperty
+LightAnchorEditor --> "m_FrameSpaceProperty" SerializedProperty
+LightAnchorEditor --> "m_AnchorPositionOverrideProperty" SerializedProperty
+LightAnchorEditor --> "m_AnchorPositionOffsetProperty" SerializedProperty
+LightAnchorEditor --> "manipulator" LightAnchor
+LightAnchorEditor --> "s_CurrentMousePosition" Vector2
+LightAnchorEditor --> "s_DragStartScreenPosition" Vector2
+LightAnchorEditor --> "s_DragScreenOffset" Vector2
+AngleFieldState --> "position" Vector2
+LightAnchorStyles o-> "centeredLabel" GUIStyle
+LightAnchorStyles o-> "presetTextureRimLeft" GUIContent
+LightAnchorStyles o-> "presetTextureKickLeft" GUIContent
+LightAnchorStyles o-> "presetTextureBounceLeft" GUIContent
+LightAnchorStyles o-> "presetTextureFillLeft" GUIContent
+LightAnchorStyles o-> "presetTextureHair" GUIContent
+LightAnchorStyles o-> "presetTextureFillRight" GUIContent
+LightAnchorStyles o-> "presetTextureBounceRight" GUIContent
+LightAnchorStyles o-> "presetTextureKickRight" GUIContent
+LightAnchorStyles o-> "presetTextureRimRight" GUIContent
+LightAnchorStyles o-> "distanceProperty" GUIContent
+LightAnchorStyles o-> "upDirectionProperty" GUIContent
+LightAnchorStyles o-> "anchorPositionOverrideProperty" GUIContent
+LightAnchorStyles o-> "anchorPositionOffsetProperty" GUIContent
+LightAnchorStyles o-> "totalTransparentColor" Color
+LightAnchorStyles o-> "hoverColor" Color
+LightAnchorStyles o-> "darkBackgroundIconColor" Color
+LightAnchorStyles o-> "lightBackgroundIconColor" Color
+LightAnchorStyles o-> "angleDiskBorderColor" Color
+LightAnchorStyles o-> "darkDiskBackgroundAngleColor" Color
+LightAnchorStyles o-> "lightDiskBackgroundAngleColor" Color
+LightAnchorStyles o-> "darkWireDiskAngleColor" Color
+LightAnchorStyles o-> "lightWireDiskAngleColor" Color
+@enduml

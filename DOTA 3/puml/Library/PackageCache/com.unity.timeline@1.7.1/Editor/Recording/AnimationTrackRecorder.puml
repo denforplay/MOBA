@@ -1,0 +1,20 @@
+@startuml
+class AnimationTrackRecorder {
+    + {static} <<readonly>> kRecordClipDefaultName : string
+    m_CurveCount : int = 0
+    m_ClipTime : double
+    m_needRebuildRects : bool
+    m_TrackHasPreviewComponents : bool
+    + PrepareForRecord(state:WindowState) : void
+    + PrepareTrack(track:TrackAsset, state:WindowState, gameObject:GameObject, startTime:double) : AnimationClip
+    {static} GetCurveCount(animationClip:AnimationClip) : int
+    + FinializeTrack(track:TrackAsset, state:WindowState) : void
+    + FinalizeRecording(state:WindowState) : void
+    + {static} GetUniqueRecordedClipName(owner:Object, name:string) : string
+    + {static} AddRecordableClip(parentTrack:TrackAsset, state:WindowState, atTime:double) : TimelineClip
+    {static} ShiftKeys(keys:Keyframe[], time:float) : Keyframe[]
+    {static} ShiftObjectKeys(keys:ObjectReferenceKeyframe[], time:float) : ObjectReferenceKeyframe[]
+}
+AnimationTrackRecorder --> "m_TargetClip" AnimationClip
+AnimationTrackRecorder --> "recordClip" TimelineClip
+@enduml

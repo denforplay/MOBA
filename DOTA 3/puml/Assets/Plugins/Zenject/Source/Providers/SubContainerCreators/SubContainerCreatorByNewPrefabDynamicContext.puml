@@ -1,0 +1,68 @@
+@startuml
+abstract class SubContainerCreatorByNewPrefabDynamicContext {
+    + SubContainerCreatorByNewPrefabDynamicContext(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters)
+}
+class SubContainerCreatorByNewPrefabInstaller {
+    + SubContainerCreatorByNewPrefabInstaller(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerType:Type, extraArgs:List<TypeValuePair>)
+}
+class SubContainerCreatorByNewPrefabMethod {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer>)
+}
+class "SubContainerCreatorByNewPrefabMethod`1"<TParam1> {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer, TParam1>)
+}
+class "SubContainerCreatorByNewPrefabMethod`2"<TParam1,TParam2> {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer, TParam1, TParam2>)
+}
+class "SubContainerCreatorByNewPrefabMethod`3"<TParam1,TParam2,TParam3> {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer, TParam1, TParam2, TParam3>)
+}
+class "SubContainerCreatorByNewPrefabMethod`4"<TParam1,TParam2,TParam3,TParam4> {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4>)
+}
+class "SubContainerCreatorByNewPrefabMethod`5"<TParam1,TParam2,TParam3,TParam4,TParam5> {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5>)
+}
+class "SubContainerCreatorByNewPrefabMethod`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6> {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6>)
+}
+class "SubContainerCreatorByNewPrefabMethod`10"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10> {
+    + SubContainerCreatorByNewPrefabMethod(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>)
+}
+class "List`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+class "Action`3"<T1,T2,T3> {
+}
+class "Action`4"<T1,T2,T3,T4> {
+}
+SubContainerCreatorDynamicContext <|-- SubContainerCreatorByNewPrefabDynamicContext
+SubContainerCreatorByNewPrefabDynamicContext --> "_prefabProvider" IPrefabProvider
+SubContainerCreatorByNewPrefabDynamicContext --> "_gameObjectBindInfo" GameObjectCreationParameters
+SubContainerCreatorByNewPrefabDynamicContext <|-- SubContainerCreatorByNewPrefabInstaller
+SubContainerCreatorByNewPrefabInstaller --> "_installerType" Type
+SubContainerCreatorByNewPrefabInstaller --> "_extraArgs<TypeValuePair>" "List`1"
+SubContainerCreatorByNewPrefabDynamicContext <|-- SubContainerCreatorByNewPrefabMethod
+SubContainerCreatorByNewPrefabMethod --> "_installerMethod<DiContainer>" "Action`1"
+SubContainerCreatorByNewPrefabDynamicContext <|-- "SubContainerCreatorByNewPrefabMethod`1"
+"SubContainerCreatorByNewPrefabMethod`1" --> "_installerMethod<DiContainer,TParam1>" "Action`2"
+SubContainerCreatorByNewPrefabDynamicContext <|-- "SubContainerCreatorByNewPrefabMethod`2"
+"SubContainerCreatorByNewPrefabMethod`2" --> "_installerMethod<DiContainer,TParam1,TParam2>" "Action`3"
+SubContainerCreatorByNewPrefabDynamicContext <|-- "SubContainerCreatorByNewPrefabMethod`3"
+"SubContainerCreatorByNewPrefabMethod`3" --> "_installerMethod<DiContainer,TParam1,TParam2,TParam3>" "Action`4"
+SubContainerCreatorByNewPrefabDynamicContext <|-- "SubContainerCreatorByNewPrefabMethod`4"
+SubContainerCreatorByNewPrefabDynamicContext <|-- "SubContainerCreatorByNewPrefabMethod`5"
+SubContainerCreatorByNewPrefabDynamicContext <|-- "SubContainerCreatorByNewPrefabMethod`6"
+SubContainerCreatorByNewPrefabDynamicContext <|-- "SubContainerCreatorByNewPrefabMethod`10"
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class RectBoneSelector {
+    + Select() : void
+}
+class "IRectSelector`1"<T> {
+}
+class "ISelection`1"<T> {
+}
+"IRectSelector`1" "<BoneCache>" <|-- RectBoneSelector
+RectBoneSelector --> "selection<BoneCache>" "ISelection`1"
+RectBoneSelector --> "rect" Rect
+@enduml

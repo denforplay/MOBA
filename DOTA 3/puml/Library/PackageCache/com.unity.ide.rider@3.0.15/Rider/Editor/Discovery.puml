@@ -1,0 +1,58 @@
+@startuml
+interface IDiscovery {
+    PathCallback() : CodeEditor.Installation[]
+}
+class Discovery {
+    + PathCallback() : CodeEditor.Installation[]
+}
+class RiderPathLocator <<static>> {
+    + {static} GetAllRiderPaths() : RiderInfo[]
+}
+class SettingsJson {
+    + install_location : string
+    + {static} GetInstallLocationFromJson(json:string) : string
+}
+class ToolboxHistory {
+    + {static} GetLatestBuildFromJson(json:string) : string
+}
+class ItemNode {
+}
+class BuildNode {
+    + build : string
+}
+class ProductInfo {
+    + version : string
+    + versionSuffix : string
+}
+class ToolboxInstallData {
+    + {static} GetLatestBuildFromJson(json:string) : string
+}
+class ActiveApplication {
+}
+class RiderInfo <<struct>> {
+    + IsToolbox : bool
+    + Presentation : string
+    + Path : string
+    + RiderInfo(path:string, isToolbox:bool)
+}
+class Logger <<static>> {
+}
+class "List`1"<T> {
+}
+IDiscovery <|-- Discovery
+RiderPathLocator +-- SettingsJson
+RiderPathLocator +-- ToolboxHistory
+ToolboxHistory --> "history<ItemNode>" "List`1"
+RiderPathLocator +-- ItemNode
+ItemNode --> "item" BuildNode
+RiderPathLocator +-- BuildNode
+RiderPathLocator +-- ProductInfo
+RiderPathLocator +-- ToolboxInstallData
+ToolboxInstallData --> "active_application" ActiveApplication
+RiderPathLocator +-- ActiveApplication
+ActiveApplication --> "builds<string>" "List`1"
+RiderPathLocator +-- RiderInfo
+RiderInfo --> "BuildNumber" Version
+RiderInfo --> "ProductInfo" ProductInfo
+RiderPathLocator +-- Logger
+@enduml

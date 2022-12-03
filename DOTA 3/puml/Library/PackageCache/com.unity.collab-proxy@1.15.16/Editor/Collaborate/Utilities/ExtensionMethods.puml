@@ -1,0 +1,5 @@
+@startuml
+class ExtensionMethods <<static>> {
+    + {static} FirstCharToUpper(input:string) : string
+}
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+class ProfileAnalyzerExportWindow {
+    {static} + FindOpenWindow() : ProfileAnalyzerExportWindow
+    {static} + IsOpen() : bool
+    {static} + Open(screenX:float, screenY:float, profileSingleView:ProfileDataView, profileLeftView:ProfileDataView, profileRightView:ProfileDataView, profileAnalyzerWindow:ProfileAnalyzerWindow) : ProfileAnalyzerExportWindow
+    {static} + CloseAll() : void
+    + SetData(profileDataView:ProfileDataView, leftDataView:ProfileDataView, rightDataView:ProfileDataView) : void
+    OnGUI() : void
+    SaveMarkerTableCSV() : void
+    SaveFrameTimesCSV() : void
+    SaveComparisonFrameTimesCSV() : void
+}
+class Styles <<static>> {
+}
+EditorWindow <|-- ProfileAnalyzerExportWindow
+ProfileAnalyzerExportWindow --> "m_ProfileAnalyzerWindow" ProfileAnalyzerWindow
+ProfileAnalyzerExportWindow --> "m_ProfileDataView" ProfileDataView
+ProfileAnalyzerExportWindow --> "m_LeftDataView" ProfileDataView
+ProfileAnalyzerExportWindow --> "m_RightDataView" ProfileDataView
+ProfileAnalyzerExportWindow +-- Styles
+Styles o-> "markerTable" GUIContent
+Styles o-> "singleFrameTimes" GUIContent
+Styles o-> "comparisonFrameTimes" GUIContent
+@enduml

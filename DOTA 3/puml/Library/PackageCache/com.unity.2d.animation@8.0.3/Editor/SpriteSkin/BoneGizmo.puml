@@ -1,0 +1,18 @@
+@startuml
+class BoneGizmoInitializer {
+    {static} BoneGizmoInitializer()
+}
+class BoneGizmo {
+}
+class BoneGizmoController {
+    + BoneGizmoController(view:ISkeletonView, undo:IUndo, toggle:IBoneGizmoToggle)
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<BoneGizmo>" <|-- BoneGizmo
+BoneGizmoController --> "hoveredBone" Transform
+BoneGizmoController --> "hoveredTail" Transform
+BoneGizmoController --> "hoveredBody" Transform
+BoneGizmoController --> "hoveredJoint" Transform
+BoneGizmoController --> "hotBone" Transform
+@enduml

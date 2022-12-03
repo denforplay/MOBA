@@ -1,0 +1,8 @@
+@startuml
+class WayPointsWrapper {
+}
+MonoBehaviour <|-- WayPointsWrapper
+WayPointsWrapper --> "TopLineWayPoint" WayPoint
+WayPointsWrapper --> "MidLineWayPoint" WayPoint
+WayPointsWrapper --> "BottomLineWayPoint" WayPoint
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class IProviderExtensions <<static>> {
+    + {static} GetAllInstancesWithInjectSplit(creator:IProvider, context:InjectContext, injectAction:Action, buffer:List<object>) : void
+    + {static} GetAllInstances(creator:IProvider, context:InjectContext, buffer:List<object>) : void
+    + {static} GetAllInstances(creator:IProvider, context:InjectContext, args:List<TypeValuePair>, buffer:List<object>) : void
+    + {static} TryGetInstance(creator:IProvider, context:InjectContext) : object
+    + {static} TryGetInstance(creator:IProvider, context:InjectContext, args:List<TypeValuePair>) : object
+    + {static} GetInstance(creator:IProvider, context:InjectContext) : object
+    + {static} GetInstance(creator:IProvider, context:InjectContext, args:List<TypeValuePair>) : object
+}
+class "List`1"<T> {
+}
+IProviderExtensions o-> "EmptyArgList<TypeValuePair>" "List`1"
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+interface IGUIUtility {
+    GetPermanentControlID() : int
+    hotControl : int <<get>> <<set>>
+    keyboardControl : int <<get>> <<set>>
+    GetControlID(hint:int, focus:FocusType) : int
+}
+class GUIUtilitySystem {
+    + GetPermanentControlID() : int
+    + hotControl : int <<get>> <<set>>
+    + keyboardControl : int <<get>> <<set>>
+    + GetControlID(hint:int, focus:FocusType) : int
+}
+IGUIUtility <|-- GUIUtilitySystem
+@enduml

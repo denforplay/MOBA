@@ -1,0 +1,29 @@
+@startuml
+class EditorCoroutine {
+    m_IsDone : bool
+}
+class YieldProcessor <<struct>> {
+    + Set(yield:object) : void
+    + MoveNext(enumerator:IEnumerator) : bool
+}
+class "Stack`1"<T> {
+}
+enum DataType {
+    None= 0,
+    WaitForSeconds= 1,
+    EditorCoroutine= 2,
+    AsyncOP= 3,
+}
+class ProcessorData <<struct>> {
+    + targetTime : double
+    + current : object
+}
+EditorCoroutine --> "m_Routine" IEnumerator
+EditorCoroutine --> "m_Processor" YieldProcessor
+EditorCoroutine o-> "kIEnumeratorProcessingStack<IEnumerator>" "Stack`1"
+EditorCoroutine +-- YieldProcessor
+YieldProcessor --> "data" ProcessorData
+YieldProcessor +-- DataType
+YieldProcessor +-- ProcessorData
+ProcessorData --> "type" DataType
+@enduml

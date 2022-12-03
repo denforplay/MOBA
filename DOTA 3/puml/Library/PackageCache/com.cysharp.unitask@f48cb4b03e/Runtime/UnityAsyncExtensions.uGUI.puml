@@ -1,0 +1,232 @@
+@startuml
+class UnityAsyncExtensions <<static>> <<partial>> {
+    + {static} GetAsyncEventHandler(unityEvent:UnityEvent, cancellationToken:CancellationToken) : AsyncUnityEventHandler
+    + {static} OnInvokeAsync(unityEvent:UnityEvent, cancellationToken:CancellationToken) : UniTask
+    + {static} OnInvokeAsAsyncEnumerable(unityEvent:UnityEvent, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} GetAsyncEventHandler(unityEvent:UnityEvent<T>, cancellationToken:CancellationToken) : AsyncUnityEventHandler<T>
+    + {static} OnInvokeAsync(unityEvent:UnityEvent<T>, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} OnInvokeAsAsyncEnumerable(unityEvent:UnityEvent<T>, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<T>
+    + {static} GetAsyncClickEventHandler(button:Button) : IAsyncClickEventHandler
+    + {static} GetAsyncClickEventHandler(button:Button, cancellationToken:CancellationToken) : IAsyncClickEventHandler
+    + {static} OnClickAsync(button:Button) : UniTask
+    + {static} OnClickAsync(button:Button, cancellationToken:CancellationToken) : UniTask
+    + {static} OnClickAsAsyncEnumerable(button:Button) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} OnClickAsAsyncEnumerable(button:Button, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} GetAsyncValueChangedEventHandler(toggle:Toggle) : IAsyncValueChangedEventHandler<bool>
+    + {static} GetAsyncValueChangedEventHandler(toggle:Toggle, cancellationToken:CancellationToken) : IAsyncValueChangedEventHandler<bool>
+    + {static} OnValueChangedAsync(toggle:Toggle) : UniTask<bool>
+    + {static} OnValueChangedAsync(toggle:Toggle, cancellationToken:CancellationToken) : UniTask<bool>
+    + {static} OnValueChangedAsAsyncEnumerable(toggle:Toggle) : IUniTaskAsyncEnumerable<bool>
+    + {static} OnValueChangedAsAsyncEnumerable(toggle:Toggle, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<bool>
+    + {static} GetAsyncValueChangedEventHandler(scrollbar:Scrollbar) : IAsyncValueChangedEventHandler<float>
+    + {static} GetAsyncValueChangedEventHandler(scrollbar:Scrollbar, cancellationToken:CancellationToken) : IAsyncValueChangedEventHandler<float>
+    + {static} OnValueChangedAsync(scrollbar:Scrollbar) : UniTask<float>
+    + {static} OnValueChangedAsync(scrollbar:Scrollbar, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} OnValueChangedAsAsyncEnumerable(scrollbar:Scrollbar) : IUniTaskAsyncEnumerable<float>
+    + {static} OnValueChangedAsAsyncEnumerable(scrollbar:Scrollbar, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<float>
+    + {static} GetAsyncValueChangedEventHandler(scrollRect:ScrollRect) : IAsyncValueChangedEventHandler<Vector2>
+    + {static} GetAsyncValueChangedEventHandler(scrollRect:ScrollRect, cancellationToken:CancellationToken) : IAsyncValueChangedEventHandler<Vector2>
+    + {static} OnValueChangedAsync(scrollRect:ScrollRect) : UniTask<Vector2>
+    + {static} OnValueChangedAsync(scrollRect:ScrollRect, cancellationToken:CancellationToken) : UniTask<Vector2>
+    + {static} OnValueChangedAsAsyncEnumerable(scrollRect:ScrollRect) : IUniTaskAsyncEnumerable<Vector2>
+    + {static} OnValueChangedAsAsyncEnumerable(scrollRect:ScrollRect, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<Vector2>
+    + {static} GetAsyncValueChangedEventHandler(slider:Slider) : IAsyncValueChangedEventHandler<float>
+    + {static} GetAsyncValueChangedEventHandler(slider:Slider, cancellationToken:CancellationToken) : IAsyncValueChangedEventHandler<float>
+    + {static} OnValueChangedAsync(slider:Slider) : UniTask<float>
+    + {static} OnValueChangedAsync(slider:Slider, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} OnValueChangedAsAsyncEnumerable(slider:Slider) : IUniTaskAsyncEnumerable<float>
+    + {static} OnValueChangedAsAsyncEnumerable(slider:Slider, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<float>
+    + {static} GetAsyncEndEditEventHandler(inputField:InputField) : IAsyncEndEditEventHandler<string>
+    + {static} GetAsyncEndEditEventHandler(inputField:InputField, cancellationToken:CancellationToken) : IAsyncEndEditEventHandler<string>
+    + {static} OnEndEditAsync(inputField:InputField) : UniTask<string>
+    + {static} OnEndEditAsync(inputField:InputField, cancellationToken:CancellationToken) : UniTask<string>
+    + {static} OnEndEditAsAsyncEnumerable(inputField:InputField) : IUniTaskAsyncEnumerable<string>
+    + {static} OnEndEditAsAsyncEnumerable(inputField:InputField, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<string>
+    + {static} GetAsyncValueChangedEventHandler(inputField:InputField) : IAsyncValueChangedEventHandler<string>
+    + {static} GetAsyncValueChangedEventHandler(inputField:InputField, cancellationToken:CancellationToken) : IAsyncValueChangedEventHandler<string>
+    + {static} OnValueChangedAsync(inputField:InputField) : UniTask<string>
+    + {static} OnValueChangedAsync(inputField:InputField, cancellationToken:CancellationToken) : UniTask<string>
+    + {static} OnValueChangedAsAsyncEnumerable(inputField:InputField) : IUniTaskAsyncEnumerable<string>
+    + {static} OnValueChangedAsAsyncEnumerable(inputField:InputField, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<string>
+    + {static} GetAsyncValueChangedEventHandler(dropdown:Dropdown) : IAsyncValueChangedEventHandler<int>
+    + {static} GetAsyncValueChangedEventHandler(dropdown:Dropdown, cancellationToken:CancellationToken) : IAsyncValueChangedEventHandler<int>
+    + {static} OnValueChangedAsync(dropdown:Dropdown) : UniTask<int>
+    + {static} OnValueChangedAsync(dropdown:Dropdown, cancellationToken:CancellationToken) : UniTask<int>
+    + {static} OnValueChangedAsAsyncEnumerable(dropdown:Dropdown) : IUniTaskAsyncEnumerable<int>
+    + {static} OnValueChangedAsAsyncEnumerable(dropdown:Dropdown, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<int>
+}
+interface IAsyncClickEventHandler {
+    OnClickAsync() : UniTask
+}
+interface "IAsyncValueChangedEventHandler`1"<T> {
+    OnValueChangedAsync() : UniTask<T>
+}
+interface "IAsyncEndEditEventHandler`1"<T> {
+    OnEndEditAsync() : UniTask<T>
+}
+interface "IAsyncEndTextSelectionEventHandler`1"<T> {
+    OnEndTextSelectionAsync() : UniTask<T>
+}
+interface "IAsyncTextSelectionEventHandler`1"<T> {
+    OnTextSelectionAsync() : UniTask<T>
+}
+interface "IAsyncDeselectEventHandler`1"<T> {
+    OnDeselectAsync() : UniTask<T>
+}
+interface "IAsyncSelectEventHandler`1"<T> {
+    OnSelectAsync() : UniTask<T>
+}
+interface "IAsyncSubmitEventHandler`1"<T> {
+    OnSubmitAsync() : UniTask<T>
+}
+class TextSelectionEventConverter {
+    + TextSelectionEventConverter(unityEvent:UnityEvent<string, int, int>)
+    InvokeCore(item1:string, item2:int, item3:int) : void
+    + Dispose() : void
+}
+class AsyncUnityEventHandler {
+    isDisposed : bool
+    callOnce : bool
+    + AsyncUnityEventHandler(unityEvent:UnityEvent, cancellationToken:CancellationToken, callOnce:bool)
+    + OnInvokeAsync() : UniTask
+    Invoke() : void
+    {static} CancellationCallback(state:object) : void
+    + Dispose() : void
+    OnClickAsync() : UniTask
+    GetResult(token:short) : void
+    GetStatus(token:short) : UniTaskStatus
+    UnsafeGetStatus() : UniTaskStatus
+    OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class "AsyncUnityEventHandler`1"<T> {
+    isDisposed : bool
+    callOnce : bool
+    + AsyncUnityEventHandler(unityEvent:UnityEvent<T>, cancellationToken:CancellationToken, callOnce:bool)
+    + OnInvokeAsync() : UniTask<T>
+    Invoke(result:T) : void
+    {static} CancellationCallback(state:object) : void
+    + Dispose() : void
+    OnValueChangedAsync() : UniTask<T>
+    OnEndEditAsync() : UniTask<T>
+    OnEndTextSelectionAsync() : UniTask<T>
+    OnTextSelectionAsync() : UniTask<T>
+    OnDeselectAsync() : UniTask<T>
+    OnSelectAsync() : UniTask<T>
+    OnSubmitAsync() : UniTask<T>
+    GetResult(token:short) : T
+    GetResult(token:short) : void
+    GetStatus(token:short) : UniTaskStatus
+    UnsafeGetStatus() : UniTaskStatus
+    OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class UnityEventHandlerAsyncEnumerable {
+    + UnityEventHandlerAsyncEnumerable(unityEvent:UnityEvent, cancellationToken:CancellationToken)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<AsyncUnit>
+}
+class "UnityEventHandlerAsyncEnumerable`1"<T> {
+    + UnityEventHandlerAsyncEnumerable(unityEvent:UnityEvent<T>, cancellationToken:CancellationToken)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "UnityEvent`1"<T> {
+}
+class "UnityEvent`3"<T1,T2,T3> {
+}
+class "UnityAction`3"<T1,T2,T3> {
+}
+class "Action`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+class "IUniTaskSource`1"<T> {
+}
+class "UnityAction`1"<T> {
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class UnityEventHandlerAsyncEnumerator {
+    isDisposed : bool
+    + UnityEventHandlerAsyncEnumerator(unityEvent:UnityEvent, cancellationToken1:CancellationToken, cancellationToken2:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    Invoke() : void
+    {static} OnCanceled1(state:object) : void
+    {static} OnCanceled2(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class UnityEventHandlerAsyncEnumerator {
+    isDisposed : bool
+    + UnityEventHandlerAsyncEnumerator(unityEvent:UnityEvent<T>, cancellationToken1:CancellationToken, cancellationToken2:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    Invoke(value:T) : void
+    {static} OnCanceled1(state:object) : void
+    {static} OnCanceled2(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+IDisposable <|-- IAsyncClickEventHandler
+IDisposable <|-- "IAsyncValueChangedEventHandler`1"
+IDisposable <|-- "IAsyncEndEditEventHandler`1"
+IDisposable <|-- "IAsyncEndTextSelectionEventHandler`1"
+IDisposable <|-- "IAsyncTextSelectionEventHandler`1"
+IDisposable <|-- "IAsyncDeselectEventHandler`1"
+IDisposable <|-- "IAsyncSelectEventHandler`1"
+IDisposable <|-- "IAsyncSubmitEventHandler`1"
+"UnityEvent`1" "<(string, int, int)>" <|-- TextSelectionEventConverter
+IDisposable <|-- TextSelectionEventConverter
+TextSelectionEventConverter --> "innerEvent<string,int,int>" "UnityEvent`3"
+TextSelectionEventConverter --> "invokeDelegate<string,int,int>" "UnityAction`3"
+IUniTaskSource <|-- AsyncUnityEventHandler
+IDisposable <|-- AsyncUnityEventHandler
+IAsyncClickEventHandler <|-- AsyncUnityEventHandler
+AsyncUnityEventHandler o-> "cancellationCallback<object>" "Action`1"
+AsyncUnityEventHandler --> "action" UnityAction
+AsyncUnityEventHandler --> "unityEvent" UnityEvent
+AsyncUnityEventHandler --> "cancellationToken" CancellationToken
+AsyncUnityEventHandler --> "registration" CancellationTokenRegistration
+AsyncUnityEventHandler --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+"IUniTaskSource`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+IDisposable <|-- "AsyncUnityEventHandler`1"
+"IAsyncValueChangedEventHandler`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+"IAsyncEndEditEventHandler`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+"IAsyncEndTextSelectionEventHandler`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+"IAsyncTextSelectionEventHandler`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+"IAsyncDeselectEventHandler`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+"IAsyncSelectEventHandler`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+"IAsyncSubmitEventHandler`1" "<T>" <|-- "AsyncUnityEventHandler`1"
+"AsyncUnityEventHandler`1" o-> "cancellationCallback<object>" "Action`1"
+"AsyncUnityEventHandler`1" --> "action<T>" "UnityAction`1"
+"AsyncUnityEventHandler`1" --> "unityEvent<T>" "UnityEvent`1"
+"AsyncUnityEventHandler`1" --> "cancellationToken" CancellationToken
+"AsyncUnityEventHandler`1" --> "registration" CancellationTokenRegistration
+"AsyncUnityEventHandler`1" --> "core<T>" "UniTaskCompletionSourceCore`1"
+"IUniTaskAsyncEnumerable`1" "<AsyncUnit>" <|-- UnityEventHandlerAsyncEnumerable
+UnityEventHandlerAsyncEnumerable --> "unityEvent" UnityEvent
+UnityEventHandlerAsyncEnumerable --> "cancellationToken1" CancellationToken
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "UnityEventHandlerAsyncEnumerable`1"
+"UnityEventHandlerAsyncEnumerable`1" --> "unityEvent<T>" "UnityEvent`1"
+"UnityEventHandlerAsyncEnumerable`1" --> "cancellationToken1" CancellationToken
+UnityEventHandlerAsyncEnumerable +-- UnityEventHandlerAsyncEnumerator
+MoveNextSource <|-- UnityEventHandlerAsyncEnumerator
+"IUniTaskAsyncEnumerator`1" "<AsyncUnit>" <|-- UnityEventHandlerAsyncEnumerator
+UnityEventHandlerAsyncEnumerator o-> "cancel1<object>" "Action`1"
+UnityEventHandlerAsyncEnumerator o-> "cancel2<object>" "Action`1"
+UnityEventHandlerAsyncEnumerator --> "unityEvent" UnityEvent
+UnityEventHandlerAsyncEnumerator --> "cancellationToken1" CancellationToken
+UnityEventHandlerAsyncEnumerator --> "cancellationToken2" CancellationToken
+UnityEventHandlerAsyncEnumerator --> "unityAction" UnityAction
+UnityEventHandlerAsyncEnumerator --> "registration1" CancellationTokenRegistration
+UnityEventHandlerAsyncEnumerator --> "registration2" CancellationTokenRegistration
+UnityEventHandlerAsyncEnumerator --> "Current" AsyncUnit
+"UnityEventHandlerAsyncEnumerable`1" +-- UnityEventHandlerAsyncEnumerator
+MoveNextSource <|-- UnityEventHandlerAsyncEnumerator
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- UnityEventHandlerAsyncEnumerator
+UnityEventHandlerAsyncEnumerator o-> "cancel1<object>" "Action`1"
+UnityEventHandlerAsyncEnumerator o-> "cancel2<object>" "Action`1"
+UnityEventHandlerAsyncEnumerator --> "unityEvent<T>" "UnityEvent`1"
+UnityEventHandlerAsyncEnumerator --> "cancellationToken1" CancellationToken
+UnityEventHandlerAsyncEnumerator --> "cancellationToken2" CancellationToken
+UnityEventHandlerAsyncEnumerator --> "unityAction<T>" "UnityAction`1"
+UnityEventHandlerAsyncEnumerator --> "registration1" CancellationTokenRegistration
+UnityEventHandlerAsyncEnumerator --> "registration2" CancellationTokenRegistration
+UnityEventHandlerAsyncEnumerator --> "Current" T
+@enduml

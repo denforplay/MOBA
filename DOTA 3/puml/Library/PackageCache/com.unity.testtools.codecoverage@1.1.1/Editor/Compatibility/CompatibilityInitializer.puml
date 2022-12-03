@@ -1,0 +1,5 @@
+@startuml
+class CompatibilityInitializer {
+    {static} CompatibilityInitializer()
+}
+@enduml

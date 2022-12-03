@@ -1,0 +1,6 @@
+@startuml
+class CinemachineTrack {
+    + <<override>> CreateTrackMixer(graph:PlayableGraph, go:GameObject, inputCount:int) : Playable
+}
+TrackAsset <|-- CinemachineTrack
+@enduml

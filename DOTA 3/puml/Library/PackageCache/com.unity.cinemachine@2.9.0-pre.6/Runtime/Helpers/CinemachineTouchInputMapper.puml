@@ -1,0 +1,10 @@
+@startuml
+class CinemachineTouchInputMapper {
+    + TouchSensitivityX : float = 10f
+    + TouchSensitivityY : float = 10f
+    + TouchXInputMapTo : string = "Mouse X"
+    + TouchYInputMapTo : string = "Mouse Y"
+    Start() : void
+}
+MonoBehaviour <|-- CinemachineTouchInputMapper
+@enduml

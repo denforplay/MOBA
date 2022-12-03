@@ -1,0 +1,17 @@
+@startuml
+class BackendInstallationProgress <<static>> {
+    + {static} Initialize() : void
+}
+class BackendDownloadProgress {
+    + Start() : void
+    + UpdateOnEachDownloadedMegabyte(downloadedMegabytes:int, totalMegabytes:int, downloadSpeedInMegabytesPerSecond:int) : void
+    + Finish() : void
+}
+class BackendExtractProgress {
+    + Start() : void
+    + OnEachExtractedFile(extractedFilesCount:int, totalExtractedFiles:int) : void
+    + Finish() : void
+}
+BackendInstallationProgress +-- BackendDownloadProgress
+BackendInstallationProgress +-- BackendExtractProgress
+@enduml

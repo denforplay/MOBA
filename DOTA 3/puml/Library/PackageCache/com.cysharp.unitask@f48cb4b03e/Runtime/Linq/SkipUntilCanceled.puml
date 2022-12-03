@@ -1,0 +1,42 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} SkipUntilCanceled(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<TSource>
+}
+class "SkipUntilCanceled`1"<TSource> <<sealed>> {
+    + SkipUntilCanceled(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _SkipUntilCanceled <<sealed>> {
+    isCanceled : int
+    continueNext : bool
+    + _SkipUntilCanceled(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken1:CancellationToken, cancellationToken2:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    {static} OnCanceled1(state:object) : void
+    {static} OnCanceled2(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "SkipUntilCanceled`1"
+"SkipUntilCanceled`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"SkipUntilCanceled`1" --> "cancellationToken" CancellationToken
+"SkipUntilCanceled`1" +-- _SkipUntilCanceled
+MoveNextSource <|-- _SkipUntilCanceled
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _SkipUntilCanceled
+_SkipUntilCanceled o-> "CancelDelegate1<object>" "Action`1"
+_SkipUntilCanceled o-> "CancelDelegate2<object>" "Action`1"
+_SkipUntilCanceled o-> "MoveNextCoreDelegate<object>" "Action`1"
+_SkipUntilCanceled --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_SkipUntilCanceled --> "cancellationToken1" CancellationToken
+_SkipUntilCanceled --> "cancellationToken2" CancellationToken
+_SkipUntilCanceled --> "cancellationTokenRegistration1" CancellationTokenRegistration
+_SkipUntilCanceled --> "cancellationTokenRegistration2" CancellationTokenRegistration
+_SkipUntilCanceled --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_SkipUntilCanceled --> "Current" TSource
+@enduml

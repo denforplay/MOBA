@@ -1,0 +1,14 @@
+@startuml
+class InternalEngineBridge <<static>> {
+    + {static} SetLocalAABB(spriteRenderer:SpriteRenderer, aabb:Bounds) : void
+    + {static} SetDeformableBuffer(spriteRenderer:SpriteRenderer, src:NativeArray<byte>) : void
+    + {static} IsUsingDeformableBuffer(spriteRenderer:SpriteRenderer, buffer:IntPtr) : bool
+    + {static} GUIUnclip(v:Vector2) : Vector2
+    + {static} GetGUIClipTopMostRect() : Rect
+    + {static} GetGUIClipTopRect() : Rect
+    + {static} GetGUIClipVisibleRect() : Rect
+    + {static} SetBatchDeformableBufferAndLocalAABBArray(spriteRenderers:SpriteRenderer[], buffers:NativeArray<IntPtr>, bufferSizes:NativeArray<int>, bounds:NativeArray<Bounds>) : void
+    + {static} ConvertFloatToInt(f:float) : int
+    + {static} ConvertIntToFloat(i:int) : float
+}
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class CharacterController {
+    + CharacterController(camera:Camera, characterView:CharacterView, controlledCharacter:Character, animationController:AnimationController)
+    + IsDestroyed : bool <<get>>
+    + Move() : void
+    + MoveTo(point:Vector3) : void
+    + SetState(animationType:AnimationType) : void
+    + SetSkillUseState(skillId:int, canBeUsed:bool) : void
+    + ObserveSkill(skillId:int, cancellationToken:CancellationTokenSource) : ISkillObserver
+}
+ICharacterController <|-- CharacterController
+CharacterController --> "NavigationAgent" NavMeshAgent
+@enduml

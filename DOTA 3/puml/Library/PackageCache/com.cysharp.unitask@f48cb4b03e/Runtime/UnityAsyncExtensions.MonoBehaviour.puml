@@ -1,0 +1,5 @@
+@startuml
+class UnityAsyncExtensions <<static>> <<partial>> {
+    + {static} StartAsyncCoroutine(monoBehaviour:UnityEngine.MonoBehaviour, asyncCoroutine:Func<CancellationToken, UniTask>) : UniTask
+}
+@enduml

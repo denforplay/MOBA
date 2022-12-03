@@ -1,0 +1,22 @@
+@startuml
+class "PoolWrapperFactory`1"<T> {
+    + PoolWrapperFactory(pool:IMemoryPool<T>)
+    + Create() : T
+}
+class "PoolWrapperFactory`2"<TParam1,TValue> {
+    + PoolWrapperFactory(pool:IMemoryPool<TParam1, TValue>)
+    + Create(arg:TParam1) : TValue
+}
+class "IFactory`1"<T> {
+}
+class "IMemoryPool`1"<T> {
+}
+class "IFactory`2"<T1,T2> {
+}
+class "IMemoryPool`2"<T1,T2> {
+}
+"IFactory`1" "<T>" <|-- "PoolWrapperFactory`1"
+"PoolWrapperFactory`1" --> "_pool<T>" "IMemoryPool`1"
+"IFactory`2" "<TParam1,TValue>" <|-- "PoolWrapperFactory`2"
+"PoolWrapperFactory`2" --> "_pool<TParam1,TValue>" "IMemoryPool`2"
+@enduml

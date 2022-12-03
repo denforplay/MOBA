@@ -1,0 +1,7 @@
+@startuml
+class Triangulator {
+    + Triangulate(edges:int2[], vertices:float2[], indices:int[]) : void
+    + Tessellate(minAngle:float, maxAngle:float, meshAreaFactor:float, largestTriangleAreaFactor:float, areaThreshold:float, smoothIterations:int, vertices:float2[], edges:int2[], indices:int[]) : void
+}
+ITriangulator <|-- Triangulator
+@enduml

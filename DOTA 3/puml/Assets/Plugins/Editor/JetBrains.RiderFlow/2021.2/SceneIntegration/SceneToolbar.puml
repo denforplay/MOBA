@@ -1,0 +1,6 @@
+@startuml
+class SceneToolbar {
+    + SceneToolbar()
+}
+ToolbarOverlay <|-- SceneToolbar
+@enduml

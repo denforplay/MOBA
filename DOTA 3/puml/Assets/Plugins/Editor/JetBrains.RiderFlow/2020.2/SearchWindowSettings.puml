@@ -1,0 +1,13 @@
+@startuml
+class SearchWindowSettings {
+    + IsSettingsCached : bool <<get>>
+    + GetCachedSearchQuery : string <<get>>
+    + GetCachedTab : int <<get>>
+    + SaveCache(query:string, tab:int, size:Rect) : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<SearchWindowSettings>" <|-- SearchWindowSettings
+ISearchWindowSettings <|-- SearchWindowSettings
+SearchWindowSettings --> "GetCachedSize" Rect
+@enduml

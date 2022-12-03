@@ -1,0 +1,10 @@
+@startuml
+class OrbitalTransposerHeadingPropertyDrawer <<sealed>> {
+    <<const>> vSpace : int = 2
+    mExpanded : bool = true
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    IsVelocityMode(property:SerializedProperty) : bool
+}
+PropertyDrawer <|-- OrbitalTransposerHeadingPropertyDrawer
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class ObsoleteSupport <<static>> {
+    + {static} ShowSpritePacker() : void
+}
+@enduml

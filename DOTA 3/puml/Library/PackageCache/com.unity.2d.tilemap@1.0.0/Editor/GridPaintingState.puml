@@ -1,0 +1,19 @@
+@startuml
+class GridPaintingState {
+    + {static}  <<event>> scenePaintTargetChanged : Action<GameObject> 
+    + {static}  <<event>> brushChanged : Action<GridBrushBase> 
+    + {static}  <<event>> paletteChanged : Action<GameObject> 
+    + {static} IsPartOfActivePalette(target:GameObject) : bool
+}
+class "ScriptableSingleton`1"<T> {
+}
+class "IList`1"<T> {
+}
+"ScriptableSingleton`1" "<GridPaintingState>" <|-- GridPaintingState
+GridPaintingState --> "scenePaintTarget" GameObject
+GridPaintingState --> "gridBrush" GridBrushBase
+GridPaintingState --> "brushes<GridBrushBase>" "IList`1"
+GridPaintingState --> "palette" GameObject
+GridPaintingState --> "palettes<GameObject>" "IList`1"
+GridPaintingState --> "activeBrushEditor" GridBrushEditorBase
+@enduml

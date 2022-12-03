@@ -1,0 +1,13 @@
+@startuml
+class SkillConfiguration {
+    + Id : int <<get>>
+    + CountDowntime : float <<get>>
+    + EffectValue : float <<get>>
+    + Range : float <<get>>
+}
+ScriptableObject <|-- SkillConfiguration
+SkillConfiguration --> "SkillSprite" Sprite
+SkillConfiguration --> "SkillType" SkillType
+SkillConfiguration --> "SkillAnimation" AnimationClip
+SkillConfiguration --> "ParticleSystem" ParticleSystem
+@enduml

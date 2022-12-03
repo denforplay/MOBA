@@ -1,0 +1,10 @@
+@startuml
+class EditorUtilities <<static>> {
+    + {static} ContainsAny(array:Vector2Int[], element:Vector2Int) : bool
+    + {static} ToInt2(source:Vector2Int[]) : int2[]
+    + {static} ToVector2Int(source:int2[]) : Vector2Int[]
+    + {static} ToFloat2(source:Vector2[]) : float2[]
+    + {static} ToVector2(source:float2[]) : Vector2[]
+    + {static} CreateCopy(source:T[]) : T[]
+}
+@enduml

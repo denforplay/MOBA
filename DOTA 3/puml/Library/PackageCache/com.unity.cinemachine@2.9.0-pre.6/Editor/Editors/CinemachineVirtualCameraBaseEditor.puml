@@ -1,0 +1,49 @@
+@startuml
+class CameraExtensions <<static>> {
+    + {static} HorizontalToVerticalFieldOfView(f:float, aspect:float) : float
+    + {static} VerticalToHorizontalFieldOfView(f:float, aspect:float) : float
+    + {static} FieldOfViewToFocalLength(fov:float, sensorHeight:float) : float
+    + {static} FocalLengthToFieldOfView(focalLength:float, sensorHeight:float) : float
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+    IsPrefabBase : bool <<get>> <<set>>
+    UpdateCameraState() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class LensSettingsInspectorHelper {
+    IsOrtho : bool
+    IsPhysical : bool
+    {static} s_AdvancedExpanded : bool
+    + LensSettingsInspectorHelper()
+    + SnapshotCameraShadowValues(property:SerializedProperty, camera:Camera) : void
+    {static} AccessProperty(type:Type, obj:object, memberName:string) : T
+    + DrawLensSettingsInInspector(property:SerializedProperty) : void
+    {static} ExtraSpaceHackWTF() : float
+    DrawSensorSizeInInspector(property:SerializedProperty) : void
+    DrawLensFocusInInspector(rect:Rect, property:SerializedProperty) : void
+    DrawFOVControl(rect:Rect, property:SerializedProperty) : void
+    DrawFocalLengthControl(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+class "BaseEditor`1"<T> {
+}
+class Styles <<static>> {
+}
+"BaseEditor`1" "<T>" <|-- "CinemachineVirtualCameraBaseEditor`1"
+"CinemachineVirtualCameraBaseEditor`1" o-> "ShowInGameGuidesLabel" GUIContent
+"CinemachineVirtualCameraBaseEditor`1" o-> "SaveDuringPlayLabel" GUIContent
+"CinemachineVirtualCameraBaseEditor`1" --> "m_LensSettingsInspectorHelper" LensSettingsInspectorHelper
+LensSettingsInspectorHelper o-> "m_LensSettingsDef" LensSettings
+LensSettingsInspectorHelper o-> "EditPresetsLabel" GUIContent
+LensSettingsInspectorHelper o-> "LensLabel" GUIContent
+LensSettingsInspectorHelper o-> "HFOVLabel" GUIContent
+LensSettingsInspectorHelper o-> "VFOVLabel" GUIContent
+LensSettingsInspectorHelper o-> "FocalLengthLabel" GUIContent
+LensSettingsInspectorHelper o-> "OrthoSizeLabel" GUIContent
+LensSettingsInspectorHelper o-> "SensorSizeLabel" GUIContent
+LensSettingsInspectorHelper o-> "AdvancedLabel" GUIContent
+LensSettingsInspectorHelper --> "SensorSize" Vector2
+LensSettingsInspectorHelper --> "ModeOverrideProperty" SerializedProperty
+"CinemachineVirtualCameraBaseEditor`1" +-- Styles
+Styles o-> "addExtensionLabel" GUIContent
+Styles o-> "virtualCameraChildrenInfoMsg" GUIContent
+@enduml

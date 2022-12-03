@@ -1,0 +1,71 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Timer(dueTime:TimeSpan, updateTiming:PlayerLoopTiming, ignoreTimeScale:bool) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} Timer(dueTime:TimeSpan, period:TimeSpan, updateTiming:PlayerLoopTiming, ignoreTimeScale:bool) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} Interval(period:TimeSpan, updateTiming:PlayerLoopTiming, ignoreTimeScale:bool) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} TimerFrame(dueTimeFrameCount:int, updateTiming:PlayerLoopTiming) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} TimerFrame(dueTimeFrameCount:int, periodFrameCount:int, updateTiming:PlayerLoopTiming) : IUniTaskAsyncEnumerable<AsyncUnit>
+    + {static} IntervalFrame(intervalFrameCount:int, updateTiming:PlayerLoopTiming) : IUniTaskAsyncEnumerable<AsyncUnit>
+}
+class Timer {
+    <<readonly>> period : TimeSpan?
+    <<readonly>> ignoreTimeScale : bool
+    + Timer(dueTime:TimeSpan, period:TimeSpan?, updateTiming:PlayerLoopTiming, ignoreTimeScale:bool)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<AsyncUnit>
+}
+class TimerFrame {
+    <<readonly>> dueTimeFrameCount : int
+    <<readonly>> periodFrameCount : int?
+    + TimerFrame(dueTimeFrameCount:int, periodFrameCount:int?, updateTiming:PlayerLoopTiming)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<AsyncUnit>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Timer {
+    <<readonly>> dueTime : float
+    <<readonly>> period : float?
+    <<readonly>> ignoreTimeScale : bool
+    initialFrame : int
+    elapsed : float
+    dueTimePhase : bool
+    completed : bool
+    disposed : bool
+    + _Timer(dueTime:TimeSpan, period:TimeSpan?, updateTiming:PlayerLoopTiming, ignoreTimeScale:bool, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + MoveNext() : bool
+}
+class _TimerFrame {
+    <<readonly>> dueTimeFrameCount : int
+    <<readonly>> periodFrameCount : int?
+    initialFrame : int
+    currentFrame : int
+    dueTimePhase : bool
+    completed : bool
+    disposed : bool
+    + _TimerFrame(dueTimeFrameCount:int, periodFrameCount:int?, updateTiming:PlayerLoopTiming, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + MoveNext() : bool
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<AsyncUnit>" <|-- Timer
+Timer --> "updateTiming" PlayerLoopTiming
+Timer --> "dueTime" TimeSpan
+"IUniTaskAsyncEnumerable`1" "<AsyncUnit>" <|-- TimerFrame
+TimerFrame --> "updateTiming" PlayerLoopTiming
+Timer +-- _Timer
+MoveNextSource <|-- _Timer
+"IUniTaskAsyncEnumerator`1" "<AsyncUnit>" <|-- _Timer
+IPlayerLoopItem <|-- _Timer
+_Timer --> "updateTiming" PlayerLoopTiming
+_Timer --> "cancellationToken" CancellationToken
+_Timer --> "Current" AsyncUnit
+TimerFrame +-- _TimerFrame
+MoveNextSource <|-- _TimerFrame
+"IUniTaskAsyncEnumerator`1" "<AsyncUnit>" <|-- _TimerFrame
+IPlayerLoopItem <|-- _TimerFrame
+_TimerFrame --> "cancellationToken" CancellationToken
+_TimerFrame --> "Current" AsyncUnit
+@enduml

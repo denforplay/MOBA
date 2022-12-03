@@ -1,0 +1,70 @@
+@startuml
+class SpriteOutline {
+    + Add(point:Vector2) : void
+    + Insert(index:int, point:Vector2) : void
+    + RemoveAt(index:int) : void
+    + Count : int <<get>>
+    + AddRange(addRange:IEnumerable<Vector2>) : void
+}
+class SpriteOutlineList {
+    m_TessellationDetail : float = 0
+    + tessellationDetail : float <<get>> <<set>>
+    + SpriteOutlineList(guid:GUID)
+    + SpriteOutlineList(guid:GUID, list:List<Vector2[]>)
+    + SpriteOutlineList(guid:GUID, list:List<SpriteOutline>)
+    + ToListVector() : List<Vector2[]>
+    + ToListVectorCapped(rect:Rect) : List<Vector2[]>
+    + Count : int <<get>>
+    IsValidIndex(index:int) : bool
+}
+class SpriteOutlineModel {
+    + AddListVector2(guid:GUID, outline:List<Vector2[]>) : void
+    + Count : int <<get>>
+    IsValidIndex(index:int) : bool
+}
+class SpriteOutlineModule {
+    + SpriteOutlineModule(sem:ISpriteEditor, es:IEventSystem, us:IUndoSystem, ad:IAssetDatabase, gu:IGUIUtility, sef:IShapeEditorFactory, outlineTexture:ITexture2D)
+    + <<override>> moduleName : string <<get>>
+    + <<override>> ApplyRevert(apply:bool) : bool
+    + <<override>> OnModuleActivate() : void
+    GenerateOutlineIfNotExist() : void
+    + <<override>> OnModuleDeactivate() : void
+    + <<override>> DoMainGUI() : void
+    + <<override>> DoToolbarGUI(drawArea:Rect) : void
+    + <<override>> DoPostGUI() : void
+    + <<override>> CanBeActivated() : bool
+    + CreateNewOutline(rectOutline:Rect) : void
+    + UpdateShapeEditors() : void
+    + SetupShapeEditor() : void
+    + SnapPoint(position:Vector3) : Vector3
+    + GetPointPosition(outlineIndex:int, pointIndex:int) : Vector3
+    + SetPointPosition(outlineIndex:int, pointIndex:int, position:Vector3) : void
+    + InsertPointAt(outlineIndex:int, pointIndex:int, position:Vector3) : void
+    + RemovePointAt(outlineIndex:int, i:int) : void
+    + GetPointsCount(outlineIndex:int) : int
+    + Copy() : void
+    + Paste() : void
+    + PasteAll() : void
+}
+class "List`1"<T> {
+}
+class Styles {
+}
+SpriteOutline o-> "m_Path<Vector2>" "List`1"
+SpriteOutlineList o-> "m_SpriteOutlines<SpriteOutline>" "List`1"
+SpriteOutlineList --> "spriteOutlines<SpriteOutline>" "List`1"
+SpriteOutlineList --> "spriteID" GUID
+ScriptableObject <|-- SpriteOutlineModel
+SpriteOutlineModel o-> "m_SpriteOutlineList<SpriteOutlineList>" "List`1"
+SpriteEditorModuleBase <|-- SpriteOutlineModule
+SpriteOutlineModule +-- Styles
+Styles o-> "generateOutlineLabel" GUIContent
+Styles o-> "outlineTolerance" GUIContent
+Styles o-> "snapButtonLabel" GUIContent
+Styles o-> "copyButtonLabel" GUIContent
+Styles o-> "pasteButtonLabel" GUIContent
+Styles o-> "pasteAllButtonLabel" GUIContent
+Styles o-> "generatingOutlineDialogTitle" GUIContent
+Styles o-> "generatingOutlineDialogContent" GUIContent
+Styles o-> "spriteBorderColor" Color
+@enduml

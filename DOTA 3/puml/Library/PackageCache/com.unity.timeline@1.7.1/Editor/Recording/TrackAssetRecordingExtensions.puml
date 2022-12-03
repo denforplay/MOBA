@@ -1,0 +1,7 @@
+@startuml
+class TrackAssetRecordingExtensions <<static>> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+TrackAssetRecordingExtensions o-> "s_ActiveClips<TrackAsset,AnimationClip>" "Dictionary`2"
+@enduml

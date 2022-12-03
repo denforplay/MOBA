@@ -1,0 +1,23 @@
+@startuml
+class BindingSelector {
+    m_PartOfSelection : bool
+    + BindingSelector(window:EditorWindow, curveEditor:CurveEditor, trackGlobalTreeViewState:TreeViewState)
+    + OnGUI(targetRect:Rect) : void
+    + InitIfNeeded(rect:Rect, dataSource:CurveDataSource, isNewSelection:bool) : void
+    OnItemSelectionChanged(selection:int[]) : void
+    RefreshAll() : void
+    RefreshSelection() : void
+    RefreshSelection(selection:int[]) : void
+    + RefreshCurves() : void
+    + RefreshTree() : void
+}
+BindingSelector --> "m_TreeView" TreeViewController
+BindingSelector --> "treeViewController" TreeViewController
+BindingSelector --> "m_TrackGlobalTreeViewState" TreeViewState
+BindingSelector --> "m_TreeViewState" TreeViewState
+BindingSelector --> "m_TreeViewDataSource" BindingTreeViewDataSource
+BindingSelector --> "m_CurveDataSource" CurveDataSource
+BindingSelector --> "m_Window" TimelineWindow
+BindingSelector --> "m_CurveEditor" CurveEditor
+BindingSelector --> "m_DopeLines" ReorderableList
+@enduml

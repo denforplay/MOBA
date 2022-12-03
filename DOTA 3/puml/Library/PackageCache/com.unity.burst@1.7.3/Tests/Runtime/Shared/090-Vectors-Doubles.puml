@@ -1,0 +1,10 @@
+@startuml
+class VectorsDoubles <<partial>> {
+    + {static} Double4Int(a:int) : double
+    + {static} Double4Double3Double(x:double) : double
+    + {static} Double4Double2Double2(x:double) : double
+    + {static} Double44Doubles(a:double) : double
+    + {static} Double4Double(a:double) : double
+    + {static} Double4Int4(a:int4) : double
+}
+@enduml

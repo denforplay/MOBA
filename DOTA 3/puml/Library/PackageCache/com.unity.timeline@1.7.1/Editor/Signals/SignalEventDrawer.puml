@@ -1,0 +1,6 @@
+@startuml
+class SignalEventDrawer {
+    {static} FindBoundObject(property:SerializedProperty) : GameObject
+}
+UnityEventDrawer <|-- SignalEventDrawer
+@enduml

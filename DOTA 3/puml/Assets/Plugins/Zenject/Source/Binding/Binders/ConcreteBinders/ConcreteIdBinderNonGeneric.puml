@@ -1,0 +1,7 @@
+@startuml
+class ConcreteIdBinderNonGeneric {
+    + ConcreteIdBinderNonGeneric(bindContainer:DiContainer, bindInfo:BindInfo, bindStatement:BindStatement)
+    + WithId(identifier:object) : ConcreteBinderNonGeneric
+}
+ConcreteBinderNonGeneric <|-- ConcreteIdBinderNonGeneric
+@enduml

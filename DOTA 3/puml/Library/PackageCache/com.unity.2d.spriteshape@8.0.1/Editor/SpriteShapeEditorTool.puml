@@ -1,0 +1,51 @@
+@startuml
+class CustomDrawer {
+    + CustomDrawer(spriteShapeController:SpriteShapeController)
+    DrawBezier(p1:Vector3, p2:Vector3, p3:Vector3, p4:Vector3, width:float, color:Color) : void
+    DrawCreatePointPreview(position:Vector3, color:Color) : void
+    DrawLine(p1:Vector3, p2:Vector3, width:float, color:Color) : void
+    DrawPoint(position:Vector3, color:Color) : void
+    DrawPointHovered(position:Vector3, color:Color) : void
+    DrawPointSelected(position:Vector3, color:Color) : void
+    DrawTangent(position:Vector3, tangent:Vector3, color:Color) : void
+}
+class SpriteShapeData {
+    + height : float = 1f
+    + spriteIndex : int
+    + corner : int = 1
+    + cornerMode : int = 1
+}
+class ScriptableSpriteShapeData {
+}
+class SpriteShapeDataInspector {
+    + <<override>> OnInspectorGUI() : void
+}
+class CustomPath {
+}
+class CustomPathInspector {
+}
+class SpriteShapeEditorTool {
+    + <<override>> OnActivated() : void
+    + <<override>> OnWillBeDeactivated() : void
+}
+class "ScriptableData`1"<T> {
+}
+class Contents <<static>> {
+}
+class "GenericScriptablePath`1"<T> {
+}
+class "GenericScriptablePathInspector`2"<T1,T2> {
+}
+class "PathEditorTool`1"<T> {
+}
+IDrawer <|-- CustomDrawer
+"ScriptableData`1" "<SpriteShapeData>" <|-- ScriptableSpriteShapeData
+Editor <|-- SpriteShapeDataInspector
+"GenericScriptablePath`1" "<SpriteShapeData>" <|-- CustomPath
+"GenericScriptablePathInspector`2" "<ScriptableSpriteShapeData,SpriteShapeData>" <|-- CustomPathInspector
+"PathEditorTool`1" "<CustomPath>" <|-- SpriteShapeEditorTool
+SpriteShapeEditorTool --> "activeSpriteShapeEditorTool" SpriteShapeEditorTool
+SpriteShapeDataInspector +-- Contents
+Contents o-> "heightLabel" GUIContent
+Contents o-> "cornerLabel" GUIContent
+@enduml

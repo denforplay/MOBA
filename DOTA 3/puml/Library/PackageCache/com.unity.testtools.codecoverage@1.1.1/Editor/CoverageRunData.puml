@@ -1,0 +1,47 @@
+@startuml
+class CoverageRunDataImplementation {
+    + Start(setupEvents:bool) : void
+    + Stop() : void
+    + StartRecording(setupEvents:bool) : void
+    + PauseRecording() : void
+    + UnpauseRecording() : void
+    + StopRecording() : void
+    + isRunning : bool <<get>>
+    + isRecording : bool <<get>>
+    + isRecordingPaused : bool <<get>>
+    + isGeneratingReport : bool <<get>>
+    + reportWasGenerated : bool <<get>>
+    + ReportGenerationStart() : void
+    + ReportGenerationEnd(success:bool) : void
+    + GetNextFileIndex() : int
+    + IncrementTestRunCount() : void
+    + DidTestsRun() : bool
+    + SetLastIgnoredSuiteID(id:string) : void
+    + HasLastIgnoredSuiteID() : bool
+    + GetLastIgnoredSuiteID() : string
+}
+class CoverageRunData {
+    + isRunning : bool <<get>>
+    + isRecording : bool <<get>>
+    + isRecordingPaused : bool <<get>>
+    + reportWasGenerated : bool <<get>>
+    + GetNextFileIndex() : int
+    + IncrementTestRunCount() : void
+    + DidTestsRun() : bool
+    + SetLastIgnoredSuiteID(id:string) : void
+    + HasLastIgnoredSuiteID() : bool
+    + GetLastIgnoredSuiteID() : string
+    + Start() : void
+    + Stop() : void
+    + StartRecording() : void
+    + StopRecording() : void
+    + PauseRecording() : void
+    + UnpauseRecording() : void
+    + isGeneratingReport : bool <<get>>
+    + ReportGenerationStart() : void
+    + ReportGenerationEnd(success:bool) : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<CoverageRunData>" <|-- CoverageRunData
+@enduml

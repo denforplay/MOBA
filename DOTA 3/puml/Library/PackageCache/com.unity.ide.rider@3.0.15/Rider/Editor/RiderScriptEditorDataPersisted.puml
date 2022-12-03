@@ -1,0 +1,8 @@
+@startuml
+class RiderScriptEditorPersistedState {
+    + LastWrite : DateTime? <<get>> <<set>>
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<RiderScriptEditorPersistedState>" <|-- RiderScriptEditorPersistedState
+@enduml

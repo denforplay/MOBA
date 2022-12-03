@@ -1,0 +1,27 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Reverse(source:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "Reverse`1"<TSource> <<sealed>> {
+    + Reverse(source:IUniTaskAsyncEnumerable<TSource>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Reverse <<sealed>> {
+    index : int
+    + _Reverse(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken)
+    + <<async>> MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Reverse`1"
+"Reverse`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"Reverse`1" +-- _Reverse
+MoveNextSource <|-- _Reverse
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _Reverse
+_Reverse --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_Reverse --> "cancellationToken" CancellationToken
+_Reverse --> "Current" TSource
+@enduml

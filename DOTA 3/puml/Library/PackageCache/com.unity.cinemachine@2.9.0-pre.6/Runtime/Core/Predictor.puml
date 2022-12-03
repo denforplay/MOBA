@@ -1,0 +1,49 @@
+@startuml
+class PositionPredictor {
+    m_HavePos : bool
+    + Smoothing : float
+    + IsEmpty() : bool
+    + ApplyTransformDelta(positionDelta:Vector3) : void
+    + Reset() : void
+    + AddPosition(pos:Vector3, deltaTime:float, lookaheadTime:float) : void
+    + PredictPositionDelta(lookaheadTime:float) : Vector3
+    + PredictPosition(lookaheadTime:float) : Vector3
+}
+class Damper <<static>> {
+    <<const>> Epsilon : float
+    {static} DecayConstant(time:float, residual:float) : float
+    {static} DecayedRemainder(initial:float, decayConstant:float, deltaTime:float) : float
+    + <<const>> kNegligibleResidual : float = 0.01f
+    <<const>> kLogNegligibleResidual : float
+    + {static} Damp(initial:float, dampTime:float, deltaTime:float) : float
+    + {static} Damp(initial:Vector3, dampTime:Vector3, deltaTime:float) : Vector3
+    + {static} Damp(initial:Vector3, dampTime:float, deltaTime:float) : Vector3
+}
+class HeadingTracker {
+    mTop : int
+    mBottom : int
+    mCount : int
+    mWeightSum : float = 0
+    mWeightTime : float = 0
+    + HeadingTracker(filterSize:int)
+    + FilterSize : int <<get>>
+    ClearHistory() : void
+    {static} mDecayExponent : float
+    {static} Decay(time:float) : float
+    + Add(velocity:Vector3) : void
+    PopBottom() : void
+    + DecayHistory() : void
+    + GetReliableHeading() : Vector3
+}
+class Item <<struct>> {
+    + weight : float
+    + time : float
+}
+PositionPredictor --> "m_Velocity" Vector3
+PositionPredictor --> "m_SmoothDampVelocity" Vector3
+PositionPredictor --> "m_Pos" Vector3
+HeadingTracker --> "mHeadingSum" Vector3
+HeadingTracker o-> "mLastGoodHeading" Vector3
+HeadingTracker +-- Item
+Item --> "velocity" Vector3
+@enduml

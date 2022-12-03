@@ -1,0 +1,97 @@
+@startuml
+class TMPro_FontAssetCreatorWindow {
+    + {static} ShowFontAtlasCreatorWindow() : void
+    + {static} ShowFontAtlasCreatorWindow(sourceFontFile:Font) : void
+    + {static} ShowFontAtlasCreatorWindow(fontAsset:TMP_FontAsset) : void
+    m_FontAssetCreationSettingsCurrentIndex : int = 0
+    <<const>> k_FontAssetCreationSettingsContainerKey : string = "TextMeshPro.FontAssetCreator.RecentFontAssetCreationSettings.Container"
+    <<const>> k_FontAssetCreationSettingsCurrentIndexKey : string = "TextMeshPro.FontAssetCreator.RecentFontAssetCreationSettings.CurrentIndex"
+    <<const>> k_TwoColumnControlsWidth : float = 335f
+    m_GlyphPackingGenerationTime : double
+    m_GlyphRenderingGenerationTime : double
+    m_PointSizeSamplingMode : int
+    m_CharacterSetSelectionMode : int
+    m_CharacterSequence : string = ""
+    m_OutputFeedback : string = ""
+    m_WarningMessage : string
+    m_CharacterCount : int
+    m_IsRepaintNeeded : bool
+    m_AtlasGenerationProgress : float
+    m_AtlasGenerationProgressLabel : string
+    m_RenderingProgress : float
+    m_IsGlyphPackingDone : bool
+    m_IsGlyphRenderingDone : bool
+    m_IsRenderingDone : bool
+    m_IsProcessing : bool
+    m_IsGenerationDisabled : bool
+    m_IsGenerationCancelled : bool
+    m_IsFontAtlasInvalid : bool
+    m_PointSize : int
+    m_Padding : int = 5
+    m_AtlasWidth : int = 512
+    m_AtlasHeight : int = 512
+    m_IncludeFontFeatures : bool
+    + OnEnable() : void
+    + OnDisable() : void
+    ON_RESOURCES_LOADED() : void
+    CheckEssentialResources() : void
+    + OnGUI() : void
+    + Update() : void
+    {static} ParseNumberSequence(sequence:string) : uint[]
+    {static} ParseHexNumberSequence(sequence:string) : uint[]
+    DrawControls() : void
+    ClearGeneratedData() : void
+    UpdateRenderFeedbackWindow() : void
+    DrawGlyphRectPreviewTexture() : void
+    CreateFontAtlasTexture() : void
+    SaveNewFontAsset(sourceObject:Object) : void
+    SaveNewFontAssetWithSameName(sourceObject:Object) : void
+    Save_Bitmap_FontAsset(filePath:string) : void
+    Save_SDF_FontAsset(filePath:string) : void
+    SaveFontCreationSettings() : FontAssetCreationSettings
+    LoadFontCreationSettings(settings:FontAssetCreationSettings) : void
+    SaveCreationSettingsToEditorPrefs(settings:FontAssetCreationSettings) : void
+    DrawPreview() : void
+    CheckForLegacyGlyphRenderMode() : void
+    + GetKerningTable() : TMP_FontFeatureTable
+}
+class FontAssetCreationSettingsContainer {
+}
+enum FontPackingModes {
+    Fast= 0,
+    Optimum= 4,
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+EditorWindow <|-- TMPro_FontAssetCreatorWindow
+TMPro_FontAssetCreatorWindow --> "m_FontAssetCreationSettingsContainer" FontAssetCreationSettingsContainer
+TMPro_FontAssetCreatorWindow o-> "m_PackingMode" FontPackingModes
+TMPro_FontAssetCreatorWindow --> "m_ScrollPosition" Vector2
+TMPro_FontAssetCreatorWindow --> "m_OutputScrollPosition" Vector2
+TMPro_FontAssetCreatorWindow --> "m_SourceFontFile" Object
+TMPro_FontAssetCreatorWindow --> "m_SelectedFontAsset" TMP_FontAsset
+TMPro_FontAssetCreatorWindow --> "m_LegacyFontAsset" TMP_FontAsset
+TMPro_FontAssetCreatorWindow --> "m_ReferencedFontAsset" TMP_FontAsset
+TMPro_FontAssetCreatorWindow --> "m_CharactersFromFile" TextAsset
+TMPro_FontAssetCreatorWindow o-> "m_GlyphRenderMode" GlyphRenderMode
+TMPro_FontAssetCreatorWindow --> "m_FontAtlasTexture" Texture2D
+TMPro_FontAssetCreatorWindow --> "m_GlyphRectPreviewTexture" Texture2D
+TMPro_FontAssetCreatorWindow --> "m_SavedFontAtlas" Texture2D
+TMPro_FontAssetCreatorWindow o-> "m_FontGlyphTable<Glyph>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_FontCharacterTable<TMP_Character>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_CharacterLookupMap<uint,uint>" "Dictionary`2"
+TMPro_FontAssetCreatorWindow o-> "m_GlyphLookupMap<uint,List<uint>>" "Dictionary`2"
+TMPro_FontAssetCreatorWindow o-> "m_GlyphsToPack<Glyph>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_GlyphsPacked<Glyph>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_FreeGlyphRects<GlyphRect>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_UsedGlyphRects<GlyphRect>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_GlyphsToRender<Glyph>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_AvailableGlyphsToAdd<uint>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_MissingCharacters<uint>" "List`1"
+TMPro_FontAssetCreatorWindow o-> "m_ExcludedCharacters<uint>" "List`1"
+TMPro_FontAssetCreatorWindow +-- FontAssetCreationSettingsContainer
+FontAssetCreationSettingsContainer --> "fontAssetCreationSettings<FontAssetCreationSettings>" "List`1"
+TMPro_FontAssetCreatorWindow +-- FontPackingModes
+@enduml

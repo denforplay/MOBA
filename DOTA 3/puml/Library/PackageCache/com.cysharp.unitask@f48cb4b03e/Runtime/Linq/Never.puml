@@ -1,0 +1,24 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Never() : IUniTaskAsyncEnumerable<T>
+}
+class "Never`1"<T> {
+    Never()
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Never {
+    + _Never(cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "Never`1"
+"Never`1" o-> "Instance<T>" "IUniTaskAsyncEnumerable`1"
+"Never`1" +-- _Never
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- _Never
+_Never --> "cancellationToken" CancellationToken
+_Never --> "Current" T
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+class Documentation <<static>> {
+    + <<const>> BaseURL : string = "https://docs.unity3d.com/Packages/com.unity.cinemachine@2.9/"
+}
+class CinemachineCore <<sealed>> {
+    + {static} <<readonly>> kStreamingVersion : int = 20170927
+    + {static} <<readonly>> kVersionString : string = "2.9.0"
+    + {static} sShowHiddenObjects : bool = false
+    + {static} UniformDeltaTimeOverride : float
+    + {static} DeltaTime : float <<get>>
+    + {static} CurrentTimeOverride : float
+    + {static} CurrentTime : float <<get>>
+    + BrainCount : int <<get>>
+    + GetActiveBrain(index:int) : CinemachineBrain
+    + VirtualCameraCount : int <<get>>
+    + GetVirtualCamera(index:int) : CinemachineVirtualCameraBase
+    {static} s_LastUpdateTime : float
+    {static} s_FixedFrameCount : int
+    {static} InitializeModule() : void
+    + IsLive(vcam:ICinemachineCamera) : bool
+    + IsLiveInBlend(vcam:ICinemachineCamera) : bool
+    + GenerateCameraActivationEvent(vcam:ICinemachineCamera, vcamFrom:ICinemachineCamera) : void
+    + GenerateCameraCutEvent(vcam:ICinemachineCamera) : void
+    + FindPotentialTargetBrain(vcam:CinemachineVirtualCameraBase) : CinemachineBrain
+    + OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+}
+enum Stage {
+    Body,
+    Aim,
+    Noise,
+    Finalize,
+}
+class UpdateStatus {
+    + lastUpdateFrame : int
+    + lastUpdateFixedFrame : int
+    + lastUpdateDeltaTime : float
+}
+class "Dictionary`2"<T1,T2> {
+}
+enum UpdateFilter {
+    Fixed= UpdateTracker.UpdateClock.Fixed,
+    Late= UpdateTracker.UpdateClock.Late,
+    Smart= 8,
+    SmartFixed= Smart | Fixed,
+    SmartLate= Smart | Late,
+}
+CinemachineCore --> "Instance" CinemachineCore
+CinemachineCore o-> "GetInputAxis" AxisInputDelegate
+CinemachineCore --> "GetBlendOverride" GetBlendOverrideDelegate
+CinemachineCore o-> "mRoundRobinVcamLastFrame" CinemachineVirtualCameraBase
+CinemachineCore --> "mUpdateStatus<CinemachineVirtualCameraBase,UpdateStatus>" "Dictionary`2"
+CinemachineCore +-- Stage
+CinemachineCore +-- UpdateStatus
+CinemachineCore +-- UpdateFilter
+@enduml

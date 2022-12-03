@@ -1,0 +1,35 @@
+@startuml
+interface IAssetFilesFilterPatternsMenuOperations {
+    AddFilesFilterPatterns(type:FilterTypes, action:FilterActions, operation:FilterOperationType) : void
+}
+class AssetFilesFilterPatternsMenuBuilder {
+    IgnoredByName_Click() : void
+    IgnoredByExtension_Click() : void
+    IgnoredByFullPath_Click() : void
+    HiddenChangesByName_Click() : void
+    HiddenChangesByExtension_Click() : void
+    HiddenChangesByFullPath_Click() : void
+    UpdateIgnoredMenuItems(actions:FilterMenuActions) : void
+    UpdateHiddenChangesMenuItems(actions:FilterMenuActions) : void
+    RemoveIgnoredMenuItems() : void
+    RemoveHiddenChangesMenuItems() : void
+    GetIgnoredFilterOperationType() : FilterOperationType
+    GetHiddenChangesFilterOperationType() : FilterOperationType
+    DisabledMenuItem_Click() : void
+    ValidateEnabledMenuItem() : bool
+    ValidateDisabledMenuItem() : bool
+    GetIgnoredMenuItemName(filterPattern:string) : string
+    GetHiddenChangesMenuItemName(filterPattern:string) : string
+    <<readonly>> mIgnoredMenuItemsPriority : int
+    <<readonly>> mHiddenChangesMenuItemsPriority : int
+    mIgnoredSubmenuItem : string
+    mHiddenChangesSubmenuItem : string
+    mIgnoredByNameMenuItem : string
+    mHiddenChangesByNameMenuItem : string
+    mIgnoredByExtensionMenuItem : string
+    mHiddenChangesByExtensionMenuItem : string
+    mIgnoredByFullPathMenuItem : string
+    mHiddenChangesByFullPathMenuItem : string
+}
+AssetFilesFilterPatternsMenuBuilder --> "mOperations" IAssetFilesFilterPatternsMenuOperations
+@enduml

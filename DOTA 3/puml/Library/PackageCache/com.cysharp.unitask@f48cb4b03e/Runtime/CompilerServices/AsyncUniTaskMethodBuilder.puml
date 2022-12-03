@@ -1,0 +1,33 @@
+@startuml
+class AsyncUniTaskMethodBuilder <<struct>> {
+    + {static} Create() : AsyncUniTaskMethodBuilder
+    + SetException(exception:Exception) : void
+    + SetResult() : void
+    + AwaitOnCompleted(awaiter:TAwaiter, stateMachine:TStateMachine) : void
+    + AwaitUnsafeOnCompleted(awaiter:TAwaiter, stateMachine:TStateMachine) : void
+    + Start(stateMachine:TStateMachine) : void
+    + SetStateMachine(stateMachine:IAsyncStateMachine) : void
+    debuggingId : object
+}
+class "AsyncUniTaskMethodBuilder`1"<T> <<struct>> {
+    result : T
+    + {static} Create() : AsyncUniTaskMethodBuilder<T>
+    + SetException(exception:Exception) : void
+    + SetResult(result:T) : void
+    + AwaitOnCompleted(awaiter:TAwaiter, stateMachine:TStateMachine) : void
+    + AwaitUnsafeOnCompleted(awaiter:TAwaiter, stateMachine:TStateMachine) : void
+    + Start(stateMachine:TStateMachine) : void
+    + SetStateMachine(stateMachine:IAsyncStateMachine) : void
+    debuggingId : object
+}
+class "IStateMachineRunnerPromise`1"<T> {
+}
+class "UniTask`1"<T> {
+}
+AsyncUniTaskMethodBuilder --> "runnerPromise" IStateMachineRunnerPromise
+AsyncUniTaskMethodBuilder --> "ex" Exception
+AsyncUniTaskMethodBuilder --> "Task" UniTask
+"AsyncUniTaskMethodBuilder`1" --> "runnerPromise<T>" "IStateMachineRunnerPromise`1"
+"AsyncUniTaskMethodBuilder`1" --> "ex" Exception
+"AsyncUniTaskMethodBuilder`1" --> "Task<T>" "UniTask`1"
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class UnityWebRequestClient {
+    + GetBaseUrlFor(serviceId:string) : string
+    + GetDefaultOptionsFor(serviceId:string) : HttpOptions
+    + CreateRequestForService(serviceId:string, resourcePath:string) : HttpRequest
+    + Send(request:HttpRequest) : IAsyncOperation<ReadOnlyHttpResponse>
+    {static} ConvertToWebRequest(request:HttpRequest) : UnityWebRequest
+    {static} ConvertToResponse(webRequest:UnityWebRequest) : HttpResponse
+}
+class "Dictionary`2"<T1,T2> {
+}
+IHttpClient <|-- UnityWebRequestClient
+UnityWebRequestClient o-> "m_ServiceIdToConfig<string,HttpServiceConfig>" "Dictionary`2"
+@enduml

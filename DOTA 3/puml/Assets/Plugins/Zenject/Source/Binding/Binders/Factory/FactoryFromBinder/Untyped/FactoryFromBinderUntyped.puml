@@ -1,0 +1,6 @@
+@startuml
+class FactoryFromBinderUntyped {
+    + FactoryFromBinderUntyped(bindContainer:DiContainer, contractType:Type, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+}
+FactoryFromBinderBase <|-- FactoryFromBinderUntyped
+@enduml

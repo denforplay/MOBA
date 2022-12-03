@@ -1,0 +1,7 @@
+@startuml
+class CinemachineColliderPrefs <<static>> {
+    {static} CinemachineColliderPrefs()
+}
+CinemachineColliderPrefs --> "FeelerHitColor" Color
+CinemachineColliderPrefs --> "FeelerColor" Color
+@enduml

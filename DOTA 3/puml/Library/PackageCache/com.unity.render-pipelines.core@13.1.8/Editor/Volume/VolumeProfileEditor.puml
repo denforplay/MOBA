@@ -1,0 +1,9 @@
+@startuml
+class VolumeProfileEditor <<sealed>> {
+    OnEnable() : void
+    OnDisable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- VolumeProfileEditor
+VolumeProfileEditor --> "m_ComponentList" VolumeComponentListEditor
+@enduml

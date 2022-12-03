@@ -1,0 +1,10 @@
+@startuml
+abstract class Popup {
+    +  <<event>> Closing : Action<Popup> 
+    + <<virtual>> Show() : void
+    + <<virtual>> Hide() : void
+    + {abstract} EnableInput() : void
+    + {abstract} DisableInput() : void
+}
+MonoBehaviour <|-- Popup
+@enduml

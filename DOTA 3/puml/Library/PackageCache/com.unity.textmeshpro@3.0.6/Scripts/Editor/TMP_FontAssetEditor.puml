@@ -1,0 +1,56 @@
+@startuml
+class FontWeightDrawer {
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+class TMP_FontAssetEditor {
+    + OnEnable() : void
+    + OnDisable() : void
+    + <<override>> OnInspectorGUI() : void
+    CleanFallbackFontAssetTable() : void
+    SavedAtlasGenerationSettings() : void
+    RestoreAtlasGenerationSettings() : void
+    UpdateFontAssetCreationSettings() : void
+    UpdateCharacterData(property:SerializedProperty, index:int) : void
+    UpdateGlyphData(property:SerializedProperty, index:int) : void
+    DisplayPageNavigation(currentPage:int, arraySize:int, itemsPerPage:int) : void
+    AddNewGlyph(srcIndex:int, dstGlyphID:int) : bool
+    RemoveGlyphFromList(index:int) : void
+    AddNewCharacter(srcIndex:int, dstGlyphID:int) : bool
+    RemoveCharacterFromList(index:int) : void
+    GetValueRecord(property:SerializedProperty) : TMP_GlyphValueRecord
+    RemoveAdjustmentPairFromList(index:int) : void
+    CopyGlyphSerializedProperty(srcGlyph:SerializedProperty, dstGlyph:SerializedProperty) : void
+    CopyCharacterSerializedProperty(source:SerializedProperty, target:SerializedProperty) : void
+    SearchGlyphTable(searchPattern:string, searchResults:List<int>) : void
+    SearchCharacterTable(searchPattern:string, searchResults:List<int>) : void
+    SearchKerningTable(searchPattern:string, searchResults:List<int>) : void
+}
+class UI_PanelState <<struct>> {
+    + {static} faceInfoPanel : bool = true
+    + {static} generationSettingsPanel : bool = true
+    + {static} fontAtlasInfoPanel : bool = true
+    + {static} fontWeightPanel : bool = true
+    + {static} fallbackFontAssetPanel : bool = true
+    + {static} glyphTablePanel : bool = false
+    + {static} characterTablePanel : bool = false
+    + {static} fontFeatureTablePanel : bool = false
+}
+class AtlasSettings <<struct>> {
+    + pointSize : int
+    + padding : int
+    + atlasWidth : int
+    + atlasHeight : int
+}
+class Warning <<struct>> {
+    + isEnabled : bool
+    + expirationTime : double
+}
+PropertyDrawer <|-- FontWeightDrawer
+Editor <|-- TMP_FontAssetEditor
+TMP_FontAssetEditor --> "s_InternalSDFMaterial" Material
+TMP_FontAssetEditor --> "s_InternalBitmapMaterial" Material
+TMP_FontAssetEditor +-- UI_PanelState
+TMP_FontAssetEditor +-- AtlasSettings
+AtlasSettings --> "glyphRenderMode" GlyphRenderMode
+TMP_FontAssetEditor +-- Warning
+@enduml

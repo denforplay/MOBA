@@ -1,0 +1,5 @@
+@startuml
+class UnityTestProtocolStarter <<static>> {
+    {static} UnityTestProtocolStarter()
+}
+@enduml

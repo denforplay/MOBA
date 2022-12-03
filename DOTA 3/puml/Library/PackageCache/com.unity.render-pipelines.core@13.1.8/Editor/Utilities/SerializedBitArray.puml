@@ -1,0 +1,66 @@
+@startuml
+class SerializedBitArrayUtilities <<static>> {
+    + {static} ToSerializeBitArray8(serializedProperty:SerializedProperty) : SerializedBitArray8
+    + {static} TryGetSerializeBitArray8(serializedProperty:SerializedProperty, serializedBitArray:SerializedBitArray8) : bool
+    + {static} ToSerializeBitArray16(serializedProperty:SerializedProperty) : SerializedBitArray16
+    + {static} TryGetSerializeBitArray16(serializedProperty:SerializedProperty, serializedBitArray:SerializedBitArray16) : bool
+    + {static} ToSerializeBitArray32(serializedProperty:SerializedProperty) : SerializedBitArray32
+    + {static} TryGetSerializeBitArray32(serializedProperty:SerializedProperty, serializedBitArray:SerializedBitArray32) : bool
+    + {static} ToSerializeBitArray64(serializedProperty:SerializedProperty) : SerializedBitArray64
+    + {static} TryGetSerializeBitArray64(serializedProperty:SerializedProperty, serializedBitArray:SerializedBitArray64) : bool
+    + {static} ToSerializeBitArray128(serializedProperty:SerializedProperty) : SerializedBitArray128
+    + {static} TryGetSerializeBitArray128(serializedProperty:SerializedProperty, serializedBitArray:SerializedBitArray128) : bool
+    + {static} ToSerializeBitArray256(serializedProperty:SerializedProperty) : SerializedBitArray256
+    + {static} TryGetSerializeBitArray256(serializedProperty:SerializedProperty, serializedBitArray:SerializedBitArray256) : bool
+    {static} IsBitArrayOfCapacity(serializedProperty:SerializedProperty, capacity:uint) : bool
+}
+interface ISerializedBitArray {
+    capacity : uint <<get>>
+    GetBitAt(bitIndex:uint) : bool
+    SetBitAt(bitIndex:uint, value:bool) : void
+    HasBitMultipleDifferentValue(bitIndex:uint) : bool
+}
+abstract class SerializedBitArray {
+    {static} SerializedBitArray()
+    + capacity : uint <<get>>
+    + HasBitMultipleDifferentValue(bitIndex:uint) : bool
+    + GetBitAt(bitIndex:uint) : bool
+    + SetBitAt(bitIndex:uint, value:bool) : void
+    + Update() : void
+}
+class SerializedBitArray8 <<sealed>> {
+    + SerializedBitArray8(serializedProperty:SerializedProperty)
+}
+class SerializedBitArray16 <<sealed>> {
+    + SerializedBitArray16(serializedProperty:SerializedProperty)
+}
+class SerializedBitArray32 <<sealed>> {
+    + SerializedBitArray32(serializedProperty:SerializedProperty)
+}
+class SerializedBitArray64 <<sealed>> {
+    + SerializedBitArray64(serializedProperty:SerializedProperty)
+}
+class SerializedBitArray128 <<sealed>> {
+    + SerializedBitArray128(serializedProperty:SerializedProperty)
+}
+class SerializedBitArray256 <<sealed>> {
+    + SerializedBitArray256(serializedProperty:SerializedProperty)
+}
+ISerializedBitArray <|-- SerializedBitArray
+SerializedBitArray <|-- SerializedBitArray8
+SerializedBitArray8 --> "m_Data" SerializedProperty
+SerializedBitArray <|-- SerializedBitArray16
+SerializedBitArray16 --> "m_Data" SerializedProperty
+SerializedBitArray <|-- SerializedBitArray32
+SerializedBitArray32 --> "m_Data" SerializedProperty
+SerializedBitArray <|-- SerializedBitArray64
+SerializedBitArray64 --> "m_Data" SerializedProperty
+SerializedBitArray <|-- SerializedBitArray128
+SerializedBitArray128 --> "m_Data1" SerializedProperty
+SerializedBitArray128 --> "m_Data2" SerializedProperty
+SerializedBitArray <|-- SerializedBitArray256
+SerializedBitArray256 --> "m_Data1" SerializedProperty
+SerializedBitArray256 --> "m_Data2" SerializedProperty
+SerializedBitArray256 --> "m_Data3" SerializedProperty
+SerializedBitArray256 --> "m_Data4" SerializedProperty
+@enduml

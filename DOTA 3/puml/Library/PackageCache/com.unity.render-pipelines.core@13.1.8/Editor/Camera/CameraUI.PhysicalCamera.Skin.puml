@@ -1,0 +1,18 @@
+@startuml
+class CameraUI <<static>> <<partial>> {
+}
+class PhysicalCamera <<static>> <<partial>> {
+}
+class Styles <<static>> {
+    + {static} <<readonly>> customPresetIndex : int
+}
+CameraUI +-- PhysicalCamera
+PhysicalCamera +-- Styles
+Styles o-> "cameraBody" GUIContent
+Styles o-> "sensorType" GUIContent
+Styles o-> "sensorSize" GUIContent
+Styles o-> "gateFit" GUIContent
+Styles o-> "lens" GUIContent
+Styles o-> "focalLength" GUIContent
+Styles o-> "shift" GUIContent
+@enduml

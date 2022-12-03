@@ -1,0 +1,6 @@
+@startuml
+enum CoverageFormat {
+    OpenCover= 0,
+    DotCover= 1,
+}
+@enduml

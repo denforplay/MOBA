@@ -1,0 +1,28 @@
+@startuml
+class SceneDragAndDrop <<static>> {
+    {static} SceneDragAndDrop()
+    {static} OnSceneGUI(sceneView:SceneView) : void
+    + {static} Create(shape:UnityEngine.U2D.SpriteShape, position:Vector3, sceneView:SceneView) : GameObject
+    {static} OnHierarchyGUI(instanceID:int, rect:Rect) : void
+    {static} GetSpriteShapeFromPathsOrObjects(objects:Object[], paths:string[], currentEventType:EventType) : List<UnityEngine.U2D.SpriteShape>
+    {static} HandleSceneDrag(sceneView:SceneView, evt:Event, objectReferences:Object[], paths:string[]) : void
+    {static} PositionSceneDragObjects(objects:List<Object>, sceneView:SceneView, mousePosition:Vector2) : void
+    {static} CreateSceneDragObjects(shapes:List<UnityEngine.U2D.SpriteShape>) : void
+    {static} CleanUp(deleteTempSceneObject:bool) : void
+    {static} ExistingAssets(objects:Object[]) : bool
+    {static} CreateDragGO(spriteShape:UnityEngine.U2D.SpriteShape, position:Vector3) : GameObject
+}
+class Contents <<static>> {
+    + {static} <<readonly>> createString : string = "Create Sprite Shape"
+}
+class "List`1"<T> {
+}
+enum DragType {
+    NotInitialized,
+    CreateMultiple,
+}
+SceneDragAndDrop --> "s_SceneDragObjects<Object>" "List`1"
+SceneDragAndDrop --> "s_DragType" DragType
+SceneDragAndDrop +-- Contents
+SceneDragAndDrop +-- DragType
+@enduml

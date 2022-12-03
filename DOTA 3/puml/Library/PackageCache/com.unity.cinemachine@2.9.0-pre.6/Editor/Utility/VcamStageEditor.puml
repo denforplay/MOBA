@@ -1,0 +1,44 @@
+@startuml
+class VcamStageEditor {
+    m_StageSelection : int
+    m_StageError : bool
+    m_IsMixedType : bool
+    + VcamStageEditor(stage:CinemachineCore.Stage)
+    + Shutdown() : void
+    + HasImplementation : bool <<get>>
+    + TypeIsLocked : bool <<get>> <<set>>
+    + OnInspectorGUI() : void
+    + OnSceneGUI() : void
+}
+class VcamStageEditorPipeline {
+    + Initialize(getComponent:VcamStageEditor.GetComponentDelegate, setComponent:VcamStageEditor.SetComponentDelegate) : void
+    + SetStageIsLocked(stage:CinemachineCore.Stage) : void
+    + Shutdown() : void
+    + OnInspectorGUI(withHeader:bool) : void
+    + OnSceneGUI() : void
+}
+class StageData <<struct>> {
+    + IsExpanded : bool <<get>> <<set>>
+    + Name : string
+}
+class EditorInitialize {
+    {static} EditorInitialize()
+}
+class ActiveEditorRegistry <<static>> {
+    + {static} SetActiveEditor(e:UnityEditor.Editor, active:bool) : void
+    + {static} IsActiveEditor(e:UnityEditor.Editor) : bool
+}
+class "List`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+VcamStageEditor --> "m_EditedComponents<CinemachineComponentBase>" "List`1"
+VcamStageEditor --> "m_ScratchComponentList<CinemachineComponentBase>" "List`1"
+VcamStageEditor --> "GetComponent" GetComponentDelegate
+VcamStageEditor --> "SetComponent" SetComponentDelegate
+VcamStageEditorPipeline o-> "ProceduralMotionLabel" GUIContent
+VcamStageEditor +-- StageData
+VcamStageEditor +-- EditorInitialize
+VcamStageEditor +-- ActiveEditorRegistry
+ActiveEditorRegistry o-> "s_ActiveEditorRegistry<UnityEditor.Editor>" "HashSet`1"
+@enduml

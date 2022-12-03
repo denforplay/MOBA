@@ -1,0 +1,14 @@
+@startuml
+class V64DebugView <<unsafe>> {
+    + V64DebugView(value:v64)
+}
+class V128DebugView <<unsafe>> {
+    + V128DebugView(value:v128)
+}
+class V256DebugView <<unsafe>> {
+    + V256DebugView(value:v256)
+}
+V64DebugView --> "m_Value" v64
+V128DebugView --> "m_Value" v128
+V256DebugView --> "m_Value" v256
+@enduml

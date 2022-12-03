@@ -1,0 +1,8 @@
+@startuml
+class InventoryView {
+    + IsHaveFreeSlot : bool <<get>>
+    + RemoveItem(slot:int) : void
+    + AddItem(item:Item, slot:int) : void
+}
+MonoBehaviour <|-- InventoryView
+@enduml

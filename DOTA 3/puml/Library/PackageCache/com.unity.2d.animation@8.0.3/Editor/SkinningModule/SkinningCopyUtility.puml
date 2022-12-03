@@ -1,0 +1,9 @@
+@startuml
+class SkinningCopyUtility <<static>> {
+    + {static} SerializeSkinningCopyDataToString(skinningData:SkinningCopyData) : string
+    + {static} CanDeserializeSystemCopyBufferToSkinningCopyData() : bool
+    + {static} CanDeserializeStringToSkinningCopyData(data:string) : bool
+    + {static} DeserializeStringToSkinningCopyData(data:string) : SkinningCopyData
+}
+SkinningCopyUtility --> "Serializer" ISkinningSerializer
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class CinemachineFixedSignal {
+    + <<override>> SignalDuration : float <<get>>
+    AxisDuration(axis:AnimationCurve) : float
+    + <<override>> GetSignal(timeSinceSignalStart:float, pos:Vector3, rot:Quaternion) : void
+    AxisValue(axis:AnimationCurve, time:float) : float
+}
+SignalSourceAsset <|-- CinemachineFixedSignal
+CinemachineFixedSignal --> "m_XCurve" AnimationCurve
+CinemachineFixedSignal --> "m_YCurve" AnimationCurve
+CinemachineFixedSignal --> "m_ZCurve" AnimationCurve
+@enduml

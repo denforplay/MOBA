@@ -1,0 +1,25 @@
+@startuml
+class ProgressView {
+    + <<const>> UssClassName : string = "progress-view"
+    + <<const>> LabelUssClassName : string
+    + <<const>> ProgressBarUssClassName : string
+    + <<const>> ButtonUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    + ProgressView()
+    + SetText(text:string, progressText:string) : void
+    + SetPercentComplete(percent:int) : void
+    + SetCancelCallback(callback:Action) : void
+    + SetCancelButtonActive(active:bool) : void
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- ProgressView
+ProgressView --> "m_Label" Label
+ProgressView --> "m_ProgressBar" ProgressBar
+ProgressView --> "m_Button" Button
+ProgressView +-- UxmlFactory
+"UxmlFactory`1" "<ProgressView>" <|-- UxmlFactory
+@enduml

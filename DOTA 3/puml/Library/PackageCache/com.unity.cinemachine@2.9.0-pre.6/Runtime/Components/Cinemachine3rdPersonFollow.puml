@@ -1,0 +1,29 @@
+@startuml
+class Cinemachine3rdPersonFollow {
+    + VerticalArmLength : float
+    + CameraSide : float
+    + CameraDistance : float
+    + IgnoreTag : string
+    + CameraRadius : float
+    + DampingIntoCollision : float
+    + DampingFromCollision : float
+    m_CamPosCollisionCorrection : float
+    OnValidate() : void
+    Reset() : void
+    OnDestroy() : void
+    + <<override>> IsValid : bool <<get>>
+    + <<override>> GetMaxDampTime() : float
+    + <<override>> MutateCameraState(curState:CameraState, deltaTime:float) : void
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    PositionCamera(curState:CameraState, deltaTime:float) : void
+    + GetRigPositions(root:Vector3, shoulder:Vector3, hand:Vector3) : void
+    GetRawRigPositions(root:Vector3, targetRot:Quaternion, heading:Quaternion, shoulder:Vector3, hand:Vector3) : void
+    ResolveCollisions(root:Vector3, tip:Vector3, deltaTime:float, cameraRadius:float, collisionCorrection:float) : Vector3
+}
+CinemachineComponentBase <|-- Cinemachine3rdPersonFollow
+Cinemachine3rdPersonFollow --> "Damping" Vector3
+Cinemachine3rdPersonFollow --> "ShoulderOffset" Vector3
+Cinemachine3rdPersonFollow --> "CameraCollisionFilter" LayerMask
+Cinemachine3rdPersonFollow --> "m_PreviousFollowTargetPosition" Vector3
+Cinemachine3rdPersonFollow --> "m_DampingCorrection" Vector3
+@enduml

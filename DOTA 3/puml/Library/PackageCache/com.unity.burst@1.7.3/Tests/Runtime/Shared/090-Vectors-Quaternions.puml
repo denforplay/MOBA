@@ -1,0 +1,6 @@
+@startuml
+class VectorsQuaternions <<partial>> {
+    + {static} Normalize() : float
+    + {static} IdentityValue() : float
+}
+@enduml

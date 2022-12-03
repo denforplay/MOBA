@@ -1,0 +1,45 @@
+@startuml
+class "@PlayerInputs" <<partial>> {
+    + @PlayerInputs()
+    + Dispose() : void
+    + bindingMask : InputBinding? <<get>> <<set>>
+    + devices : ReadOnlyArray<InputDevice>? <<get>> <<set>>
+    + Contains(action:InputAction) : bool
+    + GetEnumerator() : IEnumerator<InputAction>
+    GetEnumerator() : IEnumerator
+    + Enable() : void
+    + Disable() : void
+    + FindAction(actionNameOrId:string, throwIfNotFound:bool) : InputAction
+    + FindBinding(bindingMask:InputBinding, action:InputAction) : int
+}
+class "ReadOnlyArray`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class CharacterActions <<struct>> {
+    + CharacterActions(wrapper:@PlayerInputs)
+    + Get() : InputActionMap
+    + Enable() : void
+    + Disable() : void
+    + enabled : bool <<get>>
+    + SetCallbacks(instance:ICharacterActions) : void
+}
+interface ICharacterActions {
+    OnMove(context:InputAction.CallbackContext) : void
+    OnUseFirstSkill(context:InputAction.CallbackContext) : void
+    OnUseSecondSkill(context:InputAction.CallbackContext) : void
+    OnUseThirdSkill(context:InputAction.CallbackContext) : void
+}
+IInputActionCollection2 <|-- "@PlayerInputs"
+IDisposable <|-- "@PlayerInputs"
+"@PlayerInputs" --> "asset" InputActionAsset
+"@PlayerInputs" --> "controlSchemes<InputControlScheme>" "ReadOnlyArray`1"
+"@PlayerInputs" --> "bindings<InputBinding>" "IEnumerable`1"
+"@PlayerInputs" --> "@Character" CharacterActions
+"@PlayerInputs" +-- CharacterActions
+CharacterActions --> "@Move" InputAction
+CharacterActions --> "@UseFirstSkill" InputAction
+CharacterActions --> "@UseSecondSkill" InputAction
+CharacterActions --> "@UseThirdSkill" InputAction
+"@PlayerInputs" +-- ICharacterActions
+@enduml

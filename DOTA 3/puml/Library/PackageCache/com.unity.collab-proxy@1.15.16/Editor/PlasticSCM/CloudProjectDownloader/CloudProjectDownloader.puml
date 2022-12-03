@@ -1,0 +1,7 @@
+@startuml
+class CloudProjectDownloader <<static>> {
+    {static} RunOnceWhenAccessTokenIsInitialized() : void
+    {static} Execute(unityAccessToken:string) : void
+}
+CloudProjectDownloader o-> "mLog" ILog
+@enduml

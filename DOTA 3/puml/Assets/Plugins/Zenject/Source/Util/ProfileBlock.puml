@@ -1,0 +1,13 @@
+@startuml
+class ProfileBlock {
+    ProfileBlock(sampleName:string, rootBlock:bool)
+    ProfileBlock(sampleName:string)
+    + {static} Start() : ProfileBlock
+    + {static} Start(sampleNameFormat:string, obj1:object, obj2:object) : ProfileBlock
+    + {static} Start(sampleNameFormat:string, obj:object) : ProfileBlock
+    + {static} Start(sampleName:string) : ProfileBlock
+    + Dispose() : void
+}
+IDisposable <|-- ProfileBlock
+ProfileBlock --> "ProfilePattern" Regex
+@enduml

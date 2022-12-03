@@ -1,0 +1,13 @@
+@startuml
+class CinemachineBasicMultiChannelPerlin {
+    + m_AmplitudeGain : float = 1f
+    + m_FrequencyGain : float = 1f
+    + <<override>> IsValid : bool <<get>>
+    + <<override>> MutateCameraState(curState:CameraState, deltaTime:float) : void
+    + ReSeed() : void
+    Initialize() : void
+}
+CinemachineComponentBase <|-- CinemachineBasicMultiChannelPerlin
+CinemachineBasicMultiChannelPerlin --> "m_NoiseProfile" NoiseSettings
+CinemachineBasicMultiChannelPerlin o-> "m_PivotOffset" Vector3
+@enduml

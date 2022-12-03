@@ -1,0 +1,8 @@
+@startuml
+class Events <<static>> {
+    + {static}  <<event>> onCoverageSessionStarted : Action<SessionEventInfo> 
+    + {static}  <<event>> onCoverageSessionFinished : Action<SessionEventInfo> 
+    + {static}  <<event>> onCoverageSessionPaused : Action<SessionEventInfo> 
+    + {static}  <<event>> onCoverageSessionUnpaused : Action<SessionEventInfo> 
+}
+@enduml

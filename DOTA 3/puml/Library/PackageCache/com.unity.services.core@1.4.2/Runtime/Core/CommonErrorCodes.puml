@@ -1,0 +1,16 @@
+@startuml
+class CommonErrorCodes <<static>> {
+    + <<const>> Unknown : int = 0
+    + <<const>> TransportError : int = 1
+    + <<const>> Timeout : int = 2
+    + <<const>> ServiceUnavailable : int = 3
+    + <<const>> ApiMissing : int = 4
+    + <<const>> RequestRejected : int = 5
+    + <<const>> TooManyRequests : int = 50
+    + <<const>> InvalidToken : int = 51
+    + <<const>> TokenExpired : int = 52
+    + <<const>> Forbidden : int = 53
+    + <<const>> NotFound : int = 54
+    + <<const>> InvalidRequest : int = 55
+}
+@enduml

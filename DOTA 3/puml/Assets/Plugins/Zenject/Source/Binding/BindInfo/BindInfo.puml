@@ -1,0 +1,51 @@
+@startuml
+enum ScopeTypes {
+    Unset,
+    Transient,
+    Singleton,
+}
+enum ToChoices {
+    Self,
+    Concrete,
+}
+enum InvalidBindResponses {
+    Assert,
+    Skip,
+}
+enum BindingInheritanceMethods {
+    None,
+    CopyIntoAll,
+    CopyDirectOnly,
+    MoveIntoAll,
+    MoveDirectOnly,
+}
+class BindInfo {
+    + MarkAsCreationBinding : bool
+    + MarkAsUniqueSingleton : bool
+    + ConcreteIdentifier : object
+    + SaveProvider : bool
+    + OnlyBindIfNotBound : bool
+    + RequireExplicitScope : bool
+    + Identifier : object
+    + NonLazy : bool
+    + ContextInfo : string
+    + BindInfo()
+    + Dispose() : void
+    + SetContextInfo(contextInfo:string) : void
+    + Reset() : void
+}
+class "List`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+IDisposable <|-- BindInfo
+BindInfo --> "ContractTypes<Type>" "List`1"
+BindInfo --> "BindingInheritanceMethod" BindingInheritanceMethods
+BindInfo --> "InvalidBindResponse" InvalidBindResponses
+BindInfo --> "Condition" BindingCondition
+BindInfo --> "ToChoice" ToChoices
+BindInfo --> "ToTypes<Type>" "List`1"
+BindInfo --> "Scope" ScopeTypes
+BindInfo --> "Arguments<TypeValuePair>" "List`1"
+BindInfo --> "InstantiatedCallback<InjectContext,object>" "Action`2"
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+class SpriteShapeGeometryInfo <<struct>> {
+}
+class SpriteShapeGeometryCache {
+    m_MaxArrayCount : int
+    m_RequiresUpdate : bool = false
+    m_RequiresUpload : bool = false
+    OnEnable() : void
+}
+class "NativeSlice`1"<T> {
+}
+class "NativeArray`1"<T> {
+}
+MonoBehaviour <|-- SpriteShapeGeometryCache
+SpriteShapeGeometryCache --> "m_PosArrayCache<Vector3>" "NativeSlice`1"
+SpriteShapeGeometryCache --> "m_Uv0ArrayCache<Vector2>" "NativeSlice`1"
+SpriteShapeGeometryCache --> "m_TanArrayCache<Vector4>" "NativeSlice`1"
+SpriteShapeGeometryCache --> "m_IndexArrayCache<ushort>" "NativeArray`1"
+SpriteShapeGeometryCache --> "m_GeomArrayCache<SpriteShapeSegment>" "NativeArray`1"
+@enduml

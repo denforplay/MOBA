@@ -1,0 +1,39 @@
+@startuml
+abstract class "KeyedFactoryBase`2"<TBase,TKey> {
+    + Initialize() : void
+    + HasKey(key:TKey) : bool
+    + <<virtual>> Validate() : void
+}
+class "KeyedFactory`2"<TBase,TKey> {
+    + <<virtual>> Create(key:TKey) : TBase
+}
+class "KeyedFactory`3"<TBase,TKey,TParam1> {
+    + <<virtual>> Create(key:TKey, param1:TParam1) : TBase
+}
+class "KeyedFactory`4"<TBase,TKey,TParam1,TParam2> {
+    + <<virtual>> Create(key:TKey, param1:TParam1, param2:TParam2) : TBase
+}
+class "KeyedFactory`5"<TBase,TKey,TParam1,TParam2,TParam3> {
+    + <<virtual>> Create(key:TKey, param1:TParam1, param2:TParam2, param3:TParam3) : TBase
+}
+class "KeyedFactory`6"<TBase,TKey,TParam1,TParam2,TParam3,TParam4> {
+    + <<virtual>> Create(key:TKey, param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : TBase
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "ICollection`1"<T> {
+}
+IValidatable <|-- "KeyedFactoryBase`2"
+"KeyedFactoryBase`2" o-> "_container" DiContainer
+"KeyedFactoryBase`2" o-> "_typePairs<ValuePair<TKey, Type>>" "List`1"
+"KeyedFactoryBase`2" o-> "_typeMap<TKey,Type>" "Dictionary`2"
+"KeyedFactoryBase`2" o-> "_fallbackType" Type
+"KeyedFactoryBase`2" --> "Keys<TKey>" "ICollection`1"
+"KeyedFactoryBase`2" "<TBase,TKey>" <|-- "KeyedFactory`2"
+"KeyedFactoryBase`2" "<TBase,TKey>" <|-- "KeyedFactory`3"
+"KeyedFactoryBase`2" "<TBase,TKey>" <|-- "KeyedFactory`4"
+"KeyedFactoryBase`2" "<TBase,TKey>" <|-- "KeyedFactory`5"
+"KeyedFactoryBase`2" "<TBase,TKey>" <|-- "KeyedFactory`6"
+@enduml

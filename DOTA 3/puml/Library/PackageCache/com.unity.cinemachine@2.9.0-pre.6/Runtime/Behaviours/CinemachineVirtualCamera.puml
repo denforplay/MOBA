@@ -1,0 +1,31 @@
+@startuml
+class CinemachineVirtualCamera {
+    + <<const>> PipelineName : string = "cm"
+    + <<override>> GetMaxDampTime() : float
+    <<override>> + InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    OnTransformChildrenChanged() : void
+    Reset() : void
+    + InvalidateComponentPipeline() : void
+    + GetComponentOwner() : Transform
+    + GetComponentPipeline() : CinemachineComponentBase[]
+    + GetCinemachineComponent(stage:CinemachineCore.Stage) : CinemachineComponentBase
+    + GetCinemachineComponent() : T
+    + AddCinemachineComponent() : T
+    + DestroyCinemachineComponent() : void
+    UpdateComponentPipeline() : void
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+}
+CinemachineVirtualCameraBase <|-- CinemachineVirtualCamera
+CinemachineVirtualCamera o-> "m_LookAt" Transform
+CinemachineVirtualCamera o-> "m_Follow" Transform
+CinemachineVirtualCamera o-> "m_Lens" LensSettings
+CinemachineVirtualCamera --> "m_Transitions" TransitionParams
+CinemachineVirtualCamera --> "State" CameraState
+CinemachineVirtualCamera --> "LookAt" Transform
+CinemachineVirtualCamera --> "Follow" Transform
+CinemachineVirtualCamera --> "CreatePipelineOverride" CreatePipelineDelegate
+CinemachineVirtualCamera --> "DestroyPipelineOverride" DestroyPipelineDelegate
+CinemachineVirtualCamera o-> "m_State" CameraState
+@enduml

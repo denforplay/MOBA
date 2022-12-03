@@ -1,0 +1,17 @@
+@startuml
+class CinemachineStoryboardMute <<static>> {
+    {static} CinemachineStoryboardMute()
+    + {static} kEnabledKey : string = "StoryboardMute_Enabled"
+    + {static} Enabled : bool <<get>> <<set>>
+}
+class CinemachineStoryboardEditor <<sealed>> {
+    + OnDisable() : void
+    <<const>> FastWaveformUpdateInterval : float = 0.1f
+    mLastSplitScreenEventTime : float = 0
+    {static} sAdvancedFoldout : bool
+    + <<override>> OnInspectorGUI() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineStoryboard>" <|-- CinemachineStoryboardEditor
+@enduml

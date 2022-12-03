@@ -1,0 +1,7 @@
+@startuml
+class CinemachineExternalCameraEditor {
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+}
+"CinemachineVirtualCameraBaseEditor`1" "<CinemachineExternalCamera>" <|-- CinemachineExternalCameraEditor
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+class AxisStatePropertyAttribute <<sealed>> {
+}
+class OrbitalTransposerHeadingPropertyAttribute <<sealed>> {
+}
+class LensSettingsPropertyAttribute <<sealed>> {
+}
+class VcamTargetPropertyAttribute <<sealed>> {
+}
+class CinemachineBlendDefinitionPropertyAttribute <<sealed>> {
+}
+class SaveDuringPlayAttribute <<sealed>> {
+}
+class NoSaveDuringPlayAttribute <<sealed>> {
+}
+class TagFieldAttribute <<sealed>> {
+}
+class NoiseSettingsPropertyAttribute <<sealed>> {
+}
+class CinemachineEmbeddedAssetPropertyAttribute <<sealed>> {
+    + WarnIfNull : bool
+    + CinemachineEmbeddedAssetPropertyAttribute(warnIfNull:bool)
+}
+class DocumentationSortingAttribute <<sealed>> {
+    + DocumentationSortingAttribute(category:Level)
+}
+enum Level {
+    Undoc,
+    API,
+    UserRef,
+}
+PropertyAttribute <|-- AxisStatePropertyAttribute
+PropertyAttribute <|-- OrbitalTransposerHeadingPropertyAttribute
+PropertyAttribute <|-- LensSettingsPropertyAttribute
+PropertyAttribute <|-- VcamTargetPropertyAttribute
+PropertyAttribute <|-- CinemachineBlendDefinitionPropertyAttribute
+PropertyAttribute <|-- NoSaveDuringPlayAttribute
+PropertyAttribute <|-- TagFieldAttribute
+PropertyAttribute <|-- NoiseSettingsPropertyAttribute
+PropertyAttribute <|-- CinemachineEmbeddedAssetPropertyAttribute
+DocumentationSortingAttribute --> "Category" Level
+DocumentationSortingAttribute +-- Level
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+class Discovery <<static>> {
+    + {static} FindVSWhere() : void
+    + {static} GetVisualStudioInstallations() : IEnumerable<IVisualStudioInstallation>
+    + {static} TryDiscoverInstallation(editorPath:string, installation:IVisualStudioInstallation) : bool
+}
+class VsWhereResult {
+    + {static} FromJson(json:string) : VsWhereResult
+    + ToVisualStudioInstallations() : IEnumerable<VisualStudioInstallation>
+}
+class VsWhereEntry {
+    + displayName : string
+    + isPrerelease : bool
+    + productPath : string
+}
+class VsWhereCatalog {
+    + productDisplayVersion : string
+    + buildVersion : string
+}
+Discovery +-- VsWhereResult
+Discovery +-- VsWhereEntry
+VsWhereEntry --> "catalog" VsWhereCatalog
+Discovery +-- VsWhereCatalog
+@enduml

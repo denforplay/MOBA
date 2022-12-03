@@ -1,0 +1,14 @@
+@startuml
+class ArgConditionCopyNonLazyBinder {
+    + ArgConditionCopyNonLazyBinder(bindInfo:BindInfo)
+    + WithArguments(param:T) : InstantiateCallbackConditionCopyNonLazyBinder
+    + WithArguments(param1:TParam1, param2:TParam2) : InstantiateCallbackConditionCopyNonLazyBinder
+    + WithArguments(param1:TParam1, param2:TParam2, param3:TParam3) : InstantiateCallbackConditionCopyNonLazyBinder
+    + WithArguments(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : InstantiateCallbackConditionCopyNonLazyBinder
+    + WithArguments(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5) : InstantiateCallbackConditionCopyNonLazyBinder
+    + WithArguments(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6) : InstantiateCallbackConditionCopyNonLazyBinder
+    + WithArguments(args:object[]) : InstantiateCallbackConditionCopyNonLazyBinder
+    + WithArgumentsExplicit(extraArgs:IEnumerable<TypeValuePair>) : InstantiateCallbackConditionCopyNonLazyBinder
+}
+InstantiateCallbackConditionCopyNonLazyBinder <|-- ArgConditionCopyNonLazyBinder
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class "ExpandedState`2"<TState,TTarget> <<struct>> {
+    + ExpandedState(defaultValue:TState, prefix:string)
+    + GetExpandedAreas(mask:TState) : bool
+    + SetExpandedAreas(mask:TState, value:bool) : void
+    + ExpandAll() : void
+    + CollapseAll() : void
+}
+class "EditorPrefBoolFlags`1"<T> {
+}
+"ExpandedState`2" --> "m_State<TState>" "EditorPrefBoolFlags`1"
+@enduml

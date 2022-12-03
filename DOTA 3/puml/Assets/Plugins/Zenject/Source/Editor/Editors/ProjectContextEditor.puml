@@ -1,0 +1,10 @@
+@startuml
+class ProjectContextEditor {
+    + <<override>> OnEnable() : void
+}
+ContextEditor <|-- ProjectContextEditor
+ProjectContextEditor --> "_settingsProperty" SerializedProperty
+ProjectContextEditor --> "_editorReflectionBakingCoverageModeProperty" SerializedProperty
+ProjectContextEditor --> "_buildsReflectionBakingCoverageModeProperty" SerializedProperty
+ProjectContextEditor --> "_parentNewObjectsUnderContextProperty" SerializedProperty
+@enduml

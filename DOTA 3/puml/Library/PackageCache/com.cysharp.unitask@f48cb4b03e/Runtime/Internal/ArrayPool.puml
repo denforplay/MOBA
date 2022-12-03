@@ -1,0 +1,11 @@
+@startuml
+class "ArrayPool`1"<T> <<sealed>> {
+    <<const>> DefaultMaxNumberOfArraysPerBucket : int = 50
+    ArrayPool()
+    + Rent(minimumLength:int) : T[]
+    + Return(array:T[], clearArray:bool) : void
+    {static} CalculateSize(size:int) : int
+    {static} GetQueueIndex(size:int) : int
+}
+"ArrayPool`1" o-> "Shared<T>" "ArrayPool`1"
+@enduml

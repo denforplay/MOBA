@@ -1,0 +1,12 @@
+@startuml
+class ConventionSelectTypesBinder {
+    + ConventionSelectTypesBinder(bindInfo:ConventionBindInfo)
+    CreateNextBinder() : ConventionFilterTypesBinder
+    + AllTypes() : ConventionFilterTypesBinder
+    + AllClasses() : ConventionFilterTypesBinder
+    + AllNonAbstractClasses() : ConventionFilterTypesBinder
+    + AllAbstractClasses() : ConventionFilterTypesBinder
+    + AllInterfaces() : ConventionFilterTypesBinder
+}
+ConventionSelectTypesBinder --> "_bindInfo" ConventionBindInfo
+@enduml

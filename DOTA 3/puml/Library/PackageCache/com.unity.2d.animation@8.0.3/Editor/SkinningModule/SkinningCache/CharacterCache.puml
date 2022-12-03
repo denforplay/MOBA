@@ -1,0 +1,20 @@
+@startuml
+class CharacterCache {
+    + GetEnumerator() : IEnumerator<CharacterPartCache>
+    GetEnumerator() : IEnumerator
+}
+class "IEnumerable`1"<T> {
+}
+class "List`1"<T> {
+}
+SkinningObject <|-- CharacterCache
+"IEnumerable`1" "<CharacterPartCache>" <|-- CharacterCache
+CharacterCache --> "m_Skeleton" SkeletonCache
+CharacterCache o-> "m_Parts<CharacterPartCache>" "List`1"
+CharacterCache --> "m_Dimension" Vector2Int
+CharacterCache o-> "m_Groups<CharacterGroupCache>" "List`1"
+CharacterCache --> "m_Pivot" Vector2
+CharacterCache --> "skeleton" SkeletonCache
+CharacterCache --> "dimension" Vector2Int
+CharacterCache --> "pivot" Vector2
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+interface IMainPresenter {
+    AssignHistoryPresenter(view:IHistoryView) : IHistoryPresenter
+    AssignChangesPresenter(view:IChangesView) : IChangesPresenter
+    RequestCancelJob() : void
+    UpdateTabIndex(index:int) : void
+    NavigateBack() : void
+}
+IPresenter <|-- IMainPresenter
+@enduml

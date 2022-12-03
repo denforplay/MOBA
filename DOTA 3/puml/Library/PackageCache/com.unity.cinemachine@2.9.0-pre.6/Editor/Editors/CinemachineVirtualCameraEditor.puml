@@ -1,0 +1,25 @@
+@startuml
+class CinemachineVirtualCameraEditor {
+    {static} AdoptGameViewCameraSettings(command:MenuCommand) : void
+    {static} AdoptSceneViewCameraSettings(command:MenuCommand) : void
+    OnSceneGUI() : void
+    + <<override>> OnInspectorGUI() : void
+    ResetTargetOnUndo() : void
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+}
+class CreatePipelineWithUndo {
+    {static} CreatePipelineWithUndo()
+}
+class CollectGizmoDrawers <<static>> {
+    {static} CollectGizmoDrawers()
+}
+class "Dictionary`2"<T1,T2> {
+}
+"CinemachineVirtualCameraBaseEditor`1" "<CinemachineVirtualCamera>" <|-- CinemachineVirtualCameraEditor
+CinemachineVirtualCameraEditor o-> "m_PipelineSet" VcamStageEditorPipeline
+CinemachineVirtualCameraEditor --> "m_PreviousPosition" Vector3
+CinemachineVirtualCameraEditor +-- CreatePipelineWithUndo
+CinemachineVirtualCameraEditor +-- CollectGizmoDrawers
+CollectGizmoDrawers --> "m_GizmoDrawers<Type,MethodInfo>" "Dictionary`2"
+@enduml

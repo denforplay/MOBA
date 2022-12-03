@@ -1,0 +1,7 @@
+@startuml
+class ProfileDataAPITests {
+    + ProfileData_AddMarkerName_AddsMarkerAndContainsName() : void
+    + ProfileData_AddThreadName_AddsThreadAndContainsName() : void
+}
+ProfileAnalyzerBaseTest <|-- ProfileDataAPITests
+@enduml

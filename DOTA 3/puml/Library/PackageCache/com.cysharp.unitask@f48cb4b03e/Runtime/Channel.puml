@@ -1,0 +1,108 @@
+@startuml
+class Channel <<static>> {
+    + {static} CreateSingleConsumerUnbounded() : Channel<T>
+}
+abstract class "Channel`2"<TWrite,TRead> {
+}
+abstract class "Channel`1"<T> {
+}
+abstract class "ChannelReader`1"<T> {
+    + {abstract} TryRead(item:T) : bool
+    + {abstract} WaitToReadAsync(cancellationToken:CancellationToken) : UniTask<bool>
+    + <<virtual>> ReadAsync(cancellationToken:CancellationToken) : UniTask<T>
+    <<async>> ReadAsyncCore(cancellationToken:CancellationToken) : UniTask<T>
+    + {abstract} ReadAllAsync(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<T>
+}
+abstract class "ChannelWriter`1"<T> {
+    + {abstract} TryWrite(item:T) : bool
+    + {abstract} TryComplete(error:Exception) : bool
+    + Complete(error:Exception) : void
+}
+class ChannelClosedException <<partial>> {
+    + ChannelClosedException()
+    + ChannelClosedException(message:string)
+    + ChannelClosedException(innerException:Exception)
+    + ChannelClosedException(message:string, innerException:Exception)
+}
+class "SingleConsumerUnboundedChannel`1"<T> {
+    closed : bool
+    + SingleConsumerUnboundedChannel()
+}
+class "Queue`1"<T> {
+}
+class SingleConsumerUnboundedChannelWriter <<sealed>> {
+    + SingleConsumerUnboundedChannelWriter(parent:SingleConsumerUnboundedChannel<T>)
+    + <<override>> TryWrite(item:T) : bool
+    + <<override>> TryComplete(error:Exception) : bool
+}
+class SingleConsumerUnboundedChannelReader <<sealed>> {
+    + SingleConsumerUnboundedChannelReader(parent:SingleConsumerUnboundedChannel<T>)
+    + <<override>> TryRead(item:T) : bool
+    + <<override>> WaitToReadAsync(cancellationToken:CancellationToken) : UniTask<bool>
+    + SingalContinuation() : void
+    + SingalCancellation(cancellationToken:CancellationToken) : void
+    + SingalCompleted(error:Exception) : void
+    + <<override>> ReadAllAsync(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<T>
+    GetResult(token:short) : bool
+    GetResult(token:short) : void
+    GetStatus(token:short) : UniTaskStatus
+    OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    UnsafeGetStatus() : UniTaskStatus
+    {static} CancellationCallback(state:object) : void
+}
+class "IUniTaskSource`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+class ReadAllAsyncEnumerable <<sealed>> {
+    cacheValue : bool
+    running : bool
+    + ReadAllAsyncEnumerable(parent:SingleConsumerUnboundedChannelReader, cancellationToken:CancellationToken)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    {static} CancellationCallback1(state:object) : void
+    {static} CancellationCallback2(state:object) : void
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"Channel`2" --> "Reader<TRead>" "ChannelReader`1"
+"Channel`2" --> "Writer<TWrite>" "ChannelWriter`1"
+"Channel`2" "<T,T>" <|-- "Channel`1"
+"ChannelReader`1" --> "Completion" UniTask
+InvalidOperationException <|-- ChannelClosedException
+"Channel`1" "<T>" <|-- "SingleConsumerUnboundedChannel`1"
+"SingleConsumerUnboundedChannel`1" --> "items<T>" "Queue`1"
+"SingleConsumerUnboundedChannel`1" --> "readerSource" SingleConsumerUnboundedChannelReader
+"SingleConsumerUnboundedChannel`1" --> "completedTaskSource" UniTaskCompletionSource
+"SingleConsumerUnboundedChannel`1" --> "completedTask" UniTask
+"SingleConsumerUnboundedChannel`1" --> "completionError" Exception
+"SingleConsumerUnboundedChannel`1" +-- SingleConsumerUnboundedChannelWriter
+"ChannelWriter`1" "<T>" <|-- SingleConsumerUnboundedChannelWriter
+SingleConsumerUnboundedChannelWriter --> "parent<T>" "SingleConsumerUnboundedChannel`1"
+"SingleConsumerUnboundedChannel`1" +-- SingleConsumerUnboundedChannelReader
+"ChannelReader`1" "<T>" <|-- SingleConsumerUnboundedChannelReader
+"IUniTaskSource`1" "<bool>" <|-- SingleConsumerUnboundedChannelReader
+SingleConsumerUnboundedChannelReader o-> "CancellationCallbackDelegate<object>" "Action`1"
+SingleConsumerUnboundedChannelReader --> "parent<T>" "SingleConsumerUnboundedChannel`1"
+SingleConsumerUnboundedChannelReader --> "cancellationToken" CancellationToken
+SingleConsumerUnboundedChannelReader --> "cancellationTokenRegistration" CancellationTokenRegistration
+SingleConsumerUnboundedChannelReader --> "core<bool>" "UniTaskCompletionSourceCore`1"
+SingleConsumerUnboundedChannelReader --> "Completion" UniTask
+SingleConsumerUnboundedChannelReader +-- ReadAllAsyncEnumerable
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- ReadAllAsyncEnumerable
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- ReadAllAsyncEnumerable
+ReadAllAsyncEnumerable o-> "CancellationCallback1Delegate<object>" "Action`1"
+ReadAllAsyncEnumerable o-> "CancellationCallback2Delegate<object>" "Action`1"
+ReadAllAsyncEnumerable --> "parent" SingleConsumerUnboundedChannelReader
+ReadAllAsyncEnumerable --> "cancellationToken1" CancellationToken
+ReadAllAsyncEnumerable --> "cancellationToken2" CancellationToken
+ReadAllAsyncEnumerable --> "cancellationTokenRegistration1" CancellationTokenRegistration
+ReadAllAsyncEnumerable --> "cancellationTokenRegistration2" CancellationTokenRegistration
+ReadAllAsyncEnumerable --> "current" T
+ReadAllAsyncEnumerable --> "Current" T
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+interface IPresenter {
+    Start() : void
+    Stop() : void
+}
+@enduml

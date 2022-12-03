@@ -1,0 +1,39 @@
+@startuml
+class BindingTreeViewDataSource {
+    {static} <<readonly>> s_DefaultValue : string
+    + <<const>> RootID : int
+    + <<const>> GroupID : int
+    + BindingTreeViewDataSource(treeView:TreeViewController, clip:AnimationClip, curveDataSource:CurveDataSource)
+    SetupRootNodeSettings() : void
+    + <<override>> FetchData() : void
+    + UpdateData() : void
+    GroupName(binding:EditorCurveBinding) : string
+    {static} CleanUpArrayBinding(propertyName:string, isGroup:bool) : string
+    PropertyName(binding:EditorCurveBinding, prependPathName:bool) : string
+    GetBindingGroup(binding:EditorCurveBinding) : BindingGroup
+    {static} CreateLeafNode(binding:EditorCurveBinding, parent:TreeViewItem, displayName:string) : CurveTreeViewNode
+    {static} FillMissingTransformCurves(bindings:List<EditorCurveBinding>) : void
+    {static} BindingSort(b:EditorCurveBinding) : int
+    {static} NamePrioritySort(group:ValueTuple<BindingGroup, List<EditorCurveBinding>>) : int
+    {static} CreateTuple(key:BindingGroup, items:IEnumerable<EditorCurveBinding>) : ValueTuple<BindingGroup, List<EditorCurveBinding>>
+}
+class BindingGroup <<struct>> {
+    + <<readonly>> GroupName : string
+    + <<readonly>> Path : string
+    + BindingGroup(path:string, groupName:string, type:Type)
+    + groupDisplayName : string <<get>>
+    + Equals(other:BindingGroup) : bool
+    + CompareTo(other:BindingGroup) : int
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class "IEquatable`1"<T> {
+}
+class "IComparable`1"<T> {
+}
+TreeViewDataSource <|-- BindingTreeViewDataSource
+BindingTreeViewDataSource +-- BindingGroup
+"IEquatable`1" "<BindingGroup>" <|-- BindingGroup
+"IComparable`1" "<BindingGroup>" <|-- BindingGroup
+BindingGroup --> "Type" Type
+@enduml

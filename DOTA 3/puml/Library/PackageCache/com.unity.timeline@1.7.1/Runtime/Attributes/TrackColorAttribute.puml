@@ -1,0 +1,8 @@
+@startuml
+class TrackColorAttribute {
+    + TrackColorAttribute(r:float, g:float, b:float)
+}
+Attribute <|-- TrackColorAttribute
+TrackColorAttribute --> "m_Color" Color
+TrackColorAttribute --> "color" Color
+@enduml

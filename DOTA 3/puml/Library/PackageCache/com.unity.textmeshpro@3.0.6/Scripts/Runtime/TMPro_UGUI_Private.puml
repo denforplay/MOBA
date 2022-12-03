@@ -1,0 +1,13 @@
+@startuml
+class TextMeshProUGUI <<partial>> {
+    UpdateEnvMapMatrix() : void
+    EnableMasking() : void
+    DisableMasking() : void
+    UpdateMask() : void
+    SetPerspectiveCorrection() : void
+    SetMeshArrays(size:int) : void
+    + <<override>> ComputeMarginSize() : void
+    OnPreRenderCanvas() : void
+    UpdateSDFScale(scaleDelta:float) : void
+}
+@enduml

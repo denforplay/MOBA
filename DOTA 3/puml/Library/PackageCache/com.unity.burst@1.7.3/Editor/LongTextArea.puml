@@ -1,0 +1,33 @@
+@startuml
+class LongTextArea {
+    + SetText(textToRender:string, isDarkMode:bool, isAssemblyKindJustChanged:bool, disassembler:BurstDisassembler, useDisassembler:bool) : void
+    + ExpandAllBlocks() : void
+    + FocusCodeBlocks() : void
+    + SetDisassembler(disassembler:BurstDisassembler) : void
+    + Invalidate() : void
+    + Interact(pos:Vector2) : void
+    + Render(style:GUIStyle, workingArea:Rect, showBranchMarkers:bool) : void
+}
+class Fragment <<struct>> {
+    + lineCount : int
+    + text : string
+}
+class HoverBox <<struct>> {
+    + info : string
+    + valid : bool
+}
+class Branch <<struct>> {
+    + UpperAngle : float
+    + LowerAngle : float
+    + Branch(edge:BurstDisassembler.AsmEdge, startHorizontal:Rect, verticalLine:Rect, endHorizontal:Rect, upperLine:Rect, lowerLine:Rect, angle1:float, angle2:float)
+}
+LongTextArea +-- Fragment
+LongTextArea +-- HoverBox
+HoverBox --> "position" Vector2
+LongTextArea +-- Branch
+Branch --> "StartHorizontal" Rect
+Branch --> "VerticalLine" Rect
+Branch --> "EndHorizontal" Rect
+Branch --> "UpperLine" Rect
+Branch --> "LowerLine" Rect
+@enduml

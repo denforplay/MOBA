@@ -20,6 +20,7 @@ namespace Views.UI.Panels
             var skillImage = _skillImages.FirstOrDefault(x => x.Id == skillConfig.Id);
             if (skillImage is not null)
             {
+                skillImage.SetSkillConfiguration(skillConfig);
                 skillImage.SkillImg.sprite = skillConfig.SkillSprite;
                 skillImage.DarkSkillImg.sprite = skillConfig.SkillSprite;
                 skillImage.SetCountdownTime(skillConfig.CountDowntime);

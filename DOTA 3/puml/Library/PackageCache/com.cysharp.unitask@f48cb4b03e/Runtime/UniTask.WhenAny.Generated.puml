@@ -1,0 +1,309 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>, task13:UniTask<T13>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>, task13:UniTask<T13>, task14:UniTask<T14>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14)>
+    + {static} WhenAny(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>, task13:UniTask<T13>, task14:UniTask<T14>, task15:UniTask<T15>) : UniTask<(int winArgumentIndex, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14, T15 result15)>
+}
+class "WhenAnyPromise`2"<T1,T2> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2>, awaiter:UniTask<T2>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`3"<T1,T2,T3> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3>, awaiter:UniTask<T3>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`4"<T1,T2,T3,T4> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4>, awaiter:UniTask<T4>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`5"<T1,T2,T3,T4,T5> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5>, awaiter:UniTask<T5>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`6"<T1,T2,T3,T4,T5,T6> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6>, awaiter:UniTask<T6>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`7"<T1,T2,T3,T4,T5,T6,T7> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7>, awaiter:UniTask<T7>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`8"<T1,T2,T3,T4,T5,T6,T7,T8> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8>, awaiter:UniTask<T8>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`9"<T1,T2,T3,T4,T5,T6,T7,T8,T9> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T8>.Awaiter) : void
+    {static} TryInvokeContinuationT9(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9>, awaiter:UniTask<T9>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`10"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T8>.Awaiter) : void
+    {static} TryInvokeContinuationT9(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T9>.Awaiter) : void
+    {static} TryInvokeContinuationT10(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, awaiter:UniTask<T10>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`11"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T8>.Awaiter) : void
+    {static} TryInvokeContinuationT9(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T9>.Awaiter) : void
+    {static} TryInvokeContinuationT10(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T10>.Awaiter) : void
+    {static} TryInvokeContinuationT11(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, awaiter:UniTask<T11>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`12"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T8>.Awaiter) : void
+    {static} TryInvokeContinuationT9(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T9>.Awaiter) : void
+    {static} TryInvokeContinuationT10(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T10>.Awaiter) : void
+    {static} TryInvokeContinuationT11(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T11>.Awaiter) : void
+    {static} TryInvokeContinuationT12(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, awaiter:UniTask<T12>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`13"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>, task13:UniTask<T13>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T8>.Awaiter) : void
+    {static} TryInvokeContinuationT9(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T9>.Awaiter) : void
+    {static} TryInvokeContinuationT10(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T10>.Awaiter) : void
+    {static} TryInvokeContinuationT11(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T11>.Awaiter) : void
+    {static} TryInvokeContinuationT12(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T12>.Awaiter) : void
+    {static} TryInvokeContinuationT13(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, awaiter:UniTask<T13>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`14"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>, task13:UniTask<T13>, task14:UniTask<T14>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T8>.Awaiter) : void
+    {static} TryInvokeContinuationT9(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T9>.Awaiter) : void
+    {static} TryInvokeContinuationT10(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T10>.Awaiter) : void
+    {static} TryInvokeContinuationT11(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T11>.Awaiter) : void
+    {static} TryInvokeContinuationT12(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T12>.Awaiter) : void
+    {static} TryInvokeContinuationT13(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T13>.Awaiter) : void
+    {static} TryInvokeContinuationT14(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, awaiter:UniTask<T14>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`15"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(task1:UniTask<T1>, task2:UniTask<T2>, task3:UniTask<T3>, task4:UniTask<T4>, task5:UniTask<T5>, task6:UniTask<T6>, task7:UniTask<T7>, task8:UniTask<T8>, task9:UniTask<T9>, task10:UniTask<T10>, task11:UniTask<T11>, task12:UniTask<T12>, task13:UniTask<T13>, task14:UniTask<T14>, task15:UniTask<T15>)
+    {static} TryInvokeContinuationT1(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T1>.Awaiter) : void
+    {static} TryInvokeContinuationT2(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T2>.Awaiter) : void
+    {static} TryInvokeContinuationT3(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T3>.Awaiter) : void
+    {static} TryInvokeContinuationT4(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T4>.Awaiter) : void
+    {static} TryInvokeContinuationT5(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T5>.Awaiter) : void
+    {static} TryInvokeContinuationT6(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T6>.Awaiter) : void
+    {static} TryInvokeContinuationT7(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T7>.Awaiter) : void
+    {static} TryInvokeContinuationT8(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T8>.Awaiter) : void
+    {static} TryInvokeContinuationT9(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T9>.Awaiter) : void
+    {static} TryInvokeContinuationT10(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T10>.Awaiter) : void
+    {static} TryInvokeContinuationT11(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T11>.Awaiter) : void
+    {static} TryInvokeContinuationT12(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T12>.Awaiter) : void
+    {static} TryInvokeContinuationT13(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T13>.Awaiter) : void
+    {static} TryInvokeContinuationT14(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T14>.Awaiter) : void
+    {static} TryInvokeContinuationT15(self:WhenAnyPromise<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, awaiter:UniTask<T15>.Awaiter) : void
+    + GetResult(token:short) : (int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14, T15 result15)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "IUniTaskSource`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+UniTask +-- "WhenAnyPromise`2"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2)>" <|-- "WhenAnyPromise`2"
+"WhenAnyPromise`2" --> "core<(int, T1 result1, T2 result2)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`3"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3)>" <|-- "WhenAnyPromise`3"
+"WhenAnyPromise`3" --> "core<(int, T1 result1, T2 result2, T3 result3)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`4"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4)>" <|-- "WhenAnyPromise`4"
+"WhenAnyPromise`4" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`5"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5)>" <|-- "WhenAnyPromise`5"
+"WhenAnyPromise`5" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`6"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6)>" <|-- "WhenAnyPromise`6"
+"WhenAnyPromise`6" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`7"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7)>" <|-- "WhenAnyPromise`7"
+"WhenAnyPromise`7" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`8"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8)>" <|-- "WhenAnyPromise`8"
+"WhenAnyPromise`8" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`9"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9)>" <|-- "WhenAnyPromise`9"
+"WhenAnyPromise`9" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`10"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10)>" <|-- "WhenAnyPromise`10"
+"WhenAnyPromise`10" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`11"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11)>" <|-- "WhenAnyPromise`11"
+"WhenAnyPromise`11" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`12"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12)>" <|-- "WhenAnyPromise`12"
+"WhenAnyPromise`12" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`13"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13)>" <|-- "WhenAnyPromise`13"
+"WhenAnyPromise`13" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`14"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14)>" <|-- "WhenAnyPromise`14"
+"WhenAnyPromise`14" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`15"
+"IUniTaskSource`1" "<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14, T15 result15)>" <|-- "WhenAnyPromise`15"
+"WhenAnyPromise`15" --> "core<(int, T1 result1, T2 result2, T3 result3, T4 result4, T5 result5, T6 result6, T7 result7, T8 result8, T9 result9, T10 result10, T11 result11, T12 result12, T13 result13, T14 result14, T15 result15)>" "UniTaskCompletionSourceCore`1"
+@enduml

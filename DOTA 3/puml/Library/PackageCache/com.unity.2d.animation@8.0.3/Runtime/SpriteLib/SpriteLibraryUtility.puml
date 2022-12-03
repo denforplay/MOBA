@@ -1,0 +1,6 @@
+@startuml
+class SpriteLibraryUtility <<static>> {
+    {static} Bit30Hash_GetStringHash(value:string) : int
+    {static} PreserveFirst30Bits(input:int) : int
+}
+@enduml

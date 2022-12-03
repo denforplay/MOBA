@@ -1,0 +1,5 @@
+@startuml
+class CollabSettingsManager <<static>> {
+    + {static} Get(key:string, scope:SettingsScope, fallback:T) : T
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class ProjectSettingsProviderView {
+    + ProjectSettingsProviderView()
+    + <<override>> OnGUI(searchContext:string) : void
+}
+SettingsProvider <|-- ProjectSettingsProviderView
+@enduml

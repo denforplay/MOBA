@@ -1,0 +1,43 @@
+@startuml
+abstract class PlayerLoopTimer {
+    <<readonly>> state : object
+    <<readonly>> periodic : bool
+    isRunning : bool
+    tryStop : bool
+    isDisposed : bool
+    + {static} Create(interval:TimeSpan, periodic:bool, delayType:DelayType, playerLoopTiming:PlayerLoopTiming, cancellationToken:CancellationToken, timerCallback:Action<object>, state:object) : PlayerLoopTimer
+    + {static} StartNew(interval:TimeSpan, periodic:bool, delayType:DelayType, playerLoopTiming:PlayerLoopTiming, cancellationToken:CancellationToken, timerCallback:Action<object>, state:object) : PlayerLoopTimer
+    + Restart() : void
+    + Restart(interval:TimeSpan) : void
+    + Stop() : void
+    + Dispose() : void
+    MoveNext() : bool
+}
+class DeltaTimePlayerLoopTimer <<sealed>> {
+    initialFrame : int
+    elapsed : float
+    interval : float
+    + DeltaTimePlayerLoopTimer(interval:TimeSpan, periodic:bool, playerLoopTiming:PlayerLoopTiming, cancellationToken:CancellationToken, timerCallback:Action<object>, state:object)
+}
+class IgnoreTimeScalePlayerLoopTimer <<sealed>> {
+    initialFrame : int
+    elapsed : float
+    interval : float
+    + IgnoreTimeScalePlayerLoopTimer(interval:TimeSpan, periodic:bool, playerLoopTiming:PlayerLoopTiming, cancellationToken:CancellationToken, timerCallback:Action<object>, state:object)
+}
+class RealtimePlayerLoopTimer <<sealed>> {
+    intervalTicks : long
+    + RealtimePlayerLoopTimer(interval:TimeSpan, periodic:bool, playerLoopTiming:PlayerLoopTiming, cancellationToken:CancellationToken, timerCallback:Action<object>, state:object)
+}
+class "Action`1"<T> {
+}
+IDisposable <|-- PlayerLoopTimer
+IPlayerLoopItem <|-- PlayerLoopTimer
+PlayerLoopTimer --> "cancellationToken" CancellationToken
+PlayerLoopTimer --> "timerCallback<object>" "Action`1"
+PlayerLoopTimer --> "playerLoopTiming" PlayerLoopTiming
+PlayerLoopTimer <|-- DeltaTimePlayerLoopTimer
+PlayerLoopTimer <|-- IgnoreTimeScalePlayerLoopTimer
+PlayerLoopTimer <|-- RealtimePlayerLoopTimer
+RealtimePlayerLoopTimer --> "stopwatch" ValueStopwatch
+@enduml

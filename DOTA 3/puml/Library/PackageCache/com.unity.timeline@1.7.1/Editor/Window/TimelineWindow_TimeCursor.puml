@@ -1,0 +1,10 @@
+@startuml
+class TimelineWindow <<partial>> {
+    TimeCursorGUI(area:TimelineItemArea) : void
+    CanDrawTimeCursor(area:TimelineItemArea) : bool
+    DrawTimeOnSlider() : void
+    DrawTimeCursor(drawHead:bool, drawline:bool) : void
+    OnTrackHeadDrag(newTime:double) : void
+}
+TimelineWindow --> "m_PlayHead" TimeAreaItem
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class PSDImportPostProcessor {
+    + {static} currentApplyAssetPath : string <<set>>
+    {static} OnPostprocessAllAssets(importedAssets:string[], deletedAssets:string[], movedAssets:string[], movedFromPath:string[]) : void
+}
+AssetPostprocessor <|-- PSDImportPostProcessor
+@enduml

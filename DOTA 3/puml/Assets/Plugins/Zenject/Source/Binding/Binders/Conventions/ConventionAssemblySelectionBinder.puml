@@ -1,0 +1,14 @@
+@startuml
+class ConventionAssemblySelectionBinder {
+    + ConventionAssemblySelectionBinder(bindInfo:ConventionBindInfo)
+    + FromAllAssemblies() : void
+    + FromAssemblyContaining() : void
+    + FromAssembliesContaining(types:Type[]) : void
+    + FromAssembliesContaining(types:IEnumerable<Type>) : void
+    + FromThisAssembly() : void
+    + FromAssembly(assembly:Assembly) : void
+    + FromAssemblies(assemblies:Assembly[]) : void
+    + FromAssemblies(assemblies:IEnumerable<Assembly>) : void
+    + FromAssembliesWhere(predicate:Func<Assembly, bool>) : void
+}
+@enduml

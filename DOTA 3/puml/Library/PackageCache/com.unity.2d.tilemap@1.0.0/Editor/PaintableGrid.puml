@@ -1,0 +1,23 @@
+@startuml
+abstract class PaintableGrid {
+    + {abstract} Repaint() : void
+    + {abstract} isActive : bool <<get>>
+    + isPicking : bool <<get>>
+    + isBoxing : bool <<get>>
+    + zPosition : int <<get>> <<set>>
+    + <<virtual>> OnGUI() : void
+    + ChangeZPosition(change:int) : void
+    + ResetZPosition() : void
+    + {static} InGridEditMode() : bool
+    + {static} EditTypeToBrushTool(activeToolType:Type) : GridBrushBase.Tool
+}
+enum MarqueeType {
+    None= 0,
+    Pick,
+    Box,
+    Select,
+}
+ScriptableObject <|-- PaintableGrid
+PaintableGrid --> "mouseGridPosition" Vector2Int
+PaintableGrid +-- MarqueeType
+@enduml

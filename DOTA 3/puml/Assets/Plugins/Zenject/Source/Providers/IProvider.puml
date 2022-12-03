@@ -1,0 +1,8 @@
+@startuml
+interface IProvider {
+    TypeVariesBasedOnMemberType : bool <<get>>
+    IsCached : bool <<get>>
+    GetInstanceType(context:InjectContext) : Type
+    GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, instances:List<object>) : void
+}
+@enduml

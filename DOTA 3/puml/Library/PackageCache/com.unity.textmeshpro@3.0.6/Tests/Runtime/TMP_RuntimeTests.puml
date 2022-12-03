@@ -1,0 +1,13 @@
+@startuml
+class TMP_RuntimeTests {
+    + Setup() : void
+    + {static} TestCases_Parsing_TextInfo_WordWrapDisabled() : IEnumerable<object[]>
+    + Parsing_TextInfo_WordWrapDisabled(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+    + {static} TestCases_Parsing_TextInfo_WordWrapEnabled() : IEnumerable<object[]>
+    + Parsing_TextInfo_WordWrapEnabled(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+    + {static} TestCases_Parsing_TextInfo_AlignmentTopJustified() : IEnumerable<object[]>
+    + Parsing_TextInfo_AlignmentTopJustified(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+    + {static} TestCases_Parsing_TextInfo_RichText() : IEnumerable<object[]>
+    + Parsing_TextInfo_RichText(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+}
+@enduml

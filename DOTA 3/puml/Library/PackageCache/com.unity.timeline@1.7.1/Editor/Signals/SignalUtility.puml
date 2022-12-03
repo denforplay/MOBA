@@ -1,0 +1,22 @@
+@startuml
+interface ISignalAssetProvider {
+    AvailableSignalAssets() : IEnumerable<SignalAsset>
+    CreateNewSignalAsset(path:string) : void
+}
+class SignalUtility <<static>> {
+    <<const>> k_SignalExtension : string = "signal"
+    + {static} DrawSignalNames(assetProvider:ISignalAssetProvider, position:Rect, label:GUIContent, multipleValues:bool) : void
+    + {static} GetNewSignalPath() : string
+    + {static} IsSignalAssetHandled(receiver:SignalReceiver, asset:SignalAsset) : bool
+    + {static} AddNewReaction(receiver:SignalReceiver, signalAsset:SignalAsset) : void
+    + {static} DrawCenteredMessage(message:string) : void
+    + {static} DrawCenteredButton(buttonLabel:GUIContent) : bool
+}
+class SignalReceiverUtility <<static>> {
+    <<const>> k_DefaultTreeviewHeaderHeight : int = 20
+    + {static} headerHeight : int <<get>>
+    + {static} FindSignalsProperty(obj:SerializedObject) : SerializedProperty
+    + {static} FindEventsProperty(obj:SerializedObject) : SerializedProperty
+}
+ISignalAssetProvider --> "signalAsset" SignalAsset
+@enduml

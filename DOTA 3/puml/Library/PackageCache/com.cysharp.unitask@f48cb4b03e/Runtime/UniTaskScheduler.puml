@@ -1,0 +1,6 @@
+@startuml
+class UniTaskScheduler <<static>> {
+    + {static}  <<event>> UnobservedTaskException : Action<Exception> 
+    + {static} PropagateOperationCanceledException : bool = false
+}
+@enduml

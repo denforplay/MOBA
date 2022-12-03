@@ -1,0 +1,36 @@
+@startuml
+class SpriteBoneData {
+    + parentId : int
+    + depth : float
+    + length : float
+}
+abstract class BaseSpriteMeshData {
+    + vertexCount : int <<get>>
+    + <<virtual>> boneCount : int <<get>>
+    + <<virtual>> spriteName : string <<get>>
+    + SetVertices(newVertices:Vector2[], newWeights:EditableBoneWeight[]) : void
+    + AddVertex(position:Vector2, weight:BoneWeight) : void
+    + RemoveVertex(index:int) : void
+    + {abstract} GetBoneData(index:int) : SpriteBoneData
+    + {abstract} GetBoneDepth(index:int) : float
+    + Clear() : void
+}
+class SpriteMeshData {
+    + <<override>> boneCount : int <<get>>
+    + <<override>> GetBoneData(index:int) : SpriteBoneData
+    + <<override>> GetBoneDepth(index:int) : float
+    + SetFrame(newFrame:Rect) : void
+}
+class "List`1"<T> {
+}
+SpriteBoneData --> "localPosition" Vector2
+SpriteBoneData o-> "localRotation" Quaternion
+SpriteBoneData --> "position" Vector2
+SpriteBoneData --> "endPosition" Vector2
+BaseSpriteMeshData --> "frame" Rect
+BaseSpriteMeshData <|-- SpriteMeshData
+SpriteMeshData o-> "m_Bones<SpriteBoneData>" "List`1"
+SpriteMeshData --> "m_Frame" Rect
+SpriteMeshData --> "frame" Rect
+SpriteMeshData --> "bones<SpriteBoneData>" "List`1"
+@enduml

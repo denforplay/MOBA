@@ -1,0 +1,42 @@
+@startuml
+class TimelinePreferences {
+    + timeUnitInFrame : bool
+    + showAudioWaveform : bool = true
+    m_AudioScrubbing : bool
+    + audioScrubbing : bool <<get>> <<set>>
+    + snapToFrame : bool = true
+    + playbackLockedToFrame : bool <<get>> <<set>>
+    + edgeSnap : bool = true
+    OnDisable() : void
+    + Save() : void
+}
+class TimelinePreferencesProvider {
+    + TimelinePreferencesProvider(path:string, scopes:SettingsScope, keywords:IEnumerable<string>)
+    + <<override>> OnActivate(searchContext:string, rootElement:VisualElement) : void
+    + <<override>> OnGUI(searchContext:string) : void
+    + {static} CreateTimelineProjectSettingProvider() : SettingsProvider
+}
+class "ScriptableSingleton`1"<T> {
+}
+class Styles {
+}
+"ScriptableSingleton`1" "<TimelinePreferences>" <|-- TimelinePreferences
+TimelinePreferences --> "timeFormat" TimeFormat
+TimelinePreferences o-> "playbackScrollMode" PlaybackScrollMode
+SettingsProvider <|-- TimelinePreferencesProvider
+TimelinePreferencesProvider --> "m_SerializedObject" SerializedObject
+TimelinePreferencesProvider --> "m_ShowAudioWaveform" SerializedProperty
+TimelinePreferencesProvider --> "m_TimeFormat" SerializedProperty
+TimelinePreferencesProvider --> "m_SnapToFrame" SerializedProperty
+TimelinePreferencesProvider --> "m_EdgeSnap" SerializedProperty
+TimelinePreferencesProvider --> "m_PlaybackScrollMode" SerializedProperty
+TimelinePreferencesProvider --> "m_PlaybackLockedToFrame" SerializedProperty
+TimelinePreferencesProvider +-- Styles
+Styles o-> "TimeUnitLabel" GUIContent
+Styles o-> "ShowAudioWaveformLabel" GUIContent
+Styles o-> "AudioScrubbingLabel" GUIContent
+Styles o-> "SnapToFrameLabel" GUIContent
+Styles o-> "EdgeSnapLabel" GUIContent
+Styles o-> "PlaybackScrollModeLabel" GUIContent
+Styles o-> "EditorSettingLabel" GUIContent
+@enduml

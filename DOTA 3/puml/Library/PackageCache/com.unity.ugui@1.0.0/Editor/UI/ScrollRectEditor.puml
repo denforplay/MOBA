@@ -1,0 +1,32 @@
+@startuml
+class ScrollRectEditor {
+    m_ViewportIsNotChild : bool
+    m_HScrollbarIsNotChild : bool
+    m_VScrollbarIsNotChild : bool
+    {static} s_HError : string = "For this visibility mode, the Viewport property and the Horizontal Scrollbar property both needs to be set to a Rect Transform that is a child to the Scroll Rect."
+    {static} s_VError : string = "For this visibility mode, the Viewport property and the Vertical Scrollbar property both needs to be set to a Rect Transform that is a child to the Scroll Rect."
+    SetAnimBools(instant:bool) : void
+    SetAnimBool(a:AnimBool, value:bool, instant:bool) : void
+    CalculateCachedValues() : void
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- ScrollRectEditor
+ScrollRectEditor --> "m_Content" SerializedProperty
+ScrollRectEditor --> "m_Horizontal" SerializedProperty
+ScrollRectEditor --> "m_Vertical" SerializedProperty
+ScrollRectEditor --> "m_MovementType" SerializedProperty
+ScrollRectEditor --> "m_Elasticity" SerializedProperty
+ScrollRectEditor --> "m_Inertia" SerializedProperty
+ScrollRectEditor --> "m_DecelerationRate" SerializedProperty
+ScrollRectEditor --> "m_ScrollSensitivity" SerializedProperty
+ScrollRectEditor --> "m_Viewport" SerializedProperty
+ScrollRectEditor --> "m_HorizontalScrollbar" SerializedProperty
+ScrollRectEditor --> "m_VerticalScrollbar" SerializedProperty
+ScrollRectEditor --> "m_HorizontalScrollbarVisibility" SerializedProperty
+ScrollRectEditor --> "m_VerticalScrollbarVisibility" SerializedProperty
+ScrollRectEditor --> "m_HorizontalScrollbarSpacing" SerializedProperty
+ScrollRectEditor --> "m_VerticalScrollbarSpacing" SerializedProperty
+ScrollRectEditor --> "m_OnValueChanged" SerializedProperty
+ScrollRectEditor --> "m_ShowElasticity" AnimBool
+ScrollRectEditor --> "m_ShowDecelerationRate" AnimBool
+@enduml

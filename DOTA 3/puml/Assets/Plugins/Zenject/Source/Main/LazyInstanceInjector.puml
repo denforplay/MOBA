@@ -1,0 +1,16 @@
+@startuml
+class LazyInstanceInjector {
+    + LazyInstanceInjector(container:DiContainer)
+    + AddInstance(instance:object) : void
+    + AddInstances(instances:IEnumerable<object>) : void
+    + LazyInject(instance:object) : void
+    + LazyInjectAll() : void
+}
+class "HashSet`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+LazyInstanceInjector --> "_container" DiContainer
+LazyInstanceInjector o-> "_instancesToInject<object>" "HashSet`1"
+LazyInstanceInjector --> "Instances<object>" "IEnumerable`1"
+@enduml

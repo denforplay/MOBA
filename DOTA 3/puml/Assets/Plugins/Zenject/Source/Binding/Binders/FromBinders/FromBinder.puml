@@ -1,0 +1,52 @@
+@startuml
+abstract class FromBinder {
+    + FromBinder(bindContainer:DiContainer, bindInfo:BindInfo, bindStatement:BindStatement)
+    + FromNew() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolve() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolve(subIdentifier:object) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolve(subIdentifier:object, source:InjectSources) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveAll() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveAll(subIdentifier:object) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveAll(subIdentifier:object, source:InjectSources) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    FromResolveInternal(subIdentifier:object, matchAll:bool, source:InjectSources) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromSubContainerResolveAll() : SubContainerBinder
+    + FromSubContainerResolveAll(subIdentifier:object) : SubContainerBinder
+    + FromSubContainerResolve() : SubContainerBinder
+    + FromSubContainerResolve(subIdentifier:object) : SubContainerBinder
+    FromSubContainerResolveInternal(subIdentifier:object, resolveAll:bool) : SubContainerBinder
+    + FromComponentsOn(gameObject:GameObject) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentOn(gameObject:GameObject) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsOn(gameObjectGetter:Func<InjectContext, GameObject>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentOn(gameObjectGetter:Func<InjectContext, GameObject>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsOnRoot() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentOnRoot() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOn(gameObject:GameObject) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOn(gameObjectGetter:Func<InjectContext, GameObject>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentSibling() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOnRoot() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOnNewGameObject() : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOnNewPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOnNewPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentInNewPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsInNewPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentInNewPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsInNewPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewScriptableObject(resource:ScriptableObject) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromScriptableObject(resource:ScriptableObject) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    FromScriptableObjectInternal(resource:ScriptableObject, createNew:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewScriptableObjectResource(resourcePath:string) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromScriptableObjectResource(resourcePath:string) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    FromScriptableObjectResourceInternal(resourcePath:string, createNew:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResource(resourcePath:string) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResources(resourcePath:string) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentInChildren(includeInactive:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentInParents(excludeSelf:bool, includeInactive:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsInParents(excludeSelf:bool, includeInactive:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentSibling() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsSibling() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentInHierarchy(includeInactive:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromMethodUntyped(method:Func<InjectContext, object>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromMethodMultipleUntyped(method:Func<InjectContext, IEnumerable<object>>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+ScopeConcreteIdArgConditionCopyNonLazyBinder <|-- FromBinder
+@enduml

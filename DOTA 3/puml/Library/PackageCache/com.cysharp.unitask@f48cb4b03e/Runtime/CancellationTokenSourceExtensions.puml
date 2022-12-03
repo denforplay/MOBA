@@ -1,0 +1,12 @@
+@startuml
+class CancellationTokenSourceExtensions <<static>> <<partial>> {
+    {static} CancelCancellationTokenSourceState(state:object) : void
+    + {static} CancelAfterSlim(cts:CancellationTokenSource, millisecondsDelay:int, delayType:DelayType, delayTiming:PlayerLoopTiming) : IDisposable
+    + {static} CancelAfterSlim(cts:CancellationTokenSource, delayTimeSpan:TimeSpan, delayType:DelayType, delayTiming:PlayerLoopTiming) : IDisposable
+    + {static} RegisterRaiseCancelOnDestroy(cts:CancellationTokenSource, component:Component) : void
+    + {static} RegisterRaiseCancelOnDestroy(cts:CancellationTokenSource, gameObject:GameObject) : void
+}
+class "Action`1"<T> {
+}
+CancellationTokenSourceExtensions o-> "CancelCancellationTokenSourceStateDelegate<object>" "Action`1"
+@enduml

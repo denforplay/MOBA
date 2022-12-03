@@ -1,0 +1,15 @@
+@startuml
+class Histogram {
+    + SetUnits(units:Units) : void
+    + Histogram(draw2D:Draw2D, units:Units)
+    + Histogram(draw2D:Draw2D, units:Units, barBackground:Color)
+    + DrawStart(width:float) : void
+    + DrawEnd(width:float, min:float, max:float, spacing:float) : void
+    + DrawBackground(width:float, height:float, bucketCount:int, min:float, max:float, spacing:float) : void
+    + DrawData(width:float, height:float, buckets:int[], totalFrameCount:int, min:float, max:float, barColor:Color, spacing:float) : void
+    + Draw(width:float, height:float, buckets:int[], totalFrameCount:int, min:float, max:float, barColor:Color) : void
+}
+Histogram --> "m_2D" Draw2D
+Histogram --> "m_ColorBarBackground" Color
+Histogram --> "m_Units" DisplayUnits
+@enduml

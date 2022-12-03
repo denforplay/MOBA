@@ -1,0 +1,25 @@
+@startuml
+interface IMainModel {
+     <<event>> ConflictStatusChange : Action<bool> 
+     <<event>> OperationStatusChange : Action<bool> 
+     <<event>> OperationProgressChange : Action<IProgressInfo> 
+     <<event>> ErrorOccurred : Action<IErrorInfo> 
+     <<event>> ErrorCleared : Action 
+     <<event>> RemoteRevisionsAvailabilityChange : Action<bool> 
+     <<event>> BackButtonStateUpdated : Action<string> 
+    RemoteRevisionsAvailable : bool <<get>>
+    Conflicted : bool <<get>>
+    CurrentTabIndex : int <<get>> <<set>>
+    ConstructHistoryModel() : IHistoryModel
+    ConstructChangesModel() : IChangesModel
+    ClearError() : void
+    RequestSync() : void
+    RequestCancelJob() : void
+    GetBackNavigation() : (string id, string text, Action backAction)?
+    RegisterBackNavigation(id:string, text:string, backAction:Action) : void
+    UnregisterBackNavigation(id:string) : bool
+}
+IModel <|-- IMainModel
+IMainModel --> "ProgressInfo" IProgressInfo
+IMainModel --> "ErrorInfo" IErrorInfo
+@enduml

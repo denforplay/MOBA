@@ -1,0 +1,16 @@
+@startuml
+class TaskTracker <<static>> {
+    + {static} TrackActiveTask(task:IUniTaskSource, skipFrame:int) : void
+    + {static} RemoveTracking(task:IUniTaskSource) : void
+    {static} dirty : bool
+    + {static} CheckAndResetDirty() : bool
+    + {static} ForEachActiveTask(action:Action<int, string, UniTaskStatus, DateTime, string>) : void
+    {static} TypeBeautify(type:Type, sb:StringBuilder) : void
+}
+class "List`1"<T> {
+}
+class "WeakDictionary`2"<T1,T2> {
+}
+TaskTracker o-> "listPool<KeyValuePair<IUniTaskSource, (string formattedType, int trackingId, DateTime addTime, string stackTrace)>>" "List`1"
+TaskTracker o-> "tracking<IUniTaskSource,(string formattedType, int trackingId, DateTime addTime, string stackTrace)>" "WeakDictionary`2"
+@enduml

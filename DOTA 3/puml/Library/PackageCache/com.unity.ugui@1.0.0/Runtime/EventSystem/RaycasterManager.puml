@@ -1,0 +1,7 @@
+@startuml
+class RaycasterManager <<static>> {
+    + {static} AddRaycaster(baseRaycaster:BaseRaycaster) : void
+    + {static} GetRaycasters() : List<BaseRaycaster>
+    + {static} RemoveRaycasters(baseRaycaster:BaseRaycaster) : void
+}
+@enduml

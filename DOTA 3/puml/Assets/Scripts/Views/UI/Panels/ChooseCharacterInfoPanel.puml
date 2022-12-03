@@ -1,0 +1,6 @@
+@startuml
+class ChooseCharacterInfoPanel {
+    + DisplayCharacterInfo(characterInfo:CharacterInfo) : void
+}
+MonoBehaviour <|-- ChooseCharacterInfoPanel
+@enduml

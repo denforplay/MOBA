@@ -1,0 +1,34 @@
+@startuml
+abstract class SpriteFrameModuleBase <<partial>> {
+    SetupIntegerField(field:IntegerField, onFocusOutEvent:EventCallback<FocusOutEvent>, onChangeEvent:EventCallback<ChangeEvent<int>>) : void
+    SetDragFieldLimit(field:IntegerField, value:int) : void
+    OnPositionIntXChange(evt:ChangeEvent<int>) : void
+    OnPositionIntYChange(evt:ChangeEvent<int>) : void
+    OnPositionIntWChange(evt:ChangeEvent<int>) : void
+    OnPositionIntHChange(evt:ChangeEvent<int>) : void
+    OnBorderIntLChange(evt:ChangeEvent<int>) : void
+    OnBorderIntBChange(evt:ChangeEvent<int>) : void
+    OnBorderIntRChange(evt:ChangeEvent<int>) : void
+    OnBorderIntTChange(evt:ChangeEvent<int>) : void
+    + <<override>> DoMainGUI() : void
+    + <<override>> DoPostGUI() : void
+}
+enum GizmoMode {
+    BorderEditing,
+    RectEditing,
+}
+class Styles {
+    + Styles()
+}
+SpriteEditorModuleBase <|-- SpriteFrameModuleBase
+SpriteFrameModuleBase +-- GizmoMode
+SpriteFrameModuleBase +-- Styles
+Styles o-> "dragdot" GUIStyle
+Styles o-> "dragdotactive" GUIStyle
+Styles o-> "createRect" GUIStyle
+Styles o-> "pivotdotactive" GUIStyle
+Styles o-> "pivotdot" GUIStyle
+Styles o-> "dragBorderdot" GUIStyle
+Styles o-> "dragBorderDotActive" GUIStyle
+Styles --> "toolbar" GUIStyle
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+class TMP_SDFShaderGUI {
+    {static} s_Face : bool = true
+    {static} s_Outline : bool = true
+    {static} s_Outline2 : bool
+    {static} s_Underlay : bool
+    {static} s_Lighting : bool
+    {static} s_Glow : bool
+    {static} s_Bevel : bool
+    {static} s_Light : bool
+    {static} s_Bump : bool
+    {static} s_Env : bool
+    {static} TMP_SDFShaderGUI()
+    DoFacePanel() : void
+    DoOutlinePanel() : void
+    DoOutline2Panel() : void
+    DoUnderlayPanel() : void
+    DoBevelPanel() : void
+    DoLocalLightingPanel() : void
+    DoSurfaceLightingPanel() : void
+    DoBumpMapPanel() : void
+    DoEnvMapPanel() : void
+    DoGlowPanel() : void
+    DoDebugPanel() : void
+    DoMaskSubgroup() : void
+    DoMaskTexSubgroup() : void
+}
+TMP_BaseShaderGUI <|-- TMP_SDFShaderGUI
+TMP_SDFShaderGUI --> "s_OutlineFeature" ShaderFeature
+TMP_SDFShaderGUI --> "s_UnderlayFeature" ShaderFeature
+TMP_SDFShaderGUI --> "s_BevelFeature" ShaderFeature
+TMP_SDFShaderGUI --> "s_GlowFeature" ShaderFeature
+TMP_SDFShaderGUI --> "s_MaskFeature" ShaderFeature
+@enduml

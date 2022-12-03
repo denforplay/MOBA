@@ -1,0 +1,11 @@
+@startuml
+class ShowUsagesExplorerButton {
+    + ShowUsagesExplorerButton(lifetime:Lifetime, tool:SceneOccurrenceExplorerTool, isHorizontal:bool)
+    + RefreshPresentation() : void
+}
+interface IPresentationRefreshable {
+    RefreshPresentation() : void
+}
+RiderFlowEditorToolbarButton <|-- ShowUsagesExplorerButton
+IPresentationRefreshable <|-- ShowUsagesExplorerButton
+@enduml

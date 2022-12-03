@@ -1,0 +1,9 @@
+@startuml
+class ShopItems {
+    + ShopItems(shopItemsConfiguration:ShopItemsConfiguration)
+    + SearchBranchWithType(itemType:ItemType) : List<ItemEdge>
+}
+class "List`1"<T> {
+}
+ShopItems --> "StartItemEdges<ItemEdge>" "List`1"
+@enduml

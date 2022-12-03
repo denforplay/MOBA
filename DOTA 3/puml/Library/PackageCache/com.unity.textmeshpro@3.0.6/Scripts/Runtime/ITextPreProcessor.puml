@@ -1,0 +1,5 @@
+@startuml
+interface ITextPreprocessor {
+    PreprocessText(text:string) : string
+}
+@enduml

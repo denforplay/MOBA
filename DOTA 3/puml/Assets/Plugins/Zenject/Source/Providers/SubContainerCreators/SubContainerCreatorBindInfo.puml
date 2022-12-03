@@ -1,0 +1,7 @@
+@startuml
+class SubContainerCreatorBindInfo {
+    + DefaultParentName : string <<get>> <<set>>
+    + CreateKernel : bool <<get>> <<set>>
+}
+SubContainerCreatorBindInfo --> "KernelType" Type
+@enduml

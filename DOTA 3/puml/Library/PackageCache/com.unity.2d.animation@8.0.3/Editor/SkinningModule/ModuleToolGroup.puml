@@ -1,0 +1,20 @@
+@startuml
+class ModuleToolGroup {
+    + AddToolToGroup(groupId:int, tool:BaseTool, toolActivatedCallback:Action) : void
+    + ActivateTool(tool:BaseTool) : void
+}
+class ToolGroupEntry {
+}
+class ToolGroup {
+    + groupId : int
+    + previousToolIndex : int
+}
+class "List`1"<T> {
+}
+ModuleToolGroup o-> "m_ToolGroups<ToolGroup>" "List`1"
+ModuleToolGroup +-- ToolGroupEntry
+ToolGroupEntry --> "tool" BaseTool
+ToolGroupEntry --> "activateCallback" Action
+ModuleToolGroup +-- ToolGroup
+ToolGroup o-> "tools<ToolGroupEntry>" "List`1"
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class MeshPreviewTool {
+    + DrawOverlay() : void
+    + OverlayWireframe() : void
+}
+BaseTool <|-- MeshPreviewTool
+MeshPreviewTool --> "previewBehaviourOverride" IMeshPreviewBehaviour
+MeshPreviewTool --> "previewBehaviour" IMeshPreviewBehaviour
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+enum PathFilterType {
+    Include= 0,
+    Exclude= 1,
+}
+@enduml

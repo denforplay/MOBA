@@ -1,0 +1,12 @@
+@startuml
+class LookaheadTests {
+    + <<override>> SetUp() : void
+    + TargetsChanged() : IEnumerator
+    + LookaheadDelta() : IEnumerator
+}
+CinemachineFixtureBase <|-- LookaheadTests
+LookaheadTests --> "m_VCam" CinemachineVirtualCamera
+LookaheadTests --> "m_Composer" CinemachineComposer
+LookaheadTests --> "m_FramingTransposer" CinemachineFramingTransposer
+LookaheadTests --> "m_Target" Transform
+@enduml

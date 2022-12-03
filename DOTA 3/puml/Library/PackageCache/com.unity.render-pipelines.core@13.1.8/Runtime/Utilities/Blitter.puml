@@ -1,0 +1,42 @@
+@startuml
+class Blitter <<static>> {
+    + {static} Initialize(blitPS:Shader, blitColorAndDepthPS:Shader) : void
+    + {static} Cleanup() : void
+    {static} + GetBlitMaterial(dimension:TextureDimension, singleSlice:bool) : Material
+    + {static} BlitTexture(cmd:CommandBuffer, source:RTHandle, scaleBias:Vector4, mipLevel:float, bilinear:bool) : void
+    + {static} BlitTexture2D(cmd:CommandBuffer, source:RTHandle, scaleBias:Vector4, mipLevel:float, bilinear:bool) : void
+    + {static} BlitColorAndDepth(cmd:CommandBuffer, sourceColor:Texture, sourceDepth:RenderTexture, scaleBias:Vector4, mipLevel:float, blitDepth:bool) : void
+    + {static} BlitTexture(cmd:CommandBuffer, source:RTHandle, scaleBias:Vector4, material:Material, pass:int) : void
+    + {static} BlitCameraTexture(cmd:CommandBuffer, source:RTHandle, destination:RTHandle, mipLevel:float, bilinear:bool) : void
+    + {static} BlitCameraTexture2D(cmd:CommandBuffer, source:RTHandle, destination:RTHandle, mipLevel:float, bilinear:bool) : void
+    + {static} BlitCameraTexture(cmd:CommandBuffer, source:RTHandle, destination:RTHandle, material:Material, pass:int) : void
+    + {static} BlitCameraTexture(cmd:CommandBuffer, source:RTHandle, destination:RTHandle, scaleBias:Vector4, mipLevel:float, bilinear:bool) : void
+    + {static} BlitCameraTexture(cmd:CommandBuffer, source:RTHandle, destination:RTHandle, destViewport:Rect, mipLevel:float, bilinear:bool) : void
+    + {static} BlitQuad(cmd:CommandBuffer, source:Texture, scaleBiasTex:Vector4, scaleBiasRT:Vector4, mipLevelTex:int, bilinear:bool) : void
+    + {static} BlitQuadWithPadding(cmd:CommandBuffer, source:Texture, textureSize:Vector2, scaleBiasTex:Vector4, scaleBiasRT:Vector4, mipLevelTex:int, bilinear:bool, paddingInPixels:int) : void
+    + {static} BlitQuadWithPaddingMultiply(cmd:CommandBuffer, source:Texture, textureSize:Vector2, scaleBiasTex:Vector4, scaleBiasRT:Vector4, mipLevelTex:int, bilinear:bool, paddingInPixels:int) : void
+    + {static} BlitOctahedralWithPadding(cmd:CommandBuffer, source:Texture, textureSize:Vector2, scaleBiasTex:Vector4, scaleBiasRT:Vector4, mipLevelTex:int, bilinear:bool, paddingInPixels:int) : void
+    + {static} BlitOctahedralWithPaddingMultiply(cmd:CommandBuffer, source:Texture, textureSize:Vector2, scaleBiasTex:Vector4, scaleBiasRT:Vector4, mipLevelTex:int, bilinear:bool, paddingInPixels:int) : void
+    + {static} BlitCubeToOctahedral2DQuad(cmd:CommandBuffer, source:Texture, scaleBiasRT:Vector4, mipLevelTex:int) : void
+    + {static} BlitCubeToOctahedral2DQuadSingleChannel(cmd:CommandBuffer, source:Texture, scaleBiasRT:Vector4, mipLevelTex:int) : void
+    + {static} BlitQuadSingleChannel(cmd:CommandBuffer, source:Texture, scaleBiasTex:Vector4, scaleBiasRT:Vector4, mipLevelTex:int) : void
+}
+class BlitShaderIDs <<static>> {
+    + {static} <<readonly>> _BlitTexture : int
+    + {static} <<readonly>> _BlitCubeTexture : int
+    + {static} <<readonly>> _BlitScaleBias : int
+    + {static} <<readonly>> _BlitScaleBiasRt : int
+    + {static} <<readonly>> _BlitMipLevel : int
+    + {static} <<readonly>> _BlitTextureSize : int
+    + {static} <<readonly>> _BlitPaddingSize : int
+    + {static} <<readonly>> _InputDepth : int
+}
+Blitter --> "s_Blit" Material
+Blitter --> "s_BlitTexArray" Material
+Blitter --> "s_BlitTexArraySingleSlice" Material
+Blitter --> "s_BlitColorAndDepth" Material
+Blitter o-> "s_PropertyBlock" MaterialPropertyBlock
+Blitter --> "s_TriangleMesh" Mesh
+Blitter --> "s_QuadMesh" Mesh
+Blitter +-- BlitShaderIDs
+@enduml

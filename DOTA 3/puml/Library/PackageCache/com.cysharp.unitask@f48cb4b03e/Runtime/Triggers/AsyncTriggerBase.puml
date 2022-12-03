@@ -1,0 +1,86 @@
+@startuml
+abstract class "AsyncTriggerBase`1"<T> {
+    Awake() : void
+    OnDestroy() : void
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+interface IAsyncOneShotTrigger {
+    OneShotAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OneShotAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<sealed>> <<partial>> {
+    isDisposed : bool
+    callOnce : bool
+    {static} CancellationCallback(state:object) : void
+    + Dispose() : void
+    GetResult(token:short) : T
+    OnNext(value:T) : void
+    OnCanceled(cancellationToken:CancellationToken) : void
+    OnCompleted() : void
+    OnError(ex:Exception) : void
+    GetResult(token:short) : void
+    GetStatus(token:short) : UniTaskStatus
+    UnsafeGetStatus() : UniTaskStatus
+    OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "TriggerEvent`1"<T> {
+}
+class AsyncTriggerEnumerator <<sealed>> {
+    called : bool
+    isDisposed : bool
+    + AsyncTriggerEnumerator(parent:AsyncTriggerBase<T>, cancellationToken:CancellationToken)
+    + OnCanceled(cancellationToken:CancellationToken) : void
+    + OnNext(value:T) : void
+    + OnCompleted() : void
+    + OnError(ex:Exception) : void
+    {static} CancellationCallback(state:object) : void
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class AwakeMonitor {
+    + AwakeMonitor(trigger:AsyncTriggerBase<T>)
+    + MoveNext() : bool
+}
+class "IUniTaskSource`1"<T> {
+}
+class "ITriggerHandler`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+MonoBehaviour <|-- "AsyncTriggerBase`1"
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "AsyncTriggerBase`1"
+"AsyncTriggerBase`1" --> "triggerEvent<T>" "TriggerEvent`1"
+IAsyncOneShotTrigger <|-- "AsyncTriggerHandler`1"
+"IUniTaskSource`1" "<T>" <|-- "AsyncTriggerHandler`1"
+"ITriggerHandler`1" "<T>" <|-- "AsyncTriggerHandler`1"
+IDisposable <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerHandler`1" o-> "cancellationCallback<object>" "Action`1"
+"AsyncTriggerHandler`1" --> "trigger<T>" "AsyncTriggerBase`1"
+"AsyncTriggerHandler`1" --> "cancellationToken" CancellationToken
+"AsyncTriggerHandler`1" --> "registration" CancellationTokenRegistration
+"AsyncTriggerHandler`1" --> "core<T>" "UniTaskCompletionSourceCore`1"
+"AsyncTriggerHandler`1" --> "Prev<T>" "ITriggerHandler`1"
+"AsyncTriggerHandler`1" --> "Next<T>" "ITriggerHandler`1"
+"AsyncTriggerBase`1" +-- AsyncTriggerEnumerator
+MoveNextSource <|-- AsyncTriggerEnumerator
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- AsyncTriggerEnumerator
+"ITriggerHandler`1" "<T>" <|-- AsyncTriggerEnumerator
+AsyncTriggerEnumerator o-> "cancellationCallback<object>" "Action`1"
+AsyncTriggerEnumerator --> "parent<T>" "AsyncTriggerBase`1"
+AsyncTriggerEnumerator --> "cancellationToken" CancellationToken
+AsyncTriggerEnumerator --> "registration" CancellationTokenRegistration
+AsyncTriggerEnumerator --> "Current" T
+AsyncTriggerEnumerator --> "Prev<T>" "ITriggerHandler`1"
+AsyncTriggerEnumerator --> "Next<T>" "ITriggerHandler`1"
+"AsyncTriggerBase`1" +-- AwakeMonitor
+IPlayerLoopItem <|-- AwakeMonitor
+AwakeMonitor --> "trigger<T>" "AsyncTriggerBase`1"
+@enduml

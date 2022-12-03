@@ -1,0 +1,45 @@
+@startuml
+class TransformCache {
+    + childCount : int <<get>>
+    Update() : void
+    AddChild(transform:TransformCache) : void
+    InsertChildAt(index:int, transform:TransformCache) : void
+    RemoveChild(transform:TransformCache) : void
+    RemoveChildAt(index:int) : void
+    GetSiblingIndex() : int
+    SetSiblingIndex(index:int) : void
+    + SetParent(newParent:TransformCache, worldPositionStays:bool) : void
+    GetGlobalRotation() : Quaternion
+    SetGlobalRotation(r:Quaternion) : void
+    InverseTransformRotation(r:Quaternion) : Quaternion
+    {static} ScaleMulQuaternion(scale:Vector3, q:Quaternion) : Quaternion
+    {static} ChangeSign(x:float, y:float) : float
+    MatchDirection(localDirection:Vector3, worldDirection:Vector3) : void
+    GetEnumerator() : IEnumerator<TransformCache>
+    GetEnumerator() : IEnumerator
+}
+class "IEnumerable`1"<T> {
+}
+class "List`1"<T> {
+}
+SkinningObject <|-- TransformCache
+"IEnumerable`1" "<TransformCache>" <|-- TransformCache
+TransformCache --> "m_Parent" TransformCache
+TransformCache o-> "m_Children<TransformCache>" "List`1"
+TransformCache --> "m_LocalPosition" Vector3
+TransformCache o-> "m_LocalRotation" Quaternion
+TransformCache o-> "m_LocalScale" Vector3
+TransformCache o-> "m_LocalToWorldMatrix" Matrix4x4
+TransformCache --> "parent" TransformCache
+TransformCache --> "localPosition" Vector3
+TransformCache --> "localRotation" Quaternion
+TransformCache --> "localScale" Vector3
+TransformCache --> "position" Vector3
+TransformCache --> "rotation" Quaternion
+TransformCache --> "right" Vector3
+TransformCache --> "up" Vector3
+TransformCache --> "forward" Vector3
+TransformCache --> "localToWorldMatrix" Matrix4x4
+TransformCache --> "worldToLocalMatrix" Matrix4x4
+TransformCache --> "parentMatrix" Matrix4x4
+@enduml

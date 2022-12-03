@@ -1,0 +1,10 @@
+@startuml
+class CinemachineImpulseEnvelopePropertyDrawer <<sealed>> {
+    <<const>> vSpace : int = 2
+    {static} mExpanded : bool = true
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+    DrawCurveTimeProperty(rect:Rect, label:GUIContent, curveProp:SerializedProperty, timeProp:SerializedProperty) : void
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+}
+PropertyDrawer <|-- CinemachineImpulseEnvelopePropertyDrawer
+@enduml

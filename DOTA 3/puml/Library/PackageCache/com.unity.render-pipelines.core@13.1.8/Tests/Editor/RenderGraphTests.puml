@@ -1,0 +1,26 @@
+@startuml
+class RenderGraphTests {
+    + SetupRenderGraph() : void
+    + CleanUp() : void
+    + WriteToBackBufferNotCulled() : void
+    + NoWriteToBackBufferCulled() : void
+    + WriteToImportedTextureNotCulled() : void
+    + WriteToImportedComputeBufferNotCulled() : void
+    + PassWriteResourcePartialNotReadAfterNotCulled() : void
+    + PassDisallowCullingNotCulled() : void
+    + PartialUnusedProductNotCulled() : void
+    + SimpleCreateReleaseTexture() : void
+    + UseTransientOutsidePassRaiseException() : void
+    + TransientCreateReleaseInSamePass() : void
+    + AsyncPassReleaseTextureOnGraphicsPipe() : void
+    + TransientResourceNotCulled() : void
+    + AsyncPassWriteWaitOnGraphcisPipe() : void
+    + AsyncPassReadWaitOnGraphcisPipe() : void
+    + GraphicsPassWriteWaitOnAsyncPipe() : void
+    + GraphicsPassReadWaitOnAsyncPipe() : void
+}
+class RenderGraphTestPassData {
+}
+RenderGraphTests o-> "m_RenderGraph" RenderGraph
+RenderGraphTests +-- RenderGraphTestPassData
+@enduml

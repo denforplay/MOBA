@@ -1,0 +1,16 @@
+@startuml
+class "FactoryArgumentsToChoiceBinder`11"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TContract> {
+    + FactoryArgumentsToChoiceBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + WithFactoryArguments(param:T) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3, param4:TFactoryParam4) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3, param4:TFactoryParam4, param5:TFactoryParam5) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3, param4:TFactoryParam4, param5:TFactoryParam5, param6:TFactoryParam6) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + WithFactoryArguments(args:object[]) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + WithFactoryArgumentsExplicit(extraArgs:IEnumerable<TypeValuePair>) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+}
+class "FactoryToChoiceBinder`11"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11> {
+}
+"FactoryToChoiceBinder`11" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TContract>" <|-- "FactoryArgumentsToChoiceBinder`11"
+@enduml

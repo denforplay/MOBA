@@ -1,0 +1,8 @@
+@startuml
+abstract class CharacterCombatController {
+    + CharacterCombatController(characterController:ICharacterController, character:Models.Character)
+    + <<virtual>> Attack(target:TargetableView) : void
+    + Cancel() : void
+}
+BaseCombatController <|-- CharacterCombatController
+@enduml

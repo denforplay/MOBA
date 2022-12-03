@@ -1,0 +1,13 @@
+@startuml
+class PrefabControlPlayable {
+    + {static} Create(graph:PlayableGraph, prefabGameObject:GameObject, parentTransform:Transform) : ScriptPlayable<PrefabControlPlayable>
+    + Initialize(prefabGameObject:GameObject, parentTransform:Transform) : GameObject
+    + <<override>> OnPlayableDestroy(playable:Playable) : void
+    + <<override>> OnBehaviourPlay(playable:Playable, info:FrameData) : void
+    + <<override>> OnBehaviourPause(playable:Playable, info:FrameData) : void
+    {static} SetHideFlagsRecursive(gameObject:GameObject) : void
+}
+PlayableBehaviour <|-- PrefabControlPlayable
+PrefabControlPlayable --> "m_Instance" GameObject
+PrefabControlPlayable --> "prefabInstance" GameObject
+@enduml

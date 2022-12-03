@@ -1,0 +1,38 @@
+@startuml
+class AsyncLazy {
+    syncLock : object
+    initialized : bool
+    + AsyncLazy(taskFactory:Func<UniTask>)
+    + GetAwaiter() : UniTask.Awaiter
+    EnsureInitialized() : void
+    EnsureInitializedCore() : void
+    SetCompletionSource(awaiter:UniTask.Awaiter) : void
+    {static} SetCompletionSource(state:object) : void
+}
+class "AsyncLazy`1"<T> {
+    syncLock : object
+    initialized : bool
+    + AsyncLazy(taskFactory:Func<UniTask<T>>)
+    + GetAwaiter() : UniTask<T>.Awaiter
+    EnsureInitialized() : void
+    EnsureInitializedCore() : void
+    SetCompletionSource(awaiter:UniTask<T>.Awaiter) : void
+    {static} SetCompletionSource(state:object) : void
+}
+class "Action`1"<T> {
+}
+class "Func`1"<T> {
+}
+class "UniTaskCompletionSource`1"<T> {
+}
+class "UniTask`1"<T> {
+}
+AsyncLazy o-> "continuation<object>" "Action`1"
+AsyncLazy --> "taskFactory<UniTask>" "Func`1"
+AsyncLazy --> "completionSource" UniTaskCompletionSource
+AsyncLazy --> "Task" UniTask
+"AsyncLazy`1" o-> "continuation<object>" "Action`1"
+"AsyncLazy`1" --> "taskFactory<UniTask<T>>" "Func`1"
+"AsyncLazy`1" --> "completionSource<T>" "UniTaskCompletionSource`1"
+"AsyncLazy`1" --> "Task<T>" "UniTask`1"
+@enduml

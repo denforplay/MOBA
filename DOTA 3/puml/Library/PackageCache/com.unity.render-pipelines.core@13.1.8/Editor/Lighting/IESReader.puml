@@ -1,0 +1,22 @@
+@startuml
+class IESReader {
+    m_FileFormatVersion : string
+    + FileFormatVersion : string <<get>>
+    m_TotalLumens : float
+    + TotalLumens : float <<get>>
+    m_MaxCandelas : float
+    + MaxCandelas : float <<get>>
+    m_PhotometricType : int
+    + PhotometricType : int <<get>>
+    m_VerticalAngleCount : int
+    m_HorizontalAngleCount : int
+    m_MinDeltaVerticalAngle : float
+    m_MinDeltaHorizontalAngle : float
+    m_FirstHorizontalAngle : float
+    m_LastHorizontalAngle : float
+    + ReadFile(iesFilePath:string) : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+IESReader o-> "m_KeywordDictionary<string,string>" "Dictionary`2"
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class Spline <<struct>> {
+    + isOpenEnded : bool
+    isOpenEnded : bool <<get>>
+    ToControlPoints() : ControlPoint[]
+}
+IShape <|-- Spline
+Spline --> "type" ShapeType
+Spline o-> "empty" Spline
+@enduml

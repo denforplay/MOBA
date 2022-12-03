@@ -1,0 +1,8 @@
+@startuml
+enum ProjectileType {
+    None,
+    Default,
+    Arrow,
+    CannonBall,
+}
+@enduml

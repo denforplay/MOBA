@@ -1,0 +1,42 @@
+@startuml
+class HistoryModel {
+    <<const>> k_RequestPage : string = "request-page"
+    <<const>> k_RequestEntry : string = "request-entry"
+    <<const>> k_RequestEntryNumber : string = "request-entry-number"
+    +  <<event>> HistoryListUpdated : Action 
+    +  <<event>> HistoryListReceived : Action<IReadOnlyList<IHistoryEntry>> 
+    +  <<event>> SelectedRevisionReceived : Action<IHistoryEntry> 
+    +  <<event>> BusyStatusUpdated : Action<bool> 
+    +  <<event>> EntryCountUpdated : Action<int?> 
+    +  <<event>> StateChanged : Action 
+    + HistoryModel(provider:ISourceControlProvider)
+    + OnStart() : void
+    + OnStop() : void
+    + RestoreState(cache:IWindowCache) : void
+    + SaveState(cache:IWindowCache) : void
+    OnReceivedHistoryEntryCount(entryCount:int?) : void
+    OnReceivedHistoryPage(list:IReadOnlyList<IHistoryEntry>) : void
+    OnReceivedHistoryEntry(entry:IHistoryEntry) : void
+    OnUpdatedHistoryEntries() : void
+    + RequestPageOfRevisions(pageSize:int) : void
+    + RequestSingleRevision(revisionId:string) : void
+    + RequestEntryNumber() : void
+    + RequestUpdateTo(revisionId:string) : void
+    + RequestRestoreTo(revisionId:string) : void
+    + RequestGoBackTo(revisionId:string) : void
+    + SupportsRevert : bool <<get>>
+    + RequestRevert(revisionId:string, files:IReadOnlyList<string>) : void
+    AddRequest(requestId:string) : bool
+    RemoveRequest(requestId:string) : void
+    + Busy : bool <<get>>
+    + PageNumber : int <<get>> <<set>>
+    + SelectedRevisionId : string <<get>>
+    + SavedRevisionId : string <<get>>
+    + IsRevisionSelected : bool <<get>>
+}
+class "HashSet`1"<T> {
+}
+IHistoryModel <|-- HistoryModel
+HistoryModel --> "m_Provider" ISourceControlProvider
+HistoryModel --> "m_Requests<string>" "HashSet`1"
+@enduml

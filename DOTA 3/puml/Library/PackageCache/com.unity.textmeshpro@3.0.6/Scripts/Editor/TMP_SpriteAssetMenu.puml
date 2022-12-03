@@ -1,0 +1,9 @@
+@startuml
+class TMP_SpriteAssetMenu <<static>> {
+    {static} AddDefaultMaterialValidate(command:MenuCommand) : bool
+    {static} AddDefaultMaterial(command:MenuCommand) : void
+    {static} UpdateSpriteAssetValidate(command:MenuCommand) : bool
+    {static} UpdateSpriteAsset(command:MenuCommand) : void
+    + {static} CreateSpriteAsset() : void
+}
+@enduml

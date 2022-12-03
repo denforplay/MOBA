@@ -1,0 +1,6 @@
+@startuml
+class CinemachineGroupComposerEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+CinemachineComposerEditor <|-- CinemachineGroupComposerEditor
+@enduml

@@ -1,0 +1,207 @@
+@startuml
+class PSDImporterEditor {
+    <<const>> kReferencePref : string = "PSDImporterPreviewShowReference"
+    {static} <<readonly>> s_SwizzleFieldHash : int
+    m_IsPOT : bool = false
+    m_PlatformSettingsIndex : int
+    m_ShowPerAxisWrapModes : bool = false
+    m_ActiveEditorIndex : int = 0
+    m_ShowPivot : bool
+    + <<override>> OnEnable() : void
+    InitPreview() : void
+    + <<override>> OnDisable() : void
+    UpdateLayerTreeView() : void
+    + <<override>> RequiresConstantRepaint() : bool
+    + <<override>> OnInspectorGUI() : void
+    DoLayerManagementUI() : void
+    DoSettingsUI() : void
+    MainRigPropertyField() : void
+    {static} IsPSD(doc:PsdFile) : bool
+    {static} FileColorMode(doc:PsdFile) : PsdColorMode
+    IsCharacterRigged() : bool
+    LoadPlatformSettings() : void
+    StorePlatformSettings() : void
+    DoPlatformSettings() : void
+    DoAdvanceInspector() : void
+    CommonTextureSettingsGUI() : void
+    {static} WrapModePopup(wrapU:SerializedProperty, wrapV:SerializedProperty, wrapW:SerializedProperty, isVolumeTexture:bool, showPerAxisWrapModes:bool) : void
+    {static} WrapModeAxisPopup(label:GUIContent, wrapProperty:SerializedProperty) : void
+    DoWrapModePopup() : void
+    IsVolume() : bool
+    DoSpriteTextureTypeInspector() : void
+    DoSpriteInspector() : void
+    DoOpenSpriteEditorButton() : void
+    DoTextureDefaultTextureTypeInspector() : void
+    ColorSpaceGUI() : void
+    POTScaleGUI() : void
+    ReadableGUI() : void
+    AlphaHandlingGUI() : void
+    MipMapGUI() : void
+    ToggleFromInt(property:SerializedProperty, label:GUIContent) : void
+    EnumPopup(property:SerializedProperty, type:System.Type, label:GUIContent) : void
+    ExportMosaicTexture() : void
+    {static} SwizzleField(property:SerializedProperty, label:GUIContent) : void
+    SwizzleGUI() : void
+    GetTargetCount() : int
+    GetPlatformTextureSettings(i:int, name:string) : TextureImporterPlatformSettings
+    ShowPresetSettings() : bool
+    DoesSourceTextureHaveAlpha(i:int) : bool
+    IsSourceTextureHDR(i:int) : bool
+    SetPlatformTextureSettings(i:int, platformSettings:TextureImporterPlatformSettings) : void
+    GetImporterSettings(i:int, settings:TextureImporterSettings) : void
+    {static} ConvertSwizzleRaw(value:uint) : (TextureImporterSwizzle r, TextureImporterSwizzle g, TextureImporterSwizzle b, TextureImporterSwizzle a)
+    + <<override>> showImportedObject : bool <<get>>
+    textureTypeHasMultipleDifferentValues : bool <<get>>
+    + <<override>> HasModified() : bool
+    shouldProduceGameObject : bool <<get>>
+    + <<override>> OnPreviewSettings() : void
+    + <<override>> DrawPreview(r:Rect) : void
+}
+class PSDImporterEditorFoldOutState {
+    + PSDImporterEditorFoldOutState()
+    DoFoldout(title:GUIContent, state:bool) : bool
+    + DoGeneralUI(title:GUIContent) : bool
+    + DoLayerImportUI(title:GUIContent) : bool
+    + DoCharacterRigUI(title:GUIContent) : bool
+    + DoAdvancedUI(title:GUIContent) : bool
+    + DoPlatformSettingsUI(title:GUIContent) : bool
+    + DoTextureUI(title:GUIContent) : bool
+}
+class InspectorGUI <<struct>> {
+    + needsRepaint : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+class Styles {
+    + Styles()
+}
+class SavedBool {
+    m_Value : bool
+    m_Name : string
+    m_Loaded : bool
+    + SavedBool(name:string, value:bool)
+    + value : bool <<get>> <<set>>
+}
+ScriptedImporterEditor <|-- PSDImporterEditor
+ITexturePlatformSettingsDataProvider <|-- PSDImporterEditor
+PSDImporterEditor --> "m_TextureType" SerializedProperty
+PSDImporterEditor --> "m_TextureShape" SerializedProperty
+PSDImporterEditor --> "m_SpriteMode" SerializedProperty
+PSDImporterEditor --> "m_SpritePixelsToUnits" SerializedProperty
+PSDImporterEditor --> "m_SpriteMeshType" SerializedProperty
+PSDImporterEditor --> "m_SpriteExtrude" SerializedProperty
+PSDImporterEditor --> "m_Alignment" SerializedProperty
+PSDImporterEditor --> "m_SpritePivot" SerializedProperty
+PSDImporterEditor --> "m_NPOTScale" SerializedProperty
+PSDImporterEditor --> "m_IsReadable" SerializedProperty
+PSDImporterEditor --> "m_sRGBTexture" SerializedProperty
+PSDImporterEditor --> "m_AlphaSource" SerializedProperty
+PSDImporterEditor --> "m_Swizzle" SerializedProperty
+PSDImporterEditor --> "m_MipMapMode" SerializedProperty
+PSDImporterEditor --> "m_EnableMipMap" SerializedProperty
+PSDImporterEditor --> "m_FadeOut" SerializedProperty
+PSDImporterEditor --> "m_BorderMipMap" SerializedProperty
+PSDImporterEditor --> "m_MipMapsPreserveCoverage" SerializedProperty
+PSDImporterEditor --> "m_AlphaTestReferenceValue" SerializedProperty
+PSDImporterEditor --> "m_MipMapFadeDistanceStart" SerializedProperty
+PSDImporterEditor --> "m_MipMapFadeDistanceEnd" SerializedProperty
+PSDImporterEditor --> "m_AlphaIsTransparency" SerializedProperty
+PSDImporterEditor --> "m_FilterMode" SerializedProperty
+PSDImporterEditor --> "m_Aniso" SerializedProperty
+PSDImporterEditor --> "m_WrapU" SerializedProperty
+PSDImporterEditor --> "m_WrapV" SerializedProperty
+PSDImporterEditor --> "m_WrapW" SerializedProperty
+PSDImporterEditor --> "m_ConvertToNormalMap" SerializedProperty
+PSDImporterEditor --> "m_MosaicLayers" SerializedProperty
+PSDImporterEditor --> "m_ImportHiddenLayers" SerializedProperty
+PSDImporterEditor --> "m_ResliceFromLayer" SerializedProperty
+PSDImporterEditor --> "m_CharacterMode" SerializedProperty
+PSDImporterEditor --> "m_DocumentPivot" SerializedProperty
+PSDImporterEditor --> "m_DocumentAlignment" SerializedProperty
+PSDImporterEditor --> "m_GenerateGOHierarchy" SerializedProperty
+PSDImporterEditor --> "m_PaperDollMode" SerializedProperty
+PSDImporterEditor --> "m_KeepDupilcateSpriteName" SerializedProperty
+PSDImporterEditor --> "m_SkeletonAssetReferenceID" SerializedProperty
+PSDImporterEditor --> "m_GeneratePhysicsShape" SerializedProperty
+PSDImporterEditor --> "m_LayerMappingOption" SerializedProperty
+PSDImporterEditor --> "m_Padding" SerializedProperty
+PSDImporterEditor --> "m_ImportFileNodeState" SerializedProperty
+PSDImporterEditor o-> "m_AdvanceInspectorGUI<TextureImporterType,Action[]>" "Dictionary`2"
+PSDImporterEditor --> "m_TexturePlatformSettingsHelper" TexturePlatformSettingsHelper
+PSDImporterEditor o-> "m_EditorFoldOutState" PSDImporterEditorFoldOutState
+PSDImporterEditor --> "m_LayerTreeView" PSDImporterEditorLayerTreeView
+PSDImporterEditor --> "m_TreeViewState" TreeViewState
+PSDImporterEditor --> "m_CurrentTarget" PSDImporter
+PSDImporterEditor --> "m_PreviewRenderUtility" PSDGameObjectPreviewData
+PSDImporterEditor o-> "m_PlatfromSettings<string,List<TextureImporterPlatformSettings>>" "Dictionary`2"
+PSDImporterEditor --> "textureType" TextureImporterType
+PSDImporterEditor --> "spriteImportMode" SpriteImportMode
+PSDImporterEditor --> "spriteImportMode" SpriteImportMode
+PSDImporterEditorFoldOutState --> "m_GeneralFoldout" SavedBool
+PSDImporterEditorFoldOutState --> "m_LayerImportFoldout" SavedBool
+PSDImporterEditorFoldOutState --> "m_CharacterRigFoldout" SavedBool
+PSDImporterEditorFoldOutState --> "m_AdvancedFoldout" SavedBool
+PSDImporterEditorFoldOutState --> "m_TextureFoldout" SavedBool
+PSDImporterEditorFoldOutState --> "m_PlatformSettingsFoldout" SavedBool
+PSDImporterEditor +-- InspectorGUI
+InspectorGUI --> "callback" Action
+PSDImporterEditor +-- Styles
+Styles o-> "preBackgroundSolid" GUIStyle
+Styles o-> "padding" GUIContent
+Styles o-> "preButton" GUIStyle
+Styles o-> "previewPivotButtonContent" GUIContent
+Styles o-> "textureTypeTitle" GUIContent
+Styles o-> "textureShapeOptionsDictionnary<TextureImporterShape,GUIContent[]>" "Dictionary`2"
+Styles o-> "textureShapeValuesDictionnary<TextureImporterShape,int[]>" "Dictionary`2"
+Styles o-> "filterMode" GUIContent
+Styles o-> "mipmapFadeOutToggle" GUIContent
+Styles o-> "mipmapFadeOut" GUIContent
+Styles o-> "readWrite" GUIContent
+Styles o-> "alphaSource" GUIContent
+Styles o-> "generateMipMaps" GUIContent
+Styles o-> "sRGBTexture" GUIContent
+Styles o-> "borderMipMaps" GUIContent
+Styles o-> "mipMapsPreserveCoverage" GUIContent
+Styles o-> "alphaTestReferenceValue" GUIContent
+Styles o-> "mipMapFilter" GUIContent
+Styles o-> "npot" GUIContent
+Styles o-> "spriteMode" GUIContent
+Styles o-> "spritePixelsPerUnit" GUIContent
+Styles o-> "spriteExtrude" GUIContent
+Styles o-> "spriteMeshType" GUIContent
+Styles o-> "spriteAlignment" GUIContent
+Styles o-> "characterAlignment" GUIContent
+Styles o-> "warpNotSupportWarning" GUIContent
+Styles o-> "anisoLevelLabel" GUIContent
+Styles o-> "anisotropicDisableInfo" GUIContent
+Styles o-> "anisotropicForceEnableInfo" GUIContent
+Styles o-> "unappliedSettingsDialogTitle" GUIContent
+Styles o-> "unappliedSettingsDialogContent" GUIContent
+Styles o-> "applyButtonLabel" GUIContent
+Styles o-> "cancelButtonLabel" GUIContent
+Styles o-> "spriteEditorButtonLabel" GUIContent
+Styles o-> "resliceFromLayerWarning" GUIContent
+Styles o-> "alphaIsTransparency" GUIContent
+Styles o-> "advancedHeaderText" GUIContent
+Styles o-> "platformSettingsHeaderText" GUIContent
+Styles o-> "wrapModeLabel" GUIContent
+Styles o-> "wrapU" GUIContent
+Styles o-> "wrapV" GUIContent
+Styles o-> "wrapW" GUIContent
+Styles o-> "layerMapping" GUIContent
+Styles o-> "generatePhysicsShape" GUIContent
+Styles o-> "importHiddenLayer" GUIContent
+Styles o-> "mosaicLayers" GUIContent
+Styles o-> "characterMode" GUIContent
+Styles o-> "layerGroupLabel" GUIContent
+Styles o-> "resliceFromLayer" GUIContent
+Styles o-> "paperDollMode" GUIContent
+Styles o-> "keepDuplicateSpriteName" GUIContent
+Styles o-> "mainSkeletonName" GUIContent
+Styles o-> "generalHeaderText" GUIContent
+Styles o-> "layerImportHeaderText" GUIContent
+Styles o-> "characterRigHeaderText" GUIContent
+Styles o-> "textureHeaderText" GUIContent
+Styles o-> "swizzle" GUIContent
+PSDImporterEditorFoldOutState +-- SavedBool
+@enduml

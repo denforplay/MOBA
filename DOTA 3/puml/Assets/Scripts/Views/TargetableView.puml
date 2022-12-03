@@ -1,0 +1,16 @@
+@startuml
+class TargetableView {
+    + Subscribe(subscriber:object, callBack:Action, isMarked:bool) : void
+    + UnSubscribe(subscriber:object, isMarked:bool) : void
+    + UnSubscribeAll() : void
+    + AttachCostableModel(costable:ICostable) : void
+    + AttachHealthableModel(healthable:IHealthable) : void
+    + ApplyDamage(value:float) : void
+    + GetCost() : int
+    + SetTeam(team:Team) : void
+}
+MonoBehaviour <|-- TargetableView
+TargetableView --> "Team" Team
+TargetableView --> "Healthable" IHealthable
+TargetableView --> "Costable" ICostable
+@enduml

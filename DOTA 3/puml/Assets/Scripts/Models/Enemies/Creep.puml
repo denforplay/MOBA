@@ -1,0 +1,18 @@
+@startuml
+class Creep {
+    +  <<event>> OnMaxHealthChanged : Action<float> 
+    +  <<event>> OnHealthChanged : Action<float> 
+    +  <<event>> OnHealthEnded : Action 
+    + MaxHealth : float <<get>>
+    + CurrentHealth : float <<get>>
+    + AttackRange : float <<get>> <<set>>
+    + AttackDistance : float <<get>> <<set>>
+    + Damage : float <<get>> <<set>>
+    + AttackDelay : float <<get>> <<set>>
+    + Creep(configuration:CreepConfiguration)
+    + ChangeHealth(value:float) : void
+    + GetCost() : int
+}
+IHealthable <|-- Creep
+ICostable <|-- Creep
+@enduml

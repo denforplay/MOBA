@@ -1,0 +1,69 @@
+@startuml
+class ControlFlows {
+    + {static} For() : int
+    + {static} ForBreak(a:int) : int
+    + {static} ForContinue(a:int, b:int) : int
+    + {static} ForBreak2() : int
+    + {static} ForDynamicCondition(b:int) : float
+    + {static} ForNestedIf(a:int, b:int) : int
+    + {static} DoWhileNested(a:int, b:int) : int
+    + {static} While(a:int) : int
+    + {static} ForForIf(a:int) : int
+    + {static} ForNestedComplex1(a:int) : int
+    + {static} ForNestedComplex2(a:int) : int
+    + {static} IfReturn(a:int) : int
+    + {static} IfElseReturn(a:int) : int
+    + {static} IfElseReturnDynamic(a:int) : int
+    + {static} WhileFunction(a:int) : int
+    + {static} WhileDynamic(a:int) : int
+    + {static} IfDeep(a:int, b:int, c:int) : int
+    + {static} CallRecursive(n:int) : int
+    + {static} IfCompareFloat(a:float, b:float) : float
+    + {static} TernaryCompareFloat(input:int) : float
+    + {static} TernaryMask(a:int) : int
+    + {static} IfElseMash(a:int) : int
+    + {static} IfCallCondition(a:int) : int
+    + {static} IfIncrementCondition(a:int) : int
+    + {static} IfWhileGotoForward(a:int, b:int) : int
+    + {static} IfWhileGotoBackward(a:int, b:int) : int
+    + {static} IfAssignCondition(a:int, b:int) : int
+    + {static} ForWhileNestedCall(a:int, b:int) : float
+    + {static} WhileIfContinue(a:int) : int
+    + {static} SwitchReturn(a:int) : int
+    + {static} SwitchBreak(a:int) : int
+    + {static} SwitchBreakByte(a:byte) : int
+    + {static} GetValueAsByte(a:int) : byte
+    + {static} SwitchByteReturnFromFunction(a:int) : byte
+    + {static} SwitchOnLong(a:long) : byte
+    + {static} TestSwitchByteReturn(_results:NativeArray<byte>, a:int) : byte
+    + {static} SwitchEnum(a:EnumSwitch) : int
+    + {static} ExceptionReachedReturn() : int
+    + {static} ExceptionReached() : void
+    + {static} ExceptionNotReached(a:int) : void
+    + {static} ExceptionMultipleNotReached(a:int) : void
+    + {static} UnreachedExceptionInCalledFunction(a:int) : double
+    + {static} ExceptionNotReachedReturn(a:int) : int
+    + {static} ExceptionMultipleNotReachedReturn(a:int) : int
+    + {static} TestInternalError() : void
+    + {static} TestPopNonInitialTrailingPush(x:bool) : int
+    + {static} TestUnsignedTernary() : ulong
+    + {static} TestByteAndIntFlow(value:byte) : int
+}
+enum EnumSwitch {
+    Case1,
+    Case2,
+    Case3,
+}
+class SmallStruct <<struct>> {
+    + I : int
+    + F : float
+}
+class InternalErrorVariableNotFound <<struct>> {
+    + Execute() : void
+    {static} CausesError(x:int) : int
+}
+ControlFlows +-- EnumSwitch
+ControlFlows +-- SmallStruct
+ControlFlows +-- InternalErrorVariableNotFound
+IJob <|-- InternalErrorVariableNotFound
+@enduml

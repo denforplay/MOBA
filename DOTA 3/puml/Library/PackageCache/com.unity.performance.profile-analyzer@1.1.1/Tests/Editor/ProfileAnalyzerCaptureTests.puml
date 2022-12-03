@@ -1,0 +1,6 @@
+@startuml
+class ProfileAnalyzerCaptureTests {
+    + PlayMode_Capture_ContainsNoDuplicates() : IEnumerator
+}
+ProfileAnalyzerBaseTest <|-- ProfileAnalyzerCaptureTests
+@enduml

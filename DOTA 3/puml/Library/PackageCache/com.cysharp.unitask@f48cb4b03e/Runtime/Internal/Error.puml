@@ -1,0 +1,15 @@
+@startuml
+class Error <<static>> {
+    + {static} ThrowArgumentNullException(value:T, paramName:string) : void
+    {static} ThrowArgumentNullExceptionCore(paramName:string) : void
+    + {static} ArgumentOutOfRange(paramName:string) : Exception
+    + {static} NoElements() : Exception
+    + {static} MoreThanOneElement() : Exception
+    + {static} ThrowArgumentException(message:string) : void
+    + {static} ThrowNotYetCompleted() : void
+    + {static} ThrowNotYetCompleted() : T
+    + {static} ThrowWhenContinuationIsAlreadyRegistered(continuationField:T) : void
+    {static} ThrowInvalidOperationExceptionCore(message:string) : void
+    + {static} ThrowOperationCanceledException() : void
+}
+@enduml

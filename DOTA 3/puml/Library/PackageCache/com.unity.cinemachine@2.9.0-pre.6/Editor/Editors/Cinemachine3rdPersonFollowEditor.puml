@@ -1,0 +1,8 @@
+@startuml
+class Cinemachine3rdPersonFollowEditor {
+    {static} Draw3rdPersonGizmos(target:Cinemachine3rdPersonFollow, selectionType:GizmoType) : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<Cinemachine3rdPersonFollow>" <|-- Cinemachine3rdPersonFollowEditor
+@enduml

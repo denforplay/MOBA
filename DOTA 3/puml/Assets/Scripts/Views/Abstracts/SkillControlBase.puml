@@ -1,0 +1,7 @@
+@startuml
+abstract class SkillControlBase {
+    + {abstract} UpdateSkillView(newPosition:Vector3) : void
+}
+MonoBehaviour <|-- SkillControlBase
+SkillControlBase --> "SkillType" SkillType
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+class MatchOffsetsPreviousAction {
+    + <<override>> Execute(clips:IEnumerable<TimelineClip>) : bool
+    {static} IsValidClip(clip:TimelineClip, director:PlayableDirector) : bool
+    + <<override>> Validate(clips:IEnumerable<TimelineClip>) : ActionValidity
+}
+class MatchOffsetsNextAction {
+    + <<override>> Execute(clips:IEnumerable<TimelineClip>) : bool
+    {static} IsValidClip(clip:TimelineClip, director:PlayableDirector) : bool
+    + <<override>> Validate(clips:IEnumerable<TimelineClip>) : ActionValidity
+}
+class ResetOffsets {
+    + <<override>> Execute(clips:IEnumerable<TimelineClip>) : bool
+    + <<override>> Validate(clips:IEnumerable<TimelineClip>) : ActionValidity
+}
+ClipAction <|-- MatchOffsetsPreviousAction
+ClipAction <|-- MatchOffsetsNextAction
+ClipAction <|-- ResetOffsets
+@enduml

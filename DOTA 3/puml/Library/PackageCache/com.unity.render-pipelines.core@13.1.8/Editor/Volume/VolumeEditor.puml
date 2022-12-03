@@ -1,0 +1,35 @@
+@startuml
+class VolumeEditor <<sealed>> {
+    OnEnable() : void
+    OnDisable() : void
+    RefreshEffectListEditor(asset:VolumeProfile) : void
+    + <<override>> OnInspectorGUI() : void
+    {static} IsAssetInReadOnlyPackage(path:string) : bool
+}
+class Styles <<static>> {
+    + {static} <<readonly>> noVolumeMessage : string
+}
+Editor <|-- VolumeEditor
+VolumeEditor --> "m_IsGlobal" SerializedProperty
+VolumeEditor --> "m_BlendRadius" SerializedProperty
+VolumeEditor --> "m_Weight" SerializedProperty
+VolumeEditor --> "m_Priority" SerializedProperty
+VolumeEditor --> "m_Profile" SerializedProperty
+VolumeEditor --> "m_ComponentList" VolumeComponentListEditor
+VolumeEditor --> "actualTarget" Volume
+VolumeEditor --> "profileRef" VolumeProfile
+VolumeEditor +-- Styles
+Styles o-> "mode" GUIContent
+Styles o-> "addBoxCollider" GUIContent
+Styles o-> "sphereBoxCollider" GUIContent
+Styles o-> "capsuleBoxCollider" GUIContent
+Styles o-> "meshBoxCollider" GUIContent
+Styles o-> "addColliderFixMessage" GUIContent
+Styles o-> "disableColliderFixMessage" GUIContent
+Styles o-> "enableColliderFixMessage" GUIContent
+Styles o-> "profileInstance" GUIContent
+Styles o-> "profile" GUIContent
+Styles o-> "newLabel" GUIContent
+Styles o-> "saveLabel" GUIContent
+Styles o-> "cloneLabel" GUIContent
+@enduml

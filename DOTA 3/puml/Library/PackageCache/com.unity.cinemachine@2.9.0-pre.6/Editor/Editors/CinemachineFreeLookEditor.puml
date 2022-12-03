@@ -1,0 +1,16 @@
+@startuml
+class CinemachineFreeLookEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+    OnSceneGUI() : void
+    {static} GetSelectedRig(freelook:CinemachineFreeLook) : int
+    UpdateRigEditor() : void
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+}
+class CreateRigWithUndo {
+    {static} CreateRigWithUndo()
+}
+"CinemachineVirtualCameraBaseEditor`1" "<CinemachineFreeLook>" <|-- CinemachineFreeLookEditor
+CinemachineFreeLookEditor o-> "m_EditedRig" CinemachineVirtualCameraBase
+CinemachineFreeLookEditor +-- CreateRigWithUndo
+@enduml

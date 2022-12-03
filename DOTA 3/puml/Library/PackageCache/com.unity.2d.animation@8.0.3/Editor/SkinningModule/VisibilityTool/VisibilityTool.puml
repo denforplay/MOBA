@@ -1,0 +1,97 @@
+@startuml
+class VisibilityToolWindow {
+    m_CurrentSelectedTab : int = 0
+    +  <<event>> onBoneOpacitySliderChange : Action<float> 
+    +  <<event>> onMeshOpacitySliderChange : Action<float> 
+    +  <<event>> onBoneOpacitySliderChangeBegin : Action 
+    +  <<event>> onBoneOpacitySliderChangeEnd : Action 
+    +  <<event>> onMeshOpacitySliderChangeBegin : Action 
+    +  <<event>> onMeshOpacitySliderChangeEnd : Action 
+    + {static} CreateFromUXML() : VisibilityToolWindow
+    + BindElements() : void
+    + Initialize(layout:LayoutOverlay) : void
+    + Show() : void
+    + Hide() : void
+    IsOpacityTarget(target:IEventHandler, opacityTarget:VisualElement) : bool
+    OpacityChangeBegin(evt:MouseDownEvent) : void
+    OpacityChangeEnd(evt:MouseCaptureOutEvent) : void
+    OnBoneOpacitySliderValueChangd(evt:ChangeEvent<float>) : void
+    OnMeshOpacitySliderValueChangd(evt:ChangeEvent<float>) : void
+    + SetBoneOpacitySliderValue(value:float) : void
+    + SetMeshOpacitySliderValue(value:float) : void
+    + AddToolTab(name:string, onClick:Action) : void
+    + SetActiveTab(toolIndex:int) : void
+    + SetContent(content:VisualElement) : void
+    + SetToolAvailable(toolIndex:int, available:bool) : void
+}
+class VisibilityTool {
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    currentToolIndex : int <<get>> <<set>>
+    boneOpacityValue : float <<get>> <<set>>
+    meshOpacityValue : float <<get>> <<set>>
+    UndoScope(value:string) : UndoScope
+    BeginUndoOperation(value:string) : void
+}
+interface IVisibilityToolModel {
+    currentToolIndex : int <<get>> <<set>>
+    meshOpacityValue : float <<get>> <<set>>
+    boneOpacityValue : float <<get>> <<set>>
+    UndoScope(value:string) : UndoScope
+    BeginUndoOperation(value:string) : void
+}
+interface IVisibilityToolWindow {
+    AddToolTab(name:string, callback:Action) : void
+    SetToolAvailable(i:int, available:bool) : void
+    SetBoneOpacitySliderValue(value:float) : void
+    SetMeshOpacitySliderValue(value:float) : void
+     <<event>> onBoneOpacitySliderChange : Action<float> 
+     <<event>> onMeshOpacitySliderChange : Action<float> 
+     <<event>> onBoneOpacitySliderChangeBegin : Action 
+     <<event>> onBoneOpacitySliderChangeEnd : Action 
+     <<event>> onMeshOpacitySliderChangeBegin : Action 
+     <<event>> onMeshOpacitySliderChangeEnd : Action 
+    Show() : void
+    Hide() : void
+    SetActiveTab(index:int) : void
+    SetContent(content:VisualElement) : void
+}
+class VisibilityToolController {
+    m_DeactivateBoneaTool : bool = false
+    + VisibilityToolController(model:IVisibilityToolModel, tools:IVisibilityTool[], skeletonTool:Func<SkeletonTool>, meshPreviewBehaviour:Func<IMeshPreviewBehaviour>)
+    + Activate() : void
+    + Deactivate() : void
+    OnBoneOpacityChangeBegin() : void
+    OnBoneOpacityChangeEnd() : void
+    OnMeshOpacityChangeBegin() : void
+    OnMeshOpacityChangeEnd() : void
+}
+class CustomUxmlFactory {
+}
+class "List`1"<T> {
+}
+class "Func`1"<T> {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- VisibilityToolWindow
+IVisibilityToolWindow <|-- VisibilityToolWindow
+VisibilityToolWindow --> "m_SelectorContainer" VisualElement
+VisibilityToolWindow --> "m_Container" VisualElement
+VisibilityToolWindow --> "m_BoneOpacitySlider" Slider
+VisibilityToolWindow --> "m_MeshOpacitySlider" Slider
+VisibilityToolWindow --> "m_Tabs<Button>" "List`1"
+BaseTool <|-- VisibilityTool
+IVisibilityToolModel <|-- VisibilityTool
+VisibilityTool --> "skeletonTool" SkeletonTool
+VisibilityTool --> "m_Controller" VisibilityToolController
+VisibilityTool --> "previewBehaviour" IMeshPreviewBehaviour
+VisibilityTool --> "view" IVisibilityToolWindow
+VisibilityTool --> "skinningCache" SkinningCache
+IVisibilityToolModel --> "view" IVisibilityToolWindow
+IVisibilityToolModel --> "skinningCache" SkinningCache
+VisibilityToolController --> "m_Model" IVisibilityToolModel
+VisibilityToolController --> "m_SkeletonTool<SkeletonTool>" "Func`1"
+VisibilityToolController --> "m_MeshPreviewBehaviour<IMeshPreviewBehaviour>" "Func`1"
+VisibilityToolWindow +-- CustomUxmlFactory
+"UxmlFactory`2" "<VisibilityToolWindow,UxmlTraits>" <|-- CustomUxmlFactory
+@enduml

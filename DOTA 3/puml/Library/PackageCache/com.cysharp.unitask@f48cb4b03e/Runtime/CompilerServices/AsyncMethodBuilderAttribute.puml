@@ -1,0 +1,7 @@
+@startuml
+class AsyncMethodBuilderAttribute <<sealed>> {
+    + AsyncMethodBuilderAttribute(builderType:Type)
+}
+Attribute <|-- AsyncMethodBuilderAttribute
+AsyncMethodBuilderAttribute --> "BuilderType" Type
+@enduml

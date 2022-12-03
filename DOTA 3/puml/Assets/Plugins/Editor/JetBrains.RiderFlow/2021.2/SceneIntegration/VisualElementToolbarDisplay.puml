@@ -1,0 +1,8 @@
+@startuml
+class VisualElementToolbarDisplay {
+    + VisualElementToolbarDisplay(toolbox:Overlay)
+    + OpenToolbox() : void
+    + CloseToolbox() : void
+}
+ISceneToolbarDisplay <|-- VisualElementToolbarDisplay
+@enduml

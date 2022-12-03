@@ -1,0 +1,11 @@
+@startuml
+class ConditionCopyNonLazyBinder {
+    + ConditionCopyNonLazyBinder(bindInfo:BindInfo)
+    + When(condition:BindingCondition) : CopyNonLazyBinder
+    + WhenInjectedIntoInstance(instance:object) : CopyNonLazyBinder
+    + WhenInjectedInto(targets:Type[]) : CopyNonLazyBinder
+    + WhenInjectedInto() : CopyNonLazyBinder
+    + WhenNotInjectedInto() : CopyNonLazyBinder
+}
+CopyNonLazyBinder <|-- ConditionCopyNonLazyBinder
+@enduml

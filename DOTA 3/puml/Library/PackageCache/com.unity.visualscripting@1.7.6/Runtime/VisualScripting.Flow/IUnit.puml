@@ -1,0 +1,45 @@
+@startuml
+interface IUnit {
+    canDefine : bool <<get>>
+    isDefined : bool <<get>>
+    failedToDefine : bool <<get>>
+    Define() : void
+    EnsureDefined() : void
+    RemoveUnconnectedInvalidPorts() : void
+    PortsChanged() : void
+     <<event>> onPortsChanged : Action 
+    isControlRoot : bool <<get>>
+}
+class XUnit <<static>> {
+    + {static} CompatibleValueInput(unit:IUnit, outputType:Type) : ValueInput
+    + {static} CompatibleValueOutput(unit:IUnit, inputType:Type) : ValueOutput
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "IUnitPortCollection`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class "IConnectionCollection`3"<T1,T2,T3> {
+}
+IGraphElementWithDebugData <|-- IUnit
+IUnit --> "graph" FlowGraph
+IUnit --> "definitionException" Exception
+IUnit --> "defaultValues<string,object>" "Dictionary`2"
+IUnit --> "controlInputs<ControlInput>" "IUnitPortCollection`1"
+IUnit --> "controlOutputs<ControlOutput>" "IUnitPortCollection`1"
+IUnit --> "valueInputs<ValueInput>" "IUnitPortCollection`1"
+IUnit --> "valueOutputs<ValueOutput>" "IUnitPortCollection`1"
+IUnit --> "invalidInputs<InvalidInput>" "IUnitPortCollection`1"
+IUnit --> "invalidOutputs<InvalidOutput>" "IUnitPortCollection`1"
+IUnit --> "inputs<IUnitInputPort>" "IEnumerable`1"
+IUnit --> "outputs<IUnitOutputPort>" "IEnumerable`1"
+IUnit --> "validInputs<IUnitInputPort>" "IEnumerable`1"
+IUnit --> "validOutputs<IUnitOutputPort>" "IEnumerable`1"
+IUnit --> "ports<IUnitPort>" "IEnumerable`1"
+IUnit --> "invalidPorts<IUnitPort>" "IEnumerable`1"
+IUnit --> "validPorts<IUnitPort>" "IEnumerable`1"
+IUnit --> "relations<IUnitRelation,IUnitPort,IUnitPort>" "IConnectionCollection`3"
+IUnit --> "connections<IUnitConnection>" "IEnumerable`1"
+IUnit --> "position" Vector2
+@enduml

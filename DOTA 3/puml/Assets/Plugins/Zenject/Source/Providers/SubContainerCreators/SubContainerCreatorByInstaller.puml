@@ -1,0 +1,14 @@
+@startuml
+class SubContainerCreatorByInstaller {
+    + SubContainerCreatorByInstaller(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installerType:Type, extraArgs:IEnumerable<TypeValuePair>)
+    + SubContainerCreatorByInstaller(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installerType:Type)
+    + CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "List`1"<T> {
+}
+ISubContainerCreator <|-- SubContainerCreatorByInstaller
+SubContainerCreatorByInstaller --> "_installerType" Type
+SubContainerCreatorByInstaller --> "_container" DiContainer
+SubContainerCreatorByInstaller --> "_extraArgs<TypeValuePair>" "List`1"
+SubContainerCreatorByInstaller --> "_containerBindInfo" SubContainerCreatorBindInfo
+@enduml

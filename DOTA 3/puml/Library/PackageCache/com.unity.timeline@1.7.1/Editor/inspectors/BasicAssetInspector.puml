@@ -1,0 +1,13 @@
+@startuml
+class BasicAssetInspector {
+    m_ShouldRebuild : bool
+    + <<override>> OnInspectorGUI() : void
+    + <<virtual>> OnPlayableAssetChangedInInspector() : void
+    {static} SkipField(fieldName:string) : bool
+}
+class ActivationPlayableAssetInspector {
+}
+Editor <|-- BasicAssetInspector
+IInspectorChangeHandler <|-- BasicAssetInspector
+BasicAssetInspector <|-- ActivationPlayableAssetInspector
+@enduml

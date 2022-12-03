@@ -1,0 +1,5 @@
+@startuml
+interface IUtpLogger {
+    Log(msg:Message) : void
+}
+@enduml

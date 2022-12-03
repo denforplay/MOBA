@@ -1,0 +1,20 @@
+@startuml
+class RemoveComponentUtils <<static>> {
+    + {static} ComponentDependencies(component:Component) : IEnumerable<Component>
+    + {static} CanRemoveComponent(component:Component, dependencies:IEnumerable<Component>) : bool
+}
+class ContextualMenuDispatcher <<static>> {
+    {static} RemoveReflectionProbeComponent(command:MenuCommand) : void
+    {static} RemoveLightComponent(command:MenuCommand) : void
+    {static} RemoveCameraComponent(command:MenuCommand) : void
+    {static} RegisterAdditionalDataMenus() : void
+    {static} RemoveComponent(command:MenuCommand) : void
+    {static} DispatchRemoveComponent(component:T) : bool
+}
+interface "IRemoveAdditionalDataContextualMenu`1"<T> {
+    RemoveComponent(component:T, dependencies:IEnumerable<Component>) : void
+}
+class "RemoveAdditionalDataContextualMenu`1"<T> {
+    + RemoveComponent(component:T, dependencies:IEnumerable<Component>) : void
+}
+@enduml

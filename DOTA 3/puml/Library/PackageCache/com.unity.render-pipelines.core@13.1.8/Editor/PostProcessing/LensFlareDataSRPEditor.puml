@@ -1,0 +1,130 @@
+@startuml
+class LensFlareDataSRPEditor {
+    {static} LensFlareDataSRPEditor()
+    m_ReservedListSizeRect : Rect?
+    {static} <<readonly>> k_PreviewSize : int = 128
+    {static} <<readonly>> k_FlareColorValue : int
+    {static} <<readonly>> k_FlareTex : int
+    {static} <<readonly>> k_FlareData0 : int
+    {static} <<readonly>> k_FlareData1 : int
+    {static} <<readonly>> k_FlareData2 : int
+    {static} <<readonly>> k_FlareData3 : int
+    {static} <<readonly>> k_FlareData4 : int
+    {static} <<readonly>> k_FlarePreviewData : int
+    OnEnable() : void
+    OnDisable() : void
+    + <<override>> OnInspectorGUI() : void
+    OnAdd(list:ReorderableList) : void
+    OnRemove(list:ReorderableList) : void
+    DrawListHeader(rect:Rect) : void
+    DrawListSize(rect:Rect) : void
+    DrawListFooter(rect:Rect) : void
+    ElementHeight(index:int) : float
+    GetTypeCathegoryLines(type:SerializedProperty) : int
+    GetColorCathegoryLines() : int
+    GetTransformCathegoryLines() : int
+    GetAxisTransformCathegoryLines() : int
+    GetRadialDistortionCathegoryLines(enabled:SerializedProperty) : int
+    GetMultipleElementsCathegoryLines(enabled:SerializedProperty, distribution:SerializedProperty) : int
+    DrawElementBackground(rect:Rect, index:int, isActive:bool, isFocused:bool) : void
+    {static} SafeGradientValue(sp:SerializedProperty) : Gradient
+    ComputeThumbnail(computedTexture:Texture2D, element:SerializedProperty, type:SRPLensFlareType, index:int) : void
+    RenderToTexture2D(computedTexture:Texture2D, clear:bool) : void
+    GetElementHash(element:SerializedProperty, type:SRPLensFlareType, index:int) : int
+    GetCachedThumbnailProceduralTexture(element:SerializedProperty, type:SRPLensFlareType, index:int) : Texture2D
+    DrawThumbnailProcedural(rect:Rect, element:SerializedProperty, type:SRPLensFlareType, index:int) : void
+    DrawElement(rect:Rect, index:int, isActive:bool, isFocused:bool) : void
+    DrawElementHeader(headerRect:Rect, isFoldOpened:SerializedProperty, selectedInList:bool, element:SerializedProperty) : bool
+    DrawSummary(summaryRect:Rect, element:SerializedProperty, index:int) : void
+    DrawFull(remainingRect:Rect, element:SerializedProperty) : void
+    DrawTypeCathegory(remainingRect:Rect, element:SerializedProperty) : void
+    DrawColorCathegory(remainingRect:Rect, element:SerializedProperty) : void
+    DrawTransformCathegory(remainingRect:Rect, element:SerializedProperty) : void
+    DrawAxisTransformCathegory(remainingRect:Rect, element:SerializedProperty) : void
+    DrawRadialDistortionCathegory(remainingRect:Rect, element:SerializedProperty) : void
+    DrawMultipleElementsCathegory(remainingRect:Rect, element:SerializedProperty) : void
+    ReserveFields(rect:Rect, fields:int) : IEnumerator<Rect>
+    ReserveCathegory(remaining:Rect, fields:int) : IEnumerator<Rect>
+    OffsetForThumbnail(remainingRect:Rect) : Rect
+    GetEnum(property:SerializedProperty) : T
+    SetEnum(property:SerializedProperty, value:T) : void
+}
+class Styles <<static>> {
+    + <<const>> sizeWidth : int = 47
+    + <<const>> sizeOffset : int = 5
+    + {static} <<readonly>> headerHeight : int
+    + {static} <<readonly>> cathegorySpacing : int = 5
+    + <<const>> footerSeparatorHeight : int = 5
+    + <<const>> thumbnailSize : int = 52
+    + <<const>> iconMargin : int = 6
+    + <<const>> horiwontalSpaceBetweenThumbnailAndInspector : int = 5
+    + <<const>> shrinkingLabel : int = 10
+    {static} + <<readonly>> typeCathegory : string
+    {static} + <<readonly>> colorCathegory : string
+    {static} + <<readonly>> transformCathegory : string
+    {static} + <<readonly>> axisTransformCathegory : string
+    {static} + <<readonly>> radialDistortionCathegory : string
+    {static} + <<readonly>> multipleElementsCathegory : string
+}
+class "Func`2"<T1,T2> {
+}
+class TextureCacheElement {
+    + hash : int = 0
+}
+class "List`1"<T> {
+}
+Editor <|-- LensFlareDataSRPEditor
+LensFlareDataSRPEditor --> "FillPropertyContextMenu<SerializedProperty,GenericMenu>" "Func`2"
+LensFlareDataSRPEditor --> "m_Elements" SerializedProperty
+LensFlareDataSRPEditor --> "m_List" ReorderableList
+LensFlareDataSRPEditor --> "s_ProceduralThumbnailShader" Shader
+LensFlareDataSRPEditor --> "m_PreviewTexture" RTHandle
+LensFlareDataSRPEditor --> "m_PreviewTextureCache<TextureCacheElement>" "List`1"
+LensFlareDataSRPEditor o-> "m_PreviewLensFlare" Material
+LensFlareDataSRPEditor +-- Styles
+Styles o-> "elementBackgroundColor" Color
+Styles o-> "mainHeader" GUIContent
+Styles o-> "elementHeader" GUIContent
+Styles o-> "type" GUIContent
+Styles o-> "flareTexture" GUIContent
+Styles o-> "preserveAspectRatio" GUIContent
+Styles o-> "gradient" GUIContent
+Styles o-> "fallOff" GUIContent
+Styles o-> "sideCount" GUIContent
+Styles o-> "sdfRoundness" GUIContent
+Styles o-> "inverseSDF" GUIContent
+Styles o-> "tint" GUIContent
+Styles o-> "modulateByLightColor" GUIContent
+Styles o-> "intensity" GUIContent
+Styles o-> "blendMode" GUIContent
+Styles o-> "positionOffset" GUIContent
+Styles o-> "autoRotate" GUIContent
+Styles o-> "rotation" GUIContent
+Styles o-> "sizeXY" GUIContent
+Styles o-> "uniformScale" GUIContent
+Styles o-> "position" GUIContent
+Styles o-> "angularOffset" GUIContent
+Styles o-> "translationScale" GUIContent
+Styles o-> "enableDistortion" GUIContent
+Styles o-> "targetSizeDistortion" GUIContent
+Styles o-> "distortionCurve" GUIContent
+Styles o-> "distortionRelativeToCenter" GUIContent
+Styles o-> "allowMultipleElement" GUIContent
+Styles o-> "count" GUIContent
+Styles o-> "distribution" GUIContent
+Styles o-> "lengthSpread" GUIContent
+Styles o-> "seed" GUIContent
+Styles o-> "intensityVariation" GUIContent
+Styles o-> "colorGradient" GUIContent
+Styles o-> "positionVariation" GUIContent
+Styles o-> "rotationVariation" GUIContent
+Styles o-> "scaleVariation" GUIContent
+Styles o-> "positionCurve" GUIContent
+Styles o-> "scaleCurve" GUIContent
+Styles o-> "uniformAngleCurve" GUIContent
+Styles o-> "uniformAngle" GUIContent
+Styles --> "m_BlueFocusedBoldLabel" GUIStyle
+Styles --> "blueFocusedBoldLabel" GUIStyle
+LensFlareDataSRPEditor +-- TextureCacheElement
+TextureCacheElement o-> "computedTexture" Texture2D
+@enduml

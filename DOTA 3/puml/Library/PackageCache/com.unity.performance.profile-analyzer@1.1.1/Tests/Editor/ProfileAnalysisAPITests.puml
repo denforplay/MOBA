@@ -1,0 +1,10 @@
+@startuml
+class ProfileAnalysisAPITests {
+    + ProfileAnalysis_SetRange_ModifiesFirstLastIndices(first:int, last:int) : void
+    + ProfileAnalysis_UpdateSummary_AddsFramesToSummary() : void
+    + ProfileAnalysis_SetupMarkers_GeneratesExpectedValues() : void
+    + ProfileAnalysis_SetupMarkerBuckets_GeneratesExpectedValues() : void
+    + ProfileAnalysis_SetupFrameBuckets_GeneratesExpectedValues() : void
+}
+ProfileAnalyzerBaseTest <|-- ProfileAnalysisAPITests
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class PackageSettingsRepository <<sealed>> {
+    + PackageSettingsRepository(package:string, name:string)
+    + {static} GetSettingsPath(packageName:string, name:string) : string
+}
+FileSettingsRepository <|-- PackageSettingsRepository
+@enduml

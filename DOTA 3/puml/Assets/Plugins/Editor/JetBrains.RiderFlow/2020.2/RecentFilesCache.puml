@@ -1,0 +1,13 @@
+@startuml
+class RecentFilesCache {
+    + RecentFilesCache()
+    + AddRecentFile(path:string) : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+"ScriptableSingleton`1" "<RecentFilesCache>" <|-- RecentFilesCache
+IRecentFilePersistentCache <|-- RecentFilesCache
+RecentFilesCache --> "RecentFiles<string>" "IEnumerable`1"
+@enduml

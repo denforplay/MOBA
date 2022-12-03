@@ -1,0 +1,10 @@
+@startuml
+class WeightPainterToolWrapper {
+    + title : string <<set>>
+    + <<override>> defaultControlID : int <<get>>
+}
+BaseTool <|-- WeightPainterToolWrapper
+WeightPainterToolWrapper --> "previewBehaviour" IMeshPreviewBehaviour
+WeightPainterToolWrapper --> "weightPainterTool" WeightPainterTool
+WeightPainterToolWrapper --> "paintMode" WeightPainterMode
+@enduml

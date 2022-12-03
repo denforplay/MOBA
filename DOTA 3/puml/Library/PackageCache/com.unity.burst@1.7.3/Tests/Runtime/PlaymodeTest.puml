@@ -1,0 +1,33 @@
+@startuml
+class PlaymodeTest {
+    + CheckBurstJobEnabledDisabled() : IEnumerator
+    + NoSafetyCheckExceptionWarningInEditor() : void
+    + <<unsafe>> SharedStaticPostProcessedTests() : void
+}
+class ThrowingJob <<struct>> {
+    + I : int
+    + Execute() : void
+}
+class MyKey <<struct>> {
+}
+class "SomeGenericStruct`1"<T> <<struct>> {
+}
+class "MyGenericContainingStruct`1"<T> <<struct>> {
+}
+class MySubKey0 <<struct>> {
+}
+class MySubKey1 <<struct>> {
+}
+class "SharedStatic`1"<T> {
+}
+PlaymodeTest +-- ThrowingJob
+IJob <|-- ThrowingJob
+PlaymodeTest +-- MyKey
+PlaymodeTest +-- "SomeGenericStruct`1"
+PlaymodeTest +-- "MyGenericContainingStruct`1"
+"MyGenericContainingStruct`1" o-> "Data0<int>" "SharedStatic`1"
+"MyGenericContainingStruct`1" o-> "Data1<int>" "SharedStatic`1"
+"MyGenericContainingStruct`1" o-> "Data2<int>" "SharedStatic`1"
+MyKey +-- MySubKey0
+MyKey +-- MySubKey1
+@enduml

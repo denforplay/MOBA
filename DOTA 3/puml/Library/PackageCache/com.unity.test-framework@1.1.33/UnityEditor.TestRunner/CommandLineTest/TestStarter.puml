@@ -1,0 +1,9 @@
+@startuml
+class TestStarter <<static>> {
+    {static} TestStarter()
+    {static} UpdateWatch() : void
+    {static} ShouldRunTests() : bool
+}
+TestStarter --> "s_Executer" Executer
+TestStarter --> "executer" Executer
+@enduml

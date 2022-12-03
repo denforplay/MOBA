@@ -1,0 +1,37 @@
+@startuml
+class IKManager2DEditor {
+    OnEnable() : void
+    SetupReorderableList() : void
+    OnSelectMenu(param:object) : void
+    + <<override>> OnInspectorGUI() : void
+    DoRestoreDefaultPoseButton() : void
+    {static} GetDerivedTypes() : List<Type>
+}
+class Contents {
+    + {static} <<readonly>> listHeaderLabel : string = "IK Solvers"
+    + {static} <<readonly>> createSolverString : string = "Create Solver"
+    + {static} <<readonly>> restoreDefaultPoseString : string = "Restore Default Pose"
+    + {static} showGizmoPropertyWidth : int = 20
+    + {static} solverPropertyWidth : int = 100
+    + {static} solverColorPropertyWidth : int = 40
+    + Contents()
+}
+class "List`1"<T> {
+}
+Editor <|-- IKManager2DEditor
+IKManager2DEditor --> "s_Contents" Contents
+IKManager2DEditor --> "m_ReorderableList" ReorderableList
+IKManager2DEditor --> "m_SelectedSolver" Solver2D
+IKManager2DEditor --> "m_SelectedSolverEditor" Editor
+IKManager2DEditor --> "m_SolversProperty" SerializedProperty
+IKManager2DEditor --> "m_SolverEditorDataProperty" SerializedProperty
+IKManager2DEditor --> "m_WeightProperty" SerializedProperty
+IKManager2DEditor --> "m_SolverTypes<Type>" "List`1"
+IKManager2DEditor --> "m_Manager" IKManager2D
+IKManager2DEditor +-- Contents
+Contents o-> "findAllSolversLabel" GUIContent
+Contents o-> "weightLabel" GUIContent
+Contents o-> "gizmoColorTooltip" GUIContent
+Contents o-> "gizmoVisibilityToolTip" GUIContent
+Contents --> "visibilityToggleStyle" GUIStyle
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+class LightAnchor {
+    <<const>> k_ArcRadius : float = 5
+    <<const>> k_AxisLength : float = 10
+    m_Distance : float = 0f
+    m_Yaw : float
+    m_Pitch : float
+    m_Roll : float
+    + yaw : float <<get>> <<set>>
+    + pitch : float <<get>> <<set>>
+    + roll : float <<get>> <<set>>
+    + distance : float <<get>> <<set>>
+    + {static} NormalizeAngleDegree(angle:float) : float
+    + SynchronizeOnTransform(camera:Camera) : void
+    + UpdateTransform(camera:Camera, anchor:Vector3) : void
+    GetWorldSpaceAxes(camera:Camera) : Axes
+    Update() : void
+    OnDrawGizmosSelected() : void
+    UpdateTransform(up:Vector3, right:Vector3, forward:Vector3, anchor:Vector3) : void
+}
+enum UpDirection {
+    World= Space.World,
+    Local= Space.Self,
+}
+class Axes <<struct>> {
+}
+MonoBehaviour <|-- LightAnchor
+LightAnchor o-> "m_FrameSpace" UpDirection
+LightAnchor --> "m_AnchorPositionOverride" Transform
+LightAnchor --> "m_AnchorPositionOffset" Vector3
+LightAnchor --> "frameSpace" UpDirection
+LightAnchor --> "anchorPosition" Vector3
+LightAnchor --> "anchorPositionOverride" Transform
+LightAnchor --> "anchorPositionOffset" Vector3
+LightAnchor +-- UpDirection
+LightAnchor +-- Axes
+Axes --> "up" Vector3
+Axes --> "right" Vector3
+Axes --> "forward" Vector3
+@enduml

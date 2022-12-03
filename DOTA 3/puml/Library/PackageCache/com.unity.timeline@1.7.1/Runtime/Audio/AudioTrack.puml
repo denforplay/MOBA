@@ -1,0 +1,11 @@
+@startuml
+class AudioTrack {
+    + CreateClip(clip:AudioClip) : TimelineClip
+    OnValidate() : void
+}
+class "IEnumerable`1"<T> {
+}
+TrackAsset <|-- AudioTrack
+AudioTrack o-> "m_TrackProperties" AudioMixerProperties
+AudioTrack --> "outputs<PlayableBinding>" "IEnumerable`1"
+@enduml

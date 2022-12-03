@@ -1,0 +1,111 @@
+@startuml
+class GridPaintPaletteWindow {
+    {static} GridSelectKey() : void
+    {static} GridMoveKey() : void
+    {static} GridBrushKey() : void
+    {static} GridRectangleKey() : void
+    {static} GridPickerKey() : void
+    {static} GridEraseKey() : void
+    {static} GridFillKey() : void
+    {static} RotateBrush(direction:GridBrushBase.RotationDirection) : void
+    {static} RotateBrushClockwise() : void
+    {static} RotateBrushAntiClockwise() : void
+    {static} FlipBrush(axis:GridBrushBase.FlipAxis) : void
+    {static} FlipBrushX() : void
+    {static} FlipBrushY() : void
+    {static} ChangeBrushZ(change:int) : void
+    {static} IncreaseBrushZ() : void
+    {static} DecreaseBrushZ() : void
+    + {static} isActive : bool <<get>>
+    {static} DoTilemapToolbar() : void
+    + DelayedResetPreviewInstance() : void
+    + ResetPreviewInstance() : void
+    + DestroyPreviewInstance() : void
+    + InitPreviewUtility() : void
+    + SavePalette() : void
+    + OnEnable() : void
+    + OnDisable() : void
+    + {static} OpenTilemapPalette() : void
+}
+enum TilemapFocusMode {
+    None= 0,
+    Tilemap= 1,
+    Grid= 2,
+}
+class MouseStyles <<static>> {
+    {static} MouseStyles()
+}
+class Styles <<static>> {
+    + {static} <<readonly>> dragPadding : float = 3f
+}
+class TilePaletteSaveScope {
+    + TilePaletteSaveScope(paletteInstance:GameObject)
+    + Dispose() : void
+}
+class TilePaletteProperties {
+    + {static} <<readonly>> targetEditModeDialogTitle : string
+    + {static} <<readonly>> targetEditModeDialogMessage : string
+    + {static} <<readonly>> targetEditModeDialogYes : string
+    + {static} <<readonly>> targetEditModeDialogChange : string
+    + {static} <<readonly>> targetEditModeDialogNo : string
+    + {static} <<readonly>> targetEditModeEditorPref : string = "TilePalette.TargetEditMode"
+    + {static} <<readonly>> targetEditModeLookup : string = "Target Edit Mode"
+    + {static} <<readonly>> tilePalettePreferencesLookup : string = "Tile Palette"
+}
+class "List`1"<T> {
+}
+class AssetProcessor {
+    + <<override>> GetPostprocessOrder() : int
+}
+class PaletteAssetModificationProcessor {
+    {static} OnWillCreateAsset(assetName:string) : void
+    {static} OnWillSaveAssets(paths:string[]) : string[]
+    {static} SavePalettesIfRequired(paths:string[]) : void
+}
+enum PrefabEditModeSettings {
+    EnableDialog= 0,
+    EditInPrefabMode= 1,
+    EditInScene= 2,
+}
+EditorWindow <|-- GridPaintPaletteWindow
+GridPaintPaletteWindow --> "instances<GridPaintPaletteWindow>" "List`1"
+GridPaintPaletteWindow --> "palette" GameObject
+GridPaintPaletteWindow --> "paletteInstance" GameObject
+GridPaintPaletteWindow --> "clipboardView" GridPaintPaletteClipboard
+GridPaintPaletteWindow --> "previewUtility" PreviewRenderUtility
+GridPaintPaletteWindow +-- TilemapFocusMode
+GridPaintPaletteWindow +-- MouseStyles
+GridPaintPaletteWindow +-- Styles
+Styles o-> "emptyProjectInfo" GUIContent
+Styles o-> "emptyPaletteInfo" GUIContent
+Styles o-> "invalidPaletteInfo" GUIContent
+Styles o-> "invalidGridInfo" GUIContent
+Styles o-> "selectPaintTarget" GUIContent
+Styles o-> "selectPalettePrefab" GUIContent
+Styles o-> "selectTileAsset" GUIContent
+Styles o-> "unlockPaletteEditing" GUIContent
+Styles o-> "lockPaletteEditing" GUIContent
+Styles o-> "openTilePalettePreferences" GUIContent
+Styles o-> "createNewPalette" GUIContent
+Styles o-> "activeTargetLabel" GUIContent
+Styles o-> "prefabWarningIcon" GUIContent
+Styles o-> "tilePalette" GUIContent
+Styles o-> "edit" GUIContent
+Styles o-> "editModified" GUIContent
+Styles o-> "gridGizmo" GUIContent
+Styles o-> "gizmos" GUIContent
+Styles o-> "lockZPosition" GUIContent
+Styles o-> "zPosition" GUIContent
+Styles o-> "resetZPosition" GUIContent
+Styles o-> "ToolbarTitleStyle" GUIStyle
+Styles o-> "dragHandle" GUIStyle
+GridPaintPaletteWindow +-- TilePaletteSaveScope
+IDisposable <|-- TilePaletteSaveScope
+GridPaintPaletteWindow +-- TilePaletteProperties
+TilePaletteProperties o-> "targetEditModeDialogLabel" GUIContent
+GridPaintPaletteWindow +-- AssetProcessor
+AssetPostprocessor <|-- AssetProcessor
+GridPaintPaletteWindow +-- PaletteAssetModificationProcessor
+AssetModificationProcessor <|-- PaletteAssetModificationProcessor
+TilePaletteProperties +-- PrefabEditModeSettings
+@enduml

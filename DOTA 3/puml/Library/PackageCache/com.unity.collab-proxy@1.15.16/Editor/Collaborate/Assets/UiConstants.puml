@@ -1,0 +1,11 @@
+@startuml
+class UiConstants <<static>> {
+    + <<const>> ChangesListViewItemHeight : int = 24
+    + <<const>> HistoryListViewItemHeight : int = 24
+    + <<const>> ussDark : string = "dark"
+    + <<const>> ussLight : string = "light"
+    + <<const>> ussHidden : string = "hidden"
+    + <<const>> ussDefaultInset : string = "default-inset"
+    + <<const>> ussActive : string = "active"
+}
+@enduml

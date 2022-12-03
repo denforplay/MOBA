@@ -1,0 +1,20 @@
+@startuml
+class XRGraphics {
+    + {static} eyeTextureResolutionScale : float <<get>> <<set>>
+    + {static} renderViewportScale : float <<get>>
+    + {static} enabled : bool <<get>>
+    + {static} isDeviceActive : bool <<get>>
+    + {static} loadedDeviceName : string <<get>>
+    + {static} eyeTextureWidth : int <<get>>
+    + {static} eyeTextureHeight : int <<get>>
+}
+enum StereoRenderingMode {
+    MultiPass= 0,
+    SinglePass,
+    SinglePassInstanced,
+    SinglePassMultiView,
+}
+XRGraphics --> "stereoRenderingMode" StereoRenderingMode
+XRGraphics --> "eyeTextureDesc" RenderTextureDescriptor
+XRGraphics +-- StereoRenderingMode
+@enduml

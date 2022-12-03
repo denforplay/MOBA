@@ -1,0 +1,23 @@
+@startuml
+class CCDSolver2DEditor {
+    OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class Contents <<static>> {
+}
+Solver2DEditor <|-- CCDSolver2DEditor
+CCDSolver2DEditor --> "m_TargetProperty" SerializedProperty
+CCDSolver2DEditor --> "m_EffectorProperty" SerializedProperty
+CCDSolver2DEditor --> "m_TransformCountProperty" SerializedProperty
+CCDSolver2DEditor --> "m_IterationsProperty" SerializedProperty
+CCDSolver2DEditor --> "m_ToleranceProperty" SerializedProperty
+CCDSolver2DEditor --> "m_VelocityProperty" SerializedProperty
+CCDSolver2DEditor --> "m_Solver" CCDSolver2D
+CCDSolver2DEditor +-- Contents
+Contents o-> "effectorLabel" GUIContent
+Contents o-> "targetLabel" GUIContent
+Contents o-> "chainLengthLabel" GUIContent
+Contents o-> "iterationsLabel" GUIContent
+Contents o-> "toleranceLabel" GUIContent
+Contents o-> "velocityLabel" GUIContent
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+enum Units {
+    Milliseconds,
+    Microseconds,
+    Count,
+}
+class DisplayUnits {
+    <<const>> kShowFullValueWhenBelowZero : bool = true
+    <<const>> kTooltipDigitsNumber : int = 7
+    + DisplayUnits(units:Units)
+    + Postfix() : string
+    ClampToRange(value:int, min:int, max:int) : int
+    RemoveTrailingZeros(numberStr:string, minNumberStringLength:int) : string
+    + ToString(ms:float, showUnits:bool, limitToNDigits:int, showFullValueWhenBelowZero:bool) : string
+    + {static} GetSIUnitString(unitPower:int) : string
+    + ToTooltipString(ms:double, showUnits:bool, frameIndex:int) : string
+    + ToGUIContentWithTooltips(ms:float, showUnits:bool, limitToNDigits:int, frameIndex:int) : GUIContent
+}
+DisplayUnits --> "Units" Units
+@enduml

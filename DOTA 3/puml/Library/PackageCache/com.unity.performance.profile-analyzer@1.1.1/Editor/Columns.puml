@@ -1,0 +1,24 @@
+@startuml
+class Columns {
+    + Columns(a:int, b:int, c:int, d:int)
+    + SetColumnSizes(a:int, b:int, c:int, d:int) : void
+    + GetColumnWidth(n:int) : int
+    + Draw(n:int, col:string) : void
+    + Draw(n:int, value:float) : void
+    + Draw2(col1:string, col2:string) : void
+    + Draw2(label:string, value:float) : void
+    + Draw3(col1:string, col2:string, col3:string) : void
+    + Draw3(col1:string, value2:float, value3:float) : void
+    + Draw4(col1:string, col2:string, col3:string, col4:string) : void
+    + Draw4Diff(col1:string, left:float, right:float) : void
+    + Draw4(col1:string, value2:float, value3:float, value4:float) : void
+    + Draw(n:int, col:GUIContent) : void
+    + Draw2(col1:GUIContent, col2:GUIContent) : void
+    + Draw2(label:GUIContent, value:float) : void
+    + Draw3(col1:GUIContent, col2:GUIContent, col3:GUIContent) : void
+    + Draw3(col1:GUIContent, value2:float, value3:float) : void
+    + Draw4(col1:GUIContent, col2:GUIContent, col3:GUIContent, col4:GUIContent) : void
+    + Draw4Diff(col1:GUIContent, left:float, right:float) : void
+    + Draw4(col1:GUIContent, value2:float, value3:float, value4:float) : void
+}
+@enduml

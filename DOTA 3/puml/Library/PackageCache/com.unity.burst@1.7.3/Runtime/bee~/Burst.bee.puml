@@ -1,0 +1,103 @@
+@startuml
+abstract class BurstCompiler {
+    + {abstract} TargetPlatform : string <<get>> <<set>>
+    + {abstract} TargetArchitecture : string <<get>> <<set>>
+    + {abstract} ObjectFormat : string <<get>> <<set>>
+    + {abstract} ObjectFileExtension : string <<get>> <<set>>
+    + {abstract} UseOwnToolchain : bool <<get>> <<set>>
+    + <<virtual>> OnlyStaticMethods : bool <<get>> <<set>> = false
+    + <<virtual>> BurstBackend : string <<get>> <<set>>
+    + <<virtual>> SafetyChecks : bool <<get>> <<set>> = false
+    + <<virtual>> DisableVectors : bool <<get>> <<set>> = false
+    + <<virtual>> Link : bool <<get>> <<set>> = true
+    + <<virtual>> Verbose : bool <<get>> <<set>> = false
+    + {abstract} FloatPrecision : string <<get>> <<set>>
+    + <<virtual>> Threads : int <<get>> <<set>> = 9
+    + <<virtual>> DisableOpt : bool <<get>> <<set>> = false
+    + <<virtual>> EnableGuard : bool <<get>> <<set>> = false
+    + <<virtual>> ExecuteMethodName : string <<get>> <<set>> = "ProducerExecuteFn_Gen"
+    + <<virtual>> EnableStaticLinkage : bool <<get>> <<set>> = false
+    + <<virtual>> EnableJobMarshalling : bool <<get>> <<set>> = false
+    + <<virtual>> EnableDirectExternalLinking : bool <<get>> <<set>> = false
+    + <<virtual>> DisableWarnings : string <<get>> <<set>> = ""
+    + <<virtual>> EmitLlvmObjects : bool <<get>> <<set>> = false
+    {static} GetBurstCommandLineArgs(compiler:BurstCompiler, outputPrefixForObjectFile:NPath, outputDirForPatchedAssemblies:NPath, pinvokeName:string, inputAssemblies:DotNetAssembly[]) : string[]
+    {static} AddDebugSymbolPaths(assemblies:DotNetAssembly[]) : IEnumerable<NPath>
+    {static} ArgumentsToResponseFile(usesMono:bool, targetDir:NPath, commandLineArgs:string[], responseFile:NPath) : string[]
+    + {static} SetupBurstCompilationForAssemblies(compiler:BurstCompiler, unpatchedInputAssembly:DotNetAssembly, outputDirForObjectFile:NPath, outputDirForPatchedAssemblies:NPath, pinvokeName:string, patchedAssembly:DotNetAssembly) : BagOfObjectFilesLibrary
+    + {static} SetupBurstCompilationAndLinkForAssemblies(compiler:BurstCompiler, unpatchedInputAssembly:DotNetAssembly, targetNativeLibrary:NPath, outputDirForPatchedAssemblies:NPath, patchedAssembly:DotNetAssembly) : DynamicLibrary
+}
+class BurstCompilerForEmscripten {
+    + <<override>> TargetPlatform : string <<get>> <<set>> = "Wasm"
+    + <<override>> TargetArchitecture : string <<get>> <<set>> = "WASM32"
+    + <<override>> ObjectFormat : string <<get>> <<set>> = "Wasm"
+    + <<override>> FloatPrecision : string <<get>> <<set>> = "High"
+    + <<override>> SafetyChecks : bool <<get>> <<set>> = true
+    + <<override>> DisableVectors : bool <<get>> <<set>> = true
+    + <<override>> Link : bool <<get>> <<set>> = false
+    + <<override>> ObjectFileExtension : string <<get>> <<set>> = ".bc"
+    + <<override>> UseOwnToolchain : bool <<get>> <<set>> = false
+    + <<override>> EnableStaticLinkage : bool <<get>> <<set>> = true
+    + <<override>> EnableJobMarshalling : bool <<get>> <<set>> = false
+    + <<override>> EnableDirectExternalLinking : bool <<get>> <<set>> = true
+    + <<override>> EmitLlvmObjects : bool <<get>> <<set>> = true
+}
+class BurstCompilerForWindows {
+    + <<override>> TargetPlatform : string <<get>> <<set>> = "Windows"
+    + <<override>> TargetArchitecture : string <<get>> <<set>> = "X64_SSE2"
+    + <<override>> ObjectFormat : string <<get>> <<set>> = "Coff"
+    + <<override>> FloatPrecision : string <<get>> <<set>> = "High"
+    + <<override>> SafetyChecks : bool <<get>> <<set>> = true
+    + <<override>> DisableVectors : bool <<get>> <<set>> = false
+    + <<override>> Link : bool <<get>> <<set>> = false
+    + <<override>> ObjectFileExtension : string <<get>> <<set>> = ".obj"
+    + <<override>> UseOwnToolchain : bool <<get>> <<set>> = true
+    + <<override>> EnableDirectExternalLinking : bool <<get>> <<set>> = false
+    + <<override>> EnableJobMarshalling : bool <<get>> <<set>> = true
+}
+class BurstCompilerForWindows64 {
+    + <<override>> TargetArchitecture : string <<get>> <<set>> = "X64_SSE4"
+}
+class BurstCompilerForMac {
+    + <<override>> TargetPlatform : string <<get>> <<set>> = "macOS"
+    + <<override>> TargetArchitecture : string <<get>> <<set>> = "X64_SSE2"
+    + <<override>> ObjectFormat : string <<get>> <<set>> = "MachO"
+    + <<override>> FloatPrecision : string <<get>> <<set>> = "High"
+    + <<override>> SafetyChecks : bool <<get>> <<set>> = true
+    + <<override>> DisableVectors : bool <<get>> <<set>> = false
+    + <<override>> Link : bool <<get>> <<set>> = false
+    + <<override>> ObjectFileExtension : string <<get>> <<set>> = ".o"
+    + <<override>> UseOwnToolchain : bool <<get>> <<set>> = true
+}
+class BurstCompilerForAndroid {
+    + <<override>> TargetPlatform : string <<get>> <<set>> = "Android"
+    + <<override>> TargetArchitecture : string <<get>> <<set>> = "ARMV7A_NEON32"
+    + <<override>> ObjectFormat : string <<get>> <<set>> = "Elf"
+    + <<override>> FloatPrecision : string <<get>> <<set>> = "High"
+    + <<override>> SafetyChecks : bool <<get>> <<set>> = true
+    + <<override>> DisableVectors : bool <<get>> <<set>> = false
+    + <<override>> Link : bool <<get>> <<set>> = false
+    + <<override>> ObjectFileExtension : string <<get>> <<set>> = ".o"
+    + <<override>> UseOwnToolchain : bool <<get>> <<set>> = true
+    + <<override>> EnableDirectExternalLinking : bool <<get>> <<set>> = true
+}
+class BurstCompilerForiOS {
+    + <<override>> TargetPlatform : string <<get>> <<set>> = "iOS"
+    + <<override>> TargetArchitecture : string <<get>> <<set>> = "ARMV8A_AARCH64"
+    + <<override>> ObjectFormat : string <<get>> <<set>> = "Elf"
+    + <<override>> SafetyChecks : bool <<get>> <<set>> = true
+    + <<override>> DisableVectors : bool <<get>> <<set>> = false
+    + <<override>> Link : bool <<get>> <<set>> = true
+    + <<override>> FloatPrecision : string <<get>> <<set>> = "High"
+    + <<override>> ObjectFileExtension : string <<get>> <<set>> = ".o"
+    + <<override>> UseOwnToolchain : bool <<get>> <<set>> = true
+    + <<override>> EnableDirectExternalLinking : bool <<get>> <<set>> = true
+}
+BurstCompiler --> "BurstExecutable" NPath
+BurstCompiler <|-- BurstCompilerForEmscripten
+BurstCompiler <|-- BurstCompilerForWindows
+BurstCompilerForWindows <|-- BurstCompilerForWindows64
+BurstCompiler <|-- BurstCompilerForMac
+BurstCompiler <|-- BurstCompilerForAndroid
+BurstCompiler <|-- BurstCompilerForiOS
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+class SceneContextRegistry {
+    + Add(context:SceneContext) : void
+    + GetSceneContextForScene(name:string) : SceneContext
+    + GetSceneContextForScene(scene:Scene) : SceneContext
+    + TryGetSceneContextForScene(name:string) : SceneContext
+    + TryGetSceneContextForScene(scene:Scene) : SceneContext
+    + GetContainerForScene(scene:Scene) : DiContainer
+    + TryGetContainerForScene(scene:Scene) : DiContainer
+    + Remove(context:SceneContext) : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "IEnumerable`1"<T> {
+}
+SceneContextRegistry o-> "_map<Scene,SceneContext>" "Dictionary`2"
+SceneContextRegistry --> "SceneContexts<SceneContext>" "IEnumerable`1"
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+class ThreadData {
+    + threadNameWithIndex : string
+    + threadGroupIndex : int
+    + threadGroupName : string
+    + threadsInGroup : int
+    + msMedian : float
+    + msLowerQuartile : float
+    + msUpperQuartile : float
+    + msMin : float
+    + msMax : float
+    + medianFrameIndex : int
+    + minFrameIndex : int
+    + maxFrameIndex : int
+    + ThreadData(_threadName:string)
+    + GetFrame(frameIndex:int) : ThreadFrameTime?
+}
+class "List`1"<T> {
+}
+class ThreadFrameTimeFrameComparer <<struct>> {
+    + Compare(x:ThreadFrameTime, y:ThreadFrameTime) : int
+}
+class "IComparer`1"<T> {
+}
+ThreadData o-> "frames<ThreadFrameTime>" "List`1"
+ThreadData +-- ThreadFrameTimeFrameComparer
+"IComparer`1" "<ThreadFrameTime>" <|-- ThreadFrameTimeFrameComparer
+@enduml

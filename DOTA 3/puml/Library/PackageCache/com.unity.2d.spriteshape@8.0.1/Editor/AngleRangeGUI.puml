@@ -1,0 +1,14 @@
+@startuml
+class AngleRangeGUI {
+    + {static} <<readonly>> kLeftHandleHashCode : int
+    + {static} <<readonly>> kRightHandleHashCode : int
+    + <<const>> kRangeWidth : float = 10f
+    + {static} AngleRangeField(rect:Rect, start:float, end:float, angleOffset:float, radius:float, snap:bool, drawLine:bool, drawCircle:bool, rangeColor:Color) : void
+    + {static} AngleRangeField(rect:Rect, leftHandleID:int, rightHandleID:int, start:float, end:float, angleOffset:float, radius:float, snap:bool, drawLine:bool, drawCircle:bool, rangeColor:Color) : void
+    + {static} AngleRangeField(rect:Rect, startProperty:SerializedProperty, endProperty:SerializedProperty, angleOffset:float, radius:float, snap:bool, drawLine:bool, drawCircle:bool, rangeColor:Color) : void
+    + {static} AngleField(id:int, property:SerializedProperty, angleOffset:float, handleOffset:Vector2, handleAngle:float, handleSize:float, radius:float, snap:bool, drawLine:bool, drawCircle:bool, drawCapFunction:Handles.CapFunction) : void
+    + {static} AngleField(r:Rect, id:int, property:SerializedProperty, angleOffset:float, handleOffset:Vector2, handleAngle:float, handleSize:float, radius:float, snap:bool, drawLine:bool, drawCircle:bool, drawCapFunction:Handles.CapFunction) : void
+    + {static} AngleField(id:int, angle:float, angleOffset:float, handleOffset:Vector2, handleAngle:float, radius:float, handleSize:float, snap:bool, drawLine:bool, drawCircle:bool, drawCapFunction:Handles.CapFunction) : float
+    + {static} AngleField(rect:Rect, id:int, angle:float, angleOffset:float, handleOffset:Vector2, handleAngle:float, handleSize:float, radius:float, snap:bool, drawLine:bool, drawCircle:bool, drawCapFunction:Handles.CapFunction) : float
+}
+@enduml

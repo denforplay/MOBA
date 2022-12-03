@@ -1,0 +1,9 @@
+@startuml
+class CloudCollabSettingsProvider {
+    <<const>> k_CollaborateName : string = "Version Control"
+    CloudCollabSettingsProvider(keywords:IEnumerable<string>)
+    {static} CreateSettingsProvider() : SettingsProvider
+}
+EditorGameServiceSettingsProvider <|-- CloudCollabSettingsProvider
+CloudCollabSettingsProvider --> "m_Visuals" CloudCollabVisuals
+@enduml

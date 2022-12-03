@@ -1,0 +1,24 @@
+@startuml
+class SpriteCategoryLabel <<struct>> {
+    m_Name : string
+    m_SpriteId : string
+    + name : string <<get>> <<set>>
+    + spriteId : string <<get>> <<set>>
+}
+class SpriteCategory <<struct>> {
+    m_Name : string
+    + name : string <<get>> <<set>>
+}
+class SpriteCategoryList <<struct>> {
+}
+interface ISpriteLibDataProvider {
+    GetSpriteCategoryList() : SpriteCategoryList
+    SetSpriteCategoryList(spriteCategoryList:SpriteCategoryList) : void
+}
+class "List`1"<T> {
+}
+SpriteCategory --> "m_Labels<SpriteCategoryLabel>" "List`1"
+SpriteCategory --> "labels<SpriteCategoryLabel>" "List`1"
+SpriteCategoryList --> "m_Categories<SpriteCategory>" "List`1"
+SpriteCategoryList --> "categories<SpriteCategory>" "List`1"
+@enduml

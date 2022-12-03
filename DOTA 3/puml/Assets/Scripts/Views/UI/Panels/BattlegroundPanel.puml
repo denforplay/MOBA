@@ -1,0 +1,6 @@
+@startuml
+class BattlegroundPanel {
+    + Initialize(leftTeamCharacters:List<CharacterInfo>, rightTeamCharacters:List<CharacterInfo>) : void
+}
+MonoBehaviour <|-- BattlegroundPanel
+@enduml

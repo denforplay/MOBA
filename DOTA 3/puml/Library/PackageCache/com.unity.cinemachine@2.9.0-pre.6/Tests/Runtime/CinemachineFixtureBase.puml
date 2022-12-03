@@ -1,0 +1,6 @@
+@startuml
+class CinemachineFixtureBase {
+    + <<virtual>> SetUp() : void
+    + <<virtual>> TearDown() : void
+}
+@enduml

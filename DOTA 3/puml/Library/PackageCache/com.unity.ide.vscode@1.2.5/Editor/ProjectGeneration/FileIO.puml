@@ -1,0 +1,17 @@
+@startuml
+interface IFileIO {
+    Exists(fileName:string) : bool
+    ReadAllText(fileName:string) : string
+    WriteAllText(fileName:string, content:string) : void
+    CreateDirectory(pathName:string) : void
+    EscapedRelativePathFor(file:string, projectDirectory:string) : string
+}
+class FileIOProvider {
+    + Exists(fileName:string) : bool
+    + ReadAllText(fileName:string) : string
+    + WriteAllText(fileName:string, content:string) : void
+    + CreateDirectory(pathName:string) : void
+    + EscapedRelativePathFor(file:string, projectDirectory:string) : string
+}
+IFileIO <|-- FileIOProvider
+@enduml

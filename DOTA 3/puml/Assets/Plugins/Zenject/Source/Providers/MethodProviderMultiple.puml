@@ -1,0 +1,14 @@
+@startuml
+class "MethodProviderMultiple`1"<TReturn> {
+    + MethodProviderMultiple(method:Func<InjectContext, IEnumerable<TReturn>>, container:DiContainer)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "Func`2"<T1,T2> {
+}
+IProvider <|-- "MethodProviderMultiple`1"
+"MethodProviderMultiple`1" --> "_container" DiContainer
+"MethodProviderMultiple`1" --> "_method<InjectContext,IEnumerable<TReturn>>" "Func`2"
+@enduml

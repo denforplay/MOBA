@@ -1,0 +1,21 @@
+@startuml
+interface IInputActionCollection {
+    bindingMask : InputBinding? <<get>> <<set>>
+    devices : ReadOnlyArray<InputDevice>? <<get>> <<set>>
+    Contains(action:InputAction) : bool
+    Enable() : void
+    Disable() : void
+}
+interface IInputActionCollection2 {
+    FindAction(actionNameOrId:string, throwIfNotFound:bool) : InputAction
+    FindBinding(mask:InputBinding, action:InputAction) : int
+}
+class "IEnumerable`1"<T> {
+}
+class "ReadOnlyArray`1"<T> {
+}
+"IEnumerable`1" "<InputAction>" <|-- IInputActionCollection
+IInputActionCollection --> "controlSchemes<InputControlScheme>" "ReadOnlyArray`1"
+IInputActionCollection <|-- IInputActionCollection2
+IInputActionCollection2 --> "bindings<InputBinding>" "IEnumerable`1"
+@enduml

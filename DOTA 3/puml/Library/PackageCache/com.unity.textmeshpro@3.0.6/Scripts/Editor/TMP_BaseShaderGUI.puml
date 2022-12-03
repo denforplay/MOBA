@@ -1,0 +1,35 @@
+@startuml
+abstract class TMP_BaseShaderGUI {
+    {static} s_UndoRedoCount : int
+    {static} s_LastSeenUndoRedoCount : int
+    {static} TMP_BaseShaderGUI()
+    m_IsNewGUI : bool = true
+    m_DragAndDropMinY : float
+    PrepareGUI() : void
+    + <<override>> OnGUI(materialEditor:MaterialEditor, properties:MaterialProperty[]) : void
+    + EndPanel() : void
+    BeginProperty(name:string) : MaterialProperty
+    EndProperty() : bool
+    DoTexture(name:string, label:string, type:System.Type, withTilingOffset:bool, speedNames:string[]) : void
+    DoTilingOffset(rect:Rect, property:MaterialProperty) : void
+    DoFloat(rect:Rect, name:string, label:string) : void
+    DoFloat2(rect:Rect, name:string) : void
+    DoDragAndDropBegin() : void
+    DoDragAndDropEnd() : void
+    PerformDrop(droppedMaterial:Material) : void
+}
+class ShaderFeature {
+    + undoLabel : string
+    m_State : int
+    + Active : bool <<get>>
+    + State : int <<get>>
+    + ReadState(material:Material) : void
+    + SetActive(active:bool, material:Material) : void
+    + DoPopup(editor:MaterialEditor, material:Material) : void
+    SetStateKeywords(material:Material) : void
+}
+ShaderGUI <|-- TMP_BaseShaderGUI
+TMP_BaseShaderGUI o-> "s_TempLabel" GUIContent
+TMP_BaseShaderGUI +-- ShaderFeature
+ShaderFeature --> "label" GUIContent
+@enduml

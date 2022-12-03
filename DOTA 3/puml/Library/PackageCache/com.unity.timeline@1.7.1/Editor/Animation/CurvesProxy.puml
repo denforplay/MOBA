@@ -1,0 +1,44 @@
+@startuml
+class CurvesProxy {
+    + hasCurves : bool <<get>>
+    + duration : double <<get>>
+    + defaultCurvesName : string <<get>>
+    <<readonly>> m_IsAnimatable : bool
+    m_ProxyIsRebuilding : int = 0
+    + CurvesProxy(originalOwner:ICurvesOwner)
+    + CreateCurves(curvesClipName:string) : void
+    + ConfigureCurveWrapper(wrapper:CurveWrapper) : void
+    + RebuildCurves() : void
+    + RemoveCurves(bindings:IEnumerable<EditorCurveBinding>) : void
+    + UpdateCurves(updatedCurves:IEnumerable<CurveWrapper>) : void
+    + ApplyExternalChangesToProxy() : void
+    UpdateCurve(binding:EditorCurveBinding, curve:AnimationCurve) : void
+    IsConstantCurve(binding:EditorCurveBinding, curve:AnimationCurve) : bool
+    ApplyConstraints(binding:EditorCurveBinding, curve:AnimationCurve) : void
+    HandleCurveUpdated(binding:EditorCurveBinding, updatedCurve:AnimationCurve) : void
+    HandleConstantCurveValueChanged(binding:EditorCurveBinding, updatedCurve:AnimationCurve) : void
+    HandleAllKeysDeleted(binding:EditorCurveBinding) : void
+    RebuildProxyCurves() : void
+    + UpdateProxyCurves() : void
+    CreateProxyCurve(prop:SerializedProperty, clip:AnimationClip, owner:UnityObject, propertyName:string) : void
+    SetProxyCurve(prop:SerializedProperty, binding:EditorCurveBinding) : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class RebuildGuard <<struct>> {
+    + RebuildGuard(owner:CurvesProxy)
+    + Dispose() : void
+}
+ICurvesOwner <|-- CurvesProxy
+CurvesProxy --> "curves" AnimationClip
+CurvesProxy --> "asset" UnityObject
+CurvesProxy --> "assetOwner" UnityObject
+CurvesProxy --> "targetTrack" TrackAsset
+CurvesProxy --> "m_OriginalOwner" ICurvesOwner
+CurvesProxy o-> "m_PropertiesMap<EditorCurveBinding,SerializedProperty>" "Dictionary`2"
+CurvesProxy --> "m_ProxyCurves" AnimationClip
+CurvesProxy --> "proxyCurves" AnimationClip
+CurvesProxy +-- RebuildGuard
+IDisposable <|-- RebuildGuard
+RebuildGuard --> "m_Owner" CurvesProxy
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class Control {
+    + HandleManipulatorsEvents(state:WindowState) : bool
+    + AddManipulator(m:Manipulator) : void
+}
+class "List`1"<T> {
+}
+Control o-> "m_Manipulators<Manipulator>" "List`1"
+@enduml

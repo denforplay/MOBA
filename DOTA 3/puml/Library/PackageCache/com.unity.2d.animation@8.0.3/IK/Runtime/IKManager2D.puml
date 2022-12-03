@@ -1,0 +1,15 @@
+@startuml
+class IKManager2D <<partial>> {
+    + weight : float <<get>> <<set>>
+    + AddSolver(solver:Solver2D) : void
+    + RemoveSolver(solver:Solver2D) : void
+    + UpdateManager() : void
+    + OnPreviewUpdate() : void
+    {static} IsInGUIUpdateLoop() : bool
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- IKManager2D
+IPreviewable <|-- IKManager2D
+IKManager2D --> "solvers<Solver2D>" "List`1"
+@enduml

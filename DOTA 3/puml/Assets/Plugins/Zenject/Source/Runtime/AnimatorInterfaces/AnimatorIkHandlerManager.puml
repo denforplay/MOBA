@@ -1,0 +1,10 @@
+@startuml
+class AnimatorIkHandlerManager {
+    + Construct(handlers:List<IAnimatorIkHandler>) : void
+    + OnAnimatorIk() : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- AnimatorIkHandlerManager
+AnimatorIkHandlerManager --> "_handlers<IAnimatorIkHandler>" "List`1"
+@enduml

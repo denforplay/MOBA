@@ -1,0 +1,10 @@
+@startuml
+class SubContainerCreatorByNewPrefab {
+    + SubContainerCreatorByNewPrefab(container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters)
+    + CreateSubContainer(args:List<TypeValuePair>, parentContext:InjectContext, injectAction:Action) : DiContainer
+}
+ISubContainerCreator <|-- SubContainerCreatorByNewPrefab
+SubContainerCreatorByNewPrefab --> "_gameObjectBindInfo" GameObjectCreationParameters
+SubContainerCreatorByNewPrefab --> "_prefabProvider" IPrefabProvider
+SubContainerCreatorByNewPrefab --> "_container" DiContainer
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+abstract class "CoverageResultWriterBase`1"<T> {
+    + CoverageSession : T <<get>> <<set>>
+    + <<virtual>> WriteCoverageSession() : void
+    + SetupCoveragePaths() : void
+    + ClearCoverageFolderIfExists() : void
+}
+@enduml

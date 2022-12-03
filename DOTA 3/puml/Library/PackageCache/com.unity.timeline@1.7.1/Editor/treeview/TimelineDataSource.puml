@@ -1,0 +1,18 @@
+@startuml
+class TimelineDataSource {
+    + TimelineDataSource(parentGUI:TimelineTreeViewGUI, treeView:TreeViewController, sequencerWindow:TimelineWindow)
+    + <<override>> IsExpanded(item:TreeViewItem) : bool
+    + <<override>> IsExpandable(item:TreeViewItem) : bool
+    + <<sealed>> <<override>> FetchData() : void
+    CreateItem(scriptableObject:ScriptableObject, tree:Dictionary<TrackAsset, TimelineTrackBaseGUI>, selectedRows:IEnumerable<TrackAsset>, parentTreeViewItem:TreeViewItem) : TimelineTrackBaseGUI
+    + <<override>> CanBeParent(item:TreeViewItem) : bool
+    + ExpandItems(item:TreeViewItem) : void
+}
+class "List`1"<T> {
+}
+TreeViewDataSource <|-- TimelineDataSource
+TimelineDataSource --> "m_TimelineWindow" TimelineWindow
+TimelineDataSource --> "m_ParentGUI" TimelineTreeViewGUI
+TimelineDataSource --> "allTrackGuis<TimelineTrackBaseGUI>" "List`1"
+TimelineDataSource --> "treeroot" TreeViewItem
+@enduml

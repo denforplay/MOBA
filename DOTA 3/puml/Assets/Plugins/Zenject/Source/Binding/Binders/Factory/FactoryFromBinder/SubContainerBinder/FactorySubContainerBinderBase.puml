@@ -1,0 +1,15 @@
+@startuml
+class "FactorySubContainerBinderBase`1"<TContract> {
+    + FactorySubContainerBinderBase(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, subIdentifier:object)
+    + ByInstaller() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByInstaller(installerType:Type) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewGameObjectInstaller() : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewGameObjectInstaller(installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefabGetter:Func<InjectContext, UnityEngine.Object>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefabGetter:Func<InjectContext, UnityEngine.Object>, installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefab:UnityEngine.Object, installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResourceInstaller(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResourceInstaller(resourcePath:string, installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+@enduml

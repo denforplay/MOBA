@@ -1,0 +1,30 @@
+@startuml
+class VolumeComponentListEditor <<sealed>> {
+    m_CurrentHashCode : int
+    {static} VolumeComponentListEditor()
+    + VolumeComponentListEditor(editor:Editor)
+    + Init(asset:VolumeProfile, serializedObject:SerializedObject) : void
+    OnUndoRedoPerformed() : void
+    CreateEditor(component:VolumeComponent, property:SerializedProperty, index:int, forceOpen:bool) : void
+    RefreshEditors() : void
+    + Clear() : void
+    + OnGUI() : void
+    OnContextClick(position:Vector2, targetEditor:VolumeComponentEditor, id:int) : void
+    CreateNewComponent(type:Type) : VolumeComponent
+    {static} CanPaste(targetComponent:VolumeComponent) : bool
+    {static} CopySettings(targetComponent:VolumeComponent) : void
+    {static} PasteSettings(targetComponent:VolumeComponent) : void
+    {static} ReloadDocumentation() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+VolumeComponentListEditor --> "asset" VolumeProfile
+VolumeComponentListEditor --> "m_BaseEditor" Editor
+VolumeComponentListEditor --> "m_SerializedObject" SerializedObject
+VolumeComponentListEditor --> "m_ComponentsProperty" SerializedProperty
+VolumeComponentListEditor --> "m_EditorTypes<Type,Type>" "Dictionary`2"
+VolumeComponentListEditor --> "m_Editors<VolumeComponentEditor>" "List`1"
+VolumeComponentListEditor --> "m_EditorDocumentationURLs<Type,string>" "Dictionary`2"
+@enduml

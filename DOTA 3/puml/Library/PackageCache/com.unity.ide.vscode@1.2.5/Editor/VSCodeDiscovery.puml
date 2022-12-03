@@ -1,0 +1,15 @@
+@startuml
+interface IDiscovery {
+    PathCallback() : CodeEditor.Installation[]
+}
+class VSCodeDiscovery {
+    + PathCallback() : CodeEditor.Installation[]
+    FindInstallationPaths() : void
+    {static} GetLongestCommonPrefix(paths:List<string>) : string
+    {static} VSCodeExists(path:string) : bool
+}
+class "List`1"<T> {
+}
+IDiscovery <|-- VSCodeDiscovery
+VSCodeDiscovery --> "m_Installations<CodeEditor.Installation>" "List`1"
+@enduml

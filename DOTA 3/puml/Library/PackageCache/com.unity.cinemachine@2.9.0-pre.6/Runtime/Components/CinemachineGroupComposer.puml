@@ -1,0 +1,37 @@
+@startuml
+class CinemachineGroupComposer {
+    + m_GroupFramingSize : float = 0.8f
+    + m_FrameDamping : float = 2f
+    + m_MaxDollyIn : float = 5000f
+    + m_MaxDollyOut : float = 5000f
+    + m_MinimumDistance : float = 1
+    + m_MaximumDistance : float = 5000f
+    + m_MinimumFOV : float = 3
+    + m_MaximumFOV : float = 60
+    + m_MinimumOrthoSize : float = 1
+    + m_MaximumOrthoSize : float = 5000
+    m_prevFramingDistance : float
+    m_prevFOV : float
+    + <<override>> GetMaxDampTime() : float
+    + <<override>> MutateCameraState(curState:CameraState, deltaTime:float) : void
+    GetTargetHeight(boundsSize:Vector2) : float
+    {static} GetScreenSpaceGroupBoundingBox(group:ICinemachineTargetGroup, observer:Matrix4x4, newFwd:Vector3) : Bounds
+}
+enum FramingMode {
+    Horizontal,
+    Vertical,
+    HorizontalAndVertical,
+}
+enum AdjustmentMode {
+    ZoomOnly,
+    DollyOnly,
+    DollyThenZoom,
+}
+CinemachineComposer <|-- CinemachineGroupComposer
+CinemachineGroupComposer o-> "m_FramingMode" FramingMode
+CinemachineGroupComposer o-> "m_AdjustmentMode" AdjustmentMode
+CinemachineGroupComposer --> "LastBounds" Bounds
+CinemachineGroupComposer --> "LastBoundsMatrix" Matrix4x4
+CinemachineGroupComposer +-- FramingMode
+CinemachineGroupComposer +-- AdjustmentMode
+@enduml

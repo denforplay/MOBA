@@ -1,0 +1,7 @@
+@startuml
+class RangeTargetZoneSkillControl {
+    + <<override>> UpdateSkillView(newPosition:Vector3) : void
+}
+SkillControlBase <|-- RangeTargetZoneSkillControl
+RangeTargetZoneSkillControl --> "SkillType" SkillType
+@enduml

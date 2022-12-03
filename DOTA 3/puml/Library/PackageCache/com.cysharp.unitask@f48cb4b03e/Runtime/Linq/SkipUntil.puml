@@ -1,0 +1,44 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} SkipUntil(source:IUniTaskAsyncEnumerable<TSource>, other:UniTask) : IUniTaskAsyncEnumerable<TSource>
+    + {static} SkipUntil(source:IUniTaskAsyncEnumerable<TSource>, other:Func<CancellationToken, UniTask>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "SkipUntil`1"<TSource> <<sealed>> {
+    + SkipUntil(source:IUniTaskAsyncEnumerable<TSource>, other:UniTask, other2:Func<CancellationToken, UniTask>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "Func`2"<T1,T2> {
+}
+class _SkipUntil <<sealed>> {
+    completed : bool
+    continueNext : bool
+    + _SkipUntil(source:IUniTaskAsyncEnumerable<TSource>, other:UniTask, cancellationToken1:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    <<async>> RunOther(other:UniTask) : UniTaskVoid
+    {static} OnCanceled1(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "SkipUntil`1"
+"SkipUntil`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"SkipUntil`1" --> "other" UniTask
+"SkipUntil`1" --> "other2<CancellationToken,UniTask>" "Func`2"
+"SkipUntil`1" +-- _SkipUntil
+MoveNextSource <|-- _SkipUntil
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _SkipUntil
+_SkipUntil o-> "CancelDelegate1<object>" "Action`1"
+_SkipUntil o-> "MoveNextCoreDelegate<object>" "Action`1"
+_SkipUntil --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_SkipUntil --> "cancellationToken1" CancellationToken
+_SkipUntil --> "cancellationTokenRegistration1" CancellationTokenRegistration
+_SkipUntil --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_SkipUntil --> "exception" Exception
+_SkipUntil --> "Current" TSource
+@enduml

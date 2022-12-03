@@ -1,0 +1,8 @@
+@startuml
+class InstantiateCallbackConditionCopyNonLazyBinder {
+    + InstantiateCallbackConditionCopyNonLazyBinder(bindInfo:BindInfo)
+    + OnInstantiated(callback:Action<InjectContext, object>) : ConditionCopyNonLazyBinder
+    + OnInstantiated(callback:Action<InjectContext, T>) : ConditionCopyNonLazyBinder
+}
+ConditionCopyNonLazyBinder <|-- InstantiateCallbackConditionCopyNonLazyBinder
+@enduml

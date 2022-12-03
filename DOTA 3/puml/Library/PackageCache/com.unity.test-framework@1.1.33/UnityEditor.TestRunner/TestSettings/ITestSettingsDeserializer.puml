@@ -1,0 +1,5 @@
+@startuml
+interface ITestSettingsDeserializer {
+    GetSettingsFromJsonFile(jsonFilePath:string) : ITestSettings
+}
+@enduml

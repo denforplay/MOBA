@@ -1,0 +1,19 @@
+@startuml
+class AssemblyFiltering {
+    + <<const>> kDefaultExcludedAssemblies : string = "system*,mono*,nunit*,microsoft*,mscorlib*,roslyn*"
+    + <<const>> kUserAlias : string = "<user>"
+    + <<const>> kProjectAlias : string = "<project>"
+    + <<const>> kPackagesAlias : string = "<packages>"
+    + <<const>> kAllAlias : string = "<all>"
+    + includedAssemblies : string <<get>>
+    + excludedAssemblies : string <<get>>
+    + AssemblyFiltering()
+    + Parse(includeAssemblies:string, excludeAssemblies:string) : void
+    + IsAssemblyIncluded(name:string) : bool
+    + {static} GetAllProjectAssembliesString() : string
+    + {static} GetUserOnlyAssembliesString() : string
+    + {static} GetPackagesOnlyAssembliesString() : string
+    + {static} CreateFilterRegex(filter:string) : Regex
+    + {static} RemoveAssembliesThatNoLongerExist(assembliesString:string) : string
+}
+@enduml

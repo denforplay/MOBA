@@ -1,0 +1,31 @@
+@startuml
+class SearchBar {
+    + <<const>> UssClassName : string = "unity-search-bar"
+    + <<const>> SearchFieldUssClassName : string
+    + <<const>> PlaceholderUssClassName : string
+    {static} <<readonly>> k_StylePath : string
+    + <<const>> timeoutMilliseconds : int = 1000
+    m_LatestSearchValue : string
+    m_SearchEventFlag : bool
+    m_Focused : bool
+    +  <<event>> Search : Action<string> 
+    + SearchBar()
+    + SearchBar(searchEvent:Action<string>)
+    SearchEventThrottle(evt:ChangeEvent<string>) : void
+    + Value : string <<get>> <<set>>
+    + SetValueWithoutNotify(value:string) : void
+    UpdatePlaceholderVisibility() : void
+    HidePlaceholder() : void
+    ShowPlaceholder() : void
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- SearchBar
+SearchBar --> "m_SearchField" ToolbarSearchField
+SearchBar --> "m_Placeholder" Label
+SearchBar --> "m_SearchEventTimer" Timer
+SearchBar +-- UxmlFactory
+"UxmlFactory`1" "<SearchBar>" <|-- UxmlFactory
+@enduml

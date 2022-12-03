@@ -1,0 +1,8 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ToHashSetAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<HashSet<TSource>>
+    + {static} ToHashSetAsync(source:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>, cancellationToken:CancellationToken) : UniTask<HashSet<TSource>>
+}
+class ToHashSet <<static>> {
+}
+@enduml

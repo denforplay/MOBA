@@ -1,0 +1,9 @@
+@startuml
+class TestStackalloc {
+    + {static} <<unsafe>> Stackalloc1ByteWithInitializer() : int
+    + {static} <<unsafe>> Stackalloc16BytesWithInitializer() : int
+    + {static} <<unsafe>> Stackalloc16IntsWithInitializer() : int
+    + {static} <<unsafe>> StackallocInBranch(takeBranch:int) : int
+    + {static} <<unsafe>> StackallocInLoop(iterations:int) : int
+}
+@enduml

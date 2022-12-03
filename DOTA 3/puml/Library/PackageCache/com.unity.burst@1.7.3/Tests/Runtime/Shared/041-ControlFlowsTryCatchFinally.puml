@@ -1,0 +1,41 @@
+@startuml
+class ControlFlowsTryCatchFinally {
+    + {static} TryFinallySimple(i:int) : int
+    {static} Oof() : void
+    + {static} TryFinallyFirstBlock() : void
+    + {static} TryFinallyComplex1(i:int) : int
+    + {static} TryFinallyComplex2(i:int) : int
+    + {static} TryUsingDispose() : int
+    + {static} ForEachTryFinally() : int
+    + {static} TryCatch() : int
+}
+class CustomBuffer <<struct>> {
+    + CustomBuffer(size:int)
+    + Hash() : int
+    + <<unsafe>> Dispose() : void
+}
+class RangeEnumerable <<struct>> {
+    + RangeEnumerable(from:int, to:int)
+    + GetEnumerator() : Enumerator
+    GetEnumerator() : IEnumerator<int>
+    GetEnumerator() : IEnumerator
+}
+class "IEnumerable`1"<T> {
+}
+class Enumerator <<struct>> {
+    + Enumerator(from:int, to:int)
+    + Dispose() : void
+    + MoveNext() : bool
+    + Reset() : void
+    + Current : int <<get>>
+    Current : object <<get>>
+}
+class "IEnumerator`1"<T> {
+}
+ControlFlowsTryCatchFinally +-- CustomBuffer
+IDisposable <|-- CustomBuffer
+ControlFlowsTryCatchFinally +-- RangeEnumerable
+"IEnumerable`1" "<int>" <|-- RangeEnumerable
+RangeEnumerable +-- Enumerator
+"IEnumerator`1" "<int>" <|-- Enumerator
+@enduml

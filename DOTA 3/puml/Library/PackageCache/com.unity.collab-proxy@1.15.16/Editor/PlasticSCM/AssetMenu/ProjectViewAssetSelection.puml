@@ -1,0 +1,8 @@
+@startuml
+class ProjectViewAssetSelection {
+    SelectionChanged() : void
+    GetSelectedAssets() : AssetList
+    HasSelectedAssets() : bool
+}
+ProjectViewAssetSelection --> "mAssetSelectionChangedAction" Action
+@enduml

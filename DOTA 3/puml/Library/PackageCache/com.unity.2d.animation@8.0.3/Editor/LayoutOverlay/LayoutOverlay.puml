@@ -1,0 +1,24 @@
+@startuml
+class LayoutOverlay {
+    + VisibilityWindowOn(on:bool) : void
+    + hasScrollbar : bool <<get>> <<set>>
+    + LayoutOverlay()
+}
+class LayoutOverlayFactory {
+}
+class LayoutOverlayUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- LayoutOverlay
+LayoutOverlay --> "horizontalToolbar" ScrollableToolbar
+LayoutOverlay --> "verticalToolbar" ScrollableToolbar
+LayoutOverlay --> "horizontalHolder" VisualElement
+LayoutOverlay --> "leftOverlay" VisualElement
+LayoutOverlay --> "rightOverlay" VisualElement
+LayoutOverlay --> "dropdownOverlay" DropdownMenu
+LayoutOverlay +-- LayoutOverlayFactory
+"UxmlFactory`2" "<LayoutOverlay,LayoutOverlayUxmlTraits>" <|-- LayoutOverlayFactory
+LayoutOverlay +-- LayoutOverlayUxmlTraits
+UxmlTraits <|-- LayoutOverlayUxmlTraits
+@enduml

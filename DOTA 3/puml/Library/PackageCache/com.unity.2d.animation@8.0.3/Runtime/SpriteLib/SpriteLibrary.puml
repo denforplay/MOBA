@@ -1,0 +1,37 @@
+@startuml
+class SpriteLibrary {
+    m_PreviousSpriteLibraryAsset : int
+    m_PreviousModificationHash : long
+    OnEnable() : void
+    + OnPreviewUpdate() : void
+    + GetSprite(category:string, label:string) : Sprite
+    GetSprite(hash:int) : Sprite
+    UpdateCacheOverridesIfNeeded() : void
+    GetEntries(category:string, addIfNotExist:bool) : List<SpriteCategoryEntry>
+    GetEntry(entries:List<SpriteCategoryEntry>, entry:string, addIfNotExist:bool) : SpriteCategoryEntry
+    + AddOverride(spriteLib:SpriteLibraryAsset, category:string, label:string) : void
+    + AddOverride(spriteLib:SpriteLibraryAsset, category:string) : void
+    + AddOverride(sprite:Sprite, category:string, label:string) : void
+    + RemoveOverride(category:string) : void
+    + RemoveOverride(category:string, label:string) : void
+    + HasOverride(category:string, label:string) : bool
+    + RefreshSpriteResolvers() : void
+}
+class CategoryEntrySprite <<struct>> {
+    + category : string
+    + entry : string
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+MonoBehaviour <|-- SpriteLibrary
+IPreviewable <|-- SpriteLibrary
+SpriteLibrary o-> "m_Library<SpriteLibCategory>" "List`1"
+SpriteLibrary --> "m_SpriteLibraryAsset" SpriteLibraryAsset
+SpriteLibrary o-> "m_CategoryEntryHashCache<int,CategoryEntrySprite>" "Dictionary`2"
+SpriteLibrary o-> "m_CategoryEntryCache<string,HashSet<string>>" "Dictionary`2"
+SpriteLibrary --> "spriteLibraryAsset" SpriteLibraryAsset
+SpriteLibrary +-- CategoryEntrySprite
+CategoryEntrySprite --> "sprite" Sprite
+@enduml

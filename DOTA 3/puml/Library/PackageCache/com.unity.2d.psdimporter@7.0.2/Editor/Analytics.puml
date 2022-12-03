@@ -1,0 +1,32 @@
+@startuml
+class PSDApplyEvent <<struct>> {
+    + instance_id : int
+    + texture_type : int
+    + sprite_mode : int
+    + mosaic_layer : bool
+    + import_hidden_layer : bool
+    + character_mode : bool
+    + generate_go_hierarchy : bool
+    + reslice_from_layer : bool
+    + is_character_rigged : bool
+    + is_psd : bool
+}
+interface IAnalytics {
+    SendApplyEvent(evt:PSDApplyEvent) : AnalyticsResult
+}
+class AnalyticFactory <<static>> {
+}
+class Analytics {
+    <<const>> k_MaxEventsPerHour : int = 100
+    <<const>> k_MaxNumberOfElements : int = 1000
+    <<const>> k_VendorKey : string = "unity.2d.psdimporter"
+    <<const>> k_Version : int = 1
+    {static} Analytics()
+    + SendApplyEvent(evt:PSDApplyEvent) : AnalyticsResult
+}
+PSDApplyEvent --> "character_alignment" SpriteAlignment
+PSDApplyEvent --> "color_mode" PsdColorMode
+AnalyticFactory --> "s_Analytics" IAnalytics
+AnalyticFactory --> "analytics" IAnalytics
+IAnalytics <|-- Analytics
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+class FileSettingsRepository {
+    <<const>> k_PrettyPrintJson : bool = true
+    m_Initialized : bool
+    m_Path : string
+    + FileSettingsRepository(path:string)
+    Init() : void
+    + path : string <<get>>
+    + name : string <<get>>
+    + TryLoadSavedJson(json:string) : bool
+    + Save() : void
+    + Set(key:string, value:T) : void
+    + Get(key:string, fallback:T) : T
+    + ContainsKey(key:string) : bool
+    + Remove(key:string) : void
+}
+ISettingsRepository <|-- FileSettingsRepository
+FileSettingsRepository o-> "m_Dictionary" SettingsDictionary
+FileSettingsRepository --> "m_JsonHash" Hash128
+FileSettingsRepository --> "scope" SettingsScope
+@enduml

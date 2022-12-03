@@ -39,5 +39,13 @@ namespace Models.Skills.Observers
             
             OnSkillCalled?.Invoke(lastPosition);
         }
+
+        public void ClearSkillLCalled()
+        {
+            foreach(var method in OnSkillCalled.GetInvocationList())
+            {
+                OnSkillCalled -= (Action<Vector3>)method;
+            }
+        }
     }
 }

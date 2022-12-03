@@ -1,0 +1,21 @@
+@startuml
+class SettingsDictionary <<sealed>> {
+    + ContainsKey(key:string) : bool
+    + Set(key:string, value:T) : void
+    + Get(key:string, fallback:T) : T
+    + Remove(key:string) : void
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+    + <<override>> ToString() : string
+}
+class SettingsKeyValuePair <<struct>> {
+    + type : string
+    + key : string
+    + value : string
+}
+class "List`1"<T> {
+}
+ISerializationCallbackReceiver <|-- SettingsDictionary
+SettingsDictionary o-> "m_DictionaryValues<SettingsKeyValuePair>" "List`1"
+SettingsDictionary +-- SettingsKeyValuePair
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+class CinemachineScreenComposerGuidesGlobalDraggable <<static>> {
+    {static} CinemachineScreenComposerGuidesGlobalDraggable()
+    + {static} kEnabledKey : string = "DraggableScreenComposerGuides_Enabled"
+    + {static} Enabled : bool <<get>> <<set>>
+}
+class GameViewEventCatcher {
+    + OnEnable() : void
+    + OnDisable() : void
+}
+class CinemachineScreenComposerGuides {
+    + <<const>> kGuideBarWidthPx : float = 3f
+    + {static} sDraggableGameWindowGuides : bool = true
+    + SetNewBounds(oldHard:Rect, oldSoft:Rect, newHard:Rect, newSoft:Rect) : void
+    GetCameraRect(outputCamera:Camera, lens:LensSettings) : Rect
+    + OnGUI_DrawGuides(isLive:bool, outputCamera:Camera, lens:LensSettings, showHardGuides:bool) : void
+}
+enum DragBar {
+    Center,
+    SoftBarLineLeft,
+    SoftBarLineTop,
+    SoftBarLineRight,
+    SoftBarLineBottom,
+    HardBarLineLeft,
+    HardBarLineTop,
+    HardBarLineRight,
+    HardBarLineBottom,
+    NONE,
+}
+CinemachineScreenComposerGuides --> "GetHardGuide" RectGetter
+CinemachineScreenComposerGuides --> "GetSoftGuide" RectGetter
+CinemachineScreenComposerGuides --> "SetHardGuide" RectSetter
+CinemachineScreenComposerGuides --> "SetSoftGuide" RectSetter
+CinemachineScreenComposerGuides --> "Target" ObjectGetter
+CinemachineScreenComposerGuides +-- DragBar
+@enduml

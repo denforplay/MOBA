@@ -1,0 +1,19 @@
+@startuml
+class TimelineWindow <<partial>> {
+}
+class PlayableLookup {
+    <<const>> k_InitialDictionarySize : int = 10
+    + UpdatePlayableLookup(clip:TimelineClip, go:GameObject, p:Playable) : void
+    + UpdatePlayableLookup(track:TrackAsset, go:GameObject, p:Playable) : void
+    UpdatePlayableLookup(timelineAsset:TimelineAsset, curvesOwner:ICurvesOwner, go:GameObject, p:Playable) : void
+    + GetPlayableFromAnimClip(clip:AnimationClip, p:Playable) : bool
+    + GetTimelineClipFromCurves(clip:AnimationClip) : TimelineClip
+    + ClearPlayableLookup() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+TimelineWindow o-> "m_PlayableLookup" PlayableLookup
+TimelineWindow +-- PlayableLookup
+PlayableLookup o-> "m_AnimationClipToPlayable<AnimationClip,Playable>" "Dictionary`2"
+PlayableLookup o-> "m_AnimationClipToTimelineClip<AnimationClip,TimelineClip>" "Dictionary`2"
+@enduml

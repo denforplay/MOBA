@@ -1,0 +1,9 @@
+@startuml
+class CodeCoverage <<static>> {
+    + {static} StartRecording() : void
+    + {static} PauseRecording() : void
+    + {static} UnpauseRecording() : void
+    + {static} StopRecording() : void
+}
+CodeCoverage --> "VerbosityLevel" LogVerbosityLevel
+@enduml

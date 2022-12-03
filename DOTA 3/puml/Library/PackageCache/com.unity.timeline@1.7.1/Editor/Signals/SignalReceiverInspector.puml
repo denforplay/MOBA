@@ -1,0 +1,16 @@
+@startuml
+class SignalReceiverInspector {
+    OnEnable() : void
+    OnDisable() : void
+    OnUndoRedo() : void
+    + <<override>> OnInspectorGUI() : void
+    DrawEmitterControls() : void
+    DrawAddRemoveButtons() : void
+    InitTreeView(so:SerializedObject) : void
+}
+Editor <|-- SignalReceiverInspector
+SignalReceiverInspector --> "m_Target" SignalReceiver
+SignalReceiverInspector --> "m_TreeState" TreeViewState
+SignalReceiverInspector --> "m_MultiColumnHeaderState" MultiColumnHeaderState
+SignalReceiverInspector --> "signalEmitterContext" SignalEmitter
+@enduml

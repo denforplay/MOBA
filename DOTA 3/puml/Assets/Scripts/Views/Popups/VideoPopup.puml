@@ -1,0 +1,8 @@
+@startuml
+class VideoPopup {
+    +  <<event>> OnVideoEnded : Action 
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- VideoPopup
+@enduml

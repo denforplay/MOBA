@@ -1,0 +1,27 @@
+@startuml
+interface IUnityTestAssemblyRunnerFactory {
+    Create(testPlatform:TestPlatform, orderedTestNames:string[], factory:WorkItemFactory) : IUnityTestAssemblyRunner
+}
+class UnityTestAssemblyRunnerFactory {
+    + Create(testPlatform:TestPlatform, orderedTestNames:string[], factory:WorkItemFactory) : IUnityTestAssemblyRunner
+}
+class EditModeRunner {
+    + RunFinished : bool = false
+    + RunningSynchronously : bool <<get>>
+    + Init(filters:Filter[], platform:TestPlatform, runningSynchronously:bool, orderedTestNames:string[]) : void
+    + OnEnable() : void
+    + TestStartedEvent(test:ITest) : void
+    + TestFinishedEvent(testResult:ITestResult) : void
+    + Run() : void
+    + CompleteSynchronously() : void
+    + AddEventHandler() : T
+    + Dispose() : void
+    + OnRunCancel() : void
+    + GetLoadedTests() : ITest
+    + GetFilter() : ITestFilter
+}
+IUnityTestAssemblyRunnerFactory <|-- UnityTestAssemblyRunnerFactory
+ScriptableObject <|-- EditModeRunner
+IDisposable <|-- EditModeRunner
+EditModeRunner --> "UnityTestAssemblyRunnerFactory" IUnityTestAssemblyRunnerFactory
+@enduml

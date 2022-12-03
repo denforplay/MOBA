@@ -1,0 +1,64 @@
+@startuml
+class ViewSwitcher {
+    ShowPendingChanges() : void
+    ShowSyncView(syncViewToSelect:string) : void
+    ShowBranchExplorerView() : void
+    DisableMergeView() : void
+    IsIncomingChangesView() : bool
+    CloseIncomingChangesView() : void
+    MergeFrom(objectInfo:ObjectInfo, mergeType:EnumMergeType) : void
+    MergeFrom(objectInfo:ObjectInfo, mergeType:EnumMergeType, from:ShowIncomingChangesFrom) : void
+    MergeFromInterval(objectInfo:ObjectInfo, ancestorChangesetInfo:ObjectInfo, mergeType:EnumMergeType) : void
+    ShowIncomingChangesView() : void
+    ShowHistoryView(repSpec:RepositorySpec, itemId:long, path:string, isDirectory:bool) : void
+    CloseHistoryTab() : void
+    OpenBranchesTab() : void
+    CloseBranchesTab() : void
+    ShowPendingChangesView() : void
+    ShowIncomingChangesView() : void
+    ShowChangesetsView() : void
+    ShowHistoryView(repSpec:RepositorySpec, itemId:long, path:string, isDirectory:bool) : void
+    InitializeTabButtonWidth() : void
+    ShowView(viewToShow:SelectedTab) : void
+    GetRefreshableViewBasedOnSelectedTab(selectedTab:SelectedTab) : IRefreshableView
+    GetRefreshableView(viewType:ViewType) : IRefreshableView
+    SetSelectedView(tab:SelectedTab) : void
+    PendingChangesTabButtonGUI() : void
+    IncomingChangesTabButtonGUI() : void
+    ChangesetsTabButtonGUI() : void
+    HistoryTabButtonGUI() : void
+    BranchesTabButtonGUI() : void
+    mTabButtonWidth : float
+    <<readonly>> mIsGluonMode : bool
+}
+enum SelectedTab {
+    None= 0,
+    PendingChanges= 1,
+    IncomingChanges= 2,
+    Changesets= 3,
+    Branches= 4,
+    History= 5,
+}
+IViewSwitcher <|-- ViewSwitcher
+IMergeViewLauncher <|-- ViewSwitcher
+IGluonViewSwitcher <|-- ViewSwitcher
+IHistoryViewLauncher <|-- ViewSwitcher
+ViewSwitcher --> "mIncomingChangesTab" IIncomingChangesTab
+ViewSwitcher --> "mSelectedTab" SelectedTab
+ViewSwitcher --> "mPreviousSelectedTab" SelectedTab
+ViewSwitcher --> "mPendingChangesTabButton" TabButton
+ViewSwitcher --> "mChangesetsTabButton" TabButton
+ViewSwitcher --> "mIncomingChangesTabButton" TabButton
+ViewSwitcher --> "mHistoryTabButton" TabButton
+ViewSwitcher --> "mBranchesTabButton" TabButton
+ViewSwitcher --> "mWorkspaceWindow" WorkspaceWindow
+ViewSwitcher --> "mParentWindow" EditorWindow
+ViewSwitcher --> "mStatusBar" StatusBar
+ViewSwitcher --> "mAssetStatusCache" IAssetStatusCache
+ViewSwitcher --> "mIncomingChangesNotifier" IIncomingChangesNotifier
+ViewSwitcher --> "mGluonNewIncomingChangesUpdater" GluonNewIncomingChangesUpdater
+ViewSwitcher --> "mDeveloperNewIncomingChangesUpdater" NewIncomingChangesUpdater
+ViewSwitcher --> "mViewHost" ViewHost
+ViewSwitcher --> "mWkInfo" WorkspaceInfo
+ViewSwitcher +-- SelectedTab
+@enduml

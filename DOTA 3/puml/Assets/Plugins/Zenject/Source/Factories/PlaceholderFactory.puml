@@ -1,0 +1,84 @@
+@startuml
+class "PlaceholderFactory`1"<TValue> {
+    + <<virtual>> Create() : TValue
+}
+class "Factory`1"<TValue> {
+}
+class "PlaceholderFactory`2"<TParam1,TValue> {
+    + <<virtual>> Create(param:TParam1) : TValue
+}
+class "Factory`2"<TParam1,TValue> {
+}
+class "PlaceholderFactory`3"<TParam1,TParam2,TValue> {
+    + <<virtual>> Create(param1:TParam1, param2:TParam2) : TValue
+}
+class "Factory`3"<TParam1,TParam2,TValue> {
+}
+class "PlaceholderFactory`4"<TParam1,TParam2,TParam3,TValue> {
+    + <<virtual>> Create(param1:TParam1, param2:TParam2, param3:TParam3) : TValue
+}
+class "Factory`4"<TParam1,TParam2,TParam3,TValue> {
+}
+class "PlaceholderFactory`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+    + <<virtual>> Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : TValue
+}
+class "Factory`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+}
+class "PlaceholderFactory`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+    + <<virtual>> Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5) : TValue
+}
+class "Factory`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+}
+class "PlaceholderFactory`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue> {
+    + <<virtual>> Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6) : TValue
+}
+class "Factory`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue> {
+}
+class "PlaceholderFactory`11"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TValue> {
+    + <<virtual>> Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7, param8:TParam8, param9:TParam9, param10:TParam10) : TValue
+}
+class "Factory`11"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TValue> {
+}
+class "PlaceholderFactoryBase`1"<T> {
+}
+class "IFactory`1"<T> {
+}
+class "IFactory`2"<T1,T2> {
+}
+class "IFactory`3"<T1,T2,T3> {
+}
+class "IFactory`4"<T1,T2,T3,T4> {
+}
+class "IFactory`5"<T1,T2,T3,T4,T5> {
+}
+class "IFactory`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "IFactory`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "IFactory`11"<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11> {
+}
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`1"
+"IFactory`1" "<TValue>" <|-- "PlaceholderFactory`1"
+"PlaceholderFactory`1" "<TValue>" <|-- "Factory`1"
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`2"
+"IFactory`2" "<TParam1,TValue>" <|-- "PlaceholderFactory`2"
+"PlaceholderFactory`2" "<TParam1,TValue>" <|-- "Factory`2"
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`3"
+"IFactory`3" "<TParam1,TParam2,TValue>" <|-- "PlaceholderFactory`3"
+"PlaceholderFactory`3" "<TParam1,TParam2,TValue>" <|-- "Factory`3"
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`4"
+"IFactory`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "PlaceholderFactory`4"
+"PlaceholderFactory`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "Factory`4"
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`5"
+"IFactory`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "PlaceholderFactory`5"
+"PlaceholderFactory`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "Factory`5"
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`6"
+"IFactory`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "PlaceholderFactory`6"
+"PlaceholderFactory`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "Factory`6"
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`7"
+"IFactory`7" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue>" <|-- "PlaceholderFactory`7"
+"PlaceholderFactory`7" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue>" <|-- "Factory`7"
+"PlaceholderFactoryBase`1" "<TValue>" <|-- "PlaceholderFactory`11"
+"IFactory`11" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TValue>" <|-- "PlaceholderFactory`11"
+"PlaceholderFactory`11" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TValue>" <|-- "Factory`11"
+@enduml

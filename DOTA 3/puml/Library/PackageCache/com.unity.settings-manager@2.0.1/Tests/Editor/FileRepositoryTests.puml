@@ -1,0 +1,11 @@
+@startuml
+class FileRepositoryTests {
+    + SetUp() : void
+    + TearDown() : void
+    + CallingSaveMultipleTimes_OnlySavesWhenContentsChange() : void
+    + SaveFileSettingsRepository_WritesFile() : void
+}
+SettingsTestBase <|-- FileRepositoryTests
+FileRepositoryTests --> "m_Settings" Settings
+FileRepositoryTests --> "m_Repository" FileSettingsRepository
+@enduml

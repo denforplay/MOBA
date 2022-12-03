@@ -1,0 +1,12 @@
+@startuml
+class "DictionaryPool`2"<TKey,TValue> {
+    + DictionaryPool()
+    {static} OnSpawned(items:Dictionary<TKey, TValue>) : void
+    {static} OnDespawned(items:Dictionary<TKey, TValue>) : void
+}
+class "StaticMemoryPool`1"<T> {
+}
+"StaticMemoryPool`1" "<Dictionary<TKey, TValue>>" <|-- "DictionaryPool`2"
+"DictionaryPool`2" o-> "_instance<TKey,TValue>" "DictionaryPool`2"
+"DictionaryPool`2" --> "Instance<TKey,TValue>" "DictionaryPool`2"
+@enduml

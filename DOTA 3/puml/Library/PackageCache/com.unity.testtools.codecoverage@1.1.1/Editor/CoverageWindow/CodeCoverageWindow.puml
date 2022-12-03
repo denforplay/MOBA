@@ -1,0 +1,77 @@
+@startuml
+class CodeCoverageWindow {
+    + LoseFocus() : void
+    + AssembliesToInclude : string <<set>>
+    + PathsToInclude : string <<set>>
+    + PathsToExclude : string <<set>>
+    + {static} ShowWindow() : void
+    + OnGUI() : void
+    HandleFocusRepaint() : void
+    ResetIncludeWarnings() : void
+    HandleWarningsRepaint() : void
+    CheckScriptingRuntimeVersion() : void
+    CheckCoverageEnabled() : void
+    CheckCodeOptimization() : void
+    CheckBurstCompilation() : void
+    CheckIfIncludedAssembliesIsEmpty() : void
+    DrawCodeCoverageLocation() : void
+    DrawCodeCoverageHistoryLocation() : void
+    DrawIncludedAssemblies() : void
+    DrawPathFiltering() : void
+    DrawIncludedPaths() : void
+    DrawExcludedPaths() : void
+    DrawPathsToIncludeListItem(rect:Rect, index:int, isActive:bool, isFocused:bool) : void
+    RemovePathsToIncludeListItem(rect:Rect) : void
+    DrawPathsToExcludeListItem(rect:Rect, index:int, isActive:bool, isFocused:bool) : void
+    OnPathsListChange(rl:ReorderableList, pathFilterType:PathFilterType) : void
+    RemovePathsToExcludeListItem(rect:Rect) : void
+    CheckIfCodeCoverageIsDisabled() : void
+    DrawEnableCoverageCheckbox() : void
+    DrawGenerateHTMLReportCheckbox() : void
+    DrawGenerateBadgeReportCheckbox() : void
+    DrawGenerateHistoryCheckbox() : void
+    DrawGenerateAdditionalMetricsCheckbox() : void
+    DrawAutoGenerateReportCheckbox() : void
+    DrawCoverageSettings() : void
+    DrawFooterButtons() : void
+    SetDefaultCoverageLocation() : void
+    SetDefaultCoverageHistoryLocation() : void
+}
+class Styles {
+    {static} s_Initialized : bool
+    + {static} Init() : void
+}
+EditorWindow <|-- CodeCoverageWindow
+CodeCoverageWindow +-- Styles
+Styles o-> "SwitchToDebugCodeOptimizationButton" GUIContent
+Styles o-> "SwitchBurstCompilationOffButton" GUIContent
+Styles o-> "CodeCoverageResultsLocationLabel" GUIContent
+Styles o-> "CodeCoverageHistoryLocationLabel" GUIContent
+Styles o-> "CoverageSettingsLabel" GUIContent
+Styles o-> "EnableCodeCoverageLabel" GUIContent
+Styles o-> "CodeCoverageFormat" GUIContent
+Styles o-> "GenerateAdditionalMetricsLabel" GUIContent
+Styles o-> "CoverageHistoryLabel" GUIContent
+Styles o-> "AssembliesToIncludeLabel" GUIContent
+Styles o-> "AssembliesToIncludeDropdownLabel" GUIContent
+Styles o-> "AssembliesToIncludeEmptyDropdownLabel" GUIContent
+Styles o-> "PathsToIncludeLabel" GUIContent
+Styles o-> "PathsToExcludeLabel" GUIContent
+Styles o-> "PathsToIncludeAddFolderLabel" GUIContent
+Styles o-> "PathsToIncludeAddFileLabel" GUIContent
+Styles o-> "PathsToIncludeRemoveLabel" GUIContent
+Styles o-> "PathsToExcludeAddFolderLabel" GUIContent
+Styles o-> "PathsToExcludeAddFileLabel" GUIContent
+Styles o-> "PathsToExcludeRemoveLabel" GUIContent
+Styles o-> "BrowseButtonLabel" GUIContent
+Styles o-> "GenerateHTMLReportLabel" GUIContent
+Styles o-> "GenerateBadgeReportLabel" GUIContent
+Styles o-> "AutoGenerateReportLabel" GUIContent
+Styles o-> "GenerateReportButtonLabel" GUIContent
+Styles o-> "ClearCoverageButtonLabel" GUIContent
+Styles o-> "ClearHistoryButtonLabel" GUIContent
+Styles o-> "StartRecordingButtonLabel" GUIContent
+Styles o-> "StopRecordingButtonLabel" GUIContent
+Styles o-> "largeButton" GUIStyle
+Styles --> "settings" GUIStyle
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+abstract class TabPageComponent {
+    + SetActive(active:bool) : void
+}
+VisualElement <|-- TabPageComponent
+@enduml

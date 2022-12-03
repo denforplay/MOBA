@@ -1,0 +1,10 @@
+@startuml
+class PlaymodeTestsControllerSettings {
+    + sceneBased : bool
+    + originalScene : string
+    + bootstrapScene : string
+    + runInBackgroundValue : bool
+    + consoleErrorPaused : bool
+    + {static} CreateRunnerSettings(filters:RuntimeTestRunnerFilter[], orderedTestNames:string[]) : PlaymodeTestsControllerSettings
+}
+@enduml

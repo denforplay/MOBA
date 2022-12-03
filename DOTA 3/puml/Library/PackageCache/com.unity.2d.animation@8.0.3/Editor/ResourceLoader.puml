@@ -1,0 +1,5 @@
+@startuml
+class ResourceLoader <<static>> {
+    <<const>> k_ResourcePath : string = "Packages/com.unity.2d.animation/Editor/Assets"
+}
+@enduml

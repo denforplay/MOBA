@@ -1,0 +1,14 @@
+@startuml
+class AutoConfig <<static>> {
+}
+class ConfigureClientConf <<static>> {
+    {static} BuildClientConfigData(serverName:string, projectPath:string, response:CredentialsResponse) : ClientConfigData
+    {static} GetPassword(token:string, tokenType:CredentialsResponse.TokenType) : string
+    {static} GetWorkingMode(tokenType:CredentialsResponse.TokenType) : SEIDWorkingMode
+    <<const>> BEARER_PREFIX : string = "Bearer "
+}
+class ConfigureProfile <<static>> {
+}
+AutoConfig +-- ConfigureClientConf
+AutoConfig +-- ConfigureProfile
+@enduml

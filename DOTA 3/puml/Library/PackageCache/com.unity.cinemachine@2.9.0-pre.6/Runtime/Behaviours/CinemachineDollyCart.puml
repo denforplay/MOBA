@@ -1,0 +1,19 @@
+@startuml
+class CinemachineDollyCart {
+    + m_Speed : float
+    + m_Position : float
+    FixedUpdate() : void
+    Update() : void
+    LateUpdate() : void
+    SetCartPosition(distanceAlongPath:float) : void
+}
+enum UpdateMethod {
+    Update,
+    FixedUpdate,
+    LateUpdate,
+}
+MonoBehaviour <|-- CinemachineDollyCart
+CinemachineDollyCart --> "m_Path" CinemachinePathBase
+CinemachineDollyCart o-> "m_UpdateMethod" UpdateMethod
+CinemachineDollyCart +-- UpdateMethod
+@enduml

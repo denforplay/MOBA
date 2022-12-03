@@ -1,0 +1,18 @@
+@startuml
+class CachedOpenTypeProvider {
+    _isCreatingInstance : bool
+    + CachedOpenTypeProvider(creator:IProvider)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + NumInstances : int <<get>>
+    + ClearCache() : void
+    + GetInstanceType(context:InjectContext) : Type
+    TryGetMatchFromCache(memberType:Type) : List<object>
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "List`1"<T> {
+}
+IProvider <|-- CachedOpenTypeProvider
+CachedOpenTypeProvider --> "_creator" IProvider
+CachedOpenTypeProvider o-> "_cachedInstances<List<object>>" "List`1"
+@enduml

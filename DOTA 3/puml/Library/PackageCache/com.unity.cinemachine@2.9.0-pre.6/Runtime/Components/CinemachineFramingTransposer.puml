@@ -1,0 +1,69 @@
+@startuml
+class CinemachineFramingTransposer {
+    + m_LookaheadTime : float = 0
+    + m_LookaheadSmoothing : float = 0
+    + m_LookaheadIgnoreY : bool
+    + m_XDamping : float = 1f
+    + m_YDamping : float = 1f
+    + m_ZDamping : float = 1f
+    + m_TargetMovementOnly : bool = true
+    + m_ScreenX : float = 0.5f
+    + m_ScreenY : float = 0.5f
+    + m_CameraDistance : float = 10f
+    + m_DeadZoneWidth : float = 0f
+    + m_DeadZoneHeight : float = 0f
+    + m_DeadZoneDepth : float = 0
+    + m_UnlimitedSoftZone : bool = false
+    + m_SoftZoneWidth : float = 0.8f
+    + m_SoftZoneHeight : float = 0.8f
+    + m_BiasX : float = 0f
+    + m_BiasY : float = 0f
+    + m_CenterOnActivate : bool = true
+    + m_GroupFramingSize : float = 0.8f
+    + m_MaxDollyIn : float = 5000f
+    + m_MaxDollyOut : float = 5000f
+    + m_MinimumDistance : float = 1
+    + m_MaximumDistance : float = 5000f
+    + m_MinimumFOV : float = 3
+    + m_MaximumFOV : float = 60
+    + m_MinimumOrthoSize : float = 1
+    + m_MaximumOrthoSize : float = 5000
+    OnValidate() : void
+    + <<override>> IsValid : bool <<get>>
+    + <<override>> BodyAppliesAfterAim : bool <<get>>
+    <<const>> kMinimumCameraDistance : float = 0.01f
+    <<const>> kMinimumGroupSize : float = 0.01f
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<override>> GetMaxDampTime() : float
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float, transitionParams:CinemachineVirtualCameraBase.TransitionParams) : bool
+    m_InheritingPosition : bool
+    m_prevFOV : float
+    + <<override>> MutateCameraState(curState:CameraState, deltaTime:float) : void
+    GetTargetHeight(boundsSize:Vector2) : float
+    ComputeGroupBounds(group:ICinemachineTargetGroup, curState:CameraState) : Vector3
+    {static} GetScreenSpaceGroupBoundingBox(group:ICinemachineTargetGroup, pos:Vector3, orientation:Quaternion) : Bounds
+}
+enum FramingMode {
+    Horizontal,
+    Vertical,
+    HorizontalAndVertical,
+    None,
+}
+enum AdjustmentMode {
+    ZoomOnly,
+    DollyOnly,
+    DollyThenZoom,
+}
+CinemachineComponentBase <|-- CinemachineFramingTransposer
+CinemachineFramingTransposer --> "m_TrackedObjectOffset" Vector3
+CinemachineFramingTransposer o-> "m_GroupFramingMode" FramingMode
+CinemachineFramingTransposer o-> "m_AdjustmentMode" AdjustmentMode
+CinemachineFramingTransposer o-> "m_PreviousCameraPosition" Vector3
+CinemachineFramingTransposer --> "TrackedPoint" Vector3
+CinemachineFramingTransposer --> "m_prevRotation" Quaternion
+CinemachineFramingTransposer --> "LastBounds" Bounds
+CinemachineFramingTransposer --> "LastBoundsMatrix" Matrix4x4
+CinemachineFramingTransposer +-- FramingMode
+CinemachineFramingTransposer +-- AdjustmentMode
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+class BurstInspectorGUITests {
+    + SetUp() : IEnumerator
+    + TestInspectorOpenDuringDomainReloadDoesNotLogErrors() : IEnumerator
+    + DisassemblerNotChangingUnexpectedlyTest() : IEnumerator
+    + InspectorStallingLoadTest() : IEnumerator
+    + FontStyleDuringDomainReloadTest() : IEnumerator
+}
+class MyJob <<struct>> {
+    + Execute() : void
+}
+class BurstDisassemblerWithCopy {
+    + IsColoredCopy : bool
+    + BurstDisassemblerWithCopy(disassembler:BurstDisassembler)
+    + Equals(other:BurstDisassembler) : bool
+}
+class "NativeArray`1"<T> {
+}
+class "List`1"<T> {
+}
+BurstInspectorGUITests +-- MyJob
+IJob <|-- MyJob
+MyJob --> "Inpút<float>" "NativeArray`1"
+MyJob --> "Output<float>" "NativeArray`1"
+BurstInspectorGUITests +-- BurstDisassemblerWithCopy
+BurstDisassembler <|-- BurstDisassemblerWithCopy
+BurstDisassemblerWithCopy --> "BlocksCopy<AsmBlock>" "List`1"
+BurstDisassemblerWithCopy --> "LinesCopy<AsmLine>" "List`1"
+BurstDisassemblerWithCopy --> "TokensCopy<AsmToken>" "List`1"
+@enduml

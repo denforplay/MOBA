@@ -1,0 +1,10 @@
+@startuml
+class SubContainerCreatorCached {
+    _isLookingUp : bool
+    + SubContainerCreatorCached(subCreator:ISubContainerCreator)
+    + CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+ISubContainerCreator <|-- SubContainerCreatorCached
+SubContainerCreatorCached --> "_subCreator" ISubContainerCreator
+SubContainerCreatorCached --> "_subContainer" DiContainer
+@enduml

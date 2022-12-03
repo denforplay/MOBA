@@ -1,0 +1,50 @@
+@startuml
+class FrameTimeGraphSelectionTests {
+    + OneTimeSetUp() : void
+    + SetUp() : void
+    + FrameTimeGraph_MoveSelectedRange(configuration:MoveTestConfiguration) : void
+    + FrameTimeGraph_MoveSelectedRange_DoesNotMovePastGraphBounds(configuration:MoveTestConfiguration) : void
+    FrameTimeGraph_MoveSelectedRange(configuration:MoveTestConfiguration, expectedSelection:List<int>) : void
+    + FrameTimeGraph_ResizeSelectedRange(configuration:ResizeTestConfiguration) : void
+    + FrameTimeGraph_ResizeSelectedRange_DoesNotMovePastGraphBounds(configuration:ResizeTestConfiguration) : void
+    FrameTimeGraph_ResizeSelectedRange(configuration:ResizeTestConfiguration, expectedSelection:List<int>) : void
+    NewFrameTimeGraph() : FrameTimeGraph
+    GenerateFrameTimeGraphData() : List<FrameTimeGraph.Data>
+    OnFrameTimeGraphDidSetRange(selected:List<int>, clickCount:int, inputStatus:FrameTimeGraph.State) : void
+    SelectedRangeStateFromTestConfiguration(configuration:TestConfiguration) : FrameTimeGraph.SelectedRangeState
+    InitialSelectedFramesForTestConfiguration(configuration:TestConfiguration) : List<int>
+    ExpectedSelectedFramesForMoveTestConfiguration(configuration:MoveTestConfiguration) : List<int>
+    ExpectedSelectedFramesForResizeTestConfiguration(configuration:ResizeTestConfiguration) : List<int>
+    GenerateListOfFrames(origin:int, count:int) : List<int>
+}
+class "List`1"<T> {
+}
+class TestConfiguration {
+    + TestConfiguration(selections:SelectionRange[])
+}
+class MoveTestConfiguration {
+    + offset : int
+    + MoveTestConfiguration(selections:SelectionRange[], offset:int)
+    + <<override>> ToString() : string
+}
+class ResizeTestConfiguration {
+    + leftOffset : int
+    + rightOffset : int
+    + ResizeTestConfiguration(selections:SelectionRange[], leftOffset:int, rightOffset:int)
+    + <<override>> ToString() : string
+}
+class SelectionRange <<struct>> {
+    + origin : int
+    + length : int
+    + SelectionRange(origin:int, length:int)
+    + LastIndex : int <<get>>
+}
+FrameTimeGraphSelectionTests --> "m_FrameTimeGraph" FrameTimeGraph
+FrameTimeGraphSelectionTests --> "m_ReportedSelection<int>" "List`1"
+FrameTimeGraphSelectionTests +-- TestConfiguration
+FrameTimeGraphSelectionTests +-- MoveTestConfiguration
+TestConfiguration <|-- MoveTestConfiguration
+FrameTimeGraphSelectionTests +-- ResizeTestConfiguration
+TestConfiguration <|-- ResizeTestConfiguration
+TestConfiguration +-- SelectionRange
+@enduml

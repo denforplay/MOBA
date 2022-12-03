@@ -1,0 +1,95 @@
+@startuml
+class PSDLayerImportSettingSerializedPropertyWrapper {
+    m_WasLayerImported : bool
+    + name : string <<get>> <<set>>
+    + isGroup : bool <<get>> <<set>>
+    + layerID : int <<get>> <<set>>
+    + flatten : bool <<get>> <<set>>
+    + wasLayerImported : bool <<get>> <<set>>
+    + importLayer : bool <<get>> <<set>>
+    CheckAndAddElement() : void
+    CacheProperty(property:SerializedProperty) : void
+    + PSDLayerImportSettingSerializedPropertyWrapper(sp:SerializedProperty, array:SerializedProperty, layer:PSDLayerData)
+}
+class PSDNode {
+    m_Disable : bool = false
+    + disable : bool <<get>> <<set>>
+    + PSDNode()
+    + PSDNode(layer:PSDLayerData, id:int, importSetting:PSDLayerImportSettingSerializedPropertyWrapper)
+    + <<virtual>> importLayer : bool <<get>> <<set>>
+}
+class NodeStateChange {
+    + childNodeStateCount : int = 0
+    + state : bool
+    + ChangeState(newState:bool) : void
+    NotifyParentStateChange(newState:bool) : void
+}
+class PSDCollapsableNode {
+    + <<virtual>> flatten : bool <<get>> <<set>>
+    + PSDCollapsableNode()
+    + PSDCollapsableNode(layer:PSDLayerData, id:int, property:PSDLayerImportSettingSerializedPropertyWrapper)
+}
+class PSDFileNode {
+    + PSDFileNode(mosaicProperty:SerializedProperty, importNodeState:SerializedProperty)
+    + <<override>> flatten : bool <<get>> <<set>>
+    + <<override>> importLayer : bool <<get>> <<set>>
+}
+class PSDLayerNode {
+    + PSDLayerNode(layer:PSDLayerData, id:int, property:PSDLayerImportSettingSerializedPropertyWrapper)
+}
+class PSDLayerGroupNode {
+    + PSDLayerGroupNode(layer:PSDLayerData, id:int, property:PSDLayerImportSettingSerializedPropertyWrapper)
+}
+class Style <<static>> {
+    {static} + <<readonly>> k_LightIconResourcePath : string = "Icons/Light"
+    {static} + <<readonly>> k_DarkIconResourcePath : string = "Icons/Dark"
+    {static} + <<readonly>> k_SelectedIconResourcePath : string = "Icons/Selected"
+    <<const>> k_ResourcePath : string = "Packages/com.unity.2d.psdimporter/Editor/Assets"
+    + {static} iconSize : int = 16
+    + {static} iconPadding : int = 6
+    + {static} LoadIconResource(name:string, personalPath:string, proPath:string) : Texture2D
+    {static} Style()
+}
+class PSDImporterEditorLayerTreeView {
+    m_RootName : string
+    m_LastArraySize : int
+    <<const>> k_LeftMargin : int = 15
+    + PSDImporterEditorLayerTreeView(rootName:string, treeViewState:TreeViewState, layers:PSDLayerData[], psdLayerImportSetting:SerializedProperty, mappingStrategy:IPSDLayerMappingStrategy, mosaicProperty:SerializedProperty, importHidden:SerializedProperty, fileNodeImportState:SerializedProperty)
+    + <<override>> OnGUI(rect:Rect) : void
+    SetChildrenNodeImport(node:PSDNode, value:bool) : void
+}
+IPSDLayerMappingStrategyComparable <|-- PSDLayerImportSettingSerializedPropertyWrapper
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_Layer" PSDLayerData
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_Array" SerializedProperty
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_Element" SerializedProperty
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_NameProperty" SerializedProperty
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_LayerIdProperty" SerializedProperty
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_FlattenProperty" SerializedProperty
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_IsGroup" SerializedProperty
+PSDLayerImportSettingSerializedPropertyWrapper --> "m_ImportLayerProperty" SerializedProperty
+TreeViewItem <|-- PSDNode
+PSDNode o-> "m_ImportState" NodeStateChange
+PSDNode --> "m_Layer" PSDLayerData
+PSDNode --> "layer" PSDLayerData
+PSDNode --> "m_Property" PSDLayerImportSettingSerializedPropertyWrapper
+PSDNode --> "importState" NodeStateChange
+PSDNode --> "property" PSDLayerImportSettingSerializedPropertyWrapper
+NodeStateChange --> "parent" NodeStateChange
+PSDNode <|-- PSDCollapsableNode
+PSDCollapsableNode o-> "m_CollapseStateChange" NodeStateChange
+PSDCollapsableNode --> "collapseStateChange" NodeStateChange
+PSDCollapsableNode <|-- PSDFileNode
+PSDFileNode --> "m_MosaicProperty" SerializedProperty
+PSDFileNode --> "m_ImportFileNodeState" SerializedProperty
+PSDNode <|-- PSDLayerNode
+PSDCollapsableNode <|-- PSDLayerGroupNode
+Style o-> "hoverLine" GUIStyle
+Style o-> "flattenToggleStyle" GUIStyle
+Style o-> "layerHiddenToolTip" GUIContent
+Style o-> "hiddenLayerNotImportWarning" GUIContent
+PSDImporterEditorLayerTreeView --> "m_PSDLayerImportSetting" SerializedProperty
+PSDImporterEditorLayerTreeView --> "m_MappingStrategy" IPSDLayerMappingStrategy
+PSDImporterEditorLayerTreeView --> "m_MosaicProperty" SerializedProperty
+PSDImporterEditorLayerTreeView --> "m_FileNodeImportState" SerializedProperty
+PSDImporterEditorLayerTreeView --> "m_ImportHidden" SerializedProperty
+@enduml

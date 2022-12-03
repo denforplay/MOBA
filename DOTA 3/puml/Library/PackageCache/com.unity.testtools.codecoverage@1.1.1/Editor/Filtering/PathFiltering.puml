@@ -1,0 +1,10 @@
+@startuml
+class PathFiltering {
+    + includedPaths : string <<get>>
+    + excludedPaths : string <<get>>
+    + PathFiltering()
+    + Parse(includePaths:string, excludePaths:string) : void
+    + IsPathIncluded(name:string) : bool
+    CreateFilterRegex(filter:string) : Regex
+}
+@enduml

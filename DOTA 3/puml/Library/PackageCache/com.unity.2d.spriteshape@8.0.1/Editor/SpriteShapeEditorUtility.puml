@@ -1,0 +1,19 @@
+@startuml
+class SpriteShapeEditorUtility {
+    + <<const>> kMaxSideSize : float = 2.0f
+    + {static} CreateSpriteShapeAsset() : UnityEngine.U2D.SpriteShape
+    + {static} CreateSpriteShapeController(shape:UnityEngine.U2D.SpriteShape) : SpriteShapeController
+    + {static} CreateSpriteShapeControllerFromSelection() : SpriteShapeController
+    + {static} SetShapeFromAsset(spriteShapeController:SpriteShapeController) : void
+    {static} SetToSquare(spriteShapeController:SpriteShapeController) : void
+    {static} SetToLine(spriteShapeController:SpriteShapeController) : void
+    {static} SetToOctogon(spriteShapeController:SpriteShapeController) : void
+    + {static} GetRangeIndexFromAngle(spriteShape:UnityEngine.U2D.SpriteShape, angle:float) : int
+    + {static} GetRangeIndexFromAngle(angleRanges:List<AngleRange>, angle:float) : int
+}
+class Contents <<static>> {
+    + {static} <<readonly>> createSpriteShapeString : string = "Create Sprite Shape"
+    + {static} <<readonly>> newSpriteShapeString : string = "SpriteShape"
+}
+SpriteShapeEditorUtility +-- Contents
+@enduml

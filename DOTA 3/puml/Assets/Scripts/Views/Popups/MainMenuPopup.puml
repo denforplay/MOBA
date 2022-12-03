@@ -1,0 +1,8 @@
+@startuml
+class MainMenuPopup {
+    + Initialize(popupSystem:PopupSystem) : void
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- MainMenuPopup
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class SubContainerCreatorByNewPrefabWithParams {
+    + SubContainerCreatorByNewPrefabWithParams(installerType:Type, container:DiContainer, prefabProvider:IPrefabProvider, gameObjectBindInfo:GameObjectCreationParameters)
+    GetAllInjectableIncludingBaseTypes() : IEnumerable<InjectableInfo>
+    CreateTempContainer(args:List<TypeValuePair>) : DiContainer
+    + CreateSubContainer(args:List<TypeValuePair>, parentContext:InjectContext, injectAction:Action) : DiContainer
+}
+ISubContainerCreator <|-- SubContainerCreatorByNewPrefabWithParams
+SubContainerCreatorByNewPrefabWithParams --> "_container" DiContainer
+SubContainerCreatorByNewPrefabWithParams --> "_prefabProvider" IPrefabProvider
+SubContainerCreatorByNewPrefabWithParams --> "_installerType" Type
+SubContainerCreatorByNewPrefabWithParams --> "_gameObjectBindInfo" GameObjectCreationParameters
+@enduml

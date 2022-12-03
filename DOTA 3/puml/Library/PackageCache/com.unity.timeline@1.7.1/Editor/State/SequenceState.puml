@@ -1,0 +1,37 @@
+@startuml
+class SequenceState {
+    m_Time : double
+    m_CachedEvaluableRange : Range?
+    + start : double <<get>>
+    + timeScale : double <<get>>
+    + isAssetOnly : bool <<get>> <<set>>
+    + duration : double <<get>>
+    + InvalidateChildAssetCache() : void
+    m_IsReadOnly : bool?
+    + isReadOnly : bool <<get>>
+    + ResetIsReadOnly() : void
+    + time : double <<get>> <<set>>
+    + frame : int <<get>> <<set>>
+    + frameRate : double <<get>> <<set>>
+    + SequenceState(windowState:WindowState, asset:TimelineAsset, director:PlayableDirector, hostClip:TimelineClip, parentSequence:SequenceState)
+    AssetOnAssetModifiedOnDisk() : void
+    + GetEvaluableRange() : Range
+    + ToGlobalTime(t:double) : double
+    + ToLocalTime(t:double) : double
+    GetLocalTime() : double
+    SetLocalTime(newTime:double) : void
+    GetGlobalEvaluableRange() : Range
+    + Dispose() : void
+}
+class "List`1"<T> {
+}
+ISequenceState <|-- SequenceState
+SequenceState --> "m_WindowState" WindowState
+SequenceState --> "m_ParentSequence" SequenceState
+SequenceState --> "asset" TimelineAsset
+SequenceState --> "director" PlayableDirector
+SequenceState --> "hostClip" TimelineClip
+SequenceState --> "m_CachedChildAssets<UnityEngine.Object>" "List`1"
+SequenceState --> "cachedChildAssets<UnityEngine.Object>" "List`1"
+SequenceState --> "viewModel" TimelineAssetViewModel
+@enduml

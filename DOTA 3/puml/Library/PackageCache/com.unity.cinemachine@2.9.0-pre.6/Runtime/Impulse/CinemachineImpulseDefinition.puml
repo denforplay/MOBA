@@ -1,0 +1,65 @@
+@startuml
+class CinemachineImpulseDefinitionPropertyAttribute <<sealed>> {
+}
+class CinemachineImpulseDefinition {
+    + m_ImpulseChannel : int = 1
+    + m_ImpulseDuration : float = 0.2f
+    + m_DissipationRate : float
+    + m_AmplitudeGain : float = 1f
+    + m_FrequencyGain : float = 1f
+    + m_Randomize : bool = true
+    + m_ImpactRadius : float = 100
+    + m_DissipationDistance : float = 100
+    + m_PropagationSpeed : float = 343
+    + OnValidate() : void
+    {static} CreateStandardShapes() : void
+    + CreateEvent(position:Vector3, velocity:Vector3) : void
+    + CreateAndReturnEvent(position:Vector3, velocity:Vector3) : CinemachineImpulseManager.ImpulseEvent
+    LegacyCreateAndReturnEvent(position:Vector3, velocity:Vector3) : CinemachineImpulseManager.ImpulseEvent
+}
+enum ImpulseShapes {
+    Custom,
+    Recoil,
+    Bump,
+    Explosion,
+    Rumble,
+}
+enum ImpulseTypes {
+    Uniform,
+    Dissipating,
+    Propagating,
+    Legacy,
+}
+enum RepeatMode {
+    Stretch,
+    Loop,
+}
+class SignalSource {
+    + SignalSource(def:CinemachineImpulseDefinition, velocity:Vector3)
+    + SignalDuration : float <<get>>
+    + GetSignal(timeSinceSignalStart:float, pos:Vector3, rot:Quaternion) : void
+}
+class LegacySignalSource {
+    m_StartTimeOffset : float = 0
+    + LegacySignalSource(def:CinemachineImpulseDefinition, velocity:Vector3)
+    + SignalDuration : float <<get>>
+    + GetSignal(timeSinceSignalStart:float, pos:Vector3, rot:Quaternion) : void
+}
+PropertyAttribute <|-- CinemachineImpulseDefinitionPropertyAttribute
+CinemachineImpulseDefinition --> "m_ImpulseShape" ImpulseShapes
+CinemachineImpulseDefinition o-> "m_CustomImpulseShape" AnimationCurve
+CinemachineImpulseDefinition o-> "m_ImpulseType" ImpulseTypes
+CinemachineImpulseDefinition o-> "m_RawSignal" SignalSourceAsset
+CinemachineImpulseDefinition o-> "m_RepeatMode" RepeatMode
+CinemachineImpulseDefinition +-- ImpulseShapes
+CinemachineImpulseDefinition +-- ImpulseTypes
+CinemachineImpulseDefinition +-- RepeatMode
+CinemachineImpulseDefinition +-- SignalSource
+ISignalSource6D <|-- SignalSource
+SignalSource --> "m_Def" CinemachineImpulseDefinition
+SignalSource --> "m_Velocity" Vector3
+CinemachineImpulseDefinition +-- LegacySignalSource
+ISignalSource6D <|-- LegacySignalSource
+LegacySignalSource --> "m_Def" CinemachineImpulseDefinition
+LegacySignalSource --> "m_Velocity" Vector3
+@enduml

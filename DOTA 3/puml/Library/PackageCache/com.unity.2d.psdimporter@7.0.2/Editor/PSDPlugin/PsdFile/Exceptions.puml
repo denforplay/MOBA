@@ -1,0 +1,12 @@
+@startuml
+class PsdInvalidException {
+    + PsdInvalidException()
+    + PsdInvalidException(message:string)
+}
+class RleException {
+    + RleException()
+    + RleException(message:string)
+}
+Exception <|-- PsdInvalidException
+Exception <|-- RleException
+@enduml

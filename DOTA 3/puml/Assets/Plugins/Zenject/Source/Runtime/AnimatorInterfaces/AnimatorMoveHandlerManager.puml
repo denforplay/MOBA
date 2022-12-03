@@ -1,0 +1,10 @@
+@startuml
+class AnimatorMoveHandlerManager {
+    + Construct(handlers:List<IAnimatorMoveHandler>) : void
+    + OnAnimatorMove() : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- AnimatorMoveHandlerManager
+AnimatorMoveHandlerManager --> "_handlers<IAnimatorMoveHandler>" "List`1"
+@enduml

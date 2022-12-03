@@ -1,0 +1,56 @@
+@startuml
+class AlertBox {
+    + <<const>> UssClassName : string = "alert-box"
+    + <<const>> IconUssClassName : string
+    + <<const>> TextUssClassName : string
+    + <<const>> ButtonUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    <<const>> k_UssIconInfo : string = "icon-info"
+    <<const>> k_UssIconWarning : string = "icon-warning"
+    <<const>> k_UssIconAlert : string = "icon-alert"
+    + AlertBox()
+    + QueueAlert(id:string, level:AlertLevel, message:string, button:(string text, Action action)?) : void
+    + DequeueAlert(id:string) : void
+    UpdateAlertBox(previousButtonAction:Action) : void
+    SetAlertLevel(level:AlertLevel) : void
+}
+enum AlertLevel {
+    Info,
+    Warning,
+    Alert,
+}
+class "SortedSet`1"<T> {
+}
+class AlertEntry <<struct>> {
+    + <<readonly>> Id : string
+    + <<readonly>> Message : string
+    + Button : AlertButton?
+    + AlertEntry(id:string, level:AlertLevel, message:string, button:AlertButton?)
+    + <<override>> GetHashCode() : int
+    + <<override>> Equals(obj:object) : bool
+    + CompareTo(other:AlertEntry) : int
+}
+class UxmlFactory <<new>> {
+}
+class "IComparable`1"<T> {
+}
+class AlertButton <<struct>> {
+    + Text : string
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- AlertBox
+AlertBox --> "m_Button" Button
+AlertBox --> "m_Icon" VisualElement
+AlertBox --> "m_Text" TextElement
+AlertBox --> "m_AlertEntryList<AlertEntry>" "SortedSet`1"
+AlertBox +-- AlertLevel
+AlertBox +-- AlertEntry
+"IComparable`1" "<AlertEntry>" <|-- AlertEntry
+AlertEntry --> "Level" AlertLevel
+AlertBox +-- UxmlFactory
+"UxmlFactory`1" "<AlertBox>" <|-- UxmlFactory
+AlertEntry +-- AlertButton
+AlertButton --> "Action" Action
+@enduml

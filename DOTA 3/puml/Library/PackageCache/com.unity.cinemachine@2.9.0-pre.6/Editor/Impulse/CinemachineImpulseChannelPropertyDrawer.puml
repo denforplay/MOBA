@@ -1,0 +1,9 @@
+@startuml
+class CinemachineImpulseChannelPropertyDrawer <<sealed>> {
+    <<const>> hSpace : float = 2
+    UpdateLayerList() : void
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+PropertyDrawer <|-- CinemachineImpulseChannelPropertyDrawer
+CinemachineImpulseChannelPropertyDrawer o-> "mAddLabel" GUIContent
+@enduml

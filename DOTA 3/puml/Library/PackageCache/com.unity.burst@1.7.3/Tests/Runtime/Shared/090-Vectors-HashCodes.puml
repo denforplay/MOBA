@@ -1,0 +1,10 @@
+@startuml
+class VectorsHashCodes <<partial>> {
+    + {static} Float4GetHashCode(a:float4) : int
+    + {static} Float3GetHashCode(a:float3) : int
+    + {static} Float2GetHashCode(a:float2) : int
+    + {static} Int4GetHashCode(a:int4) : int
+    + {static} Int3GetHashCode(a:int3) : int
+    + {static} Int2GetHashCode(a:int2) : int
+}
+@enduml

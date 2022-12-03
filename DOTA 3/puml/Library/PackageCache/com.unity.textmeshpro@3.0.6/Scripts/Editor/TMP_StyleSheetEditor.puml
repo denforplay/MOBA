@@ -1,0 +1,20 @@
+@startuml
+class StyleDrawer {
+    + {static} <<readonly>> height : float = 95f
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+class TMP_StyleEditor {
+    m_SelectedElement : int
+    m_Page : int
+    m_IsStyleSheetDirty : bool
+    OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+    {static} DoSelectionCheck(selectionArea:Rect) : bool
+    SwapStyleElements(selectedIndex:int, newIndex:int) : void
+}
+PropertyDrawer <|-- StyleDrawer
+Editor <|-- TMP_StyleEditor
+TMP_StyleEditor --> "m_StyleSheet" TMP_StyleSheet
+TMP_StyleEditor --> "m_StyleListProp" SerializedProperty
+@enduml

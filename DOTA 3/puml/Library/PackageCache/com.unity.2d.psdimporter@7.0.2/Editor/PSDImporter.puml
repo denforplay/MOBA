@@ -1,0 +1,102 @@
+@startuml
+class PSDImporter <<partial>> {
+    m_MosaicLayers : bool = true
+    m_CharacterMode : bool = true
+    m_ImportHiddenLayers : bool = false
+    m_GeneratePhysicsShape : bool = false
+    m_PaperDollMode : bool = false
+    m_KeepDupilcateSpriteName : bool = true
+    m_SkeletonAssetReferenceID : string = null
+    m_Padding : int = 4
+    m_SpritePackingTag : string = ""
+    m_ResliceFromLayer : bool = false
+    m_ImportFileNodeState : bool = true
+    m_GenerateGOHierarchy : bool = false
+    m_TextureAssetName : string = null
+    m_PrefabAssetName : string = null
+    m_SpriteLibAssetName : string = null
+    m_SkeletonAssetName : string = null
+    m_ImporterDirty : bool
+    GetCustomSpriteMode() : ECustomSpriteMode
+    + PSDImporter()
+    + <<override>> OnImportAsset(ctx:AssetImportContext) : void
+    {static} ValidatePSDLayerId(oldPsdLayer:IEnumerable<PSDLayer>, layers:List<BitmapLayer>, uniqueNameGenerator:UniqueNameGenerator) : void
+    ValidatePSDLayerId(doc:Document) : void
+    ImportTexture(ctx:AssetImportContext, imageData:NativeArray<Color32>, textureWidth:int, textureHeight:int, sprites:SpriteMetaData[]) : TextureGenerationOutput
+    GetUniqueSpriteName(name:string, generator:UniqueNameGenerator) : string
+    SetDocumentImportData(layers:List<BitmapLayer>, extractData:PSDExtractLayerData[], mappingStrategy:IPSDLayerMappingStrategy, psdLayers:List<PSDLayer>, parent:PSDExtractLayerData) : void
+    SetDocumentImportData(doc:Document) : void
+    ImportFromLayers(ctx:AssetImportContext, doc:Document) : void
+    EnsureSingleSpriteExist() : void
+    GetPlatformTextureSettings(buildTarget:BuildTarget) : TextureImporterPlatformSettings
+    RegisterAssets(ctx:AssetImportContext, output:TextureGenerationOutput) : void
+    SpriteIsMainFromSpriteLib(spriteId:string, categoryName:string) : bool
+    VisibleInHierarchy(psdGroup:List<PSDLayer>, index:int) : bool
+    BuildGroupGameObject(psdGroup:List<PSDLayer>, index:int, root:Transform) : void
+    shouldProduceGameObject : bool <<get>>
+    shouldResliceFromLayer : bool <<get>>
+    definitionScale : float <<get>>
+    CreateBoneGO(index:int, bones:SpriteBone[], bonesGO:BoneGO[], defaultRoot:Transform) : void
+    CreateBonesGO(root:Transform) : BoneGO[]
+    GetSpriteLiblabel(spriteId:string, category:string, label:string) : void
+    OnProducePaperDollPrefab(assetname:string, sprites:Sprite[], spriteLib:SpriteLibraryAsset) : GameObject
+    OnProducePrefab(assetname:string, sprites:Sprite[], spriteLib:SpriteLibraryAsset) : GameObject
+    GetBoundingBox(root:GameObject) : Bounds?
+    CleanUpGameobjectsWithOutRig(root:GameObject) : bool
+    pixelsPerUnit : float <<get>>
+    GetDataProvider() : T
+    HasDataProvider(type:Type) : bool
+    Apply() : void
+    InitSpriteEditorDataProvider() : void
+    InitSpriteEditorDataProvider() : void
+    GetSpriteRects() : SpriteRect[]
+    SetSpriteRects(spriteRects:SpriteRect[]) : void
+    inMosaicMode : bool <<get>>
+    ProduceSpriteLibAsset(sprites:Sprite[]) : SpriteLibraryAsset
+    SetPhysicsOutline(sprites:Sprite[]) : void
+}
+class PSDImporterAssetPostProcessor {
+    + <<override>> GetPostprocessOrder() : int
+    OnPreprocessAsset() : void
+    {static} OnPostprocessAllAssets(importedAssets:string[], deletedAssets:string[], movedAssets:string[], movedFromAssetPaths:string[]) : void
+}
+enum ELayerMappingOption {
+    UseLayerName,
+    UseLayerNameCaseSensitive,
+    UseLayerId,
+}
+enum ECustomSpriteMode {
+    Single,
+    Multiple,
+    Mosaic,
+    Rig,
+    RigShare,
+}
+class "List`1"<T> {
+}
+ScriptedImporter <|-- PSDImporter
+ISpriteEditorDataProvider <|-- PSDImporter
+PSDImporter o-> "m_TextureImporterSettings" TextureImporterSettings
+PSDImporter o-> "m_SpriteImportData<SpriteMetaData>" "List`1"
+PSDImporter o-> "m_MosaicSpriteImportData<SpriteMetaData>" "List`1"
+PSDImporter o-> "m_RigSpriteImportData<SpriteMetaData>" "List`1"
+PSDImporter o-> "m_CharacterData" CharacterData
+PSDImporter o-> "m_SharedRigSpriteImportData<SpriteMetaData>" "List`1"
+PSDImporter o-> "m_SharedRigCharacterData" CharacterData
+PSDImporter o-> "m_PlatformSettings<TextureImporterPlatformSettings>" "List`1"
+PSDImporter o-> "m_DocumentPivot" Vector2
+PSDImporter o-> "m_DocumentAlignment" SpriteAlignment
+PSDImporter o-> "m_LayerMappingOption" ELayerMappingOption
+PSDImporter o-> "m_SpriteCategoryList" SpriteCategoryList
+PSDImporter o-> "m_GameObjectFactory" GameObjectCreationFactory
+PSDImporter --> "m_ImportData" PSDImportData
+PSDImporter o-> "m_MosaicPSDLayers<PSDLayer>" "List`1"
+PSDImporter o-> "m_RigPSDLayers<PSDLayer>" "List`1"
+PSDImporter o-> "m_SharedRigPSDLayers<PSDLayer>" "List`1"
+PSDImporter --> "spriteImportMode" SpriteImportMode
+PSDImporter --> "spriteImportModeToUse" SpriteImportMode
+AssetPostprocessor <|-- PSDImporterAssetPostProcessor
+PSDImporterAssetPostProcessor --> "s_AssetImporter<PSDImporter>" "List`1"
+PSDImporter +-- ELayerMappingOption
+PSDImporter +-- ECustomSpriteMode
+@enduml

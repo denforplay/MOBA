@@ -1,0 +1,13 @@
+@startuml
+class "FactorySubContainerBinder`2"<TParam1,TContract> {
+    + FactorySubContainerBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, subIdentifier:object)
+    + ByMethod(installerMethod:Action<DiContainer, TParam1>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewGameObjectMethod(installerMethod:Action<DiContainer, TParam1>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabMethod(prefabGetter:Func<InjectContext, UnityEngine.Object>, installerMethod:Action<DiContainer, TParam1>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabMethod(prefab:UnityEngine.Object, installerMethod:Action<DiContainer, TParam1>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResourceMethod(resourcePath:string, installerMethod:Action<DiContainer, TParam1>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+class "FactorySubContainerBinderWithParams`1"<T> {
+}
+"FactorySubContainerBinderWithParams`1" "<TContract>" <|-- "FactorySubContainerBinder`2"
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+class ZenMenuItems <<static>> {
+    + {static} ValidateCurrentScene() : void
+    + {static} ValidateCurrentSceneThenRun() : void
+    + {static} OpenDocumentation() : void
+    + {static} CreateSceneContext(menuCommand:MenuCommand) : void
+    + {static} CreateDecoratorContext(menuCommand:MenuCommand) : void
+    + {static} CreateGameObjectContext(menuCommand:MenuCommand) : void
+    + {static} CreateProjectContextInDefaultLocation() : void
+    + {static} CreateDefaultSceneContractConfig() : void
+    + {static} CreateScriptableObjectInstaller() : void
+    + {static} CreateMonoInstaller() : void
+    + {static} CreateInstaller() : void
+    + {static} CreateEditorWindow() : void
+    + {static} CreateProjectContext() : void
+    {static} CreateProjectContextInternal(absoluteDir:string) : void
+    + {static} AddCSharpClassTemplate(friendlyName:string, defaultFileName:string, templateStr:string) : string
+    + {static} AddCSharpClassTemplate(friendlyName:string, defaultFileName:string, templateStr:string, folderPath:string) : string
+    + {static} ValidateAllActiveScenes() : void
+    {static} ValidateCurrentSceneInternal() : bool
+    + {static} CreateUnitTest() : void
+    + {static} CreateIntegrationTest() : void
+    + {static} CreateSceneTest() : void
+}
+@enduml

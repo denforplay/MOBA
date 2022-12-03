@@ -1,0 +1,13 @@
+@startuml
+class CreepController {
+    +  <<event>> OnAttack : Action<TargetableView> 
+    + IsDestroyed : bool <<get>>
+    + SetState(animationType:AnimationType) : void
+    + CreepController(navMeshAgent:NavMeshAgent, creep:Creep, animationController:AnimationController, startWayPoint:WayPoint, direction:Direction, creepView:CreepView)
+    + StartMove() : void
+    + Cancel() : void
+}
+IController <|-- CreepController
+CreepController --> "Navigation" NavMeshAgent
+CreepController --> "AnimationController" AnimationController
+@enduml

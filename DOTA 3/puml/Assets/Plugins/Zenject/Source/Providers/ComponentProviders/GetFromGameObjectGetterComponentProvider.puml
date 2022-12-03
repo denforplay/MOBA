@@ -1,0 +1,15 @@
+@startuml
+class GetFromGameObjectGetterComponentProvider {
+    <<readonly>> _matchSingle : bool
+    + GetFromGameObjectGetterComponentProvider(componentType:Type, gameObjectGetter:Func<InjectContext, GameObject>, matchSingle:bool)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "Func`2"<T1,T2> {
+}
+IProvider <|-- GetFromGameObjectGetterComponentProvider
+GetFromGameObjectGetterComponentProvider --> "_gameObjectGetter<InjectContext,GameObject>" "Func`2"
+GetFromGameObjectGetterComponentProvider --> "_componentType" Type
+@enduml

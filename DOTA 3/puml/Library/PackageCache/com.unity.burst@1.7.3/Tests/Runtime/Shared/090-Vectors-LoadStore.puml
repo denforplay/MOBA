@@ -1,0 +1,15 @@
+@startuml
+class VectorsLoadStore <<partial>> {
+    + {static} TestReturnFloat4(result:float4) : float
+    + {static} FieldLoadStoreLocalFloat4() : float
+    + {static} FieldLoadStoreIndirectFloat4() : float
+    + {static} FieldLoadStoreLocalByRefFloat4() : float
+    + {static} FieldStoreByOutFloat4() : float
+    + {static} FieldLoadStoreLocalByRefFloat3() : float
+    + {static} FieldLoadStoreByRefFloat3() : float
+}
+class StructWithFloat4 <<struct>> {
+}
+VectorsLoadStore +-- StructWithFloat4
+StructWithFloat4 --> "Vec4" float4
+@enduml

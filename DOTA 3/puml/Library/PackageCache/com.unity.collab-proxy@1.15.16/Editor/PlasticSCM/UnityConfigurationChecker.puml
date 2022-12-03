@@ -1,0 +1,10 @@
+@startuml
+class UnityConfigurationChecker <<static>> {
+    {static} IsPlasticInstalling() : bool
+}
+class SetupUnityEditionToken <<static>> {
+    {static} SetupTokenFiles(isCloudPlasticInstall:bool, isDvcsPlasticInstall:bool) : void
+    {static} CreateOrDeleteTokenFile(isEdition:bool, editionTokenFile:string) : void
+    {static} IsPlasticInstallOfEdition(plasticClientBinDir:string, editionFileName:string) : bool
+}
+@enduml

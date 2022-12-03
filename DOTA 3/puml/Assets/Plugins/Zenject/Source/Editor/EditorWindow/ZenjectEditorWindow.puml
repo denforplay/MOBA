@@ -1,0 +1,16 @@
+@startuml
+abstract class ZenjectEditorWindow {
+    + <<virtual>> OnEnable() : void
+    + <<virtual>> OnDisable() : void
+    + <<virtual>> Update() : void
+    + <<virtual>> OnGUI() : void
+    + {abstract} InstallBindings() : void
+}
+EditorWindow <|-- ZenjectEditorWindow
+ZenjectEditorWindow --> "_kernel" Kernel
+ZenjectEditorWindow --> "_guiRenderableManager" GuiRenderableManager
+ZenjectEditorWindow --> "_container" DiContainer
+ZenjectEditorWindow --> "_fatalError" Exception
+ZenjectEditorWindow --> "_errorTextStyle" GUIStyle
+ZenjectEditorWindow --> "ErrorTextStyle" GUIStyle
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+class DropdownEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+SelectableEditor <|-- DropdownEditor
+DropdownEditor --> "m_Template" SerializedProperty
+DropdownEditor --> "m_CaptionText" SerializedProperty
+DropdownEditor --> "m_CaptionImage" SerializedProperty
+DropdownEditor --> "m_Placeholder" SerializedProperty
+DropdownEditor --> "m_ItemText" SerializedProperty
+DropdownEditor --> "m_ItemImage" SerializedProperty
+DropdownEditor --> "m_OnSelectionChanged" SerializedProperty
+DropdownEditor --> "m_Value" SerializedProperty
+DropdownEditor --> "m_AlphaFadeSpeed" SerializedProperty
+DropdownEditor --> "m_Options" SerializedProperty
+@enduml

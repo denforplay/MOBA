@@ -1,0 +1,20 @@
+@startuml
+class BoxAndWhiskerPlot {
+    DisplayUnits() : string
+    ToDisplayUnits(ms:float, showUnits:bool) : string
+    ToTooltipDisplayUnits(ms:float, showUnits:bool) : string
+    + SetUnits(units:Units) : void
+    + BoxAndWhiskerPlot(draw2D:Draw2D, units:Units, colorBackground:Color)
+    + BoxAndWhiskerPlot(draw2D:Draw2D, units:Units)
+    ClampToRange(value:float, min:float, max:float) : float
+    + Draw(width:float, height:float, min:float, lowerQuartile:float, median:float, upperQuartile:float, max:float, yAxisStart:float, yAxisEnd:float, color:Color, colorFilled:Color) : void
+    GetTooltip(min:float, lowerQuartile:float, median:float, upperQuartile:float, max:float) : string
+    + Draw(rect:Rect, x:float, y:float, w:float, h:float, min:float, lowerQuartile:float, median:float, upperQuartile:float, max:float, yAxisStart:float, yAxisEnd:float, color:Color, colorFilled:Color, clearFirst:bool) : void
+    + DrawHorizontal(width:float, height:float, min:float, lowerQuartile:float, median:float, upperQuartile:float, max:float, xAxisStart:float, xAxisEnd:float, color:Color, colorFilled:Color, style:GUIStyle) : void
+    + DrawHorizontal(rect:Rect, x:float, y:float, w:float, h:float, min:float, lowerQuartile:float, median:float, upperQuartile:float, max:float, xAxisStart:float, xAxisEnd:float, color:Color, colorFilled:Color, clearFirst:bool) : void
+    + DrawText(width:float, plotHeight:float, min:float, max:float, minTooltip:string, maxTooltip:string) : void
+}
+BoxAndWhiskerPlot --> "m_2D" Draw2D
+BoxAndWhiskerPlot --> "m_ColorBackground" Color
+BoxAndWhiskerPlot --> "m_Units" DisplayUnits
+@enduml

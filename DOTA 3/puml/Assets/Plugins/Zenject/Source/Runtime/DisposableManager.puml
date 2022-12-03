@@ -1,0 +1,31 @@
+@startuml
+class DisposableManager {
+    _disposed : bool
+    _lateDisposed : bool
+    + DisposableManager(disposables:List<IDisposable>, priorities:List<ValuePair<Type, int>>, lateDisposables:List<ILateDisposable>, latePriorities:List<ValuePair<Type, int>>)
+    + Add(disposable:IDisposable) : void
+    + Add(disposable:IDisposable, priority:int) : void
+    + AddLate(disposable:ILateDisposable) : void
+    + AddLate(disposable:ILateDisposable, priority:int) : void
+    + Remove(disposable:IDisposable) : void
+    + LateDispose() : void
+    + Dispose() : void
+}
+class "List`1"<T> {
+}
+class DisposableInfo <<struct>> {
+    + Priority : int
+    + DisposableInfo(disposable:IDisposable, priority:int)
+}
+class LateDisposableInfo {
+    + Priority : int
+    + LateDisposableInfo(lateDisposable:ILateDisposable, priority:int)
+}
+IDisposable <|-- DisposableManager
+DisposableManager o-> "_disposables<DisposableInfo>" "List`1"
+DisposableManager o-> "_lateDisposables<LateDisposableInfo>" "List`1"
+DisposableManager +-- DisposableInfo
+DisposableInfo --> "Disposable" IDisposable
+DisposableManager +-- LateDisposableInfo
+LateDisposableInfo --> "LateDisposable" ILateDisposable
+@enduml

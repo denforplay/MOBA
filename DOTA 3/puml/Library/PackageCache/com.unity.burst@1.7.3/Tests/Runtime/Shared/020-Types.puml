@@ -1,0 +1,114 @@
+@startuml
+class Types <<partial>> {
+    + {static} Bool() : int
+    + {static} BoolArgAndReturn(value:bool) : bool
+    + {static} BoolArgAndReturnCall(value:bool) : bool
+    + {static} BoolMarshalAsU1Call(value:bool) : bool
+    + {static} BoolMarshalAsI1Call(value:bool) : bool
+    + {static} BoolMarshalAsR4Call(value:bool) : bool
+    + {static} BoolMarshalAsU1CallParam(value:bool) : bool
+    + {static} BoolMarshalAsI1CallParam(value:bool) : bool
+    + {static} BoolMarshalAsR4CallParam(value:bool) : bool
+    + {static} BoolMarshalAsU1AndI1CallParam(value:bool) : bool
+    + {static} BoolMarshalAsI1AndU1CallParam(value:bool) : bool
+    + {static} Char() : int
+    + {static} Int8() : int
+    + {static} Int16() : int
+    + {static} Int32() : int
+    + {static} Int64() : int
+    + {static} UInt8() : int
+    + {static} UInt16() : int
+    + {static} UInt32() : int
+    + {static} UInt64() : int
+    + {static} EnumSizeOf() : int
+    + {static} EnumByteSizeOf() : int
+    + {static} CheckEnumByte(value:MyEnumByte) : MyEnumByte
+    + {static} EnumByParam(value:MyEnum) : int
+    + {static} Struct() : float
+    + {static} StructAccess() : long
+    + {static} StructWithBool(value:bool) : bool
+    + {static} TestUsingReferenceType() : int
+    + {static} TestValueTuple1Return() : long
+    + {static} TestValueTuple2Return() : long
+    + {static} TestValueTuple3Return() : long
+    + {static} TestValueTuple4Return() : long
+    + {static} TestValueTuple5Return() : long
+    + {static} TestValueTuple6Return() : long
+    + {static} TestValueTuple7Return() : long
+    + {static} TestValueTuple8Return() : long
+    + {static} TestValueTuple9Return() : long
+    + {static} TestValueTuple1Arg() : long
+    + {static} TestValueTuple2Arg() : long
+    + {static} TestValueTuple3Arg() : long
+    + {static} TestValueTuple4Arg() : long
+    + {static} TestValueTuple5Arg() : long
+    + {static} TestValueTuple6Arg() : long
+    + {static} TestValueTuple7Arg() : long
+    + {static} TestValueTuple8Arg() : long
+    + {static} TestValueTuple9Arg() : long
+}
+class MyStruct <<struct>> {
+    + MyStruct(x:float, y:float, z:float, w:float)
+    + x : float
+    + y : float
+    + z : float
+    + w : float
+}
+class BoolStruct <<struct>> {
+    + b1 : bool
+    + b2 : bool
+}
+class BoolFixedStruct <<struct>> {
+    + <<fixed>> Values : bool
+}
+class InterleavedBoolStruct <<struct>> {
+    + b1 : bool
+    + i2 : int
+    + b3 : bool
+    + b4 : bool
+    + i5 : long
+}
+enum MyEnum {
+    Value1= 1,
+    Value15= 15,
+}
+class ExplicitLayoutStruct <<struct>> {
+    + FieldA : int
+    + FieldB : int
+}
+class StructWithSize <<struct>> {
+    + FieldA : int
+    + FieldB : int
+}
+class EmptyStruct <<struct>> {
+}
+enum MyEnumByte {
+    Tada1= 1,
+    Tada2= 2,
+}
+class SomeStruct <<struct>> {
+    + X : int
+}
+class SomeStructWithValueTuple <<struct>> {
+}
+class "ValueTuple`2"<T1,T2> {
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+Types +-- MyStruct
+Types +-- BoolStruct
+Types +-- BoolFixedStruct
+Types +-- InterleavedBoolStruct
+InterleavedBoolStruct --> "e6" MyEnum
+Types +-- MyEnum
+Types +-- ExplicitLayoutStruct
+Types +-- StructWithSize
+Types +-- EmptyStruct
+Types +-- MyEnumByte
+Types +-- SomeStruct
+Types +-- SomeStructWithValueTuple
+SomeStructWithValueTuple --> "X<int,float>" "ValueTuple`2"
+SomeStructWithValueTuple +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

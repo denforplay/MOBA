@@ -1,0 +1,65 @@
+@startuml
+abstract class PSDDataProvider {
+}
+class SpriteBoneDataProvider {
+    + GetBones(guid:GUID) : List<SpriteBone>
+    + SetBones(guid:GUID, bones:List<SpriteBone>) : void
+}
+class TextureDataProvider {
+    + GetReadableTexture2D() : Texture2D
+    + GetTextureActualWidthAndHeight(width:int, height:int) : void
+}
+class SecondaryTextureDataProvider {
+}
+class SpriteOutlineDataProvider {
+    + GetOutlines(guid:GUID) : List<Vector2[]>
+    + SetOutlines(guid:GUID, data:List<Vector2[]>) : void
+    + GetTessellationDetail(guid:GUID) : float
+    + SetTessellationDetail(guid:GUID, value:float) : void
+}
+class SpritePhysicsOutlineProvider {
+    + GetOutlines(guid:GUID) : List<Vector2[]>
+    + SetOutlines(guid:GUID, data:List<Vector2[]>) : void
+    + GetTessellationDetail(guid:GUID) : float
+    + SetTessellationDetail(guid:GUID, value:float) : void
+}
+class SpriteMeshDataProvider {
+    + GetVertices(guid:GUID) : Vertex2DMetaData[]
+    + SetVertices(guid:GUID, vertices:Vertex2DMetaData[]) : void
+    + GetIndices(guid:GUID) : int[]
+    + SetIndices(guid:GUID, indices:int[]) : void
+    + GetEdges(guid:GUID) : Vector2Int[]
+    + SetEdges(guid:GUID, edges:Vector2Int[]) : void
+}
+class CharacterDataProvider {
+    ParentGroupInFlatten(groupDictIndex:Dictionary<int, int>, groups:List<CharacterGroup>, parentIndex:int, psdLayers:List<PSDLayer>) : int
+    GenerateNodeForGroup(index:int, psdLayers:List<PSDLayer>) : bool
+    + GetCharacterData() : CharacterData
+    + SetCharacterData(characterData:CharacterData) : void
+}
+class MainSkeletonDataProvider {
+    + GetMainSkeletonData() : MainSkeletonData
+}
+PSDDataProvider --> "dataProvider" PSDImporter
+PSDDataProvider <|-- SpriteBoneDataProvider
+ISpriteBoneDataProvider <|-- SpriteBoneDataProvider
+PSDDataProvider <|-- TextureDataProvider
+ITextureDataProvider <|-- TextureDataProvider
+TextureDataProvider --> "m_ReadableTexture" Texture2D
+TextureDataProvider --> "m_OriginalTexture" Texture2D
+TextureDataProvider --> "textureImporter" PSDImporter
+TextureDataProvider --> "texture" Texture2D
+TextureDataProvider --> "previewTexture" Texture2D
+PSDDataProvider <|-- SecondaryTextureDataProvider
+ISecondaryTextureDataProvider <|-- SecondaryTextureDataProvider
+PSDDataProvider <|-- SpriteOutlineDataProvider
+ISpriteOutlineDataProvider <|-- SpriteOutlineDataProvider
+PSDDataProvider <|-- SpritePhysicsOutlineProvider
+ISpritePhysicsOutlineDataProvider <|-- SpritePhysicsOutlineProvider
+PSDDataProvider <|-- SpriteMeshDataProvider
+ISpriteMeshDataProvider <|-- SpriteMeshDataProvider
+PSDDataProvider <|-- CharacterDataProvider
+ICharacterDataProvider <|-- CharacterDataProvider
+PSDDataProvider <|-- MainSkeletonDataProvider
+IMainSkeletonDataProvider <|-- MainSkeletonDataProvider
+@enduml

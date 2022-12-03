@@ -1,0 +1,86 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+}
+class Sum <<static>> {
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> SumAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> SumAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> SumAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+}
+@enduml

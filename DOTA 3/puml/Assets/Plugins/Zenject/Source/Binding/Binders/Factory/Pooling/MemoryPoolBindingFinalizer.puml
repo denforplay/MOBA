@@ -1,0 +1,8 @@
+@startuml
+class "MemoryPoolBindingFinalizer`1"<TContract> {
+    + MemoryPoolBindingFinalizer(bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, poolBindInfo:MemoryPoolBindInfo)
+}
+ProviderBindingFinalizer <|-- "MemoryPoolBindingFinalizer`1"
+"MemoryPoolBindingFinalizer`1" --> "_poolBindInfo" MemoryPoolBindInfo
+"MemoryPoolBindingFinalizer`1" --> "_factoryBindInfo" FactoryBindInfo
+@enduml

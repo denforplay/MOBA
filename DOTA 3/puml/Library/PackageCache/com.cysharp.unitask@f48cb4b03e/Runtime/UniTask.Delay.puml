@@ -1,0 +1,197 @@
+@startuml
+enum DelayType {
+    DeltaTime,
+    UnscaledDeltaTime,
+    Realtime,
+}
+class UniTask <<struct>> {
+    + {static} Yield() : YieldAwaitable
+    + {static} Yield(timing:PlayerLoopTiming) : YieldAwaitable
+    + {static} Yield(cancellationToken:CancellationToken) : UniTask
+    + {static} Yield(timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} NextFrame() : UniTask
+    + {static} NextFrame(timing:PlayerLoopTiming) : UniTask
+    + {static} NextFrame(cancellationToken:CancellationToken) : UniTask
+    + {static} NextFrame(timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} WaitForEndOfFrame() : YieldAwaitable
+    + {static} WaitForEndOfFrame(cancellationToken:CancellationToken) : UniTask
+    + {static} WaitForEndOfFrame(coroutineRunner:MonoBehaviour, cancellationToken:CancellationToken) : UniTask
+    + {static} WaitForFixedUpdate() : YieldAwaitable
+    + {static} WaitForFixedUpdate(cancellationToken:CancellationToken) : UniTask
+    + {static} DelayFrame(delayFrameCount:int, delayTiming:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} Delay(millisecondsDelay:int, ignoreTimeScale:bool, delayTiming:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} Delay(delayTimeSpan:TimeSpan, ignoreTimeScale:bool, delayTiming:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} Delay(millisecondsDelay:int, delayType:DelayType, delayTiming:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} Delay(delayTimeSpan:TimeSpan, delayType:DelayType, delayTiming:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+}
+class YieldAwaitable <<struct>> {
+    + YieldAwaitable(timing:PlayerLoopTiming)
+    + GetAwaiter() : Awaiter
+    + ToUniTask() : UniTask
+}
+class YieldPromise <<sealed>> {
+    {static} YieldPromise()
+    YieldPromise()
+    + {static} Create(timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class NextFramePromise <<sealed>> {
+    {static} NextFramePromise()
+    frameCount : int
+    NextFramePromise()
+    + {static} Create(timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class WaitForEndOfFramePromise <<sealed>> {
+    {static} WaitForEndOfFramePromise()
+    WaitForEndOfFramePromise()
+    + {static} Create(coroutineRunner:MonoBehaviour, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    TryReturn() : bool
+    isFirst : bool = true
+    Current : object <<get>>
+    MoveNext() : bool
+    + Reset() : void
+}
+class DelayFramePromise <<sealed>> {
+    {static} DelayFramePromise()
+    initialFrame : int
+    delayFrameCount : int
+    currentFrameCount : int
+    DelayFramePromise()
+    + {static} Create(delayFrameCount:int, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class DelayPromise <<sealed>> {
+    {static} DelayPromise()
+    initialFrame : int
+    delayTimeSpan : float
+    elapsed : float
+    DelayPromise()
+    + {static} Create(delayTimeSpan:TimeSpan, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class DelayIgnoreTimeScalePromise <<sealed>> {
+    {static} DelayIgnoreTimeScalePromise()
+    delayFrameTimeSpan : float
+    elapsed : float
+    initialFrame : int
+    DelayIgnoreTimeScalePromise()
+    + {static} Create(delayFrameTimeSpan:TimeSpan, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class DelayRealtimePromise <<sealed>> {
+    {static} DelayRealtimePromise()
+    delayTimeSpanTicks : long
+    DelayRealtimePromise()
+    + {static} Create(delayTimeSpan:TimeSpan, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class Awaiter <<struct>> {
+    + Awaiter(timing:PlayerLoopTiming)
+    + IsCompleted : bool <<get>>
+    + GetResult() : void
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+YieldAwaitable --> "timing" PlayerLoopTiming
+UniTask +-- YieldPromise
+IUniTaskSource <|-- YieldPromise
+IPlayerLoopItem <|-- YieldPromise
+"ITaskPoolNode`1" "<YieldPromise>" <|-- YieldPromise
+YieldPromise --> "pool<YieldPromise>" "TaskPool`1"
+YieldPromise --> "nextNode" YieldPromise
+YieldPromise --> "cancellationToken" CancellationToken
+YieldPromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+UniTask +-- NextFramePromise
+IUniTaskSource <|-- NextFramePromise
+IPlayerLoopItem <|-- NextFramePromise
+"ITaskPoolNode`1" "<NextFramePromise>" <|-- NextFramePromise
+NextFramePromise --> "pool<NextFramePromise>" "TaskPool`1"
+NextFramePromise --> "nextNode" NextFramePromise
+NextFramePromise --> "cancellationToken" CancellationToken
+NextFramePromise --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+UniTask +-- WaitForEndOfFramePromise
+IUniTaskSource <|-- WaitForEndOfFramePromise
+"ITaskPoolNode`1" "<WaitForEndOfFramePromise>" <|-- WaitForEndOfFramePromise
+WaitForEndOfFramePromise --> "pool<WaitForEndOfFramePromise>" "TaskPool`1"
+WaitForEndOfFramePromise --> "nextNode" WaitForEndOfFramePromise
+WaitForEndOfFramePromise --> "cancellationToken" CancellationToken
+WaitForEndOfFramePromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+WaitForEndOfFramePromise o-> "waitForEndOfFrameYieldInstruction" WaitForEndOfFrame
+UniTask +-- DelayFramePromise
+IUniTaskSource <|-- DelayFramePromise
+IPlayerLoopItem <|-- DelayFramePromise
+"ITaskPoolNode`1" "<DelayFramePromise>" <|-- DelayFramePromise
+DelayFramePromise --> "pool<DelayFramePromise>" "TaskPool`1"
+DelayFramePromise --> "nextNode" DelayFramePromise
+DelayFramePromise --> "cancellationToken" CancellationToken
+DelayFramePromise --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+UniTask +-- DelayPromise
+IUniTaskSource <|-- DelayPromise
+IPlayerLoopItem <|-- DelayPromise
+"ITaskPoolNode`1" "<DelayPromise>" <|-- DelayPromise
+DelayPromise --> "pool<DelayPromise>" "TaskPool`1"
+DelayPromise --> "nextNode" DelayPromise
+DelayPromise --> "cancellationToken" CancellationToken
+DelayPromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+UniTask +-- DelayIgnoreTimeScalePromise
+IUniTaskSource <|-- DelayIgnoreTimeScalePromise
+IPlayerLoopItem <|-- DelayIgnoreTimeScalePromise
+"ITaskPoolNode`1" "<DelayIgnoreTimeScalePromise>" <|-- DelayIgnoreTimeScalePromise
+DelayIgnoreTimeScalePromise --> "pool<DelayIgnoreTimeScalePromise>" "TaskPool`1"
+DelayIgnoreTimeScalePromise --> "nextNode" DelayIgnoreTimeScalePromise
+DelayIgnoreTimeScalePromise --> "cancellationToken" CancellationToken
+DelayIgnoreTimeScalePromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+UniTask +-- DelayRealtimePromise
+IUniTaskSource <|-- DelayRealtimePromise
+IPlayerLoopItem <|-- DelayRealtimePromise
+"ITaskPoolNode`1" "<DelayRealtimePromise>" <|-- DelayRealtimePromise
+DelayRealtimePromise --> "pool<DelayRealtimePromise>" "TaskPool`1"
+DelayRealtimePromise --> "nextNode" DelayRealtimePromise
+DelayRealtimePromise --> "stopwatch" ValueStopwatch
+DelayRealtimePromise --> "cancellationToken" CancellationToken
+DelayRealtimePromise --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+YieldAwaitable +-- Awaiter
+ICriticalNotifyCompletion <|-- Awaiter
+Awaiter --> "timing" PlayerLoopTiming
+@enduml

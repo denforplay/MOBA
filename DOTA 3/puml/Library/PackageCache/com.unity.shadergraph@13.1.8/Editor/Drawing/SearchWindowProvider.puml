@@ -1,0 +1,32 @@
+@startuml
+class NodeEntry <<struct>> {
+    + compatibleSlotId : int
+    + slotName : string
+}
+class SearchWindowProvider {
+    + nodeNeedsRepositioning : bool <<get>> <<set>>
+    + regenerateEntries : bool <<get>> <<set>>
+    + Initialize(editorWindow:EditorWindow, graph:GraphData, graphView:GraphView) : void
+    OnDestroy() : void
+    + GenerateNodeEntries() : void
+    SortEntries(nodeEntries:List<NodeEntry>) : void
+    AddEntries(node:AbstractMaterialNode, title:string[], addNodeEntries:List<NodeEntry>) : void
+}
+class SearcherProvider {
+    + LoadSearchWindow() : Searcher.Searcher
+    + OnSearcherSelectEntry(entry:SearcherItem, screenMousePosition:Vector2) : bool
+    + CopyNodeForGraph(oldNode:AbstractMaterialNode) : AbstractMaterialNode
+}
+class "List`1"<T> {
+}
+NodeEntry --> "node" AbstractMaterialNode
+ScriptableObject <|-- SearchWindowProvider
+SearchWindowProvider --> "currentNodeEntries<NodeEntry>" "List`1"
+SearchWindowProvider --> "connectedPort" ShaderPort
+SearchWindowProvider --> "targetSlotReference" SlotReference
+SearchWindowProvider --> "targetPosition" Vector2
+SearchWindowProvider --> "target" VisualElement
+SearchWindowProvider --> "m_Ids<int>" "List`1"
+SearchWindowProvider o-> "m_Slots<MaterialSlot>" "List`1"
+SearchWindowProvider <|-- SearcherProvider
+@enduml

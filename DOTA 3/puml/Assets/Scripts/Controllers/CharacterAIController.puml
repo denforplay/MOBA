@@ -1,0 +1,15 @@
+@startuml
+class CharacterAIController {
+    +  <<event>> OnAttack : Action<TargetableView> 
+    + IsDestroyed : bool <<get>>
+    + CharacterAIController(camera:Camera, navAgent:NavMeshAgent, characterView:CharacterView, direction:Direction, startWayPoint:WayPoint)
+    + StartMove() : void
+    Move() : void
+    + SetSkillUseState(skillId:int, canBeUsed:bool) : void
+    + ObserveSkill(skillId:int, cancellationToken:CancellationTokenSource) : ISkillObserver
+    + MoveTo(point:Vector3) : void
+    + SetState(animationType:AnimationType) : void
+}
+ICharacterController <|-- CharacterAIController
+CharacterAIController --> "NavigationAgent" NavMeshAgent
+@enduml

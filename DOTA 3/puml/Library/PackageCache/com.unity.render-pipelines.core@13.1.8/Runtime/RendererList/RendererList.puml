@@ -1,0 +1,25 @@
+@startuml
+class RendererList <<struct>> {
+    + isValid : bool <<get>>
+    + stateBlock : RenderStateBlock?
+    + {static} Create(desc:RendererListDesc) : RendererList
+}
+class RendererListDesc <<struct>> {
+    + stateBlock : RenderStateBlock?
+    + excludeObjectMotionVectors : bool
+    + layerMask : int
+    + overrideMaterialPassIndex : int
+    + RendererListDesc(passName:ShaderTagId, cullingResult:CullingResults, camera:Camera)
+    + RendererListDesc(passNames:ShaderTagId[], cullingResult:CullingResults, camera:Camera)
+    + IsValid() : bool
+}
+RendererList o-> "s_EmptyName" ShaderTagId
+RendererList o-> "nullRendererList" RendererList
+RendererList --> "cullingResult" CullingResults
+RendererList --> "drawSettings" DrawingSettings
+RendererList --> "filteringSettings" FilteringSettings
+RendererListDesc --> "sortingCriteria" SortingCriteria
+RendererListDesc --> "rendererConfiguration" PerObjectData
+RendererListDesc --> "renderQueueRange" RenderQueueRange
+RendererListDesc --> "overrideMaterial" Material
+@enduml

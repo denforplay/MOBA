@@ -1,0 +1,26 @@
+@startuml
+class IconButton {
+    + <<const>> UssClassName : string = "unity-icon-button"
+    + <<const>> UndoUssClassName : string = "btn-undo"
+    + <<const>> ShowUssClassName : string = "btn-show"
+    + <<const>> MergeUssClassName : string = "btn-merge"
+    + <<const>> ChooseMineUssClassName : string = "btn-choose-mine"
+    + <<const>> ChooseRemoteUssClassName : string = "btn-choose-remote"
+    + <<const>> DiffUssCLassName : string = "btn-diff"
+    {static} <<readonly>> k_StylePath : string
+    +  <<event>> Clicked : Action 
+    + IconButton()
+    + IconButton(clickEvent:Action)
+    OnClick() : void
+    + UnregisterClickEvents() : void
+    + <<override>> canGrabFocus : bool <<get>> = true
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+Image <|-- IconButton
+IconButton --> "Image" Texture2D
+IconButton +-- UxmlFactory
+"UxmlFactory`1" "<IconButton>" <|-- UxmlFactory
+@enduml

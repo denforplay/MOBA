@@ -1,0 +1,7 @@
+@startuml
+class DrawUserIcon <<static>> {
+    {static} BuildUserIconAreaRect(commentText:string, sizeOfImage:float) : Rect
+    {static} GetIconTexture() : Texture2D
+}
+DrawUserIcon --> "sUserIconImage" Texture2D
+@enduml

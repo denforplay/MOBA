@@ -1,0 +1,29 @@
+@startuml
+class IESImporterEditor {
+    m_ShowLuminaireProductInformation : bool = true
+    m_ShowLightProperties : bool = true
+    + CommonOnEnable(serializedObject:SerializedProperty) : void
+    + CommonOnInspectorGUI(scriptedImporter:ScriptedImporterEditor) : void
+    + CommonApply() : void
+    + CommonHasPreviewGUI(setupRenderPipelinePreviewCamera:SetupRenderPipelinePreviewCamera, setupRenderPipelinePreviewLight:SetupRenderPipelinePreviewLight, setupRenderPipelinePreviewWallRenderer:SetupRenderPipelinePreviewWallRenderer, setupRenderPipelinePreviewFloorRenderer:SetupRenderPipelinePreviewFloorRenderer) : bool
+    + CommonGetPreviewTitle() : GUIContent
+    + CommonOnPreviewGUI(r:Rect, background:GUIStyle, target:ScriptedImporter, setupRenderPipelinePreviewLightIntensity:SetupRenderPipelinePreviewLightIntensity) : void
+    + CommonOnDisable() : void
+}
+IESImporterEditor o-> "m_WordWrapStyle" GUIStyle
+IESImporterEditor --> "m_FileFormatVersionProp" SerializedProperty
+IESImporterEditor --> "m_IESPhotometricTypeProp" SerializedProperty
+IESImporterEditor --> "m_IESMaximumIntensityProp" SerializedProperty
+IESImporterEditor --> "m_IESMaximumIntensityUnitProp" SerializedProperty
+IESImporterEditor --> "m_ManufacturerProp" SerializedProperty
+IESImporterEditor --> "m_LuminaireCatalogNumberProp" SerializedProperty
+IESImporterEditor --> "m_LuminaireDescriptionProp" SerializedProperty
+IESImporterEditor --> "m_LampCatalogNumberProp" SerializedProperty
+IESImporterEditor --> "m_LampDescriptionProp" SerializedProperty
+IESImporterEditor --> "m_PrefabLightTypeProp" SerializedProperty
+IESImporterEditor --> "m_SpotAngleProp" SerializedProperty
+IESImporterEditor --> "m_IESSizeProp" SerializedProperty
+IESImporterEditor --> "m_ApplyLightAttenuationProp" SerializedProperty
+IESImporterEditor --> "m_UseIESMaximumIntensityProp" SerializedProperty
+IESImporterEditor --> "m_CookieCompressionProp" SerializedProperty
+@enduml

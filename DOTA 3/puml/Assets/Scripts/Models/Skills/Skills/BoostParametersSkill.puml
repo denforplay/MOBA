@@ -1,0 +1,8 @@
+@startuml
+class BoostParametersSkill {
+    + BoostParametersSkill(character:Character, skillConfiguration:SkillConfiguration)
+    + <<override>> <<async>> Apply(position:Vector3) : UniTask
+}
+SelfAppliedSkill <|-- BoostParametersSkill
+BoostParametersSkill --> "SkillType" SkillType
+@enduml

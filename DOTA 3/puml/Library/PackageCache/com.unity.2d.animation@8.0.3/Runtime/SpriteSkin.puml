@@ -1,0 +1,53 @@
+@startuml
+class PositionVertex <<struct>> {
+}
+class PositionTangentVertex <<struct>> {
+}
+class SpriteSkin <<sealed>> <<partial>> {
+    m_UseBatching : bool = true
+    m_AlwaysUpdate : bool = true
+    m_AutoRebind : bool = false
+    m_CurrentDeformVerticesLength : int = 0
+    m_CurrentDeformSprite : int = 0
+    m_ForceSkinning : bool
+    m_BatchSkinning : bool = false
+    m_IsValid : bool = false
+    m_TransformsHash : int = 0
+    GetSpriteInstanceID() : int
+    OnEnable() : void
+    CacheValidFlag() : void
+    Reset() : void
+    + HasCurrentDeformedVertices() : bool
+    + GetDeformedVertexPositionData() : IEnumerable<Vector3>
+    + GetDeformedVertexTangentData() : IEnumerable<Vector4>
+    OnDisable() : void
+    + OnPreviewUpdate() : void
+    {static} IsInGUIUpdateLoop() : bool
+    LateUpdate() : void
+    Deform(useBatching:bool) : void
+    CacheCurrentSprite(rebind:bool) : void
+    + alwaysUpdate : bool <<get>> <<set>>
+    {static} GetSpriteBonesTransformFromPath(spriteBones:SpriteBone[], rootBone:Transform, outNewBoneTransform:Transform[]) : bool
+    {static} CalculateBoneTransformsPath(index:int, spriteBones:SpriteBone[], paths:string[]) : void
+    OnDestroy() : void
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+}
+class Profiling <<static>> {
+}
+PositionVertex --> "position" Vector3
+PositionTangentVertex --> "position" Vector3
+PositionTangentVertex --> "tangent" Vector4
+MonoBehaviour <|-- SpriteSkin
+IPreviewable <|-- SpriteSkin
+ISerializationCallbackReceiver <|-- SpriteSkin
+SpriteSkin --> "m_RootBone" Transform
+SpriteSkin --> "m_Bounds" Bounds
+SpriteSkin --> "m_DeformedVertices" NativeByteArray
+SpriteSkin --> "m_SpriteRenderer" SpriteRenderer
+SpriteSkin --> "rootBone" Transform
+SpriteSkin +-- Profiling
+Profiling o-> "cacheCurrentSprite" ProfilerMarker
+Profiling o-> "getSpriteBonesTransformFromGuid" ProfilerMarker
+Profiling o-> "getSpriteBonesTransformFromPath" ProfilerMarker
+@enduml

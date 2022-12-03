@@ -1,0 +1,38 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} WhenAll(tasks:UniTask<T>[]) : UniTask<T[]>
+    + {static} WhenAll(tasks:IEnumerable<UniTask<T>>) : UniTask<T[]>
+    + {static} WhenAll(tasks:UniTask[]) : UniTask
+    + {static} WhenAll(tasks:IEnumerable<UniTask>) : UniTask
+}
+class "WhenAllPromise`1"<T> <<sealed>> {
+    completeCount : int
+    + WhenAllPromise(tasks:UniTask<T>[], tasksLength:int)
+    {static} TryInvokeContinuation(self:WhenAllPromise<T>, awaiter:UniTask<T>.Awaiter, i:int) : void
+    + GetResult(token:short) : T[]
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class WhenAllPromise <<sealed>> {
+    completeCount : int
+    tasksLength : int
+    + WhenAllPromise(tasks:UniTask[], tasksLength:int)
+    {static} TryInvokeContinuation(self:WhenAllPromise, awaiter:UniTask.Awaiter) : void
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class "IUniTaskSource`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+UniTask +-- "WhenAllPromise`1"
+"IUniTaskSource`1" "<T[]>" <|-- "WhenAllPromise`1"
+"WhenAllPromise`1" --> "core<T[]>" "UniTaskCompletionSourceCore`1"
+UniTask +-- WhenAllPromise
+IUniTaskSource <|-- WhenAllPromise
+WhenAllPromise --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+@enduml

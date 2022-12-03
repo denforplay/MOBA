@@ -1,0 +1,13 @@
+@startuml
+class UIObjRotation {
+    Start() : void
+    Update() : void
+    + rotSpeed : float = 1
+    + rotType : int = 0
+    + CanRotationSoldier : bool = false
+    RotateCharacter() : void
+}
+MonoBehaviour <|-- UIObjRotation
+UIObjRotation --> "RotationY" GameObject
+UIObjRotation --> "RotationX" GameObject
+@enduml

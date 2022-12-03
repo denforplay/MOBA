@@ -1,0 +1,15 @@
+@startuml
+abstract class TilemapEditorTool {
+    + {static} tilemapEditorToolsToolbarSize : float <<get>>
+    + <<virtual>> HandleTool(isHotControl:bool, gridLayout:GridLayout, brushTarget:GameObject, gridMousePosition:Vector3Int) : bool
+    + <<override>> IsAvailable() : bool
+    + {static} ToggleActiveEditorTool(type:Type) : void
+    + {static} SetActiveEditorTool(type:Type) : void
+}
+class ShortcutContext {
+    + active : bool <<get>> <<set>>
+}
+EditorTool <|-- TilemapEditorTool
+TilemapEditorTool +-- ShortcutContext
+IShortcutToolContext <|-- ShortcutContext
+@enduml

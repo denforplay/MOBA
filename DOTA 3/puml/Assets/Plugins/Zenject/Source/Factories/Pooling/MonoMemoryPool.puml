@@ -1,0 +1,44 @@
+@startuml
+class "MonoMemoryPool`1"<TValue> {
+    + MonoMemoryPool()
+}
+class "MonoMemoryPool`2"<TParam1,TValue> {
+    + MonoMemoryPool()
+}
+class "MonoMemoryPool`3"<TParam1,TParam2,TValue> {
+    + MonoMemoryPool()
+}
+class "MonoMemoryPool`4"<TParam1,TParam2,TParam3,TValue> {
+    + MonoMemoryPool()
+}
+class "MonoMemoryPool`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+    + MonoMemoryPool()
+}
+class "MonoMemoryPool`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+    + MonoMemoryPool()
+}
+class "MemoryPool`1"<T> {
+}
+class "MemoryPool`2"<T1,T2> {
+}
+class "MemoryPool`3"<T1,T2,T3> {
+}
+class "MemoryPool`4"<T1,T2,T3,T4> {
+}
+class "MemoryPool`5"<T1,T2,T3,T4,T5> {
+}
+class "MemoryPool`6"<T1,T2,T3,T4,T5,T6> {
+}
+"MemoryPool`1" "<TValue>" <|-- "MonoMemoryPool`1"
+"MonoMemoryPool`1" --> "_originalParent" Transform
+"MemoryPool`2" "<TParam1,TValue>" <|-- "MonoMemoryPool`2"
+"MonoMemoryPool`2" --> "_originalParent" Transform
+"MemoryPool`3" "<TParam1,TParam2,TValue>" <|-- "MonoMemoryPool`3"
+"MonoMemoryPool`3" --> "_originalParent" Transform
+"MemoryPool`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "MonoMemoryPool`4"
+"MonoMemoryPool`4" --> "_originalParent" Transform
+"MemoryPool`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "MonoMemoryPool`5"
+"MonoMemoryPool`5" --> "_originalParent" Transform
+"MemoryPool`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "MonoMemoryPool`6"
+"MonoMemoryPool`6" --> "_originalParent" Transform
+@enduml

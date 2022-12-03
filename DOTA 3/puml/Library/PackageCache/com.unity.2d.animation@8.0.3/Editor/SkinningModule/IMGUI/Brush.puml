@@ -1,0 +1,20 @@
+@startuml
+class Brush {
+    +  <<event>> onMove : Action<Brush> 
+    +  <<event>> onSize : Action<Brush> 
+    +  <<event>> onRepaint : Action<Brush> 
+    +  <<event>> onStrokeBegin : Action<Brush> 
+    +  <<event>> onStrokeDelta : Action<Brush> 
+    +  <<event>> onStrokeStep : Action<Brush> 
+    +  <<event>> onStrokeEnd : Action<Brush> 
+    + isHot : bool <<get>>
+    + isActivable : bool <<get>>
+    + controlID : int <<get>>
+    + hardness : float <<get>> <<set>>
+    + step : float <<get>> <<set>>
+    + size : float <<get>> <<set>>
+    + Brush(guiWrapper:IGUIWrapper)
+    + OnGUI() : void
+}
+Brush --> "position" Vector3
+@enduml

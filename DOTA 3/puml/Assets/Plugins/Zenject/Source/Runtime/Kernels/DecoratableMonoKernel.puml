@@ -1,0 +1,34 @@
+@startuml
+interface IDecoratableMonoKernel {
+    ShouldInitializeOnStart() : bool
+    Initialize() : void
+    Update() : void
+    FixedUpdate() : void
+    LateUpdate() : void
+    Dispose() : void
+    LateDispose() : void
+}
+class DecoratableMonoKernel {
+    + <<virtual>> ShouldInitializeOnStart() : bool
+    + <<virtual>> Initialize() : void
+    + Update() : void
+    + FixedUpdate() : void
+    + LateUpdate() : void
+    + Dispose() : void
+    + LateDispose() : void
+}
+abstract class BaseMonoKernelDecorator {
+    + <<virtual>> ShouldInitializeOnStart() : bool
+    + <<virtual>> Initialize() : void
+    + <<virtual>> Update() : void
+    + <<virtual>> FixedUpdate() : void
+    + <<virtual>> LateUpdate() : void
+    + <<virtual>> Dispose() : void
+    + <<virtual>> LateDispose() : void
+}
+IDecoratableMonoKernel <|-- DecoratableMonoKernel
+DecoratableMonoKernel o-> "TickableManager" TickableManager
+DecoratableMonoKernel o-> "InitializableManager" InitializableManager
+DecoratableMonoKernel o-> "DisposablesManager" DisposableManager
+IDecoratableMonoKernel <|-- BaseMonoKernelDecorator
+@enduml

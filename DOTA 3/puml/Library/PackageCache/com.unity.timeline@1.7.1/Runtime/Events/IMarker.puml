@@ -1,0 +1,7 @@
+@startuml
+interface IMarker {
+    time : double <<get>> <<set>>
+    Initialize(parent:TrackAsset) : void
+}
+IMarker --> "parent" TrackAsset
+@enduml

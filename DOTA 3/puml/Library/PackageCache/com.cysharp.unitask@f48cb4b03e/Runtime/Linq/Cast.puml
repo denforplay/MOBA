@@ -1,0 +1,20 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Cast(source:IUniTaskAsyncEnumerable<Object>) : IUniTaskAsyncEnumerable<TResult>
+}
+class "Cast`1"<TResult> <<sealed>> {
+    + Cast(source:IUniTaskAsyncEnumerable<object>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Cast {
+    + _Cast(source:IUniTaskAsyncEnumerable<object>, cancellationToken:CancellationToken)
+}
+class "AsyncEnumeratorBase`2"<T1,T2> {
+}
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "Cast`1"
+"Cast`1" --> "source<object>" "IUniTaskAsyncEnumerable`1"
+"Cast`1" +-- _Cast
+"AsyncEnumeratorBase`2" "<object,TResult>" <|-- _Cast
+@enduml

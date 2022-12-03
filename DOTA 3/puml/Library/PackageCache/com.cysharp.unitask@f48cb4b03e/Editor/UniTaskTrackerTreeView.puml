@@ -1,0 +1,24 @@
+@startuml
+class UniTaskTrackerViewItem {
+    + TaskType : string <<get>> <<set>>
+    + Elapsed : string <<get>> <<set>>
+    + Status : string <<get>> <<set>>
+    position : string
+    + Position : string <<get>> <<set>>
+    + PositionFirstLine : string <<get>>
+    {static} GetFirstLine(str:string) : string
+    + UniTaskTrackerViewItem(id:int)
+}
+class UniTaskTrackerTreeView {
+    <<const>> sortedColumnIndexStateKey : string = "UniTaskTrackerTreeView_sortedColumnIndex"
+    + UniTaskTrackerTreeView()
+    UniTaskTrackerTreeView(state:TreeViewState, header:MultiColumnHeader)
+    + ReloadAndSort() : void
+}
+class "IReadOnlyList`1"<T> {
+}
+TreeViewItem <|-- UniTaskTrackerViewItem
+UniTaskTrackerViewItem o-> "removeHref" Regex
+TreeView <|-- UniTaskTrackerTreeView
+UniTaskTrackerTreeView --> "CurrentBindingItems<TreeViewItem>" "IReadOnlyList`1"
+@enduml

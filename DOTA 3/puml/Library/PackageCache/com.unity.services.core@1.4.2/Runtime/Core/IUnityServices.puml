@@ -1,0 +1,7 @@
+@startuml
+interface IUnityServices {
+    InitializeAsync(options:InitializationOptions) : Task
+}
+IUnityServices --> "State" ServicesInitializationState
+IUnityServices --> "Options" InitializationOptions
+@enduml

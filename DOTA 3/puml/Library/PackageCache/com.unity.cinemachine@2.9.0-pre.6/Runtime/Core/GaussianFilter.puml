@@ -1,0 +1,28 @@
+@startuml
+abstract class "GaussianWindow1d`1"<T> {
+    + Sigma : float <<get>>
+    + KernelSize : int <<get>>
+    GenerateKernel(sigma:float, maxKernelRadius:int) : void
+    + GaussianWindow1d(sigma:float, maxKernelRadius:int)
+    + Reset() : void
+    + IsEmpty() : bool
+    + AddValue(v:T) : void
+    + Filter(v:T) : T
+    + Value() : T
+    + BufferLength : int <<get>>
+    + SetBufferValue(index:int, value:T) : void
+    + GetBufferValue(index:int) : T
+}
+class GaussianWindow1D_Vector3 {
+    + GaussianWindow1D_Vector3(sigma:float, maxKernelRadius:int)
+}
+class GaussianWindow1D_Quaternion {
+    + GaussianWindow1D_Quaternion(sigma:float, maxKernelRadius:int)
+}
+class GaussianWindow1D_CameraRotation {
+    + GaussianWindow1D_CameraRotation(sigma:float, maxKernelRadius:int)
+}
+"GaussianWindow1d`1" "<Vector3>" <|-- GaussianWindow1D_Vector3
+"GaussianWindow1d`1" "<Quaternion>" <|-- GaussianWindow1D_Quaternion
+"GaussianWindow1d`1" "<Vector2>" <|-- GaussianWindow1D_CameraRotation
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+class CoverageSettings {
+    + <<const>> ReportFolderName : string = "Report"
+    + <<const>> ReportHistoryFolderName : string = "Report-history"
+    + <<const>> PackageName : string = "Code Coverage"
+    + rootFolderPath : string
+    + rootFolderName : string = "CodeCoverage"
+    + resultsPathFromCommandLine : string
+    + resultsFileName : string = "TestCoverageResults"
+    + resultsFileExtension : string
+    + resultsFolderSuffix : string
+    + resultsFolderPath : string
+    + resultsRootFolderPath : string
+    + resultsFilePath : string
+    + historyPathFromCommandLine : string
+    + historyFolderPath : string
+    + overrideIncludeAssemblies : string
+    + overrideGenerateReport : bool = false
+    + hasPersistentRunData : bool = true
+    + resetCoverageData : bool = true
+    + revealReportInFinder : bool = true
+}
+@enduml

@@ -22,6 +22,7 @@ namespace Models.Skills.Skills
         {
             var direction = GetDirection(_character.NavMeshAgent.transform.position, position);
             _character.NavMeshAgent.ResetPath();
+            _character.ChangeMana(-_skillConfiguration.ManaCost);
             await UniTask.Delay(TimeSpan.FromSeconds(0.05));
             _character.NavMeshAgent.speed = _character.Speed;
             var newVelocity = _skillConfiguration.EffectValue * direction;

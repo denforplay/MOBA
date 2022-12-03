@@ -1,0 +1,11 @@
+@startuml
+interface "ISelection`1"<T> {
+    Count : int <<get>>
+    activeElement : T <<get>> <<set>>
+    Clear() : void
+    BeginSelection() : void
+    EndSelection(select:bool) : void
+    Select(element:T, select:bool) : bool
+    Contains(element:T) : bool
+}
+@enduml

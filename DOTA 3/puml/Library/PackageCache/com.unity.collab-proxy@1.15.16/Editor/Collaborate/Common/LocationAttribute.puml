@@ -1,0 +1,15 @@
+@startuml
+class LocationAttribute <<sealed>> {
+    m_RelativePath : string
+    m_FilePath : string
+    + FilePath : string <<get>>
+    + LocationAttribute(relativePath:string, location:Location)
+}
+enum Location {
+    PreferencesFolder,
+    LibraryFolder,
+}
+Attribute <|-- LocationAttribute
+LocationAttribute --> "m_Location" Location
+LocationAttribute +-- Location
+@enduml

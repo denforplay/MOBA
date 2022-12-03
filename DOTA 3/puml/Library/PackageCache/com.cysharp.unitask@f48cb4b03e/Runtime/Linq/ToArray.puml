@@ -1,0 +1,7 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ToArrayAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource[]>
+}
+class ToArray <<static>> {
+}
+@enduml

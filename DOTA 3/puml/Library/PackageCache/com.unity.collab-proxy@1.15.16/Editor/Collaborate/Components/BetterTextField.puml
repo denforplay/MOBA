@@ -1,0 +1,30 @@
+@startuml
+class BetterTextField {
+    + <<const>> UssClassName : string = "unity-better-text-field"
+    + <<const>> PlaceholderUssClassName : string
+    {static} <<readonly>> k_StylePath : string
+    + BetterTextField()
+    UpdatePlaceholderVisibility() : void
+    HidePlaceholder() : void
+    ShowPlaceholder() : void
+    + <<override>> value : string <<get>> <<set>>
+    + Placeholder : string <<get>> <<set>>
+    + <<override>> SetValueWithoutNotify(newValue:string) : void
+}
+class "Action`1"<T> {
+}
+class UxmlFactory <<new>> {
+}
+class UxmlTraits <<new>> {
+    + <<override>> Init(ve:VisualElement, bag:IUxmlAttributes, cc:CreationContext) : void
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+TextField <|-- BetterTextField
+BetterTextField --> "m_PlaceholderLabel" Label
+BetterTextField --> "OnValueChangedHandler<string>" "Action`1"
+BetterTextField +-- UxmlFactory
+"UxmlFactory`2" "<BetterTextField,UxmlTraits>" <|-- UxmlFactory
+BetterTextField +-- UxmlTraits
+UxmlTraits o-> "m_Hint" UxmlStringAttributeDescription
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class Limb <<static>> {
+    + {static} Solve(targetPosition:Vector3, lengths:float[], positions:Vector3[], outAngles:float[]) : bool
+}
+@enduml

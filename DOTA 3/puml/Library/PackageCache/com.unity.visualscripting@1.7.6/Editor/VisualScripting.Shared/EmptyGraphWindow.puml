@@ -1,0 +1,12 @@
+@startuml
+class DropdownOptions {
+}
+class SplitDropdown {
+}
+class EmptyGraphWindow {
+    <<const>> k_OnSelectedGameObject : string = "...on selected GameObject"
+    <<const>> k_OnNewGameObject : string = "...on new GameObject"
+    <<const>> k_SelectedGameObject : string = "Please, select a GameObject"
+}
+EditorWindow <|-- EmptyGraphWindow
+@enduml

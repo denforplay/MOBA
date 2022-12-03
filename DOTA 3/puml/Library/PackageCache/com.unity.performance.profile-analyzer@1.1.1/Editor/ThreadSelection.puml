@@ -1,0 +1,15 @@
+@startuml
+class ThreadSelection {
+    + empty : bool <<get>>
+    + ThreadSelection()
+    + ThreadSelection(threadSelection:ThreadSelection)
+    + SetAll() : void
+    + Set(name:string) : void
+    + SetGroup(groupName:string) : void
+    + Set(threadSelection:ThreadSelection) : void
+}
+class "List`1"<T> {
+}
+ThreadSelection --> "groups<string>" "List`1"
+ThreadSelection --> "selection<string>" "List`1"
+@enduml

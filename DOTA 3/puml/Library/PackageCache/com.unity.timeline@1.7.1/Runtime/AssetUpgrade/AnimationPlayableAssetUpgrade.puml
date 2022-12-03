@@ -1,0 +1,19 @@
+@startuml
+class AnimationPlayableAsset <<partial>> {
+    {static} <<readonly>> k_LatestVersion : int
+    m_Version : int
+    OnBeforeSerialize() : void
+    OnAfterDeserialize() : void
+    OnUpgradeFromVersion(oldVersion:int) : void
+}
+enum Versions {
+    Initial= 0,
+    RotationAsEuler= 1,
+}
+class AnimationPlayableAssetUpgrade <<static>> {
+    + {static} ConvertRotationToEuler(asset:AnimationPlayableAsset) : void
+}
+ISerializationCallbackReceiver <|-- AnimationPlayableAsset
+AnimationPlayableAsset +-- Versions
+AnimationPlayableAsset +-- AnimationPlayableAssetUpgrade
+@enduml

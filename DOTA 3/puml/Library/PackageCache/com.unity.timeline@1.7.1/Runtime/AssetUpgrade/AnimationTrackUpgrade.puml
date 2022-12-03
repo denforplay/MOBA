@@ -1,0 +1,16 @@
+@startuml
+class AnimationTrack <<partial>> {
+    m_ApplyOffsets : bool
+}
+class AnimationTrackUpgrade <<static>> {
+    + {static} ConvertRotationsToEuler(track:AnimationTrack) : void
+    + {static} ConvertRootMotion(track:AnimationTrack) : void
+    + {static} ConvertInfiniteTrack(track:AnimationTrack) : void
+}
+AnimationTrack o-> "m_OpenClipOffsetRotation" Quaternion
+AnimationTrack o-> "m_Rotation" Quaternion
+AnimationTrack --> "openClipOffsetPosition" Vector3
+AnimationTrack --> "openClipOffsetRotation" Quaternion
+AnimationTrack --> "openClipOffsetEulerAngles" Vector3
+AnimationTrack +-- AnimationTrackUpgrade
+@enduml

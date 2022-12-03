@@ -1,0 +1,45 @@
+@startuml
+class DebugDisplaySettingsVolume {
+    + DebugDisplaySettingsVolume(volumeDebugSettings:IVolumeDebugSettings)
+    + AreAnySettingsActive : bool <<get>>
+    + IsPostProcessingAllowed : bool <<get>>
+    + IsLightingActive : bool <<get>>
+    + TryGetScreenClearColor(color:Color) : bool
+    + CreatePanel() : IDebugDisplaySettingsPanelDisposable
+}
+class Styles <<static>> {
+}
+class Strings <<static>> {
+    + {static} <<readonly>> none : string = "None"
+    + {static} <<readonly>> camera : string = "Camera"
+    + {static} <<readonly>> parameter : string = "Parameter"
+    + {static} <<readonly>> component : string = "Component"
+    + {static} <<readonly>> debugViewNotSupported : string = "Debug view not supported"
+    + {static} <<readonly>> volumeInfo : string = "Volume Info"
+    + {static} <<readonly>> interpolatedValue : string = "Interpolated Value"
+    + {static} <<readonly>> defaultValue : string = "Default Value"
+    + {static} <<readonly>> global : string = "Global"
+    + {static} <<readonly>> local : string = "Local"
+}
+class WidgetFactory <<static>> {
+    + {static} CreateComponentSelector(data:DebugDisplaySettingsVolume, refresh:Action<DebugUI.Field<int>, int>) : DebugUI.EnumField
+    + {static} CreateCameraSelector(data:DebugDisplaySettingsVolume, refresh:Action<DebugUI.Field<int>, int>) : DebugUI.EnumField
+    {static} CreateVolumeParameterWidget(name:string, param:VolumeParameter, isHiddenCallback:Func<bool>) : DebugUI.Widget
+    + {static} CreateVolumeTable(data:DebugDisplaySettingsVolume) : DebugUI.Table
+}
+class SettingsPanel {
+    + <<override>> PanelName : string <<get>>
+    + SettingsPanel(data:DebugDisplaySettingsVolume)
+    Refresh(_:DebugUI.Field<int>, __:int) : void
+}
+IDebugDisplaySettingsData <|-- DebugDisplaySettingsVolume
+DebugDisplaySettingsVolume --> "volumeDebugSettings" IVolumeDebugSettings
+DebugDisplaySettingsVolume +-- Styles
+Styles o-> "none" GUIContent
+Styles o-> "editorCamera" GUIContent
+DebugDisplaySettingsVolume +-- Strings
+DebugDisplaySettingsVolume +-- WidgetFactory
+DebugDisplaySettingsVolume +-- SettingsPanel
+DebugDisplaySettingsPanel <|-- SettingsPanel
+SettingsPanel --> "m_Data" DebugDisplaySettingsVolume
+@enduml

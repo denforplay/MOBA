@@ -1,0 +1,5 @@
+@startuml
+interface IMenuChecked {
+    isChecked : bool <<get>>
+}
+@enduml

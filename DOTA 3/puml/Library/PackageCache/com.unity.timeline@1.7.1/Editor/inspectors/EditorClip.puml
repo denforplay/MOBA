@@ -1,0 +1,9 @@
+@startuml
+class EditorClip {
+    + lastHash : int <<get>> <<set>>
+    + <<override>> GetHashCode() : int
+}
+ScriptableObject <|-- EditorClip
+EditorClip --> "m_Clip" TimelineClip
+EditorClip --> "clip" TimelineClip
+@enduml

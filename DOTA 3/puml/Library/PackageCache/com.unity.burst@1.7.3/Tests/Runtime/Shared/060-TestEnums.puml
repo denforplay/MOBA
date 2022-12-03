@@ -1,0 +1,49 @@
+@startuml
+class TestEnums <<partial>> {
+    + {static} test_enum_cast_to_int() : int
+    + {static} test_enum_compare(value:MyEnum) : int
+    + {static} test_enum_has_flag(value:MyEnum) : int
+    + {static} test_enum_and_mask(value:MyEnum) : int
+    + {static} TestEnumSwitchCase(value:IntPtr) : int
+    + {static} test_enum_sizeof_small_enum() : int
+    + {static} test_enum_sizeof_small_enum_in_struct_access(value:SmallEnum) : int
+    + {static} test_enum_indexer(bytes:FixedByte4Struct) : SomeByteEnum
+}
+enum MyEnum {
+    Hello= 5,
+    Something= 10,
+}
+class StructContainingEnum <<struct>> {
+    + intValue : int
+}
+enum SmallEnum {
+    One,
+    Two,
+    Three,
+}
+class MySmallEnumStruct <<struct>> {
+}
+enum SomeByteEnum {
+    First= 0,
+    Last= 255,
+}
+class FixedByte4Struct <<struct>> {
+    <<fixed>> bytes : byte
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+TestEnums +-- MyEnum
+TestEnums +-- StructContainingEnum
+StructContainingEnum --> "value" MyEnum
+TestEnums +-- SmallEnum
+TestEnums +-- MySmallEnumStruct
+MySmallEnumStruct --> "a" SmallEnum
+MySmallEnumStruct --> "b" SmallEnum
+MySmallEnumStruct --> "c" SmallEnum
+MySmallEnumStruct --> "d" SmallEnum
+TestEnums +-- SomeByteEnum
+TestEnums +-- FixedByte4Struct
+FixedByte4Struct +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

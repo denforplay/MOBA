@@ -1,0 +1,72 @@
+@startuml
+class TargetPositionCache {
+    + {static} UseCache : bool
+    + <<const>> CacheStepSize : float
+    + {static} IsRecording : bool <<get>>
+    + {static} CurrentPlaybackTimeValid : bool <<get>>
+    + {static} IsEmpty : bool <<get>>
+    + {static} CurrentTime : float
+    + {static} CurrentFrame : int
+    + {static} IsCameraCut : bool
+    + {static} HasCurrentTime : bool <<get>>
+    + {static} ClearCache() : void
+    {static} CreatePlaybackCurves() : void
+    <<const>> kWraparoundSlush : float = 0.1f
+    + {static} GetTargetPosition(target:Transform) : Vector3
+    + {static} GetTargetRotation(target:Transform) : Quaternion
+}
+enum Mode {
+    Disabled,
+    Record,
+    Playback,
+}
+class CacheCurve {
+    + StartTime : float
+    + StepSize : float
+    + Count : int <<get>>
+    + CacheCurve(startTime:float, endTime:float, stepSize:float)
+    + Add(item:Item) : void
+    + AddUntil(item:Item, time:float, isCut:bool) : void
+    + Evaluate(time:float) : Item
+}
+class CacheEntry {
+    + AddRawItem(time:float, isCut:bool, target:Transform) : void
+    + CreateCurves() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class TimeRange <<struct>> {
+    + Start : float
+    + End : float
+    + IsEmpty : bool <<get>>
+    + Contains(time:float) : bool
+    + Include(time:float) : void
+}
+class Item <<struct>> {
+    + {static} Lerp(a:Item, b:Item, t:float) : Item
+}
+class "List`1"<T> {
+}
+class RecordingItem <<struct>> {
+    + Time : float
+    + IsCut : bool
+}
+TargetPositionCache o-> "m_CacheMode" Mode
+TargetPositionCache --> "CacheMode" Mode
+TargetPositionCache --> "m_Cache<Transform,CacheEntry>" "Dictionary`2"
+TargetPositionCache --> "m_CacheTimeRange" TimeRange
+TargetPositionCache --> "CacheTimeRange" TimeRange
+TargetPositionCache +-- Mode
+TargetPositionCache +-- CacheCurve
+CacheCurve --> "m_Cache<Item>" "List`1"
+TargetPositionCache +-- CacheEntry
+CacheEntry --> "Curve" CacheCurve
+CacheEntry o-> "RawItems<RecordingItem>" "List`1"
+TargetPositionCache +-- TimeRange
+TimeRange --> "Empty" TimeRange
+CacheCurve +-- Item
+Item --> "Pos" Vector3
+Item --> "Rot" Quaternion
+Item --> "Empty" Item
+CacheEntry +-- RecordingItem
+@enduml

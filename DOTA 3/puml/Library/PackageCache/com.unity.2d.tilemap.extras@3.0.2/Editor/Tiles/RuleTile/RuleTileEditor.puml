@@ -1,0 +1,73 @@
+@startuml
+class RuleTileEditor {
+    + extendNeighbor : bool
+    + <<const>> k_DefaultElementHeight : float = 48f
+    + <<const>> k_PaddingBetweenRules : float = 8f
+    + <<const>> k_SingleLineHeight : float = 18f
+    + <<const>> k_LabelWidth : float = 80f
+    + <<virtual>> OnEnable() : void
+    + <<virtual>> OnDisable() : void
+    + <<virtual>> GetRuleGUIBounds(bounds:BoundsInt, rule:RuleTile.TilingRule) : BoundsInt
+    + ListUpdated(list:ReorderableList) : void
+    + GetElementHeight(rule:RuleTile.TilingRule) : float
+    + GetElementHeight(rule:RuleTile.TilingRuleOutput) : float
+    + <<virtual>> GetMatrixSize(bounds:BoundsInt) : Vector2
+    + SaveTile() : void
+    + {static} UpdateAffectedOverrideTiles(target:RuleTile) : void
+    + {static} FindAffectedOverrideTiles(target:RuleTile) : List<RuleOverrideTile>
+    + OnDrawHeader(rect:Rect) : void
+    + <<override>> OnInspectorGUI() : void
+    + DrawCustomFields(isOverrideInstance:bool) : void
+    + <<virtual>> GetArrowIndex(position:Vector3Int) : int
+    + <<virtual>> RuleOnGUI(rect:Rect, position:Vector3Int, neighbor:int) : void
+    + RuleTooltipOnGUI(rect:Rect, neighbor:int) : void
+    + <<virtual>> RuleTransformOnGUI(rect:Rect, ruleTransform:RuleTile.TilingRuleOutput.Transform) : void
+    + RuleNeighborUpdate(rect:Rect, tilingRule:RuleTile.TilingRule, neighbors:Dictionary<Vector3Int, int>, position:Vector3Int) : void
+    + RuleTransformUpdate(rect:Rect, tilingRule:RuleTile.TilingRule) : void
+    + <<virtual>> ContainsMousePosition(rect:Rect) : bool
+    + {static} GetMouseChange() : int
+    + <<virtual>> RuleMatrixOnGUI(tile:RuleTile, rect:Rect, bounds:BoundsInt, tilingRule:RuleTile.TilingRule) : void
+    + RuleMatrixIconOnGUI(tilingRule:RuleTile.TilingRule, neighbors:Dictionary<Vector3Int, int>, position:Vector3Int, rect:Rect) : void
+    + <<virtual>> SpriteOnGUI(rect:Rect, tilingRule:RuleTile.TilingRuleOutput) : void
+    + RuleInspectorOnGUI(rect:Rect, tilingRule:RuleTile.TilingRuleOutput) : void
+    + <<override>> HasPreviewGUI() : bool
+    + <<override>> OnPreviewGUI(rect:Rect, background:GUIStyle) : void
+    + <<override>> RenderStaticPreview(assetPath:string, subAssets:Object[], width:int, height:int) : Texture2D
+    + {static} Base64ToTexture(base64:string) : Texture2D
+    + {static} CopyAllRules(item:MenuCommand) : void
+    + {static} PasteRules(item:MenuCommand) : void
+}
+class Styles <<static>> {
+}
+class "List`1"<T> {
+}
+class RuleTileRuleWrapper {
+}
+Editor <|-- RuleTileEditor
+RuleTileEditor --> "tile" RuleTile
+RuleTileEditor --> "m_PreviewUtility" PreviewRenderUtility
+RuleTileEditor --> "m_PreviewGrid" Grid
+RuleTileEditor --> "m_PreviewTilemaps<Tilemap>" "List`1"
+RuleTileEditor --> "m_PreviewTilemapRenderers<TilemapRenderer>" "List`1"
+RuleTileEditor +-- Styles
+Styles o-> "defaultSprite" GUIContent
+Styles o-> "defaultGameObject" GUIContent
+Styles o-> "defaultCollider" GUIContent
+Styles o-> "emptyRuleTileInfo" GUIContent
+Styles o-> "extendNeighbor" GUIContent
+Styles o-> "numberOfTilingRules" GUIContent
+Styles o-> "tilingRules" GUIContent
+Styles o-> "tilingRulesGameObject" GUIContent
+Styles o-> "tilingRulesCollider" GUIContent
+Styles o-> "tilingRulesOutput" GUIContent
+Styles o-> "tilingRulesNoise" GUIContent
+Styles o-> "tilingRulesShuffle" GUIContent
+Styles o-> "tilingRulesRandomSize" GUIContent
+Styles o-> "tilingRulesMinSpeed" GUIContent
+Styles o-> "tilingRulesMaxSpeed" GUIContent
+Styles o-> "tilingRulesAnimationSize" GUIContent
+Styles o-> "extendNeighborsLightStyle" GUIStyle
+Styles o-> "extendNeighborsDarkStyle" GUIStyle
+RuleTileEditor +-- RuleTileRuleWrapper
+RuleTileRuleWrapper o-> "rules<RuleTile.TilingRule>" "List`1"
+@enduml

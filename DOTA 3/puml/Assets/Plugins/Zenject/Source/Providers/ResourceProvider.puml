@@ -1,0 +1,13 @@
+@startuml
+class ResourceProvider {
+    <<readonly>> _resourcePath : string
+    <<readonly>> _matchSingle : bool
+    + ResourceProvider(resourcePath:string, resourceType:Type, matchSingle:bool)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+IProvider <|-- ResourceProvider
+ResourceProvider --> "_resourceType" Type
+@enduml

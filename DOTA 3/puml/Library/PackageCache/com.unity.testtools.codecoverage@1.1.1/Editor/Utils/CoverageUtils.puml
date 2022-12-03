@@ -1,0 +1,21 @@
+@startuml
+class CoverageUtils <<static>> {
+    + {static} IsConnectedToPlayer : bool <<get>>
+    + {static} NormaliseFolderSeparators(folderPath:string, stripTrailingSlash:bool) : string
+    + {static} EnsureFolderExists(folderPath:string) : bool
+    + {static} GetProjectFolderName() : string
+    + {static} StripAssetsFolderIfExists(folderPath:string) : string
+    + {static} GetProjectPath() : string
+    + {static} GetRootFolderPath(coverageSettings:CoverageSettings) : string
+    + {static} GetHistoryFolderPath(coverageSettings:CoverageSettings) : string
+    + {static} JoinPaths(pathLeft:string, pathRight:string) : string
+    + {static} GetNumberOfFilesInFolder(folderPath:string, filePattern:string, searchOption:SearchOption) : int
+    + {static} ClearFolderIfExists(folderPath:string, filePattern:string) : void
+    + {static} DoesFolderExistAndNotEmpty(folderPath:string) : bool
+    + {static} IsValidFolder(folderPath:string) : bool
+    + {static} IsValidFile(filePath:string) : bool
+    + {static} GlobToRegex(glob:string, startEndConstrains:bool) : string
+    + {static} BrowseForDir(directory:string, title:string) : string
+    + {static} BrowseForFile(directory:string, title:string) : string
+}
+@enduml

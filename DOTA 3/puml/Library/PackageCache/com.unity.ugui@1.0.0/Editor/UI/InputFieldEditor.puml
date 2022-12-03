@@ -1,0 +1,28 @@
+@startuml
+class InputFieldEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+SelectableEditor <|-- InputFieldEditor
+InputFieldEditor --> "m_TextComponent" SerializedProperty
+InputFieldEditor --> "m_Text" SerializedProperty
+InputFieldEditor --> "m_ContentType" SerializedProperty
+InputFieldEditor --> "m_LineType" SerializedProperty
+InputFieldEditor --> "m_InputType" SerializedProperty
+InputFieldEditor --> "m_CharacterValidation" SerializedProperty
+InputFieldEditor --> "m_KeyboardType" SerializedProperty
+InputFieldEditor --> "m_CharacterLimit" SerializedProperty
+InputFieldEditor --> "m_CaretBlinkRate" SerializedProperty
+InputFieldEditor --> "m_CaretWidth" SerializedProperty
+InputFieldEditor --> "m_CaretColor" SerializedProperty
+InputFieldEditor --> "m_CustomCaretColor" SerializedProperty
+InputFieldEditor --> "m_SelectionColor" SerializedProperty
+InputFieldEditor --> "m_HideMobileInput" SerializedProperty
+InputFieldEditor --> "m_Placeholder" SerializedProperty
+InputFieldEditor --> "m_OnValueChanged" SerializedProperty
+InputFieldEditor --> "m_OnSubmit" SerializedProperty
+InputFieldEditor --> "m_OnDidEndEdit" SerializedProperty
+InputFieldEditor --> "m_ReadOnly" SerializedProperty
+InputFieldEditor --> "m_ShouldActivateOnSelect" SerializedProperty
+InputFieldEditor --> "m_CustomColor" AnimBool
+InputFieldEditor o-> "m_EndEditContent" GUIContent
+@enduml

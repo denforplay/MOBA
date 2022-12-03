@@ -1,0 +1,15 @@
+@startuml
+class ProjectConfiguration {
+    m_JsonCache : string
+    + ProjectConfiguration(configValues:IReadOnlyDictionary<string, ConfigurationEntry>)
+    + GetBool(key:string, defaultValue:bool) : bool
+    + GetInt(key:string, defaultValue:int) : int
+    + GetFloat(key:string, defaultValue:float) : float
+    + GetString(key:string, defaultValue:string) : string
+    + ToJson() : string
+}
+class "IReadOnlyDictionary`2"<T1,T2> {
+}
+IProjectConfiguration <|-- ProjectConfiguration
+ProjectConfiguration --> "m_ConfigValues<string,ConfigurationEntry>" "IReadOnlyDictionary`2"
+@enduml

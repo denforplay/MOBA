@@ -1,0 +1,25 @@
+@startuml
+abstract class Context {
+    + {abstract} GetRootGameObjects() : IEnumerable<GameObject>
+    + AddNormalInstallerType(installerType:Type) : void
+    + AddNormalInstaller(installer:InstallerBase) : void
+    CheckInstallerPrefabTypes(installers:List<MonoInstaller>, installerPrefabs:List<MonoInstaller>) : void
+    InstallZenjectBinding(binding:ZenjectBinding) : void
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+MonoBehaviour <|-- Context
+Context o-> "_scriptableObjectInstallers<ScriptableObjectInstaller>" "List`1"
+Context o-> "_monoInstallers<MonoInstaller>" "List`1"
+Context o-> "_installerPrefabs<MonoInstaller>" "List`1"
+Context o-> "_normalInstallers<InstallerBase>" "List`1"
+Context o-> "_normalInstallerTypes<Type>" "List`1"
+Context --> "Installers<MonoInstaller>" "IEnumerable`1"
+Context --> "InstallerPrefabs<MonoInstaller>" "IEnumerable`1"
+Context --> "ScriptableObjectInstallers<ScriptableObjectInstaller>" "IEnumerable`1"
+Context --> "NormalInstallerTypes<Type>" "IEnumerable`1"
+Context --> "NormalInstallers<InstallerBase>" "IEnumerable`1"
+Context --> "Container" DiContainer
+@enduml

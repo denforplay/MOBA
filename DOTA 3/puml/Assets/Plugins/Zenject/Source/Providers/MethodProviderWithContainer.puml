@@ -1,0 +1,86 @@
+@startuml
+class "MethodProviderWithContainer`1"<TValue> {
+    + MethodProviderWithContainer(method:Func<DiContainer, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "MethodProviderWithContainer`2"<TParam1,TValue> {
+    + MethodProviderWithContainer(method:Func<DiContainer, TParam1, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "MethodProviderWithContainer`3"<TParam1,TParam2,TValue> {
+    + MethodProviderWithContainer(method:Func<DiContainer, TParam1, TParam2, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "MethodProviderWithContainer`4"<TParam1,TParam2,TParam3,TValue> {
+    + MethodProviderWithContainer(method:Func<DiContainer, TParam1, TParam2, TParam3, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "MethodProviderWithContainer`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+    + MethodProviderWithContainer(method:ModestTree.Util.
+#endif
+            Func<DiContainer, TParam1, TParam2, TParam3, TParam4, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "MethodProviderWithContainer`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+    + MethodProviderWithContainer(method:ModestTree.Util.
+#endif
+            Func<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "MethodProviderWithContainer`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue> {
+    + MethodProviderWithContainer(method:ModestTree.Util.
+#endif
+            Func<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "MethodProviderWithContainer`11"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TValue> {
+    + MethodProviderWithContainer(method:ModestTree.Util.
+#endif
+            Func<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TValue>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "Func`2"<T1,T2> {
+}
+class "Func`3"<T1,T2,T3> {
+}
+class "Func`4"<T1,T2,T3,T4> {
+}
+class "Func`5"<T1,T2,T3,T4,T5> {
+}
+IProvider <|-- "MethodProviderWithContainer`1"
+"MethodProviderWithContainer`1" --> "_method<DiContainer,TValue>" "Func`2"
+IProvider <|-- "MethodProviderWithContainer`2"
+"MethodProviderWithContainer`2" --> "_method<DiContainer,TParam1,TValue>" "Func`3"
+IProvider <|-- "MethodProviderWithContainer`3"
+"MethodProviderWithContainer`3" --> "_method<DiContainer,TParam1,TParam2,TValue>" "Func`4"
+IProvider <|-- "MethodProviderWithContainer`4"
+"MethodProviderWithContainer`4" --> "_method<DiContainer,TParam1,TParam2,TParam3,TValue>" "Func`5"
+IProvider <|-- "MethodProviderWithContainer`5"
+IProvider <|-- "MethodProviderWithContainer`6"
+IProvider <|-- "MethodProviderWithContainer`7"
+IProvider <|-- "MethodProviderWithContainer`11"
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+class CinemachineMenu <<static>> {
+    <<const>> m_CinemachineAssetsRootMenu : string = "Assets/Create/Cinemachine/"
+    <<const>> m_CinemachineGameObjectRootMenu : string = "GameObject/Cinemachine/"
+    <<const>> m_GameObjectMenuPriority : int = 11
+    {static} CreateBlenderSettingAsset() : void
+    {static} CreateNoiseSettingAsset() : void
+    {static} CreateFixedSignalDefinition() : void
+    {static} CreateVirtualCamera(command:MenuCommand) : void
+    {static} CreateFreeLookCamera(command:MenuCommand) : void
+    {static} CreateBlendListCamera(command:MenuCommand) : void
+    {static} CreateDollyCameraWithPath(command:MenuCommand) : void
+    {static} CreateDollyTrackWithCart(command:MenuCommand) : void
+    {static} CreateTargetGroupCamera(command:MenuCommand) : void
+    {static} CreateMixingCamera(command:MenuCommand) : void
+    {static} Create2DCamera(command:MenuCommand) : void
+    + {static} MatchSceneViewCamera(sceneObject:Transform) : LensSettings
+    + {static} CreateDefaultVirtualCamera(name:string, parentObject:GameObject, select:bool) : CinemachineVirtualCamera
+    + {static} CreatePassiveVirtualCamera(name:string, parentObject:GameObject, select:bool) : CinemachineVirtualCamera
+    {static} CreateCinemachineObject(name:string, parentObject:GameObject, select:bool) : T
+    {static} GetOrCreateBrain() : CinemachineBrain
+    {static} AddCinemachineComponent(vcam:CinemachineVirtualCamera) : T
+}
+@enduml

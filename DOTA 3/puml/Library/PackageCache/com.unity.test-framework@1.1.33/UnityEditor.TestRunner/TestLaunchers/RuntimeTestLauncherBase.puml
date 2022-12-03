@@ -1,0 +1,8 @@
+@startuml
+abstract class RuntimeTestLauncherBase {
+    + CreateSceneName() : string
+}
+class PlaymodeTestsControllerExtensions <<static>> {
+}
+TestLauncherBase <|-- RuntimeTestLauncherBase
+@enduml

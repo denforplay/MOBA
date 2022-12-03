@@ -1,0 +1,24 @@
+@startuml
+class CinemachineImpulseListener {
+    + m_ChannelMask : int
+    + m_Gain : float
+    + m_Use2DDistance : bool
+    + m_UseCameraSpace : bool
+}
+class ImpulseReaction <<struct>> {
+    + m_AmplitudeGain : float
+    + m_FrequencyGain : float
+    + m_Duration : float
+    m_CurrentAmount : float
+    m_CurrentTime : float
+    m_CurrentDamping : float
+    m_Initialized : bool
+    + ReSeed() : void
+    + GetReaction(deltaTime:float, impulsePos:Vector3, pos:Vector3, rot:Quaternion) : bool
+}
+CinemachineExtension <|-- CinemachineImpulseListener
+CinemachineImpulseListener --> "m_ReactionSettings" ImpulseReaction
+CinemachineImpulseListener +-- ImpulseReaction
+ImpulseReaction --> "m_SecondaryNoise" NoiseSettings
+ImpulseReaction --> "m_NoiseOffsets" Vector3
+@enduml

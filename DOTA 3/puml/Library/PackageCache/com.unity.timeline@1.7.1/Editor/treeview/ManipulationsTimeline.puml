@@ -1,0 +1,25 @@
+@startuml
+class TimelinePanManipulator {
+    <<const>> k_MaxPanSpeed : float = 50.0f
+    m_Active : bool
+    {static} Pan(evt:Event, state:WindowState) : bool
+}
+class TimelineZoomManipulator {
+    m_FocalTime : float
+    m_LastMouseMoveX : float
+    m_WheelUsedLast : bool
+    TimelineZoomManipulator()
+    {static} DoZoom(zoomFactor:float, refRange:Vector2, focalTime:float) : void
+    {static} PixelToZoom(x:float) : float
+}
+class TimelineShortcutManipulator {
+}
+class InlineCurvesShortcutManipulator {
+}
+Manipulator <|-- TimelinePanManipulator
+Manipulator <|-- TimelineZoomManipulator
+TimelineZoomManipulator o-> "m_MouseDownPos" Vector2
+TimelineZoomManipulator o-> "Instance" TimelineZoomManipulator
+Manipulator <|-- TimelineShortcutManipulator
+Manipulator <|-- InlineCurvesShortcutManipulator
+@enduml

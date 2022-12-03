@@ -1,0 +1,20 @@
+@startuml
+class EncryptionConfigurationDialog {
+    BuildEncryptionConfigurationData() : EncryptionConfigurationDialogData
+    DoPasswordArea() : void
+    DoNotificationArea() : void
+    DoButtonsArea() : void
+    DoOkButton() : void
+    DoCancelButton() : void
+    OkButtonWithValidationAction() : void
+    {static} IsValidPassword(password:string, retypePassword:string, errorMessage:string) : bool
+    {static} Create(server:string) : EncryptionConfigurationDialog
+    mPassword : string
+    mRetypePassword : string
+    mErrorMessage : string
+    mServer : string
+    <<const>> PASSWORD_TEXT_WIDTH : float = 250f
+    <<const>> PASSWORD_TEXT_X : float = 200f
+}
+PlasticDialog <|-- EncryptionConfigurationDialog
+@enduml

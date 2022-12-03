@@ -1,0 +1,18 @@
+@startuml
+class TextMeshPro <<partial>> {
+    m_previousLossyScaleY : float
+    UpdateEnvMapMatrix() : void
+    SetMask(maskType:MaskingTypes) : void
+    SetMaskCoordinates(coords:Vector4) : void
+    SetMaskCoordinates(coords:Vector4, softX:float, softY:float) : void
+    EnableMasking() : void
+    DisableMasking() : void
+    UpdateMask() : void
+    CreateMaterialInstance() : void
+    SetPerspectiveCorrection() : void
+    + <<override>> ComputeMarginSize() : void
+    OnPreRenderObject() : void
+    SetMeshFilters(state:bool) : void
+    UpdateSDFScale(scaleDelta:float) : void
+}
+@enduml

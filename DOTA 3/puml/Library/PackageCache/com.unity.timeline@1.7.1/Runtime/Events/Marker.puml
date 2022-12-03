@@ -1,0 +1,11 @@
+@startuml
+abstract class Marker {
+    m_Time : double
+    + time : double <<get>> <<set>>
+    Initialize(parentTrack:TrackAsset) : void
+    + <<virtual>> OnInitialize(aPent:TrackAsset) : void
+}
+ScriptableObject <|-- Marker
+IMarker <|-- Marker
+Marker --> "parent" TrackAsset
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class ContextEditor {
+}
+UnityInspectorListEditor <|-- ContextEditor
+@enduml

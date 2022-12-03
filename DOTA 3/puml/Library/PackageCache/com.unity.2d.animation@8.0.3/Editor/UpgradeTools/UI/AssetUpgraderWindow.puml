@@ -1,0 +1,104 @@
+@startuml
+class AssetUpgraderWindow {
+    <<const>> k_UiUxml : string = "AssetUpgrader/AssetUpgrader.uxml"
+    <<const>> k_UiUss : string = "AssetUpgrader/AssetUpgrader.uss"
+    <<const>> k_IconWarningId : string = "WarningIcon_Small"
+    <<const>> k_IconFailId : string = "ErrorIcon_Small"
+    <<const>> k_IconSuccessId : string = "GreenCheck"
+    m_UpgradeLogPath : string
+    + CreateGUI() : void
+    LoadIconTextures() : void
+    SetupUI() : void
+    SetupTopContainer() : void
+    SetupConversionResultContainer() : void
+    SetupCenterContainer() : void
+    SetupInfoContainer() : void
+    SetupBottomContainer() : void
+    {static} CanUseTool() : bool
+    OnChangeUpgradeMode() : void
+    ResetInfoBox() : void
+    OnScanClicked() : void
+    OnSelectAll(value:ChangeEvent<bool>) : void
+    OnToggleObject(value:ChangeEvent<bool>, index:int) : void
+    AddRemoveSelectedObject(index:int, shouldAdd:bool) : void
+    OnUpgradeSelectedClicked() : void
+    UpdateObjectResults(report:UpgradeReport) : void
+    GetResultImage(result:UpgradeResult) : Texture2D
+    UpdateConversionResultCounters() : void
+    UpdateInfoBox(report:UpgradeReport) : void
+    ResetConversionResultCounters() : void
+    OnOpenLogClicked() : void
+}
+class ElementIds <<static>> {
+    + <<const>> ModeSelector : string = "ModeSelector"
+    + <<const>> ToolDescription : string = "ToolDescription"
+    + <<const>> WarningImage : string = "WarningImage"
+    + <<const>> WarningCount : string = "WarningCount"
+    + <<const>> ErrorImage : string = "ErrorImage"
+    + <<const>> ErrorCount : string = "ErrorCount"
+    + <<const>> SuccessImage : string = "SuccessImage"
+    + <<const>> SuccessCount : string = "SuccessCount"
+    + <<const>> CenterInfo : string = "CenterInfo"
+    + <<const>> ListHeader : string = "ListHeader"
+    + <<const>> SelectAll : string = "SelectAll"
+    + <<const>> AssetHeader : string = "AssetHeader"
+    + <<const>> AssetList : string = "AssetList"
+    + <<const>> ListFooter : string = "ListFooter"
+    + <<const>> InfoContainer : string = "InfoContainer"
+    + <<const>> InfoBox : string = "InfoBox"
+    + <<const>> Scan : string = "Scan"
+    + <<const>> UpgradeSelected : string = "UpgradeSelected"
+    + <<const>> OpenLog : string = "OpenLog"
+    + <<const>> AssetRow : string = "AssetRow"
+    + <<const>> ObjectToggle : string = "ObjectToggle"
+    + <<const>> ObjectImage : string = "ObjectImage"
+    + <<const>> AssetCheckbox : string = "AssetCheckbox"
+    + <<const>> AssetElement : string = "AssetElement"
+    + <<const>> DarkArea : string = "DarkArea"
+    + <<const>> AssetImage : string = "AssetImage"
+}
+class Contents <<static>> {
+    + {static} <<readonly>> WindowTitle : string
+    + {static} <<readonly>> UnsupportedSerializeMode : string
+    + {static} <<readonly>> SpriteLibDesc : string
+    + {static} <<readonly>> AnimClipDesc : string
+    + {static} <<readonly>> ScanToBegin : string
+    + {static} <<readonly>> NoAssetsRequireUpgrade : string
+    + {static} <<readonly>> UpgradeDialogTitle : string
+    + {static} <<readonly>> UpgradeDialogMessage : string
+    + {static} <<readonly>> UpgradeDialogYes : string
+    + {static} <<readonly>> UpgradeDialogNo : string
+    + {static} <<readonly>> SpriteLibraries : string
+    + {static} <<readonly>> AnimationClips : string
+}
+class "List`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+EditorWindow <|-- AssetUpgraderWindow
+AssetUpgraderWindow --> "m_IconWarn" Texture2D
+AssetUpgraderWindow --> "m_IconFail" Texture2D
+AssetUpgraderWindow --> "m_IconSuccess" Texture2D
+AssetUpgraderWindow --> "m_ModeSelector" ButtonStripField
+AssetUpgraderWindow --> "m_DescriptionLabel" Label
+AssetUpgraderWindow --> "m_WarningCountLabel" Label
+AssetUpgraderWindow --> "m_ErrorCountLabel" Label
+AssetUpgraderWindow --> "m_SuccessCountLabel" Label
+AssetUpgraderWindow --> "m_CenterInfo" Label
+AssetUpgraderWindow --> "m_ListHeaderContainer" VisualElement
+AssetUpgraderWindow --> "m_SelectAllToggle" Toggle
+AssetUpgraderWindow --> "m_AssetHeader" Label
+AssetUpgraderWindow --> "m_AssetListView" ListView
+AssetUpgraderWindow --> "m_ListFooterContainer" VisualElement
+AssetUpgraderWindow --> "m_InfoContainer" VisualElement
+AssetUpgraderWindow --> "m_InfoBox" HelpBox
+AssetUpgraderWindow --> "m_UpgradeSelectedBtn" Button
+AssetUpgraderWindow --> "m_OpenLogBtn" Button
+AssetUpgraderWindow o-> "m_SelectedMode" UpgradeMode
+AssetUpgraderWindow o-> "m_AssetList<Object>" "List`1"
+AssetUpgraderWindow o-> "m_UpgradeResultList<UpgradeResult>" "List`1"
+AssetUpgraderWindow o-> "m_UpgradeTooltips<string>" "List`1"
+AssetUpgraderWindow o-> "m_SelectedObjs<int>" "HashSet`1"
+AssetUpgraderWindow +-- ElementIds
+AssetUpgraderWindow +-- Contents
+@enduml

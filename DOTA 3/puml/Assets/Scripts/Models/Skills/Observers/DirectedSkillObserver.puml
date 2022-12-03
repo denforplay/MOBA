@@ -1,0 +1,9 @@
+@startuml
+class DirectedSkillObserver {
+    +  <<event>> OnObservedPositionChanged : Action<Vector3> 
+    +  <<event>> OnSkillCalled : Action<Vector3> 
+    + DirectedSkillObserver(camera:Camera)
+    + <<async>> ObserveSkill(cancellationToken:CancellationTokenSource) : UniTask
+}
+ISkillObserver <|-- DirectedSkillObserver
+@enduml

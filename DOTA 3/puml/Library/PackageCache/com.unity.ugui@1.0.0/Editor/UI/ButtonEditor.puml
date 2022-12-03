@@ -1,0 +1,7 @@
+@startuml
+class ButtonEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+SelectableEditor <|-- ButtonEditor
+ButtonEditor --> "m_OnClickProperty" SerializedProperty
+@enduml

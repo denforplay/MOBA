@@ -1,0 +1,6 @@
+@startuml
+class PsdLoad <<static>> {
+    + {static} Load(input:System.IO.Stream, loadFlag:ELoadFlag) : PsdFile
+    + {static} Load(input:System.IO.Stream) : Document
+}
+@enduml

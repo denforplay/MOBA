@@ -1,0 +1,9 @@
+@startuml
+class TimeStamp <<static>> {
+    + {static} UseRelativeTimeStamps : bool <<get>>
+    + {static} GetTimeStamp(dateTime:DateTimeOffset) : string
+    + {static} GetLocalisedTimeStamp(dateTime:DateTimeOffset) : string
+    {static} GetElapsedTime(dateTime:DateTimeOffset) : string
+    {static} ProcessPeriod(value:int, subValue:int, name:string, singularName:string) : string
+}
+@enduml

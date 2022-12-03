@@ -19,7 +19,7 @@ MonoBehaviour:
     the waist to the body and legs of a horse. They represented barbarism and unbridled
     chaos and were frequently represented in Greek architectural sculpture and pottery
     decoration.
-  _speed: 10
+  _speed: 7
   _maxHealth: 1000
   _basePhysicalDamage: 30
   _baseMagicalDamage: 30

@@ -1,0 +1,7 @@
+@startuml
+class AssetUpgrader <<static>> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+AssetUpgrader o-> "s_Upgraders<UpgradeMode,BaseUpgrader>" "Dictionary`2"
+@enduml

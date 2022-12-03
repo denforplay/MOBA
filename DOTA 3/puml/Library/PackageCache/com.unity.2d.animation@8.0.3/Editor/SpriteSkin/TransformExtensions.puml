@@ -1,0 +1,7 @@
+@startuml
+class TransformExtensions <<static>> {
+    + {static} GetScaledRight(transform:Transform) : Vector3
+    + {static} GetScaledUp(transform:Transform) : Vector3
+    + {static} IsDescendentOf(transform:Transform, ancestor:Transform) : bool
+}
+@enduml

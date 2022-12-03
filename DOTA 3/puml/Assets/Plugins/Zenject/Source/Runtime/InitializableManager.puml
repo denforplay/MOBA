@@ -1,0 +1,17 @@
+@startuml
+class InitializableManager {
+    + InitializableManager(initializables:List<IInitializable>, priorities:List<ValuePair<Type, int>>)
+    + Add(initializable:IInitializable) : void
+    + Add(initializable:IInitializable, priority:int) : void
+    + Initialize() : void
+}
+class "List`1"<T> {
+}
+class InitializableInfo {
+    + Priority : int
+    + InitializableInfo(initializable:IInitializable, priority:int)
+}
+InitializableManager --> "_initializables<InitializableInfo>" "List`1"
+InitializableManager +-- InitializableInfo
+InitializableInfo --> "Initializable" IInitializable
+@enduml

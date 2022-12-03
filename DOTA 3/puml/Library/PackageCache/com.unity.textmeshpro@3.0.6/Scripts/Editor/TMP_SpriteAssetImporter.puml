@@ -1,0 +1,17 @@
+@startuml
+class TMP_SpriteAssetImporter {
+    + {static} ShowFontAtlasCreatorWindow() : void
+    m_CreationFeedback : string
+    OnEnable() : void
+    + OnGUI() : void
+    DrawEditorPanel() : void
+    SaveSpriteAsset(filePath:string) : void
+    {static} AddDefaultMaterial(spriteAsset:TMP_SpriteAsset) : void
+    SetEditorWindowSize() : void
+}
+EditorWindow <|-- TMP_SpriteAssetImporter
+TMP_SpriteAssetImporter --> "m_SpriteAtlas" Texture2D
+TMP_SpriteAssetImporter o-> "m_SpriteDataFormat" SpriteAssetImportFormats
+TMP_SpriteAssetImporter --> "m_JsonFile" TextAsset
+TMP_SpriteAssetImporter --> "m_SpriteAsset" TMP_SpriteAsset
+@enduml

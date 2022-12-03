@@ -1,0 +1,8 @@
+@startuml
+class VolumeMenuItems <<static>> {
+    {static} CreateGlobalVolume(menuCommand:MenuCommand) : void
+    {static} CreateBoxVolume(menuCommand:MenuCommand) : void
+    {static} CreateSphereVolume(menuCommand:MenuCommand) : void
+    {static} CreateConvexMeshVolume(menuCommand:MenuCommand) : void
+}
+@enduml

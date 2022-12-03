@@ -1,0 +1,14 @@
+@startuml
+class TimelineAsset <<partial>> {
+    <<const>> k_LatestVersion : int
+    m_Version : int
+    UpgradeToLatestVersion() : void
+}
+enum Versions {
+    Initial= 0,
+}
+class TimelineAssetUpgrade <<static>> {
+}
+TimelineAsset +-- Versions
+TimelineAsset +-- TimelineAssetUpgrade
+@enduml

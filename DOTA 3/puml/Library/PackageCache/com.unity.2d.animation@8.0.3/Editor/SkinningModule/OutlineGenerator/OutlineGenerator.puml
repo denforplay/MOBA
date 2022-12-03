@@ -1,0 +1,9 @@
+@startuml
+class OutlineGenerator {
+    <<const>> kClipperScale : double = 1000.0
+    + GenerateOutline(textureDataProvider:ITextureDataProvider, rect:Rect, detail:float, alphaTolerance:byte, holeDetection:bool, paths:Vector2[][]) : void
+}
+class "List`1"<T> {
+}
+IOutlineGenerator <|-- OutlineGenerator
+@enduml

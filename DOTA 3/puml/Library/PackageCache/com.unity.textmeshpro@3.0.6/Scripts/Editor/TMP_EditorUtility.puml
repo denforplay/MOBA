@@ -1,0 +1,17 @@
+@startuml
+class TMP_EditorUtility <<static>> {
+    + {static} packageRelativePath : string <<get>>
+    + {static} packageFullPath : string <<get>>
+    + {static} RepaintAll() : void
+    + {static} CreateAsset(name:string) : T
+    + {static} FindMaterialReferences(fontAsset:TMP_FontAsset) : Material[]
+    + {static} FindMatchingFontAsset(mat:Material) : TMP_FontAsset
+    + {static} GetDecimalCharacterSequence(characterSet:int[]) : string
+    + {static} GetUnicodeCharacterSequence(characterSet:int[]) : string
+    + {static} DrawBox(rect:Rect, thickness:float, color:Color) : void
+    + {static} GetHorizontalAlignmentGridValue(value:int) : int
+    + {static} GetVerticalAlignmentGridValue(value:int) : int
+    + {static} DrawColorProperty(rect:Rect, property:SerializedProperty) : void
+    + {static} EditorToggle(position:Rect, value:bool, content:GUIContent, style:GUIStyle) : bool
+}
+@enduml

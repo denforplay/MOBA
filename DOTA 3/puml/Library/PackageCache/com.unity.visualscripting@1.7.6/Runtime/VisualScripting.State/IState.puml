@@ -1,0 +1,20 @@
+@startuml
+interface IState {
+    isStart : bool <<get>> <<set>>
+    canBeSource : bool <<get>>
+    canBeDestination : bool <<get>>
+    OnBranchTo(flow:Flow, destination:IState) : void
+    OnEnter(flow:Flow, reason:StateEnterReason) : void
+    OnExit(flow:Flow, reason:StateExitReason) : void
+    width : float <<get>> <<set>>
+}
+class "IEnumerable`1"<T> {
+}
+IGraphElementWithDebugData <|-- IState
+IGraphElementWithData <|-- IState
+IState --> "graph" StateGraph
+IState --> "outgoingTransitions<IStateTransition>" "IEnumerable`1"
+IState --> "incomingTransitions<IStateTransition>" "IEnumerable`1"
+IState --> "transitions<IStateTransition>" "IEnumerable`1"
+IState --> "position" Vector2
+@enduml

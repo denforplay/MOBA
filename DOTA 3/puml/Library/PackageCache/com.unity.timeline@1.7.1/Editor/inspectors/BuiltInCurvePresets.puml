@@ -1,0 +1,7 @@
+@startuml
+class BuiltInPresets <<static>> {
+    {static} ReverseCurve(curve:AnimationCurve) : AnimationCurve
+}
+BuiltInPresets --> "s_BlendInPresets" CurvePresetLibrary
+BuiltInPresets --> "s_BlendOutPresets" CurvePresetLibrary
+@enduml

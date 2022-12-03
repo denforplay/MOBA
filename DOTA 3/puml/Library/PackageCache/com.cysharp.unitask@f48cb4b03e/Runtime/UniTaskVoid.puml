@@ -1,0 +1,5 @@
+@startuml
+class UniTaskVoid <<struct>> {
+    + Forget() : void
+}
+@enduml

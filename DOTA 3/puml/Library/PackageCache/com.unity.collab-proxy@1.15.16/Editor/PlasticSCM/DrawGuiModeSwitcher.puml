@@ -1,0 +1,10 @@
+@startuml
+class DrawGuiModeSwitcher <<static>> {
+    {static} SwitchGuiModeIfUserWants(workspaceWindow:WorkspaceWindow, currentMode:GuiMode, selectedMode:GuiMode, changesTreeView:TreeView, editorWindow:EditorWindow) : void
+}
+enum GuiMode {
+    DeveloperMode,
+    GluonMode,
+}
+DrawGuiModeSwitcher +-- GuiMode
+@enduml

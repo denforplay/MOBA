@@ -1,0 +1,19 @@
+@startuml
+class SpriteMetaData {
+    + tessellationDetail : float
+    + SpriteMetaData()
+    + SpriteMetaData(sr:SpriteRect)
+    + {static} GetGUIDFromSerializedProperty(sp:SerializedProperty) : GUID
+    + {static} GetPivotValue(alignment:SpriteAlignment, customOffset:Vector2) : Vector2
+}
+class SpriteOutline {
+}
+class "List`1"<T> {
+}
+SpriteRect <|-- SpriteMetaData
+SpriteMetaData --> "spriteBone<SpriteBone>" "List`1"
+SpriteMetaData --> "spriteOutline<SpriteOutline>" "List`1"
+SpriteMetaData --> "vertices<Vertex2DMetaData>" "List`1"
+SpriteMetaData --> "spritePhysicsOutline<SpriteOutline>" "List`1"
+SpriteMetaData o-> "uvTransform" Vector2Int
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} WhenAny(leftTask:UniTask<T>, rightTask:UniTask) : UniTask<(bool hasResultLeft, T result)>
+    + {static} WhenAny(tasks:UniTask<T>[]) : UniTask<(int winArgumentIndex, T result)>
+    + {static} WhenAny(tasks:IEnumerable<UniTask<T>>) : UniTask<(int winArgumentIndex, T result)>
+    + {static} WhenAny(tasks:UniTask[]) : UniTask<int>
+    + {static} WhenAny(tasks:IEnumerable<UniTask>) : UniTask<int>
+}
+class "WhenAnyLRPromise`1"<T> <<sealed>> {
+    completedCount : int
+    + WhenAnyLRPromise(leftTask:UniTask<T>, rightTask:UniTask)
+    {static} TryLeftInvokeContinuation(self:WhenAnyLRPromise<T>, awaiter:UniTask<T>.Awaiter) : void
+    {static} TryRightInvokeContinuation(self:WhenAnyLRPromise<T>, awaiter:UniTask.Awaiter) : void
+    + GetResult(token:short) : (bool, T)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "WhenAnyPromise`1"<T> <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(tasks:UniTask<T>[], tasksLength:int)
+    {static} TryInvokeContinuation(self:WhenAnyPromise<T>, awaiter:UniTask<T>.Awaiter, i:int) : void
+    + GetResult(token:short) : (int, T)
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class WhenAnyPromise <<sealed>> {
+    completedCount : int
+    + WhenAnyPromise(tasks:UniTask[], tasksLength:int)
+    {static} TryInvokeContinuation(self:WhenAnyPromise, awaiter:UniTask.Awaiter, i:int) : void
+    + GetResult(token:short) : int
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "IUniTaskSource`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+UniTask +-- "WhenAnyLRPromise`1"
+"IUniTaskSource`1" "<(bool, T)>" <|-- "WhenAnyLRPromise`1"
+"WhenAnyLRPromise`1" --> "core<(bool, T)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WhenAnyPromise`1"
+"IUniTaskSource`1" "<(int, T)>" <|-- "WhenAnyPromise`1"
+"WhenAnyPromise`1" --> "core<(int, T)>" "UniTaskCompletionSourceCore`1"
+UniTask +-- WhenAnyPromise
+"IUniTaskSource`1" "<int>" <|-- WhenAnyPromise
+WhenAnyPromise --> "core<int>" "UniTaskCompletionSourceCore`1"
+@enduml

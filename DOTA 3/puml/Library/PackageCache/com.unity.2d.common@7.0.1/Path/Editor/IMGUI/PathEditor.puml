@@ -1,0 +1,13 @@
+@startuml
+class PathEditor {
+    <<const>> kSnappingDistance : float = 15f
+    <<const>> kDeleteCommandName : string = "Delete"
+    <<const>> kSoftDeleteCommandName : string = "SoftDelete"
+    + linearTangentIsZero : bool <<get>> <<set>>
+    + PathEditor()
+    + PathEditor(guiSystem:GUISystem)
+    + OnGUI() : void
+}
+PathEditor --> "controller" IEditablePathController
+PathEditor --> "drawerOverride" IDrawer
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+interface ICinemachineCamera {
+    Name : string <<get>>
+    Description : string <<get>>
+    Priority : int <<get>> <<set>>
+    IsValid : bool <<get>>
+    IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    UpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+}
+ICinemachineCamera --> "LookAt" Transform
+ICinemachineCamera --> "Follow" Transform
+ICinemachineCamera --> "State" CameraState
+ICinemachineCamera --> "VirtualCameraGameObject" GameObject
+ICinemachineCamera --> "ParentCamera" ICinemachineCamera
+@enduml

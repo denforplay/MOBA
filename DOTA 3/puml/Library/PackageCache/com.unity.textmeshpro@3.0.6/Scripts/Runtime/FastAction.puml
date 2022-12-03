@@ -1,0 +1,34 @@
+@startuml
+class FastAction {
+    + Add(rhs:System.Action) : void
+    + Remove(rhs:System.Action) : void
+    + Call() : void
+}
+class "FastAction`1"<A> {
+    + Add(rhs:System.Action<A>) : void
+    + Remove(rhs:System.Action<A>) : void
+    + Call(a:A) : void
+}
+class "FastAction`2"<A,B> {
+    + Add(rhs:System.Action<A, B>) : void
+    + Remove(rhs:System.Action<A, B>) : void
+    + Call(a:A, b:B) : void
+}
+class "FastAction`3"<A,B,C> {
+    + Add(rhs:System.Action<A, B, C>) : void
+    + Remove(rhs:System.Action<A, B, C>) : void
+    + Call(a:A, b:B, c:C) : void
+}
+class "LinkedList`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+FastAction o-> "delegates<System.Action>" "LinkedList`1"
+FastAction o-> "lookup<System.Action,LinkedListNode<System.Action>>" "Dictionary`2"
+"FastAction`1" o-> "delegates<System.Action<A>>" "LinkedList`1"
+"FastAction`1" o-> "lookup<System.Action<A>,LinkedListNode<System.Action<A>>>" "Dictionary`2"
+"FastAction`2" o-> "delegates<System.Action<A, B>>" "LinkedList`1"
+"FastAction`2" o-> "lookup<System.Action<A, B>,LinkedListNode<System.Action<A, B>>>" "Dictionary`2"
+"FastAction`3" o-> "delegates<System.Action<A, B, C>>" "LinkedList`1"
+"FastAction`3" o-> "lookup<System.Action<A, B, C>,LinkedListNode<System.Action<A, B, C>>>" "Dictionary`2"
+@enduml

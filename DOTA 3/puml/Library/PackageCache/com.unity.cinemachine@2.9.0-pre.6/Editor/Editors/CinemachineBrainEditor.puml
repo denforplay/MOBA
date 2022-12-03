@@ -1,0 +1,18 @@
+@startuml
+class CinemachineBrainEditor <<sealed>> {
+    mEventsExpanded : bool = false
+    + <<override>> OnInspectorGUI() : void
+    + {static} DrawVirtualCameraBaseGizmos(vcam:CinemachineVirtualCameraBase, selectionType:GizmoType) : void
+    {static} kGizmoFileName : string = "Cinemachine/cm_logo_lg.png"
+}
+class "BaseEditor`1"<T> {
+}
+class "EmbeddeAssetEditor`1"<T> {
+}
+class InstallGizmos <<static>> {
+    {static} InstallGizmos()
+}
+"BaseEditor`1" "<CinemachineBrain>" <|-- CinemachineBrainEditor
+CinemachineBrainEditor --> "m_BlendsEditor<CinemachineBlenderSettings>" "EmbeddeAssetEditor`1"
+CinemachineBrainEditor +-- InstallGizmos
+@enduml

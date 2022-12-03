@@ -1,0 +1,23 @@
+@startuml
+class BackendInstallationProgress <<static>> {
+    + {static} Initialize() : void
+}
+class BackendDownloadProgress {
+    + Start() : void
+    + UpdateOnEachDownloadedMegabyte(downloadedMegabytes:int, totalMegabytes:int, downloadSpeedInMegabytesPerSecond:int) : void
+    + Finish() : void
+}
+class BackendExtractProgress {
+    + Start() : void
+    + OnEachExtractedFile(extractedFilesCount:int, totalExtractedFiles:int) : void
+    + Finish() : void
+}
+class IntervalProgress {
+    + IntervalProgress(intervalsCount:int)
+    + ShowProgressInInterval(processed:int, total:int, showProgress:Action<int, int>) : void
+    + ShowProgressInIntervalWithSpeed(processed:int, total:int, speed:int, showProgress:Action<int, int, int>) : void
+}
+BackendInstallationProgress +-- BackendDownloadProgress
+BackendInstallationProgress +-- BackendExtractProgress
+BackendInstallationProgress +-- IntervalProgress
+@enduml

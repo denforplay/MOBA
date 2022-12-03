@@ -1,0 +1,7 @@
+@startuml
+class VersionPair <<struct>> {
+    + VersionPair(idemajor:int, ideminor:int, languageMajor:int, languageMinor:int)
+}
+VersionPair --> "IdeVersion" Version
+VersionPair --> "LanguageVersion" Version
+@enduml

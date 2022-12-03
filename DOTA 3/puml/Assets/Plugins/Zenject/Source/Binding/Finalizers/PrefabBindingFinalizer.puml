@@ -1,0 +1,12 @@
+@startuml
+class PrefabBindingFinalizer {
+    + PrefabBindingFinalizer(bindInfo:BindInfo, gameObjectBindInfo:GameObjectCreationParameters, prefab:UnityEngine.Object, providerFactory:Func<Type, IPrefabInstantiator, IProvider>)
+    FinalizeBindingConcrete(container:DiContainer, concreteTypes:List<Type>) : void
+    FinalizeBindingSelf(container:DiContainer) : void
+}
+class "Func`3"<T1,T2,T3> {
+}
+ProviderBindingFinalizer <|-- PrefabBindingFinalizer
+PrefabBindingFinalizer --> "_gameObjectBindInfo" GameObjectCreationParameters
+PrefabBindingFinalizer --> "_providerFactory<Type,IPrefabInstantiator,IProvider>" "Func`3"
+@enduml

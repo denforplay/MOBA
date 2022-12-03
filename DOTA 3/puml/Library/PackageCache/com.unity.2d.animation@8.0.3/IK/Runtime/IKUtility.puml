@@ -1,0 +1,7 @@
+@startuml
+class IKUtility {
+    + {static} IsDescendentOf(transform:Transform, ancestor:Transform) : bool
+    + {static} GetAncestorCount(transform:Transform) : int
+    + {static} GetMaxChainCount(chain:IKChain2D) : int
+}
+@enduml

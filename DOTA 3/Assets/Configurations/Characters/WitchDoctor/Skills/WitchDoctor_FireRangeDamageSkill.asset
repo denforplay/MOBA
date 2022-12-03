@@ -19,4 +19,5 @@ MonoBehaviour:
   _skillAnimation: {fileID: 0}
   _effectValue: 25
   _range: 7
+  _manaCost: 50
   _particle: {fileID: 198321560017527566, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}

@@ -1,0 +1,432 @@
+@startuml
+enum ThreadRange {
+    Median,
+    UpperQuartile,
+    Max,
+}
+enum ActiveTab {
+    Summary,
+    Compare,
+}
+enum ActiveView {
+    Single,
+    Left,
+    Right,
+}
+enum ThreadActivity {
+    None,
+    Analyze,
+    AnalyzeDone,
+    Compare,
+    CompareDone,
+    Load,
+    LoadDone,
+}
+enum TopTenDisplay {
+    Normalized,
+    LongestTime,
+}
+enum NameFilterOperation {
+    All,
+    Any,
+}
+class ProfileAnalyzerWindow {
+    <<const>> k_ProgressBarHeight : float = 2f
+    m_LastProfilerSelectedMarker : string
+    m_LastMarkerSuccesfullySyncedWithProfilerWindow : string = null
+    m_SelectionEventFromProfilerWindowInProgress : bool = false
+    m_TopNumber : int
+    m_ParentMarker : string = null
+    m_ThreadSelectionSummary : string
+    m_NameFilter : string = ""
+    m_NameExclude : string = ""
+    m_ProfilerFirstFrameIndex : int = 0
+    m_ProfilerLastFrameIndex : int = 0
+    <<const>> k_ProfileDataDefaultDisplayOffset : int = 1
+    m_OtherTabDirty : bool = false
+    m_OtherTableDirty : bool = false
+    m_ShowFilters : bool = true
+    m_ShowTopNMarkers : bool = true
+    m_ShowFrameSummary : bool = true
+    m_ShowThreadSummary : bool = false
+    m_ShowMarkerSummary : bool = true
+    m_ShowMarkerTable : bool = true
+    m_NeedPre2019Enable : bool
+    m_FrameTimeGraphsPaired : bool = true
+    m_TotalCombinedMarkerCountNew : int
+    m_TotalCombinedMarkerCount : int = 0
+    m_SelectedPairing : int = 0
+    m_Async : bool = true
+    m_Path : string
+    m_ThreadPhase : int
+    m_ThreadPhases : int
+    m_ThreadProgress : int
+    m_RequestRepaint : bool
+    m_RequestAnalysis : bool
+    m_RequestCompare : bool
+    m_FullAnalysisRequired : bool
+    m_FullCompareRequired : bool
+    m_TopNBars : int = 10
+    m_EnableAnalysisProfiling : bool = false
+    m_AnalyzeInUpdatePhase : int = 0
+    m_LastAnalysisTime : string = ""
+    m_LastCompareTime : string = ""
+    m_LastAnalysisTimeMilliseconds : float
+    m_LastCompareTimeMilliseconds : float
+    m_NewDataLoaded : bool = false
+    m_NewComparisonDataLoaded : bool = false
+    m_ScreenSizeChanged : bool
+    m_ScreenSizeChangedTimeStarted : double
+    m_ScreenSizeChangedTimeFinished : double
+    m_StylesSetup : bool = false
+    {static} Init() : void
+    + {static} OpenProfileAnalyzer() : void
+    Awake() : void
+    {static} s_TmpCount : int = 0
+    {static} s_TmpDir : string = ""
+    {static} s_ApplicationDataPath : string
+    OnEnable() : void
+    OnDisable() : void
+    OnDestroy() : void
+    DisplayCount() : bool
+    OnGUI() : void
+    TmpInUse(dv:ProfileDataView, path:string) : bool
+    SetView(dst:ProfileDataView, data:ProfileData, path:string, graph:FrameTimeGraph) : void
+    SetView(dst:ProfileDataView, src:ProfileDataView, graph:FrameTimeGraph) : void
+    UpdateThreadNames() : void
+    ProcessTabSwitch() : void
+    IsDocked() : bool
+    CheckScreenSizeChanges() : void
+    ProcessInput() : void
+    VerifyFrameDataInSyncWithProfilerWindow(dataView:ProfileDataView) : void
+    SyncWithProfilerWindow() : bool
+    OnProfilerWindowCpuModuleSelectionChanged(selectedMarker:string, threadGroupName:string, threadName:string) : void
+    OnProfilerWindowSelectedFrameChanged(newlySelectedFrame:int) : void
+    Update() : void
+    Pre2019ReEnableRecording() : void
+    Pre2019DisableRecording() : void
+    UpdateAnalysisFromAsyncProcessing(view:ProfileDataView, full:bool) : void
+    GetFrameTimeData(profileData:ProfileData) : List<FrameTimeGraph.Data>
+    Load() : void
+    UpdateMatchingProfileData(data:ProfileData, path:string, analysis:ProfileAnalysis, newPath:string) : void
+    Save(dataView:ProfileDataView, updateDataViewWithSelectedPath:bool) : void
+    GetTotalCombinedMarkerCount(left:ProfileData, right:ProfileData) : int
+    GeneratePairings(leftAnalysis:ProfileAnalysis, rightAnalysis:ProfileAnalysis) : List<MarkerPairing>
+    SetThreadPhaseCount(activity:ThreadActivity) : void
+    BeginAsyncAction(activity:ThreadActivity) : void
+    CreateComparisonTable() : void
+    CalculatePairingbuckets(left:ProfileAnalysis, right:ProfileAnalysis, pairings:List<MarkerPairing>) : void
+    CompareSync() : bool
+    Compare() : void
+    GetPairings() : List<MarkerPairing>
+    GetUnsavedIndex(path:string) : int
+    PullFromProfiler(firstFrame:int, lastFrame:int, view:ProfileDataView, frameTimeGraph:FrameTimeGraph) : void
+    BackgroundThread() : void
+    SelectFirstMarkerInTable() : void
+    CreateProfileTable() : void
+    AnalyzeSync() : void
+    Analyze() : void
+    GetThreadNames(profleData:ProfileData, threadUINames:List<string>, threadFilters:List<string>, threadNameToUIName:Dictionary<string, string>) : void
+    + GetUIThreadName(threadNameWithIndex:string) : string
+    GetFriendlyThreadName(threadNameWithIndex:string, single:bool) : string
+    GetThreadNames(leftData:ProfileData, rightData:ProfileData, threadUINames:List<string>, threadFilters:List<string>, threadNameToUIName:Dictionary<string, string>) : void
+    UpdateThreadGroupSelection(threadNames:List<string>, threadSelection:ThreadSelection) : void
+    GetLimitedThreadSelection(threadNames:List<string>, threadSelection:ThreadSelection) : List<string>
+    ClampToRange(value:int, min:int, max:int) : int
+    GraphActive(active:bool) : void
+    SetRange(selectedOffsets:List<int>, clickCount:int, inputStatus:FrameTimeGraph.State) : void
+    {static} GetNameFilters(nameFilter:string) : List<string>
+    NameInAnyFilterList(name:string, nameFilters:List<string>) : bool
+    {static} FilterWithQuotes(markerName:string) : string
+    {static} AddFilter(filter:string, quotedMarkerName:string) : void
+    {static} AddFilter(nameFilters:List<string>, filter:string, markerName:string) : bool
+    GetFilenameWidth(path:string) : float
+    ShowFilename(path:string) : void
+    DrawLoadSave() : void
+    ShowSelectedMarker() : void
+    GetRemappedUIFirstFrameOffset(context:ProfileDataView) : int
+    GetRemappedUIFirstFrameDisplayOffset(context:ProfileDataView) : int
+    DrawFrameTimeGraph(height:float) : void
+    DrawParentFilter() : void
+    CalculateSelectedThreadsSummary() : string
+    GetSelectedThreadsSummary() : string
+    DrawThreadFilter(profileData:ProfileData) : void
+    DrawSelectedText(text:string) : void
+    ShowSelectedThreads() : void
+    DrawUnitFilter() : void
+    IsSelfTime() : bool
+    DrawTimingFilter() : void
+    SetUnits(units:Units) : void
+    UpdateActiveTab(fullAnalysisRequired:bool, markOtherDirty:bool) : void
+    UpdateMarkerTable(markOtherDirty:bool) : void
+    DrawNameFilter() : void
+    DrawMarkerColumnFilter() : void
+    GetCombinedThreadCount(matchingCount:int, uniqueLeft:int, uniqueRight:int) : int
+    DrawMarkerCount() : void
+    GetThreadCountToolTipUnion(allThreadsCount:int, matchingCount:int) : string
+    GetThreadCountToolTipDifference(allThreadsCount:int, matchingCount:int, uniqueLeft:int, uniqueRight:int) : string
+    GetThreadCountToolTip(allThreadsCount:int, matchingCount:int, uniqueLeft:int, uniqueRight:int) : string
+    DrawThreadCount() : void
+    DrawAnalysisOptions() : void
+    GetProgress() : float
+    IsAnalysisValid(checkFrameCount:bool) : bool
+    DrawProgress(rect:Rect) : void
+    DrawPullButton(color:Color, view:ProfileDataView, frameTimeGraph:FrameTimeGraph) : void
+    DrawFilesLoaded() : void
+    ShowHelp() : void
+    DrawAnalysis() : void
+    SetRange(selectedOffsets:List<int>, clickCount:int, inputStatus:FrameTimeGraph.State, mainData:ProfileDataView, selectedIndices:List<int>) : void
+    SetLeftRange(selectedOffsets:List<int>, clickCount:int, inputStatus:FrameTimeGraph.State) : void
+    SetRightRange(selectedOffsets:List<int>, clickCount:int, inputStatus:FrameTimeGraph.State) : void
+    DrawComparisonLoadSaveButton(color:Color, view:ProfileDataView, frameTimeGraph:FrameTimeGraph, activeView:ActiveView) : void
+    GetComparisonYRange() : float
+    SetFrameTimeGraphPairing(paired:bool) : void
+    DrawComparisonLoadSave() : void
+    DrawComparisonHistogram(height:float, minValue:float, maxValue:float, bucketCount:int, leftBuckets:int[], rightBuckets:int[], leftCount:int, rightCount:int, leftValid:bool, rightValid:bool, displayUnits:DisplayUnits) : void
+    DrawComparisonFrameSummary() : void
+    ShowThreadRange() : void
+    GetThreadTimeRange(profileAnalysis:ProfileAnalysis) : float
+    GetThreadSelectionCount(leftSelectionCount:int, rightSelectionCount:int) : int
+    DrawComparisonThreadSummary() : void
+    DrawCompareOptions() : void
+    DrawComparison() : void
+    BoldFoldout(toggle:bool, content:GUIContent) : bool
+    DrawComparisonSelectedStats(leftMarker:MarkerData, rightMarker:MarkerData) : void
+    DrawComparisonSelected() : void
+    SelectTab(newTab:ActiveTab) : void
+    DrawToolbar() : void
+    SetupStyles() : void
+    Draw() : void
+    FindSelectionByName(markers:List<MarkerData>, name:string) : int
+    + SelectMarker(name:string) : void
+    SelectMarker(name:string, threadGroupName:string, threadName:string) : void
+    UpdateSelectedMarkerName(markerName:string) : void
+    + GetSelectedMarkerName() : string
+    GetMarkerName(index:int) : string
+    SelectMarkerByName(markerName:string, threadGroupName:string, threadName:string) : void
+    GetPairingName(index:int) : string
+    SelectPairingByName(pairingName:string, threadGroupName:string, threadName:string) : void
+    GetFrameCountText(context:ProfileDataView) : GUIContent
+    RangesText(context:ProfileDataView) : string
+    GetFirstFrameText(context:ProfileDataView) : GUIContent
+    GetLastFrameText(context:ProfileDataView) : GUIContent
+    DrawFrameSummary() : void
+    GetThreadNameWithGroupTooltip(threadNameWithIndex:string, singleThread:bool) : GUIContent
+    DrawThreadSummary() : void
+    DrawHistogramForMarker(histogram:Histogram, marker:MarkerData) : void
+    Draw3LabelMsFrame(col1:GUIContent, ms:float, frameIndex:int, frameContext:ProfileDataView) : void
+    Draw2LabelMs(col1:GUIContent, ms:float) : void
+    Draw4DiffMs(col1:GUIContent, msLeft:float, msRight:float) : void
+    Draw4DiffMs(col1:GUIContent, msLeft:float, frameIndexLeft:int, msRight:float, frameIndexRight:int) : void
+    Draw4Ms(col1:GUIContent, value2:float, value3:float, value4:float) : void
+    DrawBoxAndWhiskerPlotForMarker(boxAndWhiskerPlot:BoxAndWhiskerPlot, width:float, height:float, analysis:ProfileAnalysis, marker:MarkerData, yAxisStart:float, yAxisEnd:float, color:Color, colorBackground:Color) : void
+    DrawBoxAndWhiskerPlotHorizontalForMarker(boxAndWhiskerPlot:BoxAndWhiskerPlot, width:float, height:float, analysis:ProfileAnalysis, marker:MarkerData, yAxisStart:float, yAxisEnd:float, color:Color, colorBackground:Color) : void
+    DrawFrameRatio(marker:MarkerData) : void
+    ShowPercent(percent:float) : GUIContent
+    DrawComparisonFrameRatio(leftMarker:MarkerData, rightMarker:MarkerData) : void
+    DrawTopComparison(leftMarker:MarkerData, rightMarker:MarkerData) : void
+    DrawSelectedStats(marker:MarkerData, markerContext:ProfileDataView) : void
+    DrawSelected() : void
+}
+class Styles <<static>> {
+    + {static} <<readonly>> autoDepthTitleText : string = "Auto Depth (Diff: {0:+##;-##;None&#125;)"
+    + {static} <<readonly>> topMarkersTooltip : string = "Top markers for the median frame.\nThe length of this frame is the median of those in the data set.\nIt is likely to be the most representative frame."
+    + {static} <<readonly>> medianFrameTooltip : string = "The length of this frame is the median of those in the data set.\nIt is likely to be the most representative frame."
+    + {static} <<readonly>> helpText : string = @"This tool can analyze Unity Profiler data, to find representative frames and perform comparisons of data sets.
+
+To gather data to analyze:
+* Open the Unity Profiler. Either via the Unity menu under 'Windows', 'Analysis' or via the 'Open Profile Window' in the tool bar.
+* Capture some profiling data in the Unity Profiler by selecting a target application and click the 'Record' button.
+* Stop the capture by clicking again on the 'Record' button.
+
+To analyze the data:
+* Pull the Unity Profiler data into this tool by clicking the 'Pull Data' button in the single or compare views.
+* The analysis will be automatically triggered (in the compare view two data sets are required before analysis is performed).
+* Select a marker to see more detailed information about its time utilization over the frame time range.
+* Save off a data file from here to keep for future use. (Recommend saving the profile .data file in the same folder).
+
+To compare two data sets:
+* Click the compare tab. The data in the single tab will be used by default. You can also load previously saved analysis data.
+* Drag select a region in the frame time graph (above) to choose 1 or more frames for each of the two data sets.
+* The comparison will be automatically triggered as the selection is made."
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class UIColor <<static>> {
+}
+class ThreadMarkerInfo <<struct>> {
+    + id : int
+    + threadName : string
+    + threadGroupName : string
+    + name : string
+}
+class LayoutSize <<static>> {
+    + {static} <<readonly>> WidthColumn0 : int = 100
+    + {static} <<readonly>> WidthColumn1 : int = 52
+    + {static} <<readonly>> WidthColumn2 : int = 52
+    + {static} <<readonly>> WidthColumn3 : int = 52
+    + {static} <<readonly>> WidthRHS : int = 290
+    + {static} <<readonly>> FilterOptionsLeftLabelWidth : int = 100
+    + {static} <<readonly>> FilterOptionsEnumWidth : int = 50
+    + {static} <<readonly>> FilterOptionsLockedEnumWidth : int = 120
+    + {static} <<readonly>> FilterOptionsRightLabelWidth : int = 110
+    + {static} <<readonly>> FilterOptionsRightEnumWidth : int = 150
+    + {static} <<readonly>> HistogramWidth : int = 153
+    + {static} <<readonly>> MinWindowWidth : int
+    + {static} <<readonly>> MinWindowHeight : int = 480
+    + {static} <<readonly>> WindowWidth : int
+    + {static} <<readonly>> WindowHeight : int = 840
+    + {static} <<readonly>> ScrollBarPadding : int = 6
+}
+enum InDataSet {
+    Left,
+    Both,
+    Right,
+}
+EditorWindow <|-- ProfileAnalyzerWindow
+ProfileAnalyzerWindow --> "m_ProgressBar" ProgressBarDisplay
+ProfileAnalyzerWindow --> "m_ProfileAnalyzer" ProfileAnalyzer
+ProfileAnalyzerWindow --> "m_ProfilerWindowInterface" ProfilerWindowInterface
+ProfileAnalyzerWindow --> "m_DepthSliceUI" DepthSliceUI
+ProfileAnalyzerWindow o-> "m_ThreadUINames<string>" "List`1"
+ProfileAnalyzerWindow o-> "m_ThreadNames<string>" "List`1"
+ProfileAnalyzerWindow --> "m_ThreadNameToUIName<string,string>" "Dictionary`2"
+ProfileAnalyzerWindow o-> "m_ThreadSelection" ThreadSelection
+ProfileAnalyzerWindow --> "m_ThreadSelectionNew" ThreadSelection
+ProfileAnalyzerWindow o-> "m_DisplayUnits" DisplayUnits
+ProfileAnalyzerWindow o-> "m_SingleModeFilter" MarkerColumnFilter
+ProfileAnalyzerWindow o-> "m_CompareModeFilter" MarkerColumnFilter
+ProfileAnalyzerWindow o-> "m_TopTenDisplay" TopTenDisplay
+ProfileAnalyzerWindow o-> "m_NameFilterOperation" NameFilterOperation
+ProfileAnalyzerWindow o-> "m_NameExcludeOperation" NameFilterOperation
+ProfileAnalyzerWindow o-> "m_NextActiveTab" ActiveTab
+ProfileAnalyzerWindow o-> "m_ActiveTab" ActiveTab
+ProfileAnalyzerWindow --> "m_ProfileSingleView" ProfileDataView
+ProfileAnalyzerWindow --> "m_ProfileLeftView" ProfileDataView
+ProfileAnalyzerWindow --> "m_ProfileRightView" ProfileDataView
+ProfileAnalyzerWindow o-> "m_SelectedMarker" ThreadMarkerInfo
+ProfileAnalyzerWindow --> "m_FrameTimeGraphGlobalSettings" FrameTimeGraphGlobalSettings
+ProfileAnalyzerWindow --> "m_FrameTimeGraph" FrameTimeGraph
+ProfileAnalyzerWindow --> "m_LeftFrameTimeGraph" FrameTimeGraph
+ProfileAnalyzerWindow --> "m_RightFrameTimeGraph" FrameTimeGraph
+ProfileAnalyzerWindow --> "m_TopMarkers" TopMarkers
+ProfileAnalyzerWindow --> "m_TopMarkersLeft" TopMarkers
+ProfileAnalyzerWindow --> "m_TopMarkersRight" TopMarkers
+ProfileAnalyzerWindow --> "m_PairingsNew<MarkerPairing>" "List`1"
+ProfileAnalyzerWindow o-> "m_Pairings<MarkerPairing>" "List`1"
+ProfileAnalyzerWindow --> "m_ProfileTreeViewState" TreeViewState
+ProfileAnalyzerWindow --> "m_ProfileMulticolumnHeaderState" MultiColumnHeaderState
+ProfileAnalyzerWindow --> "m_ProfileTable" ProfileTable
+ProfileAnalyzerWindow --> "m_ComparisonTreeViewState" TreeViewState
+ProfileAnalyzerWindow --> "m_ComparisonMulticolumnHeaderState" MultiColumnHeaderState
+ProfileAnalyzerWindow --> "m_ComparisonTable" ComparisonTable
+ProfileAnalyzerWindow o-> "m_Columns" Columns
+ProfileAnalyzerWindow o-> "m_ThreadRange" ThreadRange
+ProfileAnalyzerWindow --> "m_BackgroundThread" Thread
+ProfileAnalyzerWindow --> "m_ThreadActivity" ThreadActivity
+ProfileAnalyzerWindow --> "m_ProfilerData" ProfileData
+ProfileAnalyzerWindow o-> "m_HelpScroll" Vector2
+ProfileAnalyzerWindow o-> "m_ThreadScroll" Vector2
+ProfileAnalyzerWindow o-> "m_MarkerSummaryScroll" Vector2
+ProfileAnalyzerWindow o-> "m_ThreadsAreaRect" Rect
+ProfileAnalyzerWindow o-> "m_ComparisonThreadsAreaRect" Rect
+ProfileAnalyzerWindow o-> "m_LastScreenSize" Vector2
+ProfileAnalyzerWindow --> "m_ScreenSizeChangedTab" ActiveTab
+ProfileAnalyzerWindow --> "m_StyleMiddleRight" GUIStyle
+ProfileAnalyzerWindow --> "m_StyleUpperLeft" GUIStyle
+ProfileAnalyzerWindow o-> "quotedStringWithoutQuotes" Regex
+ProfileAnalyzerWindow o-> "quotedString" Regex
+ProfileAnalyzerWindow o-> "stringWithoutWhiteSpace" Regex
+ProfileAnalyzerWindow --> "m_ActiveLoadingView" ActiveView
+ProfileAnalyzerWindow --> "GetActiveView" ProfileDataView
+ProfileAnalyzerWindow --> "GetActiveFrameTimeGraph" FrameTimeGraph
+ProfileAnalyzerWindow o-> "m_DrawFrameTimeGraphProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawAnalysisOptionsProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawFilesLoadedProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawAnalysisProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_TopNMarkersProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawMarkerTableProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawCompareOptionsProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawComparisonProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawComparisonTableProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawToolbarProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow o-> "m_DrawProfilerMarker" ProfilerMarkerAbstracted
+ProfileAnalyzerWindow +-- Styles
+Styles o-> "emptyString" GUIContent
+Styles o-> "dash" GUIContent
+Styles o-> "thread" GUIContent
+Styles o-> "noThread" GUIContent
+Styles o-> "max" GUIContent
+Styles o-> "upperQuartile" GUIContent
+Styles o-> "mean" GUIContent
+Styles o-> "median" GUIContent
+Styles o-> "lowerQuartile" GUIContent
+Styles o-> "min" GUIContent
+Styles o-> "individualMin" GUIContent
+Styles o-> "individualMax" GUIContent
+Styles o-> "export" GUIContent
+Styles o-> "pullOpen" GUIContent
+Styles o-> "pullRange" GUIContent
+Styles o-> "pullRecording" GUIContent
+Styles o-> "pull" GUIContent
+Styles o-> "nameFilter" GUIContent
+Styles o-> "nameExclude" GUIContent
+Styles o-> "threadFilter" GUIContent
+Styles o-> "threadFilterSelect" GUIContent
+Styles o-> "unitFilter" GUIContent
+Styles o-> "timingFilter" GUIContent
+Styles o-> "markerColumns" GUIContent
+Styles o-> "graphPairing" GUIContent
+Styles o-> "frameSummary" GUIContent
+Styles o-> "frameCount" GUIContent
+Styles o-> "frameStart" GUIContent
+Styles o-> "frameEnd" GUIContent
+Styles o-> "threadSummary" GUIContent
+Styles o-> "threadGraphScale" GUIContent
+Styles o-> "markerSummary" GUIContent
+Styles o-> "filters" GUIContent
+Styles o-> "profileTable" GUIContent
+Styles o-> "comparisonTable" GUIContent
+Styles o-> "depthTitle" GUIContent
+Styles o-> "leftDepthTitle" GUIContent
+Styles o-> "rightDepthTitle" GUIContent
+Styles o-> "autoDepthTitle" GUIContent
+Styles o-> "parentMarker" GUIContent
+Styles o-> "selectParentMarker" GUIContent
+Styles o-> "topMarkerRatio" GUIContent
+Styles o-> "firstFrame" GUIContent
+Styles o-> "menuItemSelectFramesInAll" GUIContent
+Styles o-> "menuItemSelectFramesInCurrent" GUIContent
+Styles o-> "menuItemSelectFramesAll" GUIContent
+Styles o-> "frameCosts" GUIContent
+Styles o-> "dataMissing" GUIContent
+Styles o-> "comparisonDataMissing" GUIContent
+ProfileAnalyzerWindow +-- UIColor
+UIColor o-> "white" Color
+UIColor o-> "barBackground" Color
+UIColor o-> "barBackgroundSelected" Color
+UIColor o-> "boxAndWhiskerBoxColor" Color
+UIColor o-> "boxAndWhiskerLineColorLeft" Color
+UIColor o-> "boxAndWhiskerBoxColorLeft" Color
+UIColor o-> "boxAndWhiskerLineColorRight" Color
+UIColor o-> "boxAndWhiskerBoxColorRight" Color
+UIColor o-> "bar" Color
+UIColor o-> "barSelected" Color
+UIColor o-> "standardLine" Color
+UIColor o-> "gridLines" Color
+UIColor o-> "left" Color
+UIColor o-> "leftSelected" Color
+UIColor o-> "right" Color
+UIColor o-> "rightSelected" Color
+UIColor o-> "both" Color
+UIColor o-> "textTopMarkers" Color
+UIColor o-> "marker" Color
+UIColor o-> "markerSelected" Color
+UIColor o-> "thread" Color
+UIColor o-> "threadSelected" Color
+ProfileAnalyzerWindow +-- ThreadMarkerInfo
+ProfileAnalyzerWindow +-- LayoutSize
+ProfileAnalyzerWindow +-- InDataSet
+@enduml

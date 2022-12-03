@@ -1,0 +1,10 @@
+@startuml
+class TowerCombatController {
+    +  <<event>> OnAttack : Action<Vector3> 
+    + TowerCombatController(towerView:TowerView, tower:Tower, projectileFactory:ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement>, requirement:ProjectileFactoryRequirement)
+    + StartObserve() : void
+    + <<async>> Observe() : UniTask
+    + Cencel() : void
+}
+IController <|-- TowerCombatController
+@enduml

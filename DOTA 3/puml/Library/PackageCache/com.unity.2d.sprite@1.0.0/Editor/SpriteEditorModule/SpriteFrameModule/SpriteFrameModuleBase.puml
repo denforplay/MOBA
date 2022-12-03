@@ -1,0 +1,79 @@
+@startuml
+class SpriteRectModel {
+    + SetSpriteRects(newSpriteRects:List<SpriteRect>) : void
+    + SetNameFileIdPairs(pairs:IEnumerable<SpriteNameFileIdPair>) : void
+    + FindIndex(match:Predicate<SpriteRect>) : int
+    + Clear() : void
+    + Add(spriteRect:SpriteRect, shouldReplaceInTable:bool) : bool
+    + Remove(spriteRect:SpriteRect) : void
+    + IsNameUsed(rectName:string) : bool
+    + IsInternalIdInUsed(internalId:GUID) : bool
+    + GetSpriteRects() : List<SpriteRect>
+    + Rename(oldName:string, newName:string, fileId:GUID) : bool
+    AddNameFileIdPair(spriteName:string, fileId:GUID) : void
+    UpdateIdInNameIdPair(spriteName:string, newFileId:GUID) : bool
+    + ClearUnusedFileID() : void
+    OnBeforeSerialize() : void
+    OnAfterDeserialize() : void
+}
+class OutlineSpriteRect {
+    + OutlineSpriteRect(rect:SpriteRect)
+}
+abstract class SpriteFrameModuleBase <<partial>> {
+    m_ModuleName : string
+    + <<override>> OnModuleActivate() : void
+    + <<override>> OnModuleDeactivate() : void
+    + <<override>> ApplyRevert(apply:bool) : bool
+    + <<override>> moduleName : string <<get>>
+    + hasSelected : bool <<get>>
+    + CurrentSelectedSpriteIndex() : int
+    + selectedSpriteName : string <<get>> <<set>>
+    + spriteCount : int <<get>>
+    + GetSpriteBorderAt(i:int) : Vector4
+    + GetSpriteRectAt(i:int) : Rect
+    + textureActualWidth : int <<get>>
+    + textureActualHeight : int <<get>>
+    + SetSpritePivotAndAlignment(pivot:Vector2, alignment:SpriteAlignment) : void
+    + containsMultipleSprites : bool <<get>>
+}
+class StringGUID <<struct>> {
+    m_StringGUID : string
+    + StringGUID(guid:GUID)
+}
+class StringGUIDList {
+    GetEnumerator() : IEnumerator<GUID>
+}
+class "IReadOnlyList`1"<T> {
+}
+class "List`1"<T> {
+}
+class SpriteFrameModulePersistentState {
+}
+enum PivotUnitMode {
+    Normalized,
+    Pixels,
+}
+class "ScriptableSingleton`1"<T> {
+}
+ScriptableObject <|-- SpriteRectModel
+ISerializationCallbackReceiver <|-- SpriteRectModel
+SpriteRectModel --> "spriteRects<SpriteRect>" "IReadOnlyList`1"
+SpriteRectModel --> "spriteNames<string>" "IReadOnlyList`1"
+SpriteRectModel --> "spriteFileIds<GUID>" "IReadOnlyList`1"
+SpriteRect <|-- OutlineSpriteRect
+OutlineSpriteRect --> "outlines<Vector2[]>" "List`1"
+SpriteEditorModuleBase <|-- SpriteFrameModuleBase
+SpriteFrameModuleBase --> "pivotUnitMode" PivotUnitMode
+SpriteFrameModuleBase --> "selectedSpriteAlignment" SpriteAlignment
+SpriteFrameModuleBase --> "selectedSpritePivot" Vector2
+SpriteFrameModuleBase --> "selectedSpriteBorder" Vector4
+SpriteFrameModuleBase --> "selectedSpriteRect" Rect
+SpriteRectModel +-- StringGUID
+SpriteRectModel +-- StringGUIDList
+"List`1" "<StringGUID>" <|-- StringGUIDList
+"IReadOnlyList`1" "<GUID>" <|-- StringGUIDList
+SpriteFrameModuleBase +-- SpriteFrameModulePersistentState
+"ScriptableSingleton`1" "<SpriteFrameModulePersistentState>" <|-- SpriteFrameModulePersistentState
+SpriteFrameModulePersistentState o-> "pivotUnitMode" PivotUnitMode
+SpriteFrameModuleBase +-- PivotUnitMode
+@enduml

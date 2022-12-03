@@ -1,0 +1,6 @@
+@startuml
+class InputFeatureNames <<static>> {
+    + <<const>> kRunPlayerUpdatesInEditMode : string = "RUN_PLAYER_UPDATES_IN_EDIT_MODE"
+    + <<const>> kDisableUnityRemoteSupport : string = "DISABLE_UNITY_REMOTE_SUPPORT"
+}
+@enduml

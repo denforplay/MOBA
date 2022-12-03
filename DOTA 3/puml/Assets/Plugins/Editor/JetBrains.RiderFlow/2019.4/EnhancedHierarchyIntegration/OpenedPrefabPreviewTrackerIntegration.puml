@@ -1,0 +1,5 @@
+@startuml
+class OpenedPrefabPreviewTrackerIntegration <<static>> {
+    + {static} Initialize() : void
+}
+@enduml

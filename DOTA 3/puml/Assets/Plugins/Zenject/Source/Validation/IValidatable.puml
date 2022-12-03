@@ -1,0 +1,5 @@
+@startuml
+interface IValidatable {
+    Validate() : void
+}
+@enduml

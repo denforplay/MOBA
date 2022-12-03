@@ -1,0 +1,10 @@
+@startuml
+class TowerConfiguration {
+    + MaxHealth : float <<get>>
+    + Damage : float <<get>>
+    + ObservableRange : float <<get>>
+    + RotationSpeed : float <<get>>
+    + ShootDelay : float <<get>>
+}
+ScriptableObject <|-- TowerConfiguration
+@enduml

@@ -1,0 +1,214 @@
+@startuml
+class Expressions <<partial>> {
+    + {static} ConvertUIntToFloat(rx:uint) : float
+    + {static} ConvertIntToFloat(rx:int) : float
+    + {static} ConvertIntToDouble(rx:int, ry:uint) : double
+    + {static} ConvertIntToDouble2(rx:int, ry:uint) : double
+    + {static} ConvertIntToLong(value:int) : long
+    + {static} ConvertIntToULong(value:int) : ulong
+    + {static} ConvertIntToLongConst() : ulong
+    + {static} ConvertUIntToLong(value:uint) : long
+    + {static} ConvertUIntToLongConst() : ulong
+    + {static} ConvertUIntToULong(value:uint) : ulong
+    + {static} ConvertUIntToULongConst() : ulong
+    + {static} ConvertShortToInt(value:short) : int
+    + {static} ConvertShortToIntConstMin() : int
+    + {static} ConvertShortToIntConstMax() : int
+    + {static} ConvertUShortToIntConstMax() : int
+    + {static} ConvertUShortToUIntConstMax() : uint
+    + {static} ConvertShortToLong(value:short) : long
+    + {static} ConvertShortToLongConstMin() : long
+    + {static} ConvertShortToLongConstMax() : long
+    + {static} ConvertShortToULong(value:short) : ulong
+    + {static} ConvertShortToULongConstMin() : ulong
+    + {static} ConvertShortToULongConstMax() : ulong
+    + {static} ConvertSbyteToLong(value:sbyte) : long
+    + {static} ConvertSbyteToLongConstMin() : long
+    + {static} ConvertSbyteToLongConstMax() : long
+    + {static} ConvertSbyteToUInt(value:sbyte) : uint
+    + {static} ConvertSbyteToUIntConstMin() : uint
+    + {static} ConvertSbyteToUIntConstMax() : uint
+    + {static} ConvertFloatToByte(value:float) : byte
+    + {static} CompareEqualBool(left:bool, right:bool) : bool
+    + {static} CompareNotEqualBool(left:bool, right:bool) : bool
+    + {static} CompareBoolWithConst(left:bool) : bool
+    + {static} CompareEqualInt32(left:int, right:int) : bool
+    + {static} CompareEqualInt32WithConst(left:int) : bool
+    + {static} CompareNotEqualInt32(left:int, right:int) : bool
+    + {static} CompareLessThanInt32(left:int, right:int) : bool
+    + {static} CompareLessThanInt64Int32(left:long, right:int) : bool
+    + {static} CompareLessThanUInt32Int32(left:uint, right:int) : bool
+    + {static} CompareGreaterThanUInt32Int32(left:uint, right:int) : bool
+    + {static} CompareLessThanInt32UInt32(left:int, right:uint) : bool
+    + {static} CompareGreaterThanInt32UInt32(left:int, right:uint) : bool
+    + {static} CompareGreaterThanInt32(left:int, right:int) : bool
+    + {static} CompareGreaterOrEqualInt32(left:int, right:int) : bool
+    + {static} CompareLessOrEqualInt32(left:int, right:int) : bool
+    + {static} CompareEqualFloatConstant() : bool
+    + {static} CompareNotEqualFloatConstant() : bool
+    + {static} CompareLessThanFloatConstant() : bool
+    + {static} CompareLessThanEqualFloatConstant() : bool
+    + {static} CompareGreaterThanFloatConstant() : bool
+    + {static} CompareLGreaterThanEqualFloatConstant() : bool
+    + {static} CompareEqualFloat(left:float, right:float) : bool
+    + {static} CompareNotEqualFloat(left:float, right:float) : bool
+    + {static} CompareLessThanFloat(left:float, right:float) : bool
+    + {static} CompareLessThanEqualFloat(left:float, right:float) : bool
+    + {static} CompareGreaterThanFloat(left:float, right:float) : bool
+    + {static} CompareGreaterThanEqualFloat(left:float, right:float) : bool
+    + {static} BinaryNumericAdd(left:int, right:int) : int
+    + {static} BinaryNumericSub(left:int, right:int) : int
+    + {static} BinaryNumericDiv(left:int, right:int) : int
+    + {static} BinaryNumericDiv64(left:long, right:int) : long
+    + {static} BinaryNumericRem(left:int, right:int) : int
+    + {static} BinaryNumericMul(left:int, right:int) : int
+    + {static} BinaryNumericAnd(left:int, right:int) : int
+    + {static} BinaryNumericOr(left:int, right:int) : int
+    + {static} BinaryNumericXor(left:int, right:int) : int
+    + {static} BinaryNumericShiftLeft(left:int, right:int) : int
+    + {static} BinaryNumericShiftRight(left:int, right:int) : int
+    + {static} BinaryNumericShiftLeftUInt32(left:uint, right:int) : uint
+    + {static} BinaryNumericShiftRightUInt32(left:uint, right:int) : uint
+    + {static} BinaryNumericShiftRightUIntToInt32(left:uint, right:int) : int
+    + {static} ConstantMinus1() : int
+    + {static} Constant1() : int
+    + {static} Constant2() : int
+    + {static} Constant3() : int
+    + {static} Constant4() : int
+    + {static} Constant5() : int
+    + {static} Constant6() : int
+    + {static} Constant7() : int
+    + {static} Constant8() : int
+    + {static} Constant121() : int
+    + {static} ReturnBoolTrue() : bool
+    + {static} ReturnBoolFalse() : bool
+    + {static} AddOverflowInt(x:int) : int
+    + {static} test_expr_add_one_to_zero() : int
+    + {static} test_expr_add_multiples(a:float) : float
+    + {static} test_expr_add_two_arguments(a:float, b:float) : float
+    + {static} test_expr_multiply_two_arguments(a:float, b:float) : float
+    + {static} test_expr_negateResult_float(a:float) : float
+    + {static} test_expr_negateResult_sbyte(a:sbyte) : int
+    + {static} test_expr_negateResult_byte(a:byte) : int
+    + {static} test_expr_negateResult_short(a:short) : int
+    + {static} test_expr_negateResult_ushort(a:ushort) : int
+    + {static} test_expr_negateResult_int(a:int) : int
+    + {static} test_expr_negateResult_uint(a:uint) : long
+    + {static} test_expr_negateResult_long(a:long) : long
+    + {static} test_expr_return_constant() : float
+    + {static} test_multiple_assigment() : float
+    + {static} test_expr_various_math(a:float, b:float) : float
+    + {static} test_expr_multiply_int_by_float(a:float) : float
+    + {static} test_expr_cast_float_to_int(a:float) : int
+    + {static} test_expr_cast_int_to_float(a:int) : float
+    + {static} test_expr_assign_to_argument(a:int) : int
+    + {static} test_expr_postincrement(input:int) : int
+    + {static} test_expr_mod(input:int) : int
+    + {static} test_expr_xor(a:int, b:int) : int
+    + {static} test_expr_or(a:int, b:int) : int
+    + {static} test_expr_and(a:int, b:int) : int
+    + {static} test_math_large_values(a:float) : float
+    + {static} test_expr_shift_right(n:int) : int
+    + {static} test_expr_shift(n:int) : int
+    + {static} test_expr_complement(input:int) : int
+    + {static} test_expr_sizeof_int() : int
+    + {static} test_expr_generic_equatable(a:int) : int
+    + {static} test_expr_bool_passing(a:int) : bool
+    <<const>> ConstValue : int = 5
+    + {static} test_expr_load_static_constant() : int
+    + {static} OutInt32(a:int) : int
+    + {static} CallPushAndPop(a:int) : int
+    + {static} OutputInt32(value:int) : void
+    + {static} TypeConversionAndOverflow() : long
+    + {static} test_expr_return_from_branch(test:int) : float
+    + {static} BoolOrFunction(left:bool, x:int) : bool
+    + {static} <<unsafe>> TestStackAlloc() : uint
+    + {static} BoolRefUser(isDone:bool) : int
+    + {static} LocalBoolPassedByRef() : int
+    + {static} SameCode(val1:TestEnum, val2:TestEnum) : float
+    + {static} EnumToFloatConversion() : float
+    + {static} TestSByteEnum(a:SByteEnum) : float
+    + {static} TestUnsignedEnum(a:UnsignedEnum) : float
+    + {static} AddOvf(x:int) : int
+    + {static} MulOvf(x:int) : int
+    + {static} SubOvf(x:int) : int
+    + {static} SubOvfUn(x:uint) : uint
+    + {static} BgeUn(x:uint) : uint
+    + {static} Bgt(x:int) : int
+    + {static} Beq(x:int) : int
+    + {static} Bge(x:int) : int
+    + {static} Ble(x:int) : int
+    + {static} Blt(x:int) : int
+    + {static} BgtUn(x:uint) : uint
+    + {static} BgtUnS(x:uint) : uint
+    + {static} BleUn(x:uint) : uint
+    + {static} BltUn(x:uint) : uint
+    + {static} BltUnS(x:uint) : uint
+    + {static} Brtrue(x:bool) : int
+    + {static} Brfalse(x:bool) : int
+    + {static} ConvI1(x:int) : sbyte
+    + {static} ConvI2(x:int) : short
+    + {static} ConvOvfI1Un(x:uint) : sbyte
+    + {static} ConvOvfI2Un(x:uint) : short
+    + {static} ConvOvfI4Un(x:uint) : int
+    + {static} ConvOvfI8Un(x:ulong) : long
+    + {static} ConvOvfU1Un(x:uint) : byte
+    + {static} ConvOvfU2Un(x:uint) : ushort
+    + {static} ConvOvfU4Un(x:ulong) : uint
+    + {static} ConvOvfI1(x:int) : sbyte
+    + {static} ConvOvfI2(x:int) : short
+    + {static} ConvOvfI4(x:long) : int
+    + {static} ConvOvfI8(x:double) : long
+    + {static} ConvOvfU1(x:int) : byte
+    + {static} ConvOvfU2(x:int) : ushort
+    + {static} ConvOvfU4(x:int) : uint
+    + {static} ConvOvfU8(x:double) : ulong
+    + {static} LdelemByte(index:byte) : int
+    + {static} LdelemUInt16(index:ushort) : int
+    + {static} LdelemUInt32(index:uint) : int
+    + {static} LdelemUInt64(index:ulong) : int
+    + {static} LdelemInt16(index:short) : int
+    + {static} LdelemInt32(index:int) : int
+    + {static} LdelemInt64(index:long) : int
+    + {static} FSubByDenormBecomesFAdd(x:float) : float
+    + {static} FSubByDenormBecomesFAddWithVec(x:float) : float
+    + {static} ImplicitCastsWork(i:int) : int
+    + {static} ExplicitCastsWork(i:int) : double
+}
+class "EqualityTester`1"<TKey> <<struct>> {
+    + {static} Check(value1:TKey, value2:TKey) : bool
+}
+class Yoyo <<struct>> {
+    + a : int
+}
+enum TestEnum {
+    v0= 0,
+    v1= 1,
+    v2= 2,
+    v3= 3,
+    v4= 4,
+    v5= 5,
+    v6= 6,
+}
+enum SByteEnum {
+    A= 0,
+    B= 6,
+    C= -128,
+}
+enum UnsignedEnum {
+    A= 0,
+    B= 6,
+    C= 0xFFFFFFFF,
+}
+class SomeStructWithCasts <<struct>> {
+    + I : int
+}
+class "IEquatable`1"<T> {
+}
+Expressions +-- "EqualityTester`1"
+Expressions +-- Yoyo
+Expressions +-- TestEnum
+Expressions +-- SByteEnum
+Expressions +-- UnsignedEnum
+Expressions +-- SomeStructWithCasts
+@enduml

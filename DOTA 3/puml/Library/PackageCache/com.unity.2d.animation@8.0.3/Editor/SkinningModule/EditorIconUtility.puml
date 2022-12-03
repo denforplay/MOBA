@@ -1,0 +1,7 @@
+@startuml
+class EditorIconUtility <<static>> {
+    + <<const>> LightIconPath : string = "EditorIcons/Light"
+    + <<const>> DarkIconPath : string = "EditorIcons/Dark"
+    + {static} LoadIconResource(name:string, lightPath:string, darkPath:string) : Texture2D
+}
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+class ScheduledInvocation {
+    + ActionId : long
+    + CompareTo(that:ScheduledInvocation) : int
+}
+class ActionScheduler {
+    <<const>> k_MinimumIdValue : long = 1
+    m_NextId : long
+    + ActionScheduler()
+    + ActionScheduler(timeProvider:ITimeProvider)
+    + ScheduledActionsCount : int <<get>>
+    + ScheduleAction(action:Action, delaySeconds:double) : long
+    + CancelAction(actionId:long) : void
+    {static} UpdateSubSystemList(subSystemList:List<PlayerLoopSystem>, currentPlayerLoop:PlayerLoopSystem) : void
+    + JoinPlayerLoopSystem() : void
+    + QuitPlayerLoopSystem() : void
+}
+class "IComparable`1"<T> {
+}
+class "MinimumBinaryHeap`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+"IComparable`1" "<ScheduledInvocation>" <|-- ScheduledInvocation
+ScheduledInvocation --> "Action" Action
+ScheduledInvocation --> "InvocationTime" DateTime
+IActionScheduler <|-- ActionScheduler
+ActionScheduler --> "m_TimeProvider" ITimeProvider
+ActionScheduler o-> "m_ScheduledActions<ScheduledInvocation>" "MinimumBinaryHeap`1"
+ActionScheduler o-> "m_IdScheduledInvocationMap<long,ScheduledInvocation>" "Dictionary`2"
+@enduml

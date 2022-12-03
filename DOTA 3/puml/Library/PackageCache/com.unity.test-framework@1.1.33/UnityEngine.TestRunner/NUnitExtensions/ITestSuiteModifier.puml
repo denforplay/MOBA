@@ -1,0 +1,5 @@
+@startuml
+interface ITestSuiteModifier {
+    ModifySuite(suite:TestSuite) : TestSuite
+}
+@enduml

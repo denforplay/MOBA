@@ -1,0 +1,45 @@
+@startuml
+class SignalEmitterInspector {
+    m_TargetsHaveTheSameBinding : bool
+    signalAssetSameValue : bool <<get>>
+    OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+    AvailableSignalAssets() : IEnumerable<SignalAsset>
+    CreateNewSignalAsset(path:string) : void
+    UpdateState() : void
+    GetOrCreateReceiverEditor(c:Component) : Editor
+    OnDisable() : void
+    OnDestroy() : void
+    OnUndoRedo() : void
+    ApplyChangesAndRefreshReceivers() : void
+    DrawNameSelectorAndSignalList() : void
+    DrawReceivers() : void
+    DrawSignalFlags() : void
+    DrawSignal() : void
+    AssignSignalAsset(newAsset:SignalAsset) : void
+    DrawNameSelector() : void
+    DrawReceiverHeader(receiver:Component) : bool
+    DrawReceiverObjectField() : void
+    AddReceiverComponent() : void
+    {static} SkipField(fieldName:string) : bool
+    {static} DrawSplitLine(y:float) : void
+    {static} GetBoundGameObject(track:TrackAsset, associatedDirector:PlayableDirector) : GameObject
+    {static} IsCurrentSequenceReadOnly() : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+MarkerInspector <|-- SignalEmitterInspector
+ISignalAssetProvider <|-- SignalEmitterInspector
+SignalEmitterInspector --> "m_RetroactiveProperty" SerializedProperty
+SignalEmitterInspector --> "m_EmitOnceProperty" SerializedProperty
+SignalEmitterInspector --> "m_Signal" SignalEmitter
+SignalEmitterInspector --> "m_BoundGameObject" GameObject
+SignalEmitterInspector --> "m_AssociatedDirector" PlayableDirector
+SignalEmitterInspector o-> "m_Editors<Component,Editor>" "Dictionary`2"
+SignalEmitterInspector o-> "m_Foldouts<Component,bool>" "Dictionary`2"
+SignalEmitterInspector o-> "m_Receivers<Component>" "List`1"
+SignalEmitterInspector --> "s_FoldoutStyle" GUIStyle
+SignalEmitterInspector --> "signalAsset" SignalAsset
+@enduml

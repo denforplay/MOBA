@@ -1,0 +1,155 @@
+@startuml
+class Pointers {
+    + {static} <<unsafe>> PointerCastEnum(value:int, newValue:MyCastEnum) : MyCastEnum
+    + {static} <<unsafe>> PointerCompare(a:IntPtr, b:IntPtr) : bool
+    + {static} <<unsafe>> RawPointerCompare(value:IntPtr) : bool
+    + {static} <<unsafe>> PointerHash(value:IntPtr) : int
+    + {static} <<unsafe>> PointerToPointer(value:IntPtr) : IntPtr
+    + {static} <<unsafe>> PointerToString(value:IntPtr) : int
+    + {static} <<unsafe>> PointerAdd(a:int) : int
+    + {static} <<unsafe>> PointerSub(a:int) : int
+    + {static} <<unsafe>> PointerPointerSub() : int
+    + {static} <<unsafe>> WhileWithPointer() : int
+    + {static} IntPtrConstructor(a:int) : IntPtr
+    + {static} UIntPtrConstructor(a:uint) : UIntPtr
+    + {static} IntPtrToInt32(a:int) : int
+    + {static} IntPtrToInt64(a:int) : long
+    + {static} IntPtrSize() : int
+    + {static} IntPtrSizeCompared() : bool
+    + {static} IntPtrZero() : IntPtr
+    + {static} IntPtrAdd(a:IntPtr) : IntPtr
+    + {static} IntPtrAdd2(a:IntPtr) : IntPtr
+    + {static} IntPtrSub(a:IntPtr) : IntPtr
+    + {static} IntPtrSub2(a:IntPtr) : IntPtr
+    + {static} UIntPtrZero() : UIntPtr
+    + {static} UIntPtrAdd(a:UIntPtr) : UIntPtr
+    + {static} UIntPtrSubstract(a:UIntPtr) : UIntPtr
+    + {static} <<unsafe>> PointerAccess(a:int) : int
+    + {static} <<unsafe>> PointerAccess2(a:int) : int
+    + {static} <<unsafe>> PointerAccess3(a:int) : float
+    + {static} <<unsafe>> PointerCompareViaInt(a:int) : int
+    + {static} <<unsafe>> IntPtrCompare(a:int) : int
+    + {static} <<unsafe>> UnsafeCompare(a:int*, b:int) : int
+    + {static} <<unsafe>> PointerCastWithStruct() : void
+    + {static} <<unsafe>> FixedField() : int
+    + {static} <<unsafe>> FixedFieldViaPointer(fixedStruct:MyStructWithFixed, i:int) : int
+    + {static} <<unsafe>> FixedInt32AndRefInt32(fixedStruct:MyStructWithFixed) : int
+    + {static} <<unsafe>> TestConditionalPointer(job:PointerConditional) : bool
+    + {static} <<unsafe>> TestCellVisibleInternal(length:int) : void
+    {static} <<unsafe>> IsCellVisibleInternal(cellVisibleRequest:int3*, cellVisibleResult:bool*, visibleCells:int3*, requestLength:int, visibleCellsLength:int) : void
+    + {static} <<unsafe>> InitialiseViaCastedPointer() : int
+    + {static} <<unsafe>> PointerWriteArg(a:int) : int
+    + {static} TestBlobAssetReferenceData() : void
+    + {static} <<unsafe>> StackAllocAliasCheck(stackAllocCheck:StackAllocCheck) : bool
+    + {static} <<unsafe>> NativeIntAddCheck(a:int) : int
+    + {static} <<unsafe>> TestArithmeticPointerA(job:PointerArithmetic) : Int64
+    + {static} <<unsafe>> TestArithmeticPointerB(job:PointerArithmetic) : Int64
+    + {static} <<unsafe>> TestArithmeticPointerC(job:PointerArithmetic) : Int64
+    + {static} <<unsafe>> TestArithmeticPointerD(job:PointerArithmetic) : Int64
+    + {static} <<unsafe>> TestPointerWithIn() : int
+    + {static} <<unsafe>> TestSystemBufferMemoryCopy() : int
+}
+class StructForPointerPointerSub <<struct>> {
+    + A : int
+    + B : int
+}
+class NativeQueueBlockHeader <<struct>> {
+    + itemsInBlock : int
+}
+class IntPtrZeroProvider {
+    + Value : object <<get>>
+}
+class IntPtrOneProvider {
+    + Value : object <<get>>
+}
+class ConditionalTestStruct <<struct>> {
+}
+class PointerConditional <<struct>> {
+    + Execute() : void
+    + Dispose() : void
+}
+class StructWithFields <<struct>> {
+    + a : int
+    + b : int
+    + c : bool
+    + d : bool
+    + e : bool
+    + f : bool
+}
+class MyStructWithFixed <<struct>> {
+    + <<fixed>> Values : int
+    + Value : int
+}
+class MyStructWithFixedProvider <<struct>> {
+    + <<unsafe>> Value : object <<get>>
+}
+enum MyCastEnum {
+    Value0= 0,
+    Value1= 1,
+    Value2= 2,
+    Value3= 3,
+}
+class CheckPointers <<struct>> {
+    + X : int
+    + Y : int
+    + Z : int
+    + W : int
+}
+class BlobAssetHeader <<struct>> {
+    + Length : int
+}
+class BlobAssetReferenceData <<struct>> {
+    + BlobAssetReferenceData(zero:IntPtr)
+    + Validate() : void
+}
+class StackAllocCheck <<struct>> {
+    + AddToPtr(otherPtr:int*) : void
+}
+class PointerArithmetic <<struct>> {
+    + Execute() : void
+    + Dispose() : void
+}
+class TestData <<struct>> {
+    + Size : int
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+Pointers +-- StructForPointerPointerSub
+Pointers +-- NativeQueueBlockHeader
+Pointers +-- IntPtrZeroProvider
+IArgumentProvider <|-- IntPtrZeroProvider
+Pointers +-- IntPtrOneProvider
+IArgumentProvider <|-- IntPtrOneProvider
+Pointers +-- ConditionalTestStruct
+Pointers +-- PointerConditional
+IJob <|-- PointerConditional
+IDisposable <|-- PointerConditional
+Pointers +-- StructWithFields
+Pointers +-- MyStructWithFixed
+Pointers +-- MyStructWithFixedProvider
+IArgumentProvider <|-- MyStructWithFixedProvider
+Pointers +-- MyCastEnum
+Pointers +-- CheckPointers
+Pointers +-- BlobAssetHeader
+BlobAssetHeader --> "Allocator" Allocator
+Pointers +-- BlobAssetReferenceData
+Pointers +-- StackAllocCheck
+Pointers +-- PointerArithmetic
+IJob <|-- PointerArithmetic
+IDisposable <|-- PointerArithmetic
+Pointers +-- TestData
+TestData --> "Min" int3
+PointerConditional +-- Provider
+IArgumentProvider <|-- Provider
+StackAllocCheck +-- Provider
+IArgumentProvider <|-- Provider
+PointerArithmetic +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

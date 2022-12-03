@@ -1,0 +1,11 @@
+@startuml
+class EventBusManager {
+    + Subscribe(subscriber:Action<T>) : void
+    + Clear() : void
+    + Unsubscribe(subscriber:Action<T>) : void
+    + Invoke(invokator:T) : void
+}
+class "Singleton`1"<T> {
+}
+"Singleton`1" "<EventBusManager>" <|-- EventBusManager
+@enduml

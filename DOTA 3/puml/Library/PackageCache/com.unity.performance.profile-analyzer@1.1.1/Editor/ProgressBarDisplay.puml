@@ -1,0 +1,11 @@
+@startuml
+class ProgressBarDisplay {
+    m_TotalFrames : int
+    m_CurrentFrame : int
+    m_Title : string
+    m_Description : string
+    + InitProgressBar(title:string, description:string, frames:int) : void
+    + AdvanceProgressBar() : void
+    + ClearProgressBar() : void
+}
+@enduml

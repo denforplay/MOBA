@@ -1,0 +1,9 @@
+@startuml
+class TypeHashWrapper <<static>> {
+    + {static} GetIntHash() : int
+    + {static} GetGenericHash() : int
+}
+class "SomeStruct`1"<T> <<struct>> {
+}
+TypeHashWrapper +-- "SomeStruct`1"
+@enduml

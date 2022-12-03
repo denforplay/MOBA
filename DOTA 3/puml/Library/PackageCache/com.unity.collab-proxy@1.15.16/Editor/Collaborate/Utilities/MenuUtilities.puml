@@ -1,0 +1,19 @@
+@startuml
+class MenuUtilities <<static>> {
+    + {static} GetMenuPosition(e:VisualElement, anchorPoint:AnchorPoint) : (float X, float Y)
+}
+enum AnchorPoint {
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight,
+}
+enum OpenDirection {
+    UpLeft,
+    UpRight,
+    DownLeft,
+    DownRight,
+}
+MenuUtilities +-- AnchorPoint
+MenuUtilities +-- OpenDirection
+@enduml

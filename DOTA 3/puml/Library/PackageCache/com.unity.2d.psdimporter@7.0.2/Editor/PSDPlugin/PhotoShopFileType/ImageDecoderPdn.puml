@@ -1,0 +1,37 @@
+@startuml
+enum DecodeType {
+    RGB32= 0,
+    Grayscale32= 1,
+    RGB= 2,
+    CMYK= 3,
+    Bitmap= 4,
+    Grayscale= 5,
+    Indexed= 6,
+    Lab= 7,
+}
+class ImageDecoderPdn <<static>> {
+    + {static} DecodeImage(pdnLayer:BitmapLayer, psdLayer:PhotoshopFile.Layer, inputDeps:JobHandle) : JobHandle
+    + {static} DecodeImage(pdnLayer:BitmapLayer, psdLayer:PhotoshopFile.Layer) : void
+}
+class DecodeContext {
+    + ByteDepth : int <<get>>
+    + HasAlphaChannel : int <<get>>
+    + DecodeContext(layer:PhotoshopFile.Layer, bounds:Rectangle)
+}
+class MaskDecodeContext {
+    + MaskDecodeContext(mask:Mask, layerContext:DecodeContext)
+    + IsRowEmpty(row:int) : bool
+}
+class "NativeArray`1"<T> {
+}
+ImageDecoderPdn +-- DecodeContext
+DecodeContext --> "AlphaChannel<byte>" "NativeArray`1"
+DecodeContext --> "ColorMode" PsdColorMode
+DecodeContext --> "ColorModeData<byte>" "NativeArray`1"
+DecodeContext --> "Rectangle" Rectangle
+DecodeContext --> "LayerMaskContext" MaskDecodeContext
+DecodeContext --> "UserMaskContext" MaskDecodeContext
+ImageDecoderPdn +-- MaskDecodeContext
+MaskDecodeContext --> "Mask" Mask
+MaskDecodeContext --> "Rectangle" Rectangle
+@enduml

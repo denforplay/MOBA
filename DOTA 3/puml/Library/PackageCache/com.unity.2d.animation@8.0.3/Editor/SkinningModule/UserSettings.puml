@@ -1,0 +1,47 @@
+@startuml
+class SkinningModuleSettings {
+    + <<const>> kCompactToolbarKey : string
+    + {static} compactToolBar : bool <<get>> <<set>>
+    + OnGUI() : void
+}
+class VisibilityToolSettings {
+    + <<const>> kBoneOpacitykey : string
+    + <<const>> kMeshOpacityKey : string
+    + {static} boneOpacity : float <<get>> <<set>>
+    + {static} meshOpacity : float <<get>> <<set>>
+}
+class GenerateGeomertySettings {
+    + <<const>> kDefaultOutlineDetail : int = 10
+    + <<const>> kDefaultAlphaTolerance : int = 10
+    + <<const>> kDefaultSubdivide : int = 0
+    + <<const>> kOutlineDetailKey : string
+    + <<const>> kAlphaToleranceKey : string
+    + <<const>> kSubdivideKey : string
+    + <<const>> kGenerateWeightsKey : string
+    + {static} outlineDetail : int <<get>> <<set>>
+    + {static} alphaTolerance : int <<get>> <<set>>
+    + {static} subdivide : int <<get>> <<set>>
+    + {static} generateWeights : bool <<get>> <<set>>
+}
+class SelectionOutlineSettings {
+    + <<const>> kSelectedOutlineRedKey : string
+    + <<const>> kSelectedOutlineGreenKey : string
+    + <<const>> kSelectedOutlineBlueKey : string
+    + <<const>> kSelectedOutlineAlphaKey : string
+    + <<const>> kSelectedSpriteOutlineSize : string
+    + <<const>> kSelectedBoneOutlineSize : string
+    + {static} selectedSpriteOutlineSize : int <<get>> <<set>>
+    + {static} selectedBoneOutlineSize : float <<get>> <<set>>
+    + OnGUI() : void
+}
+class UserSettings {
+    + <<const>> kSettingsUniqueKey : string = "UnityEditor.U2D.Animation/"
+    + UserSettings()
+}
+SkinningModuleSettings o-> "kCompactToolbarLabel" GUIContent
+SelectionOutlineSettings o-> "kSelectedOutlineColorLabel" GUIContent
+SelectionOutlineSettings o-> "kSelectedOutlineSizeLabel" GUIContent
+SelectionOutlineSettings o-> "kSelectedBoneOutlineSizeLabel" GUIContent
+SelectionOutlineSettings --> "outlineColor" Color
+SettingsProvider <|-- UserSettings
+@enduml

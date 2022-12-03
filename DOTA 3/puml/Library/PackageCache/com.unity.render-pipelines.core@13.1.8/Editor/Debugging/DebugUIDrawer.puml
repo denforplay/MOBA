@@ -1,0 +1,11 @@
+@startuml
+class DebugUIDrawerAttribute {
+    + DebugUIDrawerAttribute(type:Type)
+}
+class DebugUIDrawer {
+    + <<virtual>> Begin(widget:DebugUI.Widget, state:DebugState) : void
+    + <<virtual>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+    + <<virtual>> End(widget:DebugUI.Widget, state:DebugState) : void
+}
+Attribute <|-- DebugUIDrawerAttribute
+@enduml

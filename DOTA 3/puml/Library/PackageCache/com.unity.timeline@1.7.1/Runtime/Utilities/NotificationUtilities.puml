@@ -1,0 +1,6 @@
+@startuml
+class NotificationUtilities <<static>> {
+    + {static} CreateNotificationsPlayable(graph:PlayableGraph, markers:IEnumerable<IMarker>, duration:double, extrapolationMode:DirectorWrapMode) : ScriptPlayable<TimeNotificationBehaviour>
+    + {static} TrackTypeSupportsNotifications(type:Type) : bool
+}
+@enduml

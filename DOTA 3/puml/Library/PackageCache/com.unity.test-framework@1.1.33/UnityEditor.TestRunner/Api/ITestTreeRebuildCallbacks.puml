@@ -1,0 +1,6 @@
+@startuml
+interface ITestTreeRebuildCallbacks {
+    TestTreeRebuild(test:ITestAdaptor) : void
+}
+ICallbacks <|-- ITestTreeRebuildCallbacks
+@enduml

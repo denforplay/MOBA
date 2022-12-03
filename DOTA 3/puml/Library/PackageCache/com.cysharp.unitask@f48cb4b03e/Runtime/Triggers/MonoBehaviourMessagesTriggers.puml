@@ -1,0 +1,1408 @@
+@startuml
+interface IAsyncFixedUpdateHandler {
+    FixedUpdateAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    FixedUpdateAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncFixedUpdateTrigger(gameObject:GameObject) : AsyncFixedUpdateTrigger
+    + {static} GetAsyncFixedUpdateTrigger(component:Component) : AsyncFixedUpdateTrigger
+}
+class AsyncFixedUpdateTrigger <<sealed>> {
+    FixedUpdate() : void
+    + GetFixedUpdateAsyncHandler() : IAsyncFixedUpdateHandler
+    + GetFixedUpdateAsyncHandler(cancellationToken:CancellationToken) : IAsyncFixedUpdateHandler
+    + FixedUpdateAsync() : UniTask
+    + FixedUpdateAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncLateUpdateHandler {
+    LateUpdateAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    LateUpdateAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncLateUpdateTrigger(gameObject:GameObject) : AsyncLateUpdateTrigger
+    + {static} GetAsyncLateUpdateTrigger(component:Component) : AsyncLateUpdateTrigger
+}
+class AsyncLateUpdateTrigger <<sealed>> {
+    LateUpdate() : void
+    + GetLateUpdateAsyncHandler() : IAsyncLateUpdateHandler
+    + GetLateUpdateAsyncHandler(cancellationToken:CancellationToken) : IAsyncLateUpdateHandler
+    + LateUpdateAsync() : UniTask
+    + LateUpdateAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnAnimatorIKHandler {
+    OnAnimatorIKAsync() : UniTask<int>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnAnimatorIKAsync() : UniTask<int>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncAnimatorIKTrigger(gameObject:GameObject) : AsyncAnimatorIKTrigger
+    + {static} GetAsyncAnimatorIKTrigger(component:Component) : AsyncAnimatorIKTrigger
+}
+class AsyncAnimatorIKTrigger <<sealed>> {
+    OnAnimatorIK(layerIndex:int) : void
+    + GetOnAnimatorIKAsyncHandler() : IAsyncOnAnimatorIKHandler
+    + GetOnAnimatorIKAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnAnimatorIKHandler
+    + OnAnimatorIKAsync() : UniTask<int>
+    + OnAnimatorIKAsync(cancellationToken:CancellationToken) : UniTask<int>
+}
+interface IAsyncOnAnimatorMoveHandler {
+    OnAnimatorMoveAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnAnimatorMoveAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncAnimatorMoveTrigger(gameObject:GameObject) : AsyncAnimatorMoveTrigger
+    + {static} GetAsyncAnimatorMoveTrigger(component:Component) : AsyncAnimatorMoveTrigger
+}
+class AsyncAnimatorMoveTrigger <<sealed>> {
+    OnAnimatorMove() : void
+    + GetOnAnimatorMoveAsyncHandler() : IAsyncOnAnimatorMoveHandler
+    + GetOnAnimatorMoveAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnAnimatorMoveHandler
+    + OnAnimatorMoveAsync() : UniTask
+    + OnAnimatorMoveAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnApplicationFocusHandler {
+    OnApplicationFocusAsync() : UniTask<bool>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnApplicationFocusAsync() : UniTask<bool>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncApplicationFocusTrigger(gameObject:GameObject) : AsyncApplicationFocusTrigger
+    + {static} GetAsyncApplicationFocusTrigger(component:Component) : AsyncApplicationFocusTrigger
+}
+class AsyncApplicationFocusTrigger <<sealed>> {
+    OnApplicationFocus(hasFocus:bool) : void
+    + GetOnApplicationFocusAsyncHandler() : IAsyncOnApplicationFocusHandler
+    + GetOnApplicationFocusAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnApplicationFocusHandler
+    + OnApplicationFocusAsync() : UniTask<bool>
+    + OnApplicationFocusAsync(cancellationToken:CancellationToken) : UniTask<bool>
+}
+interface IAsyncOnApplicationPauseHandler {
+    OnApplicationPauseAsync() : UniTask<bool>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnApplicationPauseAsync() : UniTask<bool>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncApplicationPauseTrigger(gameObject:GameObject) : AsyncApplicationPauseTrigger
+    + {static} GetAsyncApplicationPauseTrigger(component:Component) : AsyncApplicationPauseTrigger
+}
+class AsyncApplicationPauseTrigger <<sealed>> {
+    OnApplicationPause(pauseStatus:bool) : void
+    + GetOnApplicationPauseAsyncHandler() : IAsyncOnApplicationPauseHandler
+    + GetOnApplicationPauseAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnApplicationPauseHandler
+    + OnApplicationPauseAsync() : UniTask<bool>
+    + OnApplicationPauseAsync(cancellationToken:CancellationToken) : UniTask<bool>
+}
+interface IAsyncOnApplicationQuitHandler {
+    OnApplicationQuitAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnApplicationQuitAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncApplicationQuitTrigger(gameObject:GameObject) : AsyncApplicationQuitTrigger
+    + {static} GetAsyncApplicationQuitTrigger(component:Component) : AsyncApplicationQuitTrigger
+}
+class AsyncApplicationQuitTrigger <<sealed>> {
+    OnApplicationQuit() : void
+    + GetOnApplicationQuitAsyncHandler() : IAsyncOnApplicationQuitHandler
+    + GetOnApplicationQuitAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnApplicationQuitHandler
+    + OnApplicationQuitAsync() : UniTask
+    + OnApplicationQuitAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnAudioFilterReadHandler {
+    OnAudioFilterReadAsync() : UniTask<(float[] data, int channels)>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnAudioFilterReadAsync() : UniTask<(float[] data, int channels)>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncAudioFilterReadTrigger(gameObject:GameObject) : AsyncAudioFilterReadTrigger
+    + {static} GetAsyncAudioFilterReadTrigger(component:Component) : AsyncAudioFilterReadTrigger
+}
+class AsyncAudioFilterReadTrigger <<sealed>> {
+    OnAudioFilterRead(data:float[], channels:int) : void
+    + GetOnAudioFilterReadAsyncHandler() : IAsyncOnAudioFilterReadHandler
+    + GetOnAudioFilterReadAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnAudioFilterReadHandler
+    + OnAudioFilterReadAsync() : UniTask<(float[] data, int channels)>
+    + OnAudioFilterReadAsync(cancellationToken:CancellationToken) : UniTask<(float[] data, int channels)>
+}
+interface IAsyncOnBecameInvisibleHandler {
+    OnBecameInvisibleAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnBecameInvisibleAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncBecameInvisibleTrigger(gameObject:GameObject) : AsyncBecameInvisibleTrigger
+    + {static} GetAsyncBecameInvisibleTrigger(component:Component) : AsyncBecameInvisibleTrigger
+}
+class AsyncBecameInvisibleTrigger <<sealed>> {
+    OnBecameInvisible() : void
+    + GetOnBecameInvisibleAsyncHandler() : IAsyncOnBecameInvisibleHandler
+    + GetOnBecameInvisibleAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnBecameInvisibleHandler
+    + OnBecameInvisibleAsync() : UniTask
+    + OnBecameInvisibleAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnBecameVisibleHandler {
+    OnBecameVisibleAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnBecameVisibleAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncBecameVisibleTrigger(gameObject:GameObject) : AsyncBecameVisibleTrigger
+    + {static} GetAsyncBecameVisibleTrigger(component:Component) : AsyncBecameVisibleTrigger
+}
+class AsyncBecameVisibleTrigger <<sealed>> {
+    OnBecameVisible() : void
+    + GetOnBecameVisibleAsyncHandler() : IAsyncOnBecameVisibleHandler
+    + GetOnBecameVisibleAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnBecameVisibleHandler
+    + OnBecameVisibleAsync() : UniTask
+    + OnBecameVisibleAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnBeforeTransformParentChangedHandler {
+    OnBeforeTransformParentChangedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnBeforeTransformParentChangedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncBeforeTransformParentChangedTrigger(gameObject:GameObject) : AsyncBeforeTransformParentChangedTrigger
+    + {static} GetAsyncBeforeTransformParentChangedTrigger(component:Component) : AsyncBeforeTransformParentChangedTrigger
+}
+class AsyncBeforeTransformParentChangedTrigger <<sealed>> {
+    OnBeforeTransformParentChanged() : void
+    + GetOnBeforeTransformParentChangedAsyncHandler() : IAsyncOnBeforeTransformParentChangedHandler
+    + GetOnBeforeTransformParentChangedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnBeforeTransformParentChangedHandler
+    + OnBeforeTransformParentChangedAsync() : UniTask
+    + OnBeforeTransformParentChangedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnCanvasGroupChangedHandler {
+    OnCanvasGroupChangedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCanvasGroupChangedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncOnCanvasGroupChangedTrigger(gameObject:GameObject) : AsyncOnCanvasGroupChangedTrigger
+    + {static} GetAsyncOnCanvasGroupChangedTrigger(component:Component) : AsyncOnCanvasGroupChangedTrigger
+}
+class AsyncOnCanvasGroupChangedTrigger <<sealed>> {
+    OnCanvasGroupChanged() : void
+    + GetOnCanvasGroupChangedAsyncHandler() : IAsyncOnCanvasGroupChangedHandler
+    + GetOnCanvasGroupChangedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCanvasGroupChangedHandler
+    + OnCanvasGroupChangedAsync() : UniTask
+    + OnCanvasGroupChangedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnCollisionEnterHandler {
+    OnCollisionEnterAsync() : UniTask<Collision>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCollisionEnterAsync() : UniTask<Collision>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncCollisionEnterTrigger(gameObject:GameObject) : AsyncCollisionEnterTrigger
+    + {static} GetAsyncCollisionEnterTrigger(component:Component) : AsyncCollisionEnterTrigger
+}
+class AsyncCollisionEnterTrigger <<sealed>> {
+    OnCollisionEnter(coll:Collision) : void
+    + GetOnCollisionEnterAsyncHandler() : IAsyncOnCollisionEnterHandler
+    + GetOnCollisionEnterAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCollisionEnterHandler
+    + OnCollisionEnterAsync() : UniTask<Collision>
+    + OnCollisionEnterAsync(cancellationToken:CancellationToken) : UniTask<Collision>
+}
+interface IAsyncOnCollisionEnter2DHandler {
+    OnCollisionEnter2DAsync() : UniTask<Collision2D>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCollisionEnter2DAsync() : UniTask<Collision2D>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncCollisionEnter2DTrigger(gameObject:GameObject) : AsyncCollisionEnter2DTrigger
+    + {static} GetAsyncCollisionEnter2DTrigger(component:Component) : AsyncCollisionEnter2DTrigger
+}
+class AsyncCollisionEnter2DTrigger <<sealed>> {
+    OnCollisionEnter2D(coll:Collision2D) : void
+    + GetOnCollisionEnter2DAsyncHandler() : IAsyncOnCollisionEnter2DHandler
+    + GetOnCollisionEnter2DAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCollisionEnter2DHandler
+    + OnCollisionEnter2DAsync() : UniTask<Collision2D>
+    + OnCollisionEnter2DAsync(cancellationToken:CancellationToken) : UniTask<Collision2D>
+}
+interface IAsyncOnCollisionExitHandler {
+    OnCollisionExitAsync() : UniTask<Collision>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCollisionExitAsync() : UniTask<Collision>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncCollisionExitTrigger(gameObject:GameObject) : AsyncCollisionExitTrigger
+    + {static} GetAsyncCollisionExitTrigger(component:Component) : AsyncCollisionExitTrigger
+}
+class AsyncCollisionExitTrigger <<sealed>> {
+    OnCollisionExit(coll:Collision) : void
+    + GetOnCollisionExitAsyncHandler() : IAsyncOnCollisionExitHandler
+    + GetOnCollisionExitAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCollisionExitHandler
+    + OnCollisionExitAsync() : UniTask<Collision>
+    + OnCollisionExitAsync(cancellationToken:CancellationToken) : UniTask<Collision>
+}
+interface IAsyncOnCollisionExit2DHandler {
+    OnCollisionExit2DAsync() : UniTask<Collision2D>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCollisionExit2DAsync() : UniTask<Collision2D>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncCollisionExit2DTrigger(gameObject:GameObject) : AsyncCollisionExit2DTrigger
+    + {static} GetAsyncCollisionExit2DTrigger(component:Component) : AsyncCollisionExit2DTrigger
+}
+class AsyncCollisionExit2DTrigger <<sealed>> {
+    OnCollisionExit2D(coll:Collision2D) : void
+    + GetOnCollisionExit2DAsyncHandler() : IAsyncOnCollisionExit2DHandler
+    + GetOnCollisionExit2DAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCollisionExit2DHandler
+    + OnCollisionExit2DAsync() : UniTask<Collision2D>
+    + OnCollisionExit2DAsync(cancellationToken:CancellationToken) : UniTask<Collision2D>
+}
+interface IAsyncOnCollisionStayHandler {
+    OnCollisionStayAsync() : UniTask<Collision>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCollisionStayAsync() : UniTask<Collision>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncCollisionStayTrigger(gameObject:GameObject) : AsyncCollisionStayTrigger
+    + {static} GetAsyncCollisionStayTrigger(component:Component) : AsyncCollisionStayTrigger
+}
+class AsyncCollisionStayTrigger <<sealed>> {
+    OnCollisionStay(coll:Collision) : void
+    + GetOnCollisionStayAsyncHandler() : IAsyncOnCollisionStayHandler
+    + GetOnCollisionStayAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCollisionStayHandler
+    + OnCollisionStayAsync() : UniTask<Collision>
+    + OnCollisionStayAsync(cancellationToken:CancellationToken) : UniTask<Collision>
+}
+interface IAsyncOnCollisionStay2DHandler {
+    OnCollisionStay2DAsync() : UniTask<Collision2D>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCollisionStay2DAsync() : UniTask<Collision2D>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncCollisionStay2DTrigger(gameObject:GameObject) : AsyncCollisionStay2DTrigger
+    + {static} GetAsyncCollisionStay2DTrigger(component:Component) : AsyncCollisionStay2DTrigger
+}
+class AsyncCollisionStay2DTrigger <<sealed>> {
+    OnCollisionStay2D(coll:Collision2D) : void
+    + GetOnCollisionStay2DAsyncHandler() : IAsyncOnCollisionStay2DHandler
+    + GetOnCollisionStay2DAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCollisionStay2DHandler
+    + OnCollisionStay2DAsync() : UniTask<Collision2D>
+    + OnCollisionStay2DAsync(cancellationToken:CancellationToken) : UniTask<Collision2D>
+}
+interface IAsyncOnControllerColliderHitHandler {
+    OnControllerColliderHitAsync() : UniTask<ControllerColliderHit>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnControllerColliderHitAsync() : UniTask<ControllerColliderHit>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncControllerColliderHitTrigger(gameObject:GameObject) : AsyncControllerColliderHitTrigger
+    + {static} GetAsyncControllerColliderHitTrigger(component:Component) : AsyncControllerColliderHitTrigger
+}
+class AsyncControllerColliderHitTrigger <<sealed>> {
+    OnControllerColliderHit(hit:ControllerColliderHit) : void
+    + GetOnControllerColliderHitAsyncHandler() : IAsyncOnControllerColliderHitHandler
+    + GetOnControllerColliderHitAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnControllerColliderHitHandler
+    + OnControllerColliderHitAsync() : UniTask<ControllerColliderHit>
+    + OnControllerColliderHitAsync(cancellationToken:CancellationToken) : UniTask<ControllerColliderHit>
+}
+interface IAsyncOnDisableHandler {
+    OnDisableAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnDisableAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncDisableTrigger(gameObject:GameObject) : AsyncDisableTrigger
+    + {static} GetAsyncDisableTrigger(component:Component) : AsyncDisableTrigger
+}
+class AsyncDisableTrigger <<sealed>> {
+    OnDisable() : void
+    + GetOnDisableAsyncHandler() : IAsyncOnDisableHandler
+    + GetOnDisableAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnDisableHandler
+    + OnDisableAsync() : UniTask
+    + OnDisableAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnDrawGizmosHandler {
+    OnDrawGizmosAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnDrawGizmosAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncDrawGizmosTrigger(gameObject:GameObject) : AsyncDrawGizmosTrigger
+    + {static} GetAsyncDrawGizmosTrigger(component:Component) : AsyncDrawGizmosTrigger
+}
+class AsyncDrawGizmosTrigger <<sealed>> {
+    OnDrawGizmos() : void
+    + GetOnDrawGizmosAsyncHandler() : IAsyncOnDrawGizmosHandler
+    + GetOnDrawGizmosAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnDrawGizmosHandler
+    + OnDrawGizmosAsync() : UniTask
+    + OnDrawGizmosAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnDrawGizmosSelectedHandler {
+    OnDrawGizmosSelectedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnDrawGizmosSelectedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncDrawGizmosSelectedTrigger(gameObject:GameObject) : AsyncDrawGizmosSelectedTrigger
+    + {static} GetAsyncDrawGizmosSelectedTrigger(component:Component) : AsyncDrawGizmosSelectedTrigger
+}
+class AsyncDrawGizmosSelectedTrigger <<sealed>> {
+    OnDrawGizmosSelected() : void
+    + GetOnDrawGizmosSelectedAsyncHandler() : IAsyncOnDrawGizmosSelectedHandler
+    + GetOnDrawGizmosSelectedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnDrawGizmosSelectedHandler
+    + OnDrawGizmosSelectedAsync() : UniTask
+    + OnDrawGizmosSelectedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnEnableHandler {
+    OnEnableAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnEnableAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncEnableTrigger(gameObject:GameObject) : AsyncEnableTrigger
+    + {static} GetAsyncEnableTrigger(component:Component) : AsyncEnableTrigger
+}
+class AsyncEnableTrigger <<sealed>> {
+    OnEnable() : void
+    + GetOnEnableAsyncHandler() : IAsyncOnEnableHandler
+    + GetOnEnableAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnEnableHandler
+    + OnEnableAsync() : UniTask
+    + OnEnableAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnGUIHandler {
+    OnGUIAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnGUIAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncGUITrigger(gameObject:GameObject) : AsyncGUITrigger
+    + {static} GetAsyncGUITrigger(component:Component) : AsyncGUITrigger
+}
+class AsyncGUITrigger <<sealed>> {
+    OnGUI() : void
+    + GetOnGUIAsyncHandler() : IAsyncOnGUIHandler
+    + GetOnGUIAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnGUIHandler
+    + OnGUIAsync() : UniTask
+    + OnGUIAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnJointBreakHandler {
+    OnJointBreakAsync() : UniTask<float>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnJointBreakAsync() : UniTask<float>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncJointBreakTrigger(gameObject:GameObject) : AsyncJointBreakTrigger
+    + {static} GetAsyncJointBreakTrigger(component:Component) : AsyncJointBreakTrigger
+}
+class AsyncJointBreakTrigger <<sealed>> {
+    OnJointBreak(breakForce:float) : void
+    + GetOnJointBreakAsyncHandler() : IAsyncOnJointBreakHandler
+    + GetOnJointBreakAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnJointBreakHandler
+    + OnJointBreakAsync() : UniTask<float>
+    + OnJointBreakAsync(cancellationToken:CancellationToken) : UniTask<float>
+}
+interface IAsyncOnJointBreak2DHandler {
+    OnJointBreak2DAsync() : UniTask<Joint2D>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnJointBreak2DAsync() : UniTask<Joint2D>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncJointBreak2DTrigger(gameObject:GameObject) : AsyncJointBreak2DTrigger
+    + {static} GetAsyncJointBreak2DTrigger(component:Component) : AsyncJointBreak2DTrigger
+}
+class AsyncJointBreak2DTrigger <<sealed>> {
+    OnJointBreak2D(brokenJoint:Joint2D) : void
+    + GetOnJointBreak2DAsyncHandler() : IAsyncOnJointBreak2DHandler
+    + GetOnJointBreak2DAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnJointBreak2DHandler
+    + OnJointBreak2DAsync() : UniTask<Joint2D>
+    + OnJointBreak2DAsync(cancellationToken:CancellationToken) : UniTask<Joint2D>
+}
+interface IAsyncOnMouseDownHandler {
+    OnMouseDownAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMouseDownAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMouseDownTrigger(gameObject:GameObject) : AsyncMouseDownTrigger
+    + {static} GetAsyncMouseDownTrigger(component:Component) : AsyncMouseDownTrigger
+}
+class AsyncMouseDownTrigger <<sealed>> {
+    OnMouseDown() : void
+    + GetOnMouseDownAsyncHandler() : IAsyncOnMouseDownHandler
+    + GetOnMouseDownAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMouseDownHandler
+    + OnMouseDownAsync() : UniTask
+    + OnMouseDownAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnMouseDragHandler {
+    OnMouseDragAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMouseDragAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMouseDragTrigger(gameObject:GameObject) : AsyncMouseDragTrigger
+    + {static} GetAsyncMouseDragTrigger(component:Component) : AsyncMouseDragTrigger
+}
+class AsyncMouseDragTrigger <<sealed>> {
+    OnMouseDrag() : void
+    + GetOnMouseDragAsyncHandler() : IAsyncOnMouseDragHandler
+    + GetOnMouseDragAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMouseDragHandler
+    + OnMouseDragAsync() : UniTask
+    + OnMouseDragAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnMouseEnterHandler {
+    OnMouseEnterAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMouseEnterAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMouseEnterTrigger(gameObject:GameObject) : AsyncMouseEnterTrigger
+    + {static} GetAsyncMouseEnterTrigger(component:Component) : AsyncMouseEnterTrigger
+}
+class AsyncMouseEnterTrigger <<sealed>> {
+    OnMouseEnter() : void
+    + GetOnMouseEnterAsyncHandler() : IAsyncOnMouseEnterHandler
+    + GetOnMouseEnterAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMouseEnterHandler
+    + OnMouseEnterAsync() : UniTask
+    + OnMouseEnterAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnMouseExitHandler {
+    OnMouseExitAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMouseExitAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMouseExitTrigger(gameObject:GameObject) : AsyncMouseExitTrigger
+    + {static} GetAsyncMouseExitTrigger(component:Component) : AsyncMouseExitTrigger
+}
+class AsyncMouseExitTrigger <<sealed>> {
+    OnMouseExit() : void
+    + GetOnMouseExitAsyncHandler() : IAsyncOnMouseExitHandler
+    + GetOnMouseExitAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMouseExitHandler
+    + OnMouseExitAsync() : UniTask
+    + OnMouseExitAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnMouseOverHandler {
+    OnMouseOverAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMouseOverAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMouseOverTrigger(gameObject:GameObject) : AsyncMouseOverTrigger
+    + {static} GetAsyncMouseOverTrigger(component:Component) : AsyncMouseOverTrigger
+}
+class AsyncMouseOverTrigger <<sealed>> {
+    OnMouseOver() : void
+    + GetOnMouseOverAsyncHandler() : IAsyncOnMouseOverHandler
+    + GetOnMouseOverAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMouseOverHandler
+    + OnMouseOverAsync() : UniTask
+    + OnMouseOverAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnMouseUpHandler {
+    OnMouseUpAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMouseUpAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMouseUpTrigger(gameObject:GameObject) : AsyncMouseUpTrigger
+    + {static} GetAsyncMouseUpTrigger(component:Component) : AsyncMouseUpTrigger
+}
+class AsyncMouseUpTrigger <<sealed>> {
+    OnMouseUp() : void
+    + GetOnMouseUpAsyncHandler() : IAsyncOnMouseUpHandler
+    + GetOnMouseUpAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMouseUpHandler
+    + OnMouseUpAsync() : UniTask
+    + OnMouseUpAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnMouseUpAsButtonHandler {
+    OnMouseUpAsButtonAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMouseUpAsButtonAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMouseUpAsButtonTrigger(gameObject:GameObject) : AsyncMouseUpAsButtonTrigger
+    + {static} GetAsyncMouseUpAsButtonTrigger(component:Component) : AsyncMouseUpAsButtonTrigger
+}
+class AsyncMouseUpAsButtonTrigger <<sealed>> {
+    OnMouseUpAsButton() : void
+    + GetOnMouseUpAsButtonAsyncHandler() : IAsyncOnMouseUpAsButtonHandler
+    + GetOnMouseUpAsButtonAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMouseUpAsButtonHandler
+    + OnMouseUpAsButtonAsync() : UniTask
+    + OnMouseUpAsButtonAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnParticleCollisionHandler {
+    OnParticleCollisionAsync() : UniTask<GameObject>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnParticleCollisionAsync() : UniTask<GameObject>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncParticleCollisionTrigger(gameObject:GameObject) : AsyncParticleCollisionTrigger
+    + {static} GetAsyncParticleCollisionTrigger(component:Component) : AsyncParticleCollisionTrigger
+}
+class AsyncParticleCollisionTrigger <<sealed>> {
+    OnParticleCollision(other:GameObject) : void
+    + GetOnParticleCollisionAsyncHandler() : IAsyncOnParticleCollisionHandler
+    + GetOnParticleCollisionAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnParticleCollisionHandler
+    + OnParticleCollisionAsync() : UniTask<GameObject>
+    + OnParticleCollisionAsync(cancellationToken:CancellationToken) : UniTask<GameObject>
+}
+interface IAsyncOnParticleSystemStoppedHandler {
+    OnParticleSystemStoppedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnParticleSystemStoppedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncParticleSystemStoppedTrigger(gameObject:GameObject) : AsyncParticleSystemStoppedTrigger
+    + {static} GetAsyncParticleSystemStoppedTrigger(component:Component) : AsyncParticleSystemStoppedTrigger
+}
+class AsyncParticleSystemStoppedTrigger <<sealed>> {
+    OnParticleSystemStopped() : void
+    + GetOnParticleSystemStoppedAsyncHandler() : IAsyncOnParticleSystemStoppedHandler
+    + GetOnParticleSystemStoppedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnParticleSystemStoppedHandler
+    + OnParticleSystemStoppedAsync() : UniTask
+    + OnParticleSystemStoppedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnParticleTriggerHandler {
+    OnParticleTriggerAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnParticleTriggerAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncParticleTriggerTrigger(gameObject:GameObject) : AsyncParticleTriggerTrigger
+    + {static} GetAsyncParticleTriggerTrigger(component:Component) : AsyncParticleTriggerTrigger
+}
+class AsyncParticleTriggerTrigger <<sealed>> {
+    OnParticleTrigger() : void
+    + GetOnParticleTriggerAsyncHandler() : IAsyncOnParticleTriggerHandler
+    + GetOnParticleTriggerAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnParticleTriggerHandler
+    + OnParticleTriggerAsync() : UniTask
+    + OnParticleTriggerAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnPostRenderHandler {
+    OnPostRenderAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPostRenderAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPostRenderTrigger(gameObject:GameObject) : AsyncPostRenderTrigger
+    + {static} GetAsyncPostRenderTrigger(component:Component) : AsyncPostRenderTrigger
+}
+class AsyncPostRenderTrigger <<sealed>> {
+    OnPostRender() : void
+    + GetOnPostRenderAsyncHandler() : IAsyncOnPostRenderHandler
+    + GetOnPostRenderAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPostRenderHandler
+    + OnPostRenderAsync() : UniTask
+    + OnPostRenderAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnPreCullHandler {
+    OnPreCullAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPreCullAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPreCullTrigger(gameObject:GameObject) : AsyncPreCullTrigger
+    + {static} GetAsyncPreCullTrigger(component:Component) : AsyncPreCullTrigger
+}
+class AsyncPreCullTrigger <<sealed>> {
+    OnPreCull() : void
+    + GetOnPreCullAsyncHandler() : IAsyncOnPreCullHandler
+    + GetOnPreCullAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPreCullHandler
+    + OnPreCullAsync() : UniTask
+    + OnPreCullAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnPreRenderHandler {
+    OnPreRenderAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPreRenderAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPreRenderTrigger(gameObject:GameObject) : AsyncPreRenderTrigger
+    + {static} GetAsyncPreRenderTrigger(component:Component) : AsyncPreRenderTrigger
+}
+class AsyncPreRenderTrigger <<sealed>> {
+    OnPreRender() : void
+    + GetOnPreRenderAsyncHandler() : IAsyncOnPreRenderHandler
+    + GetOnPreRenderAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPreRenderHandler
+    + OnPreRenderAsync() : UniTask
+    + OnPreRenderAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnRectTransformDimensionsChangeHandler {
+    OnRectTransformDimensionsChangeAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnRectTransformDimensionsChangeAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncRectTransformDimensionsChangeTrigger(gameObject:GameObject) : AsyncRectTransformDimensionsChangeTrigger
+    + {static} GetAsyncRectTransformDimensionsChangeTrigger(component:Component) : AsyncRectTransformDimensionsChangeTrigger
+}
+class AsyncRectTransformDimensionsChangeTrigger <<sealed>> {
+    OnRectTransformDimensionsChange() : void
+    + GetOnRectTransformDimensionsChangeAsyncHandler() : IAsyncOnRectTransformDimensionsChangeHandler
+    + GetOnRectTransformDimensionsChangeAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnRectTransformDimensionsChangeHandler
+    + OnRectTransformDimensionsChangeAsync() : UniTask
+    + OnRectTransformDimensionsChangeAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnRectTransformRemovedHandler {
+    OnRectTransformRemovedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnRectTransformRemovedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncRectTransformRemovedTrigger(gameObject:GameObject) : AsyncRectTransformRemovedTrigger
+    + {static} GetAsyncRectTransformRemovedTrigger(component:Component) : AsyncRectTransformRemovedTrigger
+}
+class AsyncRectTransformRemovedTrigger <<sealed>> {
+    OnRectTransformRemoved() : void
+    + GetOnRectTransformRemovedAsyncHandler() : IAsyncOnRectTransformRemovedHandler
+    + GetOnRectTransformRemovedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnRectTransformRemovedHandler
+    + OnRectTransformRemovedAsync() : UniTask
+    + OnRectTransformRemovedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnRenderImageHandler {
+    OnRenderImageAsync() : UniTask<(RenderTexture source, RenderTexture destination)>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnRenderImageAsync() : UniTask<(RenderTexture source, RenderTexture destination)>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncRenderImageTrigger(gameObject:GameObject) : AsyncRenderImageTrigger
+    + {static} GetAsyncRenderImageTrigger(component:Component) : AsyncRenderImageTrigger
+}
+class AsyncRenderImageTrigger <<sealed>> {
+    OnRenderImage(source:RenderTexture, destination:RenderTexture) : void
+    + GetOnRenderImageAsyncHandler() : IAsyncOnRenderImageHandler
+    + GetOnRenderImageAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnRenderImageHandler
+    + OnRenderImageAsync() : UniTask<(RenderTexture source, RenderTexture destination)>
+    + OnRenderImageAsync(cancellationToken:CancellationToken) : UniTask<(RenderTexture source, RenderTexture destination)>
+}
+interface IAsyncOnRenderObjectHandler {
+    OnRenderObjectAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnRenderObjectAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncRenderObjectTrigger(gameObject:GameObject) : AsyncRenderObjectTrigger
+    + {static} GetAsyncRenderObjectTrigger(component:Component) : AsyncRenderObjectTrigger
+}
+class AsyncRenderObjectTrigger <<sealed>> {
+    OnRenderObject() : void
+    + GetOnRenderObjectAsyncHandler() : IAsyncOnRenderObjectHandler
+    + GetOnRenderObjectAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnRenderObjectHandler
+    + OnRenderObjectAsync() : UniTask
+    + OnRenderObjectAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnServerInitializedHandler {
+    OnServerInitializedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnServerInitializedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncServerInitializedTrigger(gameObject:GameObject) : AsyncServerInitializedTrigger
+    + {static} GetAsyncServerInitializedTrigger(component:Component) : AsyncServerInitializedTrigger
+}
+class AsyncServerInitializedTrigger <<sealed>> {
+    OnServerInitialized() : void
+    + GetOnServerInitializedAsyncHandler() : IAsyncOnServerInitializedHandler
+    + GetOnServerInitializedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnServerInitializedHandler
+    + OnServerInitializedAsync() : UniTask
+    + OnServerInitializedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnTransformChildrenChangedHandler {
+    OnTransformChildrenChangedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTransformChildrenChangedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTransformChildrenChangedTrigger(gameObject:GameObject) : AsyncTransformChildrenChangedTrigger
+    + {static} GetAsyncTransformChildrenChangedTrigger(component:Component) : AsyncTransformChildrenChangedTrigger
+}
+class AsyncTransformChildrenChangedTrigger <<sealed>> {
+    OnTransformChildrenChanged() : void
+    + GetOnTransformChildrenChangedAsyncHandler() : IAsyncOnTransformChildrenChangedHandler
+    + GetOnTransformChildrenChangedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTransformChildrenChangedHandler
+    + OnTransformChildrenChangedAsync() : UniTask
+    + OnTransformChildrenChangedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnTransformParentChangedHandler {
+    OnTransformParentChangedAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTransformParentChangedAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTransformParentChangedTrigger(gameObject:GameObject) : AsyncTransformParentChangedTrigger
+    + {static} GetAsyncTransformParentChangedTrigger(component:Component) : AsyncTransformParentChangedTrigger
+}
+class AsyncTransformParentChangedTrigger <<sealed>> {
+    OnTransformParentChanged() : void
+    + GetOnTransformParentChangedAsyncHandler() : IAsyncOnTransformParentChangedHandler
+    + GetOnTransformParentChangedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTransformParentChangedHandler
+    + OnTransformParentChangedAsync() : UniTask
+    + OnTransformParentChangedAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnTriggerEnterHandler {
+    OnTriggerEnterAsync() : UniTask<Collider>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTriggerEnterAsync() : UniTask<Collider>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTriggerEnterTrigger(gameObject:GameObject) : AsyncTriggerEnterTrigger
+    + {static} GetAsyncTriggerEnterTrigger(component:Component) : AsyncTriggerEnterTrigger
+}
+class AsyncTriggerEnterTrigger <<sealed>> {
+    OnTriggerEnter(other:Collider) : void
+    + GetOnTriggerEnterAsyncHandler() : IAsyncOnTriggerEnterHandler
+    + GetOnTriggerEnterAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTriggerEnterHandler
+    + OnTriggerEnterAsync() : UniTask<Collider>
+    + OnTriggerEnterAsync(cancellationToken:CancellationToken) : UniTask<Collider>
+}
+interface IAsyncOnTriggerEnter2DHandler {
+    OnTriggerEnter2DAsync() : UniTask<Collider2D>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTriggerEnter2DAsync() : UniTask<Collider2D>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTriggerEnter2DTrigger(gameObject:GameObject) : AsyncTriggerEnter2DTrigger
+    + {static} GetAsyncTriggerEnter2DTrigger(component:Component) : AsyncTriggerEnter2DTrigger
+}
+class AsyncTriggerEnter2DTrigger <<sealed>> {
+    OnTriggerEnter2D(other:Collider2D) : void
+    + GetOnTriggerEnter2DAsyncHandler() : IAsyncOnTriggerEnter2DHandler
+    + GetOnTriggerEnter2DAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTriggerEnter2DHandler
+    + OnTriggerEnter2DAsync() : UniTask<Collider2D>
+    + OnTriggerEnter2DAsync(cancellationToken:CancellationToken) : UniTask<Collider2D>
+}
+interface IAsyncOnTriggerExitHandler {
+    OnTriggerExitAsync() : UniTask<Collider>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTriggerExitAsync() : UniTask<Collider>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTriggerExitTrigger(gameObject:GameObject) : AsyncTriggerExitTrigger
+    + {static} GetAsyncTriggerExitTrigger(component:Component) : AsyncTriggerExitTrigger
+}
+class AsyncTriggerExitTrigger <<sealed>> {
+    OnTriggerExit(other:Collider) : void
+    + GetOnTriggerExitAsyncHandler() : IAsyncOnTriggerExitHandler
+    + GetOnTriggerExitAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTriggerExitHandler
+    + OnTriggerExitAsync() : UniTask<Collider>
+    + OnTriggerExitAsync(cancellationToken:CancellationToken) : UniTask<Collider>
+}
+interface IAsyncOnTriggerExit2DHandler {
+    OnTriggerExit2DAsync() : UniTask<Collider2D>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTriggerExit2DAsync() : UniTask<Collider2D>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTriggerExit2DTrigger(gameObject:GameObject) : AsyncTriggerExit2DTrigger
+    + {static} GetAsyncTriggerExit2DTrigger(component:Component) : AsyncTriggerExit2DTrigger
+}
+class AsyncTriggerExit2DTrigger <<sealed>> {
+    OnTriggerExit2D(other:Collider2D) : void
+    + GetOnTriggerExit2DAsyncHandler() : IAsyncOnTriggerExit2DHandler
+    + GetOnTriggerExit2DAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTriggerExit2DHandler
+    + OnTriggerExit2DAsync() : UniTask<Collider2D>
+    + OnTriggerExit2DAsync(cancellationToken:CancellationToken) : UniTask<Collider2D>
+}
+interface IAsyncOnTriggerStayHandler {
+    OnTriggerStayAsync() : UniTask<Collider>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTriggerStayAsync() : UniTask<Collider>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTriggerStayTrigger(gameObject:GameObject) : AsyncTriggerStayTrigger
+    + {static} GetAsyncTriggerStayTrigger(component:Component) : AsyncTriggerStayTrigger
+}
+class AsyncTriggerStayTrigger <<sealed>> {
+    OnTriggerStay(other:Collider) : void
+    + GetOnTriggerStayAsyncHandler() : IAsyncOnTriggerStayHandler
+    + GetOnTriggerStayAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTriggerStayHandler
+    + OnTriggerStayAsync() : UniTask<Collider>
+    + OnTriggerStayAsync(cancellationToken:CancellationToken) : UniTask<Collider>
+}
+interface IAsyncOnTriggerStay2DHandler {
+    OnTriggerStay2DAsync() : UniTask<Collider2D>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnTriggerStay2DAsync() : UniTask<Collider2D>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncTriggerStay2DTrigger(gameObject:GameObject) : AsyncTriggerStay2DTrigger
+    + {static} GetAsyncTriggerStay2DTrigger(component:Component) : AsyncTriggerStay2DTrigger
+}
+class AsyncTriggerStay2DTrigger <<sealed>> {
+    OnTriggerStay2D(other:Collider2D) : void
+    + GetOnTriggerStay2DAsyncHandler() : IAsyncOnTriggerStay2DHandler
+    + GetOnTriggerStay2DAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnTriggerStay2DHandler
+    + OnTriggerStay2DAsync() : UniTask<Collider2D>
+    + OnTriggerStay2DAsync(cancellationToken:CancellationToken) : UniTask<Collider2D>
+}
+interface IAsyncOnValidateHandler {
+    OnValidateAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnValidateAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncValidateTrigger(gameObject:GameObject) : AsyncValidateTrigger
+    + {static} GetAsyncValidateTrigger(component:Component) : AsyncValidateTrigger
+}
+class AsyncValidateTrigger <<sealed>> {
+    OnValidate() : void
+    + GetOnValidateAsyncHandler() : IAsyncOnValidateHandler
+    + GetOnValidateAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnValidateHandler
+    + OnValidateAsync() : UniTask
+    + OnValidateAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnWillRenderObjectHandler {
+    OnWillRenderObjectAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnWillRenderObjectAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncWillRenderObjectTrigger(gameObject:GameObject) : AsyncWillRenderObjectTrigger
+    + {static} GetAsyncWillRenderObjectTrigger(component:Component) : AsyncWillRenderObjectTrigger
+}
+class AsyncWillRenderObjectTrigger <<sealed>> {
+    OnWillRenderObject() : void
+    + GetOnWillRenderObjectAsyncHandler() : IAsyncOnWillRenderObjectHandler
+    + GetOnWillRenderObjectAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnWillRenderObjectHandler
+    + OnWillRenderObjectAsync() : UniTask
+    + OnWillRenderObjectAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncResetHandler {
+    ResetAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    ResetAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncResetTrigger(gameObject:GameObject) : AsyncResetTrigger
+    + {static} GetAsyncResetTrigger(component:Component) : AsyncResetTrigger
+}
+class AsyncResetTrigger <<sealed>> {
+    Reset() : void
+    + GetResetAsyncHandler() : IAsyncResetHandler
+    + GetResetAsyncHandler(cancellationToken:CancellationToken) : IAsyncResetHandler
+    + ResetAsync() : UniTask
+    + ResetAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncUpdateHandler {
+    UpdateAsync() : UniTask
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    UpdateAsync() : UniTask
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncUpdateTrigger(gameObject:GameObject) : AsyncUpdateTrigger
+    + {static} GetAsyncUpdateTrigger(component:Component) : AsyncUpdateTrigger
+}
+class AsyncUpdateTrigger <<sealed>> {
+    Update() : void
+    + GetUpdateAsyncHandler() : IAsyncUpdateHandler
+    + GetUpdateAsyncHandler(cancellationToken:CancellationToken) : IAsyncUpdateHandler
+    + UpdateAsync() : UniTask
+    + UpdateAsync(cancellationToken:CancellationToken) : UniTask
+}
+interface IAsyncOnBeginDragHandler {
+    OnBeginDragAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnBeginDragAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncBeginDragTrigger(gameObject:GameObject) : AsyncBeginDragTrigger
+    + {static} GetAsyncBeginDragTrigger(component:Component) : AsyncBeginDragTrigger
+}
+class AsyncBeginDragTrigger <<sealed>> {
+    OnBeginDrag(eventData:PointerEventData) : void
+    + GetOnBeginDragAsyncHandler() : IAsyncOnBeginDragHandler
+    + GetOnBeginDragAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnBeginDragHandler
+    + OnBeginDragAsync() : UniTask<PointerEventData>
+    + OnBeginDragAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnCancelHandler {
+    OnCancelAsync() : UniTask<BaseEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnCancelAsync() : UniTask<BaseEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncCancelTrigger(gameObject:GameObject) : AsyncCancelTrigger
+    + {static} GetAsyncCancelTrigger(component:Component) : AsyncCancelTrigger
+}
+class AsyncCancelTrigger <<sealed>> {
+    OnCancel(eventData:BaseEventData) : void
+    + GetOnCancelAsyncHandler() : IAsyncOnCancelHandler
+    + GetOnCancelAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnCancelHandler
+    + OnCancelAsync() : UniTask<BaseEventData>
+    + OnCancelAsync(cancellationToken:CancellationToken) : UniTask<BaseEventData>
+}
+interface IAsyncOnDeselectHandler {
+    OnDeselectAsync() : UniTask<BaseEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnDeselectAsync() : UniTask<BaseEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncDeselectTrigger(gameObject:GameObject) : AsyncDeselectTrigger
+    + {static} GetAsyncDeselectTrigger(component:Component) : AsyncDeselectTrigger
+}
+class AsyncDeselectTrigger <<sealed>> {
+    OnDeselect(eventData:BaseEventData) : void
+    + GetOnDeselectAsyncHandler() : IAsyncOnDeselectHandler
+    + GetOnDeselectAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnDeselectHandler
+    + OnDeselectAsync() : UniTask<BaseEventData>
+    + OnDeselectAsync(cancellationToken:CancellationToken) : UniTask<BaseEventData>
+}
+interface IAsyncOnDragHandler {
+    OnDragAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnDragAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncDragTrigger(gameObject:GameObject) : AsyncDragTrigger
+    + {static} GetAsyncDragTrigger(component:Component) : AsyncDragTrigger
+}
+class AsyncDragTrigger <<sealed>> {
+    OnDrag(eventData:PointerEventData) : void
+    + GetOnDragAsyncHandler() : IAsyncOnDragHandler
+    + GetOnDragAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnDragHandler
+    + OnDragAsync() : UniTask<PointerEventData>
+    + OnDragAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnDropHandler {
+    OnDropAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnDropAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncDropTrigger(gameObject:GameObject) : AsyncDropTrigger
+    + {static} GetAsyncDropTrigger(component:Component) : AsyncDropTrigger
+}
+class AsyncDropTrigger <<sealed>> {
+    OnDrop(eventData:PointerEventData) : void
+    + GetOnDropAsyncHandler() : IAsyncOnDropHandler
+    + GetOnDropAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnDropHandler
+    + OnDropAsync() : UniTask<PointerEventData>
+    + OnDropAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnEndDragHandler {
+    OnEndDragAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnEndDragAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncEndDragTrigger(gameObject:GameObject) : AsyncEndDragTrigger
+    + {static} GetAsyncEndDragTrigger(component:Component) : AsyncEndDragTrigger
+}
+class AsyncEndDragTrigger <<sealed>> {
+    OnEndDrag(eventData:PointerEventData) : void
+    + GetOnEndDragAsyncHandler() : IAsyncOnEndDragHandler
+    + GetOnEndDragAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnEndDragHandler
+    + OnEndDragAsync() : UniTask<PointerEventData>
+    + OnEndDragAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnInitializePotentialDragHandler {
+    OnInitializePotentialDragAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnInitializePotentialDragAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncInitializePotentialDragTrigger(gameObject:GameObject) : AsyncInitializePotentialDragTrigger
+    + {static} GetAsyncInitializePotentialDragTrigger(component:Component) : AsyncInitializePotentialDragTrigger
+}
+class AsyncInitializePotentialDragTrigger <<sealed>> {
+    OnInitializePotentialDrag(eventData:PointerEventData) : void
+    + GetOnInitializePotentialDragAsyncHandler() : IAsyncOnInitializePotentialDragHandler
+    + GetOnInitializePotentialDragAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnInitializePotentialDragHandler
+    + OnInitializePotentialDragAsync() : UniTask<PointerEventData>
+    + OnInitializePotentialDragAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnMoveHandler {
+    OnMoveAsync() : UniTask<AxisEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnMoveAsync() : UniTask<AxisEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncMoveTrigger(gameObject:GameObject) : AsyncMoveTrigger
+    + {static} GetAsyncMoveTrigger(component:Component) : AsyncMoveTrigger
+}
+class AsyncMoveTrigger <<sealed>> {
+    OnMove(eventData:AxisEventData) : void
+    + GetOnMoveAsyncHandler() : IAsyncOnMoveHandler
+    + GetOnMoveAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnMoveHandler
+    + OnMoveAsync() : UniTask<AxisEventData>
+    + OnMoveAsync(cancellationToken:CancellationToken) : UniTask<AxisEventData>
+}
+interface IAsyncOnPointerClickHandler {
+    OnPointerClickAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPointerClickAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPointerClickTrigger(gameObject:GameObject) : AsyncPointerClickTrigger
+    + {static} GetAsyncPointerClickTrigger(component:Component) : AsyncPointerClickTrigger
+}
+class AsyncPointerClickTrigger <<sealed>> {
+    OnPointerClick(eventData:PointerEventData) : void
+    + GetOnPointerClickAsyncHandler() : IAsyncOnPointerClickHandler
+    + GetOnPointerClickAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPointerClickHandler
+    + OnPointerClickAsync() : UniTask<PointerEventData>
+    + OnPointerClickAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnPointerDownHandler {
+    OnPointerDownAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPointerDownAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPointerDownTrigger(gameObject:GameObject) : AsyncPointerDownTrigger
+    + {static} GetAsyncPointerDownTrigger(component:Component) : AsyncPointerDownTrigger
+}
+class AsyncPointerDownTrigger <<sealed>> {
+    OnPointerDown(eventData:PointerEventData) : void
+    + GetOnPointerDownAsyncHandler() : IAsyncOnPointerDownHandler
+    + GetOnPointerDownAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPointerDownHandler
+    + OnPointerDownAsync() : UniTask<PointerEventData>
+    + OnPointerDownAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnPointerEnterHandler {
+    OnPointerEnterAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPointerEnterAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPointerEnterTrigger(gameObject:GameObject) : AsyncPointerEnterTrigger
+    + {static} GetAsyncPointerEnterTrigger(component:Component) : AsyncPointerEnterTrigger
+}
+class AsyncPointerEnterTrigger <<sealed>> {
+    OnPointerEnter(eventData:PointerEventData) : void
+    + GetOnPointerEnterAsyncHandler() : IAsyncOnPointerEnterHandler
+    + GetOnPointerEnterAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPointerEnterHandler
+    + OnPointerEnterAsync() : UniTask<PointerEventData>
+    + OnPointerEnterAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnPointerExitHandler {
+    OnPointerExitAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPointerExitAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPointerExitTrigger(gameObject:GameObject) : AsyncPointerExitTrigger
+    + {static} GetAsyncPointerExitTrigger(component:Component) : AsyncPointerExitTrigger
+}
+class AsyncPointerExitTrigger <<sealed>> {
+    OnPointerExit(eventData:PointerEventData) : void
+    + GetOnPointerExitAsyncHandler() : IAsyncOnPointerExitHandler
+    + GetOnPointerExitAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPointerExitHandler
+    + OnPointerExitAsync() : UniTask<PointerEventData>
+    + OnPointerExitAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnPointerUpHandler {
+    OnPointerUpAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnPointerUpAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncPointerUpTrigger(gameObject:GameObject) : AsyncPointerUpTrigger
+    + {static} GetAsyncPointerUpTrigger(component:Component) : AsyncPointerUpTrigger
+}
+class AsyncPointerUpTrigger <<sealed>> {
+    OnPointerUp(eventData:PointerEventData) : void
+    + GetOnPointerUpAsyncHandler() : IAsyncOnPointerUpHandler
+    + GetOnPointerUpAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnPointerUpHandler
+    + OnPointerUpAsync() : UniTask<PointerEventData>
+    + OnPointerUpAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnScrollHandler {
+    OnScrollAsync() : UniTask<PointerEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnScrollAsync() : UniTask<PointerEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncScrollTrigger(gameObject:GameObject) : AsyncScrollTrigger
+    + {static} GetAsyncScrollTrigger(component:Component) : AsyncScrollTrigger
+}
+class AsyncScrollTrigger <<sealed>> {
+    OnScroll(eventData:PointerEventData) : void
+    + GetOnScrollAsyncHandler() : IAsyncOnScrollHandler
+    + GetOnScrollAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnScrollHandler
+    + OnScrollAsync() : UniTask<PointerEventData>
+    + OnScrollAsync(cancellationToken:CancellationToken) : UniTask<PointerEventData>
+}
+interface IAsyncOnSelectHandler {
+    OnSelectAsync() : UniTask<BaseEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnSelectAsync() : UniTask<BaseEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncSelectTrigger(gameObject:GameObject) : AsyncSelectTrigger
+    + {static} GetAsyncSelectTrigger(component:Component) : AsyncSelectTrigger
+}
+class AsyncSelectTrigger <<sealed>> {
+    OnSelect(eventData:BaseEventData) : void
+    + GetOnSelectAsyncHandler() : IAsyncOnSelectHandler
+    + GetOnSelectAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnSelectHandler
+    + OnSelectAsync() : UniTask<BaseEventData>
+    + OnSelectAsync(cancellationToken:CancellationToken) : UniTask<BaseEventData>
+}
+interface IAsyncOnSubmitHandler {
+    OnSubmitAsync() : UniTask<BaseEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnSubmitAsync() : UniTask<BaseEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncSubmitTrigger(gameObject:GameObject) : AsyncSubmitTrigger
+    + {static} GetAsyncSubmitTrigger(component:Component) : AsyncSubmitTrigger
+}
+class AsyncSubmitTrigger <<sealed>> {
+    OnSubmit(eventData:BaseEventData) : void
+    + GetOnSubmitAsyncHandler() : IAsyncOnSubmitHandler
+    + GetOnSubmitAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnSubmitHandler
+    + OnSubmitAsync() : UniTask<BaseEventData>
+    + OnSubmitAsync(cancellationToken:CancellationToken) : UniTask<BaseEventData>
+}
+interface IAsyncOnUpdateSelectedHandler {
+    OnUpdateSelectedAsync() : UniTask<BaseEventData>
+}
+class "AsyncTriggerHandler`1"<T> <<partial>> {
+    OnUpdateSelectedAsync() : UniTask<BaseEventData>
+}
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncUpdateSelectedTrigger(gameObject:GameObject) : AsyncUpdateSelectedTrigger
+    + {static} GetAsyncUpdateSelectedTrigger(component:Component) : AsyncUpdateSelectedTrigger
+}
+class AsyncUpdateSelectedTrigger <<sealed>> {
+    OnUpdateSelected(eventData:BaseEventData) : void
+    + GetOnUpdateSelectedAsyncHandler() : IAsyncOnUpdateSelectedHandler
+    + GetOnUpdateSelectedAsyncHandler(cancellationToken:CancellationToken) : IAsyncOnUpdateSelectedHandler
+    + OnUpdateSelectedAsync() : UniTask<BaseEventData>
+    + OnUpdateSelectedAsync(cancellationToken:CancellationToken) : UniTask<BaseEventData>
+}
+class "AsyncTriggerBase`1"<T> {
+}
+IAsyncFixedUpdateHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncFixedUpdateTrigger
+IAsyncLateUpdateHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncLateUpdateTrigger
+IAsyncOnAnimatorIKHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<int>" <|-- AsyncAnimatorIKTrigger
+IAsyncOnAnimatorMoveHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncAnimatorMoveTrigger
+IAsyncOnApplicationFocusHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<bool>" <|-- AsyncApplicationFocusTrigger
+IAsyncOnApplicationPauseHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<bool>" <|-- AsyncApplicationPauseTrigger
+IAsyncOnApplicationQuitHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncApplicationQuitTrigger
+IAsyncOnAudioFilterReadHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<(float[] data, int channels)>" <|-- AsyncAudioFilterReadTrigger
+IAsyncOnBecameInvisibleHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncBecameInvisibleTrigger
+IAsyncOnBecameVisibleHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncBecameVisibleTrigger
+IAsyncOnBeforeTransformParentChangedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncBeforeTransformParentChangedTrigger
+IAsyncOnCanvasGroupChangedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncOnCanvasGroupChangedTrigger
+IAsyncOnCollisionEnterHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collision>" <|-- AsyncCollisionEnterTrigger
+IAsyncOnCollisionEnter2DHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collision2D>" <|-- AsyncCollisionEnter2DTrigger
+IAsyncOnCollisionExitHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collision>" <|-- AsyncCollisionExitTrigger
+IAsyncOnCollisionExit2DHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collision2D>" <|-- AsyncCollisionExit2DTrigger
+IAsyncOnCollisionStayHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collision>" <|-- AsyncCollisionStayTrigger
+IAsyncOnCollisionStay2DHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collision2D>" <|-- AsyncCollisionStay2DTrigger
+IAsyncOnControllerColliderHitHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<ControllerColliderHit>" <|-- AsyncControllerColliderHitTrigger
+IAsyncOnDisableHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncDisableTrigger
+IAsyncOnDrawGizmosHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncDrawGizmosTrigger
+IAsyncOnDrawGizmosSelectedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncDrawGizmosSelectedTrigger
+IAsyncOnEnableHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncEnableTrigger
+IAsyncOnGUIHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncGUITrigger
+IAsyncOnJointBreakHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<float>" <|-- AsyncJointBreakTrigger
+IAsyncOnJointBreak2DHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Joint2D>" <|-- AsyncJointBreak2DTrigger
+IAsyncOnMouseDownHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncMouseDownTrigger
+IAsyncOnMouseDragHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncMouseDragTrigger
+IAsyncOnMouseEnterHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncMouseEnterTrigger
+IAsyncOnMouseExitHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncMouseExitTrigger
+IAsyncOnMouseOverHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncMouseOverTrigger
+IAsyncOnMouseUpHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncMouseUpTrigger
+IAsyncOnMouseUpAsButtonHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncMouseUpAsButtonTrigger
+IAsyncOnParticleCollisionHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<GameObject>" <|-- AsyncParticleCollisionTrigger
+IAsyncOnParticleSystemStoppedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncParticleSystemStoppedTrigger
+IAsyncOnParticleTriggerHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncParticleTriggerTrigger
+IAsyncOnPostRenderHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncPostRenderTrigger
+IAsyncOnPreCullHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncPreCullTrigger
+IAsyncOnPreRenderHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncPreRenderTrigger
+IAsyncOnRectTransformDimensionsChangeHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncRectTransformDimensionsChangeTrigger
+IAsyncOnRectTransformRemovedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncRectTransformRemovedTrigger
+IAsyncOnRenderImageHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<(RenderTexture source, RenderTexture destination)>" <|-- AsyncRenderImageTrigger
+IAsyncOnRenderObjectHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncRenderObjectTrigger
+IAsyncOnServerInitializedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncServerInitializedTrigger
+IAsyncOnTransformChildrenChangedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncTransformChildrenChangedTrigger
+IAsyncOnTransformParentChangedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncTransformParentChangedTrigger
+IAsyncOnTriggerEnterHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collider>" <|-- AsyncTriggerEnterTrigger
+IAsyncOnTriggerEnter2DHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collider2D>" <|-- AsyncTriggerEnter2DTrigger
+IAsyncOnTriggerExitHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collider>" <|-- AsyncTriggerExitTrigger
+IAsyncOnTriggerExit2DHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collider2D>" <|-- AsyncTriggerExit2DTrigger
+IAsyncOnTriggerStayHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collider>" <|-- AsyncTriggerStayTrigger
+IAsyncOnTriggerStay2DHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<Collider2D>" <|-- AsyncTriggerStay2DTrigger
+IAsyncOnValidateHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncValidateTrigger
+IAsyncOnWillRenderObjectHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncWillRenderObjectTrigger
+IAsyncResetHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncResetTrigger
+IAsyncUpdateHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncUpdateTrigger
+IAsyncOnBeginDragHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncBeginDragTrigger
+IBeginDragHandler <|-- AsyncBeginDragTrigger
+IAsyncOnCancelHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<BaseEventData>" <|-- AsyncCancelTrigger
+ICancelHandler <|-- AsyncCancelTrigger
+IAsyncOnDeselectHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<BaseEventData>" <|-- AsyncDeselectTrigger
+IDeselectHandler <|-- AsyncDeselectTrigger
+IAsyncOnDragHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncDragTrigger
+IDragHandler <|-- AsyncDragTrigger
+IAsyncOnDropHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncDropTrigger
+IDropHandler <|-- AsyncDropTrigger
+IAsyncOnEndDragHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncEndDragTrigger
+IEndDragHandler <|-- AsyncEndDragTrigger
+IAsyncOnInitializePotentialDragHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncInitializePotentialDragTrigger
+IInitializePotentialDragHandler <|-- AsyncInitializePotentialDragTrigger
+IAsyncOnMoveHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<AxisEventData>" <|-- AsyncMoveTrigger
+IMoveHandler <|-- AsyncMoveTrigger
+IAsyncOnPointerClickHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncPointerClickTrigger
+IPointerClickHandler <|-- AsyncPointerClickTrigger
+IAsyncOnPointerDownHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncPointerDownTrigger
+IPointerDownHandler <|-- AsyncPointerDownTrigger
+IAsyncOnPointerEnterHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncPointerEnterTrigger
+IPointerEnterHandler <|-- AsyncPointerEnterTrigger
+IAsyncOnPointerExitHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncPointerExitTrigger
+IPointerExitHandler <|-- AsyncPointerExitTrigger
+IAsyncOnPointerUpHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncPointerUpTrigger
+IPointerUpHandler <|-- AsyncPointerUpTrigger
+IAsyncOnScrollHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<PointerEventData>" <|-- AsyncScrollTrigger
+IScrollHandler <|-- AsyncScrollTrigger
+IAsyncOnSelectHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<BaseEventData>" <|-- AsyncSelectTrigger
+ISelectHandler <|-- AsyncSelectTrigger
+IAsyncOnSubmitHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<BaseEventData>" <|-- AsyncSubmitTrigger
+ISubmitHandler <|-- AsyncSubmitTrigger
+IAsyncOnUpdateSelectedHandler <|-- "AsyncTriggerHandler`1"
+"AsyncTriggerBase`1" "<BaseEventData>" <|-- AsyncUpdateSelectedTrigger
+IUpdateSelectedHandler <|-- AsyncUpdateSelectedTrigger
+@enduml

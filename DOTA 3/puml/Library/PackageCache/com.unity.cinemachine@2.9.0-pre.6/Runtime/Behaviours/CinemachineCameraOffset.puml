@@ -1,0 +1,7 @@
+@startuml
+class CinemachineCameraOffset {
+    + m_PreserveComposition : bool
+}
+CinemachineExtension <|-- CinemachineCameraOffset
+CinemachineCameraOffset o-> "m_Offset" Vector3
+@enduml

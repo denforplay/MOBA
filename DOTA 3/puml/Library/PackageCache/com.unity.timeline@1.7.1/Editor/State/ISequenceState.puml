@@ -1,0 +1,48 @@
+@startuml
+interface ISequenceState {
+    start : double <<get>>
+    timeScale : double <<get>>
+    duration : double <<get>>
+    isReadOnly : bool <<get>>
+    isAssetOnly : bool <<get>> <<set>>
+    time : double <<get>> <<set>>
+    frame : int <<get>> <<set>>
+    frameRate : double <<get>> <<set>>
+    GetEvaluableRange() : Range
+    ToGlobalTime(t:double) : double
+    ToLocalTime(t:double) : double
+    ResetIsReadOnly() : void
+    InvalidateChildAssetCache() : void
+}
+class NullSequenceState {
+    + start : double <<get>>
+    + timeScale : double <<get>>
+    + duration : double <<get>>
+    + isReadOnly : bool <<get>>
+    + isAssetOnly : bool <<get>> <<set>>
+    + time : double <<get>> <<set>>
+    + frame : int <<get>> <<set>>
+    + frameRate : double <<get>> <<set>>
+    + GetEvaluableRange() : Range
+    + ToGlobalTime(t:double) : double
+    + ToLocalTime(t:double) : double
+    + ResetIsReadOnly() : void
+    + InvalidateChildAssetCache() : void
+    + Dispose() : void
+}
+class "List`1"<T> {
+}
+IDisposable <|-- ISequenceState
+ISequenceState --> "asset" TimelineAsset
+ISequenceState --> "director" PlayableDirector
+ISequenceState --> "hostClip" TimelineClip
+ISequenceState --> "cachedChildAssets<UnityEngine.Object>" "List`1"
+ISequenceState --> "viewModel" TimelineAssetViewModel
+ISequenceState <|-- NullSequenceState
+NullSequenceState --> "asset" TimelineAsset
+NullSequenceState --> "director" PlayableDirector
+NullSequenceState --> "hostClip" TimelineClip
+NullSequenceState --> "cachedChildAssets<UnityEngine.Object>" "List`1"
+NullSequenceState --> "m_ViewModel" TimelineAssetViewModel
+NullSequenceState --> "viewModel" TimelineAssetViewModel
+@enduml

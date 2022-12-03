@@ -1,0 +1,52 @@
+@startuml
+interface ITexturePlatformSettingsDataProvider {
+    textureTypeHasMultipleDifferentValues : bool <<get>>
+    GetTargetCount() : int
+    GetPlatformTextureSettings(i:int, name:string) : TextureImporterPlatformSettings
+    ShowPresetSettings() : bool
+    DoesSourceTextureHaveAlpha(v:int) : bool
+    IsSourceTextureHDR(v:int) : bool
+    SetPlatformTextureSettings(i:int, platformSettings:TextureImporterPlatformSettings) : void
+    GetImporterSettings(i:int, settings:UnityEditor.TextureImporterSettings) : void
+}
+class TexturePlatformSettings {
+    + TexturePlatformSettings(name:string, target:BuildTarget, inspector:ITexturePlatformSettingsDataProvider, defaultPlatform:Func<BaseTextureImportPlatformSettings>)
+    + <<override>> textureTypeHasMultipleDifferentValues : bool <<get>>
+    + <<override>> GetTargetCount() : int
+    + <<override>> ShowPresetSettings() : bool
+    + <<override>> GetImporterSettings(i:int) : TextureImporterSettings
+    + <<override>> IsSourceTextureHDR(i:int) : bool
+    + <<override>> DoesSourceTextureHaveAlpha(i:int) : bool
+    + <<override>> GetPlatformTextureSettings(i:int, name:string) : TextureImporterPlatformSettings
+    + <<override>> GetDefaultImportSettings() : BaseTextureImportPlatformSettings
+    + <<override>> SetPlatformTextureSettings(i:int, platformSettings:TextureImporterPlatformSettings) : void
+}
+class TexturePlatformSettingsHelper {
+    + TexturePlatformSettingsHelper(dataProvider:ITexturePlatformSettingsDataProvider)
+    DefaulTextureImportPlatformSettings() : BaseTextureImportPlatformSettings
+    + {static} defaultPlatformName : string <<get>>
+    + textureTypeHasMultipleDifferentValues : bool <<get>>
+    + ShowPlatformSpecificSettings() : void
+    + HasModified() : bool
+    SyncPlatformSettings() : void
+    + Apply() : void
+    + {static} GetBuildTargetGroupName(target:BuildTarget) : string
+}
+class "Func`1"<T> {
+}
+class "List`1"<T> {
+}
+ITexturePlatformSettingsDataProvider --> "textureType" TextureImporterType
+ITexturePlatformSettingsDataProvider --> "spriteImportMode" SpriteImportMode
+BaseTextureImportPlatformSettings <|-- TexturePlatformSettings
+TexturePlatformSettings o-> "m_Data" TextureImportPlatformSettingsData
+TexturePlatformSettings --> "m_DataProvider" ITexturePlatformSettingsDataProvider
+TexturePlatformSettings --> "DefaultImportSettings<BaseTextureImportPlatformSettings>" "Func`1"
+TexturePlatformSettings --> "model" TextureImportPlatformSettingsData
+TexturePlatformSettings --> "textureType" TextureImporterType
+TexturePlatformSettings --> "spriteImportMode" SpriteImportMode
+TexturePlatformSettingsHelper --> "m_PlatformSettings<TexturePlatformSettings>" "List`1"
+TexturePlatformSettingsHelper --> "m_DataProvider" ITexturePlatformSettingsDataProvider
+TexturePlatformSettingsHelper --> "spriteImportMode" SpriteImportMode
+TexturePlatformSettingsHelper --> "textureType" TextureImporterType
+@enduml

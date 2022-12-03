@@ -1,0 +1,160 @@
+@startuml
+class UniTaskLoopRunners <<static>> {
+}
+enum PlayerLoopTiming {
+    Initialization= 0,
+    LastInitialization= 1,
+    EarlyUpdate= 2,
+    LastEarlyUpdate= 3,
+    FixedUpdate= 4,
+    LastFixedUpdate= 5,
+    PreUpdate= 6,
+    LastPreUpdate= 7,
+    Update= 8,
+    LastUpdate= 9,
+    PreLateUpdate= 10,
+    LastPreLateUpdate= 11,
+    PostLateUpdate= 12,
+    LastPostLateUpdate= 13,
+}
+enum InjectPlayerLoopTimings {
+    All=
+            Initialization | LastInitialization |
+            EarlyUpdate | LastEarlyUpdate |
+            FixedUpdate | LastFixedUpdate |
+            PreUpdate | LastPreUpdate |
+            Update | LastUpdate |
+            PreLateUpdate | LastPreLateUpdate |
+            PostLateUpdate | LastPostLateUpdate,
+    Standard=
+            Initialization |
+            EarlyUpdate |
+            FixedUpdate |
+            PreUpdate |
+            Update |
+            PreLateUpdate |
+            PostLateUpdate | LastPostLateUpdate,
+    Minimum=
+            Update | FixedUpdate | LastPostLateUpdate,
+    Initialization= 1,
+    LastInitialization= 2,
+    EarlyUpdate= 4,
+    LastEarlyUpdate= 8,
+    FixedUpdate= 16,
+    LastFixedUpdate= 32,
+    PreUpdate= 64,
+    LastPreUpdate= 128,
+    Update= 256,
+    LastUpdate= 512,
+    PreLateUpdate= 1024,
+    LastPreLateUpdate= 2048,
+    PostLateUpdate= 4096,
+    LastPostLateUpdate= 8192,
+}
+interface IPlayerLoopItem {
+    MoveNext() : bool
+}
+class PlayerLoopHelper <<static>> {
+    + {static} MainThreadId : int <<get>>
+    + {static} IsMainThread : bool <<get>>
+    {static} mainThreadId : int
+    {static} applicationDataPath : string
+    {static} InsertRunner(loopSystem:PlayerLoopSystem, injectOnFirst:bool, loopRunnerYieldType:Type, cq:ContinuationQueue, loopRunnerType:Type, runner:PlayerLoopRunner) : PlayerLoopSystem[]
+    {static} RemoveRunner(loopSystem:PlayerLoopSystem, loopRunnerYieldType:Type, loopRunnerType:Type) : PlayerLoopSystem[]
+    {static} InsertUniTaskSynchronizationContext(loopSystem:PlayerLoopSystem) : PlayerLoopSystem[]
+    {static} Init() : void
+    {static} InsertLoop(copyList:PlayerLoopSystem[], injectTimings:InjectPlayerLoopTimings, loopType:Type, targetTimings:InjectPlayerLoopTimings, index:int, injectOnFirst:bool, loopRunnerYieldType:Type, loopRunnerType:Type, playerLoopTiming:PlayerLoopTiming) : void
+    + {static} Initialize(playerLoop:PlayerLoopSystem, injectTimings:InjectPlayerLoopTimings) : void
+    + {static} AddAction(timing:PlayerLoopTiming, action:IPlayerLoopItem) : void
+    {static} ThrowInvalidLoopTiming(playerLoopTiming:PlayerLoopTiming) : void
+    + {static} AddContinuation(timing:PlayerLoopTiming, continuation:Action) : void
+}
+class UniTaskLoopRunnerInitialization <<struct>> {
+}
+class UniTaskLoopRunnerEarlyUpdate <<struct>> {
+}
+class UniTaskLoopRunnerFixedUpdate <<struct>> {
+}
+class UniTaskLoopRunnerPreUpdate <<struct>> {
+}
+class UniTaskLoopRunnerUpdate <<struct>> {
+}
+class UniTaskLoopRunnerPreLateUpdate <<struct>> {
+}
+class UniTaskLoopRunnerPostLateUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastInitialization <<struct>> {
+}
+class UniTaskLoopRunnerLastEarlyUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastFixedUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastPreUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastPreLateUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastPostLateUpdate <<struct>> {
+}
+class UniTaskLoopRunnerYieldInitialization <<struct>> {
+}
+class UniTaskLoopRunnerYieldEarlyUpdate <<struct>> {
+}
+class UniTaskLoopRunnerYieldFixedUpdate <<struct>> {
+}
+class UniTaskLoopRunnerYieldPreUpdate <<struct>> {
+}
+class UniTaskLoopRunnerYieldUpdate <<struct>> {
+}
+class UniTaskLoopRunnerYieldPreLateUpdate <<struct>> {
+}
+class UniTaskLoopRunnerYieldPostLateUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastYieldInitialization <<struct>> {
+}
+class UniTaskLoopRunnerLastYieldEarlyUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastYieldFixedUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastYieldPreUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastYieldUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastYieldPreLateUpdate <<struct>> {
+}
+class UniTaskLoopRunnerLastYieldPostLateUpdate <<struct>> {
+}
+PlayerLoopHelper o-> "ThrowMarkerContinuationQueue" ContinuationQueue
+PlayerLoopHelper o-> "ThrowMarkerPlayerLoopRunner" PlayerLoopRunner
+PlayerLoopHelper --> "UnitySynchronizationContext" SynchronizationContext
+PlayerLoopHelper --> "unitySynchronizationContext" SynchronizationContext
+UniTaskLoopRunners +-- UniTaskLoopRunnerInitialization
+UniTaskLoopRunners +-- UniTaskLoopRunnerEarlyUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerFixedUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerPreUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerPreLateUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerPostLateUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastInitialization
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastEarlyUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastFixedUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastPreUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastPreLateUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastPostLateUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerYieldInitialization
+UniTaskLoopRunners +-- UniTaskLoopRunnerYieldEarlyUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerYieldFixedUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerYieldPreUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerYieldUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerYieldPreLateUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerYieldPostLateUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastYieldInitialization
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastYieldEarlyUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastYieldFixedUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastYieldPreUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastYieldUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastYieldPreLateUpdate
+UniTaskLoopRunners +-- UniTaskLoopRunnerLastYieldPostLateUpdate
+@enduml

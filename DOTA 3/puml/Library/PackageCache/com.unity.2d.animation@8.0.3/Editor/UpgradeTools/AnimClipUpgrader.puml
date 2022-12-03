@@ -1,0 +1,71 @@
+@startuml
+class AnimClipUpgrader {
+    <<const>> k_LabelHashId : string = "m_labelHash"
+    <<const>> k_CategoryHashId : string = "m_CategoryHash"
+    <<const>> k_SpriteKeyId : string = "m_SpriteKey"
+    <<const>> k_SpriteHashId : string = "m_SpriteHash"
+    <<const>> k_AnimClipTypeId : string = "t:AnimationClip"
+    {static} IsSpriteHashBinding(b:EditorCurveBinding) : bool
+    {static} IsSpriteKeyBinding(b:EditorCurveBinding) : bool
+    {static} IsSpriteCategoryBinding(b:EditorCurveBinding) : bool
+    {static} IsSpriteLabelBinding(b:EditorCurveBinding) : bool
+    ValidateConvertedData(extractedData:List<BindingData>, upgradingObject:ObjectIndexPair, entries:List<UpgradeEntry>) : bool
+    ExtractDataFromClip(clip:AnimationClip) : List<BindingData>
+    ExtractBindingsFromClip(clip:AnimationClip, hashType:HashType, isBindingFunc:System.Func<EditorCurveBinding, bool>) : BindingData[]
+    ExtractKeyframesFromClip(clip:AnimationClip, curveBinding:EditorCurveBinding, hashType:HashType) : BindingData
+    MergeBindingData(bindingData:List<BindingData>) : List<BindingData>
+    SortKeyData(bindingData:BindingData) : void
+    ConvertData(bindingData:List<BindingData>) : void
+    ConvertKeyData(bindingData:BindingData) : List<ConvertedKeyData>
+    {static} ConvertSpriteHash(keyData:KeyData) : ConvertedKeyData
+    {static} ConvertSpriteKey(keyData:KeyData) : ConvertedKeyData
+    {static} ConvertSpriteCategory(keyData:KeyData) : ConvertedKeyData
+    {static} ConvertSpriteLabel(keyData:KeyData) : ConvertedKeyData
+    {static} SpriteHashToCategoryAndLabelName(spriteHash:int, categoryName:string, labelName:string) : void
+    {static} CategoryHashToCategoryName(categoryHash:int, categoryName:string) : void
+    {static} LabelHashToLabelName(labelHash:int, labelName:string) : void
+    MergeKeyData(bindingData:BindingData) : void
+    RepairMissingKeyData(bindingData:BindingData) : void
+    CleanupData(bindingData:List<BindingData>) : bool
+    UpdateClipWithConvertedData(clip:AnimationClip, convertedBindings:List<BindingData>) : void
+    RemoveOldData(clip:AnimationClip, bindingData:List<BindingData>) : void
+    {static} GetUpgradeProgress(reports:List<UpgradeEntry>, totalNoOfObjects:List<ObjectIndexPair>) : float
+}
+class Contents <<static>> {
+    + {static} <<readonly>> ProgressBarTitle : string
+    + {static} <<readonly>> VerifyingSelection : string
+    + {static} <<readonly>> UpgradingSpriteKeys : string
+    + {static} <<readonly>> UpgradingCategoryLabelHash : string
+}
+enum HashType {
+    Label,
+    Category,
+    SpriteKey,
+    SpriteHash,
+}
+class BindingData {
+    + BindingPath : string
+}
+class KeyData {
+    + Time : float
+    + Value : float
+}
+class ConvertedKeyData {
+    + Time : float
+    + Value : float
+    + Category : string
+    + Label : string
+}
+class "List`1"<T> {
+}
+BaseUpgrader <|-- AnimClipUpgrader
+AnimClipUpgrader o-> "s_SpriteLibUpgrader" SpriteLibUpgrader
+AnimClipUpgrader +-- Contents
+AnimClipUpgrader +-- HashType
+AnimClipUpgrader +-- BindingData
+BindingData --> "RawKeys<KeyData>" "List`1"
+BindingData --> "ConvertedKeys<ConvertedKeyData>" "List`1"
+AnimClipUpgrader +-- KeyData
+KeyData --> "HashType" HashType
+AnimClipUpgrader +-- ConvertedKeyData
+@enduml

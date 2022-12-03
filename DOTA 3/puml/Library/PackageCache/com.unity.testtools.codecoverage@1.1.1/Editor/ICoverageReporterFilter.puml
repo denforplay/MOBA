@@ -1,0 +1,8 @@
+@startuml
+interface ICoverageReporterFilter {
+    SetupFiltering() : void
+    ShouldProcessAssembly(assemblyName:string) : bool
+    ShouldProcessFile(filename:string) : bool
+    ShouldGenerateAdditionalMetrics() : bool
+}
+@enduml

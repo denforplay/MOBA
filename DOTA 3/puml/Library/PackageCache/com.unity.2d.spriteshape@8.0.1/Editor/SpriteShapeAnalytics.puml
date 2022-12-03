@@ -1,0 +1,62 @@
+@startuml
+class SpriteShapeAnalyticsEvents {
+}
+enum SpriteShapeAnalyticsEventType {
+    SpriteShapeProfileCreated= 0,
+    SpriteShapeRendererCreated= 1,
+}
+class SpriteShapeAnalyticsEvent <<struct>> {
+    + data : string
+}
+interface ISpriteShapeAnalyticsStorage {
+    SendUsageEvent(evt:SpriteShapeAnalyticsEvent) : AnalyticsResult
+    Dispose() : void
+}
+class SpriteShapeAnalyticConstant <<static>> {
+    + <<const>> k_MaxEventsPerHour : int = 1000
+    + <<const>> k_MaxNumberOfElements : int = 1000
+}
+class SpriteShapeAnalytics {
+    <<const>> k_SpriteShapeEventElementCount : int = 2
+    + SpriteShapeAnalytics(analyticsStorage:ISpriteShapeAnalyticsStorage)
+    + Dispose() : void
+    OnSpriteShapeCreated(shape:UnityEngine.U2D.SpriteShape) : void
+    OnSpriteShapeRendererCreated(renderer:SpriteShapeRenderer) : void
+    + SendUsageEvent(evt:SpriteShapeAnalyticsEvent) : void
+}
+class SpriteShapeJsonAnalyticsStorage {
+    + SendUsageEvent(evt:SpriteShapeAnalyticsEvent) : AnalyticsResult
+    + Dispose() : void
+}
+class SpriteShapeUnityAnalyticsStorage {
+    <<const>> k_VendorKey : string = "unity.2d.spriteshape"
+    <<const>> k_Version : int = 1
+    + SpriteShapeUnityAnalyticsStorage()
+    + SendUsageEvent(evt:SpriteShapeAnalyticsEvent) : AnalyticsResult
+    + Dispose() : void
+}
+class SpriteShapeEvent {
+}
+class SpriteShapeRendererEvent {
+}
+class SpriteShapeToolEvents <<struct>> {
+}
+class "UnityEvent`1"<T> {
+}
+class "List`1"<T> {
+}
+SpriteShapeAnalyticsEvents --> "spriteShapeEvent" SpriteShapeEvent
+SpriteShapeAnalyticsEvents --> "spriteShapeRendererEvent" SpriteShapeRendererEvent
+SpriteShapeAnalyticsEvent --> "sub_type" SpriteShapeAnalyticsEventType
+SpriteShapeAnalytics --> "m_AnalyticsStorage" ISpriteShapeAnalyticsStorage
+SpriteShapeAnalytics o-> "m_EventBus" SpriteShapeAnalyticsEvents
+ISpriteShapeAnalyticsStorage <|-- SpriteShapeJsonAnalyticsStorage
+SpriteShapeJsonAnalyticsStorage o-> "m_TotalEvents" SpriteShapeToolEvents
+ISpriteShapeAnalyticsStorage <|-- SpriteShapeUnityAnalyticsStorage
+SpriteShapeAnalyticsEvents +-- SpriteShapeEvent
+"UnityEvent`1" "<UnityEngine.U2D.SpriteShape>" <|-- SpriteShapeEvent
+SpriteShapeAnalyticsEvents +-- SpriteShapeRendererEvent
+"UnityEvent`1" "<SpriteShapeRenderer>" <|-- SpriteShapeRendererEvent
+SpriteShapeJsonAnalyticsStorage +-- SpriteShapeToolEvents
+SpriteShapeToolEvents --> "events<SpriteShapeAnalyticsEvent>" "List`1"
+@enduml

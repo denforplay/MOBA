@@ -1,0 +1,34 @@
+@startuml
+class SpriteUtilityWindow {
+    + zoomLevel : float <<get>> <<set>>
+    + showAlpha : bool <<get>> <<set>>
+    + mipLevel : float <<get>> <<set>>
+}
+class Styles {
+    + Styles()
+}
+EditorWindow <|-- SpriteUtilityWindow
+SpriteUtilityWindow --> "m_TextureViewRect" Rect
+SpriteUtilityWindow --> "scrollPosition" Vector2
+SpriteUtilityWindow +-- Styles
+Styles o-> "dragdot" GUIStyle
+Styles o-> "dragdotDimmed" GUIStyle
+Styles o-> "dragdotactive" GUIStyle
+Styles o-> "createRect" GUIStyle
+Styles o-> "preToolbar" GUIStyle
+Styles o-> "preButton" GUIStyle
+Styles o-> "preLabel" GUIStyle
+Styles o-> "preSlider" GUIStyle
+Styles o-> "preSliderThumb" GUIStyle
+Styles o-> "preBackground" GUIStyle
+Styles o-> "pivotdotactive" GUIStyle
+Styles o-> "pivotdot" GUIStyle
+Styles o-> "dragBorderdot" GUIStyle
+Styles o-> "dragBorderDotActive" GUIStyle
+Styles --> "toolbar" GUIStyle
+Styles --> "alphaIcon" GUIContent
+Styles --> "RGBIcon" GUIContent
+Styles --> "notice" GUIStyle
+Styles --> "smallMip" GUIContent
+Styles --> "largeMip" GUIContent
+@enduml

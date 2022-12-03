@@ -1,0 +1,6 @@
+@startuml
+class CreepCompositeRoot {
+    + <<override>> Compose() : void
+}
+CompositeRoot <|-- CreepCompositeRoot
+@enduml

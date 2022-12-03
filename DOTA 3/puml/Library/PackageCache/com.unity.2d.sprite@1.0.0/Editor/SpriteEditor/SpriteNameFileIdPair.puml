@@ -1,0 +1,16 @@
+@startuml
+class SpriteNameFileIdPair {
+    + name : string <<get>> <<set>>
+    + fileId : long <<get>> <<set>>
+    + GetFileGUID() : GUID
+    + SetFileGUID(value:GUID) : void
+    + SpriteNameFileIdPair()
+    + SpriteNameFileIdPair(name:string, fileId:GUID)
+    + <<override>> GetHashCode() : int
+    + <<override>> Equals(obj:object) : bool
+    + Equals(pair:SpriteNameFileIdPair) : bool
+}
+class "IEquatable`1"<T> {
+}
+"IEquatable`1" "<SpriteNameFileIdPair>" <|-- SpriteNameFileIdPair
+@enduml

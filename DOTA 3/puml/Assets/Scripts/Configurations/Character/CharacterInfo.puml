@@ -1,0 +1,30 @@
+@startuml
+class CharacterInfo {
+    + HeroName : string <<get>>
+    + HeroDescription : string <<get>>
+    + Speed : float <<get>>
+    + MaxHealth : float <<get>>
+    + BasePhysicalDamage : float <<get>>
+    + BaseMagicalDamage : float <<get>>
+    + BaseStrength : int <<get>>
+    + BaseDefense : int <<get>>
+    + BaseIntelligence : int <<get>>
+    + BaseAgility : float <<get>>
+    + AttackRange : float <<get>>
+    + AttackDelay : float <<get>>
+    + InventorySize : int <<get>>
+    + MaxMana : float <<get>>
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- CharacterInfo
+CharacterInfo --> "ProjectileType" ProjectileType
+CharacterInfo --> "CombatType" CombatType
+CharacterInfo --> "AnimationsInfo<AnimationType,string>" "Dictionary`2"
+CharacterInfo --> "SkillConfigurations<SkillConfiguration>" "List`1"
+CharacterInfo --> "LevelsConfiguration" LevelsConfiguration
+CharacterInfo --> "CharacterIcon" Sprite
+CharacterInfo --> "CharacterPrefab" GameObject
+@enduml

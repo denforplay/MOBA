@@ -1,0 +1,57 @@
+@startuml
+class CinemachineCollider {
+    + m_IgnoreTag : string
+    + m_MinimumDistanceFromTarget : float = 0.1f
+    + m_AvoidObstacles : bool = true
+    + m_DistanceLimit : float
+    + m_MinimumOcclusionTime : float
+    + m_CameraRadius : float = 0.1f
+    + m_MaximumEffort : int = 4
+    + m_SmoothingTime : float
+    + m_Damping : float
+    + m_DampingWhenOccluded : float
+    + m_OptimalTargetDistance : float
+    + IsTargetObscured(vcam:ICinemachineCamera) : bool
+    + CameraWasDisplaced(vcam:ICinemachineCamera) : bool
+    + GetCameraDisplacementDistance(vcam:ICinemachineCamera) : float
+    OnValidate() : void
+    <<const>> k_PrecisionSlush : float = 0.001f
+    + <<override>> GetMaxDampTime() : float
+    PreserveLineOfSight(state:CameraState, extra:VcamExtraState) : Vector3
+    PullCameraInFrontOfNearestObstacle(cameraPos:Vector3, lookAtPos:Vector3, layerMask:int, hitInfo:RaycastHit) : Vector3
+    PushCameraBack(currentPos:Vector3, pushDir:Vector3, obstacle:RaycastHit, lookAtPos:Vector3, startPlane:Plane, targetDistance:float, iterations:int, extra:VcamExtraState) : Vector3
+    GetWalkingDirection(pos:Vector3, pushDir:Vector3, obstacle:RaycastHit, outDir:Vector3) : bool
+    <<const>> k_AngleThreshold : float = 0.1f
+    GetPushBackDistance(ray:Ray, startPlane:Plane, targetDistance:float, lookAtPos:Vector3) : float
+    {static} ClampRayToBounds(ray:Ray, distance:float, bounds:Bounds) : float
+    RespectCameraRadius(cameraPos:Vector3, lookAtPos:Vector3) : Vector3
+    CheckForTargetObstructions(state:CameraState) : bool
+    {static} IsTargetOffscreen(state:CameraState) : bool
+}
+enum ResolutionStrategy {
+    PullCameraForward,
+    PreserveCameraHeight,
+    PreserveCameraDistance,
+}
+class VcamExtraState {
+    + targetObscured : bool
+    + occlusionStartTime : float
+    + AddPointToDebugPath(p:Vector3) : void
+    m_SmoothedDistance : float
+    m_SmoothedTime : float
+    + ApplyDistanceSmoothing(distance:float, smoothingTime:float) : float
+    + UpdateDistanceSmoothing(distance:float) : void
+    + ResetDistanceSmoothing(smoothingTime:float) : void
+}
+class "List`1"<T> {
+}
+CinemachineExtension <|-- CinemachineCollider
+CinemachineCollider o-> "m_CollideAgainst" LayerMask
+CinemachineCollider o-> "m_TransparentLayers" LayerMask
+CinemachineCollider o-> "m_Strategy" ResolutionStrategy
+CinemachineCollider --> "DebugPaths<List<Vector3>>" "List`1"
+CinemachineCollider +-- ResolutionStrategy
+CinemachineCollider +-- VcamExtraState
+VcamExtraState --> "previousDisplacement" Vector3
+VcamExtraState --> "debugResolutionPath<Vector3>" "List`1"
+@enduml

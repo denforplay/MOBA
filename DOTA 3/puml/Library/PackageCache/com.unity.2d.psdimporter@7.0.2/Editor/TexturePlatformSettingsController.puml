@@ -1,0 +1,7 @@
+@startuml
+class TexturePlatformSettingsController {
+    + HandleDefaultSettings(platformSettings:List<TextureImporterPlatformSettings>, view:TexturePlatformSettingsView) : bool
+    + HandlePlatformSettings(buildTarget:BuildTarget, platformSettings:List<TextureImporterPlatformSettings>, view:TexturePlatformSettingsView) : bool
+    + AcquireTextureFormatValuesAndStrings(buildTarget:BuildTarget, formatValues:int[], formatStrings:string[]) : void
+}
+@enduml

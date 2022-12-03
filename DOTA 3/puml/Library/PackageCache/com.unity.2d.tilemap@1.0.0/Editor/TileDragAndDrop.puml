@@ -1,0 +1,19 @@
+@startuml
+class TileDragAndDrop <<static>> {
+    + {static} CreateHoverData(sheetTextures:List<Texture2D>, singleSprites:List<Sprite>, tiles:List<TileBase>, cellLayout:GridLayout.CellLayout) : Dictionary<Vector2Int, TileDragAndDropHoverData>
+    + {static} GetValidSpritesheets(objects:Object[]) : List<Texture2D>
+    + {static} GetValidSingleSprites(objects:Object[]) : List<Sprite>
+    + {static} GetValidTiles(objects:Object[]) : List<TileBase>
+    + {static} EstimateGridPixelSize(sprites:List<Sprite>) : Vector2Int
+    + {static} EstimateGridOffsetSize(sprites:List<Sprite>) : Vector2Int
+    + {static} EstimateGridPaddingSize(sprites:List<Sprite>, cellSize:Vector2Int, offsetSize:Vector2Int) : Vector2Int
+    + {static} CreateHoverData(sheet:Texture2D, cellLayout:GridLayout.CellLayout) : Dictionary<Vector2Int, TileDragAndDropHoverData>
+    + {static} ConvertToTileSheet(sheet:Dictionary<Vector2Int, TileDragAndDropHoverData>) : List<TileBase>
+}
+enum UserTileCreationMode {
+    Overwrite,
+    CreateUnique,
+    Reuse,
+}
+TileDragAndDrop +-- UserTileCreationMode
+@enduml

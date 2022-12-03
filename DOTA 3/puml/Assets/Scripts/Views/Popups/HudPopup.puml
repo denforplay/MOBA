@@ -1,0 +1,13 @@
+@startuml
+class HudPopup {
+    +  <<event>> OnShopCalled : Action 
+    + Initialize(characterView:CharacterView) : void
+    + InitializeBattleGroundPanel(leftTeamCharacters:List<Configurations.Character.CharacterInfo>, rightTeamCharacters:List<Configurations.Character.CharacterInfo>) : void
+    + SubscribeOnCharacterEvents() : void
+    + UnsubscribeFromCharacterEvents() : void
+    + OnShopPopupCalled() : void
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- HudPopup
+@enduml

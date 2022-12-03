@@ -1,0 +1,27 @@
+@startuml
+class UniTaskTrackerWindow {
+    {static} interval : int
+    + {static} OpenWindow() : void
+    splitterState : object
+    OnEnable() : void
+    OnGUI() : void
+    + {static} EnableAutoReload : bool <<get>>
+    + {static} EnableTracking : bool <<get>>
+    + {static} EnableStackTrace : bool <<get>>
+    RenderHeadPanel() : void
+    RenderTable() : void
+    RenderDetailsPanel() : void
+}
+EditorWindow <|-- UniTaskTrackerWindow
+UniTaskTrackerWindow --> "window" UniTaskTrackerWindow
+UniTaskTrackerWindow --> "treeView" UniTaskTrackerTreeView
+UniTaskTrackerWindow o-> "EnableAutoReloadHeadContent" GUIContent
+UniTaskTrackerWindow o-> "ReloadHeadContent" GUIContent
+UniTaskTrackerWindow o-> "GCHeadContent" GUIContent
+UniTaskTrackerWindow o-> "EnableTrackingHeadContent" GUIContent
+UniTaskTrackerWindow o-> "EnableStackTraceHeadContent" GUIContent
+UniTaskTrackerWindow --> "tableScroll" Vector2
+UniTaskTrackerWindow --> "tableListStyle" GUIStyle
+UniTaskTrackerWindow --> "detailsStyle" GUIStyle
+UniTaskTrackerWindow --> "detailsScroll" Vector2
+@enduml

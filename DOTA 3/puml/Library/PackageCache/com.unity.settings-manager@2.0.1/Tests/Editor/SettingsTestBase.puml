@@ -1,0 +1,5 @@
+@startuml
+class SettingsTestBase {
+    + <<const>> k_PackageName : string = "com.unity.settings-manager.tests"
+}
+@enduml

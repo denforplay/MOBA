@@ -1,0 +1,47 @@
+@startuml
+class RTHandleProperties <<struct>> {
+}
+class RTHandleSystem <<partial>> {
+    m_HardwareDynamicResRequested : bool = false
+    m_MaxWidths : int = 0
+    m_MaxHeights : int = 0
+    + RTHandleSystem()
+    + Dispose() : void
+    + Initialize(width:int, height:int) : void
+    + Release(rth:RTHandle) : void
+    + ResetReferenceSize(width:int, height:int) : void
+    + SetReferenceSize(width:int, height:int) : void
+    + SetReferenceSize(width:int, height:int, reset:bool) : void
+    + SetHardwareDynamicResolutionState(enableHWDynamicRes:bool) : void
+    DemandResize(rth:RTHandle) : void
+    + GetMaxWidth() : int
+    + GetMaxHeight() : int
+    Dispose(disposing:bool) : void
+    Resize(width:int, height:int, sizeChanged:bool) : void
+    + Alloc(width:int, height:int, slices:int, depthBufferBits:DepthBits, colorFormat:GraphicsFormat, filterMode:FilterMode, wrapMode:TextureWrapMode, dimension:TextureDimension, enableRandomWrite:bool, useMipMap:bool, autoGenerateMips:bool, isShadowMap:bool, anisoLevel:int, mipMapBias:float, msaaSamples:MSAASamples, bindTextureMS:bool, useDynamicScale:bool, memoryless:RenderTextureMemoryless, vrUsage:VRTextureUsage, name:string) : RTHandle
+    + Alloc(scaleFactor:Vector2, slices:int, depthBufferBits:DepthBits, colorFormat:GraphicsFormat, filterMode:FilterMode, wrapMode:TextureWrapMode, dimension:TextureDimension, enableRandomWrite:bool, useMipMap:bool, autoGenerateMips:bool, isShadowMap:bool, anisoLevel:int, mipMapBias:float, msaaSamples:MSAASamples, bindTextureMS:bool, useDynamicScale:bool, memoryless:RenderTextureMemoryless, vrUsage:VRTextureUsage, name:string) : RTHandle
+    + Alloc(scaleFunc:ScaleFunc, slices:int, depthBufferBits:DepthBits, colorFormat:GraphicsFormat, filterMode:FilterMode, wrapMode:TextureWrapMode, dimension:TextureDimension, enableRandomWrite:bool, useMipMap:bool, autoGenerateMips:bool, isShadowMap:bool, anisoLevel:int, mipMapBias:float, msaaSamples:MSAASamples, bindTextureMS:bool, useDynamicScale:bool, memoryless:RenderTextureMemoryless, vrUsage:VRTextureUsage, name:string) : RTHandle
+    AllocAutoSizedRenderTexture(width:int, height:int, slices:int, depthBufferBits:DepthBits, colorFormat:GraphicsFormat, filterMode:FilterMode, wrapMode:TextureWrapMode, dimension:TextureDimension, enableRandomWrite:bool, useMipMap:bool, autoGenerateMips:bool, isShadowMap:bool, anisoLevel:int, mipMapBias:float, msaaSamples:MSAASamples, bindTextureMS:bool, useDynamicScale:bool, memoryless:RenderTextureMemoryless, vrUsage:VRTextureUsage, name:string) : RTHandle
+    + Alloc(texture:RenderTexture) : RTHandle
+    + Alloc(texture:Texture) : RTHandle
+    + Alloc(texture:RenderTargetIdentifier) : RTHandle
+    + Alloc(texture:RenderTargetIdentifier, name:string) : RTHandle
+}
+enum ResizeMode {
+    Auto,
+    OnDemand,
+}
+class "HashSet`1"<T> {
+}
+RTHandleProperties --> "previousViewportSize" Vector2Int
+RTHandleProperties --> "previousRenderTargetSize" Vector2Int
+RTHandleProperties --> "currentViewportSize" Vector2Int
+RTHandleProperties --> "currentRenderTargetSize" Vector2Int
+RTHandleProperties --> "rtHandleScale" Vector4
+IDisposable <|-- RTHandleSystem
+RTHandleSystem --> "m_AutoSizedRTs<RTHandle>" "HashSet`1"
+RTHandleSystem --> "m_ResizeOnDemandRTs<RTHandle>" "HashSet`1"
+RTHandleSystem --> "m_RTHandleProperties" RTHandleProperties
+RTHandleSystem --> "rtHandleProperties" RTHandleProperties
+RTHandleSystem +-- ResizeMode
+@enduml

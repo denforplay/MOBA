@@ -1,0 +1,33 @@
+@startuml
+class Draw2D {
+    m_ShaderName : string
+    m_ClipRectEnabled : bool = false
+    + Draw2D(shaderName:string)
+    + CheckAndSetupMaterial() : bool
+    + IsMaterialValid() : bool
+    + OnGUI() : void
+    + SetClipRect(clipRect:Rect) : void
+    + ClearClipRect() : void
+    + GetClipRect() : Rect
+    + DrawStart(r:Rect, origin:Origin) : bool
+    + DrawStart(w:float, h:float, origin:Origin, style:GUIStyle) : bool
+    + DrawEnd() : void
+    + Translate(x:float, y:float) : void
+    + DrawFilledBox(x:float, y:float, w:float, h:float, col:Color) : void
+    + DrawFilledBox(x:float, y:float, w:float, h:float, r:float, g:float, b:float) : void
+    + DrawLine(x:float, y:float, x2:float, y2:float, col:Color) : void
+    + DrawLine(x:float, y:float, x2:float, y2:float, r:float, g:float, b:float) : void
+    + DrawBox(x:float, y:float, w:float, h:float, col:Color) : void
+    + DrawBox(x:float, y:float, w:float, h:float, r:float, g:float, b:float) : void
+}
+enum Origin {
+    TopLeft,
+    BottomLeft,
+}
+Draw2D o-> "m_Origin" Origin
+Draw2D --> "m_GLStyle" GUIStyle
+Draw2D --> "m_Material" Material
+Draw2D --> "m_Rect" Rect
+Draw2D --> "m_ClipRect" Vector4
+Draw2D +-- Origin
+@enduml

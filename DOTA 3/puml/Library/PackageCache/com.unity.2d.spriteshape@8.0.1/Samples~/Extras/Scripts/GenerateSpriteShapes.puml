@@ -1,0 +1,7 @@
+@startuml
+class GenerateSpriteShapes {
+    + destroyOnCompletion : bool = true
+    OnGUI() : void
+}
+MonoBehaviour <|-- GenerateSpriteShapes
+@enduml

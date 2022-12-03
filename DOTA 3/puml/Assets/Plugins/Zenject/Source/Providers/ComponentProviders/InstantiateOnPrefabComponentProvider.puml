@@ -1,0 +1,12 @@
+@startuml
+class InstantiateOnPrefabComponentProvider {
+    + InstantiateOnPrefabComponentProvider(componentType:Type, prefabInstantiator:IPrefabInstantiator)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+IProvider <|-- InstantiateOnPrefabComponentProvider
+InstantiateOnPrefabComponentProvider --> "_prefabInstantiator" IPrefabInstantiator
+InstantiateOnPrefabComponentProvider --> "_componentType" Type
+@enduml

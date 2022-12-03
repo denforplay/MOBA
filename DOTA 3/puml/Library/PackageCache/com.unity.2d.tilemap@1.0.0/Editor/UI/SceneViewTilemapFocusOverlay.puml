@@ -1,0 +1,28 @@
+@startuml
+class SceneViewTilemapFocusOverlay {
+    + SceneViewTilemapFocusOverlay()
+    + visible : bool <<get>>
+}
+class TilePaletteFocusLabel <<sealed>> {
+    <<const>> k_ToolSettingsClass : string = "unity-tool-settings"
+    + TilePaletteFocusLabel()
+}
+class TilePaletteFocusDropdown <<sealed>> {
+    <<const>> k_DropdownIconClass : string = "unity-toolbar-dropdown-label-icon"
+    <<const>> k_ToolSettingsClass : string = "unity-tool-settings"
+    + TilePaletteFocusDropdown()
+    OpenContextMenu() : void
+    SetFocusMode(mode:GridPaintPaletteWindow.TilemapFocusMode) : void
+    FocusModeChanged() : void
+}
+ToolbarOverlay <|-- SceneViewTilemapFocusOverlay
+ITransientOverlay <|-- SceneViewTilemapFocusOverlay
+VisualElement <|-- TilePaletteFocusLabel
+TilePaletteFocusLabel --> "m_Label" TextElement
+EditorToolbarDropdown <|-- TilePaletteFocusDropdown
+TilePaletteFocusDropdown --> "m_Label" TextElement
+TilePaletteFocusDropdown --> "m_Icon" VisualElement
+TilePaletteFocusDropdown --> "m_None" GUIContent
+TilePaletteFocusDropdown --> "m_Tilemap" GUIContent
+TilePaletteFocusDropdown --> "m_Grid" GUIContent
+@enduml

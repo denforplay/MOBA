@@ -1,0 +1,18 @@
+@startuml
+class RigToolbar {
+    +  <<event>> ActivateCopyTool : Action 
+    +  <<event>> TogglePasteTool : Action 
+    + {static} GenerateFromUXML() : RigToolbar
+    + RigToolbar()
+    + UpdatePasteButtonCheckedState() : void
+    + UpdatePasteButtonEnabledState() : void
+}
+class CustomUXMLFactor {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+Toolbar <|-- RigToolbar
+RigToolbar --> "skinningCache" SkinningCache
+RigToolbar +-- CustomUXMLFactor
+"UxmlFactory`2" "<RigToolbar,UxmlTraits>" <|-- CustomUXMLFactor
+@enduml

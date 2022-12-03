@@ -1,0 +1,12 @@
+@startuml
+class TriangulationUtility {
+    {static} <<readonly>> k_CollinearTolerance : float = 0.0001f
+    {static} <<unsafe>> ValidateCollinear(points:float2*, pointCount:int, epsilon:float) : int
+    {static} <<unsafe>> TessellateBurst(allocator:Allocator, points:float2*, pointCount:int, edges:int2*, edgeCount:int, outVertices:float2*, outIndices:int*, outEdges:int2*, arrayCount:int, result:int3*) : void
+    {static} <<unsafe>> SubdivideBurst(allocator:Allocator, points:float2*, pointCount:int, edges:int2*, edgeCount:int, outVertices:float2*, outIndices:int*, outEdges:int2*, arrayCount:int, areaFactor:float, areaThreshold:float, refineIterations:int, smoothenIterations:int, result:int3*) : void
+    {static} TessellateSafe(points:NativeArray<float2>, edges:NativeArray<int2>, outVertices:NativeArray<float2>, outVertexCount:int, outIndices:NativeArray<int>, outIndexCount:int, outEdges:NativeArray<int2>, outEdgeCount:int) : bool
+    {static} SubdivideSafe(points:NativeArray<float2>, edges:NativeArray<int2>, outVertices:NativeArray<float2>, outVertexCount:int, outIndices:NativeArray<int>, outIndexCount:int, outEdges:NativeArray<int2>, outEdgeCount:int, areaFactor:float, areaThreshold:float, refineIterations:int, smoothenIterations:int) : bool
+    + {static} Tessellate(minAngle:float, maxAngle:float, meshAreaFactor:float, largestTriangleAreaFactor:float, targetArea:float, refineIterations:int, smoothenIterations:int, vertices:float2[], edges:int2[], indices:int[], allocator:Allocator) : void
+    + {static} TessellateSafe(largestTriangleAreaFactor:float, targetArea:float, refineIterations:int, smoothenIterations:int, vertices:float2[], edges:int2[], indices:int[]) : void
+}
+@enduml

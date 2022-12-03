@@ -1,0 +1,24 @@
+@startuml
+class FreeCamera {
+    <<const>> k_MouseSensitivityMultiplier : float = 0.01f
+    + m_LookSpeedController : float = 120f
+    + m_LookSpeedMouse : float = 4.0f
+    + m_MoveSpeed : float = 10.0f
+    + m_MoveSpeedIncrement : float = 2.5f
+    + m_Turbo : float = 10.0f
+    OnEnable() : void
+    RegisterInputs() : void
+    inputRotateAxisX : float
+    inputRotateAxisY : float
+    inputChangeSpeed : float
+    inputVertical : float
+    inputHorizontal : float
+    inputYAxis : float
+    leftShiftBoost : bool
+    leftShift : bool
+    fire1 : bool
+    UpdateInputs() : void
+    Update() : void
+}
+MonoBehaviour <|-- FreeCamera
+@enduml

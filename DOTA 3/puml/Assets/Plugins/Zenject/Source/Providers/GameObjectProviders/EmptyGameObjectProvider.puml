@@ -1,0 +1,12 @@
+@startuml
+class EmptyGameObjectProvider {
+    + EmptyGameObjectProvider(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+IProvider <|-- EmptyGameObjectProvider
+EmptyGameObjectProvider --> "_container" DiContainer
+EmptyGameObjectProvider --> "_gameObjectBindInfo" GameObjectCreationParameters
+@enduml

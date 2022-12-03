@@ -1,0 +1,10 @@
+@startuml
+class DashSkill {
+    + DashSkill(skillId:int, skillConfiguration:SkillConfiguration, character:Character)
+    + CanBeUsed : bool <<get>> <<set>>
+    + <<override>> <<async>> Apply(position:Vector3) : UniTask
+    + Id : int <<get>>
+}
+DirectedSkill <|-- DashSkill
+DashSkill --> "SkillType" SkillType
+@enduml

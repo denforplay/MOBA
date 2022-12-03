@@ -1,0 +1,13 @@
+@startuml
+class CooldownWindowDelayer {
+    RefreshCooldown() : void
+    StartCooldown() : void
+    EndCooldown() : void
+    OnUpdate() : void
+    <<readonly>> mCooldownSeconds : double
+    mLastUpdateTime : double
+    mIsOnCooldown : bool
+    mSecondsOnCooldown : double
+}
+CooldownWindowDelayer --> "mAction" Action
+@enduml

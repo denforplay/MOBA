@@ -1,0 +1,12 @@
+@startuml
+class EraseTool <<sealed>> {
+}
+class Styles <<static>> {
+    + {static} tooltipStringFormat : string = "|Erase with active brush ({0&#125;)"
+    + {static} shortcutId : string = "Grid Painting/Erase"
+}
+TilemapEditorTool <|-- EraseTool
+EraseTool --> "toolbarIcon" GUIContent
+EraseTool +-- Styles
+Styles o-> "toolContent" GUIContent
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+interface ICopyToolStringStore {
+    stringStore : string <<get>> <<set>>
+}
+class SystemCopyBufferStringStore {
+    + stringStore : string <<get>> <<set>>
+}
+class CopyTool {
+    m_HasValidCopyData : bool = false
+    m_LastCopyDataHash : int
+    + pixelsPerUnit : float <<set>>
+    + hasValidCopiedData : bool <<get>>
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    CopyMeshFromSpriteCache(sprite:SpriteCache, skinningSpriteData:SkinningCopySpriteData) : void
+    + OnCopyActivated() : void
+    CopyAll() : SkinningCopyData
+    CopySingle(sprite:SpriteCache) : SkinningCopyData
+    {static} GetSpriteBoneDataRecursively(bones:IList<SpriteBoneCopyData>, rootBone:BoneCache, boneCache:List<BoneCache>) : void
+    {static} AppendSpriteBoneDataRecursively(bones:IList<SpriteBoneCopyData>, currentBone:BoneCache, parentIndex:int, boneCache:List<BoneCache>) : void
+    + OnPasteActivated(shouldPasteBones:bool, shouldPasteMesh:bool, shouldFlipX:bool, shouldFlipY:bool) : void
+    {static} IsValidCopyData(copyBuffer:string) : bool
+    {static} GetFlippedBonePosition(bone:BoneCache, startPosition:Vector2, spriteRect:Rect, flipX:bool, flipY:bool) : Vector3
+    {static} GetFlippedBoneRotation(bone:BoneCache, flipX:bool, flipY:bool) : Quaternion
+    {static} SetBonePositionAndRotation(boneCache:BoneCache[], bone:TransformCache, position:Vector3[], rotation:Quaternion[]) : void
+    PasteBonesInSprite(sprite:SpriteCache, newBones:SpriteBone[], shouldFlipX:bool, shouldFlipY:bool, scale:float) : BoneCache[]
+    PasteMeshInSprite(sprite:SpriteCache, copySpriteData:SkinningCopySpriteData, shouldFlipX:bool, shouldFlipY:bool, scale:float) : void
+}
+class CopyToolView {
+    +  <<event>> onPasteActivated : Action<bool, bool, bool, bool> 
+    + Show(readonlyBone:bool) : void
+    + Hide() : void
+    + Initialize(layoutOverlay:LayoutOverlay) : void
+    BindElements() : void
+    OnPasteActivated(bone:bool, mesh:bool, flipX:bool, flipY:bool) : void
+}
+ICopyToolStringStore <|-- SystemCopyBufferStringStore
+MeshToolWrapper <|-- CopyTool
+CopyTool --> "m_CopyToolStringStore" ICopyToolStringStore
+CopyTool --> "m_CopyToolView" CopyToolView
+CopyTool --> "copyToolStringStore" ICopyToolStringStore
+CopyToolView --> "m_PastePanel" PastePanel
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+class MeshPreviewCache {
+    m_MeshDirty : bool
+    m_VerticesDirty : bool
+    m_SkinningDirty : bool
+    m_WeightsDirty : bool
+    m_IndicesDirty : bool
+    m_ColorsDirty : bool
+    m_EnableSkinning : bool
+    + enableSkinning : bool <<get>> <<set>>
+    + canSkin : bool <<get>>
+    CanSkin() : bool
+    {static} CreateMesh() : Mesh
+    InitializeDefaultMesh() : void
+    + SetMeshDirty() : void
+    + SetSkinningDirty() : void
+    + SetWeightsDirty() : void
+    + SetColorsDirty() : void
+    + Prepare() : void
+    PrepareColors() : void
+    SkinVertices() : void
+}
+class "List`1"<T> {
+}
+SkinningObject <|-- MeshPreviewCache
+MeshPreviewCache --> "m_Sprite" SpriteCache
+MeshPreviewCache --> "m_Mesh" Mesh
+MeshPreviewCache --> "m_DefaultMesh" Mesh
+MeshPreviewCache o-> "m_SkinnedVertices<Vector3>" "List`1"
+MeshPreviewCache o-> "m_Vertices<Vector3>" "List`1"
+MeshPreviewCache o-> "m_Weights<BoneWeight>" "List`1"
+MeshPreviewCache o-> "m_TexCoords<Vector2>" "List`1"
+MeshPreviewCache o-> "m_Colors<Color>" "List`1"
+MeshPreviewCache o-> "m_SkinningMatrices<Matrix4x4>" "List`1"
+MeshPreviewCache --> "sprite" SpriteCache
+MeshPreviewCache --> "mesh" Mesh
+MeshPreviewCache --> "defaultMesh" Mesh
+MeshPreviewCache --> "vertices<Vector3>" "List`1"
+@enduml

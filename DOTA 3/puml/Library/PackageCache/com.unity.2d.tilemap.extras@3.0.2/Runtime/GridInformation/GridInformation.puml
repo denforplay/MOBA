@@ -1,0 +1,42 @@
+@startuml
+enum GridInformationType {
+    Integer,
+    String,
+    Float,
+    Double,
+    UnityObject,
+    Color,
+}
+class GridInformation {
+    OnBeforeSerialize() : void
+    OnAfterDeserialize() : void
+    + SetPositionProperty(position:Vector3Int, name:String, positionProperty:T) : bool
+    + SetPositionProperty(position:Vector3Int, name:String, positionProperty:int) : bool
+    + SetPositionProperty(position:Vector3Int, name:String, positionProperty:string) : bool
+    + SetPositionProperty(position:Vector3Int, name:String, positionProperty:float) : bool
+    + SetPositionProperty(position:Vector3Int, name:String, positionProperty:double) : bool
+    + SetPositionProperty(position:Vector3Int, name:String, positionProperty:UnityEngine.Object) : bool
+    + SetPositionProperty(position:Vector3Int, name:String, positionProperty:Color) : bool
+    + GetPositionProperty(position:Vector3Int, name:String, defaultValue:T) : T
+    + GetPositionProperty(position:Vector3Int, name:String, defaultValue:int) : int
+    + GetPositionProperty(position:Vector3Int, name:String, defaultValue:string) : string
+    + GetPositionProperty(position:Vector3Int, name:String, defaultValue:float) : float
+    + GetPositionProperty(position:Vector3Int, name:String, defaultValue:double) : double
+    + GetPositionProperty(position:Vector3Int, name:String, defaultValue:Color) : Color
+    + ErasePositionProperty(position:Vector3Int, name:String) : bool
+    + <<virtual>> Reset() : void
+    + GetAllPositions(propertyName:string) : Vector3Int[]
+}
+class GridInformationValue <<struct>> {
+    + data : object
+}
+class GridInformationKey <<struct>> {
+}
+MonoBehaviour <|-- GridInformation
+ISerializationCallbackReceiver <|-- GridInformation
+GridInformation +-- GridInformationValue
+GridInformationValue --> "type" GridInformationType
+GridInformation +-- GridInformationKey
+GridInformationKey --> "position" Vector3Int
+GridInformationKey --> "name" String
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class AdvancedRuleOverrideTile {
+    + ApplyOverrides(overrides:IList<KeyValuePair<RuleTile.TilingRule, RuleTile.TilingRuleOutput>>) : void
+    + GetOverrides(overrides:List<KeyValuePair<RuleTile.TilingRule, RuleTile.TilingRuleOutput>>, validCount:int) : void
+    + <<override>> Override() : void
+}
+class "FromJson`1"<T> {
+}
+class "List`1"<T> {
+}
+RuleOverrideTile <|-- AdvancedRuleOverrideTile
+AdvancedRuleOverrideTile --> "m_DefaultSprite" Sprite
+AdvancedRuleOverrideTile --> "m_DefaultGameObject" GameObject
+AdvancedRuleOverrideTile o-> "m_OverrideTilingRules<RuleTile.TilingRuleOutput>" "List`1"
+@enduml

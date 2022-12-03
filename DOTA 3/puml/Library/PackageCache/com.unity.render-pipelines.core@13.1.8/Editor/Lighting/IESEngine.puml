@@ -1,0 +1,20 @@
+@startuml
+class IESEngine {
+    <<const>> k_HalfPi : float
+    <<const>> k_TwoPi : float
+    + ReadFile(iesFilePath:string) : string
+    + GetKeywordValue(keyword:string) : string
+    + GetPhotometricType() : string
+    + GetMaximumIntensity() : (float, string)
+    + GenerateCubeCookie(compression:TextureImporterCompression, textureSize:int) : (string, Texture)
+    + Generate2DCookie(compression:TextureImporterCompression, coneAngle:float, textureSize:int, applyLightAttenuation:bool) : (string, Texture)
+    GenerateTexture(type:TextureImporterType, shape:TextureImporterShape, compression:TextureImporterCompression, width:int, height:int, colorBuffer:NativeArray<Color32>) : (string, Texture)
+    BuildTypeACylindricalTexture(width:int, height:int) : NativeArray<Color32>
+    BuildTypeBCylindricalTexture(width:int, height:int) : NativeArray<Color32>
+    BuildTypeCCylindricalTexture(width:int, height:int) : NativeArray<Color32>
+    BuildTypeAGnomonicTexture(coneAngle:float, size:int, applyLightAttenuation:bool) : NativeArray<Color32>
+    BuildTypeBGnomonicTexture(coneAngle:float, size:int, applyLightAttenuation:bool) : NativeArray<Color32>
+    BuildTypeCGnomonicTexture(coneAngle:float, size:int, applyLightAttenuation:bool) : NativeArray<Color32>
+}
+IESEngine --> "TextureGenerationType" TextureImporterType
+@enduml

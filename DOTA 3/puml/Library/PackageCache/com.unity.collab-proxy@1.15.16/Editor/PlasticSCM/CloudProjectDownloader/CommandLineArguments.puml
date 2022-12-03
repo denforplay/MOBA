@@ -1,0 +1,6 @@
+@startuml
+class CommandLineArguments {
+    {static} TrimArgs(args:string[]) : List<string>
+    {static} IsKeyValueArgumentAtIndex(trimmedArguments:List<string>, index:int) : bool
+}
+@enduml

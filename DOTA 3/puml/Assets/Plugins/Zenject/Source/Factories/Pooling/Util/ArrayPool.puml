@@ -1,0 +1,15 @@
+@startuml
+class "ArrayPool`1"<T> {
+    <<readonly>> _length : int
+    + ArrayPool(length:int)
+    {static} OnDespawned(arr:T[]) : void
+    + Spawn() : T[]
+    + {static} GetPool(length:int) : ArrayPool<T>
+}
+class "StaticMemoryPoolBaseBase`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+"StaticMemoryPoolBaseBase`1" "<T[]>" <|-- "ArrayPool`1"
+"ArrayPool`1" o-> "_pools<int,ArrayPool<T>>" "Dictionary`2"
+@enduml

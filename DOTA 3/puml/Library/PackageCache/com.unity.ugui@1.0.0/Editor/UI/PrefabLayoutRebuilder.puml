@@ -1,0 +1,6 @@
+@startuml
+class PrefabLayoutRebuilder {
+    {static} PrefabLayoutRebuilder()
+    {static} OnPrefabInstanceUpdates(instance:GameObject) : void
+}
+@enduml

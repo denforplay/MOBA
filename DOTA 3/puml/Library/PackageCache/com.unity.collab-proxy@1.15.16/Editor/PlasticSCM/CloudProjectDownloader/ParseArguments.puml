@@ -1,0 +1,8 @@
+@startuml
+class ParseArguments <<static>> {
+    {static} GetOrganizationNameFromData(data:string) : string
+    <<const>> CLOUD_PROJECT : string = "-cloudProject"
+    <<const>> CLOUD_ORGANIZATION : string = "-cloudOrganization"
+    <<const>> CREATE_PROJECT : string = "-createProject"
+}
+@enduml

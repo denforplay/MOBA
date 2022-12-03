@@ -1,0 +1,7 @@
+@startuml
+class LimbSolver2D <<sealed>> {
+    + flip : bool <<get>> <<set>>
+    + <<override>> GetChain(index:int) : IKChain2D
+}
+Solver2D <|-- LimbSolver2D
+@enduml

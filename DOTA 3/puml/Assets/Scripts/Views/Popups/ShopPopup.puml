@@ -1,0 +1,9 @@
+@startuml
+class ShopPopup {
+    + Initialize(shopItemsConfiguration:ShopItemsConfiguration, character:Character) : void
+    + DisplayItemsWithType(itemType:ItemType) : void
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- ShopPopup
+@enduml

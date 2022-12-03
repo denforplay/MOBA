@@ -1,0 +1,69 @@
+@startuml
+abstract class SubContainerCreatorByMethodBase {
+    + SubContainerCreatorByMethodBase(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo)
+    + {abstract} CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class SubContainerCreatorByMethod {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:Action<DiContainer>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "SubContainerCreatorByMethod`1"<TParam1> {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:Action<DiContainer, TParam1>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "SubContainerCreatorByMethod`2"<TParam1,TParam2> {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:Action<DiContainer, TParam1, TParam2>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "SubContainerCreatorByMethod`3"<TParam1,TParam2,TParam3> {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:Action<DiContainer, TParam1, TParam2, TParam3>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "SubContainerCreatorByMethod`4"<TParam1,TParam2,TParam3,TParam4> {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "SubContainerCreatorByMethod`5"<TParam1,TParam2,TParam3,TParam4,TParam5> {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "SubContainerCreatorByMethod`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6> {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "SubContainerCreatorByMethod`10"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10> {
+    + SubContainerCreatorByMethod(container:DiContainer, containerBindInfo:SubContainerCreatorBindInfo, installMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>)
+    + <<override>> CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "Action`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+class "Action`3"<T1,T2,T3> {
+}
+class "Action`4"<T1,T2,T3,T4> {
+}
+ISubContainerCreator <|-- SubContainerCreatorByMethodBase
+SubContainerCreatorByMethodBase --> "_container" DiContainer
+SubContainerCreatorByMethodBase --> "_containerBindInfo" SubContainerCreatorBindInfo
+SubContainerCreatorByMethodBase <|-- SubContainerCreatorByMethod
+SubContainerCreatorByMethod --> "_installMethod<DiContainer>" "Action`1"
+SubContainerCreatorByMethodBase <|-- "SubContainerCreatorByMethod`1"
+"SubContainerCreatorByMethod`1" --> "_installMethod<DiContainer,TParam1>" "Action`2"
+SubContainerCreatorByMethodBase <|-- "SubContainerCreatorByMethod`2"
+"SubContainerCreatorByMethod`2" --> "_installMethod<DiContainer,TParam1,TParam2>" "Action`3"
+SubContainerCreatorByMethodBase <|-- "SubContainerCreatorByMethod`3"
+"SubContainerCreatorByMethod`3" --> "_installMethod<DiContainer,TParam1,TParam2,TParam3>" "Action`4"
+SubContainerCreatorByMethodBase <|-- "SubContainerCreatorByMethod`4"
+SubContainerCreatorByMethodBase <|-- "SubContainerCreatorByMethod`5"
+SubContainerCreatorByMethodBase <|-- "SubContainerCreatorByMethod`6"
+SubContainerCreatorByMethodBase <|-- "SubContainerCreatorByMethod`10"
+@enduml

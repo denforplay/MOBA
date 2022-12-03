@@ -1,0 +1,6 @@
+@startuml
+interface IHasMetadata {
+    identifier : string <<get>>
+    GetMetadataObject(graph:GraphDataReadOnly) : ScriptableObject
+}
+@enduml

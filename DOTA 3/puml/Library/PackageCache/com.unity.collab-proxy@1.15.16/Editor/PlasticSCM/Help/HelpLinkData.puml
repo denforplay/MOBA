@@ -1,0 +1,5 @@
+@startuml
+class HelpLinkData <<static>> {
+}
+HelpLinkData o-> "mLog" ILog
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+class "PooledDelegate`1"<T> <<sealed>> {
+    {static} PooledDelegate()
+    PooledDelegate()
+    + {static} Create(continuation:Action) : Action<T>
+    Run(_:T) : void
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "Action`1"<T> {
+}
+"ITaskPoolNode`1" "<PooledDelegate<T>>" <|-- "PooledDelegate`1"
+"PooledDelegate`1" --> "pool<PooledDelegate<T>>" "TaskPool`1"
+"PooledDelegate`1" --> "nextNode<T>" "PooledDelegate`1"
+"PooledDelegate`1" --> "runDelegate<T>" "Action`1"
+"PooledDelegate`1" --> "continuation" Action
+@enduml

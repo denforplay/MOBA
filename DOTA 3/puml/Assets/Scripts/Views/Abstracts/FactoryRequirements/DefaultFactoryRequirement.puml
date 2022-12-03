@@ -1,0 +1,5 @@
+@startuml
+class DefaultFactoryRequirement {
+}
+IFactoryRequirement <|-- DefaultFactoryRequirement
+@enduml

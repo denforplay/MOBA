@@ -1,0 +1,19 @@
+@startuml
+class GameObjectContext {
+    +  <<event>> PreInstall : Action 
+    +  <<event>> PostInstall : Action 
+    +  <<event>> PreResolve : Action 
+    +  <<event>> PostResolve : Action 
+    _hasInstalled : bool
+    + <<override>> GetRootGameObjects() : IEnumerable<GameObject>
+    + Construct(parentContainer:DiContainer) : void
+    + Install(parentContainer:DiContainer) : void
+    ResolveAndStart() : void
+    InstallBindings(injectableMonoBehaviours:List<MonoBehaviour>) : void
+}
+RunnableContext <|-- GameObjectContext
+GameObjectContext --> "_kernel" MonoKernel
+GameObjectContext --> "_container" DiContainer
+GameObjectContext --> "_parentContainer" DiContainer
+GameObjectContext --> "Container" DiContainer
+@enduml

@@ -1,0 +1,63 @@
+@startuml
+class VectorsConstructors <<partial>> {
+    + {static} Float4Int(a:int) : float
+    + {static} Float4Float3Float(x:float) : float
+    + {static} Float4Float2Float2(x:float) : float
+    + {static} Float44Floats(a:float) : float
+    + {static} Float4Float(a:float) : float
+    + {static} Float4Int4(a:int4) : float
+    + {static} Float4Half(a:float) : float
+    + {static} Float4Half4(a:float4) : float
+    + {static} Float4HalfExplicit(a:float) : float
+    + {static} Float4HalfImplicit(a:float) : float
+    + {static} Float3Int(a:int) : float
+    + {static} Float33Floats(a:float) : float
+    + {static} Float3Float(a:float) : float
+    + {static} Float3Float2Float(a:float) : float
+    + {static} Float3Half(a:float) : float
+    + {static} Float3Half3(a:float3) : float
+    + {static} Float2Int(a:int) : float
+    + {static} Float22Floats(a:float) : float
+    + {static} Float2Float(a:float) : float
+    + {static} Float2Half(a:float) : float
+    + {static} Float2Half2(a:float2) : float
+    + {static} Int4Int(a:int) : int
+    + {static} Int4Int3Int(x:int) : int
+    + {static} Int44Ints(a:int) : int
+    + {static} Int3Int(a:int) : int
+    + {static} Int33Ints(a:int) : int
+    + {static} Int3Int2Int(a:int) : int
+    + {static} Int2Int(a:int) : int
+    + {static} Int22Ints(a:int) : int
+    + {static} Bool4(a:bool) : int
+    + {static} Bool4Bool3(x:bool) : int
+    + {static} Bool44Bools(a:bool, b:bool, c:bool, d:bool) : int
+    + {static} Bool3(a:bool) : int
+    + {static} Bool3Bool2(a:bool) : int
+    + {static} Bool33Bools(a:bool, b:bool, c:bool) : int
+    + {static} Bool2(a:bool) : int
+    + {static} Bool22Ints(a:bool, b:bool) : int
+    + {static} Double4Int(a:int) : double
+    + {static} Double4Double3Double(x:double) : double
+    + {static} Double4Double2Double2(x:double) : double
+    + {static} Double44Doubles(a:double) : double
+    + {static} Double4Double(a:double) : double
+    + {static} Double4Int4(a:int4) : double
+    + {static} Double4Half(a:double) : double
+    + {static} Double4Half4(a:double4) : double
+    + {static} Double3Int(a:int) : double
+    + {static} Double33Doubles(a:double) : double
+    + {static} Double3Double(a:double) : double
+    + {static} Double3Double2Double(a:double) : double
+    + {static} Double3Half(a:double) : double
+    + {static} Double3Half3(a:double3) : double
+    + {static} Double2Int(a:int) : double
+    + {static} Double22Doubles(a:double) : double
+    + {static} Double2Double(a:double) : double
+    + {static} Double2Half(a:double) : double
+    + {static} Double2Half2(a:double2) : double
+    + {static} Float2UInt2(a:uint, b:uint) : float
+    + {static} Float4UIntUIntUInt2Implicit(a:uint, b:uint) : float
+    + {static} Float4UIntUIntUInt2Explicit(a:uint, b:uint) : float
+}
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+class SpriteLibUpgrader {
+    <<const>> k_SpriteLibTypeId : string = "t:SpriteLibraryAsset"
+    <<const>> k_PsbImporterCategoriesId : string = "m_SpriteCategoryList.m_Categories"
+    m_OnlyFindOldAssets : bool
+    m_OnlySearchInAssets : bool
+    {static} SpriteLibUpgrader()
+    + SpriteLibUpgrader(onlyFindOldAssets:bool, onlySearchInAssets:bool)
+    {static} GetSpriteLibReferenceLookup() : Dictionary<Type, List<FieldInfo>>
+    {static} HasSpriteLibField(field:FieldInfo) : bool
+    {static} GetAllAssetPaths(spriteLibraries:Dictionary<int, SpriteLibraryAsset>) : string[]
+    {static} GetObjectIDString(obj:Object) : string
+    {static} IsPrefabOrScenePath(path:string, ids:string[]) : bool
+    {static} DoesFileContainString(path:string, strings:string[]) : bool
+    CreateNewAssetLibraries(spriteLibraries:Dictionary<int, SpriteLibraryAsset>) : List<(int, string)>
+    {static} LoadNewLibraries(sourceAssetPaths:List<(int, string)>) : List<SpriteLibraryAsset>
+    ReassignAssets(assetPaths:string[], oldLibraries:List<SpriteLibraryAsset>, newLibraries:List<SpriteLibraryAsset>) : void
+    {static} UpgradePrefab(path:string, oldLibraries:List<SpriteLibraryAsset>, newLibraries:List<SpriteLibraryAsset>, objectUpgrader:Action<GameObject, List<SpriteLibraryAsset>, List<SpriteLibraryAsset>>) : void
+    {static} UpgradeScene(path:string, oldLibraries:List<SpriteLibraryAsset>, newLibraries:List<SpriteLibraryAsset>, objectUpgrader:Action<GameObject, List<SpriteLibraryAsset>, List<SpriteLibraryAsset>>) : void
+    UpgradeGameObject(go:GameObject, oldLibraries:List<SpriteLibraryAsset>, newLibraries:List<SpriteLibraryAsset>) : void
+    RemoveOldLibraries(oldLibraries:List<SpriteLibraryAsset>) : void
+    RemoveSpriteLibFromPsb(path:string) : void
+    AddAssetBundlesToLog() : void
+}
+class Contents <<static>> {
+    + {static} <<readonly>> ProgressBarTitle : string
+    + {static} <<readonly>> VerifyingSelection : string
+    + {static} <<readonly>> CreatingNewLibraries : string
+    + {static} <<readonly>> ReassignAssetsInComponents : string
+    + {static} <<readonly>> RemoveOldSpriteLibraries : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "HashSet`1"<T> {
+}
+BaseUpgrader <|-- SpriteLibUpgrader
+SpriteLibUpgrader --> "k_SpriteLibraryReferenceLookup<Type,List<FieldInfo>>" "Dictionary`2"
+SpriteLibUpgrader o-> "m_IndicesWithAssetBundleConnection<int>" "HashSet`1"
+SpriteLibUpgrader o-> "m_AssetBundlesNeedingUpgrade<string>" "HashSet`1"
+SpriteLibUpgrader +-- Contents
+@enduml

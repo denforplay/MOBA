@@ -1,0 +1,7 @@
+@startuml
+class MySettingsProvider <<static>> {
+    <<const>> k_PreferencesPath : string = "Preferences/Package With Project and User Settings"
+    {static} ProBuilderPreferencesGUI() : void
+}
+MySettingsProvider --> "s_SettingsProvider" UserSettingsProvider
+@enduml

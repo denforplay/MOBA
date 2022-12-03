@@ -1,0 +1,12 @@
+@startuml
+class ExecutionOrderInstaller {
+    + ExecutionOrderInstaller(typeOrder:List<Type>)
+    + <<override>> InstallBindings() : void
+}
+class "Installer`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+"Installer`2" "<List<Type>,ExecutionOrderInstaller>" <|-- ExecutionOrderInstaller
+ExecutionOrderInstaller --> "_typeOrder<Type>" "List`1"
+@enduml

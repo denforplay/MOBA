@@ -1,0 +1,18 @@
+@startuml
+class Toolbar {
+    + Toolbar()
+    + SetButtonChecked(toCheck:Button) : void
+    + CollapseToolBar(collapse:bool) : void
+}
+class ToolbarFactory {
+}
+class ToolbarUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- Toolbar
+Toolbar +-- ToolbarFactory
+"UxmlFactory`2" "<Toolbar,ToolbarUxmlTraits>" <|-- ToolbarFactory
+Toolbar +-- ToolbarUxmlTraits
+UxmlTraits <|-- ToolbarUxmlTraits
+@enduml

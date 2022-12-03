@@ -1,0 +1,6 @@
+@startuml
+abstract class CompositeRoot {
+    + {abstract} Compose() : void
+}
+MonoBehaviour <|-- CompositeRoot
+@enduml

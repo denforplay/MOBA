@@ -1,0 +1,11 @@
+@startuml
+abstract class RiderFlowEditorToolbarToggle {
+    + NumberOfActions : int <<get>>
+    + AltAction(i:int) : void
+    + IsAltActionValid(i:int) : bool
+}
+EditorToolbarToggle <|-- RiderFlowEditorToolbarToggle
+IPositionProvider <|-- RiderFlowEditorToolbarToggle
+IPartialAltActionProvider <|-- RiderFlowEditorToolbarToggle
+RiderFlowEditorToolbarToggle --> "Position" Vector2
+@enduml

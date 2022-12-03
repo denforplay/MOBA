@@ -1,0 +1,16 @@
+@startuml
+enum EventName {
+    codeCoverage,
+}
+enum ActionID {
+    Other= 0,
+    DataOnly= 1,
+    ReportOnly= 2,
+    DataReport= 3,
+}
+enum CoverageModeID {
+    None= 0,
+    TestRunner= 1,
+    Recording= 2,
+}
+@enduml

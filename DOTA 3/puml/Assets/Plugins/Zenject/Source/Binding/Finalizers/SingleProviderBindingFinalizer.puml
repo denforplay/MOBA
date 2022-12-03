@@ -1,0 +1,9 @@
+@startuml
+class SingleProviderBindingFinalizer {
+    + SingleProviderBindingFinalizer(bindInfo:BindInfo, providerFactory:Func<DiContainer, Type, IProvider>)
+}
+class "Func`3"<T1,T2,T3> {
+}
+ProviderBindingFinalizer <|-- SingleProviderBindingFinalizer
+SingleProviderBindingFinalizer --> "_providerFactory<DiContainer,Type,IProvider>" "Func`3"
+@enduml

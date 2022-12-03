@@ -1,0 +1,14 @@
+@startuml
+class CommandLineOption {
+    + CommandLineOption(argName:string, action:Action)
+    + CommandLineOption(argName:string, action:Action<string>)
+    + CommandLineOption(argName:string, action:Action<string[]>)
+    + ArgName : string <<get>>
+    + ApplyValue(value:string) : void
+    {static} SplitStringToArray(value:string) : string[]
+}
+class "Action`1"<T> {
+}
+ICommandLineOption <|-- CommandLineOption
+CommandLineOption --> "m_ArgAction<string>" "Action`1"
+@enduml

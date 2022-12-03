@@ -1,0 +1,18 @@
+@startuml
+class "MinimumQueue`1"<T> {
+    <<const>> MinimumGrow : int = 4
+    <<const>> GrowFactor : int = 200
+    head : int
+    tail : int
+    size : int
+    + MinimumQueue(capacity:int)
+    + Count : int <<get>>
+    + Peek() : T
+    + Enqueue(item:T) : void
+    + Dequeue() : T
+    Grow() : void
+    SetCapacity(capacity:int) : void
+    MoveNext(index:int) : void
+    ThrowForEmptyQueue() : void
+}
+@enduml

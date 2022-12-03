@@ -1,0 +1,124 @@
+@startuml
+class InputActionMap <<sealed>> {
+    + name : string <<get>>
+    + enabled : bool <<get>>
+    + bindingMask : InputBinding? <<get>> <<set>>
+    + devices : ReadOnlyArray<InputDevice>? <<get>> <<set>>
+    + InputActionMap()
+    + InputActionMap(name:string)
+    + Dispose() : void
+    + FindAction(actionNameOrId:string, throwIfNotFound:bool) : InputAction
+    + FindAction(id:Guid) : InputAction
+    + IsUsableWithDevice(device:InputDevice) : bool
+    + Enable() : void
+    + Disable() : void
+    + Clone() : InputActionMap
+    Clone() : object
+    + Contains(action:InputAction) : bool
+    + <<override>> ToString() : string
+    + GetEnumerator() : IEnumerator<InputAction>
+    GetEnumerator() : IEnumerator
+    + FindBinding(mask:InputBinding, action:InputAction) : int
+    + {static} FromJson(json:string) : InputActionMap[]
+    + {static} ToJson(maps:IEnumerable<InputActionMap>) : string
+    + ToJson() : string
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+}
+class "ReadOnlyArray`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class "Action`1"<T> {
+}
+class DeviceArray <<struct>> {
+    + IndexOf(device:InputDevice) : int
+    + Remove(device:InputDevice) : bool
+    + Get() : ReadOnlyArray<InputDevice>?
+    + Set(devices:ReadOnlyArray<InputDevice>?) : bool
+}
+class BindingOverrideListJson <<struct>> {
+}
+class BindingOverrideJson <<struct>> {
+    + action : string
+    + id : string
+    + path : string
+    + interactions : string
+    + processors : string
+    + {static} FromBinding(binding:InputBinding) : BindingOverrideJson
+}
+class BindingJson <<struct>> {
+    + name : string
+    + id : string
+    + path : string
+    + interactions : string
+    + processors : string
+    + groups : string
+    + action : string
+    + isComposite : bool
+    + isPartOfComposite : bool
+    + ToBinding() : InputBinding
+    + {static} FromBinding(binding:InputBinding) : BindingJson
+}
+class ReadActionJson <<struct>> {
+    + name : string
+    + type : string
+    + id : string
+    + expectedControlType : string
+    + expectedControlLayout : string
+    + processors : string
+    + interactions : string
+    + passThrough : bool
+    + initialStateCheck : bool
+    + ToAction(actionName:string) : InputAction
+}
+class WriteActionJson <<struct>> {
+    + name : string
+    + type : string
+    + id : string
+    + expectedControlType : string
+    + processors : string
+    + interactions : string
+    + initialStateCheck : bool
+    + {static} FromAction(action:InputAction) : WriteActionJson
+}
+class ReadMapJson <<struct>> {
+    + name : string
+    + id : string
+}
+class WriteMapJson <<struct>> {
+    + name : string
+    + id : string
+    + {static} FromMap(map:InputActionMap) : WriteMapJson
+}
+class WriteFileJson <<struct>> {
+    + {static} FromMap(map:InputActionMap) : WriteFileJson
+    + {static} FromMaps(maps:IEnumerable<InputActionMap>) : WriteFileJson
+}
+class ReadFileJson <<struct>> {
+    + ToMaps() : InputActionMap[]
+}
+class "List`1"<T> {
+}
+ICloneable <|-- InputActionMap
+ISerializationCallbackReceiver <|-- InputActionMap
+IInputActionCollection2 <|-- InputActionMap
+IDisposable <|-- InputActionMap
+InputActionMap --> "asset" InputActionAsset
+InputActionMap --> "id" Guid
+InputActionMap --> "actions<InputAction>" "ReadOnlyArray`1"
+InputActionMap --> "bindings<InputBinding>" "ReadOnlyArray`1"
+InputActionMap --> "bindings<InputBinding>" "IEnumerable`1"
+InputActionMap --> "controlSchemes<InputControlScheme>" "ReadOnlyArray`1"
+InputActionMap +-- DeviceArray
+InputActionMap +-- BindingOverrideListJson
+BindingOverrideListJson --> "bindings<BindingOverrideJson>" "List`1"
+InputActionMap +-- BindingOverrideJson
+InputActionMap +-- BindingJson
+InputActionMap +-- ReadActionJson
+InputActionMap +-- WriteActionJson
+InputActionMap +-- ReadMapJson
+InputActionMap +-- WriteMapJson
+InputActionMap +-- WriteFileJson
+InputActionMap +-- ReadFileJson
+@enduml

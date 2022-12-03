@@ -1,0 +1,6 @@
+@startuml
+class BoolSetting <<static>> {
+    {static} GetSettingKey(boolSettingName:string) : string
+    {static} PREFERENCE_VALUE_KEY : string = "PreferenceValue"
+}
+@enduml

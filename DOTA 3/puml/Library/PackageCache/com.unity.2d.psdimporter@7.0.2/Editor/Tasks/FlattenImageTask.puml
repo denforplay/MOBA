@@ -1,0 +1,19 @@
+@startuml
+class FlattenImageTask <<static>> {
+    {static} <<unsafe>> + Execute(layer:PSDExtractLayerData[], importHiddenLayer:bool, width:int, height:int, output:NativeArray<Color32>) : void
+    {static} <<unsafe>> GetBuffersToMergeFromLayer(layer:PSDExtractLayerData, importHiddenLayer:bool, buffers:List<IntPtr>) : void
+}
+class FlattenImageInternalJob <<struct>> {
+    + layersPerJob : int
+    + width : int
+    + height : int
+    + flipY : bool
+    + <<unsafe>> Execute(index:int) : void
+}
+class "NativeArray`1"<T> {
+}
+FlattenImageTask +-- FlattenImageInternalJob
+IJobParallelFor <|-- FlattenImageInternalJob
+FlattenImageInternalJob --> "buffers<IntPtr>" "NativeArray`1"
+FlattenImageInternalJob --> "output<IntPtr>" "NativeArray`1"
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class SpriteEditorHandles <<static>> {
+    {static} s_RectSelectionID : int
+}
+@enduml

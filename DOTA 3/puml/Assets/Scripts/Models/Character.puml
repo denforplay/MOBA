@@ -1,0 +1,47 @@
+@startuml
+class Character {
+    +  <<event>> OnHealthChanged : Action<float> 
+    +  <<event>> OnHealthEnded : Action 
+    +  <<event>> OnMaxHealthChanged : Action<float> 
+    + CurrentHealth : float <<get>>
+    + MaxHealth : float <<get>> <<set>>
+    + ChangeHealth(value:float) : void
+    +  <<event>> OnMoneyChanged : Action<int> 
+    + Money : int <<get>> <<set>>
+    +  <<event>> OnMaxManaChanged : Action<float> 
+    +  <<event>> OnManaChanged : Action<float> 
+    + MaxMana : float <<get>>
+    + CurrentMana : float <<get>>
+    + ChangeMana(value:float) : void
+    +  <<event>> OnCurrentExperienceChanged : Action<float> 
+    +  <<event>> OnNeedForNextLevelExperienceChanged : Action<float> 
+    +  <<event>> OnLevelChanged : Action<int> 
+    + CurrentLevel : int <<get>>
+    + CurrentExperience : float <<get>>
+    + NeedForNextLevelExperience : float <<get>>
+    + AddExperience(value:float) : void
+    +  <<event>> OnStrengthChanged : Action<int> 
+    +  <<event>> OnIntelligenceChanged : Action<int> 
+    +  <<event>> OnDefenseChanged : Action<int> 
+    + Strength : int <<get>> <<set>>
+    + Intelligence : int <<get>> <<set>>
+    + Defense : int <<get>> <<set>>
+    + Character(characterInfo:CharacterInfo, navMeshAgent:NavMeshAgent, camera:Camera)
+    + BasePhysicalDamage : float <<get>> <<set>>
+    + Speed : float <<get>> <<set>>
+    + Agility : float <<get>> <<set>>
+    + AttackDelay : float <<get>> <<set>>
+    + AttackRange : float <<get>> <<set>>
+    + CurrentDamage() : float
+    + CancelAllEvents() : void
+}
+class "List`1"<T> {
+}
+IHealthable <|-- Character
+IManable <|-- Character
+ILevelable <|-- Character
+Character --> "NavMeshAgent" NavMeshAgent
+Character --> "Inventory" Inventory
+Character --> "Skills<ISkill>" "List`1"
+Character --> "Team" Team
+@enduml

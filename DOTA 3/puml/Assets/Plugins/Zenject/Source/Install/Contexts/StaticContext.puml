@@ -1,0 +1,8 @@
+@startuml
+class StaticContext <<static>> {
+    + {static} Clear() : void
+    + {static} HasContainer : bool <<get>>
+}
+StaticContext --> "_container" DiContainer
+StaticContext --> "Container" DiContainer
+@enduml

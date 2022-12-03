@@ -1,0 +1,5 @@
+@startuml
+class CinemachineInputProvider {
+}
+MonoBehaviour <|-- CinemachineInputProvider
+@enduml

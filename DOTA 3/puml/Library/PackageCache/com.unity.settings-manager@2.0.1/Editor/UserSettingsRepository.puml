@@ -1,0 +1,17 @@
+@startuml
+class UserSettingsRepository {
+    {static} GetEditorPrefKey(key:string) : string
+    {static} GetEditorPrefKey(fullName:string, key:string) : string
+    {static} SetEditorPref(key:string, value:T) : void
+    {static} GetEditorPref(key:string, fallback:T) : T
+    + name : string <<get>>
+    + path : string <<get>>
+    + Save() : void
+    + Set(key:string, value:T) : void
+    + Get(key:string, fallback:T) : T
+    + ContainsKey(key:string) : bool
+    + Remove(key:string) : void
+}
+ISettingsRepository <|-- UserSettingsRepository
+UserSettingsRepository --> "scope" SettingsScope
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class LinqExtensions <<static>> {
+    + {static} Yield(item:T) : IEnumerable<T>
+    + {static} OnlyOrDefault(source:IEnumerable<TSource>) : TSource
+    + {static} HasAtLeast(enumerable:IEnumerable<T>, amount:int) : bool
+    + {static} HasMoreThan(enumerable:IEnumerable<T>, amount:int) : bool
+    + {static} HasLessThan(enumerable:IEnumerable<T>, amount:int) : bool
+    + {static} HasAtMost(enumerable:IEnumerable<T>, amount:int) : bool
+    + {static} IsEmpty(enumerable:IEnumerable<T>) : bool
+    + {static} GetDuplicates(list:IEnumerable<T>) : IEnumerable<T>
+    + {static} Except(list:IEnumerable<T>, item:T) : IEnumerable<T>
+    + {static} ContainsItem(list:IEnumerable<T>, value:T) : bool
+}
+@enduml

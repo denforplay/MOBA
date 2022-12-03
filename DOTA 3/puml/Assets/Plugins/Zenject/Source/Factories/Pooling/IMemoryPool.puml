@@ -1,0 +1,53 @@
+@startuml
+interface IMemoryPool {
+    NumTotal : int <<get>>
+    NumActive : int <<get>>
+    NumInactive : int <<get>>
+    Resize(desiredPoolSize:int) : void
+    Clear() : void
+    ExpandBy(numToAdd:int) : void
+    ShrinkBy(numToRemove:int) : void
+    Despawn(obj:object) : void
+}
+interface "IDespawnableMemoryPool`1"<TValue> {
+    Despawn(item:TValue) : void
+}
+interface "IMemoryPool`1"<TValue> {
+    Spawn() : TValue
+}
+interface "IMemoryPool`2"<in TParam1,TValue> {
+    Spawn(param:TParam1) : TValue
+}
+interface "IMemoryPool`3"<in TParam1,in TParam2,TValue> {
+    Spawn(param1:TParam1, param2:TParam2) : TValue
+}
+interface "IMemoryPool`4"<in TParam1,in TParam2,in TParam3,TValue> {
+    Spawn(param1:TParam1, param2:TParam2, param3:TParam3) : TValue
+}
+interface "IMemoryPool`5"<in TParam1,in TParam2,in TParam3,in TParam4,TValue> {
+    Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : TValue
+}
+interface "IMemoryPool`6"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,TValue> {
+    Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5) : TValue
+}
+interface "IMemoryPool`7"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,TValue> {
+    Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6) : TValue
+}
+interface "IMemoryPool`8"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,in TParam7,TValue> {
+    Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7) : TValue
+}
+interface "IMemoryPool`9"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,in TParam7,in TParam8,TValue> {
+    Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7, param8:TParam8) : TValue
+}
+IMemoryPool --> "ItemType" Type
+IMemoryPool <|-- "IDespawnableMemoryPool`1"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`1"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`2"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`3"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`4"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`5"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`6"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`7"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`8"
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "IMemoryPool`9"
+@enduml

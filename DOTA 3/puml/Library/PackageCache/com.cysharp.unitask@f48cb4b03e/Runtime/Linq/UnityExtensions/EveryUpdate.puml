@@ -1,0 +1,29 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} EveryUpdate(updateTiming:PlayerLoopTiming) : IUniTaskAsyncEnumerable<AsyncUnit>
+}
+class EveryUpdate {
+    + EveryUpdate(updateTiming:PlayerLoopTiming)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<AsyncUnit>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _EveryUpdate {
+    disposed : bool
+    + _EveryUpdate(updateTiming:PlayerLoopTiming, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + MoveNext() : bool
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<AsyncUnit>" <|-- EveryUpdate
+EveryUpdate --> "updateTiming" PlayerLoopTiming
+EveryUpdate +-- _EveryUpdate
+MoveNextSource <|-- _EveryUpdate
+"IUniTaskAsyncEnumerator`1" "<AsyncUnit>" <|-- _EveryUpdate
+IPlayerLoopItem <|-- _EveryUpdate
+_EveryUpdate --> "updateTiming" PlayerLoopTiming
+_EveryUpdate --> "cancellationToken" CancellationToken
+_EveryUpdate --> "Current" AsyncUnit
+@enduml

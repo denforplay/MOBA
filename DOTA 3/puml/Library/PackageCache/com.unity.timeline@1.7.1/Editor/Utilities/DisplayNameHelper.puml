@@ -1,0 +1,10 @@
+@startuml
+class DisplayNameHelper <<static>> {
+    {static} <<readonly>> k_NoAssetDisplayName : string
+    {static} <<readonly>> k_ReadOnlyDisplayName : string
+    + {static} GetDisplayName(sequence:ISequenceState) : string
+    + {static} GetDisplayName(asset:PlayableAsset) : string
+    + {static} GetDisplayName(director:PlayableDirector) : string
+}
+DisplayNameHelper o-> "k_StringBuilder" StringBuilder
+@enduml

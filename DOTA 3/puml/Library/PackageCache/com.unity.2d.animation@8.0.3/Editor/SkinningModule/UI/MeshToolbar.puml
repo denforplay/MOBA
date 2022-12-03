@@ -1,0 +1,20 @@
+@startuml
+class MeshToolbar {
+    +  <<event>> SetMeshTool : Action<Tools> 
+    + {static} GenerateFromUXML() : MeshToolbar
+    + MeshToolbar()
+    + UpdateToggleState() : void
+}
+class MeshToolbarFactory {
+}
+class MeshToolbarUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+Toolbar <|-- MeshToolbar
+MeshToolbar --> "skinningCache" SkinningCache
+MeshToolbar +-- MeshToolbarFactory
+"UxmlFactory`2" "<MeshToolbar,MeshToolbarUxmlTraits>" <|-- MeshToolbarFactory
+MeshToolbar +-- MeshToolbarUxmlTraits
+UxmlTraits <|-- MeshToolbarUxmlTraits
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+enum SkillType {
+    Dash,
+    RangeDamage,
+    Self,
+}
+@enduml

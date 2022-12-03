@@ -1,0 +1,17 @@
+@startuml
+class GridPaintSortingAttribute {
+}
+class Alphabetical {
+    + Compare(go1:GameObject, go2:GameObject) : int
+}
+class ReverseAlphabetical {
+    + Compare(go1:GameObject, go2:GameObject) : int
+}
+class "IComparer`1"<T> {
+}
+Attribute <|-- GridPaintSortingAttribute
+GridPaintSortingAttribute +-- Alphabetical
+"IComparer`1" "<GameObject>" <|-- Alphabetical
+GridPaintSortingAttribute +-- ReverseAlphabetical
+"IComparer`1" "<GameObject>" <|-- ReverseAlphabetical
+@enduml

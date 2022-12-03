@@ -1,0 +1,9 @@
+@startuml
+class SceneViewToolsExtensions <<static>> {
+    + {static} CalculateDropdownPosition(button:VisualElement) : Vector2
+    + {static} MakeVisualElement(tool:CameraPresetCreationTool) : RiderFlowEditorToolbarButton
+    + {static} MakeVisualElement(tool:CameraPresetExplorerTool) : EditorToolbarButton
+    + {static} MakeVisualElement(tool:SceneSearchPopupTool, lifetime:Lifetime) : RiderFlowEditorToolbarToggle
+    + {static} MakeVisualElement(tool:BookmarkExplorerTool) : RiderFlowEditorToolbarButton
+}
+@enduml

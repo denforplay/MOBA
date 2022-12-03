@@ -1,0 +1,5 @@
+@startuml
+interface IAnimatorMoveHandler {
+    OnAnimatorMove() : void
+}
+@enduml

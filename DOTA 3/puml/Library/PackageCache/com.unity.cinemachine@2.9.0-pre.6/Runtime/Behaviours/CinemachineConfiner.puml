@@ -1,0 +1,26 @@
+@startuml
+class CinemachineConfiner {
+    + m_ConfineScreenEdges : bool = true
+    + m_Damping : float = 0
+    + CameraWasDisplaced(vcam:CinemachineVirtualCameraBase) : bool
+    + GetCameraDisplacementDistance(vcam:CinemachineVirtualCameraBase) : float
+    + IsValid : bool <<get>>
+    + <<override>> GetMaxDampTime() : float
+    + InvalidatePathCache() : void
+    ValidatePathCache() : bool
+}
+enum Mode {
+    Confine2D,
+    Confine3D,
+}
+class VcamExtraState {
+    + confinerDisplacement : float
+}
+CinemachineExtension <|-- CinemachineConfiner
+CinemachineConfiner --> "m_ConfineMode" Mode
+CinemachineConfiner --> "m_BoundingVolume" Collider
+CinemachineConfiner --> "m_BoundingShape2D" Collider2D
+CinemachineConfiner +-- Mode
+CinemachineConfiner +-- VcamExtraState
+VcamExtraState --> "m_previousDisplacement" Vector3
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+class GridPaintPaletteClipboard {
+    + activeDragAndDrop : bool <<get>>
+    + m_CameraPositionSaved : bool
+    + m_CameraOrthographicSize : float
+    + unlocked : bool <<get>> <<set>>
+    + pingTileAsset : bool <<get>> <<set>>
+    + invalidClipboard : bool <<get>>
+    + isReceivingDragAndDrop : bool <<get>>
+    + showNewEmptyClipboardInfo : bool <<get>>
+    + isModified : bool <<get>>
+    + OnBeforePaletteSelectionChanged() : void
+    + OnAfterPaletteSelectionChanged() : void
+    + SetupPreviewCameraOnInit() : void
+    + ResetPreviewMesh() : void
+    + FrameEntirePalette() : void
+    Frame(rect:RectInt) : void
+    + <<override>> OnGUI() : void
+    + OnViewSizeChanged(oldSize:Rect, newSize:Rect) : void
+    + ClampZoomAndPan() : void
+    + HandleDragAndDrop() : void
+    + <<override>> Repaint() : void
+    + <<override>> isActive : bool <<get>>
+    + CheckRevertIfChanged(paths:string[]) : void
+    + SavePaletteIfNecessary() : void
+    + GridToScreen(gridPosition:Vector2) : Vector2
+    + ScreenToLocal(screenPosition:Vector2) : Vector2
+    + UnlockAndEdit() : void
+}
+class Styles <<static>> {
+}
+class PreviewInstanceScope {
+    + PreviewInstanceScope(guiRect:Rect, previewRenderUtility:PreviewRenderUtility, paletteInstance:GameObject, drawGizmos:bool)
+    + Dispose() : void
+}
+PaintableGrid <|-- GridPaintPaletteClipboard
+GridPaintPaletteClipboard --> "guiRect" Rect
+GridPaintPaletteClipboard --> "m_CameraPosition" Vector3
+GridPaintPaletteClipboard --> "palette" GameObject
+GridPaintPaletteClipboard --> "paletteInstance" GameObject
+GridPaintPaletteClipboard --> "tilemap" Tilemap
+GridPaintPaletteClipboard --> "previewUtility" PreviewRenderUtility
+GridPaintPaletteClipboard --> "activeTile" TileBase
+GridPaintPaletteClipboard --> "owner" GridPaintPaletteWindow
+GridPaintPaletteClipboard +-- Styles
+Styles o-> "background" GUIStyle
+GridPaintPaletteClipboard +-- PreviewInstanceScope
+IDisposable <|-- PreviewInstanceScope
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+class TimeNotificationBehaviour {
+    m_PreviousTime : double
+    m_NeedSortNotifications : bool
+    + {static} Create(graph:PlayableGraph, duration:double, loopMode:DirectorWrapMode) : ScriptPlayable<TimeNotificationBehaviour>
+    + AddNotification(time:double, payload:INotification, flags:NotificationFlags) : void
+    + <<override>> OnGraphStart(playable:Playable) : void
+    + <<override>> OnBehaviourPause(playable:Playable, info:FrameData) : void
+    + <<override>> PrepareFrame(playable:Playable, info:FrameData) : void
+    SortNotifications() : void
+    {static} CanRestoreNotification(e:NotificationEntry, info:FrameData, currentTime:double, previousTime:double) : bool
+    TriggerNotificationsInRange(start:double, end:double, info:FrameData, playable:Playable, checkState:bool) : void
+    SyncDurationWithExternalSource(playable:Playable) : void
+    {static} Trigger_internal(playable:Playable, output:PlayableOutput, e:NotificationEntry) : void
+    {static} Restore_internal(e:NotificationEntry) : void
+}
+class NotificationEntry <<struct>> {
+    + time : double
+    + notificationFired : bool
+    + triggerInEditor : bool <<get>>
+    + prewarm : bool <<get>>
+    + triggerOnce : bool <<get>>
+}
+class "List`1"<T> {
+}
+PlayableBehaviour <|-- TimeNotificationBehaviour
+TimeNotificationBehaviour o-> "m_Notifications<NotificationEntry>" "List`1"
+TimeNotificationBehaviour --> "m_TimeSource" Playable
+TimeNotificationBehaviour --> "timeSource" Playable
+TimeNotificationBehaviour +-- NotificationEntry
+NotificationEntry --> "payload" INotification
+NotificationEntry --> "flags" NotificationFlags
+@enduml

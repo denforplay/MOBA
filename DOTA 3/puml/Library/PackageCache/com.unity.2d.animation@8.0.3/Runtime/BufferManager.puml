@@ -1,0 +1,19 @@
+@startuml
+class VertexBuffer {
+    + bufferCount : int <<get>>
+    + VertexBuffer(id:int, size:int, needDoubleBuffering:bool)
+    + <<override>> GetHashCode() : int
+    + GetBuffer(size:int) : NativeByteArray
+    + Deactivate() : void
+    + Dispose() : void
+    + IsSafeToDispose() : bool
+}
+class BufferManager {
+    + bufferCount : int <<get>>
+    + needDoubleBuffering : bool <<get>> <<set>>
+    + GetBuffer(id:int, bufferSize:int) : NativeByteArray
+    + ReturnBuffer(id:int) : void
+}
+ScriptableObject <|-- BufferManager
+BufferManager --> "instance" BufferManager
+@enduml

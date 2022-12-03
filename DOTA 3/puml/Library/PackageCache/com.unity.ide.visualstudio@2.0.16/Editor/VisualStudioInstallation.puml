@@ -1,0 +1,20 @@
+@startuml
+interface IVisualStudioInstallation {
+    Path : string <<get>>
+    SupportsAnalyzers : bool <<get>>
+    GetAnalyzers() : string[]
+    ToCodeEditorInstallation() : CodeEditor.Installation
+}
+class VisualStudioInstallation {
+    + Name : string <<get>> <<set>>
+    + Path : string <<get>> <<set>>
+    + IsPrerelease : bool <<get>> <<set>>
+    + SupportsAnalyzers : bool <<get>>
+    + GetAnalyzers() : string[]
+    + ToCodeEditorInstallation() : CodeEditor.Installation
+}
+IVisualStudioInstallation --> "LatestLanguageVersionSupported" Version
+IVisualStudioInstallation <|-- VisualStudioInstallation
+VisualStudioInstallation --> "Version" Version
+VisualStudioInstallation --> "LatestLanguageVersionSupported" Version
+@enduml

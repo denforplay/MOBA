@@ -1,0 +1,11 @@
+@startuml
+class PoolCleanupChecker {
+    + PoolCleanupChecker(poolFactories:List<IMemoryPool>, ignoredPools:List<Type>)
+    + LateDispose() : void
+}
+class "List`1"<T> {
+}
+ILateDisposable <|-- PoolCleanupChecker
+PoolCleanupChecker --> "_poolFactories<IMemoryPool>" "List`1"
+PoolCleanupChecker --> "_ignoredPools<Type>" "List`1"
+@enduml

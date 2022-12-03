@@ -1,0 +1,10 @@
+@startuml
+class TMP_GlyphPairAdjustmentRecordPropertyDrawer {
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+    ValidateInput(source:string) : bool
+    GetUnicodeCharacter(source:string) : uint
+    DrawGlyph(glyphIndex:uint, position:Rect, property:SerializedProperty) : void
+}
+PropertyDrawer <|-- TMP_GlyphPairAdjustmentRecordPropertyDrawer
+TMP_GlyphPairAdjustmentRecordPropertyDrawer o-> "s_CharacterTextFieldLabel" GUIContent
+@enduml

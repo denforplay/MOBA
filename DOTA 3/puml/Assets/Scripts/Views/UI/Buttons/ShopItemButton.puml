@@ -1,0 +1,10 @@
+@startuml
+class ShopItemButton {
+    + Initialize(item:Item) : void
+    + MakeUnavailable() : void
+    + MakeAvailable() : void
+}
+MonoBehaviour <|-- ShopItemButton
+ShopItemButton --> "Item" Item
+ShopItemButton --> "ItemButton" Button
+@enduml

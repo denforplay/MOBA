@@ -1,0 +1,5 @@
+@startuml
+interface IPrefabProvider {
+    GetPrefab(context:InjectContext) : UnityEngine.Object
+}
+@enduml

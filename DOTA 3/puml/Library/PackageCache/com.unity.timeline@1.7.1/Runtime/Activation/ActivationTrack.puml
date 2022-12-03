@@ -1,0 +1,17 @@
+@startuml
+class ActivationTrack {
+    + <<override>> CreateTrackMixer(graph:PlayableGraph, go:GameObject, inputCount:int) : Playable
+    + <<override>> GatherProperties(director:PlayableDirector, driver:IPropertyCollector) : void
+}
+enum PostPlaybackState {
+    Active,
+    Inactive,
+    Revert,
+    LeaveAsIs,
+}
+TrackAsset <|-- ActivationTrack
+ActivationTrack o-> "m_PostPlaybackState" PostPlaybackState
+ActivationTrack --> "m_ActivationMixer" ActivationMixerPlayable
+ActivationTrack --> "postPlaybackState" PostPlaybackState
+ActivationTrack +-- PostPlaybackState
+@enduml

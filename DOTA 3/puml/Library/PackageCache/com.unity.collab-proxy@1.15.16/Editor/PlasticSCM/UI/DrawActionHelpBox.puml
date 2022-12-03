@@ -1,0 +1,7 @@
+@startuml
+class DrawActionHelpBox <<static>> {
+    {static} DoNotificationLabel(image:Texture, labelText:string) : void
+    {static} DoActionButton(buttonText:string, buttonAction:Action) : void
+    {static} GetButtonWidth(buttonContent:GUIContent, buttonStyle:GUIStyle) : float
+}
+@enduml

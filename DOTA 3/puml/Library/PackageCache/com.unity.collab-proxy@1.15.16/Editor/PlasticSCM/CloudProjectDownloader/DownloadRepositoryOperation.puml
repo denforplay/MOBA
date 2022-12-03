@@ -1,0 +1,17 @@
+@startuml
+class DownloadRepositoryOperation {
+    DownloadRepository(state:object) : void
+    {static} DisplayProgress(status:UpdateOperationStatus, progressData:BuildProgressSpeedAndRemainingTime.ProgressData, cloudRepository:string) : void
+    {static} CreateWorkspace(repositorySpec:RepositorySpec, projectPath:string) : WorkspaceInfo
+    {static} BuildRepSpec(cloudRepository:string, cloudOrganization:string, defaultCloudAlias:string) : RepositorySpec
+    {static} LogException(ex:Exception) : void
+    <<volatile>> mOperationFinished : bool = false
+    <<volatile>> mOperationFailed : bool = false
+    <<volatile>> mDisplayProgress : bool
+}
+class DownloadRepositoryParameters {
+}
+DownloadRepositoryOperation o-> "mUpdateNotifier" UpdateNotifier
+DownloadRepositoryOperation o-> "mLog" ILog
+DownloadRepositoryOperation +-- DownloadRepositoryParameters
+@enduml

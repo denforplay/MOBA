@@ -1,0 +1,28 @@
+@startuml
+class ProfileDataView {
+    + path : string
+    + inSyncWithProfilerData : bool
+    + ProfileDataView()
+    + ProfileDataView(dataView:ProfileDataView)
+    + IsDataValid() : bool
+    + HasValidSelection() : bool
+    + HasSelection() : bool
+    + AllSelected() : bool
+    + GetMaxDepth() : int
+    Clamp(value:int, min:int, max:int) : int
+    + ClampToValidDepthValue(depthFilter:int) : int
+    SelectAllFramesContainingMarker(markerName:string, inAnalysis:ProfileAnalysis) : bool
+    + SelectAllFramesContainingMarker(markerName:string, inSelection:bool) : bool
+    ClampToRange(value:int, min:int, max:int) : int
+    + ClearSelection() : void
+    + SelectFullRange() : void
+}
+class "List`1"<T> {
+}
+ProfileDataView --> "data" ProfileData
+ProfileDataView --> "analysisFullNew" ProfileAnalysis
+ProfileDataView --> "analysisFull" ProfileAnalysis
+ProfileDataView --> "analysisNew" ProfileAnalysis
+ProfileDataView --> "analysis" ProfileAnalysis
+ProfileDataView o-> "selectedIndices<int>" "List`1"
+@enduml

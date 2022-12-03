@@ -1,0 +1,28 @@
+@startuml
+class CommandLineManager {
+}
+class CommandLineManagerImplementation {
+    + runFromCommandLine : bool <<get>>
+    + coverageResultsPath : string <<get>>
+    + coverageHistoryPath : string <<get>>
+    + generateAdditionalMetrics : bool <<get>>
+    + generateHTMLReportHistory : bool <<get>>
+    + generateHTMLReport : bool <<get>>
+    + generateBadgeReport : bool <<get>>
+    + useProjectSettings : bool <<get>>
+    + assemblyFiltersSpecified : bool <<get>>
+    + pathFiltersSpecified : bool <<get>>
+    + pathStrippingSpecified : bool <<get>>
+    + sourcePaths : string <<get>>
+    + sourcePathsSpecified : bool <<get>>
+    + runTests : bool <<get>>
+    + batchmode : bool <<get>>
+    + burstDisabled : bool <<get>>
+    + CommandLineManagerImplementation(commandLineArgs:string[])
+}
+CommandLineManagerImplementation <|-- CommandLineManager
+CommandLineManager --> "instance" CommandLineManager
+CommandLineManagerImplementation --> "assemblyFiltering" AssemblyFiltering
+CommandLineManagerImplementation --> "pathFiltering" PathFiltering
+CommandLineManagerImplementation --> "pathStripping" PathStripping
+@enduml

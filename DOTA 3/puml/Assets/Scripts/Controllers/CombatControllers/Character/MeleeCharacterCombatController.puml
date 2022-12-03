@@ -1,0 +1,6 @@
+@startuml
+class MeleeCharacterCombatController {
+    + MeleeCharacterCombatController(characterController:ICharacterController, character:Models.Character)
+}
+CharacterCombatController <|-- MeleeCharacterCombatController
+@enduml

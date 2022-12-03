@@ -1,0 +1,23 @@
+@startuml
+class "FactoryFromBinder`1"<TContract> {
+    + FactoryFromBinder(container:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + FromResolveGetter(method:Func<TObj, TContract>) : ConditionCopyNonLazyBinder
+    + FromResolveGetter(subIdentifier:object, method:Func<TObj, TContract>) : ConditionCopyNonLazyBinder
+    + FromResolveGetter(subIdentifier:object, method:Func<TObj, TContract>, source:InjectSources) : ConditionCopyNonLazyBinder
+    + FromMethod(method:Func<DiContainer, TContract>) : ConditionCopyNonLazyBinder
+    + FromFactory() : ArgConditionCopyNonLazyBinder
+    + FromSubContainerResolve() : FactorySubContainerBinder<TContract>
+    + FromSubContainerResolve(subIdentifier:object) : FactorySubContainerBinder<TContract>
+    + FromComponentInHierarchy(includeInactive:bool) : ConditionCopyNonLazyBinder
+}
+class FactoryFromBinder0Extensions <<static>> {
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TContract>, poolBindGenerator:Action<MemoryPoolInitialSizeMaxSizeBinder<TContract>>) : ArgConditionCopyNonLazyBinder
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TContract>) : ArgConditionCopyNonLazyBinder
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TContract>, poolBindGenerator:Action<MemoryPoolInitialSizeMaxSizeBinder<TContract>>) : ArgConditionCopyNonLazyBinder
+    + {static} FromMonoPoolableMemoryPool(fromBinder:FactoryFromBinder<TContract>) : ArgConditionCopyNonLazyBinder
+    + {static} FromMonoPoolableMemoryPool(fromBinder:FactoryFromBinder<TContract>, poolBindGenerator:Action<MemoryPoolInitialSizeMaxSizeBinder<TContract>>) : ArgConditionCopyNonLazyBinder
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TContract>) : ArgConditionCopyNonLazyBinder
+    + {static} FromIFactory(fromBinder:FactoryFromBinder<TContract>, factoryBindGenerator:Action<ConcreteBinderGeneric<IFactory<TContract>>>) : ArgConditionCopyNonLazyBinder
+}
+FactoryFromBinderBase <|-- "FactoryFromBinder`1"
+@enduml

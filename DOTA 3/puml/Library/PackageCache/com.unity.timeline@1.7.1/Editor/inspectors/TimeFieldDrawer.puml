@@ -1,0 +1,10 @@
+@startuml
+class TimeFieldDrawer {
+    {static} currentFrameRate : double <<get>>
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+    {static} TimeField(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+    {static} TimeFieldWithEditMode(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+PropertyDrawer <|-- TimeFieldDrawer
+TimeFieldDrawer --> "state" WindowState
+@enduml

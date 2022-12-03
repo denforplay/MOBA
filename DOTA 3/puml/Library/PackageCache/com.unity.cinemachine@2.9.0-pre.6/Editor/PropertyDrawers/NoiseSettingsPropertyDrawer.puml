@@ -1,0 +1,14 @@
+@startuml
+class NoiseSettingsPropertyDrawer <<sealed>> {
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+    {static} sLastPresetRebuildTime : float = 0
+    + {static} InvalidateProfileList() : void
+    {static} RebuildProfileList() : void
+    {static} FindAssetsByType() : List<ScriptableObject>
+    CreateProfile(property:SerializedProperty, label:string, copyFrom:NoiseSettings) : NoiseSettings
+}
+class "List`1"<T> {
+}
+PropertyDrawer <|-- NoiseSettingsPropertyDrawer
+NoiseSettingsPropertyDrawer --> "sNoisePresets<ScriptableObject>" "List`1"
+@enduml

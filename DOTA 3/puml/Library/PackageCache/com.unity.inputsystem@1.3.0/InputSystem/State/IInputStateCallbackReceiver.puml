@@ -1,0 +1,7 @@
+@startuml
+interface IInputStateCallbackReceiver {
+    OnNextUpdate() : void
+    OnStateEvent(eventPtr:InputEventPtr) : void
+    GetStateOffsetForEvent(control:InputControl, eventPtr:InputEventPtr, offset:uint) : bool
+}
+@enduml

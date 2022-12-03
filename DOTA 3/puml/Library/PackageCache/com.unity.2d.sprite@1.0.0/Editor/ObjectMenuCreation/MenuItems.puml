@@ -1,0 +1,33 @@
+@startuml
+class MenuItems <<static>> {
+    <<const>> k_SpriteAssetMenuPriority : int = 1
+    <<const>> k_SpriteAtlasAssetMenuPriority : int
+    <<const>> k_SpriteGameObjectMenuPriority : int = 1
+    <<const>> k_PhysicsGameObjectMenuPriority : int = 2
+    <<const>> k_SpriteMaskGameObjectMenuPriority : int = 6
+    {static} AssetsCreateSpritesSquare(menuCommand:MenuCommand) : void
+    {static} AssetsCreateSpritesCircle(menuCommand:MenuCommand) : void
+    {static} AssetsCreateSpritesCapsule(menuCommand:MenuCommand) : void
+    {static} AssetsCreateSpritesIsometricDiamond(menuCommand:MenuCommand) : void
+    {static} AssetsCreateSpritesHexagonFlatTop(menuCommand:MenuCommand) : void
+    {static} AssetsCreateSpritesHexagonPointedTop(menuCommand:MenuCommand) : void
+    {static} AssetsCreateSprites9Sliced(menuCommand:MenuCommand) : void
+    {static} AssetsCreateSpriteAtlas(menuCommand:MenuCommand) : void
+    {static} CreateSpriteRendererGameObject(name:string, spritePath:string, menuCommand:MenuCommand) : GameObject
+    {static} GameObjectCreateSpritesSquare(menuCommand:MenuCommand) : void
+    {static} GameObjectCreateSpritesCircle(menuCommand:MenuCommand) : void
+    {static} GameObjectCreateSpritesCapsule(menuCommand:MenuCommand) : void
+    {static} GameObjectCreateSpritesIsometricDiamond(menuCommand:MenuCommand) : void
+    {static} GameObjectCreateSpritesHexagonFlatTop(menuCommand:MenuCommand) : void
+    {static} GameObjectCreateSpritesHexagonPointedTop(menuCommand:MenuCommand) : void
+    {static} GameObjectCreateSprites9Sliced(menuCommand:MenuCommand) : void
+    {static} GameObjectCreatePhysicsStaticSprite(menuCommand:MenuCommand) : void
+    {static} GameObjectCreatePhysicsDynamicSprite(menuCommand:MenuCommand) : void
+    {static} GameObjectCreateSpriteMask(menuCommand:MenuCommand) : void
+}
+class DoCreateSpriteAtlas {
+    + sides : int
+    + <<override>> Action(instanceId:int, pathName:string, resourceFile:string) : void
+}
+MenuItems +-- DoCreateSpriteAtlas
+@enduml

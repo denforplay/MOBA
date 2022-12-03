@@ -1,0 +1,5 @@
+@startuml
+interface IEventMerger {
+    MergeForward(currentEventPtr:InputEventPtr, nextEventPtr:InputEventPtr) : bool
+}
+@enduml

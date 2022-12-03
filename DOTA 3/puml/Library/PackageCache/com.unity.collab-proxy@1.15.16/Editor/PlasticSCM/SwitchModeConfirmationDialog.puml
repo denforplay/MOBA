@@ -1,0 +1,12 @@
+@startuml
+class SwitchModeConfirmationDialog {
+    DoExplanationArea(isGluonMode:bool) : void
+    DoButtonsArea() : void
+    DoSwitchButton() : void
+    DoCancelButton() : void
+    {static} Create(isGluonMode:bool) : SwitchModeConfirmationDialog
+    mIsGluonMode : bool
+    <<const>> GLUON_HELP_URL : string = "https://www.plasticscm.com/gluon"
+}
+PlasticDialog <|-- SwitchModeConfirmationDialog
+@enduml

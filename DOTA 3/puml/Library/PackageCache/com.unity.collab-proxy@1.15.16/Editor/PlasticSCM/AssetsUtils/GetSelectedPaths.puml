@@ -1,0 +1,5 @@
+@startuml
+class GetSelectedPaths <<static>> {
+    {static} IsApplicableForOperation(path:string, isDirectory:bool, operation:AssetMenuOperations, assetStatusCache:IAssetStatusCache) : bool
+}
+@enduml

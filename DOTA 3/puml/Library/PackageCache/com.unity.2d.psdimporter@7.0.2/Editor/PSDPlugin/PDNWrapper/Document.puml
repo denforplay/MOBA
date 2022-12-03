@@ -1,0 +1,14 @@
+@startuml
+class Document {
+    + width : int
+    + height : int
+    + Document(w:int, h:int)
+    + Dispose() : void
+    + DpuX : double <<get>> <<set>>
+    + DpuY : double <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+Document --> "Layers<BitmapLayer>" "List`1"
+Document --> "DpuUnit" MeasurementUnit
+@enduml

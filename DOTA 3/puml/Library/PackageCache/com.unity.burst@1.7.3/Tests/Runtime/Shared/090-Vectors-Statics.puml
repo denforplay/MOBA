@@ -1,0 +1,10 @@
+@startuml
+class VectorsStatics <<partial>> {
+    + {static} Float4Zero() : float
+    + {static} Float3Zero() : float
+    + {static} Float2Zero() : float
+    + {static} Int4Zero() : int
+    + {static} Int3Zero() : int
+    + {static} Int2Zero() : int
+}
+@enduml

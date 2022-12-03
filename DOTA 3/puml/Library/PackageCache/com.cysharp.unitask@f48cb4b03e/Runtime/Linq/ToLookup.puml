@@ -1,0 +1,60 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ToLookupAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TSource>>
+    + {static} ToLookupAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TSource>>
+    + {static} ToLookupAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, elementSelector:Func<TSource, TElement>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TElement>>
+    + {static} ToLookupAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, elementSelector:Func<TSource, TElement>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TElement>>
+    + {static} ToLookupAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TSource>>
+    + {static} ToLookupAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TSource>>
+    + {static} ToLookupAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, elementSelector:Func<TSource, UniTask<TElement>>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TElement>>
+    + {static} ToLookupAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, elementSelector:Func<TSource, UniTask<TElement>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TElement>>
+    + {static} ToLookupAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TSource>>
+    + {static} ToLookupAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TSource>>
+    + {static} ToLookupAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, elementSelector:Func<TSource, CancellationToken, UniTask<TElement>>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TElement>>
+    + {static} ToLookupAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, elementSelector:Func<TSource, CancellationToken, UniTask<TElement>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<ILookup<TKey, TElement>>
+}
+class ToLookup <<static>> {
+}
+class "Lookup`2"<TKey,TElement> {
+    Lookup(dict:Dictionary<TKey, Grouping<TKey, TElement>>)
+    + {static} CreateEmpty() : Lookup<TKey, TElement>
+    + {static} Create(source:ArraySegment<TElement>, keySelector:Func<TElement, TKey>, comparer:IEqualityComparer<TKey>) : Lookup<TKey, TElement>
+    + {static} Create(source:ArraySegment<TSource>, keySelector:Func<TSource, TKey>, elementSelector:Func<TSource, TElement>, comparer:IEqualityComparer<TKey>) : Lookup<TKey, TElement>
+    + {static} <<async>> CreateAsync(source:ArraySegment<TElement>, keySelector:Func<TElement, UniTask<TKey>>, comparer:IEqualityComparer<TKey>) : UniTask<Lookup<TKey, TElement>>
+    + {static} <<async>> CreateAsync(source:ArraySegment<TSource>, keySelector:Func<TSource, UniTask<TKey>>, elementSelector:Func<TSource, UniTask<TElement>>, comparer:IEqualityComparer<TKey>) : UniTask<Lookup<TKey, TElement>>
+    + {static} <<async>> CreateAsync(source:ArraySegment<TElement>, keySelector:Func<TElement, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Lookup<TKey, TElement>>
+    + {static} <<async>> CreateAsync(source:ArraySegment<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, elementSelector:Func<TSource, CancellationToken, UniTask<TElement>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Lookup<TKey, TElement>>
+    + Count : int <<get>>
+    + Contains(key:TKey) : bool
+    + GetEnumerator() : IEnumerator<IGrouping<TKey, TElement>>
+    GetEnumerator() : IEnumerator
+}
+class "Grouping`2"<TKey,TElement> {
+    + Key : TKey <<get>>
+    + Grouping(key:TKey)
+    + Add(value:TElement) : void
+    + GetEnumerator() : IEnumerator<TElement>
+    GetEnumerator() : IEnumerator
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TElement>
+    + <<override>> ToString() : string
+}
+class "ILookup`2"<T1,T2> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "IEnumerable`1"<T> {
+}
+class "Empty`1"<T> {
+}
+class "IGrouping`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+ToLookup +-- "Lookup`2"
+"ILookup`2" "<TKey,TElement>" <|-- "Lookup`2"
+"Lookup`2" o-> "empty<TKey,TElement>" "Lookup`2"
+"Lookup`2" --> "dict<TKey,Grouping<TKey, TElement>>" "Dictionary`2"
+ToLookup +-- "Grouping`2"
+"IGrouping`2" "<TKey,TElement>" <|-- "Grouping`2"
+"Grouping`2" --> "elements<TElement>" "List`1"
+@enduml

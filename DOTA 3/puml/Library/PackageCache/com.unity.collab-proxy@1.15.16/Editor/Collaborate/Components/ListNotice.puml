@@ -1,0 +1,18 @@
+@startuml
+class ListNotice {
+    + <<const>> UssClassName : string = "list-notice"
+    + <<const>> ListNoticeTextUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    + ListNotice()
+    + Text : string <<set>>
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- ListNotice
+ListNotice --> "m_Text" Label
+ListNotice +-- UxmlFactory
+"UxmlFactory`1" "<ListNotice>" <|-- UxmlFactory
+@enduml

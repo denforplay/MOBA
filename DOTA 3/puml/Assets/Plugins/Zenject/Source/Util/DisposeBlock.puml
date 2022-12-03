@@ -1,0 +1,36 @@
+@startuml
+class DisposeBlock {
+    {static} OnSpawned(that:DisposeBlock) : void
+    {static} OnDespawned(that:DisposeBlock) : void
+    LazyInitializeDisposableList() : void
+    + AddRange(disposables:IList<T>) : void
+    + Add(disposable:IDisposable) : void
+    + Remove(disposable:IDisposable) : void
+    StoreSpawnedObject(obj:T, pool:IDespawnableMemoryPool<T>) : void
+    + Spawn(pool:IMemoryPool<T>) : T
+    + Spawn(pool:IMemoryPool<TParam1, TValue>, p1:TParam1) : TValue
+    + Spawn(pool:IMemoryPool<TParam1, TParam2, TValue>, p1:TParam1, p2:TParam2) : TValue
+    + Spawn(pool:IMemoryPool<TParam1, TParam2, TParam3, TValue>, p1:TParam1, p2:TParam2, p3:TParam3) : TValue
+    + Spawn(pool:IMemoryPool<TParam1, TParam2, TParam3, TParam4, TValue>, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4) : TValue
+    + Spawn(pool:IMemoryPool<TParam1, TParam2, TParam3, TParam4, TParam5, TValue>, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5) : TValue
+    + Spawn(pool:IMemoryPool<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TValue>, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6) : TValue
+    + Spawn(pool:IMemoryPool<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TValue>, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6, p7:TParam7) : TValue
+    + SpawnList(elements:IEnumerable<T>) : List<T>
+    + SpawnList() : List<T>
+    + {static} Spawn() : DisposeBlock
+    + Dispose() : void
+}
+class "StaticMemoryPool`1"<T> {
+}
+class "List`1"<T> {
+}
+class SpawnedObjectPoolPair <<struct>> {
+    + Object : object
+}
+IDisposable <|-- DisposeBlock
+DisposeBlock o-> "_pool<DisposeBlock>" "StaticMemoryPool`1"
+DisposeBlock --> "_disposables<IDisposable>" "List`1"
+DisposeBlock --> "_objectPoolPairs<SpawnedObjectPoolPair>" "List`1"
+DisposeBlock +-- SpawnedObjectPoolPair
+SpawnedObjectPoolPair --> "Pool" IMemoryPool
+@enduml

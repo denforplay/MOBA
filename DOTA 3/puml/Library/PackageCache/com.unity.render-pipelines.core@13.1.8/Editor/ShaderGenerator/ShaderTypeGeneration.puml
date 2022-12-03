@@ -1,0 +1,105 @@
+@startuml
+class ShaderTypeGenerator {
+    + ShaderTypeGenerator(type:Type, attr:GenerateHLSL)
+    {static} PrimitiveToString(type:PrimitiveType, rows:int, cols:int) : string
+    Error(error:string) : void
+    + PrintErrors() : void
+    EmitPrimitiveType(type:PrimitiveType, elements:int, arraySize:int, name:string, comment:string, preprocessor:string, fields:List<ShaderFieldInfo>) : void
+    EmitMatrixType(type:PrimitiveType, rows:int, cols:int, arraySize:int, name:string, comment:string, preprocessor:string, fields:List<ShaderFieldInfo>) : void
+    ExtractComplex(field:FieldInfo, preprocessor:string, shaderFields:List<ShaderFieldInfo>) : bool
+    PackFields(info:ShaderFieldInfo, merged:ShaderFieldInfo) : MergeResult
+    Pack(shaderFields:List<ShaderFieldInfo>) : List<ShaderFieldInfo>
+    + EmitTypeDecl() : string
+    + EmitSetters(generatingInitFunc:bool) : string
+    + EmitAccessors() : string
+    + EmitDefines() : string
+    + EmitFunctions() : string
+    + EmitFunctionsForPacked() : string
+    + Emit() : string
+    + EmitPackedInfo() : string
+    InsertUnderscore(name:string) : string
+    + Generate() : bool
+    + hasFields : bool <<get>>
+    + hasPackedInfo : bool <<get>>
+    + hasStatics : bool <<get>>
+    + needAccessors : bool <<get>>
+    + needParamDebug : bool <<get>>
+    + debugCounter : int
+}
+enum PrimitiveType {
+    Float,
+    Int,
+    UInt,
+    Bool,
+    Half,
+    Real,
+}
+class Accessor {
+    + Accessor(type:PrimitiveType, name:string, rows:int, cols:int)
+    Accessor(name:string, swizzle:string, field:string, fullType:string)
+    + name : string
+    + field : string
+    + fullType : string
+}
+class ShaderFieldInfo {
+    + ShaderFieldInfo(type:PrimitiveType, name:string, rows:int, cols:int, arraySize:int, preprocessor:string)
+    + ShaderFieldInfo(type:PrimitiveType, name:string, rows:int, cols:int, arraySize:int, comment:string, preprocessor:string)
+    + typeString : string <<get>>
+    + DeclString() : string
+    + <<override>> ToString() : string
+    + elementCount : int <<get>>
+    + Clone() : object
+    + name : string
+    + <<readonly>> originalName : string
+    + <<readonly>> comment : string
+    + <<readonly>> preprocessor : string
+    + rows : int
+    + cols : int
+    + arraySize : int
+    + swizzleOffset : int
+    + packed : bool
+}
+class DebugFieldInfo {
+    + DebugFieldInfo(defineName:string, fieldName:string, fieldType:Type, isDirection:bool, isSRGB:bool, checkIsNormalized:bool, displayName:string, preprocessor:string)
+    + defineName : string
+    + fieldName : string
+    + displayName : string
+    + isDirection : bool
+    + isSRGB : bool
+    + checkIsNormalized : bool
+    + preprocessor : string
+}
+class PackedFieldInfo {
+    + PackedFieldInfo(packingAttribute:PackingAttribute, fieldType:Type, fieldName:string)
+    + fieldName : string
+}
+enum MergeResult {
+    Merged,
+    Full,
+    Failed,
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+ShaderTypeGenerator --> "type" Type
+ShaderTypeGenerator --> "attr" GenerateHLSL
+ShaderTypeGenerator o-> "errors<string>" "List`1"
+ShaderTypeGenerator --> "m_Statics<string,string>" "Dictionary`2"
+ShaderTypeGenerator --> "m_ShaderFields<ShaderFieldInfo>" "List`1"
+ShaderTypeGenerator --> "m_PackedFields<ShaderFieldInfo>" "List`1"
+ShaderTypeGenerator --> "m_DebugFields<DebugFieldInfo>" "List`1"
+ShaderTypeGenerator --> "m_PackedFieldsInfos<PackedFieldInfo>" "List`1"
+ShaderTypeGenerator +-- PrimitiveType
+ShaderTypeGenerator +-- Accessor
+ShaderTypeGenerator +-- ShaderFieldInfo
+ICloneable <|-- ShaderFieldInfo
+ShaderFieldInfo --> "type" PrimitiveType
+ShaderFieldInfo --> "accessor" Accessor
+ShaderTypeGenerator +-- DebugFieldInfo
+DebugFieldInfo --> "fieldType" Type
+ShaderTypeGenerator +-- PackedFieldInfo
+PackedFieldInfo --> "packingAttribute" PackingAttribute
+PackedFieldInfo --> "fieldType" Type
+ShaderTypeGenerator +-- MergeResult
+@enduml

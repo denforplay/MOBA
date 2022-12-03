@@ -1,0 +1,5 @@
+@startuml
+interface ISubContainerCreator {
+    CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+@enduml

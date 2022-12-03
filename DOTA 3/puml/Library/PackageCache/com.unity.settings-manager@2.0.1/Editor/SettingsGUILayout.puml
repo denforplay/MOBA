@@ -1,0 +1,51 @@
+@startuml
+class SettingsGUIStyles <<static>> {
+    <<const>> k_SettingsGearIcon : string
+    {static} s_Initialized : bool
+    {static} Init() : void
+}
+class SettingsGUILayout <<static>> {
+    + {static} SearchableSlider(label:GUIContent, value:float, min:float, max:float, searchContext:string) : float
+    + {static} SearchableSlider(label:string, value:float, min:float, max:float, searchContext:string) : float
+    + {static} SearchableFloatField(label:GUIContent, value:float, searchContext:string) : float
+    + {static} SearchableFloatField(label:string, value:float, searchContext:string) : float
+    + {static} SearchableIntField(label:GUIContent, value:int, searchContext:string) : int
+    + {static} SearchableIntField(label:string, value:int, searchContext:string) : int
+    + {static} SearchableToggle(label:GUIContent, value:bool, searchContext:string) : bool
+    + {static} SearchableToggle(label:string, value:bool, searchContext:string) : bool
+    + {static} SearchableTextField(label:GUIContent, value:string, searchContext:string) : string
+    + {static} SearchableTextField(label:string, value:string, searchContext:string) : string
+    + {static} SearchableColorField(label:GUIContent, value:Color, searchContext:string) : Color
+    + {static} SearchableColorField(label:string, value:Color, searchContext:string) : Color
+    + {static} SettingsSlider(label:GUIContent, value:UserSetting<float>, min:float, max:float, searchContext:string) : float
+    + {static} SettingsSlider(label:string, value:UserSetting<float>, min:float, max:float, searchContext:string) : float
+    + {static} SettingsSlider(label:GUIContent, value:UserSetting<int>, min:int, max:int, searchContext:string) : int
+    + {static} SettingsSlider(label:string, value:UserSetting<int>, min:int, max:int, searchContext:string) : int
+    + {static} SettingsFloatField(label:GUIContent, value:UserSetting<float>, searchContext:string) : float
+    + {static} SettingsFloatField(label:string, value:UserSetting<float>, searchContext:string) : float
+    + {static} SettingsIntField(label:GUIContent, value:UserSetting<int>, searchContext:string) : int
+    + {static} SettingsIntField(label:string, value:UserSetting<int>, searchContext:string) : int
+    + {static} SettingsToggle(label:GUIContent, value:UserSetting<bool>, searchContext:string) : bool
+    + {static} SettingsToggle(label:string, value:UserSetting<bool>, searchContext:string) : bool
+    + {static} SettingsTextField(label:GUIContent, value:UserSetting<string>, searchContext:string) : string
+    + {static} SettingsTextField(label:string, value:UserSetting<string>, searchContext:string) : string
+    + {static} SettingsColorField(label:GUIContent, value:UserSetting<Color>, searchContext:string) : Color
+    + {static} SettingsColorField(label:string, value:UserSetting<Color>, searchContext:string) : Color
+    + {static} DoResetContextMenuForLastRect(setting:IUserSetting) : void
+    {static} DoResetContextMenu(rect:Rect, pref:IUserSetting) : void
+}
+class IndentedGroup {
+    m_IsDisposed : bool
+    + IndentedGroup()
+    + IndentedGroup(label:string)
+    + Dispose() : void
+}
+SettingsGUIStyles --> "s_SettingsGizmo" GUIStyle
+SettingsGUIStyles --> "s_SettingsArea" GUIStyle
+SettingsGUIStyles --> "s_IndentedSettingBlock" GUIStyle
+SettingsGUIStyles --> "settingsGizmo" GUIStyle
+SettingsGUIStyles --> "settingsArea" GUIStyle
+SettingsGUIStyles --> "indentedSettingBlock" GUIStyle
+SettingsGUILayout +-- IndentedGroup
+IDisposable <|-- IndentedGroup
+@enduml

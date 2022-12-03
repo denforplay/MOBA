@@ -1,0 +1,8 @@
+@startuml
+abstract class InstallerBase {
+    + <<virtual>> IsEnabled : bool <<get>>
+    + {abstract} InstallBindings() : void
+}
+IInstaller <|-- InstallerBase
+InstallerBase o-> "_container" DiContainer
+@enduml

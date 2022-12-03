@@ -1,0 +1,16 @@
+@startuml
+interface ISerializedCamera {
+    Update() : void
+    Apply() : void
+    Refresh() : void
+}
+ISerializedCamera --> "serializedObject" SerializedObject
+ISerializedCamera --> "serializedAdditionalDataObject" SerializedObject
+ISerializedCamera --> "projectionMatrixMode" SerializedProperty
+ISerializedCamera --> "dithering" SerializedProperty
+ISerializedCamera --> "stopNaNs" SerializedProperty
+ISerializedCamera --> "allowDynamicResolution" SerializedProperty
+ISerializedCamera --> "volumeLayerMask" SerializedProperty
+ISerializedCamera --> "clearDepth" SerializedProperty
+ISerializedCamera --> "antialiasing" SerializedProperty
+@enduml

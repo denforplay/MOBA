@@ -1,0 +1,7 @@
+@startuml
+class GameObjectContextEditor {
+    + <<override>> OnEnable() : void
+}
+RunnableContextEditor <|-- GameObjectContextEditor
+GameObjectContextEditor --> "_kernel" SerializedProperty
+@enduml

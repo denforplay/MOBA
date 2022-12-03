@@ -1,0 +1,5 @@
+@startuml
+class LightUI <<partial>> {
+    + {static} DrawColor(serialized:ISerializedLight, owner:Editor) : void
+}
+@enduml

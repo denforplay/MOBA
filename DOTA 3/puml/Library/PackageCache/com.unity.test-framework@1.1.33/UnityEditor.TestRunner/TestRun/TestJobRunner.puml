@@ -1,0 +1,5 @@
+@startuml
+class TestJobRunner {
+    + RunJob(data:TestJobData) : string
+}
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+class WorkspaceWindow {
+    RefreshView(viewType:ViewType) : void
+    RefreshWorkingObjectViews(viewType:ViewType, workingObjectInfo:WorkingObjectInfo) : void
+    UpdateTitle() : void
+    CheckOperationInProgress() : bool
+    ShowUpdateProgress(title:string, notifier:UpdateNotifier) : void
+    EndUpdateProgress() : void
+    ShowCheckinProgress() : void
+    EndCheckinProgress() : void
+    RefreshCheckinProgress(checkinStatus:CheckinStatus, progressData:BuildProgressSpeedAndRemainingTime.ProgressData) : void
+    HasCheckinCancelled() : bool
+    ShowReplicationProgress(replicationOperation:IReplicationOperation) : void
+    RefreshReplicationProgress(replicationData:BranchReplicationData, replicationStatus:ReplicationStatus, current:int, total:int) : void
+    EndReplicationProgress(replicationStatus:ReplicationStatus) : void
+    ShowProgress() : void
+    ShowProgress(progressOperation:IProgressOperation) : void
+    RefreshProgress(progressData:ProgressData) : void
+    EndProgress() : void
+    RequestEncryptionPassword(server:string) : EncryptionConfigurationDialogData
+    Show(wkInfo:WorkspaceInfo, reportLines:IList) : void
+    AppendReport(updateReport:string) : void
+    OnWorkspaceStatusChanged() : void
+    UpdateWorkspaceTitle() : void
+    {static} GetWorkspaceStatus(wkInfo:WorkspaceInfo) : WorkspaceStatusString.Data
+    mRequestedRepaint : bool
+    ShowUpdateReport(wkInfo:WorkspaceInfo, errors:List<ErrorMessage>) : UpdateReportResult
+    PartialUpdateWorkspace() : void
+    {static} ShowUpdateReportDialog(wkInfo:WorkspaceInfo, viewHost:ViewHost, progress:UpdateProgress, progressControls:IProgressControls, guiMessage:GuiMessage.IGuiMessage, updateProgress:IUpdateProgress, updateReport:IGluonUpdateReport) : void
+}
+IWorkspaceWindow <|-- WorkspaceWindow
+IUpdateReport <|-- WorkspaceWindow
+IGluonUpdateReport <|-- WorkspaceWindow
+IGluonWorkspaceStatusChangeListener <|-- WorkspaceWindow
+WorkspaceWindow --> "mUpdateNotifierForTesting" UpdateNotifier
+WorkspaceWindow --> "mProgressControls" IProgressControls
+WorkspaceWindow --> "mOperationProgressData" OperationProgressData
+WorkspaceWindow --> "mPlasticWindow" EditorWindow
+WorkspaceWindow --> "mDeveloperNewIncomingChangesUpdater" NewIncomingChangesUpdater
+WorkspaceWindow --> "mMergeViewLauncher" IMergeViewLauncher
+WorkspaceWindow --> "mSwitcher" ViewSwitcher
+WorkspaceWindow --> "mViewHost" ViewHost
+WorkspaceWindow --> "mWkInfo" WorkspaceInfo
+@enduml

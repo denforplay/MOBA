@@ -1,0 +1,30 @@
+@startuml
+class Rectangle <<struct>> {
+    + Rectangle(x:int, y:int, width:int, height:int)
+    + {static} FromLTRB(left:int, top:int, right:int, bottom:int) : Rectangle
+    + X : int <<get>> <<set>>
+    + Y : int <<get>> <<set>>
+    + Width : int <<get>> <<set>>
+    + Height : int <<get>> <<set>>
+    + Left : int <<get>>
+    + Top : int <<get>>
+    + Right : int <<get>>
+    + Bottom : int <<get>>
+    + IsEmpty : bool <<get>>
+    + <<override>> Equals(obj:object) : bool
+    + Contains(x:int, y:int) : bool
+    + Contains(rect:Rectangle) : bool
+    + <<override>> GetHashCode() : int
+    + Inflate(width:int, height:int) : void
+    + Inflate(size:Size) : void
+    + {static} Inflate(rect:Rectangle, x:int, y:int) : Rectangle
+    + Intersect(rect:Rectangle) : void
+    + {static} Intersect(a:Rectangle, b:Rectangle) : Rectangle
+    + IntersectsWith(rect:Rectangle) : bool
+    + {static} Union(a:Rectangle, b:Rectangle) : Rectangle
+    + Offset(x:int, y:int) : void
+    + <<override>> ToString() : string
+}
+Rectangle o-> "Empty" Rectangle
+Rectangle --> "Size" Size
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+class ShaderGraphProjectSettings {
+}
+class ShaderGraphProjectSettingsProvider {
+    + ShaderGraphProjectSettingsProvider(path:string, scopes:SettingsScope, keywords:IEnumerable<string>)
+    + <<override>> OnActivate(searchContext:string, rootElement:VisualElement) : void
+    oldWarningThreshold : int
+    OnGUIHandler(searchContext:string) : void
+    + {static} CreateShaderGraphProjectSettingsProvider() : SettingsProvider
+}
+class "ScriptableSingleton`1"<T> {
+}
+class Styles {
+}
+"ScriptableSingleton`1" "<ShaderGraphProjectSettings>" <|-- ShaderGraphProjectSettings
+SettingsProvider <|-- ShaderGraphProjectSettingsProvider
+ShaderGraphProjectSettingsProvider --> "m_SerializedObject" SerializedObject
+ShaderGraphProjectSettingsProvider --> "m_customInterpWarn" SerializedProperty
+ShaderGraphProjectSettingsProvider --> "m_customInterpError" SerializedProperty
+ShaderGraphProjectSettingsProvider +-- Styles
+Styles o-> "CustomInterpLabel" GUIContent
+Styles o-> "CustomInterpWarnThresholdLabel" GUIContent
+Styles o-> "CustomInterpErrorThresholdLabel" GUIContent
+Styles o-> "ReadMore" GUIContent
+@enduml

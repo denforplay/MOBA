@@ -1,0 +1,99 @@
+@startuml
+class Aliasing <<partial>> {
+    + {static} <<unsafe>> CheckNoAliasFieldWithItself(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckNoAliasFieldWithAnotherPointer(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckNoAliasFieldWithNull(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckAliasFieldWithNull(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckNoAliasFieldSubFunctionAlias(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckCompareWithItself(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckNoAliasFieldSubFunctionWithNoAliasParameter(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckNoAliasFieldAcrossTwoSameTypedStructs(s0:NoAliasField, s1:NoAliasField) : void
+    + {static} CheckNoAliasRefs(a:int, b:int) : void
+    + {static} CheckNoAliasRefsAcrossTypes(a:int, b:float) : void
+    + {static} CheckNoAliasRefsInUnion(u:Union) : void
+    + {static} <<unsafe>> CheckNoAliasOfSubStructs(s:ContainerOfManyNoAliasFields) : void
+    + {static} <<unsafe>> CheckNoAliasFieldCompareWithParentStruct(s:ContainerOfManyNoAliasFields) : void
+    + {static} <<unsafe>> CheckStructPointerOfSameTypeInStruct(l:LinkedList) : void
+    + {static} <<unsafe>> CheckStructWithNoAlias(s:NoAliasWithContentsStruct) : void
+    + {static} <<unsafe>> CheckStructWithNoAliasAndSubStructs(s:DoesAliasWithSubStructPointersStruct) : void
+    + {static} <<unsafe>> CheckAliasingWithSelf() : void
+    + {static} <<unsafe>> CheckAliasingWithHiddenSelf() : void
+    + {static} <<unsafe>> CheckNoAliasReturn(s:NoAliasField) : void
+    + {static} <<unsafe>> CheckMallocIsNoAlias() : void
+    + {static} <<unsafe>> CheckBumpAllocIsNoAlias() : void
+    + {static} <<unsafe>> CheckInRefOut(a:int, b:int, c:int) : void
+    + {static} <<unsafe>> CheckOutOut(a:int, b:int) : void
+    + {static} <<unsafe>> CheckOutOfBoundsGEPNoAlias() : void
+}
+class NoAliasField <<struct>> {
+    + Compare(other:NoAliasField) : void
+    + Compare(other:ContainerOfManyNoAliasFields) : void
+}
+class ContainerOfManyNoAliasFields <<struct>> {
+}
+class Union <<struct>> {
+    + a : ulong
+    + b : int
+    + c : float
+}
+class LinkedList <<struct>> {
+}
+class NoAliasWithContentsStruct <<struct>> {
+}
+class DoesAliasWithSubStructPointersStruct <<struct>> {
+    + Dispose() : void
+}
+class AliasingWithSelf <<struct>> {
+    + CheckAlias() : void
+}
+class AliasingWithHiddenSelf <<struct>> {
+    + CheckAlias() : void
+}
+class SomeData <<struct>> {
+    + A : int
+}
+class Provider {
+    + Value : object <<get>>
+}
+class Provider {
+    + Value : object <<get>>
+}
+class Provider {
+    + Value : object <<get>>
+}
+class Provider {
+    + Value : object <<get>>
+}
+class Provider {
+    + Value : object <<get>>
+}
+class Provider {
+    + Value : object <<get>>
+}
+Aliasing +-- NoAliasField
+Aliasing +-- ContainerOfManyNoAliasFields
+ContainerOfManyNoAliasFields --> "s0" NoAliasField
+ContainerOfManyNoAliasFields --> "s1" NoAliasField
+ContainerOfManyNoAliasFields --> "s2" NoAliasField
+ContainerOfManyNoAliasFields --> "s3" NoAliasField
+Aliasing +-- Union
+Aliasing +-- LinkedList
+Aliasing +-- NoAliasWithContentsStruct
+Aliasing +-- DoesAliasWithSubStructPointersStruct
+IDisposable <|-- DoesAliasWithSubStructPointersStruct
+Aliasing +-- AliasingWithSelf
+Aliasing +-- AliasingWithHiddenSelf
+Aliasing +-- SomeData
+NoAliasField +-- Provider
+IArgumentProvider <|-- Provider
+ContainerOfManyNoAliasFields +-- Provider
+IArgumentProvider <|-- Provider
+Union +-- Provider
+IArgumentProvider <|-- Provider
+LinkedList +-- Provider
+IArgumentProvider <|-- Provider
+NoAliasWithContentsStruct +-- Provider
+IArgumentProvider <|-- Provider
+DoesAliasWithSubStructPointersStruct +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

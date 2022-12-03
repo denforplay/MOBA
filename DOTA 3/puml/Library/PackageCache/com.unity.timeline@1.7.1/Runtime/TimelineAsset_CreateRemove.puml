@@ -1,0 +1,13 @@
+@startuml
+class TimelineAsset <<partial>> {
+    + CreateTrack(type:Type, parent:TrackAsset, name:string) : TrackAsset
+    + CreateTrack(parent:TrackAsset, trackName:string) : T
+    + CreateTrack(trackName:string) : T
+    + CreateTrack() : T
+    + DeleteClip(clip:TimelineClip) : bool
+    + DeleteTrack(track:TrackAsset) : bool
+    AllocateTrack(trackAssetParent:TrackAsset, trackName:string, trackType:Type) : TrackAsset
+    DeleteRecordedAnimation(track:TrackAsset) : void
+    DeleteRecordedAnimation(clip:TimelineClip) : void
+}
+@enduml

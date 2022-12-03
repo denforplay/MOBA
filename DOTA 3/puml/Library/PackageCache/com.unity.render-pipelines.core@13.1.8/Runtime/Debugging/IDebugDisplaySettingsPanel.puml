@@ -1,0 +1,9 @@
+@startuml
+interface IDebugDisplaySettingsPanel {
+    PanelName : string <<get>>
+}
+interface IDebugDisplaySettingsPanelDisposable {
+}
+IDebugDisplaySettingsPanel <|-- IDebugDisplaySettingsPanelDisposable
+IDisposable <|-- IDebugDisplaySettingsPanelDisposable
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class EnemyTargetingInputs {
+    +  <<event>> OnTargetedEnemy : Action<TargetableView> 
+    + EnemyTargetingInputs(camera:Camera, characterView:CharacterView)
+    + CheckTargetOnClick() : void
+}
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class ShowAnimation {
+    + CurAnimClip : int = 0
+    + CurAnimName : string
+    Start() : void
+    Update() : void
+    OnGUI() : void
+    + i : int = 0
+    ChooseChar() : void
+    AddAnim() : void
+    PlayAnim() : void
+}
+MonoBehaviour <|-- ShowAnimation
+@enduml

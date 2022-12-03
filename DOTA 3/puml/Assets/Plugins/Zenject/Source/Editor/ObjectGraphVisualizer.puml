@@ -1,0 +1,9 @@
+@startuml
+class ObjectGraphVisualizer <<static>> {
+    + {static} OutputObjectGraphToFile(container:DiContainer, outputPath:string, externalIgnoreTypes:IEnumerable<Type>, contractTypes:IEnumerable<Type>) : void
+    {static} ShouldIgnoreType(type:Type, ignoreTypes:List<Type>) : bool
+    {static} CalculateObjectGraph(container:DiContainer, contracts:IEnumerable<Type>) : Dictionary<Type, List<Type>>
+    {static} GetDependencies(container:DiContainer, type:Type) : List<Type>
+    {static} GetFormattedTypeName(type:Type) : string
+}
+@enduml

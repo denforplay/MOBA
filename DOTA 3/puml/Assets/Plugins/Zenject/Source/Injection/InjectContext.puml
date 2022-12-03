@@ -1,0 +1,42 @@
+@startuml
+class InjectContext {
+    _objectInstance : object
+    _memberName : string
+    _optional : bool
+    _fallBackValue : object
+    _concreteIdentifier : object
+    + InjectContext()
+    + InjectContext(container:DiContainer, memberType:Type)
+    + InjectContext(container:DiContainer, memberType:Type, identifier:object)
+    + InjectContext(container:DiContainer, memberType:Type, identifier:object, optional:bool)
+    + Dispose() : void
+    + Reset() : void
+    + ObjectInstance : object <<get>> <<set>>
+    + Identifier : object <<get>> <<set>>
+    + MemberName : string <<get>> <<set>>
+    + Optional : bool <<get>> <<set>>
+    + ConcreteIdentifier : object <<get>> <<set>>
+    + FallBackValue : object <<get>> <<set>>
+    + CreateSubContext(memberType:Type) : InjectContext
+    + CreateSubContext(memberType:Type, identifier:object) : InjectContext
+    + Clone() : InjectContext
+    + GetObjectGraphString() : string
+}
+class "IEnumerable`1"<T> {
+}
+IDisposable <|-- InjectContext
+InjectContext --> "_bindingId" BindingId
+InjectContext --> "_objectType" Type
+InjectContext --> "_parentContext" InjectContext
+InjectContext --> "_sourceType" InjectSources
+InjectContext --> "_container" DiContainer
+InjectContext --> "BindingId" BindingId
+InjectContext --> "ObjectType" Type
+InjectContext --> "ParentContext" InjectContext
+InjectContext --> "MemberType" Type
+InjectContext --> "SourceType" InjectSources
+InjectContext --> "Container" DiContainer
+InjectContext --> "ParentContexts<InjectContext>" "IEnumerable`1"
+InjectContext --> "ParentContextsAndSelf<InjectContext>" "IEnumerable`1"
+InjectContext --> "AllObjectTypes<Type>" "IEnumerable`1"
+@enduml

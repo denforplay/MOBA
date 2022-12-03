@@ -1,0 +1,16 @@
+@startuml
+class BindingId <<struct>> {
+    _identifier : object
+    + BindingId(type:Type, identifier:object)
+    + Identifier : object <<get>> <<set>>
+    + <<override>> ToString() : string
+    + <<override>> GetHashCode() : int
+    + <<override>> Equals(other:object) : bool
+    + Equals(that:BindingId) : bool
+}
+class "IEquatable`1"<T> {
+}
+"IEquatable`1" "<BindingId>" <|-- BindingId
+BindingId --> "_type" Type
+BindingId --> "Type" Type
+@enduml

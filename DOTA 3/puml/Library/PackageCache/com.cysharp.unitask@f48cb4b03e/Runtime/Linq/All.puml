@@ -1,0 +1,9 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} AllAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken) : UniTask<Boolean>
+    + {static} AllAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<Boolean>
+    + {static} AllAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<Boolean>
+}
+class All <<static>> {
+}
+@enduml

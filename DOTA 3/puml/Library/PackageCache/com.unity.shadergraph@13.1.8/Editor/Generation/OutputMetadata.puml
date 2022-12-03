@@ -1,0 +1,10 @@
+@startuml
+class OutputMetadata <<struct>> {
+    m_Index : int
+    m_ReferenceName : string
+    m_Id : int
+    + index : int <<get>>
+    + id : int <<get>>
+    + referenceName : string <<get>>
+}
+@enduml

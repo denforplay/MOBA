@@ -1,0 +1,26 @@
+@startuml
+class BoneTreeWidgetController {
+    + BoneTreeWidgetController(model:IBoneTreeViewModel, eventSystem:SkinningEvents)
+    + Activate() : void
+    + Deactivate() : void
+    + SetAllVisibility(visibility:bool) : void
+    + BuildTreeView() : List<TreeViewItem>
+    + GetIDsToExpand(bones:BoneCache[]) : List<int>
+    + GetIDsToSelect(bones:BoneCache[]) : int[]
+    + SelectBones(selectedIds:IList<int>, items:IList<TreeViewItem>) : void
+    + ExpandBones(expandedIds:IList<int>, items:IList<TreeViewItem>) : void
+    + GetTreeItemVisibility(item:TreeViewItemBase<BoneCache>) : bool
+    + SetTreeItemVisibility(item:TreeViewItemBase<BoneCache>, visible:bool, includeChildren:bool) : void
+    SetChildrenVisibility(bone:TreeViewItemBase<BoneCache>, visible:bool) : void
+    + GetTreeItemDepthValue(bone:TreeViewItemBase<BoneCache>) : int
+    + SetTreeItemDepthValue(bone:TreeViewItemBase<BoneCache>, value:int) : void
+    + GetTreeItemColorValue(bone:TreeViewItemBase<BoneCache>) : Color
+    + SetTreeItemColorValue(bone:TreeViewItemBase<BoneCache>, color:Color) : void
+    + SetTreeViewBoneName(items:IList<TreeViewItem>, bone:BoneCache) : void
+    + TreeViewItemRename(rows:IList<TreeViewItem>, itemID:int, newName:string) : void
+    + CanReparent(parent:TreeViewItemBase<BoneCache>, draggedItems:List<TreeViewItem>) : bool
+    + ReparentItems(newParent:TreeViewItemBase<BoneCache>, draggedItems:List<TreeViewItem>, insertAtIndex:int) : void
+    + <<virtual>> CanDrag() : bool
+    + <<virtual>> CanRename() : bool
+}
+@enduml

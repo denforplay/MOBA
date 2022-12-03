@@ -1,0 +1,9 @@
+@startuml
+class TimelineWindow <<partial>> {
+    OnSelectionChange() : void
+    RefreshSelection(forceRebuild:bool) : void
+    RestoreLastSelection(forceRebuild:bool) : void
+    SetCurrentSelection(obj:Object) : void
+}
+TimelineWindow --> "m_SequencePath" SequencePath
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+enum ItemExpanderState {
+    Hidden,
+    Collapsed,
+    Expanded,
+}
+interface ISearcherAdapter {
+    MakeItem() : VisualElement
+    Bind(target:VisualElement, item:SearcherItem, expanderState:ItemExpanderState, text:string) : VisualElement
+    Title : string <<get>>
+    HasDetailsPanel : bool <<get>>
+    AddAllChildResults : bool <<get>>
+    MultiSelectEnabled : bool <<get>>
+    InitialSplitterDetailRatio : float <<get>>
+    OnSelectionChanged(items:IEnumerable<SearcherItem>) : void
+    OnSearchResultsFilter(searchResults:IEnumerable<SearcherItem>, searchQuery:string) : SearcherItem
+    InitDetailsPanel(detailsPanel:VisualElement) : void
+}
+class SearcherAdapter {
+    <<const>> k_EntryName : string = "smartSearchItem"
+    <<const>> k_IndentDepthFactor : int = 15
+    + <<virtual>> Title : string <<get>>
+    + <<virtual>> HasDetailsPanel : bool <<get>>
+    + <<virtual>> AddAllChildResults : bool <<get>>
+    + <<virtual>> MultiSelectEnabled : bool <<get>>
+    + <<virtual>> InitialSplitterDetailRatio : float <<get>>
+    + SearcherAdapter(title:string)
+    + <<virtual>> MakeItem() : VisualElement
+    + <<virtual>> Bind(element:VisualElement, item:SearcherItem, expanderState:ItemExpanderState, query:string) : VisualElement
+    + <<virtual>> InitDetailsPanel(detailsPanel:VisualElement) : void
+    + <<virtual>> OnSelectionChanged(items:IEnumerable<SearcherItem>) : void
+    + <<virtual>> OnSearchResultsFilter(searchResults:IEnumerable<SearcherItem>, searchQuery:string) : SearcherItem
+}
+ISearcherAdapter <|-- SearcherAdapter
+SearcherAdapter --> "m_DefaultItemTemplate" VisualTreeAsset
+SearcherAdapter --> "m_DetailsLabel" Label
+@enduml

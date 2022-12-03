@@ -1,0 +1,5 @@
+@startuml
+class "EnumInfo`1"<T> <<static>> {
+    {static} EnumInfo()
+}
+@enduml

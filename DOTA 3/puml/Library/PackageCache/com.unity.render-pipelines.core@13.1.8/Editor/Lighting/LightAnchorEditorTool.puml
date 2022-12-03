@@ -1,0 +1,17 @@
+@startuml
+class LightAnchorEditorTool {
+    + <<override>> IsAvailable() : bool
+    + <<override>> OnToolGUI(window:EditorWindow) : void
+    OnEnable() : void
+    DoTargetGUI(target:UnityObject) : void
+    GetHandles(obj:UnityObject) : LightAnchorHandles
+    GetSerializedObject(obj:UnityObject) : SerializedObject
+}
+class "Dictionary`2"<T1,T2> {
+}
+EditorTool <|-- LightAnchorEditorTool
+LightAnchorEditorTool --> "m_IconContent" GUIContent
+LightAnchorEditorTool o-> "m_SerializedObjects<UnityObject,SerializedObject>" "Dictionary`2"
+LightAnchorEditorTool o-> "m_LightAnchorHandles<UnityObject,LightAnchorHandles>" "Dictionary`2"
+LightAnchorEditorTool --> "toolbarIcon" GUIContent
+@enduml

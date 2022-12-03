@@ -1,0 +1,8 @@
+@startuml
+class LoadContext {
+    + LoadContext()
+    + <<virtual>> OnLoadLayersHeader(psdFile:PsdFile) : void
+    + <<virtual>> OnLoadLayerHeader(layer:Layer) : void
+}
+LoadContext --> "Encoding" Encoding
+@enduml

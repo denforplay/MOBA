@@ -1,0 +1,41 @@
+@startuml
+enum WeightEditorMode {
+    AddAndSubtract,
+    GrowAndShrink,
+    Smooth,
+}
+class WeightEditor {
+    + boneIndex : int <<get>> <<set>>
+    + emptySelectionEditsAll : bool <<get>> <<set>>
+    + autoNormalize : bool <<get>> <<set>>
+    useRelativeValues : bool <<get>> <<set>>
+    <<const>> k_MaxSmoothIterations : int = 8
+    boneCount : int <<get>>
+    + WeightEditor()
+    + OnEditStart(relative:bool) : void
+    + OnEditEnd() : void
+    + DoEdit(value:float) : void
+    Validate() : void
+    RegisterUndo() : void
+    SetWeight(value:float, createNewChannel:bool) : void
+    SmoothWeights(value:float) : void
+    PrepareSmoothingBuffers() : void
+    GetSmoothedBoneWeights(lerpIndex:int) : BoneWeight[]
+    {static} GetLerpValue(smoothValue:float) : float
+    {static} GetLerpIndex(smoothValue:float) : int
+    StoreBoneWeights() : void
+    RestoreBoneWeights() : void
+}
+class "ISelection`1"<T> {
+}
+class "List`1"<T> {
+}
+WeightEditor --> "spriteMeshData" BaseSpriteMeshData
+WeightEditor --> "cacheUndo" ICacheUndo
+WeightEditor --> "mode" WeightEditorMode
+WeightEditor --> "selection<int>" "ISelection`1"
+WeightEditor --> "currentMode" WeightEditorMode
+WeightEditor o-> "m_SpriteMeshDataController" SpriteMeshDataController
+WeightEditor o-> "m_SmoothedBoneWeights<BoneWeight[]>" "List`1"
+WeightEditor o-> "m_StoredBoneWeights<BoneWeight>" "List`1"
+@enduml

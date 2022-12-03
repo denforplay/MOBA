@@ -1,0 +1,24 @@
+@startuml
+class TMP_TextInfo {
+    + characterCount : int
+    + spriteCount : int
+    + spaceCount : int
+    + wordCount : int
+    + linkCount : int
+    + lineCount : int
+    + pageCount : int
+    + materialCount : int
+    + TMP_TextInfo()
+    + TMP_TextInfo(textComponent:TMP_Text)
+    + Clear() : void
+    + ClearMeshInfo(updateMesh:bool) : void
+    + ClearAllMeshInfo() : void
+    + ResetVertexLayout(isVolumetric:bool) : void
+    + ClearUnusedVertices(materials:MaterialReference[]) : void
+    + ClearLineInfo() : void
+    + CopyMeshInfoVertexData() : TMP_MeshInfo[]
+    + {static} Resize(array:T[], size:int) : void
+    + {static} Resize(array:T[], size:int, isBlockAllocated:bool) : void
+}
+TMP_TextInfo --> "textComponent" TMP_Text
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class AnimationController {
+    + AnimationController(animations:Dictionary<AnimationType, string>, animator:Animator)
+    + ChangeAnimation(animationType:AnimationType) : void
+    + <<async>> CancelCurrentAnimationAsync(time:TimeSpan, cancellationToken:CancellationToken) : UniTask
+}
+@enduml

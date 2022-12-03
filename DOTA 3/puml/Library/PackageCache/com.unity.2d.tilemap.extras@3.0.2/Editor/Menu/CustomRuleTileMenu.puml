@@ -1,0 +1,5 @@
+@startuml
+class CustomRuleTileMenu <<static>> {
+    {static} CreateCustomRuleTile() : void
+}
+@enduml

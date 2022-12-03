@@ -1,0 +1,6 @@
+@startuml
+class UserSettings <<static>> {
+    + {static} FindUserSettings(assemblies:IEnumerable<Assembly>, visibility:SettingVisibility, flags:BindingFlags) : IEnumerable<IUserSetting>
+    {static} CreateGenericPref(key:string, scope:SettingsScope, field:FieldInfo) : IUserSetting
+}
+@enduml

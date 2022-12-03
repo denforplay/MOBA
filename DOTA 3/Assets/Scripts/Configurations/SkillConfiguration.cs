@@ -13,6 +13,7 @@ namespace Configurations
         [SerializeField] private AnimationClip _skillAnimation;
         [SerializeField] private float _effectValue;
         [SerializeField] private float _range;
+        [SerializeField] private float _manaCost;
         [SerializeField] private ParticleSystem _particle;
         
         public int Id => _id;
@@ -23,5 +24,6 @@ namespace Configurations
         public float EffectValue => _effectValue;
         public float Range => _range;
         public ParticleSystem ParticleSystem => _particle;
+        public float ManaCost => _manaCost;
     }
 }

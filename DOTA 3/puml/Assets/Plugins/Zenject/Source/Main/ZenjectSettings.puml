@@ -1,0 +1,48 @@
+@startuml
+enum ValidationErrorResponses {
+    Log,
+    Throw,
+}
+enum RootResolveMethods {
+    NonLazyOnly,
+    All,
+}
+enum SignalDefaultSyncModes {
+    Synchronous,
+    Asynchronous,
+}
+enum SignalMissingHandlerResponses {
+    Ignore,
+    Throw,
+    Warn,
+}
+class ZenjectSettings {
+    _ensureDeterministicDestructionOrderOnApplicationQuit : bool
+    _displayWarningWhenResolvingDuringInstall : bool
+    + ZenjectSettings(validationErrorResponse:ValidationErrorResponses, validationRootResolveMethod:RootResolveMethods, displayWarningWhenResolvingDuringInstall:bool, ensureDeterministicDestructionOrderOnApplicationQuit:bool, signalSettings:SignalSettings)
+    + ZenjectSettings()
+    + DisplayWarningWhenResolvingDuringInstall : bool <<get>>
+    + EnsureDeterministicDestructionOrderOnApplicationQuit : bool <<get>>
+}
+class SignalSettings {
+    _requireStrictUnsubscribe : bool
+    _defaultAsyncTickPriority : int
+    + SignalSettings(defaultSyncMode:SignalDefaultSyncModes, missingHandlerDefaultResponse:SignalMissingHandlerResponses, requireStrictUnsubscribe:bool, defaultAsyncTickPriority:int)
+    + SignalSettings()
+    + DefaultAsyncTickPriority : int <<get>>
+    + RequireStrictUnsubscribe : bool <<get>>
+}
+ZenjectSettings o-> "Default" ZenjectSettings
+ZenjectSettings --> "_validationRootResolveMethod" RootResolveMethods
+ZenjectSettings --> "_validationErrorResponse" ValidationErrorResponses
+ZenjectSettings --> "_signalSettings" SignalSettings
+ZenjectSettings --> "Signals" SignalSettings
+ZenjectSettings --> "ValidationErrorResponse" ValidationErrorResponses
+ZenjectSettings --> "ValidationRootResolveMethod" RootResolveMethods
+ZenjectSettings +-- SignalSettings
+SignalSettings o-> "Default" SignalSettings
+SignalSettings --> "_defaultSyncMode" SignalDefaultSyncModes
+SignalSettings --> "_missingHandlerDefaultResponse" SignalMissingHandlerResponses
+SignalSettings --> "DefaultSyncMode" SignalDefaultSyncModes
+SignalSettings --> "MissingHandlerDefaultResponse" SignalMissingHandlerResponses
+@enduml

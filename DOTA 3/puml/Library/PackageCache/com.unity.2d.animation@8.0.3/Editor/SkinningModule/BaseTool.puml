@@ -1,0 +1,15 @@
+@startuml
+interface ITool {
+}
+abstract class BaseTool {
+    + isActive : bool <<get>>
+    + <<virtual>> defaultControlID : int <<get>>
+    + Activate() : void
+    + Deactivate() : void
+    + DoGUI() : void
+    + <<virtual>> Initialize(layout:LayoutOverlay) : void
+}
+SkinningObject <|-- BaseTool
+ITool <|-- BaseTool
+BaseTool --> "previewBehaviour" IMeshPreviewBehaviour
+@enduml

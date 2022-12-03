@@ -1,0 +1,16 @@
+@startuml
+class ThreadIdentifier <<struct>> {
+    + threadNameWithIndex : string <<get>>
+    + name : string <<get>>
+    + index : int <<get>>
+    + {static} kAll : int
+    + {static} kSingle : int = 0
+    + ThreadIdentifier(name:string, index:int)
+    + ThreadIdentifier(threadIdentifier:ThreadIdentifier)
+    + ThreadIdentifier(threadNameWithIndex:string)
+    UpdateThreadNameWithIndex() : void
+    + SetName(newName:string) : void
+    + SetIndex(newIndex:int) : void
+    + SetAll() : void
+}
+@enduml

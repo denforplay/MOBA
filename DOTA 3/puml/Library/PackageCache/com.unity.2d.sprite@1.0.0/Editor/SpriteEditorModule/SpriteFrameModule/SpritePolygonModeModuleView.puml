@@ -1,0 +1,13 @@
+@startuml
+class SpritePolygonModeModule <<partial>> {
+    + <<override>> DoMainGUI() : void
+    + <<override>> DoToolbarGUI(toolbarRect:Rect) : void
+    ShowHideWarningMessage() : void
+    + showChangeShapeWindow : bool <<get>> <<set>>
+}
+class SpritePolygonModeStyles <<static>> {
+}
+SpriteFrameModuleBase <|-- SpritePolygonModeModule
+SpritePolygonModeModule +-- SpritePolygonModeStyles
+SpritePolygonModeStyles o-> "changeShapeLabel" GUIContent
+@enduml

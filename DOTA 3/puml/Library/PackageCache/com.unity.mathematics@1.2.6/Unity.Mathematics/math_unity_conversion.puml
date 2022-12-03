@@ -1,0 +1,12 @@
+@startuml
+class float2 <<struct>> {
+}
+class float3 <<struct>> {
+}
+class float4 <<struct>> {
+}
+class quaternion <<struct>> {
+}
+class float4x4 <<struct>> {
+}
+@enduml

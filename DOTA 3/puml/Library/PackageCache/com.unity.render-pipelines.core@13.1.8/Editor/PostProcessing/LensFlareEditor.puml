@@ -1,0 +1,10 @@
+@startuml
+class FlareEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class LensFlareEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- FlareEditor
+Editor <|-- LensFlareEditor
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class CinemachineMixer <<sealed>> {
+    + <<override>> OnPlayableDestroy(playable:Playable) : void
+    + <<override>> PrepareFrame(playable:Playable, info:FrameData) : void
+    + <<override>> ProcessFrame(playable:Playable, info:FrameData, playerData:object) : void
+    GetDeltaTime(deltaTime:float) : float
+}
+PlayableBehaviour <|-- CinemachineMixer
+CinemachineMixer --> "GetMasterPlayableDirector" MasterDirectorDelegate
+@enduml

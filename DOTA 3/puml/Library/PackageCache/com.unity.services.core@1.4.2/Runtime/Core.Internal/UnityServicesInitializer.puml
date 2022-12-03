@@ -1,0 +1,6 @@
+@startuml
+class UnityServicesInitializer <<static>> {
+    {static} CreateStaticInstance() : void
+    {static} <<async>> EnableServicesInitializationAsync() : void
+}
+@enduml

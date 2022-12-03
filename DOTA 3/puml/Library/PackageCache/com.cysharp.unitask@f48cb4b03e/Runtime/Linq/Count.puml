@@ -1,0 +1,10 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} CountAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} CountAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} CountAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} CountAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<Int32>
+}
+class Count <<static>> {
+}
+@enduml

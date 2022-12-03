@@ -1,0 +1,51 @@
+@startuml
+class GridBrushEditor {
+    + <<override>> OnPaintSceneGUI(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt, tool:GridBrushBase.Tool, executing:bool) : void
+    + <<override>> OnSelectionInspectorGUI() : void
+    + <<override>> OnSelectionSceneGUI(gridLayout:GridLayout, brushTarget:GameObject) : void
+    + <<override>> OnMouseLeave() : void
+    + <<override>> OnToolDeactivated(tool:GridBrushBase.Tool) : void
+    + <<override>> canChangeZPosition : bool <<get>> <<set>>
+    + <<override>> RegisterUndo(brushTarget:GameObject, tool:GridBrushBase.Tool) : void
+    + <<virtual>> PaintPreview(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<virtual>> BoxFillPreview(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<virtual>> FloodFillPreview(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<virtual>> ClearPreview() : void
+}
+class Styles <<static>> {
+}
+enum ModifyCells {
+    InsertRow,
+    InsertColumn,
+    InsertRowBefore,
+    InsertColumnBefore,
+    DeleteRow,
+    DeleteColumn,
+    DeleteRowBefore,
+    DeleteColumnBefore,
+}
+class GridBrushProperties {
+    + {static} <<readonly>> floodFillPreviewEditorPref : string = "GridBrush.EnableFloodFillPreview"
+}
+GridBrushEditorBase <|-- GridBrushEditor
+GridBrushEditor --> "brush" GridBrush
+GridBrushEditor +-- Styles
+Styles o-> "tileLabel" GUIContent
+Styles o-> "spriteLabel" GUIContent
+Styles o-> "colorLabel" GUIContent
+Styles o-> "colliderTypeLabel" GUIContent
+Styles o-> "lockColorLabel" GUIContent
+Styles o-> "lockTransformLabel" GUIContent
+Styles o-> "gridSelectionPropertiesLabel" GUIContent
+Styles o-> "modifyTilemapLabel" GUIContent
+Styles o-> "modifyLabel" GUIContent
+Styles o-> "deleteSelectionLabel" GUIContent
+Styles o-> "noTool" GUIContent
+Styles o-> "moveTool" GUIContent
+Styles o-> "rotateTool" GUIContent
+Styles o-> "scaleTool" GUIContent
+Styles o-> "transformTool" GUIContent
+GridBrushEditor +-- ModifyCells
+GridBrushEditor +-- GridBrushProperties
+GridBrushProperties o-> "floodFillPreviewLabel" GUIContent
+@enduml

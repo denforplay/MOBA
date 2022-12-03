@@ -1,0 +1,9 @@
+@startuml
+class "ValueWrapper`1"<T> <<sealed>> {
+    <<const>> k_PrettyPrintJson : bool = false
+    m_Value : T
+    + {static} Serialize(value:T) : string
+    + {static} Deserialize(json:string) : T
+    + {static} DeepCopy(value:T) : T
+}
+@enduml

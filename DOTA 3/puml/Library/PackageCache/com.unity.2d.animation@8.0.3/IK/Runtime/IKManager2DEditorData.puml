@@ -1,0 +1,8 @@
+@startuml
+class IKManager2D <<partial>> {
+    OnEditorDataValidate() : void
+    AddSolverEditorData() : void
+    RemoveSolverEditorData(solver:Solver2D) : void
+}
+MonoBehaviour <|-- IKManager2D
+@enduml

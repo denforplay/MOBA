@@ -1,0 +1,10 @@
+@startuml
+class SkillPanel {
+    + SetSkill(skillConfig:SkillConfiguration) : void
+    + ResetSkill(skillId:int) : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- SkillPanel
+SkillPanel --> "SkillViews<SkillView>" "List`1"
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+interface IPrefabInstantiator {
+    Instantiate(context:InjectContext, args:List<TypeValuePair>, injectAction:Action) : GameObject
+    GetPrefab(context:InjectContext) : UnityEngine.Object
+}
+class "List`1"<T> {
+}
+IPrefabInstantiator --> "ArgumentTarget" Type
+IPrefabInstantiator --> "ExtraArguments<TypeValuePair>" "List`1"
+IPrefabInstantiator --> "GameObjectCreationParameters" GameObjectCreationParameters
+@enduml

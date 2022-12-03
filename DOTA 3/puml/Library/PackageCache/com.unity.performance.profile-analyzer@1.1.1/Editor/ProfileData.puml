@@ -1,0 +1,86 @@
+@startuml
+class ProfileData {
+    {static} latestVersion : int = 7
+    + Version : int <<get>>
+    + FrameIndexOffset : int <<get>>
+    + FirstFrameIncomplete : bool
+    + LastFrameIncomplete : bool
+    + FilePath : string <<get>>
+    {static} s_Progress : float = 0
+    + ProfileData()
+    + ProfileData(filename:string)
+    Read() : void
+    IsFrameSame(frameIndex:int, other:ProfileData) : bool
+    + IsSame(other:ProfileData) : bool
+    {static} + ThreadNameWithIndex(index:int, threadName:string) : string
+    + SetFrameIndexOffset(offset:int) : void
+    + GetFrameCount() : int
+    + GetFrame(offset:int) : ProfileFrame
+    + GetMarkerNames() : List<string>
+    + GetThreadNames() : List<string>
+    + GetThreadCount() : int
+    + OffsetToDisplayFrame(offset:int) : int
+    + DisplayFrameToOffset(displayFrame:int) : int
+    + AddThreadName(threadName:string, thread:ProfileThread) : void
+    + AddMarkerName(markerName:string, marker:ProfileMarker) : void
+    + GetThreadName(thread:ProfileThread) : string
+    + GetMarkerName(marker:ProfileMarker) : string
+    + GetMarkerIndex(markerName:string) : int
+    + Add(frame:ProfileFrame) : void
+    WriteInternal(filepath:string) : void
+    + {static} CorrectThreadName(threadNameWithIndex:string) : string
+    + {static} GetThreadNameWithGroup(threadName:string, groupName:string) : string
+    + {static} GetThreadNameWithoutGroup(threadNameWithGroup:string, groupName:string) : string
+    + {static} Save(filename:string, data:ProfileData) : bool
+    + {static} Load(filename:string, data:ProfileData) : bool
+    PushMarker(markerStack:Stack<ProfileMarker>, markerData:ProfileMarker) : void
+    PopMarkerAndRecordTimeInParent(markerStack:Stack<ProfileMarker>) : ProfileMarker
+    + Finalise() : void
+    CalculateMarkerChildTimes() : void
+    + {static} GetLoadingProgress() : float
+}
+class ProfileFrame {
+    + msStartTime : double
+    + msFrame : float
+    + ProfileFrame()
+    + IsSame(otherFrame:ProfileFrame) : bool
+    + Add(thread:ProfileThread) : void
+    + Write(writer:BinaryWriter) : void
+    + ProfileFrame(reader:BinaryReader, fileVersion:int)
+}
+class ProfileThread {
+    + threadIndex : int
+    + streamPos : long
+    + markerCount : int = 0
+    + fileVersion : int
+    + ProfileThread()
+    + Write(writer:BinaryWriter) : void
+    + ProfileThread(reader:BinaryReader, fileversion:int)
+    + ReadMarkers(path:string) : bool
+    + AddMarker(markerData:ProfileMarker) : void
+    + RebuildMarkers(path:string) : void
+}
+class ProfileMarker {
+    + nameIndex : int
+    + msMarkerTotal : float
+    + depth : int
+    + msChildren : float
+    + ProfileMarker()
+    + {static} Create(durationMS:float, depth:int) : ProfileMarker
+    + {static} Create(frameData:ProfilerFrameDataIterator) : ProfileMarker
+    + Write(writer:BinaryWriter) : void
+    + ProfileMarker(reader:BinaryReader, fileVersion:int)
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+ProfileData o-> "trailingDigit" Regex
+ProfileData o-> "frames<ProfileFrame>" "List`1"
+ProfileData o-> "markerNames<string>" "List`1"
+ProfileData o-> "threadNames<string>" "List`1"
+ProfileData o-> "markerNamesDict<string,int>" "Dictionary`2"
+ProfileData o-> "threadNameDict<string,int>" "Dictionary`2"
+ProfileFrame o-> "threads<ProfileThread>" "List`1"
+ProfileThread o-> "markers<ProfileMarker>" "List`1"
+@enduml

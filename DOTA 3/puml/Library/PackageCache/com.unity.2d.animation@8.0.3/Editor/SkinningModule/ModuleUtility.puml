@@ -1,0 +1,10 @@
+@startuml
+class ModuleUtility <<static>> {
+    + {static} GUIToWorld(guiPosition:Vector3) : Vector3
+    + {static} GUIToWorld(guiPosition:Vector3, planeNormal:Vector3, planePos:Vector3) : Vector3
+    + {static} ToGUIContentArray(names:string[]) : GUIContent[]
+    + {static} CalculateNiceColor(index:int, numColors:int) : Color
+    + {static} UpdateLocalToWorldMatrices(spriteBoneDataList:List<SpriteBoneData>, rootMatrix:Matrix4x4, localToWorldMatrices:Matrix4x4[]) : void
+    + {static} CreateSpriteBoneData(spriteBoneList:UnityEngine.U2D.SpriteBone[], rootMatrix:Matrix4x4) : List<SpriteBoneData>
+}
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class RleReader {
+    + RleReader(stream:Stream)
+    + Read(buffer:byte[], offset:int, count:int) : int
+}
+@enduml

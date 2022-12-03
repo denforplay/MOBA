@@ -1,0 +1,28 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Repeat(element:TElement, count:int) : IUniTaskAsyncEnumerable<TElement>
+}
+class "Repeat`1"<TElement> {
+    <<readonly>> element : TElement
+    <<readonly>> count : int
+    + Repeat(element:TElement, count:int)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TElement>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Repeat {
+    <<readonly>> count : int
+    remaining : int
+    + _Repeat(element:TElement, count:int, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TElement>" <|-- "Repeat`1"
+"Repeat`1" +-- _Repeat
+"IUniTaskAsyncEnumerator`1" "<TElement>" <|-- _Repeat
+_Repeat --> "element" TElement
+_Repeat --> "cancellationToken" CancellationToken
+_Repeat --> "Current" TElement
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+interface IPSDLayerMappingStrategyComparable {
+    layerID : int <<get>>
+    name : string <<get>>
+    isGroup : bool <<get>>
+}
+interface IPSDLayerMappingStrategy {
+    Compare(a:IPSDLayerMappingStrategyComparable, b:IPSDLayerMappingStrategyComparable) : bool
+    Compare(a:IPSDLayerMappingStrategyComparable, b:BitmapLayer) : bool
+    LayersUnique(layers:IEnumerable<IPSDLayerMappingStrategyComparable>) : string
+}
+abstract class "LayerMappingStrategy`1"<T> {
+    m_DuplicatedStringError : string
+    + Compare(x:IPSDLayerMappingStrategyComparable, y:BitmapLayer) : bool
+    + Compare(x:IPSDLayerMappingStrategyComparable, y:IPSDLayerMappingStrategyComparable) : bool
+    + LayersUnique(layers:IEnumerable<IPSDLayerMappingStrategyComparable>) : string
+    LayersUnique(layers:IEnumerable<IPSDLayerMappingStrategyComparable>, layerNameHash:HashSet<T>, layerGroupHash:HashSet<T>) : string
+}
+class LayerMappingUseLayerName {
+}
+class LayerMappingUseLayerNameCaseSensitive {
+}
+class LayerMappingUserLayerID {
+}
+IPSDLayerMappingStrategy <|-- "LayerMappingStrategy`1"
+"LayerMappingStrategy`1" "<string>" <|-- LayerMappingUseLayerName
+"LayerMappingStrategy`1" "<string>" <|-- LayerMappingUseLayerNameCaseSensitive
+"LayerMappingStrategy`1" "<int>" <|-- LayerMappingUserLayerID
+@enduml

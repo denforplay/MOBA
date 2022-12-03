@@ -1,0 +1,142 @@
+@startuml
+interface IGenerator {
+    SyncIfNeeded(affectedFiles:List<string>, reimportedFiles:string[]) : bool
+    Sync() : void
+    SolutionFile() : string
+    ProjectDirectory : string <<get>>
+    GenerateAll(generateAll:bool) : void
+    SolutionExists() : bool
+}
+class ProjectGeneration {
+    + {static} <<readonly>> MSBuildNamespaceUri : string = "http://schemas.microsoft.com/developer/msbuild/2003"
+    <<const>> k_WindowsNewline : string = "\r\n"
+    <<const>> k_SettingsJson : string = @"{
+    ""files.exclude"":
+    {
+        ""**/.DS_Store"":true,
+        ""**/.git"":true,
+        ""**/.gitmodules"":true,
+        ""**/*.booproj"":true,
+        ""**/*.pidb"":true,
+        ""**/*.suo"":true,
+        ""**/*.user"":true,
+        ""**/*.userprefs"":true,
+        ""**/*.unityproj"":true,
+        ""**/*.dll"":true,
+        ""**/*.exe"":true,
+        ""**/*.pdf"":true,
+        ""**/*.mid"":true,
+        ""**/*.midi"":true,
+        ""**/*.wav"":true,
+        ""**/*.gif"":true,
+        ""**/*.ico"":true,
+        ""**/*.jpg"":true,
+        ""**/*.jpeg"":true,
+        ""**/*.png"":true,
+        ""**/*.psd"":true,
+        ""**/*.tga"":true,
+        ""**/*.tif"":true,
+        ""**/*.tiff"":true,
+        ""**/*.3ds"":true,
+        ""**/*.3DS"":true,
+        ""**/*.fbx"":true,
+        ""**/*.FBX"":true,
+        ""**/*.lxo"":true,
+        ""**/*.LXO"":true,
+        ""**/*.ma"":true,
+        ""**/*.MA"":true,
+        ""**/*.obj"":true,
+        ""**/*.OBJ"":true,
+        ""**/*.asset"":true,
+        ""**/*.cubemap"":true,
+        ""**/*.flare"":true,
+        ""**/*.mat"":true,
+        ""**/*.meta"":true,
+        ""**/*.prefab"":true,
+        ""**/*.unity"":true,
+        ""build/"":true,
+        ""Build/"":true,
+        ""Library/"":true,
+        ""library/"":true,
+        ""obj/"":true,
+        ""Obj/"":true,
+        ""ProjectSettings/"":true,
+        ""temp/"":true,
+        ""Temp/"":true
+    &#125;
+}"
+    <<readonly>> m_SolutionProjectEntryTemplate : string
+    <<readonly>> m_SolutionProjectConfigurationTemplate : string
+    <<const>> k_TargetLanguageVersion : string = "latest"
+    + ProjectDirectory : string <<get>>
+    + GenerateAll(generateAll:bool) : void
+    <<readonly>> m_ProjectName : string
+    <<const>> k_ToolsVersion : string = "4.0"
+    <<const>> k_ProductVersion : string = "10.0.20506"
+    <<const>> k_BaseDirectory : string = "."
+    <<const>> k_TargetFrameworkVersion : string = "v4.7.1"
+    + ProjectGeneration(tempDirectory:string)
+    + ProjectGeneration(tempDirectory:string, assemblyNameProvider:IAssemblyNameProvider, fileIO:IFileIO, guidGenerator:IGUIDGenerator)
+    + SyncIfNeeded(affectedFiles:List<string>, reimportedFiles:string[]) : bool
+    HasFilesBeenModified(affectedFiles:List<string>, reimportedFiles:string[]) : bool
+    {static} ShouldSyncOnReimportedAsset(asset:string) : bool
+    {static} OnGeneratedCSProjectFiles() : void
+    + Sync() : void
+    + SolutionExists() : bool
+    SetupProjectSupportedExtensions() : void
+    ShouldFileBePartOfSolution(file:string) : bool
+    HasValidExtension(file:string) : bool
+    IsSupportedExtension(extension:string) : bool
+    {static} ScriptingLanguageFor(assembly:Assembly) : ScriptingLanguage
+    {static} GetExtensionOfSourceFiles(files:string[]) : string
+    {static} GetExtensionOfSourceFile(file:string) : string
+    {static} ScriptingLanguageFor(extension:string) : ScriptingLanguage
+    + GenerateAndWriteSolutionAndProjects() : void
+    ParseResponseFileData(assembly:Assembly) : List<ResponseFileData>
+    GenerateAllAssetProjectParts() : Dictionary<string, string>
+    SyncProject(assembly:Assembly, allAssetsProjectParts:Dictionary<string, string>, responseFilesData:List<ResponseFileData>) : void
+    SyncProjectFileIfNotChanged(path:string, newContents:string) : void
+    SyncSolutionFileIfNotChanged(path:string, newContents:string) : void
+    SyncFileIfNotChanged(filename:string, newContents:string) : void
+    ProjectText(assembly:Assembly, allAssetsProjectParts:Dictionary<string, string>, responseFilesData:List<ResponseFileData>) : string
+    {static} AppendReference(fullReference:string, projectBuilder:StringBuilder) : void
+    + ProjectFile(assembly:Assembly) : string
+    + SolutionFile() : string
+    RetrieveRoslynAnalyzers(assembly:Assembly, otherArguments:ILookup<string, string>) : string[]
+    {static} GenerateAnalyserItemGroup(paths:string[]) : string
+    {static} GetSolutionText() : string
+    {static} GetProjectFooterTemplate() : string
+    {static} GetProjectHeaderTemplate(builder:StringBuilder, assemblyGUID:string, assemblyName:string, defines:string, langVersion:string, allowUnsafe:bool, analyzerBlock:string, rulesetBlock:string) : void
+    SyncSolution(assemblies:IEnumerable<Assembly>) : void
+    SolutionText(assemblies:IEnumerable<Assembly>) : string
+    {static} RelevantAssembliesForMode(assemblies:IEnumerable<Assembly>) : IEnumerable<Assembly>
+    GetProjectEntries(assemblies:IEnumerable<Assembly>) : string
+    GetProjectActiveConfigurations(projectGuid:string) : string
+    {static} SkipPathPrefix(path:string, prefix:string) : string
+    ProjectGuid(assembly:string) : string
+    SolutionGuid(assembly:Assembly) : string
+    {static} ProjectFooter() : string
+    {static} GetProjectExtension() : string
+    WriteVSCodeSettingsFiles() : void
+}
+class SolutionGuidGenerator <<static>> {
+    + {static} GuidForProject(projectName:string) : string
+    + {static} GuidForSolution(projectName:string, sourceFileExtension:string) : string
+    {static} ComputeGuidHashFor(input:string) : string
+}
+enum ScriptingLanguage {
+    None,
+    CSharp,
+}
+class "Dictionary`2"<T1,T2> {
+}
+IGenerator --> "AssemblyNameProvider" IAssemblyNameProvider
+IGenerator <|-- ProjectGeneration
+ProjectGeneration o-> "k_BuiltinSupportedExtensions<string,ScriptingLanguage>" "Dictionary`2"
+ProjectGeneration --> "AssemblyNameProvider" IAssemblyNameProvider
+ProjectGeneration --> "m_AssemblyNameProvider" IAssemblyNameProvider
+ProjectGeneration --> "m_FileIOProvider" IFileIO
+ProjectGeneration --> "m_GUIDProvider" IGUIDGenerator
+SolutionGuidGenerator o-> "mD5" MD5
+ProjectGeneration +-- ScriptingLanguage
+@enduml

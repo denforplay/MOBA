@@ -1,0 +1,32 @@
+@startuml
+enum ReflectionBakingCoverageModes {
+    FallbackToDirectReflection,
+    NoCheckAssumeFullCoverage,
+    FallbackToDirectReflectionWithWarning,
+}
+class TypeAnalyzer <<static>> {
+    + <<const>> ReflectionBakingGetInjectInfoMethodName : string = "__zenCreateInjectTypeInfo"
+    + <<const>> ReflectionBakingFactoryMethodName : string = "__zenCreate"
+    + <<const>> ReflectionBakingInjectMethodPrefix : string = "__zenInjectMethod"
+    + <<const>> ReflectionBakingFieldSetterPrefix : string = "__zenFieldSetter"
+    + <<const>> ReflectionBakingPropertySetterPrefix : string = "__zenPropertySetter"
+    + {static} ShouldAllowDuringValidation() : bool
+    + {static} ShouldAllowDuringValidation(type:Type) : bool
+    {static} ShouldAllowDuringValidationInternal(type:Type) : bool
+    + {static} HasInfo() : bool
+    + {static} HasInfo(type:Type) : bool
+    + {static} GetInfo() : InjectTypeInfo
+    + {static} GetInfo(type:Type) : InjectTypeInfo
+    + {static} TryGetInfo() : InjectTypeInfo
+    + {static} TryGetInfo(type:Type) : InjectTypeInfo
+    {static} GetInfoInternal(type:Type) : InjectTypeInfo
+    + {static} ShouldSkipTypeAnalysis(type:Type) : bool
+    {static} IsStaticType(type:Type) : bool
+    {static} CreateTypeInfoFromReflection(type:Type) : InjectTypeInfo
+}
+class "Dictionary`2"<T1,T2> {
+}
+TypeAnalyzer o-> "_typeInfo<Type,InjectTypeInfo>" "Dictionary`2"
+TypeAnalyzer o-> "_allowDuringValidation<Type,bool>" "Dictionary`2"
+TypeAnalyzer --> "ReflectionBakingCoverageMode" ReflectionBakingCoverageModes
+@enduml

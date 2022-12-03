@@ -1,0 +1,5 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} ToCoroutine(taskFactory:Func<UniTask>) : IEnumerator
+}
+@enduml

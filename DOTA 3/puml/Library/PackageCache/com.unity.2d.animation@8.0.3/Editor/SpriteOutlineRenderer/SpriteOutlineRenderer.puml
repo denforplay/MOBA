@@ -1,0 +1,34 @@
+@startuml
+class SpriteOutlineRenderer {
+    {static} <<readonly>> k_OutlineColorProperty : int
+    {static} <<readonly>> k_OutlineSizeProperty : int
+    {static} <<readonly>> k_AdjustLinearForGammaProperty : int
+    <<const>> k_ReferenceTextureSize : int = 1024
+    + SpriteOutlineRenderer(eventSystem:SkinningEvents)
+    + Dispose() : void
+    DrawEdgeOutline(edges:Vector2Int[], vertices:Vector3[], multMatrix:Matrix4x4, outlineSize:float, outlineColor:Color, adjustForGamma:float) : void
+    DrawMeshOutline(mesh:Mesh, spriteCache:SpriteCache, multMatrix:Matrix4x4, outlineSize:float, outlineColor:Color, adjustForGamma:float) : void
+    GenerateOutlineTexture(spriteCache:SpriteCache, reuseRT:RenderTexture) : Texture
+    {static} GetMesh(sprite:SpriteCache) : Mesh
+    {static} GenerateCircleMesh() : Mesh
+    OnMeshPreviewChanged(mesh:MeshPreviewCache) : void
+    OnSelectionChanged(spriteCache:SpriteCache) : void
+    DestroyMaterialsAndMeshes() : void
+    DestroyTextures() : void
+    AddOrUpdateMaskTexture(sprite:SpriteCache, regenerate:bool) : void
+    TryRegenerateMaskTexture(sprite:SpriteCache) : void
+}
+class OutlineRenderTexture {
+    + dirty : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+SpriteOutlineRenderer --> "m_OutlineMaterial" Material
+SpriteOutlineRenderer --> "m_BitMaskMaterial" Material
+SpriteOutlineRenderer --> "m_EdgeOutlineMaterial" Material
+SpriteOutlineRenderer --> "m_CircleMesh" Mesh
+SpriteOutlineRenderer o-> "m_OutlineTextureCache<string,OutlineRenderTexture>" "Dictionary`2"
+SpriteOutlineRenderer --> "m_EventSystem" SkinningEvents
+SpriteOutlineRenderer +-- OutlineRenderTexture
+OutlineRenderTexture --> "outlineTexture" Texture
+@enduml

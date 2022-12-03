@@ -1,0 +1,12 @@
+@startuml
+class SpriteLibraryPropertyString <<static>> {
+    + <<const>> overrideEntries : string = "m_OverrideEntries"
+    + <<const>> fromMain : string = "m_FromMain"
+    + <<const>> spriteOverride : string = "m_SpriteOverride"
+    + <<const>> sprite : string = "m_Sprite"
+    + <<const>> overrideEntryCount : string = "m_EntryOverrideCount"
+    + <<const>> name : string = "m_Name"
+    + <<const>> hash : string = "m_Hash"
+    + <<const>> categoryList : string = "m_CategoryList"
+}
+@enduml

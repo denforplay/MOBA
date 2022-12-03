@@ -1,0 +1,19 @@
+@startuml
+class StartModel {
+    +  <<event>> ProjectStatusChanged : Action<ProjectStatus> 
+    +  <<event>> StateChanged : Action 
+    + StartModel(provider:ISourceControlProvider)
+    + OnStart() : void
+    + OnStop() : void
+    + RestoreState(cache:IWindowCache) : void
+    + SaveState(cache:IWindowCache) : void
+    + RequestTurnOnService() : void
+    + ShowServicePage() : void
+    + ShowLoginPage() : void
+    + ShowNoSeatPage() : void
+    OnUpdatedProjectStatus(status:ProjectStatus) : void
+}
+IStartModel <|-- StartModel
+StartModel --> "m_Provider" ISourceControlProvider
+StartModel --> "ProjectStatus" ProjectStatus
+@enduml

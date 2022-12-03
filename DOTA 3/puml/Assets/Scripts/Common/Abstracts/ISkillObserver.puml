@@ -1,0 +1,7 @@
+@startuml
+interface ISkillObserver {
+     <<event>> OnSkillCalled : Action<Vector3> 
+     <<event>> OnObservedPositionChanged : Action<Vector3> 
+    ObserveSkill(cancellationToken:CancellationTokenSource) : UniTask
+}
+@enduml

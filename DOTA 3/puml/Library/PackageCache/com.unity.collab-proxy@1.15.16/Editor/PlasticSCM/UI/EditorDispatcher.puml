@@ -1,0 +1,8 @@
+@startuml
+class EditorDispatcher <<static>> {
+}
+class "Queue`1"<T> {
+}
+EditorDispatcher o-> "mDispatchQueue<Action>" "Queue`1"
+EditorDispatcher --> "mMainThread" Thread
+@enduml

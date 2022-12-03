@@ -1,0 +1,24 @@
+@startuml
+class StaticDelegateRegistry <<static>> <<partial>> {
+    + {static} Contains(returnType:Type, arguments:Type[]) : bool
+    + {static} TryFind(returnType:Type, arguments:Type[], staticDelegate:StaticDelegateCallback) : bool
+}
+class StaticDelegateCallback <<struct>> {
+    + StaticDelegateCallback(delegateType:Type, caller:Func<object, object[], object>)
+}
+class SignatureKey <<struct>> {
+    + SignatureKey(returnType:Type, parameterTypes:Type[])
+    + Equals(other:SignatureKey) : bool
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class "Func`3"<T1,T2,T3> {
+}
+class "IEquatable`1"<T> {
+}
+StaticDelegateCallback --> "DelegateType" Type
+StaticDelegateCallback --> "Caller<object,object[],object>" "Func`3"
+StaticDelegateRegistry +-- SignatureKey
+"IEquatable`1" "<SignatureKey>" <|-- SignatureKey
+SignatureKey --> "ReturnType" Type
+@enduml

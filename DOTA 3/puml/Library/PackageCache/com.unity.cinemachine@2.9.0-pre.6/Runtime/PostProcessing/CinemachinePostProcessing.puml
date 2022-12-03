@@ -1,0 +1,5 @@
+@startuml
+class CinemachinePostProcessing {
+}
+CinemachineExtension <|-- CinemachinePostProcessing
+@enduml

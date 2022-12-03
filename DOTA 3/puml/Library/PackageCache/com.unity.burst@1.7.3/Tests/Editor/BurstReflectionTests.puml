@@ -1,0 +1,76 @@
+@startuml
+class BurstReflectionTests {
+    + SetUp() : void
+    + CanGetAssemblyList() : void
+    + CanFindJobType(compileTargetName:string) : void
+    + ExcludesGenericMethods(compileTargetName:string) : void
+}
+class "GenericParallelForJob`1"<T> {
+}
+class MyJob <<struct>> {
+    + Execute() : void
+}
+class "MyGenericJob`1"<T> <<struct>> {
+    + Execute() : void
+}
+interface "IMyGenericJob`1"<T> {
+    Execute() : void
+}
+class "MyGenericJob2`1"<T> <<struct>> {
+    + Execute() : void
+}
+class "MyJobProducer`2"<TJob,T> <<static>> {
+    + {static} Execute(job:TJob) : void
+}
+class "MyGenericJob2Wrapper`2"<T1,T2> <<struct>> {
+}
+class NonGenericType <<struct>> {
+    + {static} TestMethod1() : void
+}
+class "GenericType`1"<T> <<struct>> {
+    + {static} TestMethod1() : void
+}
+class "MyGenericJobSeparateAssembly`1"<T> <<struct>> {
+    + Execute() : void
+}
+class GenericMethodContainer <<static>> {
+}
+class RegisterGenericJobTypeAttribute {
+    + RegisterGenericJobTypeAttribute(type:Type)
+}
+class "GenericParallelForJob`1"<T> <<struct>> {
+    + Execute(index:int) : void
+}
+class NestedNonGeneric {
+    + {static} TestMethod2() : void
+}
+class "NestedGeneric`1"<T2> {
+    + {static} TestMethod3() : void
+}
+class "IMyGenericJobSeparateAssembly`1"<T> {
+}
+BurstReflectionTests +-- MyJob
+IJob <|-- MyJob
+BurstReflectionTests +-- "MyGenericJob`1"
+IJob <|-- "MyGenericJob`1"
+BurstReflectionTests +-- "IMyGenericJob`1"
+BurstReflectionTests +-- "MyGenericJob2`1"
+"IMyGenericJob`1" "<T>" <|-- "MyGenericJob2`1"
+BurstReflectionTests +-- "MyJobProducer`2"
+BurstReflectionTests +-- "MyGenericJob2Wrapper`2"
+"MyGenericJob2Wrapper`2" --> "Job<T2>" "MyGenericJob2`1"
+BurstReflectionTests +-- NonGenericType
+BurstReflectionTests +-- "GenericType`1"
+"GenericType`1" --> "Delegate1" Action
+"GenericType`1" --> "Delegate2" Action
+"GenericType`1" --> "Delegate3" Action
+BurstReflectionTests +-- "MyGenericJobSeparateAssembly`1"
+BurstReflectionTests +-- GenericMethodContainer
+BurstReflectionTests +-- RegisterGenericJobTypeAttribute
+Attribute <|-- RegisterGenericJobTypeAttribute
+RegisterGenericJobTypeAttribute --> "ConcreteType" Type
+BurstReflectionTests +-- "GenericParallelForJob`1"
+IJobParallelFor <|-- "GenericParallelForJob`1"
+"GenericType`1" +-- NestedNonGeneric
+"GenericType`1" +-- "NestedGeneric`1"
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+class TestFixed {
+    + {static} <<unsafe>> ReadInts() : int
+    + {static} <<unsafe>> ReadIntsElement() : int
+    + {static} <<unsafe>> ReadStructs() : int
+    + {static} <<unsafe>> ReadStructsElement() : int
+    + {static} <<unsafe>> ReadFromFixedArray(s:SomeStruct) : ushort
+}
+class SomeStruct <<struct>> {
+    + <<fixed>> array : ushort
+}
+class OtherStruct <<struct>> {
+    + x : int
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+TestFixed +-- SomeStruct
+SomeStruct +-- OtherStruct
+SomeStruct +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

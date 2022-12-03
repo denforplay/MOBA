@@ -1,0 +1,19 @@
+@startuml
+class FormattedHelpLink {
+}
+class BuildFormattedHelp <<static>> {
+    {static} GetSegmentData(segment:object) : Segment.Data
+}
+class Segment <<static>> {
+    <<const>> TITLE_PREFIX : string = "<size=16>"
+    <<const>> TITLE_SUFFIX : string = "</size>"
+    <<const>> BOLD_PREFIX : string = "<b>"
+    <<const>> BOLD_SUFFIX : string = "</b>"
+    <<const>> ITALIC_PREFIX : string = "<i>"
+    <<const>> ITALIC_SUFFIX : string = "</i>"
+}
+class Data {
+}
+BuildFormattedHelp +-- Segment
+Segment +-- Data
+@enduml

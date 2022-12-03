@@ -1,0 +1,14 @@
+@startuml
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncStartTrigger(gameObject:GameObject) : AsyncStartTrigger
+    + {static} GetAsyncStartTrigger(component:Component) : AsyncStartTrigger
+}
+class AsyncStartTrigger <<sealed>> {
+    called : bool
+    Start() : void
+    + StartAsync() : UniTask
+}
+class "AsyncTriggerBase`1"<T> {
+}
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncStartTrigger
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class "FactoryProviderWrapper`1"<TContract> {
+    + FactoryProviderWrapper(provider:IProvider, injectContext:InjectContext)
+    + Create() : TContract
+}
+class "IFactory`1"<T> {
+}
+"IFactory`1" "<TContract>" <|-- "FactoryProviderWrapper`1"
+"FactoryProviderWrapper`1" --> "_provider" IProvider
+"FactoryProviderWrapper`1" --> "_injectContext" InjectContext
+@enduml

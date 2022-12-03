@@ -1,0 +1,8 @@
+@startuml
+interface IStateSerializer {
+    RestoreScriptableObjectInstance() : ScriptableObject
+    RestoreClassFromJson(instance:object) : void
+    CanRestoreFromJson(requestedType:Type) : bool
+    CanRestoreFromScriptableObject(requestedType:Type) : bool
+}
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+class PSDGameObjectPreviewData {
+    {static} s_SliderHash : int
+    m_Disposed : bool
+    m_PrefabAssetPath : string
+    m_ShowPivot : bool
+    + PSDGameObjectPreviewData(assetPrefab:GameObject, showPivot:bool, documentPivot:Rect)
+    {static} Drag2D(scrollPosition:Vector2, position:Rect) : Vector2
+    + DrawPreview(r:Rect, background:GUIStyle, offset:Vector2, showPivot:bool) : void
+    DoRenderPreview() : void
+    + {static} GetRenderableBounds(go:GameObject) : Bounds
+    + Dispose() : void
+}
+IDisposable <|-- PSDGameObjectPreviewData
+PSDGameObjectPreviewData --> "m_Texture" Texture
+PSDGameObjectPreviewData --> "m_RenderUtility" PreviewRenderUtility
+PSDGameObjectPreviewData o-> "m_PreviewRect" Rect
+PSDGameObjectPreviewData o-> "m_PreviewDir" Vector2
+PSDGameObjectPreviewData --> "m_PreviewObject" GameObject
+PSDGameObjectPreviewData --> "m_RenderableBounds" Bounds
+PSDGameObjectPreviewData --> "m_GameObjectOffset" Vector2
+PSDGameObjectPreviewData --> "m_PivotInstance" GameObject
+PSDGameObjectPreviewData --> "m_Root" GameObject
+PSDGameObjectPreviewData --> "m_DocumentPivot" Rect
+@enduml

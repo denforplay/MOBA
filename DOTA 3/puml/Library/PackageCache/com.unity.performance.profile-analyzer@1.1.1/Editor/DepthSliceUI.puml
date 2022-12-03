@@ -1,0 +1,30 @@
+@startuml
+class DepthSliceUI {
+    m_OldDepthRaw1 : int
+    m_OldDepthRaw2 : int
+    m_DepthFilter : int
+    + depthFilter : int <<get>>
+    m_DepthFilter1 : int
+    + depthFilter1 : int <<get>>
+    m_DepthFilter2 : int
+    + depthFilter2 : int <<get>>
+    m_DepthFilterAuto : bool = true
+    m_MostCommonDepthDiff : int = 0
+    mostCommonDepthDiff : int <<set>> <<get>>
+    UpdateAutoDepthTitleText() : void
+    + DepthSliceUI(updateActiveTabCallback:Action<bool>)
+    + OnEnable(updateActiveTabCallback:Action<bool>) : void
+    SetDepthStringsSingle(maxDepth:int, strings:string[], values:int[]) : void
+    SetDepthStringsCompare(maxDepth:int, strings:string[], values:int[], maxDepthRight:int) : void
+    CalcSliceMenuEntryIndex(filterDepthLeft:int, filterDepthRight:int, leftMax:int, rightMax:int) : int
+    CalcAutoSlicesFromMenuEntryIndex(depthSlcieMenuEntryIndex:int, filterDepthLeft:int, filterDepthRight:int, leftMax:int, rightMax:int) : void
+    ClampDepthFilterForAutoRespectingDiff(filterDepthLeft:int, filterDepthRight:int, profileLeftView:ProfileDataView, profileRightView:ProfileDataView) : void
+    CalculateDepthDifference(leftAnalysis:ProfileAnalysis, rightAnalysis:ProfileAnalysis, pairings:List<MarkerPairing>) : int
+    UpdateAutoDepthFilter(profileLeftView:ProfileDataView, profileRightView:ProfileDataView) : bool
+    + {static} DepthFilterToString(depthFilter:int) : string
+    + {static} DepthFilterToString(depthSliceLeft:int, depthSliceRight:int, leftIsMain:bool) : string
+}
+class "Action`1"<T> {
+}
+DepthSliceUI o-> "m_UpdateActiveTabCallback<bool>" "Action`1"
+@enduml

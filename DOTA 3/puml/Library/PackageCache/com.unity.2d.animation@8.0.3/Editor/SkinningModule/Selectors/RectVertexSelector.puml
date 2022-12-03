@@ -1,0 +1,13 @@
+@startuml
+class RectVertexSelector {
+    + Select() : void
+}
+class "IRectSelector`1"<T> {
+}
+class "ISelection`1"<T> {
+}
+"IRectSelector`1" "<int>" <|-- RectVertexSelector
+RectVertexSelector --> "selection<int>" "ISelection`1"
+RectVertexSelector --> "spriteMeshData" BaseSpriteMeshData
+RectVertexSelector --> "rect" Rect
+@enduml

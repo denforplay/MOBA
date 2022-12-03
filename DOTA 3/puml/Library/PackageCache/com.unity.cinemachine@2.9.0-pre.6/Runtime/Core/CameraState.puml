@@ -1,0 +1,55 @@
+@startuml
+class CameraState <<struct>> {
+    + HasLookAt : bool <<get>>
+    + ShotQuality : float
+    + NumCustomBlendables : int <<get>>
+    + GetCustomBlendable(index:int) : CustomBlendable
+    FindCustomBlendable(custom:Object) : int
+    + AddCustomBlendable(b:CustomBlendable) : void
+    + {static} Lerp(stateA:CameraState, stateB:CameraState, t:float) : CameraState
+    {static} InterpolateFOV(fovA:float, fovB:float, dA:float, dB:float, t:float) : float
+    {static} ApplyPosBlendHint(posA:Vector3, hintA:BlendHintValue, posB:Vector3, hintB:BlendHintValue, original:Vector3, blended:Vector3) : Vector3
+    {static} ApplyRotBlendHint(rotA:Quaternion, hintA:BlendHintValue, rotB:Quaternion, hintB:BlendHintValue, original:Quaternion, blended:Quaternion) : Quaternion
+    InterpolatePosition(posA:Vector3, pivotA:Vector3, posB:Vector3, pivotB:Vector3, t:float) : Vector3
+}
+enum BlendHintValue {
+    Nothing= 0,
+    NoPosition= 1,
+    NoOrientation= 2,
+    NoTransform= NoPosition | NoOrientation,
+    SphericalPositionBlend= 4,
+    CylindricalPositionBlend= 8,
+    RadialAimBlend= 16,
+    IgnoreLookAtTarget= 32,
+    NoLens= 64,
+}
+class CustomBlendable <<struct>> {
+    + m_Weight : float
+    + CustomBlendable(custom:Object, weight:float)
+}
+class "List`1"<T> {
+}
+CameraState --> "Lens" LensSettings
+CameraState --> "ReferenceUp" Vector3
+CameraState --> "ReferenceLookAt" Vector3
+CameraState o-> "kNoPoint" Vector3
+CameraState --> "RawPosition" Vector3
+CameraState --> "RawOrientation" Quaternion
+CameraState --> "PositionDampingBypass" Vector3
+CameraState --> "PositionCorrection" Vector3
+CameraState --> "OrientationCorrection" Quaternion
+CameraState --> "CorrectedPosition" Vector3
+CameraState --> "CorrectedOrientation" Quaternion
+CameraState --> "FinalPosition" Vector3
+CameraState --> "FinalOrientation" Quaternion
+CameraState --> "BlendHint" BlendHintValue
+CameraState --> "Default" CameraState
+CameraState --> "mCustom0" CustomBlendable
+CameraState --> "mCustom1" CustomBlendable
+CameraState --> "mCustom2" CustomBlendable
+CameraState --> "mCustom3" CustomBlendable
+CameraState --> "m_CustomOverflow<CustomBlendable>" "List`1"
+CameraState +-- BlendHintValue
+CameraState +-- CustomBlendable
+CustomBlendable --> "m_Custom" Object
+@enduml

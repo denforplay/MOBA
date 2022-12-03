@@ -1,0 +1,41 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} DefaultIfEmpty(source:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DefaultIfEmpty(source:IUniTaskAsyncEnumerable<TSource>, defaultValue:TSource) : IUniTaskAsyncEnumerable<TSource>
+}
+class "DefaultIfEmpty`1"<TSource> <<sealed>> {
+    <<readonly>> defaultValue : TSource
+    + DefaultIfEmpty(source:IUniTaskAsyncEnumerable<TSource>, defaultValue:TSource)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _DefaultIfEmpty <<sealed>> {
+    + _DefaultIfEmpty(source:IUniTaskAsyncEnumerable<TSource>, defaultValue:TSource, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    {static} MoveNextCore(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+enum IteratingState {
+    Empty,
+    Iterating,
+    Completed,
+}
+class "Action`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "DefaultIfEmpty`1"
+"DefaultIfEmpty`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"DefaultIfEmpty`1" +-- _DefaultIfEmpty
+MoveNextSource <|-- _DefaultIfEmpty
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _DefaultIfEmpty
+_DefaultIfEmpty o-> "MoveNextCoreDelegate<object>" "Action`1"
+_DefaultIfEmpty --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_DefaultIfEmpty --> "defaultValue" TSource
+_DefaultIfEmpty --> "cancellationToken" CancellationToken
+_DefaultIfEmpty --> "iteratingState" IteratingState
+_DefaultIfEmpty --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_DefaultIfEmpty --> "Current" TSource
+_DefaultIfEmpty +-- IteratingState
+@enduml

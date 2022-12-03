@@ -1,0 +1,56 @@
+@startuml
+class TMP_SpriteAssetEditor {
+    m_moveToIndex : int
+    m_selectedElement : int
+    m_CurrentCharacterPage : int
+    m_CurrentGlyphPage : int
+    <<const>> k_UndoRedo : string = "UndoRedoPerformed"
+    m_CharacterSearchPattern : string
+    m_IsCharacterSearchDirty : bool
+    m_GlyphSearchPattern : string
+    m_IsGlyphSearchDirty : bool
+    isAssetDirty : bool
+    m_xOffset : float
+    m_yOffset : float
+    m_xAdvance : float
+    m_scale : float
+    + OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+    DisplayPageNavigation(currentPage:int, arraySize:int, itemsPerPage:int) : void
+    UpdateGlobalProperty(property:string, value:float) : void
+    SwapCharacterElements(selectedIndex:int, newIndex:int) : void
+    MoveCharacterToIndex(selectedIndex:int, newIndex:int) : void
+    SwapGlyphElements(selectedIndex:int, newIndex:int) : void
+    MoveGlyphToIndex(selectedIndex:int, newIndex:int) : void
+    CopyCharacterSerializedProperty(source:SerializedProperty, target:SerializedProperty) : void
+    CopyGlyphSerializedProperty(srcGlyph:SerializedProperty, dstGlyph:SerializedProperty) : void
+    SearchCharacterTable(searchPattern:string, searchResults:List<int>) : void
+    SearchGlyphTable(searchPattern:string, searchResults:List<int>) : void
+}
+class UI_PanelState <<struct>> {
+    + {static} spriteAssetFaceInfoPanel : bool = true
+    + {static} spriteAtlasInfoPanel : bool = true
+    + {static} fallbackSpriteAssetPanel : bool = true
+    + {static} spriteCharacterTablePanel : bool
+    + {static} spriteGlyphTablePanel : bool
+}
+class "List`1"<T> {
+}
+Editor <|-- TMP_SpriteAssetEditor
+TMP_SpriteAssetEditor --> "m_CharacterSearchList<int>" "List`1"
+TMP_SpriteAssetEditor --> "m_GlyphSearchList<int>" "List`1"
+TMP_SpriteAssetEditor --> "m_FaceInfoProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_PointSizeProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_ScaleProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_LineHeightProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_AscentLineProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_BaselineProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_DescentLineProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_spriteAtlas_prop" SerializedProperty
+TMP_SpriteAssetEditor --> "m_material_prop" SerializedProperty
+TMP_SpriteAssetEditor --> "m_SpriteCharacterTableProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_SpriteGlyphTableProperty" SerializedProperty
+TMP_SpriteAssetEditor --> "m_fallbackSpriteAssetList" ReorderableList
+TMP_SpriteAssetEditor --> "m_SpriteAsset" TMP_SpriteAsset
+TMP_SpriteAssetEditor +-- UI_PanelState
+@enduml

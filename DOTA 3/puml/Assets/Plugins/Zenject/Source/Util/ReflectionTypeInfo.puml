@@ -1,0 +1,43 @@
+@startuml
+class ReflectionTypeInfo {
+    + ReflectionTypeInfo(type:Type, baseType:Type, injectConstructor:InjectConstructorInfo, injectMethods:List<InjectMethodInfo>, injectFields:List<InjectFieldInfo>, injectProperties:List<InjectPropertyInfo>)
+}
+class "List`1"<T> {
+}
+class InjectFieldInfo {
+    + InjectFieldInfo(fieldInfo:FieldInfo, injectableInfo:InjectableInfo)
+}
+class InjectParameterInfo {
+    + InjectParameterInfo(parameterInfo:ParameterInfo, injectableInfo:InjectableInfo)
+}
+class InjectPropertyInfo {
+    + InjectPropertyInfo(propertyInfo:PropertyInfo, injectableInfo:InjectableInfo)
+}
+class InjectMethodInfo {
+    + InjectMethodInfo(methodInfo:MethodInfo, parameters:List<InjectParameterInfo>)
+}
+class InjectConstructorInfo {
+    + InjectConstructorInfo(constructorInfo:ConstructorInfo, parameters:List<InjectParameterInfo>)
+}
+ReflectionTypeInfo --> "Type" Type
+ReflectionTypeInfo --> "BaseType" Type
+ReflectionTypeInfo --> "InjectProperties<InjectPropertyInfo>" "List`1"
+ReflectionTypeInfo --> "InjectFields<InjectFieldInfo>" "List`1"
+ReflectionTypeInfo --> "InjectConstructor" InjectConstructorInfo
+ReflectionTypeInfo --> "InjectMethods<InjectMethodInfo>" "List`1"
+ReflectionTypeInfo +-- InjectFieldInfo
+InjectFieldInfo --> "FieldInfo" FieldInfo
+InjectFieldInfo --> "InjectableInfo" InjectableInfo
+ReflectionTypeInfo +-- InjectParameterInfo
+InjectParameterInfo --> "ParameterInfo" ParameterInfo
+InjectParameterInfo --> "InjectableInfo" InjectableInfo
+ReflectionTypeInfo +-- InjectPropertyInfo
+InjectPropertyInfo --> "PropertyInfo" PropertyInfo
+InjectPropertyInfo --> "InjectableInfo" InjectableInfo
+ReflectionTypeInfo +-- InjectMethodInfo
+InjectMethodInfo --> "MethodInfo" MethodInfo
+InjectMethodInfo --> "Parameters<InjectParameterInfo>" "List`1"
+ReflectionTypeInfo +-- InjectConstructorInfo
+InjectConstructorInfo --> "ConstructorInfo" ConstructorInfo
+InjectConstructorInfo --> "Parameters<InjectParameterInfo>" "List`1"
+@enduml

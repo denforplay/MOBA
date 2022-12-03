@@ -1,0 +1,15 @@
+@startuml
+interface IMainView {
+    AddAlert(id:string, level:AlertBox.AlertLevel, message:string, button:(string text, Action action)?) : void
+    RemoveAlert(id:string) : void
+    SetTab(index:int) : void
+    AddOperationProgress() : void
+    RemoveOperationProgress() : void
+    SetOperationProgress(title:string, details:string, percentage:int, completed:int, total:int, isPercentage:bool, canCancel:bool) : void
+    ClearBackNavigation() : void
+    DisplayBackNavigation(text:string) : void
+}
+class "IView`1"<T> {
+}
+"IView`1" "<IMainPresenter>" <|-- IMainView
+@enduml

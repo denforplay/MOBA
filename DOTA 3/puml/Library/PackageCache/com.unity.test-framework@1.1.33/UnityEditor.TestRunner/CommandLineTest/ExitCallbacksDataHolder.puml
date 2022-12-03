@@ -1,0 +1,9 @@
+@startuml
+class ExitCallbacksDataHolder {
+    + AnyTestsExecuted : bool
+    + RunFailed : bool
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<ExitCallbacksDataHolder>" <|-- ExitCallbacksDataHolder
+@enduml

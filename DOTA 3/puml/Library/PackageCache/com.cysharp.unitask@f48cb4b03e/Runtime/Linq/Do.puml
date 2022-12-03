@@ -1,0 +1,43 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Do(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Do(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onError:Action<Exception>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Do(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onCompleted:Action) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Do(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onError:Action<Exception>, onCompleted:Action) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Do(source:IUniTaskAsyncEnumerable<TSource>, observer:IObserver<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "Do`1"<TSource> <<sealed>> {
+    + Do(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onError:Action<Exception>, onCompleted:Action)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "Action`1"<T> {
+}
+class _Do <<sealed>> {
+    + _Do(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onError:Action<Exception>, onCompleted:Action, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    CallTrySetExceptionAfterNotification(ex:Exception) : void
+    TryGetResultWithNotification(awaiter:UniTask<T>.Awaiter, result:T) : bool
+    {static} MoveNextCore(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Do`1"
+"Do`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"Do`1" --> "onNext<TSource>" "Action`1"
+"Do`1" --> "onError<Exception>" "Action`1"
+"Do`1" --> "onCompleted" Action
+"Do`1" +-- _Do
+MoveNextSource <|-- _Do
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _Do
+_Do o-> "MoveNextCoreDelegate<object>" "Action`1"
+_Do --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_Do --> "onNext<TSource>" "Action`1"
+_Do --> "onError<Exception>" "Action`1"
+_Do --> "onCompleted" Action
+_Do --> "cancellationToken" CancellationToken
+_Do --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_Do --> "Current" TSource
+@enduml

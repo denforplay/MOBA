@@ -1,0 +1,20 @@
+@startuml
+class CoveragePreferences {
+}
+class CoveragePreferencesImplementation {
+    + CoveragePreferencesImplementation(packageName:string)
+    + GetBool(key:string, defaultValue:bool, scope:SettingsScope) : bool
+    + GetInt(key:string, defaultValue:int, scope:SettingsScope) : int
+    + GetStringForPaths(key:string, defaultValue:string, scope:SettingsScope) : string
+    + GetString(key:string, defaultValue:string, scope:SettingsScope) : string
+    + SetBool(key:string, value:bool, scope:SettingsScope) : void
+    + SetInt(key:string, value:int, scope:SettingsScope) : void
+    + SetStringForPaths(key:string, value:string, scope:SettingsScope) : void
+    + SetString(key:string, value:string, scope:SettingsScope) : void
+    + DeleteBool(key:string, scope:SettingsScope) : void
+    + DeleteInt(key:string, scope:SettingsScope) : void
+    + DeleteString(key:string, scope:SettingsScope) : void
+}
+CoveragePreferencesImplementation <|-- CoveragePreferences
+CoveragePreferences --> "instance" CoveragePreferences
+@enduml

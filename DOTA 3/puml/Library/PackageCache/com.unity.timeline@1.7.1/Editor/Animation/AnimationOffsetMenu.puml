@@ -1,0 +1,7 @@
+@startuml
+class AnimationOffsetMenu <<static>> {
+    + {static} MatchFieldsPrefix : string
+    {static} EnforcePreviewMode() : bool
+    + {static} ResetClipOffsets(clips:TimelineClip[]) : void
+}
+@enduml

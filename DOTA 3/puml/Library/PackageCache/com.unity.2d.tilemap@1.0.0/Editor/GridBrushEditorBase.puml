@@ -1,0 +1,21 @@
+@startuml
+class GridBrushEditorBase {
+    + <<virtual>> canChangeZPosition : bool <<get>> <<set>>
+    + <<virtual>> OnPaintSceneGUI(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt, tool:GridBrushBase.Tool, executing:bool) : void
+    + <<virtual>> OnPaintInspectorGUI() : void
+    + <<virtual>> OnSelectionInspectorGUI() : void
+    + <<virtual>> OnSelectionSceneGUI(gridLayout:GridLayout, brushTarget:GameObject) : void
+    + <<virtual>> OnSceneGUI(gridLayout:GridLayout, brushTarget:GameObject) : void
+    + <<virtual>> OnMouseLeave() : void
+    + <<virtual>> OnMouseEnter() : void
+    + <<virtual>> OnToolActivated(tool:GridBrushBase.Tool) : void
+    + <<virtual>> OnToolDeactivated(tool:GridBrushBase.Tool) : void
+    + <<virtual>> RegisterUndo(brushTarget:GameObject, tool:GridBrushBase.Tool) : void
+}
+class Styles <<static>> {
+}
+Editor <|-- GridBrushEditorBase
+GridBrushEditorBase +-- Styles
+Styles o-> "activeColor" Color
+Styles o-> "executingColor" Color
+@enduml

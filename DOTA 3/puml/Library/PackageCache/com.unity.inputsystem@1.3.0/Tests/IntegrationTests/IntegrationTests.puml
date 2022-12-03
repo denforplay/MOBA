@@ -1,0 +1,6 @@
+@startuml
+class IntegrationTests {
+    + {static} PreserveMethods() : void
+    + Integration_CanSendAndReceiveEvents() : void
+}
+@enduml

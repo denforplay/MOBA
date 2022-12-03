@@ -1,0 +1,78 @@
+@startuml
+class SliderData <<struct>> {
+}
+interface IGUIWrapper {
+    mouseButton : int <<get>>
+    clickCount : int <<get>>
+    isShiftDown : bool <<get>>
+    isAltDown : bool <<get>>
+    isActionKeyDown : bool <<get>>
+    commandName : string <<get>>
+    IsMouseDown(button:int) : bool
+    IsMouseUp(button:int) : bool
+    IsKeyDown(keyCode:KeyCode) : bool
+    GetControlID(hint:int, focusType:FocusType) : int
+    LayoutControl(controlID:int, distance:float) : void
+    IsControlNearest(controlID:int) : bool
+    IsControlHot(controlID:int) : bool
+    IsMultiStepControlHot(controlID:int) : bool
+    SetControlHot(controlID:int) : void
+    SetMultiStepControlHot(controlID:int) : void
+    DoSlider(id:int, sliderData:SliderData, newPosition:Vector3) : bool
+    UseCurrentEvent() : void
+    DistanceToSegment(p1:Vector3, p2:Vector3) : float
+    DistanceToSegmentClamp(p1:Vector3, p2:Vector3) : float
+    DistanceToCircle(center:Vector3, radius:float) : float
+    GUIToWorld(guiPosition:Vector2) : Vector3
+    GUIToWorld(guiPosition:Vector2, planeNormal:Vector3, planePosition:Vector3) : Vector3
+    Repaint() : void
+    IsRepainting() : bool
+    IsEventOutsideWindow() : bool
+    SetGuiChanged(changed:bool) : void
+    GetHandleSize(position:Vector3) : float
+    IsViewToolActive() : bool
+    HasCurrentCamera() : bool
+}
+class GUIWrapper {
+    + mouseButton : int <<get>>
+    + clickCount : int <<get>>
+    + isShiftDown : bool <<get>>
+    + isAltDown : bool <<get>>
+    + isActionKeyDown : bool <<get>>
+    + commandName : string <<get>>
+    + IsMouseDown(button:int) : bool
+    + IsMouseUp(button:int) : bool
+    + IsKeyDown(keyCode:KeyCode) : bool
+    + GetControlID(hint:int, focusType:FocusType) : int
+    + LayoutControl(controlID:int, distance:float) : void
+    + IsControlNearest(controlID:int) : bool
+    + IsControlHot(controlID:int) : bool
+    + IsMultiStepControlHot(controlID:int) : bool
+    + SetControlHot(controlID:int) : void
+    + SetMultiStepControlHot(controlID:int) : void
+    + DoSlider(id:int, sliderData:SliderData, newPosition:Vector3) : bool
+    + UseCurrentEvent() : void
+    + DistanceToSegment(p1:Vector3, p2:Vector3) : float
+    + DistanceToSegmentClamp(p1:Vector3, p2:Vector3) : float
+    + DistanceToCircle(center:Vector3, radius:float) : float
+    + GUIToWorld(guiPosition:Vector2) : Vector3
+    + GUIToWorld(guiPosition:Vector2, planeNormal:Vector3, planePosition:Vector3) : Vector3
+    + Repaint() : void
+    + IsRepainting() : bool
+    + SetGuiChanged(changed:bool) : void
+    + IsEventOutsideWindow() : bool
+    + GetHandleSize(position:Vector3) : float
+    + IsViewToolActive() : bool
+    + HasCurrentCamera() : bool
+}
+SliderData --> "position" Vector3
+SliderData --> "forward" Vector3
+SliderData --> "up" Vector3
+SliderData --> "right" Vector3
+SliderData o-> "zero" SliderData
+IGUIWrapper --> "mousePosition" Vector2
+IGUIWrapper --> "eventType" EventType
+IGUIWrapper <|-- GUIWrapper
+GUIWrapper --> "mousePosition" Vector2
+GUIWrapper --> "eventType" EventType
+@enduml

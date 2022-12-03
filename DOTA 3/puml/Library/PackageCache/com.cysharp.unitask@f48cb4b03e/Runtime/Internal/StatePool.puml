@@ -1,0 +1,45 @@
+@startuml
+class StateTuple <<static>> {
+    + {static} Create(item1:T1) : StateTuple<T1>
+    + {static} Create(item1:T1, item2:T2) : StateTuple<T1, T2>
+    + {static} Create(item1:T1, item2:T2, item3:T3) : StateTuple<T1, T2, T3>
+}
+class "StateTuple`1"<T1> {
+    + Item1 : T1
+    + Deconstruct(item1:T1) : void
+    + Dispose() : void
+}
+class "StatePool`1"<T1> <<static>> {
+    + {static} Create(item1:T1) : StateTuple<T1>
+    + {static} Return(tuple:StateTuple<T1>) : void
+}
+class "StateTuple`2"<T1,T2> {
+    + Item1 : T1
+    + Item2 : T2
+    + Deconstruct(item1:T1, item2:T2) : void
+    + Dispose() : void
+}
+class "StatePool`2"<T1,T2> <<static>> {
+    + {static} Create(item1:T1, item2:T2) : StateTuple<T1, T2>
+    + {static} Return(tuple:StateTuple<T1, T2>) : void
+}
+class "StateTuple`3"<T1,T2,T3> {
+    + Item1 : T1
+    + Item2 : T2
+    + Item3 : T3
+    + Deconstruct(item1:T1, item2:T2, item3:T3) : void
+    + Dispose() : void
+}
+class "StatePool`3"<T1,T2,T3> <<static>> {
+    + {static} Create(item1:T1, item2:T2, item3:T3) : StateTuple<T1, T2, T3>
+    + {static} Return(tuple:StateTuple<T1, T2, T3>) : void
+}
+class "ConcurrentQueue`1"<T> {
+}
+IDisposable <|-- "StateTuple`1"
+"StatePool`1" o-> "queue<StateTuple<T1>>" "ConcurrentQueue`1"
+IDisposable <|-- "StateTuple`2"
+"StatePool`2" o-> "queue<StateTuple<T1, T2>>" "ConcurrentQueue`1"
+IDisposable <|-- "StateTuple`3"
+"StatePool`3" o-> "queue<StateTuple<T1, T2, T3>>" "ConcurrentQueue`1"
+@enduml

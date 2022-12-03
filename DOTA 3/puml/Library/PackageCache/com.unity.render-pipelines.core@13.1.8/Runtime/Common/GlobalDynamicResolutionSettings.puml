@@ -1,0 +1,31 @@
+@startuml
+enum DynamicResolutionType {
+    Software,
+    Hardware,
+}
+enum DynamicResUpscaleFilter {
+    Bilinear,
+    CatmullRom,
+    Lanczos,
+    ContrastAdaptiveSharpen,
+    EdgeAdaptiveScalingUpres,
+    TAAU,
+}
+class GlobalDynamicResolutionSettings <<struct>> {
+    + {static} NewDefault() : GlobalDynamicResolutionSettings
+    + enabled : bool
+    + useMipBias : bool
+    + enableDLSS : bool
+    + DLSSPerfQualitySetting : uint
+    + DLSSUseOptimalSettings : bool
+    + DLSSSharpness : float
+    + maxPercentage : float
+    + minPercentage : float
+    + forceResolution : bool
+    + forcedPercentage : float
+    + lowResTransparencyMinimumThreshold : float
+    + rayTracingHalfResThreshold : float
+}
+GlobalDynamicResolutionSettings --> "dynResType" DynamicResolutionType
+GlobalDynamicResolutionSettings --> "upsampleFilter" DynamicResUpscaleFilter
+@enduml

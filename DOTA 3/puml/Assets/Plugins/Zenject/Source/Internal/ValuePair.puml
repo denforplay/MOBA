@@ -1,0 +1,37 @@
+@startuml
+class "ValuePair`2"<T1,T2> {
+    + <<readonly>> First : T1
+    + <<readonly>> Second : T2
+    + ValuePair()
+    + ValuePair(first:T1, second:T2)
+    + <<override>> Equals(obj:Object) : bool
+    + Equals(that:ValuePair<T1, T2>) : bool
+    + <<override>> GetHashCode() : int
+}
+class "ValuePair`3"<T1,T2,T3> {
+    + <<readonly>> First : T1
+    + <<readonly>> Second : T2
+    + <<readonly>> Third : T3
+    + ValuePair()
+    + ValuePair(first:T1, second:T2, third:T3)
+    + <<override>> Equals(obj:Object) : bool
+    + Equals(that:ValuePair<T1, T2, T3>) : bool
+    + <<override>> GetHashCode() : int
+}
+class "ValuePair`4"<T1,T2,T3,T4> {
+    + <<readonly>> First : T1
+    + <<readonly>> Second : T2
+    + <<readonly>> Third : T3
+    + <<readonly>> Fourth : T4
+    + ValuePair()
+    + ValuePair(first:T1, second:T2, third:T3, fourth:T4)
+    + <<override>> Equals(obj:Object) : bool
+    + Equals(that:ValuePair<T1, T2, T3, T4>) : bool
+    + <<override>> GetHashCode() : int
+}
+class ValuePair <<static>> {
+    + {static} New(first:T1, second:T2) : ValuePair<T1, T2>
+    + {static} New(first:T1, second:T2, third:T3) : ValuePair<T1, T2, T3>
+    + {static} New(first:T1, second:T2, third:T3, fourth:T4) : ValuePair<T1, T2, T3, T4>
+}
+@enduml

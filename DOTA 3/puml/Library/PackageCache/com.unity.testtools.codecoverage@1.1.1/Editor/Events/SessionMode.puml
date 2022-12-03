@@ -1,0 +1,6 @@
+@startuml
+enum SessionMode {
+    TestRunner= 0,
+    Recording= 1,
+}
+@enduml

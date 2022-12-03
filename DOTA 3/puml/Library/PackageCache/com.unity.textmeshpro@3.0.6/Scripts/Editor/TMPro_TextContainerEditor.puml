@@ -1,0 +1,9 @@
+@startuml
+class TMPro_TextContainerEditor {
+    OnEnable() : void
+    OnDisable() : void
+    + <<override>> OnInspectorGUI() : void
+    GetAnchorPosition(index:int) : Vector2
+}
+Editor <|-- TMPro_TextContainerEditor
+@enduml

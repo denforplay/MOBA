@@ -1,0 +1,98 @@
+@startuml
+interface IStateMachineRunner {
+    Return() : void
+}
+interface IStateMachineRunnerPromise {
+    SetResult() : void
+    SetException(exception:Exception) : void
+}
+interface "IStateMachineRunnerPromise`1"<T> {
+    SetResult(result:T) : void
+    SetException(exception:Exception) : void
+}
+class StateMachineUtility <<static>> {
+    + {static} GetState(stateMachine:IAsyncStateMachine) : int
+}
+class "AsyncUniTaskVoid`1"<TStateMachine> <<sealed>> {
+    stateMachine : TStateMachine
+    + AsyncUniTaskVoid()
+    + {static} SetStateMachine(stateMachine:TStateMachine, runnerFieldRef:IStateMachineRunner) : void
+    {static} AsyncUniTaskVoid()
+    + Return() : void
+    Run() : void
+    GetStatus(token:short) : UniTaskStatus
+    UnsafeGetStatus() : UniTaskStatus
+    OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    GetResult(token:short) : void
+}
+class "AsyncUniTask`1"<TStateMachine> <<sealed>> {
+    stateMachine : TStateMachine
+    AsyncUniTask()
+    + {static} SetStateMachine(stateMachine:TStateMachine, runnerPromiseFieldRef:IStateMachineRunnerPromise) : void
+    {static} AsyncUniTask()
+    Return() : void
+    TryReturn() : bool
+    Run() : void
+    + SetResult() : void
+    + SetException(exception:Exception) : void
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class "AsyncUniTask`2"<TStateMachine,T> <<sealed>> {
+    stateMachine : TStateMachine
+    AsyncUniTask()
+    + {static} SetStateMachine(stateMachine:TStateMachine, runnerPromiseFieldRef:IStateMachineRunnerPromise<T>) : void
+    {static} AsyncUniTask()
+    Return() : void
+    TryReturn() : bool
+    Run() : void
+    + SetResult(result:T) : void
+    + SetException(exception:Exception) : void
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class "IUniTaskSource`1"<T> {
+}
+class "UniTask`1"<T> {
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+IStateMachineRunner --> "MoveNext" Action
+IUniTaskSource <|-- IStateMachineRunnerPromise
+IStateMachineRunnerPromise --> "MoveNext" Action
+IStateMachineRunnerPromise --> "Task" UniTask
+"IUniTaskSource`1" "<T>" <|-- "IStateMachineRunnerPromise`1"
+"IStateMachineRunnerPromise`1" --> "MoveNext" Action
+"IStateMachineRunnerPromise`1" --> "Task<T>" "UniTask`1"
+IStateMachineRunner <|-- "AsyncUniTaskVoid`1"
+"ITaskPoolNode`1" "<AsyncUniTaskVoid<TStateMachine>>" <|-- "AsyncUniTaskVoid`1"
+IUniTaskSource <|-- "AsyncUniTaskVoid`1"
+"AsyncUniTaskVoid`1" --> "pool<AsyncUniTaskVoid<TStateMachine>>" "TaskPool`1"
+"AsyncUniTaskVoid`1" --> "MoveNext" Action
+"AsyncUniTaskVoid`1" --> "nextNode<TStateMachine>" "AsyncUniTaskVoid`1"
+IStateMachineRunnerPromise <|-- "AsyncUniTask`1"
+IUniTaskSource <|-- "AsyncUniTask`1"
+"ITaskPoolNode`1" "<AsyncUniTask<TStateMachine>>" <|-- "AsyncUniTask`1"
+"AsyncUniTask`1" --> "pool<AsyncUniTask<TStateMachine>>" "TaskPool`1"
+"AsyncUniTask`1" --> "MoveNext" Action
+"AsyncUniTask`1" --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+"AsyncUniTask`1" --> "nextNode<TStateMachine>" "AsyncUniTask`1"
+"AsyncUniTask`1" --> "Task" UniTask
+"IStateMachineRunnerPromise`1" "<T>" <|-- "AsyncUniTask`2"
+"IUniTaskSource`1" "<T>" <|-- "AsyncUniTask`2"
+"ITaskPoolNode`1" "<AsyncUniTask<TStateMachine, T>>" <|-- "AsyncUniTask`2"
+"AsyncUniTask`2" --> "pool<AsyncUniTask<TStateMachine, T>>" "TaskPool`1"
+"AsyncUniTask`2" --> "MoveNext" Action
+"AsyncUniTask`2" --> "core<T>" "UniTaskCompletionSourceCore`1"
+"AsyncUniTask`2" --> "nextNode<TStateMachine,T>" "AsyncUniTask`2"
+"AsyncUniTask`2" --> "Task<T>" "UniTask`1"
+@enduml

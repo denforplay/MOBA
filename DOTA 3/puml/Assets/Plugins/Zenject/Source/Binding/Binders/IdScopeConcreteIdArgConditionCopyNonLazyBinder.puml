@@ -1,0 +1,7 @@
+@startuml
+class IdScopeConcreteIdArgConditionCopyNonLazyBinder {
+    + IdScopeConcreteIdArgConditionCopyNonLazyBinder(bindInfo:BindInfo)
+    + WithId(identifier:object) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+ScopeConcreteIdArgConditionCopyNonLazyBinder <|-- IdScopeConcreteIdArgConditionCopyNonLazyBinder
+@enduml

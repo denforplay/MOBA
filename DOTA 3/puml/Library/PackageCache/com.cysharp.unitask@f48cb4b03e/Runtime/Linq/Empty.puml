@@ -1,0 +1,24 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Empty() : IUniTaskAsyncEnumerable<T>
+}
+class "Empty`1"<T> {
+    Empty()
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Empty {
+    _Empty()
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "Empty`1"
+"Empty`1" o-> "Instance<T>" "IUniTaskAsyncEnumerable`1"
+"Empty`1" +-- _Empty
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- _Empty
+_Empty o-> "Instance<T>" "IUniTaskAsyncEnumerator`1"
+_Empty --> "Current" T
+@enduml

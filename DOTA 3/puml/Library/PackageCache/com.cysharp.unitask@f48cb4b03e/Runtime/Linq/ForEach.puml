@@ -1,0 +1,20 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ForEachAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Action<TSource>, cancellationToken:CancellationToken) : UniTask
+    + {static} ForEachAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Action<TSource, Int32>, cancellationToken:CancellationToken) : UniTask
+    + {static} ForEachAsync(source:IUniTaskAsyncEnumerable<T>, action:Func<T, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} ForEachAsync(source:IUniTaskAsyncEnumerable<T>, action:Func<T, int, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} ForEachAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} ForEachAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, Int32, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} ForEachAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, CancellationToken, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} ForEachAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, Int32, CancellationToken, UniTask>, cancellationToken:CancellationToken) : UniTask
+}
+class ForEach <<static>> {
+    + {static} <<async>> ForEachAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Action<TSource>, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> ForEachAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Action<TSource, Int32>, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> ForEachAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> ForEachAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, Int32, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> ForEachAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, CancellationToken, UniTask>, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> ForEachAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, Int32, CancellationToken, UniTask>, cancellationToken:CancellationToken) : UniTask
+}
+@enduml

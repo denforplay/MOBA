@@ -1,0 +1,6 @@
+@startuml
+class ProjectileFactoryRequirement {
+}
+IFactoryRequirement <|-- ProjectileFactoryRequirement
+ProjectileFactoryRequirement --> "ProjectileType" ProjectileType
+@enduml

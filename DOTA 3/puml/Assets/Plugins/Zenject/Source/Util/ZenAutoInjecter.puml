@@ -1,0 +1,18 @@
+@startuml
+class ZenAutoInjecter {
+    _hasInjected : bool
+    + Construct() : void
+    + Awake() : void
+    LookupContainer() : DiContainer
+    GetContainerForCurrentScene() : DiContainer
+}
+enum ContainerSources {
+    SceneContext,
+    ProjectContext,
+    SearchHierarchy,
+}
+MonoBehaviour <|-- ZenAutoInjecter
+ZenAutoInjecter o-> "_containerSource" ContainerSources
+ZenAutoInjecter --> "ContainerSource" ContainerSources
+ZenAutoInjecter +-- ContainerSources
+@enduml

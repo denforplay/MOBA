@@ -18,6 +18,7 @@ namespace Models.Skills.Skills
 
         public override async UniTask Apply(Vector3 position)
         {
+            _character.ChangeMana(-_skillConfiguration.ManaCost);
             var hitDirection = (position - _character.NavMeshAgent.transform.position).normalized;
             float distance = Vector3.Distance(position, _character.NavMeshAgent.transform.position);
             distance = Mathf.Min(distance, _skillConfiguration.Range);

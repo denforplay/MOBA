@@ -1,0 +1,41 @@
+@startuml
+class PivotInspectorPanel {
+}
+class PivotTool {
+    m_SlideHashCode : int
+    {static} CanSelectWhileInPivotTool() : bool
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    PivotAlignmentValueChange(evt:ChangeEvent<Enum>) : void
+    PivotPositionValueChange(evt:ChangeEvent<Vector2>) : void
+    UpdateCharacterPivot() : void
+    UpdateViewFields() : void
+    TranslatePivotPoint(pivot:Vector2, alignment:SpriteAlignment) : void
+    GetPivotPoint(alignment:SpriteAlignment, customPivot:Vector2) : Vector2
+    PivotSlider(sprite:Rect, pos:Vector2, pivotDot:GUIStyle, pivotDotActive:GUIStyle) : Vector2
+}
+class CustomUxmlFactory {
+}
+class Styles <<static>> {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- PivotInspectorPanel
+PivotInspectorPanel --> "m_PivotAlignment" EnumField
+PivotInspectorPanel --> "m_PivotPosition" Vector2Field
+PivotInspectorPanel --> "pivotAlignment" EnumField
+PivotInspectorPanel --> "pivotPosition" Vector2Field
+SkeletonToolWrapper <|-- PivotTool
+PivotTool o-> "m_Pivot" Vector2
+PivotTool --> "m_CurrentMousePosition" Vector2
+PivotTool --> "m_DragScreenOffset" Vector2
+PivotTool --> "m_DragStartScreenPosition" Vector2
+PivotTool --> "m_LastSelectedSprite" SpriteCache
+PivotTool --> "m_InspectorPanel" PivotInspectorPanel
+PivotTool o-> "k_PivotNormalizedRect" Rect
+PivotTool o-> "m_PivotRect" Rect
+PivotInspectorPanel +-- CustomUxmlFactory
+"UxmlFactory`2" "<PivotInspectorPanel,UxmlTraits>" <|-- CustomUxmlFactory
+PivotTool +-- Styles
+Styles o-> "pivotdotactive" GUIStyle
+Styles o-> "pivotdot" GUIStyle
+@enduml

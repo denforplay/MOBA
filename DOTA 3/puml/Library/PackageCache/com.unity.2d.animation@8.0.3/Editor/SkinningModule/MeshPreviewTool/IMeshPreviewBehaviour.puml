@@ -1,0 +1,8 @@
+@startuml
+interface IMeshPreviewBehaviour {
+    GetWeightMapOpacity(sprite:SpriteCache) : float
+    DrawWireframe(sprite:SpriteCache) : bool
+    Overlay(sprite:SpriteCache) : bool
+    OverlayWireframe(sprite:SpriteCache) : bool
+}
+@enduml

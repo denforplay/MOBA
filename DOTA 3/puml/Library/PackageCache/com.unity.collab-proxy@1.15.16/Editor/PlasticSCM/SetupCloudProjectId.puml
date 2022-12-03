@@ -1,0 +1,6 @@
+@startuml
+class SetupCloudProjectId <<static>> {
+}
+SetupCloudProjectId o-> "PlayerSettingsType" Type
+SetupCloudProjectId o-> "mLog" ILog
+@enduml

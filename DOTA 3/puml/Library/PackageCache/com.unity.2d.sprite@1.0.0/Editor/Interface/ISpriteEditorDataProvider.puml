@@ -1,0 +1,53 @@
+@startuml
+interface ISpriteEditorDataProvider {
+    pixelsPerUnit : float <<get>>
+    GetSpriteRects() : SpriteRect[]
+    SetSpriteRects(spriteRects:SpriteRect[]) : void
+    Apply() : void
+    InitSpriteEditorDataProvider() : void
+    GetDataProvider() : T
+    HasDataProvider(type:Type) : bool
+}
+interface ISpriteBoneDataProvider {
+    GetBones(guid:GUID) : List<SpriteBone>
+    SetBones(guid:GUID, bones:List<SpriteBone>) : void
+}
+interface ISpriteNameFileIdDataProvider {
+    GetNameFileIdPairs() : IEnumerable<SpriteNameFileIdPair>
+    SetNameFileIdPairs(nameFileIdPairs:IEnumerable<SpriteNameFileIdPair>) : void
+}
+interface ISpriteOutlineDataProvider {
+    GetOutlines(guid:GUID) : List<Vector2[]>
+    SetOutlines(guid:GUID, data:List<Vector2[]>) : void
+    GetTessellationDetail(guid:GUID) : float
+    SetTessellationDetail(guid:GUID, value:float) : void
+}
+interface ISpritePhysicsOutlineDataProvider {
+    GetOutlines(guid:GUID) : List<Vector2[]>
+    SetOutlines(guid:GUID, data:List<Vector2[]>) : void
+    GetTessellationDetail(guid:GUID) : float
+    SetTessellationDetail(guid:GUID, value:float) : void
+}
+interface ITextureDataProvider {
+    GetTextureActualWidthAndHeight(width:int, height:int) : void
+    GetReadableTexture2D() : Texture2D
+}
+interface ISecondaryTextureDataProvider {
+}
+class Vertex2DMetaData <<struct>> {
+}
+interface ISpriteMeshDataProvider {
+    GetVertices(guid:GUID) : Vertex2DMetaData[]
+    SetVertices(guid:GUID, vertices:Vertex2DMetaData[]) : void
+    GetIndices(guid:GUID) : int[]
+    SetIndices(guid:GUID, indices:int[]) : void
+    GetEdges(guid:GUID) : Vector2Int[]
+    SetEdges(guid:GUID, edges:Vector2Int[]) : void
+}
+ISpriteEditorDataProvider --> "spriteImportMode" SpriteImportMode
+ISpriteEditorDataProvider --> "targetObject" UnityObject
+ITextureDataProvider --> "texture" Texture2D
+ITextureDataProvider --> "previewTexture" Texture2D
+Vertex2DMetaData --> "position" Vector2
+Vertex2DMetaData --> "boneWeight" BoneWeight
+@enduml

@@ -1,0 +1,76 @@
+@startuml
+interface IEventSystemHandler {
+}
+interface IPointerMoveHandler {
+    OnPointerMove(eventData:PointerEventData) : void
+}
+interface IPointerEnterHandler {
+    OnPointerEnter(eventData:PointerEventData) : void
+}
+interface IPointerExitHandler {
+    OnPointerExit(eventData:PointerEventData) : void
+}
+interface IPointerDownHandler {
+    OnPointerDown(eventData:PointerEventData) : void
+}
+interface IPointerUpHandler {
+    OnPointerUp(eventData:PointerEventData) : void
+}
+interface IPointerClickHandler {
+    OnPointerClick(eventData:PointerEventData) : void
+}
+interface IBeginDragHandler {
+    OnBeginDrag(eventData:PointerEventData) : void
+}
+interface IInitializePotentialDragHandler {
+    OnInitializePotentialDrag(eventData:PointerEventData) : void
+}
+interface IDragHandler {
+    OnDrag(eventData:PointerEventData) : void
+}
+interface IEndDragHandler {
+    OnEndDrag(eventData:PointerEventData) : void
+}
+interface IDropHandler {
+    OnDrop(eventData:PointerEventData) : void
+}
+interface IScrollHandler {
+    OnScroll(eventData:PointerEventData) : void
+}
+interface IUpdateSelectedHandler {
+    OnUpdateSelected(eventData:BaseEventData) : void
+}
+interface ISelectHandler {
+    OnSelect(eventData:BaseEventData) : void
+}
+interface IDeselectHandler {
+    OnDeselect(eventData:BaseEventData) : void
+}
+interface IMoveHandler {
+    OnMove(eventData:AxisEventData) : void
+}
+interface ISubmitHandler {
+    OnSubmit(eventData:BaseEventData) : void
+}
+interface ICancelHandler {
+    OnCancel(eventData:BaseEventData) : void
+}
+IEventSystemHandler <|-- IPointerMoveHandler
+IEventSystemHandler <|-- IPointerEnterHandler
+IEventSystemHandler <|-- IPointerExitHandler
+IEventSystemHandler <|-- IPointerDownHandler
+IEventSystemHandler <|-- IPointerUpHandler
+IEventSystemHandler <|-- IPointerClickHandler
+IEventSystemHandler <|-- IBeginDragHandler
+IEventSystemHandler <|-- IInitializePotentialDragHandler
+IEventSystemHandler <|-- IDragHandler
+IEventSystemHandler <|-- IEndDragHandler
+IEventSystemHandler <|-- IDropHandler
+IEventSystemHandler <|-- IScrollHandler
+IEventSystemHandler <|-- IUpdateSelectedHandler
+IEventSystemHandler <|-- ISelectHandler
+IEventSystemHandler <|-- IDeselectHandler
+IEventSystemHandler <|-- IMoveHandler
+IEventSystemHandler <|-- ISubmitHandler
+IEventSystemHandler <|-- ICancelHandler
+@enduml

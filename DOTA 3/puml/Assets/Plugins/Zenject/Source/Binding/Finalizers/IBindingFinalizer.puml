@@ -1,0 +1,6 @@
+@startuml
+interface IBindingFinalizer {
+    FinalizeBinding(container:DiContainer) : void
+}
+IBindingFinalizer --> "BindingInheritanceMethod" BindingInheritanceMethods
+@enduml

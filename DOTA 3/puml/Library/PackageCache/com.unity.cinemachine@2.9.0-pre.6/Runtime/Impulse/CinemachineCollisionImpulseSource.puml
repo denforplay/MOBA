@@ -1,0 +1,12 @@
+@startuml
+class CinemachineCollisionImpulseSource {
+    + m_IgnoreTag : string
+    + m_UseImpactDirection : bool = false
+    + m_ScaleImpactWithMass : bool = false
+    + m_ScaleImpactWithSpeed : bool = false
+}
+CinemachineImpulseSource <|-- CinemachineCollisionImpulseSource
+CinemachineCollisionImpulseSource o-> "m_LayerMask" LayerMask
+CinemachineCollisionImpulseSource --> "mRigidBody" Rigidbody
+CinemachineCollisionImpulseSource --> "mRigidBody2D" Rigidbody2D
+@enduml

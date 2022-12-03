@@ -1,0 +1,6 @@
+@startuml
+class SerializableProjectConfiguration <<struct>> {
+    + SerializableProjectConfiguration(configValues:IDictionary<string, ConfigurationEntry>)
+}
+SerializableProjectConfiguration --> "Empty" SerializableProjectConfiguration
+@enduml

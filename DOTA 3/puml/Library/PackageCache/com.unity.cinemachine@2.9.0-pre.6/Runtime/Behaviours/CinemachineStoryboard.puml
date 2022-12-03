@@ -1,0 +1,49 @@
+@startuml
+class CinemachineStoryboard {
+    + {static} s_StoryboardGlobalMute : bool
+    + m_ShowImage : bool = true
+    + m_Alpha : float = 1
+    + m_SyncScale : bool = true
+    + m_MuteCamera : bool
+    + m_SplitView : float = 0f
+    + m_SortingOrder : int
+    + m_PlaneDistance : float = 100
+    UpdateRenderCanvas() : void
+    CanvasName : string <<get>>
+    CameraUpdatedCallback(brain:CinemachineBrain) : void
+    LocateMyCanvas(parent:CinemachineBrain, createIfNotFound:bool) : CanvasInfo
+    CreateCanvas(ci:CanvasInfo) : void
+    DestroyCanvas() : void
+    PlaceImage(ci:CanvasInfo, alpha:float) : void
+    {static} StaticBlendingHandler(brain:CinemachineBrain) : void
+    {static} InitializeModule() : void
+}
+enum FillStrategy {
+    BestFit,
+    CropImageToFit,
+    StretchToFit,
+}
+class CanvasInfo {
+}
+class "List`1"<T> {
+}
+enum StoryboardRenderMode {
+    ScreenSpaceOverlay= RenderMode.ScreenSpaceOverlay,
+    ScreenSpaceCamera= RenderMode.ScreenSpaceCamera,
+}
+CinemachineExtension <|-- CinemachineStoryboard
+CinemachineStoryboard --> "m_Image" Texture
+CinemachineStoryboard o-> "m_Aspect" FillStrategy
+CinemachineStoryboard o-> "m_Center" Vector2
+CinemachineStoryboard o-> "m_Rotation" Vector3
+CinemachineStoryboard o-> "m_Scale" Vector2
+CinemachineStoryboard o-> "m_RenderMode" StoryboardRenderMode
+CinemachineStoryboard o-> "mCanvasInfo<CanvasInfo>" "List`1"
+CinemachineStoryboard +-- FillStrategy
+CinemachineStoryboard +-- CanvasInfo
+CanvasInfo --> "mCanvas" GameObject
+CanvasInfo --> "mCanvasComponent" Canvas
+CanvasInfo --> "mCanvasParent" CinemachineBrain
+CanvasInfo --> "mViewport" RectTransform
+CinemachineStoryboard +-- StoryboardRenderMode
+@enduml

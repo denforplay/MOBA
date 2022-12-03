@@ -1,0 +1,35 @@
+@startuml
+class CinemachineImpulseDefinitionPropertyDrawer <<sealed>> {
+    <<const>> vSpace : int = 2
+    <<const>> kGraphHeight : int = 8
+    m_TimeTextWidth : float
+    m_ShapePropertyHeight : float
+    m_SpreadPropertyHeight : float
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+    DrawImpulseShapeCombo(fullRect:Rect, property:SerializedProperty) : void
+    <<const>> kNumSamples : int = 100
+    m_ImpulseGraphZero : float
+    InvalidateImpulseGraphSample() : void
+    DrawImpulseGraph(rect:Rect, curve:AnimationCurve) : void
+    DrawSpreadCombo(fullRect:Rect, property:SerializedProperty) : void
+    InvalidateSpreadGraphSample() : void
+    DrawSpreadGraph(rect:Rect, spread:float) : void
+    HeaderHeight : float <<get>>
+    DrawHeader(rect:Rect, text:string) : float
+    HeaderText(property:SerializedProperty) : string
+    LegacyModeGetPropertyHeight(prop:SerializedProperty, label:GUIContent) : float
+    LegacyModeOnGUI(rect:Rect, prop:SerializedProperty, label:GUIContent) : void
+}
+class "List`1"<T> {
+}
+PropertyDrawer <|-- CinemachineImpulseDefinitionPropertyDrawer
+CinemachineImpulseDefinitionPropertyDrawer --> "m_MyClass" CinemachineImpulseDefinition
+CinemachineImpulseDefinitionPropertyDrawer o-> "m_TimeText" GUIContent
+CinemachineImpulseDefinitionPropertyDrawer --> "m_ShapeProperty" SerializedProperty
+CinemachineImpulseDefinitionPropertyDrawer --> "m_ImpulseTypeProperty" SerializedProperty
+CinemachineImpulseDefinitionPropertyDrawer --> "m_DissipationRateProperty" SerializedProperty
+CinemachineImpulseDefinitionPropertyDrawer --> "m_ImpulseGraphSize" Vector2
+CinemachineImpulseDefinitionPropertyDrawer --> "m_SpreadGraphSize" Vector2
+CinemachineImpulseDefinitionPropertyDrawer o-> "mHideProperties<string>" "List`1"
+@enduml

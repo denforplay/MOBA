@@ -1,0 +1,14 @@
+@startuml
+class SpriteSkin <<sealed>> <<partial>> {
+    OnEnableBatch() : void
+    OnResetBatch() : void
+    UseBatchingBatch() : void
+    OnDisableBatch() : void
+    OnBoneTransformChanged() : void
+    OnRootBoneTransformChanged() : void
+    OnBeforeSerializeBatch() : void
+    OnAfterSerializeBatch() : void
+}
+MonoBehaviour <|-- SpriteSkin
+IPreviewable <|-- SpriteSkin
+@enduml

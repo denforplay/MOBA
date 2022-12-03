@@ -1,0 +1,18 @@
+@startuml
+class ReflectionTypeAnalyzer <<static>> {
+    {static} ReflectionTypeAnalyzer()
+    + {static} AddCustomInjectAttribute() : void
+    + {static} AddCustomInjectAttribute(type:Type) : void
+    + {static} GetReflectionInfo(type:Type) : ReflectionTypeInfo
+    {static} GetPropertyInfos(type:Type) : List<ReflectionTypeInfo.InjectPropertyInfo>
+    {static} GetFieldInfos(type:Type) : List<ReflectionTypeInfo.InjectFieldInfo>
+    {static} GetMethodInfos(type:Type) : List<ReflectionTypeInfo.InjectMethodInfo>
+    {static} GetConstructorInfo(type:Type) : ReflectionTypeInfo.InjectConstructorInfo
+    {static} CreateInjectableInfoForParam(parentType:Type, paramInfo:ParameterInfo) : ReflectionTypeInfo.InjectParameterInfo
+    {static} GetInjectableInfoForMember(parentType:Type, memInfo:MemberInfo) : InjectableInfo
+    {static} TryGetInjectConstructor(type:Type) : ConstructorInfo
+}
+class "HashSet`1"<T> {
+}
+ReflectionTypeAnalyzer --> "_injectAttributeTypes<Type>" "HashSet`1"
+@enduml

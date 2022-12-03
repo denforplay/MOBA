@@ -1,0 +1,18 @@
+@startuml
+class IntrinsicsCommon <<partial>> {
+    + {static} CheckBurstCompiler() : int
+    + {static} CheckPause() : void
+    + {static} <<unsafe>> Checkumul128(high:ulong*, x:ulong, y:ulong) : ulong
+}
+class Buffer <<struct>> {
+    + Length : int
+    + Dispose() : void
+}
+class Provider {
+    + Value : object <<get>>
+}
+IntrinsicsCommon +-- Buffer
+IDisposable <|-- Buffer
+Buffer +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

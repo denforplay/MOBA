@@ -1,0 +1,69 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} EveryValueChanged(target:TTarget, propertySelector:Func<TTarget, TProperty>, monitorTiming:PlayerLoopTiming, equalityComparer:IEqualityComparer<TProperty>) : IUniTaskAsyncEnumerable<TProperty>
+}
+class "EveryValueChangedUnityObject`2"<TTarget,TProperty> <<sealed>> {
+    <<readonly>> target : TTarget
+    + EveryValueChangedUnityObject(target:TTarget, propertySelector:Func<TTarget, TProperty>, equalityComparer:IEqualityComparer<TProperty>, monitorTiming:PlayerLoopTiming)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TProperty>
+}
+class "EveryValueChangedStandardObject`2"<TTarget,TProperty> <<sealed>> {
+    + EveryValueChangedStandardObject(target:TTarget, propertySelector:Func<TTarget, TProperty>, equalityComparer:IEqualityComparer<TProperty>, monitorTiming:PlayerLoopTiming)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TProperty>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "Func`2"<T1,T2> {
+}
+class "IEqualityComparer`1"<T> {
+}
+class _EveryValueChanged <<sealed>> {
+    first : bool
+    disposed : bool
+    + _EveryValueChanged(target:TTarget, propertySelector:Func<TTarget, TProperty>, equalityComparer:IEqualityComparer<TProperty>, monitorTiming:PlayerLoopTiming, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + MoveNext() : bool
+}
+class "WeakReference`1"<T> {
+}
+class _EveryValueChanged <<sealed>> {
+    first : bool
+    disposed : bool
+    + _EveryValueChanged(target:WeakReference<TTarget>, propertySelector:Func<TTarget, TProperty>, equalityComparer:IEqualityComparer<TProperty>, monitorTiming:PlayerLoopTiming, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + MoveNext() : bool
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TProperty>" <|-- "EveryValueChangedUnityObject`2"
+"EveryValueChangedUnityObject`2" --> "propertySelector<TTarget,TProperty>" "Func`2"
+"EveryValueChangedUnityObject`2" --> "equalityComparer<TProperty>" "IEqualityComparer`1"
+"EveryValueChangedUnityObject`2" --> "monitorTiming" PlayerLoopTiming
+"IUniTaskAsyncEnumerable`1" "<TProperty>" <|-- "EveryValueChangedStandardObject`2"
+"EveryValueChangedStandardObject`2" --> "target<TTarget>" "WeakReference`1"
+"EveryValueChangedStandardObject`2" --> "propertySelector<TTarget,TProperty>" "Func`2"
+"EveryValueChangedStandardObject`2" --> "equalityComparer<TProperty>" "IEqualityComparer`1"
+"EveryValueChangedStandardObject`2" --> "monitorTiming" PlayerLoopTiming
+"EveryValueChangedUnityObject`2" +-- _EveryValueChanged
+MoveNextSource <|-- _EveryValueChanged
+"IUniTaskAsyncEnumerator`1" "<TProperty>" <|-- _EveryValueChanged
+IPlayerLoopItem <|-- _EveryValueChanged
+_EveryValueChanged --> "target" TTarget
+_EveryValueChanged --> "equalityComparer<TProperty>" "IEqualityComparer`1"
+_EveryValueChanged --> "propertySelector<TTarget,TProperty>" "Func`2"
+_EveryValueChanged --> "cancellationToken" CancellationToken
+_EveryValueChanged --> "currentValue" TProperty
+_EveryValueChanged --> "Current" TProperty
+"EveryValueChangedStandardObject`2" +-- _EveryValueChanged
+MoveNextSource <|-- _EveryValueChanged
+"IUniTaskAsyncEnumerator`1" "<TProperty>" <|-- _EveryValueChanged
+IPlayerLoopItem <|-- _EveryValueChanged
+_EveryValueChanged --> "target<TTarget>" "WeakReference`1"
+_EveryValueChanged --> "equalityComparer<TProperty>" "IEqualityComparer`1"
+_EveryValueChanged --> "propertySelector<TTarget,TProperty>" "Func`2"
+_EveryValueChanged --> "cancellationToken" CancellationToken
+_EveryValueChanged --> "currentValue" TProperty
+_EveryValueChanged --> "Current" TProperty
+@enduml

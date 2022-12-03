@@ -1,0 +1,8 @@
+@startuml
+class CinemachineTagFieldPropertyDrawer <<sealed>> {
+    <<const>> hSpace : float = 2
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+PropertyDrawer <|-- CinemachineTagFieldPropertyDrawer
+CinemachineTagFieldPropertyDrawer o-> "clearText" GUIContent
+@enduml

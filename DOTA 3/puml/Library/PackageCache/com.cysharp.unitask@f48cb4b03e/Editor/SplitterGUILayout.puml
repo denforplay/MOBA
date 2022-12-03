@@ -1,0 +1,15 @@
+@startuml
+class SplitterGUILayout <<static>> {
+    + {static} CreateSplitterState(relativeSizes:float[], minSizes:int[], maxSizes:int[]) : object
+    + {static} BeginVerticalSplit(splitterState:object, options:GUILayoutOption[]) : void
+    + {static} EndVerticalSplit() : void
+}
+class "Lazy`1"<T> {
+}
+SplitterGUILayout o-> "flags" BindingFlags
+SplitterGUILayout o-> "splitterStateType<Type>" "Lazy`1"
+SplitterGUILayout o-> "splitterStateCtor<ConstructorInfo>" "Lazy`1"
+SplitterGUILayout o-> "splitterGUILayoutType<Type>" "Lazy`1"
+SplitterGUILayout o-> "beginVerticalSplit<MethodInfo>" "Lazy`1"
+SplitterGUILayout o-> "endVerticalSplit<MethodInfo>" "Lazy`1"
+@enduml

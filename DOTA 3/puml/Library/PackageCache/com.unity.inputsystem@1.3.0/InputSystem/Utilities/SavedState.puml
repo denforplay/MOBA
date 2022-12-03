@@ -1,0 +1,11 @@
+@startuml
+interface ISavedState {
+    StaticDisposeCurrentState() : void
+    RestoreSavedState() : void
+}
+class "SavedStructState`1"<T> <<sealed>> {
+    + StaticDisposeCurrentState() : void
+    + RestoreSavedState() : void
+}
+ISavedState <|-- "SavedStructState`1"
+@enduml

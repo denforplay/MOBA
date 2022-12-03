@@ -1,0 +1,11 @@
+@startuml
+abstract class UnityInspectorListEditor {
+    + <<virtual>> OnEnable() : void
+    + <<sealed>> <<override>> OnInspectorGUI() : void
+}
+class "List`1"<T> {
+}
+Editor <|-- UnityInspectorListEditor
+UnityInspectorListEditor --> "_installersLists<ReorderableList>" "List`1"
+UnityInspectorListEditor --> "_installersProperties<SerializedProperty>" "List`1"
+@enduml

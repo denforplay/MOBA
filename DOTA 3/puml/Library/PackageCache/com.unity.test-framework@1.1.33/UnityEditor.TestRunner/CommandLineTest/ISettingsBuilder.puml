@@ -1,0 +1,6 @@
+@startuml
+interface ISettingsBuilder {
+    BuildApiExecutionSettings(commandLineArgs:string[]) : Api.ExecutionSettings
+    BuildExecutionSettings(commandLineArgs:string[]) : ExecutionSettings
+}
+@enduml

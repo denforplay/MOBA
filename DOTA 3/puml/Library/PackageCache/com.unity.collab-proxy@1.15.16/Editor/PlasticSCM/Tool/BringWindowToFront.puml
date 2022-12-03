@@ -1,0 +1,15 @@
+@startuml
+class BringWindowToFront <<static>> {
+    {static} FindMainWindowForProcess(processId:int) : IntPtr
+    {static} IsMainWindow(handle:IntPtr) : bool
+    {static} <<extern>> EnumWindows(enumProc:EnumWindowsProc, lParam:IntPtr) : bool
+    {static} <<extern>> GetWindowThreadProcessId(hWnd:IntPtr, lpdwProcessId:uint) : uint
+    {static} <<extern>> GetWindow(hWnd:HandleRef, uCmd:int) : IntPtr
+    {static} <<extern>> IsWindowVisible(hWnd:HandleRef) : bool
+    {static} <<extern>> ShowWindow(handle:IntPtr, nCmdShow:int) : bool
+    {static} <<extern>> SetForegroundWindow(handle:IntPtr) : bool
+    {static} <<extern>> IsIconic(handle:IntPtr) : bool
+    <<const>> GW_OWNER : int = 4
+    <<const>> SW_RESTORE : int = 9
+}
+@enduml

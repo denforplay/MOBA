@@ -1,0 +1,19 @@
+@startuml
+enum ColliderCornerType {
+    Square,
+    Round,
+    Sharp,
+}
+class LegacyCollider {
+    m_ColliderOffset : float = 1.0f
+    m_UpdateCollider : bool = false
+    <<const>> s_ClipperScale : float = 100000.0f
+    m_HashCode : int = 0
+    Start() : void
+    Update() : void
+    {static} SampleCurve(colliderDetail:float, startPoint:Vector3, startTangent:Vector3, endPoint:Vector3, endTangent:Vector3, path:List<IntPoint>) : void
+    + {static} Bake(go:GameObject, forced:bool) : void
+}
+MonoBehaviour <|-- LegacyCollider
+LegacyCollider o-> "m_ColliderCornerType" ColliderCornerType
+@enduml

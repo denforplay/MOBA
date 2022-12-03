@@ -1,0 +1,23 @@
+@startuml
+class LensFlareComponentSRP <<sealed>> {
+    + intensity : float = 1.0f
+    + maxAttenuationDistance : float = 100.0f
+    + maxAttenuationScale : float = 100.0f
+    + attenuationByLightShape : bool = true
+    + useOcclusion : bool = false
+    + occlusionRadius : float = 0.1f
+    + sampleCount : uint = 32
+    + occlusionOffset : float = 0.05f
+    + scale : float = 1.0f
+    + allowOffScreen : bool = false
+    + celestialProjectedOcclusionRadius(mainCam:Camera) : float
+    OnEnable() : void
+    OnDisable() : void
+    OnValidate() : void
+}
+MonoBehaviour <|-- LensFlareComponentSRP
+LensFlareComponentSRP --> "lensFlareData" LensFlareDataSRP
+LensFlareComponentSRP o-> "distanceAttenuationCurve" AnimationCurve
+LensFlareComponentSRP o-> "scaleByDistanceCurve" AnimationCurve
+LensFlareComponentSRP o-> "radialScreenAttenuationCurve" AnimationCurve
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+class InlineCurveResize {
+    m_Captured : bool
+    m_CapturedHeight : float
+    m_CaptureMouseYPos : float
+    + <<override>> Overlay(evt:Event, state:WindowState) : void
+}
+class TrackResize {
+    m_Captured : bool
+    m_NumberOfContributingTracks : int
+    + <<override>> Overlay(evt:Event, state:WindowState) : void
+    {static} CommitExtension(trackGUI:TimelineTrackGUI) : void
+}
+class TrackDoubleClick {
+}
+class TrackShortcutManipulator {
+    {static} InternalExecute(evt:Event, state:WindowState) : bool
+}
+class "List`1"<T> {
+}
+Manipulator <|-- InlineCurveResize
+InlineCurveResize --> "m_Target" InlineCurveResizeHandle
+Manipulator <|-- TrackResize
+TrackResize --> "m_Target" TrackResizeHandle
+TrackResize --> "m_TracksToResize<TimelineTrackGUI>" "List`1"
+Manipulator <|-- TrackDoubleClick
+Manipulator <|-- TrackShortcutManipulator
+@enduml

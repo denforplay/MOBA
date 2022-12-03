@@ -1,0 +1,8 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ContainsAsync(source:IUniTaskAsyncEnumerable<TSource>, value:TSource, cancellationToken:CancellationToken) : UniTask<Boolean>
+    + {static} ContainsAsync(source:IUniTaskAsyncEnumerable<TSource>, value:TSource, comparer:IEqualityComparer<TSource>, cancellationToken:CancellationToken) : UniTask<Boolean>
+}
+class Contains <<static>> {
+}
+@enduml

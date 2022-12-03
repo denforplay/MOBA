@@ -1,0 +1,13 @@
+@startuml
+class SubContainerPrefabBindingFinalizer {
+    <<readonly>> _subIdentifier : object
+    <<readonly>> _resolveAll : bool
+    + SubContainerPrefabBindingFinalizer(bindInfo:BindInfo, subIdentifier:object, resolveAll:bool, subContainerCreatorFactory:Func<DiContainer, ISubContainerCreator>)
+    FinalizeBindingConcrete(container:DiContainer, concreteTypes:List<Type>) : void
+    FinalizeBindingSelf(container:DiContainer) : void
+}
+class "Func`2"<T1,T2> {
+}
+ProviderBindingFinalizer <|-- SubContainerPrefabBindingFinalizer
+SubContainerPrefabBindingFinalizer --> "_subContainerCreatorFactory<DiContainer,ISubContainerCreator>" "Func`2"
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+class EditModeTest {
+    + {static} TestTypeHash() : void
+    + {static} TestDebugLog() : void
+    + DebugLogError() : IEnumerator
+    + TestAssemblyBuilder() : void
+}
+class HashTestJob <<struct>> {
+    + Execute() : void
+}
+class DebugLogJob <<struct>> {
+    + Value : int
+    + Execute() : void
+}
+class DebugLogErrorJob <<struct>> {
+    + Execute() : void
+}
+class SafetyCheckJobWithDomainReload <<struct>> {
+    + Execute() : void
+}
+class EnabledSafetyChecksJob <<struct>> {
+    + Execute() : void
+}
+class DisabledSafetyChecksJob <<struct>> {
+    + Execute() : void
+}
+class EnsureAssemblyBuilderDoesNotInvalidFunctionPointers <<static>> {
+    + {static} WithBurst() : int
+}
+class "NativeArray`1"<T> {
+}
+EditModeTest +-- HashTestJob
+IJob <|-- HashTestJob
+HashTestJob --> "Hashes<int>" "NativeArray`1"
+EditModeTest +-- DebugLogJob
+IJob <|-- DebugLogJob
+EditModeTest +-- DebugLogErrorJob
+IJob <|-- DebugLogErrorJob
+EditModeTest +-- SafetyCheckJobWithDomainReload
+IJob <|-- SafetyCheckJobWithDomainReload
+SafetyCheckJobWithDomainReload --> "Result<int>" "NativeArray`1"
+EditModeTest +-- EnabledSafetyChecksJob
+IJob <|-- EnabledSafetyChecksJob
+EnabledSafetyChecksJob --> "WasHit<int>" "NativeArray`1"
+EditModeTest +-- DisabledSafetyChecksJob
+IJob <|-- DisabledSafetyChecksJob
+DisabledSafetyChecksJob --> "WasHit<int>" "NativeArray`1"
+EditModeTest +-- EnsureAssemblyBuilderDoesNotInvalidFunctionPointers
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+interface INotificationOptionProvider {
+}
+INotificationOptionProvider --> "flags" NotificationFlags
+@enduml

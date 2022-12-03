@@ -1,0 +1,24 @@
+@startuml
+class FooClass {
+    + intValue : int
+    + stringValue : string
+    + FooClass()
+}
+class MySettingsExamples {
+    {static} ConditionalValueGUI(searchContext:string) : void
+    <<const>> k_ColorInstanceFieldKey : string = "MySettingsExamples.m_ColorField"
+    {static} Init() : void
+    OnEnable() : void
+    OnGUI() : void
+}
+class "MySetting`1"<T> {
+}
+EditorWindow <|-- MySettingsExamples
+MySettingsExamples o-> "s_NumberOfDaysWithoutIncident<int>" "MySetting`1"
+MySettingsExamples o-> "s_FavoriteColor<Color>" "MySetting`1"
+MySettingsExamples o-> "s_Vector2Value<Vector2>" "MySetting`1"
+MySettingsExamples o-> "s_EditorFlags<StaticEditorFlags>" "MySetting`1"
+MySettingsExamples o-> "s_Foo<FooClass>" "MySetting`1"
+MySettingsExamples o-> "s_NumberWithSlider<int>" "MySetting`1"
+MySettingsExamples --> "m_ColorField" Color
+@enduml

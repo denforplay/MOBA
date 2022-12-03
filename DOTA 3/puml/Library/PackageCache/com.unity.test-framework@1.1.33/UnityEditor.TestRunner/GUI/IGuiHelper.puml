@@ -1,0 +1,8 @@
+@startuml
+interface IGuiHelper {
+    OpenScriptInExternalEditor(stacktrace:string) : bool
+    OpenScriptInExternalEditor(type:Type, method:MethodInfo) : void
+    GetFileOpenInfo(type:Type, method:MethodInfo) : IFileOpenInfo
+    FilePathToAssetsRelativeAndUnified(filePath:string) : string
+}
+@enduml

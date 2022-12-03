@@ -1,0 +1,6 @@
+@startuml
+class RiderStyles <<static>> {
+    {static} RiderStyles()
+}
+RiderStyles --> "LinkLabelStyle" GUIStyle
+@enduml

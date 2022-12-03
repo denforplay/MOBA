@@ -1,0 +1,17 @@
+@startuml
+interface ITestSettings {
+    scriptingBackend : ScriptingImplementation? <<get>> <<set>>
+    Architecture : string <<get>> <<set>>
+    apiProfile : ApiCompatibilityLevel? <<get>> <<set>>
+    appleEnableAutomaticSigning : bool? <<get>> <<set>>
+    appleDeveloperTeamID : string <<get>> <<set>>
+    iOSManualProvisioningProfileType : ProvisioningProfileType? <<get>> <<set>>
+    iOSManualProvisioningProfileID : string <<get>> <<set>>
+    tvOSManualProvisioningProfileType : ProvisioningProfileType? <<get>> <<set>>
+    tvOSManualProvisioningProfileID : string <<get>> <<set>>
+    autoGraphicsAPIs : bool <<get>> <<set>>
+    androidBuildAppBundle : bool? <<get>> <<set>>
+    SetupProjectParameters() : void
+}
+IDisposable <|-- ITestSettings
+@enduml

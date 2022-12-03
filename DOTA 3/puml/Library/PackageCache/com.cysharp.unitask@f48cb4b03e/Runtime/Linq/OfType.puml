@@ -1,0 +1,20 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} OfType(source:IUniTaskAsyncEnumerable<Object>) : IUniTaskAsyncEnumerable<TResult>
+}
+class "OfType`1"<TResult> <<sealed>> {
+    + OfType(source:IUniTaskAsyncEnumerable<object>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _OfType {
+    + _OfType(source:IUniTaskAsyncEnumerable<object>, cancellationToken:CancellationToken)
+}
+class "AsyncEnumeratorBase`2"<T1,T2> {
+}
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "OfType`1"
+"OfType`1" --> "source<object>" "IUniTaskAsyncEnumerable`1"
+"OfType`1" +-- _OfType
+"AsyncEnumeratorBase`2" "<object,TResult>" <|-- _OfType
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class SceneDecoratorContextEditor {
+    + <<override>> OnEnable() : void
+}
+ContextEditor <|-- SceneDecoratorContextEditor
+SceneDecoratorContextEditor --> "_decoratedContractNameProperty" SerializedProperty
+@enduml

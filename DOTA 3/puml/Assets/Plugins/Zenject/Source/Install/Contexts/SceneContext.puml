@@ -1,0 +1,45 @@
+@startuml
+class SceneContext {
+    +  <<event>> PreInstall : Action 
+    +  <<event>> PostInstall : Action 
+    +  <<event>> PreResolve : Action 
+    +  <<event>> PostResolve : Action 
+    _parentNewObjectsUnderSceneContext : bool
+    _hasInstalled : bool
+    _hasResolved : bool
+    + HasResolved : bool <<get>>
+    + HasInstalled : bool <<get>>
+    + IsValidating : bool <<get>>
+    + ParentNewObjectsUnderSceneContext : bool <<get>> <<set>>
+    + Awake() : void
+    + Validate() : void
+    + <<override>> GetRootGameObjects() : IEnumerable<GameObject>
+    GetParentContainers() : IEnumerable<DiContainer>
+    LookupDecoratorContexts() : List<SceneDecoratorContext>
+    + Install() : void
+    + Resolve() : void
+    InstallBindings(injectableMonoBehaviours:List<MonoBehaviour>) : void
+    + {static} Create() : SceneContext
+}
+class "Action`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class "List`1"<T> {
+}
+RunnableContext <|-- SceneContext
+SceneContext --> "OnPreInstall" UnityEvent
+SceneContext --> "OnPostInstall" UnityEvent
+SceneContext --> "OnPreResolve" UnityEvent
+SceneContext --> "OnPostResolve" UnityEvent
+SceneContext --> "ExtraBindingsInstallMethod<DiContainer>" "Action`1"
+SceneContext --> "ExtraBindingsLateInstallMethod<DiContainer>" "Action`1"
+SceneContext --> "ParentContainers<DiContainer>" "IEnumerable`1"
+SceneContext o-> "_contractNames<string>" "List`1"
+SceneContext o-> "_parentContractNames<string>" "List`1"
+SceneContext --> "_container" DiContainer
+SceneContext o-> "_decoratorContexts<SceneDecoratorContext>" "List`1"
+SceneContext --> "Container" DiContainer
+SceneContext --> "ContractNames<string>" "IEnumerable`1"
+SceneContext --> "ParentContractNames<string>" "IEnumerable`1"
+@enduml

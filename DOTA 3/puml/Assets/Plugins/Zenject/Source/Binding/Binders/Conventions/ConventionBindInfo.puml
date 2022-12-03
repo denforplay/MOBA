@@ -1,0 +1,18 @@
+@startuml
+class ConventionBindInfo {
+    + AddAssemblyFilter(predicate:Func<Assembly, bool>) : void
+    + AddTypeFilter(predicate:Func<Type, bool>) : void
+    GetAllAssemblies() : IEnumerable<Assembly>
+    ShouldIncludeAssembly(assembly:Assembly) : bool
+    ShouldIncludeType(type:Type) : bool
+    GetTypes(assembly:Assembly) : Type[]
+    + ResolveTypes() : List<Type>
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+ConventionBindInfo o-> "_typeFilters<Func<Type, bool>>" "List`1"
+ConventionBindInfo o-> "_assemblyFilters<Func<Assembly, bool>>" "List`1"
+ConventionBindInfo o-> "_assemblyTypeCache<Assembly,Type[]>" "Dictionary`2"
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class CheckinProgress {
+}
+CheckinProgress --> "mWorkspaceWindow" WorkspaceWindow
+@enduml

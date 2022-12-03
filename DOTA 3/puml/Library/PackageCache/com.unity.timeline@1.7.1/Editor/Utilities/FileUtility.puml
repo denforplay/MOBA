@@ -1,0 +1,5 @@
+@startuml
+class FileUtility <<static>> {
+    {static} IsReadOnlyImpl(asset:UnityEngine.Object) : bool
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+class GridEditorUtility <<static>> {
+    + {static} ClampToGrid(p:Vector3Int, origin:Vector2Int, gridSize:Vector2Int) : Vector3Int
+    + {static} ScreenToLocal(transform:Transform, screenPosition:Vector2) : Vector3
+    + {static} ScreenToLocal(transform:Transform, screenPosition:Vector2, plane:Plane) : Vector3
+    + {static} GetMarqueeRect(p1:Vector2Int, p2:Vector2Int) : RectInt
+    + {static} GetMarqueeBounds(p1:Vector3Int, p2:Vector3Int) : BoundsInt
+    + {static} GetPointsOnLine(p1:Vector2Int, p2:Vector2Int) : IEnumerable<Vector2Int>
+    + {static} DrawBatchedHorizontalLine(x1:float, x2:float, y:float) : void
+    + {static} DrawBatchedVerticalLine(y1:float, y2:float, x:float) : void
+    + {static} DrawBatchedLine(p1:Vector3, p2:Vector3) : void
+    + {static} DrawLine(p1:Vector2, p2:Vector2, color:Color) : void
+    + {static} DrawBox(r:Rect, color:Color) : void
+    + {static} DrawFilledBox(r:Rect, color:Color) : void
+    + {static} DrawGridMarquee(gridLayout:GridLayout, area:BoundsInt, color:Color) : void
+    + {static} DrawSelectedHexGridArea(gridLayout:GridLayout, area:BoundsInt, color:Color) : void
+    + {static} DrawGridGizmo(gridLayout:GridLayout, transform:Transform, color:Color, gridMesh:Mesh, gridMaterial:Material) : void
+    + {static} GetSpriteWorldSize(sprite:Sprite) : Vector3
+    + {static} GenerateCachedGridMesh(gridLayout:GridLayout, color:Color, screenPixelSize:float, bounds:RectInt, topology:MeshTopology) : Mesh
+}
+@enduml

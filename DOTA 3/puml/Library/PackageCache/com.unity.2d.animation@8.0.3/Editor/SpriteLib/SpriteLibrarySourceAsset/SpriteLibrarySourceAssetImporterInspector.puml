@@ -1,0 +1,27 @@
+@startuml
+class SpriteLibrarySourceAssetImporterInspector {
+    + <<override>> showImportedObject : bool <<get>>
+    + <<override>> OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+    DoMainAssetGUI() : void
+    {static} AssignNewMainLibrary(target:Object, extraTarget:SpriteLibrarySourceAsset, newMainLibrary:SpriteLibraryAsset) : bool
+    DoLibraryGUI() : void
+}
+class CreateSpriteLibrarySourceAsset {
+    <<const>> k_SpriteLibraryAssetMenuPriority : int = 30
+    m_MainLibrary : string
+    + <<override>> Action(instanceId:int, pathName:string, resourceFile:string) : void
+    {static} CreateSpriteLibrarySourceAssetMenu() : void
+    {static} CreateSpriteLibrarySourceAssetVariantMenu() : void
+    {static} ValidateCanCreateVariant() : bool
+}
+class Style <<static>> {
+    + {static} <<readonly>> multiEditWarning : string
+}
+ScriptedImporterEditor <|-- SpriteLibrarySourceAssetImporterInspector
+SpriteLibrarySourceAssetImporterInspector --> "m_PrimaryLibraryGUID" SerializedProperty
+SpriteLibrarySourceAssetImporterInspector --> "m_Library" SerializedProperty
+SpriteLibrarySourceAssetImporterInspector --> "m_SpriteLibraryDataInspector" SpriteLibraryDataInspector
+SpriteLibrarySourceAssetImporterInspector +-- Style
+Style o-> "mainAssetLabel" GUIContent
+@enduml

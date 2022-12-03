@@ -1,0 +1,5 @@
+@startuml
+interface AbstractMaterialNodeModificationListener {
+    OnNodeModified(scope:ModificationScope) : void
+}
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class CinemachineExternalCamera {
+    + <<override>> InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+}
+CinemachineVirtualCameraBase <|-- CinemachineExternalCamera
+CinemachineExternalCamera o-> "m_LookAt" Transform
+CinemachineExternalCamera --> "State" CameraState
+CinemachineExternalCamera --> "LookAt" Transform
+CinemachineExternalCamera --> "Follow" Transform
+CinemachineExternalCamera o-> "m_BlendHint" BlendHint
+@enduml

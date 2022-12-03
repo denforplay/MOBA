@@ -1,0 +1,11 @@
+@startuml
+class MathUtility <<static>> {
+    + {static} DistanceToSegmentClamp(p:Vector3, p1:Vector3, p2:Vector3) : float
+    + {static} ClampPositionToRect(position:Vector2, rect:Rect) : Vector2
+    + {static} MoveRectInsideFrame(rect:Rect, frame:Rect, delta:Vector2) : Vector2
+    + {static} SegmentIntersection(p0:Vector2, p1:Vector2, p2:Vector2, p3:Vector2, point:Vector2) : bool
+    + {static} Barycentric(p:Vector2, a:Vector2, b:Vector2, c:Vector2, coords:Vector3) : void
+    + {static} NormalizeQuaternion(q:Quaternion) : Quaternion
+    + {static} Intersect(p1:Vector3, p2:Vector3, p3:Vector3, ray:Ray) : bool
+}
+@enduml

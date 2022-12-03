@@ -1,0 +1,16 @@
+@startuml
+class InstanceProvider {
+    <<readonly>> _instance : object
+    + InstanceProvider(instanceType:Type, instance:object, container:DiContainer, instantiateCallback:Action<InjectContext, object>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "Action`2"<T1,T2> {
+}
+IProvider <|-- InstanceProvider
+InstanceProvider --> "_instanceType" Type
+InstanceProvider --> "_container" DiContainer
+InstanceProvider --> "_instantiateCallback<InjectContext,object>" "Action`2"
+@enduml

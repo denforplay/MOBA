@@ -1,0 +1,67 @@
+@startuml
+class MarkerData {
+    + name : string
+    + nameLowerCaseHash : int
+    + msTotal : double
+    + count : int
+    + countMin : int
+    + countMax : int
+    + countMean : float
+    + countMedian : int
+    + countLowerQuartile : int
+    + countUpperQuartile : int
+    + lastFrame : int
+    + presentOnFrameCount : int
+    + firstFrameIndex : int
+    + msMean : float
+    + msMedian : float
+    + msLowerQuartile : float
+    + msUpperQuartile : float
+    + msMin : float
+    + msMax : float
+    + minIndividualFrameIndex : int
+    + maxIndividualFrameIndex : int
+    + msMinIndividual : float
+    + msMaxIndividual : float
+    + msAtMedian : float
+    + medianFrameIndex : int
+    + minFrameIndex : int
+    + maxFrameIndex : int
+    + minDepth : int
+    + maxDepth : int
+    <<const>> bucketCount : int = 20
+    + MarkerData(markerName:string)
+    + CompareTo(other:MarkerData) : int
+    + GetFrameMs(frameIndex:int) : float
+    + ComputeBuckets(min:float, max:float) : void
+    + ComputeCountBuckets(min:int, max:int) : void
+    + {static} GetFirstThread(marker:MarkerData) : string
+    + {static} GetMsMax(marker:MarkerData) : float
+    + {static} GetMaxFrameIndex(marker:MarkerData) : int
+    + {static} GetMsMin(marker:MarkerData) : float
+    + {static} GetMinFrameIndex(marker:MarkerData) : int
+    + {static} GetMsMedian(marker:MarkerData) : float
+    + {static} GetMedianFrameIndex(marker:MarkerData) : int
+    + {static} GetMsUpperQuartile(marker:MarkerData) : float
+    + {static} GetMsLowerQuartile(marker:MarkerData) : float
+    + {static} GetMsMean(marker:MarkerData) : float
+    + {static} GetMsMinIndividual(marker:MarkerData) : float
+    + {static} GetMsMaxIndividual(marker:MarkerData) : float
+    + {static} GetPresentOnFrameCount(marker:MarkerData) : int
+    + {static} GetMsAtMedian(marker:MarkerData) : float
+    + {static} GetCountMin(marker:MarkerData) : int
+    + {static} GetCountMax(marker:MarkerData) : int
+    + {static} GetCount(marker:MarkerData) : int
+    + {static} GetCountMean(marker:MarkerData) : float
+    + {static} GetMsTotal(marker:MarkerData) : double
+    + {static} GetMinDepth(marker:MarkerData) : int
+    + {static} GetMaxDepth(marker:MarkerData) : int
+}
+class "IComparable`1"<T> {
+}
+class "List`1"<T> {
+}
+"IComparable`1" "<MarkerData>" <|-- MarkerData
+MarkerData --> "threads<string>" "List`1"
+MarkerData --> "frames<FrameTime>" "List`1"
+@enduml

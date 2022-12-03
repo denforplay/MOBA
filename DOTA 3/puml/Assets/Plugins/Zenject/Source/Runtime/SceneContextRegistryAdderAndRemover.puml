@@ -1,0 +1,11 @@
+@startuml
+class SceneContextRegistryAdderAndRemover {
+    + SceneContextRegistryAdderAndRemover(sceneContext:SceneContext, registry:SceneContextRegistry)
+    + Initialize() : void
+    + Dispose() : void
+}
+IInitializable <|-- SceneContextRegistryAdderAndRemover
+IDisposable <|-- SceneContextRegistryAdderAndRemover
+SceneContextRegistryAdderAndRemover --> "_registry" SceneContextRegistry
+SceneContextRegistryAdderAndRemover --> "_sceneContext" SceneContext
+@enduml

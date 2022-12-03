@@ -1,0 +1,15 @@
+@startuml
+class GridPalettes {
+}
+class "ScriptableSingleton`1"<T> {
+}
+class "List`1"<T> {
+}
+class AssetProcessor {
+    + <<override>> GetPostprocessOrder() : int
+}
+"ScriptableSingleton`1" "<GridPalettes>" <|-- GridPalettes
+GridPalettes --> "palettes<GameObject>" "List`1"
+GridPalettes +-- AssetProcessor
+AssetPostprocessor <|-- AssetProcessor
+@enduml

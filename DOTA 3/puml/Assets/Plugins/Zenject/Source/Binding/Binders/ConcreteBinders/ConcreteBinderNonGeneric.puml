@@ -1,0 +1,11 @@
+@startuml
+class ConcreteBinderNonGeneric {
+    + ConcreteBinderNonGeneric(bindContainer:DiContainer, bindInfo:BindInfo, bindStatement:BindStatement)
+    + ToSelf() : FromBinderNonGeneric
+    + To() : FromBinderNonGeneric
+    + To(concreteTypes:Type[]) : FromBinderNonGeneric
+    + To(concreteTypes:IEnumerable<Type>) : FromBinderNonGeneric
+    + To(generator:Action<ConventionSelectTypesBinder>) : FromBinderNonGeneric
+}
+FromBinderNonGeneric <|-- ConcreteBinderNonGeneric
+@enduml

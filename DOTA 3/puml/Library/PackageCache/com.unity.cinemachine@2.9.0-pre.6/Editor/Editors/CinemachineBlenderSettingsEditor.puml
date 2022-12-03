@@ -1,0 +1,11 @@
+@startuml
+class CinemachineBlenderSettingsEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+    DrawVcamSelector(r:Rect, prop:SerializedProperty) : void
+    SetupBlendList() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineBlenderSettings>" <|-- CinemachineBlenderSettingsEditor
+CinemachineBlenderSettingsEditor --> "GetAllVirtualCameras" GetAllVirtualCamerasDelegate
+@enduml

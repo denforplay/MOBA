@@ -1,0 +1,19 @@
+@startuml
+class SpriteCategoryEntryOverride {
+    m_FromMain : bool
+    + fromMain : bool <<get>> <<set>>
+}
+class SpriteLibCategoryOverride {
+    m_FromMain : bool
+    m_EntryOverrideCount : int
+    + fromMain : bool <<get>> <<set>>
+    + entryOverrideCount : int <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+SpriteCategoryEntry <|-- SpriteCategoryEntryOverride
+SpriteCategoryEntryOverride --> "m_SpriteOverride" Sprite
+SpriteCategoryEntryOverride --> "spriteOverride" Sprite
+SpriteLibCategory <|-- SpriteLibCategoryOverride
+SpriteLibCategoryOverride --> "overrideEntries<SpriteCategoryEntryOverride>" "List`1"
+@enduml

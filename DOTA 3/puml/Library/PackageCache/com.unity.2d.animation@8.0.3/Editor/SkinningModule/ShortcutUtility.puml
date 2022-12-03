@@ -1,0 +1,28 @@
+@startuml
+class ShortcutIds <<static>> {
+    + <<const>> toggleToolText : string = "2D/Animation/Toggle Tool Text"
+    + <<const>> restoreBindPose : string = "2D/Animation/Restore Bind Pose"
+    + <<const>> toggleCharacterMode : string = "2D/Animation/Toggle Character Mode"
+    + <<const>> previewPose : string = "2D/Animation/Preview Pose"
+    + <<const>> editBone : string = "2D/Animation/Edit Bone"
+    + <<const>> createBone : string = "2D/Animation/Create Bone"
+    + <<const>> splitBone : string = "2D/Animation/Split Bone"
+    + <<const>> autoGeometry : string = "2D/Animation/Auto Geometry"
+    + <<const>> editGeometry : string = "2D/Animation/Edit Geometry"
+    + <<const>> createVertex : string = "2D/Animation/Create Vertex"
+    + <<const>> createEdge : string = "2D/Animation/Create Edge"
+    + <<const>> splitEdge : string = "2D/Animation/Split Edge"
+    + <<const>> autoWeights : string = "2D/Animation/Auto Weights"
+    + <<const>> weightSlider : string = "2D/Animation/Weight Slider"
+    + <<const>> weightBrush : string = "2D/Animation/Weight Brush"
+    + <<const>> boneInfluence : string = "2D/Animation/Bone Influence"
+    + <<const>> spriteInfluence : string = "2D/Animation/Sprite Influence"
+    + <<const>> pastePanelWeights : string = "2D/Animation/Paste Panel Weights"
+    + <<const>> visibilityPanel : string = "2D/Animation/Visibility Panel"
+    + <<const>> characterPivot : string = "2D/Animation/Character Pivot"
+}
+class ShortcutUtility {
+    + ShortcutUtility(shortcutIds:string[])
+    + AddShortcutToButtonTooltip(rootElement:VisualElement, buttonName:string, shortcutBindingId:string) : void
+}
+@enduml

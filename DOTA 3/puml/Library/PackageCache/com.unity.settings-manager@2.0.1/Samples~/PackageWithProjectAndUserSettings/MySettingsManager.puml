@@ -1,0 +1,9 @@
+@startuml
+class MySettingsManager <<static>> {
+    + {static} Save() : void
+    + {static} Get(key:string, scope:SettingsScope, fallback:T) : T
+    + {static} Set(key:string, value:T, scope:SettingsScope) : void
+    + {static} ContainsKey(key:string, scope:SettingsScope) : bool
+}
+MySettingsManager --> "s_Instance" Settings
+@enduml

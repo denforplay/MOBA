@@ -1,0 +1,13 @@
+@startuml
+class IKChain2D {
+    + transformCount : int <<get>> <<set>>
+    + isValid : bool <<get>>
+    + Initialize() : void
+    + RestoreDefaultPose(targetRotationIsConstrained:bool) : void
+    + StoreLocalRotations() : void
+    + BlendFkToIk(finalWeight:float, targetRotationIsConstrained:bool) : void
+}
+IKChain2D --> "effector" Transform
+IKChain2D --> "target" Transform
+IKChain2D --> "rootTransform" Transform
+@enduml

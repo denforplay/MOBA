@@ -1,0 +1,8 @@
+@startuml
+class FabrikSolver2D <<sealed>> {
+    + iterations : int <<get>> <<set>>
+    + tolerance : float <<get>> <<set>>
+    + <<override>> GetChain(index:int) : IKChain2D
+}
+Solver2D <|-- FabrikSolver2D
+@enduml

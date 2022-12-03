@@ -1,0 +1,9 @@
+@startuml
+class TMP_CharacterPropertyDrawer {
+    m_GlyphSelectedForEditing : int
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    DrawGlyph(position:Rect, property:SerializedProperty) : void
+}
+PropertyDrawer <|-- TMP_CharacterPropertyDrawer
+@enduml

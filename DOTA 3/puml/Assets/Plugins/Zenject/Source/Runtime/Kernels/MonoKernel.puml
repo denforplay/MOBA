@@ -1,0 +1,16 @@
+@startuml
+abstract class MonoKernel {
+    _hasInitialized : bool
+    _isDestroyed : bool
+    + <<virtual>> Start() : void
+    + Initialize() : void
+    + <<virtual>> Update() : void
+    + <<virtual>> FixedUpdate() : void
+    + <<virtual>> LateUpdate() : void
+    + <<virtual>> OnDestroy() : void
+}
+MonoBehaviour <|-- MonoKernel
+MonoKernel o-> "_tickableManager" TickableManager
+MonoKernel o-> "_initializableManager" InitializableManager
+MonoKernel o-> "_disposablesManager" DisposableManager
+@enduml

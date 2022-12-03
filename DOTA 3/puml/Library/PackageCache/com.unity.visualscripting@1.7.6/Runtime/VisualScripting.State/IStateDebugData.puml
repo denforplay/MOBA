@@ -1,0 +1,7 @@
+@startuml
+interface IStateDebugData {
+    lastEnterFrame : int <<get>>
+    lastExitTime : float <<get>>
+}
+IGraphElementDebugData <|-- IStateDebugData
+@enduml

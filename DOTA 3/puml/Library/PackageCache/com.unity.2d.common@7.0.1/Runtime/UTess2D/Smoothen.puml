@@ -1,0 +1,9 @@
+@startuml
+class Smoothen <<struct>> {
+    {static} RefineEdges(refinedEdges:NativeArray<int4>, delaEdges:NativeArray<int4>, delaEdgeCount:int, voronoiEdges:NativeArray<int4>) : void
+    {static} GetAffectingEdges(pointIndex:int, edges:NativeArray<int4>, edgeCount:int, resultSet:NativeArray<int>, checkSet:NativeArray<int>, resultCount:int) : void
+    {static} CentroidByPoints(triIndex:int, triangles:NativeArray<UTriangle>, centroidTris:NativeArray<int>, centroidCount:int, aggregate:float2, point:float2) : void
+    {static} CentroidByPolygon(e:int4, triangles:NativeArray<UTriangle>, centroid:float2, area:float, distance:float) : void
+    {static} ConnectTriangles(connectedTri:NativeArray<int4>, affectEdges:NativeArray<int>, checkSet:NativeArray<int>, voronoiEdges:NativeArray<int4>, triangleCount:int) : bool
+}
+@enduml

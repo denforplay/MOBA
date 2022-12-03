@@ -1,0 +1,42 @@
+@startuml
+class "PrefabResourceFactory`1"<T> {
+    + <<virtual>> Create(prefabResourceName:string) : T
+}
+class "PrefabResourceFactory`2"<P1,T> {
+    + <<virtual>> Create(prefabResourceName:string, param:P1) : T
+}
+class "PrefabResourceFactory`3"<P1,P2,T> {
+    + <<virtual>> Create(prefabResourceName:string, param:P1, param2:P2) : T
+}
+class "PrefabResourceFactory`4"<P1,P2,P3,T> {
+    + <<virtual>> Create(prefabResourceName:string, param:P1, param2:P2, param3:P3) : T
+}
+class "PrefabResourceFactory`5"<P1,P2,P3,P4,T> {
+    + <<virtual>> Create(prefabResourceName:string, param:P1, param2:P2, param3:P3, param4:P4) : T
+}
+class "IFactory`2"<T1,T2> {
+}
+class "IFactory`3"<T1,T2,T3> {
+}
+class "IFactory`4"<T1,T2,T3,T4> {
+}
+class "IFactory`5"<T1,T2,T3,T4,T5> {
+}
+class "IFactory`6"<T1,T2,T3,T4,T5,T6> {
+}
+"IFactory`2" "<string,T>" <|-- "PrefabResourceFactory`1"
+"PrefabResourceFactory`1" o-> "_container" DiContainer
+"PrefabResourceFactory`1" --> "Container" DiContainer
+"IFactory`3" "<string,P1,T>" <|-- "PrefabResourceFactory`2"
+"PrefabResourceFactory`2" o-> "_container" DiContainer
+"PrefabResourceFactory`2" --> "Container" DiContainer
+"IFactory`4" "<string,P1,P2,T>" <|-- "PrefabResourceFactory`3"
+"PrefabResourceFactory`3" o-> "_container" DiContainer
+"PrefabResourceFactory`3" --> "Container" DiContainer
+"IFactory`5" "<string,P1,P2,P3,T>" <|-- "PrefabResourceFactory`4"
+"PrefabResourceFactory`4" o-> "_container" DiContainer
+"PrefabResourceFactory`4" --> "Container" DiContainer
+"IFactory`6" "<string,P1,P2,P3,P4,T>" <|-- "PrefabResourceFactory`5"
+"PrefabResourceFactory`5" o-> "_container" DiContainer
+"PrefabResourceFactory`5" --> "Container" DiContainer
+@enduml

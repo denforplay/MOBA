@@ -1,0 +1,27 @@
+@startuml
+class PointerState <<struct>> {
+    pointerId : uint
+    + pressure : float
+    + buttons : ushort
+}
+class Pointer {
+    + <<override>> MakeCurrent() : void
+    OnNextUpdate() : void
+    OnStateEvent(eventPtr:InputEventPtr) : void
+    GetStateOffsetForEvent(control:InputControl, eventPtr:InputEventPtr, offset:uint) : bool
+}
+IInputStateTypeInfo <|-- PointerState
+PointerState --> "kFormat" FourCC
+PointerState --> "position" Vector2
+PointerState --> "delta" Vector2
+PointerState --> "radius" Vector2
+PointerState --> "format" FourCC
+InputDevice <|-- Pointer
+IInputStateCallbackReceiver <|-- Pointer
+Pointer --> "position" Vector2Control
+Pointer --> "delta" Vector2Control
+Pointer --> "radius" Vector2Control
+Pointer --> "pressure" AxisControl
+Pointer --> "press" ButtonControl
+Pointer --> "current" Pointer
+@enduml

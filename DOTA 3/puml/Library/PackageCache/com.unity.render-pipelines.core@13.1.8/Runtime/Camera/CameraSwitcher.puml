@@ -1,0 +1,11 @@
+@startuml
+class CameraSwitcher {
+    m_DebugEntryEnumIndex : int
+    OnEnable() : void
+    OnDisable() : void
+    GetCameraCount() : int
+    GetNextCamera() : Camera
+    SetCameraIndex(index:int) : void
+}
+MonoBehaviour <|-- CameraSwitcher
+@enduml

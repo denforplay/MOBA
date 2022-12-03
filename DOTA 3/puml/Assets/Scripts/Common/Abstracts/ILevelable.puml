@@ -1,0 +1,11 @@
+@startuml
+interface ILevelable {
+     <<event>> OnLevelChanged : Action<int> 
+     <<event>> OnCurrentExperienceChanged : Action<float> 
+     <<event>> OnNeedForNextLevelExperienceChanged : Action<float> 
+    CurrentLevel : int <<get>>
+    CurrentExperience : float <<get>>
+    NeedForNextLevelExperience : float <<get>>
+    AddExperience(value:float) : void
+}
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+class PlasticWindow {
+    + {static} Open() : void
+    IfVisible() : void
+    IfVisible() : void
+    OnWorkspaceCreated(wkInfo:WorkspaceInfo, isGluonMode:bool) : void
+    OnEnable() : void
+    OnDisable() : void
+    OnDestroy() : void
+    OnFocus() : void
+    OnGUI() : void
+    Update() : void
+    InitializeNewIncomingChanges(wkInfo:WorkspaceInfo, bIsGluonMode:bool) : void
+    OnApplicationActivated() : void
+    OnApplicationDeactivated() : void
+    ExecuteFullReload() : void
+    DoExceptionErrorArea() : void
+    {static} DoSearchField(viewSwitcher:ViewSwitcher) : void
+    {static} DoTabToolbar(isPlasticExeAvailable:bool, workspaceInfo:WorkspaceInfo, viewSwitcher:ViewSwitcher, isGluonMode:bool) : void
+    {static} OpenBranchListViewAndSendEvent(wkInfo:WorkspaceInfo, viewSwitcher:ViewSwitcher) : void
+    {static} ShowBranchesContextMenu(wkInfo:WorkspaceInfo, viewSwitcher:ViewSwitcher, isGluonMode:bool) : void
+    {static} ShowSettingsContextMenu(wkInfo:WorkspaceInfo, isGluonMode:bool) : void
+    {static} DoLaunchButtons(isPlasticExeAvailable:bool, wkInfo:WorkspaceInfo, viewSwitcher:ViewSwitcher, isGluonMode:bool) : void
+    {static} DrawLaunchButton(icon:Texture, tooltip:string) : bool
+    {static} InviteMemberButton_clicked(obj:object) : void
+    {static} OpenCloudDashboardUsersGroupsUrl(organization:string) : void
+    {static} TrySimplifiedUIButton_Clicked(obj:object) : void
+    {static} TurnOffPlasticButton_Clicked(obj:object) : void
+    {static} ForceCheckout_Clicked(obj:object) : void
+    {static} SetupCloudProjectIdIfNeeded(wkInfo:WorkspaceInfo, plasticApi:IPlasticAPI) : void
+    {static} DisableVCSIfEnabled(projectPath:string) : void
+    {static} DisposeNewIncomingChanges(window:PlasticWindow) : void
+    {static} RegisterApplicationFocusHandlers(window:PlasticWindow) : void
+    {static} UnRegisterApplicationFocusHandlers(window:PlasticWindow) : void
+    {static} IsExitGUIException(ex:Exception) : bool
+    {static} IsIMGUIPaintException(ex:Exception) : bool
+    {static} ClosePlasticWindow(window:PlasticWindow) : void
+    {static} ShowPlasticWindow(window:PlasticWindow) : void
+    {static} NeedsToDisplayWelcomeView(clientNeedsConfiguration:bool, wkInfo:WorkspaceInfo) : bool
+    {static} DisableCollabIfEnabled(projectPath:string) : void
+    {static} InstantiateFrom(window:PlasticWindow) : PlasticWindow
+    mForceToOpen : bool
+    mLastUpdateTime : double = 0f
+    mIsGluonMode : bool
+    mDisableCollabIfEnabledWhenLoaded : bool
+}
+class Reload <<static>> {
+    {static} IsWorkspaceConfigChanged(lastWkInfo:WorkspaceInfo, currentWkInfo:WorkspaceInfo, lastIsGluonMode:bool, currentIsGluonMode:bool) : bool
+}
+EditorWindow <|-- PlasticWindow
+PlasticWindow --> "mWkInfo" WorkspaceInfo
+PlasticWindow --> "mException" Exception
+PlasticWindow --> "mCooldownAutoRefreshPendingChangesAction" CooldownWindowDelayer
+PlasticWindow --> "mWelcomeView" WelcomeView
+PlasticWindow o-> "mStatusBar" StatusBar
+PlasticWindow --> "mGluonNewIncomingChangesUpdater" GluonNewIncomingChangesUpdater
+PlasticWindow --> "mWorkspaceWindow" WorkspaceWindow
+PlasticWindow --> "mAssetOperations" AssetOperations
+PlasticWindow o-> "mLog" ILog
+PlasticWindow +-- Reload
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+class CinemachineMixingCamera {
+    + <<const>> MaxCameras : int = 8
+    + m_Weight0 : float = 0.5f
+    + m_Weight1 : float = 0.5f
+    + m_Weight2 : float = 0.5f
+    + m_Weight3 : float = 0.5f
+    + m_Weight4 : float = 0.5f
+    + m_Weight5 : float = 0.5f
+    + m_Weight6 : float = 0.5f
+    + m_Weight7 : float = 0.5f
+    + GetWeight(index:int) : float
+    + SetWeight(index:int, w:float) : void
+    + GetWeight(vcam:CinemachineVirtualCameraBase) : float
+    + SetWeight(vcam:CinemachineVirtualCameraBase, w:float) : void
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + OnTransformChildrenChanged() : void
+    + <<override>> IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    + <<override>> InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+}
+CinemachineVirtualCameraBase <|-- CinemachineMixingCamera
+CinemachineMixingCamera --> "State" CameraState
+CinemachineMixingCamera --> "LookAt" Transform
+CinemachineMixingCamera --> "Follow" Transform
+@enduml

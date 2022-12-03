@@ -1,0 +1,9 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ElementAtAsync(source:IUniTaskAsyncEnumerable<TSource>, index:int, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} ElementAtOrDefaultAsync(source:IUniTaskAsyncEnumerable<TSource>, index:int, cancellationToken:CancellationToken) : UniTask<TSource>
+}
+class ElementAt <<static>> {
+    + {static} <<async>> ElementAtAsync(source:IUniTaskAsyncEnumerable<TSource>, index:int, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+}
+@enduml

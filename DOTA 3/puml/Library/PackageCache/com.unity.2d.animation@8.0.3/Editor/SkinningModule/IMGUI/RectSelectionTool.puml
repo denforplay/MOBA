@@ -1,0 +1,13 @@
+@startuml
+class "RectSelectionTool`1"<T> {
+    + controlID : int <<get>>
+    + OnGUI() : void
+}
+class "IRectSelector`1"<T> {
+}
+"RectSelectionTool`1" --> "rectSelector<T>" "IRectSelector`1"
+"RectSelectionTool`1" --> "cacheUndo" ICacheUndo
+"RectSelectionTool`1" o-> "onSelectionStart" Action
+"RectSelectionTool`1" o-> "onSelectionUpdate" Action
+"RectSelectionTool`1" o-> "onSelectionEnd" Action
+@enduml

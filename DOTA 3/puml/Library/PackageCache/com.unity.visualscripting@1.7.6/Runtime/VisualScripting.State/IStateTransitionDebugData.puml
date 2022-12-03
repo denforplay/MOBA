@@ -1,0 +1,7 @@
+@startuml
+interface IStateTransitionDebugData {
+    lastBranchFrame : int <<get>>
+    lastBranchTime : float <<get>>
+}
+IGraphElementDebugData <|-- IStateTransitionDebugData
+@enduml

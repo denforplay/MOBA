@@ -1,0 +1,5 @@
+@startuml
+interface ILayerable {
+    CreateLayerMixer(graph:PlayableGraph, go:GameObject, inputCount:int) : Playable
+}
+@enduml

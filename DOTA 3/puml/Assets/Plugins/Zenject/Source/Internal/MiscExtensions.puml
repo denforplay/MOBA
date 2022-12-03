@@ -1,0 +1,13 @@
+@startuml
+class MiscExtensions <<static>> {
+    + {static} Fmt(s:string, args:object[]) : string
+    + {static} IndexOf(list:IList<T>, item:T) : int
+    + {static} Join(values:IEnumerable<string>, separator:string) : string
+    + {static} AllocFreeAddRange(list:IList<T>, items:IList<T>) : void
+    + {static} RemoveWithConfirm(list:IList<T>, item:T) : void
+    + {static} RemoveWithConfirm(list:LinkedList<T>, item:T) : void
+    + {static} RemoveWithConfirm(dictionary:IDictionary<TKey, TVal>, key:TKey) : void
+    + {static} RemoveWithConfirm(set:HashSet<T>, item:T) : void
+    + {static} GetValueAndRemove(dictionary:IDictionary<TKey, TVal>, key:TKey) : TVal
+}
+@enduml

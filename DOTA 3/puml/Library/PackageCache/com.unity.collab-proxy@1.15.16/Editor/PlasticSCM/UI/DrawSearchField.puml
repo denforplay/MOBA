@@ -1,0 +1,5 @@
+@startuml
+class DrawSearchField <<static>> {
+    {static} Draw(searchField:SearchField, searchFieldRect:Rect, searchString:string) : string
+}
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+class ChangesTabPageView {
+    + <<const>> UssClassName : string = "changes-tab-page-view"
+    + <<const>> SearchBarUssClassName : string
+    + <<const>> EntryGroupsUssClassName : string
+    + <<const>> PublishButtonUssClassName : string
+    + <<const>> TextFieldUssClassName : string
+    + <<const>> ListViewUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    m_Active : bool
+    + ChangesTabPageView()
+    SetupEvents() : void
+    + SetBusyStatus(busy:bool) : void
+    + SetSearchQuery(query:string) : void
+    + SetRevisionSummary(message:string) : void
+    + SetConflicts(list:IReadOnlyList<IChangeEntryData>) : void
+    + SetSelectedChanges() : void
+    + SetChanges(list:IReadOnlyList<IChangeEntryData>) : void
+    + SetToggledCount(count:int) : void
+    + SetPublishEnabled(enabled:bool, reason:string) : void
+    + DisplayDialogue(title:string, message:string, affirmative:string) : bool
+    + DisplayDialogue(title:string, message:string, affirmative:string, negative:string) : bool
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+TabPageComponent <|-- ChangesTabPageView
+IChangesView <|-- ChangesTabPageView
+ChangesTabPageView --> "m_Presenter" IChangesPresenter
+ChangesTabPageView --> "m_PublishButton" IconTextButton
+ChangesTabPageView --> "m_RevisionSummaryBox" BetterTextField
+ChangesTabPageView --> "m_SearchBar" SearchBar
+ChangesTabPageView --> "m_EntryGroupsContainer" VisualElement
+ChangesTabPageView --> "m_ConflictedChangeListAdapter" ConflictedChangeListAdapter
+ChangesTabPageView --> "m_ToggleableChangeListAdapter" ToggleableChangeListAdapter
+ChangesTabPageView --> "m_EntryToggleableGroup" ChangeEntryGroup
+ChangesTabPageView --> "m_EntryConflictsGroup" ChangeEntryGroup
+ChangesTabPageView --> "m_ActiveGroup" VisualElement
+ChangesTabPageView --> "Presenter" IChangesPresenter
+ChangesTabPageView +-- UxmlFactory
+"UxmlFactory`1" "<ChangesTabPageView>" <|-- UxmlFactory
+@enduml

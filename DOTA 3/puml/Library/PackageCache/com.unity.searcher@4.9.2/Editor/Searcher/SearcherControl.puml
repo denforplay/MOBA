@@ -1,0 +1,77 @@
+@startuml
+class SearcherControl {
+    <<const>> k_WindowTitleLabel : string = "windowTitleLabel"
+    <<const>> k_WindowDetailsPanel : string = "windowDetailsVisualContainer"
+    <<const>> k_WindowResultsScrollViewName : string = "windowResultsScrollView"
+    <<const>> k_WindowSearchTextFieldName : string = "searchBox"
+    <<const>> k_WindowAutoCompleteLabelName : string = "autoCompleteLabel"
+    <<const>> k_WindowSearchIconName : string = "searchIcon"
+    <<const>> k_WindowResizerName : string = "windowResizer"
+    <<const>> kWindowSearcherPanel : string = "searcherVisualContainer"
+    <<const>> k_TabCharacter : int = 9
+    m_SuggestedTerm : string
+    m_Text : string
+    + SearcherControl()
+    OnConfirmMultiselect() : void
+    HackDueToListViewScrollViewStealingFocus() : void
+    OnEnterPanel(e:AttachToPanelEvent) : void
+    OnLeavePanel(e:DetachFromPanelEvent) : void
+    OnKeyDown(e:KeyDownEvent) : void
+    OnListViewSelect(item:SearcherItem) : void
+    CancelSearch() : void
+    + Setup(searcher:Searcher, selectionCallback:Action<SearcherItem>, analyticsDataCallback:Action<Searcher.AnalyticsEvent>, searchResultsFilterCallback:Func<IEnumerable<SearcherItem>, string, SearcherItem>) : void
+    Refresh() : void
+    MakeItem() : VisualElement
+    GenerateVisibleResults() : void
+    ExpandAllParents() : void
+    RemoveChildrenFromResults() : void
+    RegenerateVisibleResults() : void
+    AddResultChildren(item:SearcherItem, idSet:ISet<SearcherItem>) : void
+    HasChildResult(item:SearcherItem) : bool
+    GetExpanderState(index:int) : ItemExpanderState
+    Bind(target:VisualElement, index:int) : void
+    ToggleItemForMultiSelect(item:SearcherItem, selected:bool) : void
+    {static} GetItemsToHide(parent:SearcherItem, itemsToHide:HashSet<SearcherItem>) : void
+    HideUnexpandedItems() : void
+    RefreshListView() : void
+    RefreshListViewOn() : void
+    Expand(item:SearcherItem) : void
+    Collapse(item:SearcherItem) : void
+    ExpandOrCollapse(evt:MouseDownEvent) : void
+    OnSearchTextFieldTextChanged(inputEvent:InputEvent) : void
+    OnSearchTextFieldKeyDown(keyDownEvent:KeyDownEvent) : void
+    SelectAndReplaceCurrentWord() : void
+    SetSelectedElementInResultsList(keyDownEvent:KeyDownEvent) : void
+    SetSelectedElementInResultsList(selectedIndex:int) : void
+}
+class "IEnumerable`1"<T> {
+}
+class "List`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "Action`1"<T> {
+}
+class "Func`3"<T1,T2,T3> {
+}
+VisualElement <|-- SearcherControl
+SearcherControl --> "m_AutoCompleteLabel" Label
+SearcherControl --> "m_Results<SearcherItem>" "IEnumerable`1"
+SearcherControl --> "m_VisibleResults<SearcherItem>" "List`1"
+SearcherControl --> "m_ExpandedResults<SearcherItem>" "HashSet`1"
+SearcherControl --> "m_MultiSelectSelection<SearcherItem>" "HashSet`1"
+SearcherControl --> "m_SearchItemToVisualToggle<SearcherItem,Toggle>" "Dictionary`2"
+SearcherControl --> "m_Searcher" Searcher
+SearcherControl --> "m_SelectionCallback<SearcherItem>" "Action`1"
+SearcherControl --> "m_AnalyticsDataCallback<Searcher.AnalyticsEvent>" "Action`1"
+SearcherControl --> "m_SearchResultsFilterCallback<IEnumerable<SearcherItem>,string,SearcherItem>" "Func`3"
+SearcherControl --> "m_ListView" ListView
+SearcherControl --> "m_SearchTextField" TextField
+SearcherControl --> "m_SearchTextInput" VisualElement
+SearcherControl --> "m_DetailsPanel" VisualElement
+SearcherControl --> "m_SearcherPanel" VisualElement
+SearcherControl --> "m_ContentContainer" VisualElement
+SearcherControl --> "m_ConfirmButton" Button
+@enduml

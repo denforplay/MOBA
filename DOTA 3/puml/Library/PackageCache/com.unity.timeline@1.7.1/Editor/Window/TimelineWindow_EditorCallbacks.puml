@@ -1,0 +1,20 @@
+@startuml
+class TimelineWindow <<partial>> {
+    OnSelectionChangedInactive() : void
+    InitializeEditorCallbacks() : void
+    GlobalEventHandler() : void
+    OnEditorQuit() : void
+    RemoveEditorCallbacks() : void
+    OnPlayModePause(state:PauseState) : void
+    OnPrefabApplied(go:GameObject) : void
+    OnSceneSaved(scene:Scene) : void
+    OnCurveModified(clip:AnimationClip, binding:EditorCurveBinding, type:AnimationUtility.CurveModifiedType) : void
+    OnPlayModeStateChanged(playModeState:PlayModeStateChange) : void
+    PostprocessAnimationRecordingModifications(modifications:UndoPropertyModification[]) : UndoPropertyModification[]
+    DirtyModifiedObjects(modifications:UndoPropertyModification[]) : void
+    ProcessAssetModifications(modifications:UndoPropertyModification[]) : UndoPropertyModification[]
+    OnUndoRedo() : void
+    {static} ValidateSelection() : void
+    OnComponentWasAdded(c:Component) : void
+}
+@enduml

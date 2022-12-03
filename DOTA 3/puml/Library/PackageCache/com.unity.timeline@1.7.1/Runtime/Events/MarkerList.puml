@@ -1,0 +1,26 @@
+@startuml
+class MarkerList <<struct>> {
+    m_CacheDirty : bool
+    m_HasNotifications : bool
+    + MarkerList(capacity:int)
+    + Add(item:ScriptableObject) : void
+    + Remove(item:IMarker) : bool
+    + Remove(item:ScriptableObject, timelineAsset:TimelineAsset, thingToDirty:PlayableAsset) : bool
+    + Clear() : void
+    + Contains(item:ScriptableObject) : bool
+    + GetMarkers() : IEnumerable<IMarker>
+    + Count : int <<get>>
+    + GetRawMarkerList() : List<ScriptableObject>
+    + CreateMarker(type:Type, time:double, owner:TrackAsset) : IMarker
+    + HasNotifications() : bool
+    OnBeforeSerialize() : void
+    OnAfterDeserialize() : void
+    BuildCache() : void
+}
+class "List`1"<T> {
+}
+ISerializationCallbackReceiver <|-- MarkerList
+MarkerList --> "m_Objects<ScriptableObject>" "List`1"
+MarkerList --> "m_Cache<IMarker>" "List`1"
+MarkerList --> "markers<IMarker>" "List`1"
+@enduml

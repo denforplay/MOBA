@@ -1,0 +1,12 @@
+@startuml
+class DynamicBitfield <<struct>> {
+    + length : int
+    + SetLength(newLength:int) : void
+    + SetBit(bitIndex:int) : void
+    + TestBit(bitIndex:int) : bool
+    + ClearBit(bitIndex:int) : void
+}
+class "InlinedArray`1"<T> {
+}
+DynamicBitfield --> "array<ulong>" "InlinedArray`1"
+@enduml

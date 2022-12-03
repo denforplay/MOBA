@@ -1,0 +1,8 @@
+@startuml
+interface IDebugDisplaySettingsQuery {
+    AreAnySettingsActive : bool <<get>>
+    IsPostProcessingAllowed : bool <<get>>
+    IsLightingActive : bool <<get>>
+    TryGetScreenClearColor(color:Color) : bool
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+interface "ICircleSelector`1"<T> {
+    radius : float <<get>> <<set>>
+}
+class "ISelector`1"<T> {
+}
+"ISelector`1" "<T>" <|-- "ICircleSelector`1"
+@enduml

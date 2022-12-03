@@ -1,0 +1,34 @@
+@startuml
+class "ListChangedEventArgs`1"<T> <<sealed>> {
+    + <<readonly>> index : int
+    + <<readonly>> item : T
+    + ListChangedEventArgs(index:int, item:T)
+}
+class "ObservableList`1"<T> {
+    +  <<event>> ItemAdded : ListChangedEventHandler<T> 
+    +  <<event>> ItemRemoved : ListChangedEventHandler<T> 
+    + Count : int <<get>>
+    + IsReadOnly : bool <<get>>
+    + ObservableList()
+    + ObservableList(capacity:int)
+    + ObservableList(collection:IEnumerable<T>)
+    OnEvent(e:ListChangedEventHandler<T>, index:int, item:T) : void
+    + Contains(item:T) : bool
+    + IndexOf(item:T) : int
+    + Add(item:T) : void
+    + Add(items:T[]) : void
+    + Insert(index:int, item:T) : void
+    + Remove(item:T) : bool
+    + Remove(items:T[]) : int
+    + RemoveAt(index:int) : void
+    + Clear() : void
+    + CopyTo(array:T[], arrayIndex:int) : void
+    + GetEnumerator() : IEnumerator<T>
+    GetEnumerator() : IEnumerator
+}
+class "IList`1"<T> {
+}
+EventArgs <|-- "ListChangedEventArgs`1"
+"IList`1" "<T>" <|-- "ObservableList`1"
+"ObservableList`1" --> "m_List<T>" "IList`1"
+@enduml

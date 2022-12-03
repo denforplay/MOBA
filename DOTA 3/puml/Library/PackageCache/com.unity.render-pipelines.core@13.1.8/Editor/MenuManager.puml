@@ -1,0 +1,14 @@
+@startuml
+class MenuManager <<static>> {
+    {static} GetAddMenuItemMethod() : Action<string, string, bool, int, Action, Func<bool>>
+    + {static} AddMenuItem(path:string, shortcut:string, @checked:bool, priority:int, execute:System.Action, validate:System.Func<bool>) : void
+    {static} GetRemoveMenuItemMethod() : Action<string>
+    + {static} RemoveMenuItem(path:string) : void
+}
+class "Action`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "Action`1"<T> {
+}
+MenuManager o-> "s_AddMenuItem<string,string,bool,int,Action,Func<bool>>" "Action`6"
+MenuManager o-> "s_RemoveMenuItem<string>" "Action`1"
+@enduml

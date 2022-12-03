@@ -1,0 +1,12 @@
+@startuml
+class CreepView {
+    + IsDestroyed : bool <<get>>
+    + SubscribeOnDestroy(action:Action) : void
+    + UnSubscribeOnDestroy(action:Action) : void
+    + SetTeam(team:Team) : void
+    + SetStartWayPoint(direction:Direction, wayPoint:WayPoint) : void
+}
+MonoBehaviour <|-- CreepView
+CreepView --> "NavMeshAgent" NavMeshAgent
+CreepView --> "Team" Team
+@enduml

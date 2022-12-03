@@ -1,0 +1,13 @@
+@startuml
+class SceneViewOpenTilePaletteOverlay {
+    + SceneViewOpenTilePaletteOverlay()
+    + visible : bool <<get>>
+}
+class TilePaletteOpenPalette <<sealed>> {
+    <<const>> k_ToolSettingsClass : string = "unity-tool-settings"
+    + TilePaletteOpenPalette()
+}
+ToolbarOverlay <|-- SceneViewOpenTilePaletteOverlay
+ITransientOverlay <|-- SceneViewOpenTilePaletteOverlay
+EditorToolbarButton <|-- TilePaletteOpenPalette
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class "UnselectTool`1"<T> {
+    + OnGUI() : void
+}
+class "ISelection`1"<T> {
+}
+"UnselectTool`1" --> "cacheUndo" ICacheUndo
+"UnselectTool`1" --> "selection<T>" "ISelection`1"
+"UnselectTool`1" o-> "onUnselect" Action
+@enduml

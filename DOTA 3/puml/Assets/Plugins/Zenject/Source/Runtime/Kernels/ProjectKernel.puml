@@ -1,0 +1,10 @@
+@startuml
+class ProjectKernel {
+    + OnApplicationQuit() : void
+    + DestroyEverythingInOrder() : void
+    + ForceUnloadAllScenes(immediate:bool) : void
+}
+MonoKernel <|-- ProjectKernel
+ProjectKernel o-> "_settings" ZenjectSettings
+ProjectKernel o-> "_contextRegistry" SceneContextRegistry
+@enduml

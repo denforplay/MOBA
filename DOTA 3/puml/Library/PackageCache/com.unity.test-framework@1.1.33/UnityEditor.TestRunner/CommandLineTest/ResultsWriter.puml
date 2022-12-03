@@ -1,0 +1,8 @@
+@startuml
+class ResultsWriter {
+    + WriteResultToFile(result:ITestResultAdaptor, filePath:string) : void
+    CreateDirectory(filePath:string) : void
+    + WriteResultToStream(result:ITestResultAdaptor, streamWriter:StreamWriter, settings:XmlWriterSettings) : void
+    WriteResultsToXml(result:ITestResultAdaptor, xmlWriter:XmlWriter) : void
+}
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Concat(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "Concat`1"<TSource> <<sealed>> {
+    + Concat(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Concat <<sealed>> {
+    + _Concat(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    StartIterate() : void
+    {static} MoveNextCore(state:object) : void
+    <<async>> RunSecondAfterDisposeAsync() : UniTaskVoid
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+enum IteratingState {
+    IteratingFirst,
+    IteratingSecond,
+    Complete,
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Concat`1"
+"Concat`1" --> "first<TSource>" "IUniTaskAsyncEnumerable`1"
+"Concat`1" --> "second<TSource>" "IUniTaskAsyncEnumerable`1"
+"Concat`1" +-- _Concat
+MoveNextSource <|-- _Concat
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _Concat
+_Concat o-> "MoveNextCoreDelegate<object>" "Action`1"
+_Concat --> "first<TSource>" "IUniTaskAsyncEnumerable`1"
+_Concat --> "second<TSource>" "IUniTaskAsyncEnumerable`1"
+_Concat --> "cancellationToken" CancellationToken
+_Concat --> "iteratingState" IteratingState
+_Concat --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_Concat --> "Current" TSource
+_Concat +-- IteratingState
+@enduml

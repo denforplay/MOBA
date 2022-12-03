@@ -1,0 +1,23 @@
+@startuml
+class TimelineWindow <<partial>> {
+    m_LastFrameRate : double
+    m_TimeAreaDirty : bool = true
+    InitializeTimeArea() : void
+    DrawTimelineRuler() : void
+    InitTimeAreaFrameRate() : void
+    SyncTimeAreaShownRange() : void
+}
+class Styles <<static>> {
+    + {static} DurationModeText : string
+}
+class TimelineTimeArea {
+    + TimelineTimeArea(state:WindowState, minimalGUI:bool)
+    + <<override>> FormatTickTime(time:float, frameRate:float, timeFormat:TimeFormat) : string
+}
+TimelineWindow --> "m_TimeArea" TimelineTimeArea
+TimelineWindow --> "timeArea" TimeArea
+TimelineWindow +-- Styles
+TimelineWindow +-- TimelineTimeArea
+TimeArea <|-- TimelineTimeArea
+TimelineTimeArea --> "m_State" WindowState
+@enduml

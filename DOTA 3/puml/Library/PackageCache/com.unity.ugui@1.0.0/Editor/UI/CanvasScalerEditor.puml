@@ -1,0 +1,28 @@
+@startuml
+class CanvasScalerEditor {
+    <<const>> kSliderEndpointLabelsHeight : int = 12
+    + <<override>> OnInspectorGUI() : void
+}
+class Styles {
+    + Styles()
+}
+Editor <|-- CanvasScalerEditor
+CanvasScalerEditor --> "m_UiScaleMode" SerializedProperty
+CanvasScalerEditor --> "m_ScaleFactor" SerializedProperty
+CanvasScalerEditor --> "m_ReferenceResolution" SerializedProperty
+CanvasScalerEditor --> "m_ScreenMatchMode" SerializedProperty
+CanvasScalerEditor --> "m_MatchWidthOrHeight" SerializedProperty
+CanvasScalerEditor --> "m_PhysicalUnit" SerializedProperty
+CanvasScalerEditor --> "m_FallbackScreenDPI" SerializedProperty
+CanvasScalerEditor --> "m_DefaultSpriteDPI" SerializedProperty
+CanvasScalerEditor --> "m_DynamicPixelsPerUnit" SerializedProperty
+CanvasScalerEditor --> "m_ReferencePixelsPerUnit" SerializedProperty
+CanvasScalerEditor --> "m_PresetInfoIsWorld" SerializedProperty
+CanvasScalerEditor +-- Styles
+Styles --> "matchContent" GUIContent
+Styles --> "widthContent" GUIContent
+Styles --> "heightContent" GUIContent
+Styles --> "uiScaleModeContent" GUIContent
+Styles --> "leftAlignedLabel" GUIStyle
+Styles --> "rightAlignedLabel" GUIStyle
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class StyleManager <<static>> {
+    {static} <<readonly>> k_ErrorCannotFindStyle : string
+    + {static} UssStyleForType(type:Type) : GUIStyle
+    {static} CustomStyleForType(type:Type) : string
+    {static} IsStyleValid(ussStyle:string) : bool
+    {static} ClearCacheIfInvalid() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+StyleManager o-> "s_CustomStyles<Type,GUIStyle>" "Dictionary`2"
+StyleManager --> "s_CurrentSkin" GUISkin
+@enduml

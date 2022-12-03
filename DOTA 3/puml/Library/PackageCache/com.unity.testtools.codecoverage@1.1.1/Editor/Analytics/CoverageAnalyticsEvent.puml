@@ -1,0 +1,46 @@
+@startuml
+class CoverageAnalyticsEvent {
+    + duration : long
+    + success : bool
+    + runFromCommandLine : bool
+    + batchmode : bool
+    + useProjectSettings : bool
+    + generateHTMLReport : bool
+    + generateHistory : bool
+    + createBadges : bool
+    + generateMetrics : bool
+    + autogenerate : bool
+    + clearData : bool
+    + clearHistory : bool
+    + generateFromLast : bool
+    + switchToDebugMode : bool
+    + inDebugMode : bool
+    + switchBurstOff : bool
+    + useDefaultResultsLoc : bool
+    + useDefaultHistoryLoc : bool
+    + useDefaultAssemblyFilters : bool
+    + useDefaultPathFilters : bool
+    + enterAssembliesDialog : bool
+    + updateAssembliesDialog : bool
+    + updateIncludedPaths : bool
+    + selectAddFolder_IncludedPaths : bool
+    + selectAddFile_IncludedPaths : bool
+    + numOfIncludedPaths : int
+    + updateExcludedPaths : bool
+    + selectAddFolder_ExcludedPaths : bool
+    + selectAddFile_ExcludedPaths : bool
+    + numOfExcludedPaths : int
+    + useAPI_StartRec : bool
+    + useAPI_StopRec : bool
+    + useAPI_PauseRec : bool
+    + useAPI_UnpauseRec : bool
+    + useEvent_onCoverageSessionStarted : bool
+    + useEvent_onCoverageSessionFinished : bool
+    + useEvent_onCoverageSessionPaused : bool
+    + useEvent_onCoverageSessionUnpaused : bool
+    + usePathStrippingPatterns : bool
+    + useSourcePaths : bool
+}
+CoverageAnalyticsEvent --> "actionID" ActionID
+CoverageAnalyticsEvent --> "coverageModeId" CoverageModeID
+@enduml

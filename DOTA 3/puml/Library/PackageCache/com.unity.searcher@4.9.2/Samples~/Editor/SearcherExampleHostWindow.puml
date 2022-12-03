@@ -1,0 +1,15 @@
+@startuml
+class SearcherExampleHostWindow {
+    + {static} ShowAllInOne() : void
+    + OnEnable() : void
+    OnGeometryChangedEvent(evt:GeometryChangedEvent) : void
+    OnDisable() : void
+    OnKeyDown(evt:KeyDownEvent) : void
+    OnMouseDown(evt:MouseDownEvent) : void
+}
+class "List`1"<T> {
+}
+EditorWindow <|-- SearcherExampleHostWindow
+SearcherExampleHostWindow --> "m_SearcherItems<SearcherItem>" "List`1"
+SearcherExampleHostWindow --> "m_DummyVisualElement" VisualElement
+@enduml

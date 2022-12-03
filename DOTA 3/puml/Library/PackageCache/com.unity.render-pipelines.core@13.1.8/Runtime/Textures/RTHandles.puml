@@ -1,0 +1,24 @@
+@startuml
+class RTHandles <<static>> {
+    + {static} maxWidth : int <<get>>
+    + {static} maxHeight : int <<get>>
+    + {static} Alloc(width:int, height:int, slices:int, depthBufferBits:DepthBits, colorFormat:GraphicsFormat, filterMode:FilterMode, wrapMode:TextureWrapMode, dimension:TextureDimension, enableRandomWrite:bool, useMipMap:bool, autoGenerateMips:bool, isShadowMap:bool, anisoLevel:int, mipMapBias:float, msaaSamples:MSAASamples, bindTextureMS:bool, useDynamicScale:bool, memoryless:RenderTextureMemoryless, vrUsage:VRTextureUsage, name:string) : RTHandle
+    + {static} Alloc(descriptor:RenderTextureDescriptor, filterMode:FilterMode, wrapMode:TextureWrapMode, isShadowMap:bool, anisoLevel:int, mipMapBias:float, name:string) : RTHandle
+    + {static} Alloc(scaleFactor:Vector2, slices:int, depthBufferBits:DepthBits, colorFormat:GraphicsFormat, filterMode:FilterMode, wrapMode:TextureWrapMode, dimension:TextureDimension, enableRandomWrite:bool, useMipMap:bool, autoGenerateMips:bool, isShadowMap:bool, anisoLevel:int, mipMapBias:float, msaaSamples:MSAASamples, bindTextureMS:bool, useDynamicScale:bool, memoryless:RenderTextureMemoryless, vrUsage:VRTextureUsage, name:string) : RTHandle
+    + {static} Alloc(scaleFactor:Vector2, descriptor:RenderTextureDescriptor, filterMode:FilterMode, wrapMode:TextureWrapMode, isShadowMap:bool, anisoLevel:int, mipMapBias:float, name:string) : RTHandle
+    + {static} Alloc(scaleFunc:ScaleFunc, slices:int, depthBufferBits:DepthBits, colorFormat:GraphicsFormat, filterMode:FilterMode, wrapMode:TextureWrapMode, dimension:TextureDimension, enableRandomWrite:bool, useMipMap:bool, autoGenerateMips:bool, isShadowMap:bool, anisoLevel:int, mipMapBias:float, msaaSamples:MSAASamples, bindTextureMS:bool, useDynamicScale:bool, memoryless:RenderTextureMemoryless, vrUsage:VRTextureUsage, name:string) : RTHandle
+    + {static} Alloc(scaleFunc:ScaleFunc, descriptor:RenderTextureDescriptor, filterMode:FilterMode, wrapMode:TextureWrapMode, isShadowMap:bool, anisoLevel:int, mipMapBias:float, name:string) : RTHandle
+    + {static} Alloc(tex:Texture) : RTHandle
+    + {static} Alloc(tex:RenderTexture) : RTHandle
+    + {static} Alloc(tex:RenderTargetIdentifier) : RTHandle
+    + {static} Alloc(tex:RenderTargetIdentifier, name:string) : RTHandle
+    + {static} Initialize(width:int, height:int) : void
+    + {static} Release(rth:RTHandle) : void
+    + {static} SetHardwareDynamicResolutionState(hwDynamicResRequested:bool) : void
+    + {static} SetReferenceSize(width:int, height:int) : void
+    + {static} ResetReferenceSize(width:int, height:int) : void
+    + {static} CalculateRatioAgainstMaxSize(width:int, height:int) : Vector2
+}
+RTHandles o-> "s_DefaultInstance" RTHandleSystem
+RTHandles --> "rtHandleProperties" RTHandleProperties
+@enduml

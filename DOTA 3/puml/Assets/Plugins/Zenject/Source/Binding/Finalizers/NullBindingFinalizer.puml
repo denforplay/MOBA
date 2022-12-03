@@ -1,0 +1,7 @@
+@startuml
+class NullBindingFinalizer {
+    + FinalizeBinding(container:DiContainer) : void
+}
+IBindingFinalizer <|-- NullBindingFinalizer
+NullBindingFinalizer --> "BindingInheritanceMethod" BindingInheritanceMethods
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+class ConfinerOven {
+    + ConfinerOven(inputPath:List<List<Vector2>>, aspectRatio:float, maxFrustumHeight:float)
+    + GetBakedSolution(frustumHeight:float) : BakedSolution
+    + m_BakeProgress : float
+    + BakeConfiner(maxComputationTimePerFrameInSeconds:float) : void
+}
+class BakedSolution {
+    + FrustumHeight : float <<get>>
+    + BakedSolution(aspectRatio:float, frustumHeight:float, hasBones:bool, polygonBounds:Rect, originalPolygon:List<List<IntPoint>>, solution:List<List<IntPoint>>)
+    + Clear() : void
+    + IsValid(frustumHeight:float) : bool
+    + ConfinePoint(pointToConfine:Vector2) : Vector2
+}
+class AspectStretcher <<struct>> {
+    + Aspect : float <<get>>
+    + AspectStretcher(aspect:float, centerX:float)
+    + Stretch(p:Vector2) : Vector2
+    + Unstretch(p:Vector2) : Vector2
+}
+class PolygonSolution <<struct>> {
+    + m_FrustumHeight : float
+    + StateChanged(paths:List<List<IntPoint>>) : bool
+    + IsEmpty : bool <<get>>
+}
+enum BakingState {
+    BAKING,
+    BAKED,
+    TIMEOUT,
+}
+class BakingStateCache <<struct>> {
+    + stepSize : float
+    + maxFrustumHeight : float
+    + currentFrustumHeight : float
+    + bakeTime : float
+}
+class "List`1"<T> {
+}
+ConfinerOven o-> "m_AspectStretcher" AspectStretcher
+ConfinerOven --> "State" BakingState
+ConfinerOven +-- BakedSolution
+BakedSolution --> "m_Solution<List<IntPoint>>" "List`1"
+ConfinerOven +-- AspectStretcher
+ConfinerOven +-- PolygonSolution
+PolygonSolution --> "m_Polygons<List<IntPoint>>" "List`1"
+ConfinerOven +-- BakingState
+ConfinerOven +-- BakingStateCache
+BakingStateCache --> "offsetter" ClipperOffset
+BakingStateCache --> "solutions<PolygonSolution>" "List`1"
+BakingStateCache --> "rightCandidate" PolygonSolution
+BakingStateCache --> "leftCandidate" PolygonSolution
+BakingStateCache --> "maxCandidate<List<IntPoint>>" "List`1"
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class InitCustomDeviceUsages <<static>> {
+    {static} InitCustomDeviceUsages()
+}
+class CustomDeviceUsages {
+    + gamepadIndex : int
+    + usageTag : string
+}
+MonoBehaviour <|-- CustomDeviceUsages
+@enduml

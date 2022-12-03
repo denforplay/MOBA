@@ -1,0 +1,16 @@
+@startuml
+class DrawInspectorOperations <<static>> {
+    {static} Editor_finishedDefaultHeaderGUI(inspector:UnityEditor.Editor) : void
+    {static} DrawBackRectangle(isEnabled:bool) : void
+    {static} DrawButtons(assetList:AssetList, selectedGroupInfo:AssetMenuOperations) : void
+    {static} DrawStatusLabel(assetStatus:AssetsOverlays.AssetStatus, lockStatusData:LockStatusData) : void
+    {static} DoAddButton() : void
+    {static} DoCheckoutButton() : void
+    {static} DoCheckinButton() : void
+    {static} DoUndoButton() : void
+    {static} sIsEnabled : bool
+    <<const>> EXTRA_SPACE : string = "    "
+}
+DrawInspectorOperations --> "sOperations" IAssetMenuOperations
+DrawInspectorOperations --> "sAssetSelection" InspectorAssetSelection
+@enduml

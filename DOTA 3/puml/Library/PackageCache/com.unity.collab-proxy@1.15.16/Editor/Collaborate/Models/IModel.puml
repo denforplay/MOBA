@@ -1,0 +1,9 @@
+@startuml
+interface IModel {
+     <<event>> StateChanged : Action 
+    OnStart() : void
+    OnStop() : void
+    RestoreState(cache:IWindowCache) : void
+    SaveState(cache:IWindowCache) : void
+}
+@enduml

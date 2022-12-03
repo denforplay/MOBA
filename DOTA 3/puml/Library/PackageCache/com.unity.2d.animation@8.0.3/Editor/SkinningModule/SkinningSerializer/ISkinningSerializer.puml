@@ -1,0 +1,22 @@
+@startuml
+interface ISkinningSerializer {
+    CanDeserialize(data:string) : bool
+    Deserialize(data:string) : SkinningCopyData
+    Serialize(skinningData:SkinningCopyData) : string
+}
+class SpriteBoneCopyData {
+    + order : int
+}
+class SkinningCopySpriteData {
+    + spriteName : string
+}
+class SkinningCopyData {
+    + pixelsPerUnit : float
+}
+class "List`1"<T> {
+}
+SkinningCopySpriteData --> "spriteBones<SpriteBoneCopyData>" "List`1"
+SkinningCopySpriteData --> "boneWeightGuids<string>" "List`1"
+SkinningCopySpriteData --> "boneWeightNames<string>" "List`1"
+SkinningCopyData o-> "copyData<SkinningCopySpriteData>" "List`1"
+@enduml

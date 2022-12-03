@@ -1,0 +1,16 @@
+@startuml
+class TMP_TextParsingUtilities {
+    {static} TMP_TextParsingUtilities()
+    + {static} GetHashCode(s:string) : int
+    + {static} GetHashCodeCaseSensitive(s:string) : int
+    <<const>> k_LookupStringL : string = "-------------------------------- !-#$%&-()*+,-./0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz[-]^_`abcdefghijklmnopqrstuvwxyz{|&#125;~-"
+    <<const>> k_LookupStringU : string = "-------------------------------- !-#$%&-()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[-]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|&#125;~-"
+    + {static} ToLowerASCIIFast(c:char) : char
+    + {static} ToUpperASCIIFast(c:char) : char
+    + {static} ToUpperASCIIFast(c:uint) : uint
+    + {static} ToLowerASCIIFast(c:uint) : uint
+    + {static} IsHighSurrogate(c:uint) : bool
+    + {static} IsLowSurrogate(c:uint) : bool
+}
+TMP_TextParsingUtilities --> "instance" TMP_TextParsingUtilities
+@enduml

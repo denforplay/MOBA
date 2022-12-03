@@ -1,0 +1,6 @@
+@startuml
+class MonoOnlyAttribute {
+    + MonoOnlyAttribute(reason:string)
+}
+Attribute <|-- MonoOnlyAttribute
+@enduml

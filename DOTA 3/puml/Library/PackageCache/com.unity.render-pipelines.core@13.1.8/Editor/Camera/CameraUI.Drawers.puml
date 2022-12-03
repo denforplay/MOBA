@@ -1,0 +1,22 @@
+@startuml
+class CameraUI <<static>> <<partial>> {
+    {static} s_FovChanged : bool
+    {static} s_FovLastValue : float
+    {static} DrawerProjectionType(p:ISerializedCamera, owner:Editor) : ProjectionType
+    {static} DrawerOrthographicType(p:ISerializedCamera, owner:Editor) : void
+    {static} DrawerPerspectiveType(p:ISerializedCamera, owner:Editor) : void
+    + {static} Drawer_Projection(p:ISerializedCamera, owner:Editor) : void
+    {static} Drawer_FieldClippingPlanes(p:ISerializedCamera, owner:Editor) : void
+}
+enum ProjectionType {
+    Perspective,
+    Orthographic,
+}
+enum ProjectionMatrixMode {
+    Explicit,
+    Implicit,
+    PhysicalPropertiesBased,
+}
+CameraUI +-- ProjectionType
+CameraUI +-- ProjectionMatrixMode
+@enduml

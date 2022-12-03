@@ -1,0 +1,8 @@
+@startuml
+abstract class AICombatControllerBase {
+    + AICombatControllerBase(creepController:CreepController, creep:Creep)
+    + Attack(targetableView:TargetableView) : void
+    + Cancel() : void
+}
+BaseCombatController <|-- AICombatControllerBase
+@enduml

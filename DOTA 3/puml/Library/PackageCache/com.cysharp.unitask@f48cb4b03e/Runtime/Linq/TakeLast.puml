@@ -1,0 +1,39 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} TakeLast(source:IUniTaskAsyncEnumerable<TSource>, count:Int32) : IUniTaskAsyncEnumerable<TSource>
+}
+class "TakeLast`1"<TSource> <<sealed>> {
+    <<readonly>> count : int
+    + TakeLast(source:IUniTaskAsyncEnumerable<TSource>, count:int)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _TakeLast <<sealed>> {
+    <<readonly>> count : int
+    iterateCompleted : bool
+    continueNext : bool
+    + _TakeLast(source:IUniTaskAsyncEnumerable<TSource>, count:int, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "Queue`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "TakeLast`1"
+"TakeLast`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"TakeLast`1" +-- _TakeLast
+MoveNextSource <|-- _TakeLast
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _TakeLast
+_TakeLast o-> "MoveNextCoreDelegate<object>" "Action`1"
+_TakeLast --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_TakeLast --> "cancellationToken" CancellationToken
+_TakeLast --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_TakeLast --> "queue<TSource>" "Queue`1"
+_TakeLast --> "Current" TSource
+@enduml

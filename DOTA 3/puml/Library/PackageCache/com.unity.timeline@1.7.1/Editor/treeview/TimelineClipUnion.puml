@@ -1,0 +1,17 @@
+@startuml
+class TimelineClipUnion {
+    m_Start : double
+    m_Duration : double
+    m_InitUnionRect : bool = true
+    Add(clip:TimelineClipGUI) : void
+    + Draw(parentRect:Rect, state:WindowState) : void
+    + {static} Build(clips:List<TimelineClipGUI>) : List<TimelineClipUnion>
+    + {static} Encompass(a:Rect, b:Rect) : Rect
+    + {static} Intersection(r1:Rect, r2:Rect, intersection:Rect) : bool
+}
+class "List`1"<T> {
+}
+TimelineClipUnion o-> "m_Members<TimelineClipGUI>" "List`1"
+TimelineClipUnion --> "m_BoundingRect" Rect
+TimelineClipUnion --> "m_Union" Rect
+@enduml

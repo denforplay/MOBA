@@ -1,0 +1,44 @@
+@startuml
+class CinemachineComposer {
+    + m_LookaheadTime : float = 0
+    + m_LookaheadSmoothing : float = 0
+    + m_LookaheadIgnoreY : bool
+    + m_HorizontalDamping : float = 0.5f
+    + m_VerticalDamping : float = 0.5f
+    + m_ScreenX : float = 0.5f
+    + m_ScreenY : float = 0.5f
+    + m_DeadZoneWidth : float = 0f
+    + m_DeadZoneHeight : float = 0f
+    + m_SoftZoneWidth : float = 0.8f
+    + m_SoftZoneHeight : float = 0.8f
+    + m_BiasX : float = 0f
+    + m_BiasY : float = 0f
+    + m_CenterOnActivate : bool = true
+    + <<override>> IsValid : bool <<get>>
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<override>> GetMaxDampTime() : float
+    + <<override>> PrePipelineMutateCameraState(curState:CameraState, deltaTime:float) : void
+    + <<override>> MutateCameraState(curState:CameraState, deltaTime:float) : void
+}
+class FovCache <<struct>> {
+    + mFovH : float
+    + mFov : float
+    mOrthoSizeOverDistance : float
+    mAspect : float
+    + UpdateCache(lens:LensSettings, softGuide:Rect, hardGuide:Rect, targetDistance:float) : void
+}
+CinemachineComponentBase <|-- CinemachineComposer
+CinemachineComposer o-> "m_TrackedObjectOffset" Vector3
+CinemachineComposer --> "TrackedPoint" Vector3
+CinemachineComposer o-> "m_CameraPosPrevFrame" Vector3
+CinemachineComposer o-> "m_LookAtPrevFrame" Vector3
+CinemachineComposer o-> "m_ScreenOffsetPrevFrame" Vector2
+CinemachineComposer o-> "m_CameraOrientationPrevFrame" Quaternion
+CinemachineComposer --> "mCache" FovCache
+CinemachineComposer +-- FovCache
+FovCache --> "mFovSoftGuideRect" Rect
+FovCache --> "mFovHardGuideRect" Rect
+FovCache --> "mSoftGuideRect" Rect
+FovCache --> "mHardGuideRect" Rect
+@enduml

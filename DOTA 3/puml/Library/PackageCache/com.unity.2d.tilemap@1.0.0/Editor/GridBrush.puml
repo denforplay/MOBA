@@ -1,0 +1,40 @@
+@startuml
+class GridBrush {
+    + cellCount : int <<get>>
+    + canChangeZPosition : bool <<get>> <<set>>
+    + GridBrush()
+    + Init(size:Vector3Int) : void
+    + Init(size:Vector3Int, pivot:Vector3Int) : void
+    + <<override>> Paint(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> Erase(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> BoxFill(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<override>> BoxErase(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<override>> FloodFill(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> Rotate(direction:RotationDirection, layout:GridLayout.CellLayout) : void
+    + <<override>> Flip(flip:FlipAxis, layout:Grid.CellLayout) : void
+    + <<override>> Pick(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt, pickStart:Vector3Int) : void
+    + <<override>> MoveStart(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<override>> MoveEnd(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + Reset() : void
+    + UpdateSizeAndPivot(size:Vector3Int, pivot:Vector3Int) : void
+    + SetTile(position:Vector3Int, tile:TileBase) : void
+    + SetMatrix(position:Vector3Int, matrix:Matrix4x4) : void
+    + SetColor(position:Vector3Int, color:Color) : void
+    + GetCellIndex(brushPosition:Vector3Int) : int
+    + GetCellIndex(x:int, y:int, z:int) : int
+    + GetCellIndex(x:int, y:int, z:int, sizex:int, sizey:int, sizez:int) : int
+    + GetCellIndexWrapAround(x:int, y:int, z:int) : int
+    + <<override>> GetHashCode() : int
+}
+class BrushCell {
+    + <<override>> GetHashCode() : int
+}
+GridBrushBase <|-- GridBrush
+GridBrush --> "size" Vector3Int
+GridBrush --> "pivot" Vector3Int
+GridBrush +-- BrushCell
+BrushCell --> "tile" TileBase
+BrushCell --> "matrix" Matrix4x4
+BrushCell --> "color" Color
+BrushCell o-> "m_Matrix" Matrix4x4
+@enduml

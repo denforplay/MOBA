@@ -1,0 +1,20 @@
+@startuml
+class PoseToolbar {
+    +  <<event>> SetMeshTool : Action<Tools> 
+    +  <<event>> SetSkeletonTool : Action<Tools> 
+    +  <<event>> ActivateEditPoseTool : Action 
+    + {static} GenerateFromUXML() : PoseToolbar
+    + PoseToolbar()
+    + Setup(s:SkinningCache) : void
+    + UpdateToggleState() : void
+    + UpdateResetButtonState() : void
+}
+class CustomUXMLFactor {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+Toolbar <|-- PoseToolbar
+PoseToolbar --> "skinningCache" SkinningCache
+PoseToolbar +-- CustomUXMLFactor
+"UxmlFactory`2" "<PoseToolbar,UxmlTraits>" <|-- CustomUXMLFactor
+@enduml

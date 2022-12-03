@@ -1,0 +1,54 @@
+@startuml
+class ReturnBox <<struct>> {
+}
+interface IFunctionPointerProvider {
+    FromIntPtr(ptr:IntPtr) : object
+}
+interface TestCompilerBaseExtensions {
+    SkipTest(method:MethodInfo) : (bool shouldSkip, string skipReason)
+    FetchAlternateDelegate(isInRegistry:bool, caller:Func<object, object[], object>) : Type
+    ProcessNativeArgsForDelegateCaller(nativeArgs:object[], methodInfo:MethodInfo) : object[]
+}
+abstract class TestCompilerAttributeBase {
+    + <<const>> GoldFolder : string = "gold/x86"
+    + <<const>> GoldFolderArm : string = "gold/arm"
+    + <<const>> GeneratedFolder : string = "generated/x86"
+    + <<const>> GeneratedFolderArm : string = "generated/arm"
+    + TestCompilerAttributeBase(arguments:object[])
+    + CompileOnly : bool <<get>> <<set>>
+    + ExpectCompilerException : bool <<get>> <<set>>
+    + DisableGold : bool <<get>> <<set>>
+    + FastMath : bool <<get>> <<set>>
+    + OverrideResultOnMono : object <<get>> <<set>>
+    + OverrideManagedResult : object <<get>> <<set>>
+    + OverrideOn32BitNative : object <<get>> <<set>>
+    + IgnoreOnPlatform : object <<get>> <<set>>
+    + IsDeterministic : bool? <<get>> <<set>>
+    BuildFrom(method:IMethodInfo, suite:Test) : IEnumerable<TestMethod>
+    Wrap(command:TestCommand) : TestCommand
+}
+abstract class TestCompilerCommandBase {
+    + <<override>> Execute(context:ExecutionContext) : TestResult
+    + {static} ReportBailedTests(writer:TextWriter) : void
+}
+class IntRangeAttribute <<sealed>> {
+    + <<readonly>> Lo : int
+    + <<readonly>> Hi : int
+    + IntRangeAttribute(hi:int)
+    + IntRangeAttribute(lo:int, hi:int)
+}
+enum TryExpectedExceptionResult {
+    ThrewExpectedException,
+    ThrewUnexpectedException,
+    DidNotThrowException,
+}
+TestCaseAttribute <|-- TestCompilerAttributeBase
+ITestBuilder <|-- TestCompilerAttributeBase
+IWrapTestMethod <|-- TestCompilerAttributeBase
+TestCompilerAttributeBase --> "ExpectedException" Type
+TestCompilerAttributeBase --> "ExpectedDiagnosticId" DiagnosticId
+TestCommand <|-- TestCompilerCommandBase
+TestCompilerCommandBase --> "Attribute" TestCompilerAttributeBase
+Attribute <|-- IntRangeAttribute
+TestCompilerCommandBase +-- TryExpectedExceptionResult
+@enduml

@@ -1,0 +1,176 @@
+@startuml
+class DoublePoint <<struct>> {
+    + X : double
+    + Y : double
+    + DoublePoint(x:double, y:double)
+    + DoublePoint(dp:DoublePoint)
+    + DoublePoint(ip:IntPoint)
+}
+class PolyTree {
+    + Clear() : void
+    + GetFirst() : PolyNode
+    + Total : int <<get>>
+}
+class PolyNode {
+    + ChildCount : int <<get>>
+    + GetNext() : PolyNode
+    + IsHole : bool <<get>>
+    + IsOpen : bool <<get>> <<set>>
+}
+class Int128 <<struct>> {
+    + Int128(_lo:Int64)
+    + Int128(_hi:Int64, _lo:UInt64)
+    + Int128(val:Int128)
+    + IsNegative() : bool
+    + <<override>> Equals(obj:System.Object) : bool
+    + <<override>> GetHashCode() : int
+    + {static} Int128Mul(lhs:Int64, rhs:Int64) : Int128
+}
+class IntPoint <<struct>> {
+    + IntPoint(X:cInt, Y:cInt)
+    + IntPoint(x:double, y:double)
+    + IntPoint(pt:IntPoint)
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class IntRect <<struct>> {
+    + IntRect(l:cInt, t:cInt, r:cInt, b:cInt)
+    + IntRect(ir:IntRect)
+}
+enum ClipType {
+    ctIntersection,
+    ctUnion,
+    ctDifference,
+    ctXor,
+}
+enum PolyType {
+    ptSubject,
+    ptClip,
+}
+enum PolyFillType {
+    pftEvenOdd,
+    pftNonZero,
+    pftPositive,
+    pftNegative,
+}
+enum JoinType {
+    jtSquare,
+    jtRound,
+    jtMiter,
+}
+enum EndType {
+    etClosedPolygon,
+    etClosedLine,
+    etOpenButt,
+    etOpenSquare,
+    etOpenRound,
+}
+enum EdgeSide {
+    esLeft,
+    esRight,
+}
+enum Direction {
+    dRightToLeft,
+    dLeftToRight,
+}
+class TEdge {
+}
+class IntersectNode {
+}
+class MyIntersectNodeSort {
+    + Compare(node1:IntersectNode, node2:IntersectNode) : int
+}
+class LocalMinima {
+}
+class Scanbeam {
+}
+class Maxima {
+}
+class OutRec {
+}
+class OutPt {
+}
+class Join {
+}
+class ClipperBase {
+    + PreserveCollinear : bool <<get>> <<set>>
+    + Swap(val1:cInt, val2:cInt) : void
+    + <<virtual>> Clear() : void
+    RangeTest(Pt:IntPoint, useFullRange:bool) : void
+    + AddPath(pg:Path, polyType:PolyType, Closed:bool) : bool
+    + AddPaths(ppg:Paths, polyType:PolyType, closed:bool) : bool
+    RemoveEdge(e:TEdge) : TEdge
+    + {static} GetBounds(paths:Paths) : IntRect
+}
+class Clipper {
+    + <<const>> ioReverseSolution : int = 1
+    + <<const>> ioStrictlySimple : int = 2
+    + <<const>> ioPreserveCollinear : int = 4
+    + Clipper(InitOptions:int)
+    + ReverseSolution : bool <<get>> <<set>>
+    + StrictlySimple : bool <<get>> <<set>>
+    + Execute(clipType:ClipType, solution:Paths, FillType:PolyFillType) : bool
+    + Execute(clipType:ClipType, polytree:PolyTree, FillType:PolyFillType) : bool
+    + Execute(clipType:ClipType, solution:Paths, subjFillType:PolyFillType, clipFillType:PolyFillType) : bool
+    + Execute(clipType:ClipType, polytree:PolyTree, subjFillType:PolyFillType, clipFillType:PolyFillType) : bool
+    OutRec1RightOfOutRec2(outRec1:OutRec, outRec2:OutRec) : bool
+    GetHorzDirection(HorzEdge:TEdge, Dir:Direction, Left:cInt, Right:cInt) : void
+    + {static} ReversePaths(polys:Paths) : void
+    + {static} Orientation(poly:Path) : bool
+    DupOutPt(outPt:OutPt, InsertAfter:bool) : OutPt
+    GetOverlap(a1:cInt, a2:cInt, b1:cInt, b2:cInt, Left:cInt, Right:cInt) : bool
+    JoinHorz(op1:OutPt, op1b:OutPt, op2:OutPt, op2b:OutPt, Pt:IntPoint, DiscardLeft:bool) : bool
+    + {static} PointInPolygon(pt:IntPoint, path:Path) : int
+    + {static} Area(poly:Path) : double
+    + {static} SimplifyPolygon(poly:Path, fillType:PolyFillType) : Paths
+    + {static} SimplifyPolygons(polys:Paths, fillType:PolyFillType) : Paths
+    + {static} CleanPolygon(path:Path, distance:double) : Path
+    + {static} CleanPolygons(polys:Paths, distance:double) : Paths
+    + {static} MinkowskiSum(pattern:Path, path:Path, pathIsClosed:bool) : Paths
+    + {static} MinkowskiSum(pattern:Path, paths:Paths, pathIsClosed:bool) : Paths
+    + {static} MinkowskiDiff(poly1:Path, poly2:Path) : Paths
+    + {static} PolyTreeToPaths(polytree:PolyTree) : Paths
+    + {static} OpenPathsFromPolyTree(polytree:PolyTree) : Paths
+    + {static} ClosedPathsFromPolyTree(polytree:PolyTree) : Paths
+}
+class ClipperOffset {
+    + ArcTolerance : double <<get>> <<set>>
+    + MiterLimit : double <<get>> <<set>>
+    + ClipperOffset(miterLimit:double, arcTolerance:double)
+    + Clear() : void
+    + AddPath(path:Path, joinType:JoinType, endType:EndType) : void
+    + AddPaths(paths:Paths, joinType:JoinType, endType:EndType) : void
+    + Execute(solution:Paths, delta:double) : void
+    + Execute(solution:PolyTree, delta:double) : void
+    OffsetPoint(j:int, k:int, jointype:JoinType) : void
+}
+class ClipperException {
+    + ClipperException(description:string)
+}
+class "List`1"<T> {
+}
+class "IComparer`1"<T> {
+}
+enum NodeType {
+    ntAny,
+    ntOpen,
+    ntClosed,
+}
+PolyNode <|-- PolyTree
+PolyNode --> "Contour" Path
+PolyNode --> "Childs<PolyNode>" "List`1"
+PolyNode --> "Parent" PolyNode
+IntPoint --> "X" cInt
+IntPoint --> "Y" cInt
+IntRect --> "left" cInt
+IntRect --> "top" cInt
+IntRect --> "right" cInt
+IntRect --> "bottom" cInt
+"IComparer`1" "<IntersectNode>" <|-- MyIntersectNodeSort
+ClipperBase o-> "loRange" cInt
+ClipperBase o-> "hiRange" cInt
+ClipperBase <|-- Clipper
+Clipper --> "m_IntersectNodeComparer<IntersectNode>" "IComparer`1"
+Exception <|-- ClipperException
+Clipper +-- NodeType
+@enduml

@@ -1,0 +1,59 @@
+@startuml
+class GameObjectBrush {
+    + cellCount : int <<get>>
+    + sizeCount : int <<get>>
+    + canChangeZPosition : bool <<get>> <<set>>
+    + GameObjectBrush()
+    + Init(size:Vector3Int) : void
+    + Init(size:Vector3Int, pivot:Vector3Int) : void
+    + <<override>> Paint(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> Erase(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> BoxFill(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<override>> BoxErase(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<override>> FloodFill(gridLayout:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> Rotate(direction:RotationDirection, layout:GridLayout.CellLayout) : void
+    + <<override>> Flip(flip:FlipAxis, layout:GridLayout.CellLayout) : void
+    + <<override>> Pick(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt, pivot:Vector3Int) : void
+    + <<override>> MoveStart(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<override>> MoveEnd(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + Reset() : void
+    + UpdateSizeAndPivot(size:Vector3Int, pivot:Vector3Int) : void
+    + SetGameObject(position:Vector3Int, go:GameObject) : void
+    + SetOffset(position:Vector3Int, offset:Vector3) : void
+    + SetOrientation(position:Vector3Int, orientation:Quaternion) : void
+    + SetScale(position:Vector3Int, scale:Vector3) : void
+    + GetCellIndex(brushPosition:Vector3Int) : int
+    + GetCellIndex(x:int, y:int, z:int) : int
+    + GetCellIndex(x:int, y:int, z:int, sizex:int, sizey:int, sizez:int) : int
+    + GetCellIndexWrapAround(x:int, y:int, z:int) : int
+    + <<override>> GetHashCode() : int
+}
+class GameObjectBrushEditor {
+    + <<override>> canChangeZPosition : bool <<get>> <<set>>
+    + <<override>> OnPaintSceneGUI(gridLayout:GridLayout, brushTarget:GameObject, position:BoundsInt, tool:GridBrushBase.Tool, executing:bool) : void
+    + <<override>> OnPaintInspectorGUI() : void
+}
+class HiddenGridLayout {
+}
+class BrushCell {
+    + <<override>> GetHashCode() : int
+}
+GridBrushBase <|-- GameObjectBrush
+GameObjectBrush --> "hiddenGrid" GameObject
+GameObjectBrush o-> "m_Anchor" Vector3
+GameObjectBrush --> "size" Vector3Int
+GameObjectBrush --> "pivot" Vector3Int
+GridBrushEditorBase <|-- GameObjectBrushEditor
+GameObjectBrushEditor --> "brush" GameObjectBrush
+GameObjectBrush +-- HiddenGridLayout
+HiddenGridLayout o-> "cellSize" Vector3
+HiddenGridLayout o-> "cellGap" Vector3
+GameObjectBrush +-- BrushCell
+BrushCell --> "gameObject" GameObject
+BrushCell --> "offset" Vector3
+BrushCell --> "scale" Vector3
+BrushCell --> "orientation" Quaternion
+BrushCell o-> "m_Offset" Vector3
+BrushCell o-> "m_Scale" Vector3
+BrushCell o-> "m_Orientation" Quaternion
+@enduml

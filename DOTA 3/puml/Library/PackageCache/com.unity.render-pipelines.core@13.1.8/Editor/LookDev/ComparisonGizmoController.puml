@@ -1,0 +1,32 @@
+@startuml
+class ComparisonGizmoController {
+    <<const>> k_DragPadding : float = 0.05f
+    <<const>> k_ReferenceScale : float = 1080f
+    m_IsDragging : bool
+    isDragging : bool <<get>> <<set>>
+    + ComparisonGizmoController(switcher:SwitchableCameraController)
+    + UpdateGizmoState(state:ComparisonGizmoState) : void
+    OnScrollWheel(evt:WheelEvent) : void
+    OnMouseDown(evt:MouseDownEvent) : void
+    OnMouseUp(evt:MouseUpEvent) : void
+    OnMouseDrag(evt:MouseMoveEvent) : void
+    OnDragPlaneSeparator(evt:MouseMoveEvent) : void
+    OnDragPlaneNodeExtremity(evt:MouseMoveEvent) : void
+    OnDragFader(evt:MouseMoveEvent) : void
+    SelectGizmoZone(normalizedMousePosition:Vector2) : void
+    GetViewFromComposition(localCoordinate:Vector2) : ViewIndex
+}
+enum Selected {
+    None,
+    NodeFirstView,
+    NodeSecondView,
+    PlaneSeparator,
+    Fader,
+}
+Manipulator <|-- ComparisonGizmoController
+ComparisonGizmoController --> "m_State" ComparisonGizmoState
+ComparisonGizmoController --> "m_Switcher" SwitchableCameraController
+ComparisonGizmoController --> "m_Selected" Selected
+ComparisonGizmoController --> "m_SavedRelativePositionOnMouseDown" Vector2
+ComparisonGizmoController +-- Selected
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+class GameObjectCreationParameters {
+    + Name : string <<get>> <<set>>
+    + GroupName : string <<get>> <<set>>
+    + Position : Vector3? <<get>> <<set>>
+    + Rotation : Quaternion? <<get>> <<set>>
+    + <<override>> GetHashCode() : int
+    + <<override>> Equals(other:object) : bool
+    + Equals(that:GameObjectCreationParameters) : bool
+}
+class "Func`2"<T1,T2> {
+}
+GameObjectCreationParameters --> "ParentTransform" Transform
+GameObjectCreationParameters --> "ParentTransformGetter<InjectContext,Transform>" "Func`2"
+GameObjectCreationParameters o-> "Default" GameObjectCreationParameters
+@enduml

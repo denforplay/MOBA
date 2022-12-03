@@ -1,0 +1,23 @@
+@startuml
+class BrainTargetOverrideTests {
+    + <<override>> SetUp() : void
+    CheckThatBrainsAreControllingTheirTargets() : IEnumerator
+    CheckDisconnectedBrains() : IEnumerator
+    + DoNothing() : IEnumerator
+    + ThirdPerson() : IEnumerator
+    + FramingTransposer() : IEnumerator
+    + HardLockToTarget() : IEnumerator
+    + OrbTransposer() : IEnumerator
+    + Transposer() : IEnumerator
+}
+CinemachineFixtureBase <|-- BrainTargetOverrideTests
+BrainTargetOverrideTests --> "m_CameraHolderWithBrain" GameObject
+BrainTargetOverrideTests --> "m_CameraHolderWithoutBrain" GameObject
+BrainTargetOverrideTests --> "m_GoWithBrain" GameObject
+BrainTargetOverrideTests --> "m_GoWithoutBrain" GameObject
+BrainTargetOverrideTests --> "m_Vcam" CinemachineVirtualCamera
+BrainTargetOverrideTests --> "m_FollowObject" GameObject
+BrainTargetOverrideTests --> "m_BrainAlone" CinemachineBrain
+BrainTargetOverrideTests --> "m_BrainAlone2" CinemachineBrain
+BrainTargetOverrideTests o-> "m_Delta" Vector3
+@enduml

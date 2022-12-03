@@ -1,0 +1,34 @@
+@startuml
+enum TitleMode {
+    None,
+    DisabledComponent,
+    Prefab,
+    PrefabOutOfContext,
+    Asset,
+    GameObject,
+}
+class BreadCrumbTitle <<struct>> {
+    + name : string
+}
+class BreadcrumbDrawer {
+    {static} <<readonly>> k_DisabledComponentText : string
+    {static} <<readonly>> k_PrefabOutOfContext : string
+    <<const>> k_Elipsis : string = "…"
+    {static} BreadcrumbDrawer()
+    {static} FitTextInArea(areaWidth:float, text:string, style:GUIStyle) : string
+    + {static} Draw(breadcrumbAreaWidth:float, labels:List<BreadCrumbTitle>, navigateToBreadcrumbIndex:Action<int>) : void
+    {static} GetTextContent(width:int, text:BreadCrumbTitle, style:GUIStyle) : GUIContent
+    {static} DrawBreadcrumbAsSelectedSubSequence(width:int, label:BreadCrumbTitle, style:GUIStyle, backgroundStyle:GUIStyle) : void
+    {static} GetBreadcrumbLayoutRect(content:GUIContent, style:GUIStyle) : Rect
+    {static} DrawActiveBreadcrumb(width:int, label:BreadCrumbTitle, style:GUIStyle, backgroundStyle:GUIStyle) : Rect
+}
+BreadCrumbTitle --> "mode" TitleMode
+BreadcrumbDrawer o-> "s_TextContent" GUIContent
+BreadcrumbDrawer --> "k_BreadCrumbLeft" GUIStyle
+BreadcrumbDrawer --> "k_BreadCrumbMid" GUIStyle
+BreadcrumbDrawer --> "k_BreadCrumbLeftBg" GUIStyle
+BreadcrumbDrawer --> "k_BreadCrumbMidBg" GUIStyle
+BreadcrumbDrawer --> "k_BreadCrumbMidSelected" GUIStyle
+BreadcrumbDrawer --> "k_BreadCrumbMidBgSelected" GUIStyle
+BreadcrumbDrawer --> "k_TimelineIcon" Texture
+@enduml

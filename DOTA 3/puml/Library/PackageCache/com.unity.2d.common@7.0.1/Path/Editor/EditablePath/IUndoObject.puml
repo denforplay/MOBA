@@ -1,0 +1,5 @@
+@startuml
+interface IUndoObject {
+    RegisterUndo(name:string) : void
+}
+@enduml

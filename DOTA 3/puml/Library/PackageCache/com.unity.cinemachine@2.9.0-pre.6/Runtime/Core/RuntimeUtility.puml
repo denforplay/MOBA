@@ -1,0 +1,9 @@
+@startuml
+class RuntimeUtility <<static>> {
+    + {static} DestroyObject(obj:UnityEngine.Object) : void
+    + {static} IsPrefab(gameObject:GameObject) : bool
+    + {static} RaycastIgnoreTag(ray:Ray, hitInfo:RaycastHit, rayLength:float, layerMask:int, ignoreTag:string) : bool
+    + {static} SphereCastIgnoreTag(rayStart:Vector3, radius:float, dir:Vector3, hitInfo:RaycastHit, rayLength:float, layerMask:int, ignoreTag:string) : bool
+    + {static} NormalizeCurve(curve:AnimationCurve, normalizeX:bool, normalizeY:bool) : AnimationCurve
+}
+@enduml

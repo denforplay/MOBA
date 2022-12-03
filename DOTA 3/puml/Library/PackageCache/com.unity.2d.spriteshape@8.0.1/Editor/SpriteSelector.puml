@@ -1,0 +1,30 @@
+@startuml
+class SpriteSelector {
+    m_SelectedSprite : int = 0
+    m_WindowSize : int = 0
+    m_ImageSize : int = 4
+    m_Inspector : bool = true
+    + inspector : bool <<get>> <<set>>
+    + imageSize : int <<get>> <<set>>
+    + windowSize : int <<get>> <<set>>
+    + selectedIndex : int <<get>> <<set>>
+    + hasSprites : bool <<get>>
+    + SpriteSelector()
+    + SetCustomSize(windowSizer:int, imageSizer:int) : void
+    + ResetSize() : void
+    + UpdateSprites(sprites:Sprite[]) : void
+    + UpdateSelection(newSelectedBrush:int) : void
+    {static} DrawRectangleOutline(rect:Rect, color:Color) : void
+    + GetActiveSprite() : Sprite
+    + ShowGUI(selectedIndex:int) : bool
+    SpriteSelectionGrid(selected:int, sprites:Sprite[], approxSize:int, style:GUIStyle, emptyString:GUIContent, columns:int, rows:int) : int
+}
+class Styles <<static>> {
+}
+SpriteSelector --> "m_ScrollPos" Vector2
+SpriteSelector +-- Styles
+Styles o-> "gridList" GUIStyle
+Styles o-> "spriteList" GUIContent
+Styles o-> "missingSprites" GUIContent
+Styles o-> "localGrid" GUIStyle
+@enduml

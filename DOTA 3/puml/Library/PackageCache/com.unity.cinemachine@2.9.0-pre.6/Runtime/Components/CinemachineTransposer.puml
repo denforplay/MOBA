@@ -1,0 +1,43 @@
+@startuml
+class CinemachineTransposer {
+    + m_XDamping : float = 1f
+    + m_YDamping : float = 1f
+    + m_ZDamping : float = 1f
+    + m_PitchDamping : float = 0
+    + m_YawDamping : float = 0
+    + m_RollDamping : float = 0f
+    + m_AngularDamping : float = 0f
+    + HideOffsetInInspector : bool <<get>> <<set>>
+    + <<override>> IsValid : bool <<get>>
+    + <<override>> GetMaxDampTime() : float
+    + <<override>> MutateCameraState(curState:CameraState, deltaTime:float) : void
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<virtual>> GetTargetCameraPosition(worldUp:Vector3) : Vector3
+    + GetReferenceOrientation(worldUp:Vector3) : Quaternion
+}
+enum BindingMode {
+    LockToTargetOnAssign= 0,
+    LockToTargetWithWorldUp= 1,
+    LockToTargetNoRoll= 2,
+    LockToTarget= 3,
+    WorldSpace= 4,
+    SimpleFollowWithWorldUp= 5,
+}
+enum AngularDampingMode {
+    Euler,
+    Quaternion,
+}
+CinemachineComponentBase <|-- CinemachineTransposer
+CinemachineTransposer o-> "m_BindingMode" BindingMode
+CinemachineTransposer o-> "m_FollowOffset" Vector3
+CinemachineTransposer o-> "m_AngularDampingMode" AngularDampingMode
+CinemachineTransposer --> "EffectiveOffset" Vector3
+CinemachineTransposer o-> "m_PreviousTargetPosition" Vector3
+CinemachineTransposer o-> "m_PreviousReferenceOrientation" Quaternion
+CinemachineTransposer o-> "m_targetOrientationOnAssign" Quaternion
+CinemachineTransposer --> "m_PreviousOffset" Vector3
+CinemachineTransposer o-> "m_previousTarget" Transform
+CinemachineTransposer +-- BindingMode
+CinemachineTransposer +-- AngularDampingMode
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class ShopInventorySlotButton {
+}
+MonoBehaviour <|-- ShopInventorySlotButton
+ShopInventorySlotButton --> "InventorySlot" InventorySlot
+ShopInventorySlotButton --> "Button" Button
+@enduml

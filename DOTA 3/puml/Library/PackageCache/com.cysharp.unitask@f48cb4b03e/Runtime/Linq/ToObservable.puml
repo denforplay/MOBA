@@ -1,0 +1,23 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ToObservable(source:IUniTaskAsyncEnumerable<TSource>) : IObservable<TSource>
+}
+class "ToObservable`1"<T> <<sealed>> {
+    + ToObservable(source:IUniTaskAsyncEnumerable<T>)
+    + Subscribe(observer:IObserver<T>) : IDisposable
+    {static} <<async>> RunAsync(src:IUniTaskAsyncEnumerable<T>, observer:IObserver<T>, cancellationToken:CancellationToken) : UniTaskVoid
+}
+class "IObservable`1"<T> {
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class CancellationTokenDisposable <<sealed>> {
+    + Dispose() : void
+}
+"IObservable`1" "<T>" <|-- "ToObservable`1"
+"ToObservable`1" --> "source<T>" "IUniTaskAsyncEnumerable`1"
+"ToObservable`1" +-- CancellationTokenDisposable
+IDisposable <|-- CancellationTokenDisposable
+CancellationTokenDisposable o-> "cts" CancellationTokenSource
+CancellationTokenDisposable --> "Token" CancellationToken
+@enduml

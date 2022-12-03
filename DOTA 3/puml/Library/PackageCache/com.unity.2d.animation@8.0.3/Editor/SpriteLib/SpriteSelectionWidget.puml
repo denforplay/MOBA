@@ -1,0 +1,21 @@
+@startuml
+class SpriteSelectorWidget {
+    <<const>> kTargetPreviewSize : int = 64
+    + SpriteSelectorWidget()
+    + UpdateContents(sprites:Sprite[]) : void
+    + ShowGUI(selectedIndex:int) : int
+    {static} GetRowColumnCount(drawWidth:float, size:int, contentCount:int, column:int, row:int, columnf:float) : void
+    + NeedUpdatePreview() : bool
+    UpdateSpritePreviews() : void
+}
+class Styles {
+    + Styles()
+}
+class "List`1"<T> {
+}
+SpriteSelectorWidget o-> "m_SpritePreviewNeedFetching<int>" "List`1"
+SpriteSelectorWidget --> "m_ScrollPos" Vector2
+SpriteSelectorWidget --> "m_Style" Styles
+SpriteSelectorWidget +-- Styles
+Styles --> "gridListStyle" GUIStyle
+@enduml

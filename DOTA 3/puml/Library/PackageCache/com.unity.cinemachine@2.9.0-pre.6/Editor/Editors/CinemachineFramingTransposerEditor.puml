@@ -1,0 +1,10 @@
+@startuml
+class CinemachineFramingTransposerEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineFramingTransposer>" <|-- CinemachineFramingTransposerEditor
+CinemachineFramingTransposerEditor --> "m_ScreenGuideEditor" CinemachineScreenComposerGuides
+CinemachineFramingTransposerEditor --> "m_GameViewEventCatcher" GameViewEventCatcher
+@enduml

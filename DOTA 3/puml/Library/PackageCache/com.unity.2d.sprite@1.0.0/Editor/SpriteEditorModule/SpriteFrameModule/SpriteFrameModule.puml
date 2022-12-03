@@ -1,0 +1,41 @@
+@startuml
+class SpriteFrameModule <<partial>> {
+    + SpriteFrameModule(sw:ISpriteEditor, es:IEventSystem, us:IUndoSystem, ad:IAssetDatabase)
+    {static} ShortcutTrim(args:ShortcutArguments) : void
+    + <<override>> OnModuleActivate() : void
+    + <<override>> OnModuleDeactivate() : void
+    + {static} GetSpriteImportMode(dataProvider:ISpriteEditorDataProvider) : SpriteImportMode
+    + <<override>> CanBeActivated() : bool
+    + DoAutomaticSlicing(minimumSpriteSize:int, alignment:int, pivot:Vector2, slicingMethod:AutoSlicingMethod) : void
+    GetTextureToSlice() : UnityTexture2D
+    + GetGridRects(size:Vector2, offset:Vector2, padding:Vector2, keepEmptyRects:bool) : IEnumerable<Rect>
+    + DoGridSlicing(size:Vector2, offset:Vector2, padding:Vector2, alignment:int, pivot:Vector2, slicingMethod:AutoSlicingMethod, keepEmptyRects:bool) : void
+    + GetIsometricRects(size:Vector2, offset:Vector2, isAlternate:bool, keepEmptyRects:bool) : IEnumerable<Rect>
+    + DoIsometricGridSlicing(size:Vector2, offset:Vector2, alignment:int, pivot:Vector2, slicingMethod:AutoSlicingMethod, keepEmptyRects:bool, isAlternate:bool) : void
+    + ScaleSpriteRect(r:Rect) : void
+    + TrimAlpha() : void
+    + DuplicateSprite() : void
+    + CreateSprite(rect:Rect) : void
+    + DeleteSprite() : void
+    + IsOnlyUsingDefaultNamedSpriteRects() : bool
+}
+enum AutoSlicingMethod {
+    DeleteAll= 0,
+    Smart= 1,
+    Safe= 2,
+}
+class "List`1"<T> {
+}
+class SpriteFrameModuleContext {
+    + SpriteFrameModuleContext(spriteFrame:SpriteFrameModule)
+    + active : bool <<get>>
+}
+SpriteFrameModuleBase <|-- SpriteFrameModule
+SpriteFrameModule --> "m_SpriteFrameModuleContext" SpriteFrameModuleContext
+SpriteFrameModule --> "potentialRects<Rect>" "List`1"
+SpriteFrameModule +-- AutoSlicingMethod
+SpriteFrameModule +-- SpriteFrameModuleContext
+IShortcutToolContext <|-- SpriteFrameModuleContext
+SpriteFrameModuleContext --> "m_SpriteFrameModule" SpriteFrameModule
+SpriteFrameModuleContext --> "spriteFrameModule" SpriteFrameModule
+@enduml

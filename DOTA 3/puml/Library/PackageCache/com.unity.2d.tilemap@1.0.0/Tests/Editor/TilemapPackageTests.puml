@@ -1,0 +1,5 @@
+@startuml
+class TilemapPackageEditorTests {
+    + GridPaintPaletteWindow_IsLoadedFromDll() : void
+}
+@enduml

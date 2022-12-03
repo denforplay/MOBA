@@ -1,0 +1,33 @@
+@startuml
+class TimelineRecording <<static>> <<partial>> {
+    + <<const>> kLocalPosition : string = "m_LocalPosition"
+    + <<const>> kLocalRotation : string = "m_LocalRotation"
+    + <<const>> kLocalEulerHint : string = "m_LocalEulerAnglesHint"
+    <<const>> kRotationWarning : string = "You are recording with an initial rotation offset. This may result in a misrepresentation of euler angles. When recording transform properties, it is recommended to reset rotation prior to recording"
+    + {static} IsRecordingAnimationTrack : bool <<get>>
+    {static} GatherRelatedModifications(toMatch:UndoPropertyModification, list:List<UndoPropertyModification>) : UndoPropertyModification[]
+    {static} GetGameObjectFromModification(mod:UndoPropertyModification) : GameObject
+    {static} GetChildLevel(parent:GameObject, child:GameObject) : int
+    {static} IsRotationCurve(propertyName:string) : bool
+    + {static} DoesPropertyPathMatch(a:string, b:string) : bool
+}
+class RecordingState {
+    + SaveCurve(curve:AnimationWindowCurve) : void
+    + AddPropertyModification(binding:EditorCurveBinding, propertyModification:PropertyModification, keepPrefabOverride:bool) : void
+    + addZeroFrame : bool <<get>>
+    + currentFrame : int <<get>> <<set>>
+    + DiscardModification(modification:PropertyModification) : bool
+}
+class "List`1"<T> {
+}
+TimelineRecording o-> "s_RecordState" RecordingState
+TimelineRecording o-> "s_TrackRecorder" AnimationTrackRecorder
+TimelineRecording o-> "s_UnprocessedMods<UndoPropertyModification>" "List`1"
+TimelineRecording o-> "s_ModsToProcess<UndoPropertyModification>" "List`1"
+TimelineRecording --> "s_LastTrackWarning" AnimationTrack
+TimelineRecording +-- RecordingState
+IAnimationRecordingState <|-- RecordingState
+RecordingState --> "activeGameObject" GameObject
+RecordingState --> "activeRootGameObject" GameObject
+RecordingState --> "activeAnimationClip" AnimationClip
+@enduml

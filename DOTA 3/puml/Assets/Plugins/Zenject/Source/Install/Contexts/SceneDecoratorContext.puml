@@ -1,0 +1,25 @@
+@startuml
+class SceneDecoratorContext {
+    _decoratedContractName : string = null
+    + DecoratedContractName : string <<get>>
+    + <<override>> GetRootGameObjects() : IEnumerable<GameObject>
+    + Initialize(container:DiContainer) : void
+    + InstallDecoratorSceneBindings() : void
+    + InstallDecoratorInstallers() : void
+    + InstallLateDecoratorInstallers() : void
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+Context <|-- SceneDecoratorContext
+SceneDecoratorContext o-> "_lateInstallers<MonoInstaller>" "List`1"
+SceneDecoratorContext o-> "_lateInstallerPrefabs<MonoInstaller>" "List`1"
+SceneDecoratorContext o-> "_lateScriptableObjectInstallers<ScriptableObjectInstaller>" "List`1"
+SceneDecoratorContext --> "LateInstallers<MonoInstaller>" "IEnumerable`1"
+SceneDecoratorContext --> "LateInstallerPrefabs<MonoInstaller>" "IEnumerable`1"
+SceneDecoratorContext --> "LateScriptableObjectInstallers<ScriptableObjectInstaller>" "IEnumerable`1"
+SceneDecoratorContext --> "_container" DiContainer
+SceneDecoratorContext o-> "_injectableMonoBehaviours<MonoBehaviour>" "List`1"
+SceneDecoratorContext --> "Container" DiContainer
+@enduml

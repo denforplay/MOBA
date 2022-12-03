@@ -1,0 +1,13 @@
+@startuml
+class AxisStatePropertyDrawer <<sealed>> {
+    <<const>> vSpace : int = 2
+    mExpanded : bool = true
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    ValueRangeIsLocked(property:SerializedProperty) : bool
+    HasRecentering(property:SerializedProperty) : bool
+    HasInputProvider(property:SerializedProperty) : bool
+}
+PropertyDrawer <|-- AxisStatePropertyDrawer
+AxisStatePropertyDrawer o-> "def" AxisState
+@enduml

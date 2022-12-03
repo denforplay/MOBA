@@ -1,0 +1,29 @@
+@startuml
+class GenerateGeometryPanel {
+    +  <<event>> onAutoGenerateGeometry : Action<float, byte, float> 
+    +  <<event>> onAutoGenerateGeometryAll : Action<float, byte, float> 
+    + generateWeights : bool <<get>> <<set>>
+    + GenerateGeometryPanel()
+    + SetMode(mode:GenerateMode) : void
+    + GenerateGeometry() : void
+    + GenerateGeometryAll() : void
+    + {static} GenerateFromUXML() : GenerateGeometryPanel
+}
+class GenerateGeometryPanelFactory {
+}
+class GenerateGeometryPanelUxmlTraits {
+}
+enum GenerateMode {
+    Single,
+    Multiple,
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- GenerateGeometryPanel
+GenerateGeometryPanel --> "skinningCache" SkinningCache
+GenerateGeometryPanel +-- GenerateGeometryPanelFactory
+"UxmlFactory`2" "<GenerateGeometryPanel,GenerateGeometryPanelUxmlTraits>" <|-- GenerateGeometryPanelFactory
+GenerateGeometryPanel +-- GenerateGeometryPanelUxmlTraits
+UxmlTraits <|-- GenerateGeometryPanelUxmlTraits
+GenerateGeometryPanel +-- GenerateMode
+@enduml

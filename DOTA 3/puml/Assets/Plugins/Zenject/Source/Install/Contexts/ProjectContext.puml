@@ -1,0 +1,29 @@
+@startuml
+class ProjectContext {
+    + {static}  <<event>> PreInstall : Action 
+    + {static}  <<event>> PostInstall : Action 
+    + {static}  <<event>> PreResolve : Action 
+    + {static}  <<event>> PostResolve : Action 
+    + <<const>> ProjectContextResourcePath : string = "ProjectContext"
+    + <<const>> ProjectContextResourcePathOld : string = "ProjectCompositionRoot"
+    _parentNewObjectsUnderContext : bool = true
+    + {static} HasInstance : bool <<get>>
+    + {static} ValidateOnNextRun : bool <<get>> <<set>>
+    + <<override>> GetRootGameObjects() : IEnumerable<GameObject>
+    + {static} TryGetPrefab() : GameObject
+    {static} InstantiateAndInitialize() : void
+    + ParentNewObjectsUnderContext : bool <<get>> <<set>>
+    + EnsureIsInitialized() : void
+    + Awake() : void
+    Initialize() : void
+    InstallBindings(injectableMonoBehaviours:List<MonoBehaviour>) : void
+}
+Context <|-- ProjectContext
+ProjectContext --> "_instance" ProjectContext
+ProjectContext o-> "_editorReflectionBakingCoverageMode" ReflectionBakingCoverageModes
+ProjectContext o-> "_buildsReflectionBakingCoverageMode" ReflectionBakingCoverageModes
+ProjectContext o-> "_settings" ZenjectSettings
+ProjectContext --> "_container" DiContainer
+ProjectContext --> "Container" DiContainer
+ProjectContext --> "Instance" ProjectContext
+@enduml

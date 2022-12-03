@@ -1,0 +1,8 @@
+@startuml
+class InventorySlot {
+    + IsFree : bool <<get>>
+    + SetSlotItem(item:Item) : void
+    + FreeSlotItem() : void
+}
+MonoBehaviour <|-- InventorySlot
+@enduml

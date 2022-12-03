@@ -1,0 +1,18 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} LastAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} LastAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} LastAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} LastAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} LastOrDefaultAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} LastOrDefaultAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} LastOrDefaultAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} LastOrDefaultAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+}
+class Last <<static>> {
+    + {static} <<async>> LastAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+    + {static} <<async>> LastAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+    + {static} <<async>> LastAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+    + {static} <<async>> LastAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+}
+@enduml

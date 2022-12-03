@@ -1,0 +1,24 @@
+@startuml
+class Settings <<sealed>> {
+    +  <<event>> beforeSettingsSaved : Action 
+    +  <<event>> afterSettingsSaved : Action 
+    Settings()
+    + Settings(package:string, settingsFileName:string)
+    + Settings(repositories:IEnumerable<ISettingsRepository>)
+    + GetRepository(scope:SettingsScope) : ISettingsRepository
+    + GetRepository(scope:SettingsScope, name:string) : ISettingsRepository
+    + Save() : void
+    + Set(key:string, value:T, scope:SettingsScope) : void
+    + Set(key:string, value:T, repositoryName:string, scope:SettingsScope) : void
+    + Set(key:string, value:T, repositoryName:string) : void
+    + Get(key:string, scope:SettingsScope, fallback:T) : T
+    + Get(key:string, repositoryName:string, scope:SettingsScope, fallback:T) : T
+    + Get(key:string, fallback:T, repositoryName:string) : T
+    + ContainsKey(key:string, scope:SettingsScope) : bool
+    + ContainsKey(key:string, repositoryName:string, scope:SettingsScope) : bool
+    + ContainsKey(key:string, repositoryName:string) : bool
+    + DeleteKey(key:string, scope:SettingsScope) : void
+    + DeleteKey(key:string, repositoryName:string, scope:SettingsScope) : void
+    + DeleteKey(key:string, repositoryName:string) : void
+}
+@enduml

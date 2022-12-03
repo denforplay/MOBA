@@ -1,0 +1,32 @@
+@startuml
+class AssetOperations {
+    ShowPendingChanges() : void
+    Add() : void
+    Checkout() : void
+    Checkin() : void
+    Undo() : void
+    ShowDiff() : void
+    ShowHistory() : void
+    AddFilesFilterPatterns(type:FilterTypes, action:FilterActions, operation:FilterOperationType) : void
+    {static} GetSymbolicName(selectedPath:string) : string
+    <<readonly>> mIsGluonMode : bool
+}
+interface IAssetSelection {
+    GetSelectedAssets() : AssetList
+}
+IAssetMenuOperations <|-- AssetOperations
+IAssetFilesFilterPatternsMenuOperations <|-- AssetOperations
+AssetOperations --> "mWkInfo" WorkspaceInfo
+AssetOperations --> "mViewSwitcher" IViewSwitcher
+AssetOperations --> "mHistoryViewLauncher" IHistoryViewLauncher
+AssetOperations --> "mWorkspaceWindow" IWorkspaceWindow
+AssetOperations --> "mViewHost" ViewHost
+AssetOperations --> "mNewIncomingChangesUpdater" NewIncomingChangesUpdater
+AssetOperations --> "mAssetStatusCache" IAssetStatusCache
+AssetOperations --> "mMergeViewLauncher" IMergeViewLauncher
+AssetOperations --> "mGluonViewSwitcher" IGluonViewSwitcher
+AssetOperations --> "mProgressControls" EditorProgressControls
+AssetOperations --> "mParentWindow" EditorWindow
+AssetOperations --> "mAssetSelection" IAssetSelection
+AssetOperations +-- IAssetSelection
+@enduml

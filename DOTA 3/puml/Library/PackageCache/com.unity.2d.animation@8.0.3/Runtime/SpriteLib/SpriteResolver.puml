@@ -1,0 +1,34 @@
+@startuml
+class SpriteResolver {
+    m_CategoryHash : float = 0
+    m_labelHash : float = 0
+    m_SpriteKey : float = 0
+    m_SpriteHash : int = 0
+    m_CategoryHashInt : int
+    m_LabelHashInt : int
+    m_PreviousCategoryHash : int
+    m_PreviousLabelHash : int
+    m_PreviousSpriteKeyInt : int
+    m_PreviousSpriteHash : int
+    Reset() : void
+    SetSprite(sprite:Sprite) : void
+    OnEnable() : void
+    InitializeSerializedData() : void
+    + SetCategoryAndLabel(category:string, label:string) : bool
+    + GetCategory() : string
+    + GetLabel() : string
+    + OnPreviewUpdate() : void
+    {static} IsInGUIUpdateLoop() : bool
+    LateUpdate() : void
+    ResolveUpdatedValue() : void
+    + ResolveSpriteToSpriteRenderer() : bool
+    OnTransformParentChanged() : void
+    OnBeforeSerialize() : void
+    OnAfterDeserialize() : void
+}
+MonoBehaviour <|-- SpriteResolver
+ISerializationCallbackReceiver <|-- SpriteResolver
+IPreviewable <|-- SpriteResolver
+SpriteResolver --> "spriteRenderer" SpriteRenderer
+SpriteResolver --> "spriteLibrary" SpriteLibrary
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class LevelView {
+    + AttachLevelableModel(levelable:ILevelable) : void
+    + SetLevel(level:int) : void
+    + SetCurrentExperience(value:float) : void
+    + SetNextLevelExperience(value:float) : void
+}
+MonoBehaviour <|-- LevelView
+@enduml

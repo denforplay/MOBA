@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Configurations;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -16,16 +18,55 @@ namespace Views
         [SerializeField] private Image _darkImage;
         [SerializeField] private TextMeshProUGUI _countDownText;
         private CancellationTokenSource _cancellationToken;
+        private float _startTime;
         private float _countdownTime;
-        
+        private SkillConfiguration _skillConfiguration;
+        private bool _isManaEnough = true;
+
+        public SkillConfiguration SkillConfiguration => _skillConfiguration;
+
         public int Id => _id;
         public Image SkillImg => _skillImage;
         public Image DarkSkillImg => _darkImage;
         public CancellationTokenSource CancellationToken => _cancellationToken;
 
+        public void SetSkillConfiguration(SkillConfiguration skillConfiguration)
+        {
+            _skillConfiguration = skillConfiguration;
+        }
+
+        public void DisableOnManaNotEnough()
+        {
+            _isManaEnough = false;
+            _darkImage.fillAmount = 1;
+        }
+
+        public void EnableOnManaEnough()
+        {
+            _isManaEnough = true;
+            
+            if (_cancellationToken.IsCancellationRequested)
+            {
+                _darkImage.fillAmount = 1;
+            }
+            else 
+            {
+                if (_countdownTime != _startTime)
+                {
+                    _darkImage.fillAmount = (_startTime - _countdownTime) / _startTime;
+                }
+                else
+                {
+                    _darkImage.fillAmount = 1;
+                }
+            }
+        }
+        
         public void SetCountdownTime(float countdownTime)
         {
+            _startTime = countdownTime;
             _countdownTime = countdownTime;
+
         }
         
         public async UniTask Countdown()
@@ -35,29 +76,20 @@ namespace Views
             OnSkillUseStateChanged?.Invoke(_id, false);
             _darkImage.fillAmount = 1;
             var reduceAmountPerTick = 1 / (_countdownTime * 10);
-            float startTime = _countdownTime;
             while (_countdownTime > 0)
             {
-                _countDownText.text = _countdownTime.ToString("0.0");
-                _darkImage.fillAmount -= reduceAmountPerTick;
                 await UniTask.Delay(TimeSpan.FromSeconds(0.1));
+                _countDownText.text = _countdownTime.ToString("0.0");
+                if (_isManaEnough)
+                    _darkImage.fillAmount -= reduceAmountPerTick;
                 _countdownTime -= 0.1f;
             }
 
-            _countdownTime = startTime;
+            _countdownTime = _startTime;
             _countDownText.text = "";
             _cancellationToken.Cancel();
-            OnSkillUseStateChanged?.Invoke(_id, true);
-        }
-        
-        public bool IsSkillReadyToUse()
-        {
-            if (_cancellationToken is not null)
-            {
-                return _cancellationToken.IsCancellationRequested;
-            }
-
-            return true;
+            if (_isManaEnough)
+                OnSkillUseStateChanged?.Invoke(_id, true);
         }
     }
 }

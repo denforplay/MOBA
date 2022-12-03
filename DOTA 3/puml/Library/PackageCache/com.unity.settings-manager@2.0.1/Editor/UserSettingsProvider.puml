@@ -1,0 +1,37 @@
+@startuml
+class UserSettingsProvider <<sealed>> {
+    + <<const>> developerModeCategory : string = "Developer Mode"
+    <<const>> k_SettingsName : string = "UserSettingsProviderSettings"
+    <<const>> k_LabelWidth : int = 180
+    labelWidth : int <<get>>
+    defaultLayoutMaxWidth : int <<get>>
+    + UserSettingsProvider(settings:Settings, assemblies:Assembly[])
+    SearchForUserSettingAttributes() : void
+    InitSettingsBlockKeywords() : void
+    DoContextMenu() : void
+    + OnGUI(searchContext:string) : void
+    DoPreferenceField(title:GUIContent, pref:IUserSetting) : void
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "HashSet`1"<T> {
+}
+class PrefEntry <<struct>> {
+    + PrefEntry(content:GUIContent, pref:IUserSetting)
+}
+UserSettingsProvider --> "m_Categories<string>" "List`1"
+UserSettingsProvider --> "m_Settings<string,List<PrefEntry>>" "Dictionary`2"
+UserSettingsProvider --> "m_SettingBlocks<string,List<MethodInfo>>" "Dictionary`2"
+UserSettingsProvider o-> "keywords<string>" "HashSet`1"
+UserSettingsProvider --> "m_SettingsBlockKeywordsInitialized" EventType
+UserSettingsProvider --> "s_Settings" Settings
+UserSettingsProvider --> "m_SettingsInstance" Settings
+UserSettingsProvider --> "userSettingsProviderSettings" Settings
+UserSettingsProvider +-- PrefEntry
+PrefEntry --> "m_Content" GUIContent
+PrefEntry --> "m_Pref" IUserSetting
+PrefEntry --> "content" GUIContent
+PrefEntry --> "pref" IUserSetting
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+class SkeletonController {
+    + editBindPose : bool <<get>> <<set>>
+    + Reset() : void
+    + OnGUI() : void
+    + {static} AutoBoneName(parent:BoneCache, bones:IEnumerable<BoneCache>) : string
+}
+SkeletonController --> "view" ISkeletonView
+SkeletonController --> "styleOverride" ISkeletonStyle
+SkeletonController --> "selection" IBoneSelection
+SkeletonController --> "skeleton" SkeletonCache
+SkeletonController --> "hoveredBone" BoneCache
+SkeletonController --> "hoveredTail" BoneCache
+SkeletonController --> "hoveredBody" BoneCache
+SkeletonController --> "hoveredJoint" BoneCache
+SkeletonController --> "hotBone" BoneCache
+@enduml

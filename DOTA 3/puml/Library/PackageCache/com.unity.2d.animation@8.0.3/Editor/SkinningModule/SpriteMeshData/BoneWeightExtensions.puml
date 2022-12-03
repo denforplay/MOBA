@@ -1,0 +1,10 @@
+@startuml
+class BoneWeightExtensions <<static>> {
+    + {static} GetBoneIndex(boneWeight:BoneWeight, channelIndex:int) : int
+    + {static} SetBoneIndex(boneWeight:BoneWeight, channelIndex:int, boneIndex:int) : void
+    + {static} GetWeight(boneWeight:BoneWeight, channelIndex:int) : float
+    + {static} SetWeight(boneWeight:BoneWeight, channelIndex:int, weight:float) : void
+    + {static} Sum(boneWeight:BoneWeight) : float
+    + {static} Normalized(boneWeight:BoneWeight) : BoneWeight
+}
+@enduml

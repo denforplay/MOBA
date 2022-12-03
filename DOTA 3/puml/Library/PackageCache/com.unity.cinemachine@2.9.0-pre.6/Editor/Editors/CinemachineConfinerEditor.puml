@@ -1,0 +1,9 @@
+@startuml
+class CinemachineConfinerEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+    {static} DrawPath(path:Vector2[], numPoints:int, offset:Vector2) : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineConfiner>" <|-- CinemachineConfinerEditor
+@enduml

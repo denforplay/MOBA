@@ -1,0 +1,10 @@
+@startuml
+class SplineHelpers <<static>> {
+    + {static} Bezier3(t:float, p0:Vector3, p1:Vector3, p2:Vector3, p3:Vector3) : Vector3
+    + {static} BezierTangent3(t:float, p0:Vector3, p1:Vector3, p2:Vector3, p3:Vector3) : Vector3
+    + {static} Bezier1(t:float, p0:float, p1:float, p2:float, p3:float) : float
+    + {static} BezierTangent1(t:float, p0:float, p1:float, p2:float, p3:float) : float
+    + {static} ComputeSmoothControlPoints(knot:Vector4[], ctrl1:Vector4[], ctrl2:Vector4[]) : void
+    + {static} ComputeSmoothControlPointsLooped(knot:Vector4[], ctrl1:Vector4[], ctrl2:Vector4[]) : void
+}
+@enduml

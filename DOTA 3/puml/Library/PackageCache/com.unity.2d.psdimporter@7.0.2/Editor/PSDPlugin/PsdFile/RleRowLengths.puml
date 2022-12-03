@@ -1,0 +1,7 @@
+@startuml
+class RleRowLengths {
+    + Total : long <<get>>
+    + RleRowLengths(rowCount:int)
+    + RleRowLengths(reader:PsdBinaryReader, rowCount:int, isLargeDocument:bool)
+}
+@enduml

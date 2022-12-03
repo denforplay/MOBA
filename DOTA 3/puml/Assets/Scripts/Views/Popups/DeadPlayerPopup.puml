@@ -1,0 +1,9 @@
+@startuml
+class DeadPlayerPopup {
+    +  <<event>> OnRevive : Action 
+    + Initialize(reviveTime:TimeSpan) : void
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- DeadPlayerPopup
+@enduml

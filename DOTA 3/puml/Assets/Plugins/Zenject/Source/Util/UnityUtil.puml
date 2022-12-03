@@ -1,0 +1,23 @@
+@startuml
+class UnityUtil <<static>> {
+    + {static} IsAltKeyDown : bool <<get>>
+    + {static} IsControlKeyDown : bool <<get>>
+    + {static} IsShiftKeyDown : bool <<get>>
+    + {static} WasShiftKeyJustPressed : bool <<get>>
+    + {static} WasAltKeyJustPressed : bool <<get>>
+    + {static} GetDepthLevel(transform:Transform) : int
+    + {static} GetRootParentOrSelf(gameObject:GameObject) : GameObject
+    + {static} GetParents(transform:Transform) : IEnumerable<Transform>
+    + {static} GetParentsAndSelf(transform:Transform) : IEnumerable<Transform>
+    + {static} GetComponentsInChildrenTopDown(gameObject:GameObject, includeInactive:bool) : IEnumerable<Component>
+    + {static} GetComponentsInChildrenBottomUp(gameObject:GameObject, includeInactive:bool) : IEnumerable<Component>
+    + {static} GetDirectChildrenAndSelf(obj:GameObject) : IEnumerable<GameObject>
+    + {static} GetDirectChildren(obj:GameObject) : IEnumerable<GameObject>
+    + {static} GetAllGameObjects() : IEnumerable<GameObject>
+    + {static} GetAllRootGameObjects() : List<GameObject>
+}
+class "IEnumerable`1"<T> {
+}
+UnityUtil --> "AllScenes<Scene>" "IEnumerable`1"
+UnityUtil --> "AllLoadedScenes<Scene>" "IEnumerable`1"
+@enduml

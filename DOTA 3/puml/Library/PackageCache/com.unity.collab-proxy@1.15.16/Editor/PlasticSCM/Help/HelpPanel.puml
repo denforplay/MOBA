@@ -1,0 +1,13 @@
+@startuml
+class HelpPanel {
+    ClearData() : void
+    UpdateData(helpImage:PlasticGui.Help.HelpImage, helpData:HelpData) : void
+    {static} GetFormattedLinkAtChar(formattedLinks:List<FormattedHelpLink>, charIndex:int) : FormattedHelpLink
+}
+class "List`1"<T> {
+}
+HelpPanel --> "mHelpData" HelpData
+HelpPanel --> "mHelpGUIContent" GUIContent
+HelpPanel --> "mFormattedLinks<FormattedHelpLink>" "List`1"
+HelpPanel --> "mWindow" EditorWindow
+@enduml

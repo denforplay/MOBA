@@ -1,0 +1,8 @@
+@startuml
+class DocumentLoadContext {
+    + DocumentLoadContext()
+    + <<override>> OnLoadLayersHeader(psdFile:PsdFile) : void
+    + <<override>> OnLoadLayerHeader(layer:PhotoshopFile.Layer) : void
+}
+LoadContext <|-- DocumentLoadContext
+@enduml

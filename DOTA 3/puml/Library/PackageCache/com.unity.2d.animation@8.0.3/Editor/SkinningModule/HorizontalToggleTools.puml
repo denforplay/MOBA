@@ -1,0 +1,14 @@
+@startuml
+class HorizontalToggleTools {
+    + collapseToolbar : bool <<get>> <<set>>
+    DoVisibilityToggle(currentTool:BaseTool) : void
+}
+class Styles <<static>> {
+}
+HorizontalToggleTools --> "visbilityIcon" GUIContent
+HorizontalToggleTools +-- Styles
+Styles o-> "visibilityCollapseIcon" GUIContent
+Styles o-> "visibilityIcon" GUIContent
+Styles o-> "spriteSheetIcon" GUIContent
+Styles o-> "spriteSheetCollapseIcon" GUIContent
+@enduml

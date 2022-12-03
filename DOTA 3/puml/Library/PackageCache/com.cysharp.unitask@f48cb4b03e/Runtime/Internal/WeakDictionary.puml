@@ -1,0 +1,33 @@
+@startuml
+class "WeakDictionary`2"<TKey,TValue> {
+    size : int
+    <<readonly>> loadFactor : float
+    + WeakDictionary(capacity:int, loadFactor:float, keyComparer:IEqualityComparer<TKey>)
+    + TryAdd(key:TKey, value:TValue) : bool
+    + TryGetValue(key:TKey, value:TValue) : bool
+    + TryRemove(key:TKey) : bool
+    TryAddInternal(key:TKey, value:TValue) : bool
+    AddToBuckets(targetBuckets:Entry[], newKey:TKey, value:TValue, keyHash:int) : bool
+    TryGetEntry(key:TKey, hashIndex:int, entry:Entry) : bool
+    Remove(hashIndex:int, entry:Entry) : void
+    + ToList() : List<KeyValuePair<TKey, TValue>>
+    + ToList(list:List<KeyValuePair<TKey, TValue>>, clear:bool) : int
+    {static} CalculateCapacity(collectionSize:int, loadFactor:float) : int
+}
+class "IEqualityComparer`1"<T> {
+}
+class Entry {
+    + Hash : int
+    + <<override>> ToString() : string
+    Count() : int
+}
+class "WeakReference`1"<T> {
+}
+"WeakDictionary`2" --> "gate" SpinLock
+"WeakDictionary`2" --> "keyEqualityComparer<TKey>" "IEqualityComparer`1"
+"WeakDictionary`2" +-- Entry
+Entry --> "Key<TKey>" "WeakReference`1"
+Entry --> "Value" TValue
+Entry --> "Prev" Entry
+Entry --> "Next" Entry
+@enduml

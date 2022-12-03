@@ -1,0 +1,8 @@
+@startuml
+class NonLazyBinder {
+    + NonLazyBinder(bindInfo:BindInfo)
+    + NonLazy() : IfNotBoundBinder
+    + Lazy() : IfNotBoundBinder
+}
+IfNotBoundBinder <|-- NonLazyBinder
+@enduml

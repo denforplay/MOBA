@@ -1,0 +1,5 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} AsUniTaskAsyncEnumerable(source:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+@enduml

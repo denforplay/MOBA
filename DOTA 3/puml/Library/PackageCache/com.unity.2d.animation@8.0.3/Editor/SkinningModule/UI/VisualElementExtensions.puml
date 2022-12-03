@@ -1,0 +1,6 @@
+@startuml
+class VisualElementExtensions <<static>> {
+    + {static} SetHiddenFromLayout(element:VisualElement, isHidden:bool) : void
+    + {static} LocalizeTextInChildren(element:VisualElement) : void
+}
+@enduml

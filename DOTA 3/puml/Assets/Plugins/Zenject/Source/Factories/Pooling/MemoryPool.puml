@@ -1,0 +1,103 @@
+@startuml
+class "MemoryPool`1"<TValue> {
+    + Spawn() : TValue
+    Create() : TValue
+}
+class "MemoryPool`2"<TParam1,TValue> {
+    + Spawn(param:TParam1) : TValue
+    Create(p1:TParam1) : TValue
+}
+class "MemoryPool`3"<TParam1,TParam2,TValue> {
+    + Spawn(param1:TParam1, param2:TParam2) : TValue
+    Create(p1:TParam1, p2:TParam2) : TValue
+}
+class "MemoryPool`4"<TParam1,TParam2,TParam3,TValue> {
+    + Spawn(param1:TParam1, param2:TParam2, param3:TParam3) : TValue
+    Create(p1:TParam1, p2:TParam2, p3:TParam3) : TValue
+}
+class "MemoryPool`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+    + Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : TValue
+    Create(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4) : TValue
+}
+class "MemoryPool`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+    + Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5) : TValue
+    Create(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5) : TValue
+}
+class "MemoryPool`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue> {
+    + Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6) : TValue
+    Create(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6) : TValue
+}
+class "MemoryPool`8"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue> {
+    + Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7) : TValue
+    Create(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6, p7:TParam7) : TValue
+}
+class "MemoryPool`9"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TValue> {
+    + Spawn(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7, param8:TParam8) : TValue
+    Create(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6, p7:TParam7, p8:TParam8) : TValue
+}
+class "MemoryPoolBase`1"<T> {
+}
+class "IMemoryPool`1"<T> {
+}
+class "IFactory`1"<T> {
+}
+class "IMemoryPool`2"<T1,T2> {
+}
+class "IFactory`2"<T1,T2> {
+}
+class "IMemoryPool`3"<T1,T2,T3> {
+}
+class "IFactory`3"<T1,T2,T3> {
+}
+class "IMemoryPool`4"<T1,T2,T3,T4> {
+}
+class "IFactory`4"<T1,T2,T3,T4> {
+}
+class "IMemoryPool`5"<T1,T2,T3,T4,T5> {
+}
+class "IFactory`5"<T1,T2,T3,T4,T5> {
+}
+class "IMemoryPool`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "IFactory`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "IMemoryPool`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "IFactory`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "IMemoryPool`8"<T1,T2,T3,T4,T5,T6,T7,T8> {
+}
+class "IFactory`8"<T1,T2,T3,T4,T5,T6,T7,T8> {
+}
+class "IMemoryPool`9"<T1,T2,T3,T4,T5,T6,T7,T8,T9> {
+}
+class "IFactory`9"<T1,T2,T3,T4,T5,T6,T7,T8,T9> {
+}
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`1"
+"IMemoryPool`1" "<TValue>" <|-- "MemoryPool`1"
+"IFactory`1" "<TValue>" <|-- "MemoryPool`1"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`2"
+"IMemoryPool`2" "<TParam1,TValue>" <|-- "MemoryPool`2"
+"IFactory`2" "<TParam1,TValue>" <|-- "MemoryPool`2"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`3"
+"IMemoryPool`3" "<TParam1,TParam2,TValue>" <|-- "MemoryPool`3"
+"IFactory`3" "<TParam1,TParam2,TValue>" <|-- "MemoryPool`3"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`4"
+"IMemoryPool`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "MemoryPool`4"
+"IFactory`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "MemoryPool`4"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`5"
+"IMemoryPool`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "MemoryPool`5"
+"IFactory`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "MemoryPool`5"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`6"
+"IMemoryPool`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "MemoryPool`6"
+"IFactory`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "MemoryPool`6"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`7"
+"IMemoryPool`7" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue>" <|-- "MemoryPool`7"
+"IFactory`7" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue>" <|-- "MemoryPool`7"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`8"
+"IMemoryPool`8" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue>" <|-- "MemoryPool`8"
+"IFactory`8" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue>" <|-- "MemoryPool`8"
+"MemoryPoolBase`1" "<TValue>" <|-- "MemoryPool`9"
+"IMemoryPool`9" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TValue>" <|-- "MemoryPool`9"
+"IFactory`9" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TValue>" <|-- "MemoryPool`9"
+@enduml

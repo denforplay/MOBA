@@ -1,0 +1,9 @@
+@startuml
+class "MySetting`1"<T> {
+    + MySetting(key:string, value:T, scope:SettingsScope)
+    MySetting(settings:Settings, key:string, value:T, scope:SettingsScope)
+}
+class "UserSetting`1"<T> {
+}
+"UserSetting`1" "<T>" <|-- "MySetting`1"
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class MarkerDataAPITests {
+    + MarkerData_ComputeBuckets_GeneratesExpectedValues() : void
+}
+ProfileAnalyzerBaseTest <|-- MarkerDataAPITests
+@enduml

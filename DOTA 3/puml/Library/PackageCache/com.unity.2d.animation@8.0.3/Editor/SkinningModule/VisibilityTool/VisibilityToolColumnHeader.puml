@@ -1,0 +1,13 @@
+@startuml
+class VisibilityToolColumnHeader {
+    + VisibilityToolColumnHeader(state:MultiColumnHeaderState)
+    + visibilityColumn : int <<set>>
+}
+class "Action`1"<T> {
+}
+class "Func`1"<T> {
+}
+MultiColumnHeader <|-- VisibilityToolColumnHeader
+VisibilityToolColumnHeader o-> "SetAllVisibility<bool>" "Action`1"
+VisibilityToolColumnHeader o-> "GetAllVisibility<bool>" "Func`1"
+@enduml

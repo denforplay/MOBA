@@ -1,0 +1,11 @@
+@startuml
+class "EventAction`1"<T> {
+    + AddSubscriber(subscriber:Action<T>) : void
+    + Invoke(invokator:T) : void
+    + HasSubscriber(subscriber:Action<T>) : bool
+    + RemoveSubscriber(subscriber:Action<T>) : void
+}
+class "IEventAction`1"<T> {
+}
+"IEventAction`1" "<T>" <|-- "EventAction`1"
+@enduml

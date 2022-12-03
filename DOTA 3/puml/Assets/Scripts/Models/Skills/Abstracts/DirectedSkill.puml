@@ -1,0 +1,10 @@
+@startuml
+abstract class DirectedSkill {
+    + DirectedSkill(skillId:int, skillConfiguration:SkillConfiguration)
+    + CanBeUsed : bool <<get>> <<set>>
+    + {abstract} Apply(direction:Vector3) : UniTask
+    + Id : int <<get>>
+}
+ISkill <|-- DirectedSkill
+DirectedSkill --> "SkillType" SkillType
+@enduml

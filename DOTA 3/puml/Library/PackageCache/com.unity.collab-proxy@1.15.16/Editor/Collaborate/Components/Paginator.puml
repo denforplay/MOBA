@@ -1,0 +1,25 @@
+@startuml
+class Paginator {
+    + <<const>> UssClassName : string = "paginator"
+    + <<const>> PageTextUssClassName : string
+    + <<const>> BackButtonUssClassName : string
+    + <<const>> ForwardsButtonUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    + <<const>> MoveBackwards : int
+    + <<const>> MoveForwards : int = 1
+    +  <<event>> ClickedMovePage : Action<int> 
+    + Paginator()
+    + SetPage(page:int, maxPage:int) : void
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- Paginator
+Paginator --> "m_PageText" Label
+Paginator --> "m_BackButton" Button
+Paginator --> "m_ForwardsButton" Button
+Paginator +-- UxmlFactory
+"UxmlFactory`1" "<Paginator>" <|-- UxmlFactory
+@enduml

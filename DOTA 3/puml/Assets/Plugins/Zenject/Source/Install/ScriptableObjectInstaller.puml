@@ -1,0 +1,34 @@
+@startuml
+class ScriptableObjectInstaller {
+}
+class "ScriptableObjectInstaller`1"<TDerived> {
+    + {static} InstallFromResource(container:DiContainer) : TDerived
+    + {static} InstallFromResource(resourcePath:string, container:DiContainer) : TDerived
+}
+class "ScriptableObjectInstaller`2"<TParam1,TDerived> {
+    + {static} InstallFromResource(container:DiContainer, p1:TParam1) : TDerived
+    + {static} InstallFromResource(resourcePath:string, container:DiContainer, p1:TParam1) : TDerived
+}
+class "ScriptableObjectInstaller`3"<TParam1,TParam2,TDerived> {
+    + {static} InstallFromResource(container:DiContainer, p1:TParam1, p2:TParam2) : TDerived
+    + {static} InstallFromResource(resourcePath:string, container:DiContainer, p1:TParam1, p2:TParam2) : TDerived
+}
+class "ScriptableObjectInstaller`4"<TParam1,TParam2,TParam3,TDerived> {
+    + {static} InstallFromResource(container:DiContainer, p1:TParam1, p2:TParam2, p3:TParam3) : TDerived
+    + {static} InstallFromResource(resourcePath:string, container:DiContainer, p1:TParam1, p2:TParam2, p3:TParam3) : TDerived
+}
+class "ScriptableObjectInstaller`5"<TParam1,TParam2,TParam3,TParam4,TDerived> {
+    + {static} InstallFromResource(container:DiContainer, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4) : TDerived
+    + {static} InstallFromResource(resourcePath:string, container:DiContainer, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4) : TDerived
+}
+class ScriptableObjectInstallerUtil <<static>> {
+    + {static} GetDefaultResourcePath() : string
+    + {static} CreateInstaller(resourcePath:string, container:DiContainer) : TInstaller
+}
+ScriptableObjectInstallerBase <|-- ScriptableObjectInstaller
+ScriptableObjectInstaller <|-- "ScriptableObjectInstaller`1"
+ScriptableObjectInstallerBase <|-- "ScriptableObjectInstaller`2"
+ScriptableObjectInstallerBase <|-- "ScriptableObjectInstaller`3"
+ScriptableObjectInstallerBase <|-- "ScriptableObjectInstaller`4"
+ScriptableObjectInstallerBase <|-- "ScriptableObjectInstaller`5"
+@enduml

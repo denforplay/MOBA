@@ -1,0 +1,69 @@
+@startuml
+class CinemachineImpulseEnvelopePropertyAttribute <<sealed>> {
+}
+class CinemachineImpulseChannelPropertyAttribute <<sealed>> {
+}
+class CinemachineImpulseManager {
+    {static} InitializeModule() : void
+    <<const>> Epsilon : float
+    + GetImpulseAt(listenerLocation:Vector3, distance2D:bool, channelMask:int, pos:Vector3, rot:Quaternion) : bool
+    + IgnoreTimeScale : bool
+    + CurrentTime : float <<get>>
+    + NewImpulseEvent() : ImpulseEvent
+    + AddImpulseEvent(e:ImpulseEvent) : void
+    + Clear() : void
+}
+class EnvelopeDefinition <<struct>> {
+    + m_AttackTime : float
+    + m_SustainTime : float
+    + m_DecayTime : float
+    + m_ScaleWithImpact : bool
+    + m_HoldForever : bool
+    + {static} Default() : EnvelopeDefinition
+    + Duration : float <<get>>
+    + GetValueAt(offset:float) : float
+    + ChangeStopTime(offset:float, forceNoDecay:bool) : void
+    + Clear() : void
+    + Validate() : void
+}
+class ImpulseEvent {
+    + m_StartTime : float
+    + m_Radius : float
+    + m_Channel : int
+    + m_DissipationDistance : float
+    + m_CustomDissipation : float
+    + m_PropagationSpeed : float
+    + Expired : bool <<get>>
+    + Cancel(time:float, forceNoDecay:bool) : void
+    + DistanceDecay(distance:float) : float
+    + GetDecayedSignal(listenerPosition:Vector3, use2D:bool, pos:Vector3, rot:Quaternion) : bool
+    + Clear() : void
+}
+class "List`1"<T> {
+}
+enum DirectionMode {
+    Fixed,
+    RotateTowardSource,
+}
+enum DissipationMode {
+    LinearDecay,
+    SoftDecay,
+    ExponentialDecay,
+}
+PropertyAttribute <|-- CinemachineImpulseEnvelopePropertyAttribute
+PropertyAttribute <|-- CinemachineImpulseChannelPropertyAttribute
+CinemachineImpulseManager --> "Instance" CinemachineImpulseManager
+CinemachineImpulseManager --> "m_ExpiredEvents<ImpulseEvent>" "List`1"
+CinemachineImpulseManager --> "m_ActiveEvents<ImpulseEvent>" "List`1"
+CinemachineImpulseManager +-- EnvelopeDefinition
+EnvelopeDefinition --> "m_AttackShape" AnimationCurve
+EnvelopeDefinition --> "m_DecayShape" AnimationCurve
+CinemachineImpulseManager +-- ImpulseEvent
+ImpulseEvent --> "m_Envelope" EnvelopeDefinition
+ImpulseEvent --> "m_SignalSource" ISignalSource6D
+ImpulseEvent --> "m_Position" Vector3
+ImpulseEvent o-> "m_DirectionMode" DirectionMode
+ImpulseEvent --> "m_DissipationMode" DissipationMode
+ImpulseEvent +-- DirectionMode
+ImpulseEvent +-- DissipationMode
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+class TickableManager {
+    _isPaused : bool
+    + TickableManager()
+    + IsPaused : bool <<get>> <<set>>
+    + Initialize() : void
+    InitFixedTickables() : void
+    InitTickables() : void
+    InitLateTickables() : void
+    + Add(tickable:ITickable, priority:int) : void
+    + Add(tickable:ITickable) : void
+    + AddLate(tickable:ILateTickable, priority:int) : void
+    + AddLate(tickable:ILateTickable) : void
+    + AddFixed(tickable:IFixedTickable, priority:int) : void
+    + AddFixed(tickable:IFixedTickable) : void
+    + Remove(tickable:ITickable) : void
+    + RemoveLate(tickable:ILateTickable) : void
+    + RemoveFixed(tickable:IFixedTickable) : void
+    + Update() : void
+    + FixedUpdate() : void
+    + LateUpdate() : void
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+TickableManager o-> "_tickables<ITickable>" "List`1"
+TickableManager o-> "_fixedTickables<IFixedTickable>" "List`1"
+TickableManager o-> "_lateTickables<ILateTickable>" "List`1"
+TickableManager o-> "_priorities<ValuePair<Type, int>>" "List`1"
+TickableManager o-> "_fixedPriorities<ValuePair<Type, int>>" "List`1"
+TickableManager o-> "_latePriorities<ValuePair<Type, int>>" "List`1"
+TickableManager o-> "_updater" TickablesTaskUpdater
+TickableManager o-> "_fixedUpdater" FixedTickablesTaskUpdater
+TickableManager o-> "_lateUpdater" LateTickablesTaskUpdater
+TickableManager --> "Tickables<ITickable>" "IEnumerable`1"
+@enduml

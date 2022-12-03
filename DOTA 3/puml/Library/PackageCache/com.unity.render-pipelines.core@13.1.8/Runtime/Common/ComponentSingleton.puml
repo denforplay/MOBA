@@ -1,0 +1,7 @@
+@startuml
+class "ComponentSingleton`1"<TType> <<static>> {
+    {static} s_Instance : TType = null
+    + {static} instance : TType <<get>>
+    + {static} Release() : void
+}
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class EditorWindowCoroutineExtension <<static>> {
+    + {static} StartCoroutine(window:EditorWindow, routine:IEnumerator) : EditorCoroutine
+    + {static} StopCoroutine(window:EditorWindow, coroutine:EditorCoroutine) : void
+}
+@enduml

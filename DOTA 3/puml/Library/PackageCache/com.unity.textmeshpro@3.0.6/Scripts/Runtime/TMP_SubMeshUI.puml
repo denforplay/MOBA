@@ -1,0 +1,37 @@
+@startuml
+class TMP_SubMeshUI {
+    + isDefaultMaterial : bool <<get>> <<set>>
+    + padding : float <<get>> <<set>>
+    + {static} AddSubTextObject(textComponent:TextMeshProUGUI, materialReference:MaterialReference) : TMP_SubMeshUI
+    + <<override>> GetModifiedMaterial(baseMaterial:Material) : Material
+    + GetPaddingForMaterial() : float
+    + GetPaddingForMaterial(mat:Material) : float
+    + UpdateMeshPadding(isExtraPadding:bool, isUsingBold:bool) : void
+    + <<override>> SetAllDirty() : void
+    + <<override>> SetVerticesDirty() : void
+    + <<override>> SetLayoutDirty() : void
+    + <<override>> SetMaterialDirty() : void
+    + SetPivotDirty() : void
+    GetRootCanvasTransform() : Transform
+    + <<override>> Cull(clipRect:Rect, validRect:bool) : void
+    + <<override>> Rebuild(update:CanvasUpdate) : void
+    + RefreshMaterial() : void
+    + <<override>> RecalculateClipping() : void
+    GetMaterial() : Material
+    GetMaterial(mat:Material) : Material
+    CreateMaterialInstance(source:Material) : Material
+    GetSharedMaterial() : Material
+    SetSharedMaterial(mat:Material) : void
+}
+MaskableGraphic <|-- TMP_SubMeshUI
+TMP_SubMeshUI --> "fontAsset" TMP_FontAsset
+TMP_SubMeshUI --> "spriteAsset" TMP_SpriteAsset
+TMP_SubMeshUI --> "mainTexture" Texture
+TMP_SubMeshUI --> "material" Material
+TMP_SubMeshUI --> "sharedMaterial" Material
+TMP_SubMeshUI --> "fallbackMaterial" Material
+TMP_SubMeshUI --> "fallbackSourceMaterial" Material
+TMP_SubMeshUI --> "materialForRendering" Material
+TMP_SubMeshUI --> "mesh" Mesh
+TMP_SubMeshUI --> "textComponent" TMP_Text
+@enduml

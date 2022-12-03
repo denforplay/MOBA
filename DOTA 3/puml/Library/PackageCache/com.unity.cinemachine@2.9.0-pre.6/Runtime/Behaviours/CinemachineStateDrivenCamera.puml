@@ -1,0 +1,60 @@
+@startuml
+class CinemachineStateDrivenCamera {
+    + m_LayerIndex : int
+    + m_ShowDebugText : bool = false
+    + <<override>> Description : string <<get>>
+    + <<override>> IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    + <<override>> InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + OnTransformChildrenChanged() : void
+    + IsBlending : bool <<get>>
+    + {static} CreateFakeHash(parentHash:int, clip:AnimationClip) : int
+    LookupFakeHash(parentHash:int, clip:AnimationClip) : int
+    mActivationTime : float = 0
+    mPendingActivationTime : float = 0
+    InvalidateListOfChildren() : void
+    UpdateListOfChildren() : void
+    GetClipHash(hash:int, clips:List<AnimatorClipInfo>) : int
+}
+class Instruction <<struct>> {
+    + m_FullHash : int
+    + m_ActivateAfter : float
+    + m_MinDuration : float
+}
+class ParentHash <<struct>> {
+    + m_Hash : int
+    + m_ParentHash : int
+    + ParentHash(h:int, p:int)
+}
+class HashPair <<struct>> {
+    + parentHash : int
+    + hash : int
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+CinemachineVirtualCameraBase <|-- CinemachineStateDrivenCamera
+CinemachineStateDrivenCamera o-> "m_LookAt" Transform
+CinemachineStateDrivenCamera o-> "m_Follow" Transform
+CinemachineStateDrivenCamera --> "m_AnimatedTarget" Animator
+CinemachineStateDrivenCamera o-> "m_DefaultBlend" CinemachineBlendDefinition
+CinemachineStateDrivenCamera o-> "m_CustomBlends" CinemachineBlenderSettings
+CinemachineStateDrivenCamera --> "LiveChild" ICinemachineCamera
+CinemachineStateDrivenCamera --> "State" CameraState
+CinemachineStateDrivenCamera --> "LookAt" Transform
+CinemachineStateDrivenCamera --> "Follow" Transform
+CinemachineStateDrivenCamera --> "m_TransitioningFrom" ICinemachineCamera
+CinemachineStateDrivenCamera o-> "m_State" CameraState
+CinemachineStateDrivenCamera --> "ActiveBlend" CinemachineBlend
+CinemachineStateDrivenCamera --> "mHashCache<AnimationClip,List<HashPair>>" "Dictionary`2"
+CinemachineStateDrivenCamera --> "mActiveInstruction" Instruction
+CinemachineStateDrivenCamera --> "mPendingInstruction" Instruction
+CinemachineStateDrivenCamera o-> "m_clipInfoList<AnimatorClipInfo>" "List`1"
+CinemachineStateDrivenCamera +-- Instruction
+Instruction --> "m_VirtualCamera" CinemachineVirtualCameraBase
+CinemachineStateDrivenCamera +-- ParentHash
+CinemachineStateDrivenCamera +-- HashPair
+@enduml

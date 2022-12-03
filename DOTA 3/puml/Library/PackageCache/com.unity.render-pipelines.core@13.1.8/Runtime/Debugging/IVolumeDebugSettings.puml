@@ -1,0 +1,22 @@
+@startuml
+interface IVolumeDebugSettings {
+    selectedComponent : int <<get>> <<set>>
+    selectedCameraIndex : int <<get>> <<set>>
+    GetVolumes() : Volume[]
+    VolumeHasInfluence(volume:Volume) : bool
+    RefreshVolumes(newVolumes:Volume[]) : bool
+    GetVolumeWeight(volume:Volume) : float
+}
+class "IEnumerable`1"<T> {
+}
+class "List`1"<T> {
+}
+IVolumeDebugSettings --> "targetRenderPipeline" Type
+IVolumeDebugSettings --> "selectedCamera" Camera
+IVolumeDebugSettings --> "cameras<Camera>" "IEnumerable`1"
+IVolumeDebugSettings --> "selectedCameraVolumeStack" VolumeStack
+IVolumeDebugSettings --> "selectedCameraLayerMask" LayerMask
+IVolumeDebugSettings --> "selectedCameraPosition" Vector3
+IVolumeDebugSettings --> "selectedComponentType" Type
+IVolumeDebugSettings --> "componentTypes<(string, Type)>" "List`1"
+@enduml

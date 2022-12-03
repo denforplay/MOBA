@@ -1,0 +1,12 @@
+@startuml
+class GridPaletteEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class Styles <<static>> {
+}
+Editor <|-- GridPaletteEditor
+GridPaletteEditor +-- Styles
+Styles o-> "cellSizingLabel" GUIContent
+Styles o-> "transparencySortModeLabel" GUIContent
+Styles o-> "transparencySortAxisLabel" GUIContent
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+abstract class RotateTool {
+    + <<override>> OnToolGUI(window:EditorWindow) : void
+}
+class RotateClockwiseTool <<sealed>> {
+    + <<override>> OnActivated() : void
+}
+class RotateCounterClockwiseTool <<sealed>> {
+    + <<override>> OnActivated() : void
+}
+class Styles <<static>> {
+    + {static} tooltipStringFormat : string
+    + {static} shortcutId : string = "Grid Painting/Rotate Clockwise"
+}
+class Styles <<static>> {
+    + {static} tooltipStringFormat : string
+    + {static} shortcutId : string = "Grid Painting/Rotate Anti-Clockwise"
+}
+TilemapEditorTool <|-- RotateTool
+RotateTool <|-- RotateClockwiseTool
+RotateClockwiseTool --> "toolbarIcon" GUIContent
+RotateTool <|-- RotateCounterClockwiseTool
+RotateCounterClockwiseTool --> "toolbarIcon" GUIContent
+RotateClockwiseTool +-- Styles
+Styles o-> "toolContent" GUIContent
+RotateCounterClockwiseTool +-- Styles
+Styles o-> "toolContent" GUIContent
+@enduml

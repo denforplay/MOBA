@@ -1,0 +1,14 @@
+@startuml
+class SkeletonTool {
+    + enableBoneInspector : bool <<get>> <<set>>
+    + editBindPose : bool <<get>> <<set>>
+    + <<override>> defaultControlID : int <<get>>
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    BoneDataChanged(bone:BoneCache) : void
+}
+BaseTool <|-- SkeletonTool
+SkeletonTool --> "mode" SkeletonMode
+SkeletonTool --> "skeletonStyle" ISkeletonStyle
+SkeletonTool --> "hoveredBone" BoneCache
+SkeletonTool --> "skeleton" SkeletonCache
+@enduml

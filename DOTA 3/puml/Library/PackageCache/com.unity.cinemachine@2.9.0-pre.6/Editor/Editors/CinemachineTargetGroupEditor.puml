@@ -1,0 +1,11 @@
+@startuml
+class CinemachineTargetGroupEditor <<sealed>> {
+    OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+    DisplayErrorMessageForDescendants() : void
+    SetupTargetList() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineTargetGroup>" <|-- CinemachineTargetGroupEditor
+@enduml

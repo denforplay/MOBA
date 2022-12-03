@@ -1,0 +1,34 @@
+@startuml
+class IKEditorManager {
+    m_IgnorePostProcessModifications : bool = false
+    {static} CreateInstance() : void
+    OnDrawGizmos() : void
+    + CheckGizmoToggle() : void
+    + Initialize() : void
+    + FindManager(solver:Solver2D) : IKManager2D
+    + Record(solver:Solver2D, undoName:string) : void
+    + RegisterUndo(solver:Solver2D, undoName:string) : void
+    + Record(manager:IKManager2D, undoName:string) : void
+    + RegisterUndo(manager:IKManager2D, undoName:string) : void
+    + UpdateManagerImmediate(manager:IKManager2D, recordRootLoops:bool) : void
+    + UpdateSolverImmediate(solver:Solver2D, recordRootLoops:bool) : void
+    + UpdateHierarchyImmediate(hierarchyRoot:Transform, recordRootLoops:bool) : void
+    + SetChainPositionOverride(chain:IKChain2D, position:Vector3) : void
+}
+class "HashSet`1"<T> {
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+ScriptableObject <|-- IKEditorManager
+IKEditorManager --> "s_Instance" IKEditorManager
+IKEditorManager o-> "m_DirtyManagers<IKManager2D>" "HashSet`1"
+IKEditorManager o-> "m_IKSolvers<Solver2D>" "HashSet`1"
+IKEditorManager o-> "m_IKManagers<IKManager2D>" "List`1"
+IKEditorManager o-> "m_ChainPositionOverrides<IKChain2D,Vector3>" "Dictionary`2"
+IKEditorManager o-> "m_TargetPositions<Vector3>" "List`1"
+IKEditorManager --> "m_Helper" GameObject
+IKEditorManager o-> "m_IgnoreTransformsOnUndo<Transform>" "HashSet`1"
+IKEditorManager --> "instance" IKEditorManager
+@enduml

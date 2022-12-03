@@ -1,0 +1,11 @@
+@startuml
+class EventTriggerEditor {
+    + <<override>> OnInspectorGUI() : void
+    ShowAddTriggermenu() : void
+}
+Editor <|-- EventTriggerEditor
+EventTriggerEditor --> "m_DelegatesProperty" SerializedProperty
+EventTriggerEditor --> "m_IconToolbarMinus" GUIContent
+EventTriggerEditor --> "m_EventIDName" GUIContent
+EventTriggerEditor --> "m_AddButonContent" GUIContent
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+interface IFunctionPointer {
+    FromIntPtr(ptr:IntPtr) : IFunctionPointer
+}
+class "FunctionPointer`1"<T> <<struct>> {
+    + FunctionPointer(ptr:IntPtr)
+    + Invoke : T <<get>>
+    + IsCreated : bool <<get>>
+    FromIntPtr(ptr:IntPtr) : IFunctionPointer
+}
+IFunctionPointer <|-- "FunctionPointer`1"
+"FunctionPointer`1" --> "Value" IntPtr
+@enduml

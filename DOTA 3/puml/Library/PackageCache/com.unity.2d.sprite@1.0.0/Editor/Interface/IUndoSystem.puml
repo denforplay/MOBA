@@ -1,0 +1,15 @@
+@startuml
+interface IUndoSystem {
+    RegisterUndoCallback(undoCallback:Undo.UndoRedoCallback) : void
+    UnregisterUndoCallback(undoCallback:Undo.UndoRedoCallback) : void
+    RegisterCompleteObjectUndo(obj:ScriptableObject, undoText:string) : void
+    ClearUndo(obj:ScriptableObject) : void
+}
+class UndoSystem {
+    + RegisterUndoCallback(undoCallback:Undo.UndoRedoCallback) : void
+    + UnregisterUndoCallback(undoCallback:Undo.UndoRedoCallback) : void
+    + RegisterCompleteObjectUndo(so:ScriptableObject, undoText:string) : void
+    + ClearUndo(so:ScriptableObject) : void
+}
+IUndoSystem <|-- UndoSystem
+@enduml

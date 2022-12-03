@@ -1,0 +1,41 @@
+@startuml
+class SkeletonView {
+    + InvalidID : int <<get>> <<set>>
+    + defaultControlID : int <<get>> <<set>>
+    + hoveredBoneID : int <<get>>
+    + hoveredJointID : int <<get>>
+    + hoveredBodyID : int <<get>>
+    + hoveredTailID : int <<get>>
+    + hotBoneID : int <<get>>
+    + SkeletonView(gw:IGUIWrapper)
+    + BeginLayout() : void
+    + EndLayout() : void
+    + CanLayout() : bool
+    + LayoutBone(id:int, position:Vector3, endPosition:Vector3, forward:Vector3, up:Vector3, right:Vector3, isChainEnd:bool) : void
+    + GetMouseWorldPosition(planeNormal:Vector3, planePosition:Vector3) : Vector3
+    + DoSelectBone(id:int, additive:bool) : bool
+    + DoRotateBone(pivot:Vector3, normal:Vector3, deltaAngle:float) : bool
+    + DoMoveBone(deltaPosition:Vector3) : bool
+    + DoFreeMoveBone(deltaPosition:Vector3) : bool
+    + DoMoveJoint(deltaPosition:Vector3) : bool
+    + DoMoveEndPosition(endPosition:Vector3) : bool
+    + DoChangeLength(endPosition:Vector3) : bool
+    + DoCreateBoneStart(position:Vector3) : bool
+    + CanCreateBone() : bool
+    + DoCreateBone(position:Vector3) : bool
+    + DoSplitBone(id:int, position:Vector3) : bool
+    + DoRemoveBone() : bool
+    + DoCancelMultistepAction(force:bool) : bool
+    + IsActionActive(action:SkeletonAction) : bool
+    + IsActionHot(action:SkeletonAction) : bool
+    + IsActionTriggering(action:SkeletonAction) : bool
+    + IsActionFinishing(action:SkeletonAction) : bool
+    + IsRepainting() : bool
+    + DrawBone(position:Vector3, right:Vector3, forward:Vector3, length:float, color:Color, isChained:bool, isSelected:bool, isJointHovered:bool, isTailHovered:bool, isHot:bool) : void
+    + DrawBoneParentLink(parentPosition:Vector3, position:Vector3, forward:Vector3, color:Color) : void
+    + DrawBoneOutline(position:Vector3, right:Vector3, forward:Vector3, length:float, color:Color, outlineScale:float) : void
+    + DrawCursors(canBeActive:bool) : void
+}
+ISkeletonView <|-- SkeletonView
+SkeletonView --> "mode" SkeletonMode
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+class SearcherDatabase {
+    <<const>> k_IsParallel : bool = true
+    + {static} Create(items:List<SearcherItem>, databaseDirectory:string, serializeToFile:bool) : SearcherDatabase
+    + {static} Load(databaseDirectory:string) : SearcherDatabase
+    + SearcherDatabase(db:IReadOnlyCollection<SearcherItem>)
+    SearcherDatabase(databaseDirectory:string, db:IReadOnlyCollection<SearcherItem>)
+    + <<override>> Search(query:string, localMaxScore:float) : List<SearcherItem>
+    FilterSingleThreaded(query:string) : List<SearcherItem>
+    FilterMultiThreaded(query:string) : List<SearcherItem>
+    <<readonly>> k_ScoreCutOff : float = 0.33f
+    SearchSingleThreaded(query:string, tokenizedQuery:IReadOnlyList<string>, max:Result, finalResults:ICollection<SearcherItem>) : void
+    SearchMultithreaded(query:string, tokenizedQuery:IReadOnlyList<string>, max:Result, finalResults:List<SearcherItem>) : void
+    PostprocessResults(results:IEnumerable<Result>, items:ICollection<SearcherItem>, max:Result) : void
+    + <<override>> BuildIndex() : void
+    {static} Tokenize(s:string) : IList<string>
+    Match(tokenizedQuery:IReadOnlyList<string>, itemPath:string, score:float) : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+class Result {
+    + maxScore : float
+}
+class "Func`3"<T1,T2,T3> {
+}
+SearcherDatabaseBase <|-- SearcherDatabase
+SearcherDatabase o-> "m_Index<string,IReadOnlyList<ValueTuple<string, float>>>" "Dictionary`2"
+SearcherDatabase --> "MatchFilter<string,SearcherItem,bool>" "Func`3"
+SearcherDatabase +-- Result
+Result --> "item" SearcherItem
+@enduml

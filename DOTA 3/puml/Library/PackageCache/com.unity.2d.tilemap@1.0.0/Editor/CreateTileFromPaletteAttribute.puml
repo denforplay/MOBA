@@ -1,0 +1,5 @@
+@startuml
+class CreateTileFromPaletteAttribute {
+}
+Attribute <|-- CreateTileFromPaletteAttribute
+@enduml

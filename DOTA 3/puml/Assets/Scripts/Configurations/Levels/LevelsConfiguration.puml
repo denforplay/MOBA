@@ -1,0 +1,8 @@
+@startuml
+class LevelsConfiguration {
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- LevelsConfiguration
+LevelsConfiguration --> "LevelsConfigurations<LevelConfiguration>" "List`1"
+@enduml

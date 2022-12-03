@@ -1,0 +1,76 @@
+@startuml
+interface ICameraOverrideStack {
+    SetCameraOverride(overrideId:int, camA:ICinemachineCamera, camB:ICinemachineCamera, weightB:float, deltaTime:float) : int
+    ReleaseCameraOverride(overrideId:int) : void
+}
+class CinemachineBrain {
+    + m_ShowDebugText : bool = false
+    + m_ShowCameraFrustum : bool = true
+    + m_IgnoreTimeScale : bool = false
+    + {static} GetSoloGUIColor() : Color
+    OnSceneLoaded(scene:Scene, mode:LoadSceneMode) : void
+    OnSceneUnloaded(scene:Scene) : void
+    + ManualUpdate() : void
+    {static} DeepCamBFromBlend(blend:CinemachineBlend) : ICinemachineCamera
+    + IsLiveInBlend(vcam:ICinemachineCamera) : bool
+    + IsBlending : bool <<get>>
+    + SetCameraOverride(overrideId:int, camA:ICinemachineCamera, camB:ICinemachineCamera, weightB:float, deltaTime:float) : int
+    + ReleaseCameraOverride(overrideId:int) : void
+    + ComputeCurrentBlend(outputBlend:CinemachineBlend, numTopLayersToExclude:int) : void
+    + IsLive(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+}
+enum UpdateMethod {
+    FixedUpdate,
+    LateUpdate,
+    SmartUpdate,
+    ManualUpdate,
+}
+enum BrainUpdateMethod {
+    FixedUpdate,
+    LateUpdate,
+}
+class BrainEvent {
+}
+class VcamActivatedEvent {
+}
+class BrainFrame {
+    + id : int
+    + Active : bool <<get>>
+    + deltaTimeOverride : float
+}
+class "UnityEvent`1"<T> {
+}
+class "UnityEvent`2"<T1,T2> {
+}
+ICameraOverrideStack --> "DefaultWorldUp" Vector3
+MonoBehaviour <|-- CinemachineBrain
+ICameraOverrideStack <|-- CinemachineBrain
+CinemachineBrain --> "m_WorldUpOverride" Transform
+CinemachineBrain o-> "m_UpdateMethod" UpdateMethod
+CinemachineBrain o-> "m_BlendUpdateMethod" BrainUpdateMethod
+CinemachineBrain o-> "m_DefaultBlend" CinemachineBlendDefinition
+CinemachineBrain o-> "m_CustomBlends" CinemachineBlenderSettings
+CinemachineBrain --> "OutputCamera" Camera
+CinemachineBrain --> "ControlledObject" GameObject
+CinemachineBrain o-> "m_CameraCutEvent" BrainEvent
+CinemachineBrain o-> "m_CameraActivatedEvent" VcamActivatedEvent
+CinemachineBrain --> "SoloCamera" ICinemachineCamera
+CinemachineBrain --> "DefaultWorldUp" Vector3
+CinemachineBrain o-> "mWaitForFixedUpdate" WaitForFixedUpdate
+CinemachineBrain --> "ActiveVirtualCamera" ICinemachineCamera
+CinemachineBrain --> "ActiveBlend" CinemachineBlend
+CinemachineBrain o-> "mCurrentLiveCameras" CinemachineBlend
+CinemachineBrain --> "mActiveCameraPreviousFrame" ICinemachineCamera
+CinemachineBrain --> "mActiveCameraPreviousFrameGameObject" GameObject
+CinemachineBrain --> "CurrentCameraState" CameraState
+CinemachineBrain +-- UpdateMethod
+CinemachineBrain +-- BrainUpdateMethod
+CinemachineBrain +-- BrainEvent
+"UnityEvent`1" "<CinemachineBrain>" <|-- BrainEvent
+CinemachineBrain +-- VcamActivatedEvent
+"UnityEvent`2" "<ICinemachineCamera,ICinemachineCamera>" <|-- VcamActivatedEvent
+CinemachineBrain +-- BrainFrame
+BrainFrame o-> "blend" CinemachineBlend
+BrainFrame o-> "workingBlend" CinemachineBlend
+BrainFrame o-> "workingBlendSource" BlendSourceVirtualCamera
+@enduml

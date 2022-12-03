@@ -1,0 +1,52 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Create(create:Func<IAsyncWriter<T>, CancellationToken, UniTask>) : IUniTaskAsyncEnumerable<T>
+}
+interface "IAsyncWriter`1"<T> {
+    YieldAsync(value:T) : UniTask
+}
+class "Create`1"<T> <<sealed>> {
+    + Create(create:Func<IAsyncWriter<T>, CancellationToken, UniTask>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "Func`3"<T1,T2,T3> {
+}
+class _Create <<sealed>> {
+    state : int
+    + _Create(create:Func<IAsyncWriter<T>, CancellationToken, UniTask>, cancellationToken:CancellationToken)
+    + DisposeAsync() : UniTask
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    <<async>> RunWriterTask(task:UniTask) : UniTaskVoid
+    + SetResult(value:T) : void
+}
+class AsyncWriter <<sealed>> {
+    + AsyncWriter(enumerator:_Create)
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + YieldAsync(value:T) : UniTask
+    + SignalWriter() : void
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "Create`1"
+"Create`1" --> "create<IAsyncWriter<T>,CancellationToken,UniTask>" "Func`3"
+"Create`1" +-- _Create
+MoveNextSource <|-- _Create
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- _Create
+_Create --> "create<IAsyncWriter<T>,CancellationToken,UniTask>" "Func`3"
+_Create --> "cancellationToken" CancellationToken
+_Create --> "writer" AsyncWriter
+_Create --> "Current" T
+"Create`1" +-- AsyncWriter
+IUniTaskSource <|-- AsyncWriter
+"IAsyncWriter`1" "<T>" <|-- AsyncWriter
+AsyncWriter --> "enumerator" _Create
+AsyncWriter --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+@enduml

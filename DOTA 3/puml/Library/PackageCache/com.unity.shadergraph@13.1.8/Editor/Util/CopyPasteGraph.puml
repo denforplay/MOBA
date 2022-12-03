@@ -1,0 +1,56 @@
+@startuml
+enum CopyPasteGraphSource {
+    Default,
+    Duplicate,
+}
+class CopyPasteGraph <<sealed>> {
+    + CopyPasteGraph()
+    + CopyPasteGraph(groups:IEnumerable<GroupData>, nodes:IEnumerable<AbstractMaterialNode>, edges:IEnumerable<Edge>, inputs:IEnumerable<ShaderInput>, categories:IEnumerable<CategoryData>, metaProperties:IEnumerable<AbstractShaderProperty>, metaKeywords:IEnumerable<ShaderKeyword>, metaDropdowns:IEnumerable<ShaderDropdown>, notes:IEnumerable<StickyNoteData>, keepOutputEdges:bool, removeOrphanEdges:bool, copyPasteGraphSource:CopyPasteGraphSource)
+    + IsInputCategorized(shaderInput:ShaderInput) : bool
+    + IsInputDuplicatedFromCategory(shaderInput:ShaderInput, inputCategory:CategoryData, targetGraphData:GraphData) : bool
+    AddGroup(group:GroupData) : void
+    AddNote(stickyNote:StickyNoteData) : void
+    AddNode(node:AbstractMaterialNode) : void
+    AddEdge(edge:Edge) : void
+    AddInput(input:ShaderInput) : void
+    AddCategory(category:CategoryData) : void
+    AddMetaProperty(metaProperty:AbstractShaderProperty) : void
+    AddMetaKeyword(metaKeyword:ShaderKeyword) : void
+    AddMetaDropdown(metaDropdown:ShaderDropdown) : void
+    + GetNodes() : IEnumerable<T>
+    + <<override>> OnAfterMultiDeserialize(json:string) : void
+}
+class "List`1"<T> {
+}
+class "DataValueEnumerable`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class "RefValueEnumerable`1"<T> {
+}
+JsonObject <|-- CopyPasteGraph
+CopyPasteGraph --> "m_CopyPasteGraphSource" CopyPasteGraphSource
+CopyPasteGraph o-> "m_Edges<Edge>" "List`1"
+CopyPasteGraph o-> "m_Nodes<JsonData<AbstractMaterialNode>>" "List`1"
+CopyPasteGraph o-> "m_Groups<JsonData<GroupData>>" "List`1"
+CopyPasteGraph o-> "m_StickyNotes<JsonData<StickyNoteData>>" "List`1"
+CopyPasteGraph o-> "m_Inputs<JsonRef<ShaderInput>>" "List`1"
+CopyPasteGraph o-> "m_Categories<JsonData<CategoryData>>" "List`1"
+CopyPasteGraph o-> "m_MetaProperties<JsonData<AbstractShaderProperty>>" "List`1"
+CopyPasteGraph o-> "m_MetaPropertyIds<string>" "List`1"
+CopyPasteGraph o-> "m_MetaKeywords<JsonData<ShaderKeyword>>" "List`1"
+CopyPasteGraph o-> "m_MetaKeywordIds<string>" "List`1"
+CopyPasteGraph o-> "m_MetaDropdowns<JsonData<ShaderDropdown>>" "List`1"
+CopyPasteGraph o-> "m_MetaDropdownIds<string>" "List`1"
+CopyPasteGraph --> "groups<GroupData>" "DataValueEnumerable`1"
+CopyPasteGraph --> "stickyNotes<StickyNoteData>" "DataValueEnumerable`1"
+CopyPasteGraph --> "edges<Edge>" "IEnumerable`1"
+CopyPasteGraph --> "inputs<ShaderInput>" "RefValueEnumerable`1"
+CopyPasteGraph --> "categories<CategoryData>" "DataValueEnumerable`1"
+CopyPasteGraph --> "metaProperties<AbstractShaderProperty>" "DataValueEnumerable`1"
+CopyPasteGraph --> "metaKeywords<ShaderKeyword>" "DataValueEnumerable`1"
+CopyPasteGraph --> "metaDropdowns<ShaderDropdown>" "DataValueEnumerable`1"
+CopyPasteGraph --> "metaPropertyIds<string>" "IEnumerable`1"
+CopyPasteGraph --> "metaKeywordIds<string>" "IEnumerable`1"
+CopyPasteGraph --> "copyPasteGraphSource" CopyPasteGraphSource
+@enduml

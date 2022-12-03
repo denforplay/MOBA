@@ -1,0 +1,14 @@
+@startuml
+class PerPlatformSettingsTool {
+    <<const>> k_ToolColorSetting : string = "ToolColor"
+    m_Repository : int
+    GetToolColor(repository:string, defaultColor:Color) : Color
+    OnEnable() : void
+    + <<override>> OnToolGUI(window:EditorWindow) : void
+}
+EditorTool <|-- PerPlatformSettingsTool
+PerPlatformSettingsTool --> "toolbarIcon" GUIContent
+PerPlatformSettingsTool --> "s_Settings" Settings
+PerPlatformSettingsTool --> "m_ToolColor" Color
+PerPlatformSettingsTool --> "m_HandlePosition" Vector3
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+class noise <<static>> <<partial>> {
+    {static} mod289(x:float) : float
+    {static} mod289(x:float2) : float2
+    {static} mod289(x:float3) : float3
+    {static} mod289(x:float4) : float4
+    {static} mod7(x:float3) : float3
+    {static} mod7(x:float4) : float4
+    {static} permute(x:float) : float
+    {static} permute(x:float3) : float3
+    {static} permute(x:float4) : float4
+    {static} taylorInvSqrt(r:float) : float
+    {static} taylorInvSqrt(r:float4) : float4
+    {static} fade(t:float2) : float2
+    {static} fade(t:float3) : float3
+    {static} fade(t:float4) : float4
+    {static} grad4(j:float, ip:float4) : float4
+    {static} rgrad2(p:float2, rot:float) : float2
+}
+@enduml

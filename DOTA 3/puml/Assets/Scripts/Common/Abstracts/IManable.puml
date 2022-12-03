@@ -1,0 +1,9 @@
+@startuml
+interface IManable {
+     <<event>> OnMaxManaChanged : Action<float> 
+     <<event>> OnManaChanged : Action<float> 
+    MaxMana : float <<get>>
+    CurrentMana : float <<get>>
+    ChangeMana(value:float) : void
+}
+@enduml

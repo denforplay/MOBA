@@ -1,0 +1,21 @@
+@startuml
+class TaskPool <<static>> {
+    {static} TaskPool()
+    + {static} SetMaxPoolSize(maxPoolSize:int) : void
+    + {static} GetCacheSizeInfo() : IEnumerable<(Type, int)>
+    + {static} RegisterSizeGetter(type:Type, getSize:Func<int>) : void
+}
+interface "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> <<struct>> {
+    gate : int
+    size : int
+    root : T
+    + Size : int <<get>>
+    + TryPop(result:T) : bool
+    + TryPush(item:T) : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+TaskPool o-> "sizes<Type,Func<int>>" "Dictionary`2"
+@enduml

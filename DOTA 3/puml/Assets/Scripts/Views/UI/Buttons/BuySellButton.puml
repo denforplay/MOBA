@@ -1,0 +1,7 @@
+@startuml
+class BuySellButton {
+    + SetText(text:string) : void
+}
+MonoBehaviour <|-- BuySellButton
+BuySellButton --> "Button" Button
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+interface IOuterUnityTestAction {
+    BeforeTest(test:ITest) : IEnumerator
+    AfterTest(test:ITest) : IEnumerator
+}
+@enduml

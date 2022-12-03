@@ -1,0 +1,8 @@
+@startuml
+class GridPaletteUtility <<static>> {
+    + {static} CreateNewPaletteAtCurrentFolder(name:string, layout:GridLayout.CellLayout, cellSizing:GridPalette.CellSizing, cellSize:Vector3, swizzle:GridLayout.CellSwizzle) : GameObject
+    + {static} CreateNewPaletteAtCurrentFolder(name:string, layout:GridLayout.CellLayout, cellSizing:GridPalette.CellSizing, cellSize:Vector3, swizzle:GridLayout.CellSwizzle, sortMode:TransparencySortMode, sortAxis:Vector3) : GameObject
+    + {static} CreateNewPalette(folderPath:string, name:string, layout:GridLayout.CellLayout, cellSizing:GridPalette.CellSizing, cellSize:Vector3, swizzle:GridLayout.CellSwizzle) : GameObject
+    + {static} CreateNewPalette(folderPath:string, name:string, layout:GridLayout.CellLayout, cellSizing:GridPalette.CellSizing, cellSize:Vector3, swizzle:GridLayout.CellSwizzle, sortMode:TransparencySortMode, sortAxis:Vector3) : GameObject
+}
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class Extrapolation <<static>> {
+    {static} SortClipsByStartTime(clips:TimelineClip[]) : TimelineClip[]
+}
+@enduml

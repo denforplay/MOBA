@@ -1,0 +1,5 @@
+@startuml
+class EnvironmentsOptionsExtensions <<static>> {
+    + {static} SetEnvironmentName(self:InitializationOptions, environmentName:string) : InitializationOptions
+}
+@enduml

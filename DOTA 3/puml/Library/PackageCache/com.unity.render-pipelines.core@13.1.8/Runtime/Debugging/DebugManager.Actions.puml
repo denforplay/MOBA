@@ -1,0 +1,62 @@
+@startuml
+enum DebugAction {
+    EnableDebugMenu,
+    PreviousDebugPanel,
+    NextDebugPanel,
+    Action,
+    MakePersistent,
+    MoveVertical,
+    MoveHorizontal,
+    Multiplier,
+    ResetAll,
+    DebugActionCount,
+}
+enum DebugActionRepeatMode {
+    Never,
+    Delay,
+}
+class DebugManager <<sealed>> <<partial>> {
+    <<const>> kEnableDebugBtn1 : string = "Enable Debug Button 1"
+    <<const>> kEnableDebugBtn2 : string = "Enable Debug Button 2"
+    <<const>> kDebugPreviousBtn : string = "Debug Previous"
+    <<const>> kDebugNextBtn : string = "Debug Next"
+    <<const>> kValidateBtn : string = "Debug Validate"
+    <<const>> kPersistentBtn : string = "Debug Persistent"
+    <<const>> kDPadVertical : string = "Debug Vertical"
+    <<const>> kDPadHorizontal : string = "Debug Horizontal"
+    <<const>> kMultiplierBtn : string = "Debug Multiplier"
+    <<const>> kResetBtn : string = "Debug Reset"
+    <<const>> kEnableDebug : string = "Enable Debug"
+    RegisterActions() : void
+    AddAction(action:DebugAction, desc:DebugActionDesc) : void
+    SampleAction(actionIndex:int) : void
+    UpdateAction(actionIndex:int) : void
+    RegisterInputs() : void
+}
+class DebugActionDesc {
+    + axisTrigger : string = ""
+    + repeatDelay : float
+}
+class DebugActionState {
+    m_PressedAxis : string = ""
+    m_Timer : float
+    Trigger(triggerCount:int, state:float) : void
+    + TriggerWithButton(buttons:string[], state:float) : void
+    + TriggerWithAxis(axis:string, state:float) : void
+    + TriggerWithKey(keys:KeyCode[], state:float) : void
+    Reset() : void
+    + Update(desc:DebugActionDesc) : void
+}
+class "List`1"<T> {
+}
+enum DebugActionKeyType {
+    Button,
+    Axis,
+    Key,
+}
+DebugActionDesc o-> "buttonTriggerList<string[]>" "List`1"
+DebugActionDesc o-> "keyTriggerList<KeyCode[]>" "List`1"
+DebugActionDesc o-> "repeatMode" DebugActionRepeatMode
+DebugActionState --> "m_Type" DebugActionKeyType
+DebugActionState +-- DebugActionKeyType
+@enduml

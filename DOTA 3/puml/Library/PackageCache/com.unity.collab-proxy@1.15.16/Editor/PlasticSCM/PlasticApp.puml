@@ -1,0 +1,21 @@
+@startuml
+class PlasticApp <<static>> {
+    {static} InitLocalization() : void
+    {static} ConfigureLogging() : void
+    {static} RegisterExceptionHandlers() : void
+    {static} RegisterApplicationFocusHandlers() : void
+    {static} UnRegisterExceptionHandlers() : void
+    {static} UnRegisterApplicationFocusHandlers() : void
+    {static} HandleUnhandledException(sender:object, args:UnhandledExceptionEventArgs) : void
+    {static} HandleLog(logString:string, stackTrace:string, type:LogType) : void
+    {static} EnableFsWatcher() : void
+    {static} DisableFsWatcher() : void
+    {static} SetupFsWatcher() : void
+    {static} IsPlasticStackTrace(stackTrace:string) : bool
+    {static} IsExitGUIException(ex:Exception) : bool
+    {static} mIsInitialized : bool
+}
+PlasticApp --> "sEventSenderScheduler" EventSenderScheduler
+PlasticApp --> "sPingEventLoop" PingEventLoop
+PlasticApp o-> "mLog" ILog
+@enduml

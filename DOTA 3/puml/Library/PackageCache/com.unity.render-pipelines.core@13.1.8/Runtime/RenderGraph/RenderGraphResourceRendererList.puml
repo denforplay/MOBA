@@ -1,0 +1,10 @@
+@startuml
+class RendererListHandle <<struct>> {
+    m_IsValid : bool
+    + IsValid() : bool
+}
+class RendererListResource <<struct>> {
+}
+RendererListResource --> "desc" CoreRendererListDesc
+RendererListResource --> "rendererList" CoreRendererList
+@enduml

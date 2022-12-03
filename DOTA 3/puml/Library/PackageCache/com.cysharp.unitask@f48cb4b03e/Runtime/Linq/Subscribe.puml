@@ -1,0 +1,50 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, action:Action<TSource>) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, UniTaskVoid>) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, CancellationToken, UniTaskVoid>) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, action:Action<TSource>, cancellationToken:CancellationToken) : void
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, UniTaskVoid>, cancellationToken:CancellationToken) : void
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, action:Func<TSource, CancellationToken, UniTaskVoid>, cancellationToken:CancellationToken) : void
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTask>) : IDisposable
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTask>, cancellationToken:CancellationToken) : void
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTask>) : IDisposable
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTask>, cancellationToken:CancellationToken) : void
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onError:Action<Exception>) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTaskVoid>, onError:Action<Exception>) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onError:Action<Exception>, cancellationToken:CancellationToken) : void
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTaskVoid>, onError:Action<Exception>, cancellationToken:CancellationToken) : void
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTask>, onError:Action<Exception>) : IDisposable
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTask>, onError:Action<Exception>, cancellationToken:CancellationToken) : void
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTask>, onError:Action<Exception>) : IDisposable
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTask>, onError:Action<Exception>, cancellationToken:CancellationToken) : void
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onCompleted:Action) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTaskVoid>, onCompleted:Action) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onCompleted:Action, cancellationToken:CancellationToken) : void
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTaskVoid>, onCompleted:Action, cancellationToken:CancellationToken) : void
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTask>, onCompleted:Action) : IDisposable
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTask>, onCompleted:Action, cancellationToken:CancellationToken) : void
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTask>, onCompleted:Action) : IDisposable
+    + {static} SubscribeAwait(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTask>, onCompleted:Action, cancellationToken:CancellationToken) : void
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, observer:IObserver<TSource>) : IDisposable
+    + {static} Subscribe(source:IUniTaskAsyncEnumerable<TSource>, observer:IObserver<TSource>, cancellationToken:CancellationToken) : void
+}
+class CancellationTokenDisposable <<sealed>> {
+    + Dispose() : void
+}
+class Subscribe <<static>> {
+    + {static} <<async>> SubscribeCore(source:IUniTaskAsyncEnumerable<TSource>, onNext:Action<TSource>, onError:Action<Exception>, onCompleted:Action, cancellationToken:CancellationToken) : UniTaskVoid
+    + {static} <<async>> SubscribeCore(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTaskVoid>, onError:Action<Exception>, onCompleted:Action, cancellationToken:CancellationToken) : UniTaskVoid
+    + {static} <<async>> SubscribeCore(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTaskVoid>, onError:Action<Exception>, onCompleted:Action, cancellationToken:CancellationToken) : UniTaskVoid
+    + {static} <<async>> SubscribeCore(source:IUniTaskAsyncEnumerable<TSource>, observer:IObserver<TSource>, cancellationToken:CancellationToken) : UniTaskVoid
+    + {static} <<async>> SubscribeAwaitCore(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, UniTask>, onError:Action<Exception>, onCompleted:Action, cancellationToken:CancellationToken) : UniTaskVoid
+    + {static} <<async>> SubscribeAwaitCore(source:IUniTaskAsyncEnumerable<TSource>, onNext:Func<TSource, CancellationToken, UniTask>, onError:Action<Exception>, onCompleted:Action, cancellationToken:CancellationToken) : UniTaskVoid
+}
+class "Action`1"<T> {
+}
+IDisposable <|-- CancellationTokenDisposable
+CancellationTokenDisposable o-> "cts" CancellationTokenSource
+CancellationTokenDisposable --> "Token" CancellationToken
+Subscribe o-> "NopError<Exception>" "Action`1"
+Subscribe o-> "NopCompleted" Action
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+class ClipCurveEditor {
+    {static} <<readonly>> s_GridLabelWidth : float = 40.0f
+    m_LastFrameRate : float = 30.0f
+    m_ShouldRestoreShownArea : bool
+    isNewSelection : bool <<get>>
+    + ClipCurveEditor(dataSource:CurveDataSource, parentWindow:TimelineWindow, hostTrack:TrackAsset)
+    + SelectAllKeys() : void
+    + FrameClip() : void
+    + DrawHeader(headerRect:Rect) : void
+    ContextClickItemCallback(obj:int) : void
+    GenerateContextMenu(obj:int) : void
+    + GetSelectedProperties(useForcedGroups:bool) : IEnumerable<EditorCurveBinding>
+    + RemoveCurves(bindings:IEnumerable<EditorCurveBinding>) : void
+    UpdateCurveEditorIfNeeded(state:WindowState) : void
+    + DrawCurveEditor(rect:Rect, state:WindowState, clipRange:Vector2, loop:bool, selected:bool) : void
+    {static} CalculateCurveVisibleTimeRange(timeAreaShownRange:Vector2, curve:CurveDataSource) : Vector2
+    SetupMarginsAndRect(rect:Rect, state:WindowState) : void
+    RestoreShownArea() : void
+    {static} DrawCurveEditorBackground(rect:Rect) : void
+    {static} CalculateTopMargin(height:float) : float
+    {static} DrawOutline(rect:Rect, thickness:float) : void
+    {static} DrawOverlay(rect:Rect, clipRange:Vector2, color:Color) : void
+    DrawGrid(rect:Rect, curveXPosition:float) : void
+}
+class CurveEditorState {
+    + rippleTime : bool <<get>>
+}
+ClipCurveEditor o-> "s_RemoveCurveContent" GUIContent
+ClipCurveEditor o-> "s_RemoveCurvesContent" GUIContent
+ClipCurveEditor o-> "s_CurveEditorSettings" CurveEditorSettings
+ClipCurveEditor --> "m_BindingHierarchy" BindingSelector
+ClipCurveEditor --> "bindingHierarchy" BindingSelector
+ClipCurveEditor --> "shownAreaInsideMargins" Rect
+ClipCurveEditor o-> "m_ScrollPosition" Vector2
+ClipCurveEditor --> "m_DataSource" CurveDataSource
+ClipCurveEditor o-> "m_LastClipVersion" UInt64
+ClipCurveEditor --> "m_ViewModel" TrackViewModelData
+ClipCurveEditor --> "dataSource" CurveDataSource
+ClipCurveEditor +-- CurveEditorState
+ICurveEditorState <|-- CurveEditorState
+CurveEditorState --> "timeRange" Vector2
+@enduml

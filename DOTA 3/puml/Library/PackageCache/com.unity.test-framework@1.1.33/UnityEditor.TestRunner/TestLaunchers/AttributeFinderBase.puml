@@ -1,0 +1,13 @@
+@startuml
+abstract class AttributeFinderBase {
+    + {abstract} Search(tests:ITest, filter:ITestFilter, testTargetPlatform:RuntimePlatform) : IEnumerable<Type>
+}
+interface IAttributeFinder {
+    Search(tests:ITest, filter:ITestFilter, testTargetPlatform:RuntimePlatform) : IEnumerable<Type>
+}
+abstract class "AttributeFinderBase`2"<T1,T2> {
+    + <<override>> Search(tests:ITest, filter:ITestFilter, testTargetPlatform:RuntimePlatform) : IEnumerable<Type>
+}
+IAttributeFinder <|-- AttributeFinderBase
+AttributeFinderBase <|-- "AttributeFinderBase`2"
+@enduml

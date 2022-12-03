@@ -1,0 +1,7 @@
+@startuml
+class IfNotBoundBinder {
+    + IfNotBoundBinder(bindInfo:BindInfo)
+    + IfNotBound() : void
+}
+IfNotBoundBinder --> "BindInfo" BindInfo
+@enduml

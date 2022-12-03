@@ -68,20 +68,20 @@ namespace Views.Popups
             {
                 var spawnPosition = _leftTeamStartPositions[i];
                 var character = Instantiate(leftTeamCharacters[i].CharacterPrefab, transform);
-                _controlledCharacterView = character.GetComponentInChildren<CharacterView>();
-                _controlledCharacterView.Inject(_popupSystem, _projectileViewFactory);
+                var aiCharacterView = character.GetComponentInChildren<CharacterView>();
+                aiCharacterView.Inject(_popupSystem, _projectileViewFactory);
                 var startWayPoint = GetStartWayPoint(_wayPointsToPlayerNumber[i], Direction.Right);
-                _controlledCharacterView.InitializeAI(_camera, spawnPosition, startWayPoint, Team.Blue, Direction.Right);
+                aiCharacterView.InitializeAI(_camera, spawnPosition, startWayPoint, Team.Blue, Direction.Right);
             }
             
             for (int i = 0; i < rightTeamCharacters.Count; i++)
             {
                 var spawnPosition = _rightTeamStartPositions[i];
                 var character = Instantiate(rightTeamCharacters[i].CharacterPrefab, transform);
-                _controlledCharacterView = character.GetComponentInChildren<CharacterView>();
-                _controlledCharacterView.Inject(_popupSystem, _projectileViewFactory);
+                var aiCharacterView = character.GetComponentInChildren<CharacterView>();
+                aiCharacterView.Inject(_popupSystem, _projectileViewFactory);
                 var startWayPoint = GetStartWayPoint(_wayPointsToPlayerNumber[i], Direction.Left);
-                _controlledCharacterView.InitializeAI(_camera, spawnPosition, startWayPoint, Team.Red, Direction.Left);
+                aiCharacterView.InitializeAI(_camera, spawnPosition, startWayPoint, Team.Red, Direction.Left);
             }
             
             _hudPopup.InitializeBattleGroundPanel(leftTeamCharacters, rightTeamCharacters);

@@ -1,0 +1,21 @@
+@startuml
+class SelectableEditor {
+    {static} GetTransition(transition:SerializedProperty) : Selectable.Transition
+    + <<override>> OnInspectorGUI() : void
+    <<const>> kArrowThickness : float = 2.5f
+    <<const>> kArrowHeadSize : float = 1.2f
+}
+Editor <|-- SelectableEditor
+SelectableEditor --> "m_Script" SerializedProperty
+SelectableEditor --> "m_InteractableProperty" SerializedProperty
+SelectableEditor --> "m_TargetGraphicProperty" SerializedProperty
+SelectableEditor --> "m_TransitionProperty" SerializedProperty
+SelectableEditor --> "m_ColorBlockProperty" SerializedProperty
+SelectableEditor --> "m_SpriteStateProperty" SerializedProperty
+SelectableEditor --> "m_AnimTriggerProperty" SerializedProperty
+SelectableEditor --> "m_NavigationProperty" SerializedProperty
+SelectableEditor o-> "m_VisualizeNavigation" GUIContent
+SelectableEditor o-> "m_ShowColorTint" AnimBool
+SelectableEditor o-> "m_ShowSpriteTrasition" AnimBool
+SelectableEditor o-> "m_ShowAnimTransition" AnimBool
+@enduml

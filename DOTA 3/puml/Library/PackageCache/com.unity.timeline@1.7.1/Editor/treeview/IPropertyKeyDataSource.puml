@@ -1,0 +1,12 @@
+@startuml
+interface IPropertyKeyDataSource {
+    GetKeys() : float[]
+    GetDescriptions() : Dictionary<float, string>
+}
+abstract class BasePropertyKeyDataSource {
+    + <<virtual>> GetKeys() : float[]
+    + <<virtual>> GetDescriptions() : Dictionary<float, string>
+}
+IPropertyKeyDataSource <|-- BasePropertyKeyDataSource
+BasePropertyKeyDataSource o-> "k_StringBuilder" StringBuilder
+@enduml

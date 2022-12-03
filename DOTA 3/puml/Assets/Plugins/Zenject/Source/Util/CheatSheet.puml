@@ -1,0 +1,87 @@
+@startuml
+class CheatSheet {
+    + <<override>> InstallBindings() : void
+    GetFoo(ctx:InjectContext) : Foo
+    GetRandomFoo(ctx:InjectContext) : IFoo
+    InstallMore() : void
+    + InstallMore2() : void
+    + InstallMore3() : void
+    InstallMore4() : void
+}
+class "Installer`1"<T> {
+}
+class Norf {
+    + Foo : string
+}
+class Qux {
+    + Foo : string
+}
+class Norf2 {
+}
+class Qux2 {
+}
+class FooInstaller {
+    + FooInstaller(foo:string)
+    + <<override>> InstallBindings() : void
+}
+class FooInstallerWithArgs {
+    + FooInstallerWithArgs(foo:string)
+    + <<override>> InstallBindings() : void
+}
+interface IFoo2 {
+}
+interface IFoo {
+}
+interface IBar {
+}
+class Foo {
+    + GetBar() : Bar
+    + GetTitle() : string
+}
+class Foo1 {
+}
+class Foo2 {
+}
+class Foo3 {
+}
+class Baz {
+}
+class Gui {
+}
+class Bar {
+}
+class "Installer`2"<T1,T2> {
+}
+"Installer`1" "<CheatSheet>" <|-- CheatSheet
+CheatSheet +-- Norf
+CheatSheet +-- Qux
+CheatSheet +-- Norf2
+Norf2 --> "Foo" Foo
+CheatSheet +-- Qux2
+Qux2 --> "Foo" Foo
+Qux2 --> "Foo2" Foo
+CheatSheet +-- FooInstaller
+"Installer`1" "<FooInstaller>" <|-- FooInstaller
+CheatSheet +-- FooInstallerWithArgs
+"Installer`2" "<string,FooInstallerWithArgs>" <|-- FooInstallerWithArgs
+CheatSheet +-- IFoo2
+CheatSheet +-- IFoo
+CheatSheet +-- IBar
+IFoo <|-- IBar
+CheatSheet +-- Foo
+MonoBehaviour <|-- Foo
+IFoo <|-- Foo
+IFoo2 <|-- Foo
+IBar <|-- Foo
+CheatSheet +-- Foo1
+IFoo <|-- Foo1
+CheatSheet +-- Foo2
+IFoo <|-- Foo2
+CheatSheet +-- Foo3
+IFoo <|-- Foo3
+CheatSheet +-- Baz
+CheatSheet +-- Gui
+CheatSheet +-- Bar
+IBar <|-- Bar
+Bar --> "Foo" Foo
+@enduml

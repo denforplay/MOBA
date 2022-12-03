@@ -1,0 +1,258 @@
+@startuml
+class VectorsMaths <<partial>> {
+    + {static} HalfToFloatAndDouble() : ulong
+    + {static} AsFloatInt4(a:int4) : float
+    + {static} AsFloatInt3(a:int3) : float
+    + {static} AsFloatInt2(a:int2) : float
+    + {static} AsFloatUInt4(a:uint4) : float
+    + {static} AsIntFloat4(a:float4) : int
+    + {static} AsIntFloat3(a:float3) : int
+    + {static} AsIntFloat2(a:float2) : int
+    + {static} AsUIntFloat4(a:float4) : int
+    + {static} AsUIntFloat3(a:float3) : int
+    + {static} AsUIntFloat2(a:float2) : int
+    + {static} <<unsafe>> CompressInt4(value:int4, mask:bool4) : int
+    + {static} CountBitsInt(value:int) : int
+    + {static} CountBitsInt2(value:int2) : int
+    + {static} CountBitsInt3(value:int3) : int
+    + {static} CountBitsInt4(value:int4) : int
+    + {static} CountBitsUInt(value:uint) : int
+    + {static} CountBitsUInt2(value:uint2) : int
+    + {static} CountBitsUInt3(value:uint3) : int
+    + {static} CountBitsUInt4(value:uint4) : int
+    + {static} CountBitsLong(value:long) : int
+    + {static} CountBitsULong(value:ulong) : int
+    + {static} LzCntInt(value:int) : int
+    + {static} LzCntInt2(value:int2) : int
+    + {static} LzCntInt3(value:int3) : int
+    + {static} LzCntInt4(value:int4) : int
+    + {static} LzCntUInt(value:uint) : int
+    + {static} LzCntUInt2(value:uint2) : int
+    + {static} LzCntUInt3(value:uint3) : int
+    + {static} LzCntUInt4(value:uint4) : int
+    + {static} LzCntLong(value:long) : int
+    + {static} LzCntULong(value:ulong) : int
+    + {static} TzCntInt(value:int) : int
+    + {static} TzCntInt2(value:int2) : int
+    + {static} TzCntInt3(value:int3) : int
+    + {static} TzCntInt4(value:int4) : int
+    + {static} TzCntUInt(value:uint) : int
+    + {static} TzCntUInt2(value:uint2) : int
+    + {static} TzCntUInt3(value:uint3) : int
+    + {static} TzCntUInt4(value:uint4) : int
+    + {static} TzCntLong(value:long) : int
+    + {static} TzCntULong(value:ulong) : int
+    + {static} Min4(a:float4, b:float4) : float
+    + {static} Min3(a:float3, b:float3) : float
+    + {static} Min2(a:float2, b:float2) : float
+    + {static} Min(a:float, b:float) : float
+    + {static} MinInt4(a:int4, b:int4) : int
+    + {static} MinInt3(a:int3, b:int3) : int
+    + {static} MinInt2(a:int2, b:int2) : int
+    + {static} MinInt(a:int, b:int) : int
+    + {static} Max4(a:float4, b:float4) : float
+    + {static} Max3(a:float3, b:float3) : float
+    + {static} Max2(a:float2, b:float2) : float
+    + {static} Max(a:float, b:float) : float
+    + {static} MaxInt4(a:int4, b:int4) : int
+    + {static} MaxInt3(a:int3, b:int3) : int
+    + {static} MaxInt2(a:int2, b:int2) : int
+    + {static} MaxInt(a:int, b:int) : float
+    + {static} Lerp4(a:float4, b:float4, w:float) : float
+    + {static} Lerp3(a:float3, b:float3, w:float) : float
+    + {static} Lerp2(a:float2, b:float2, w:float) : float
+    + {static} Lerp(a:float, b:float, w:float) : float
+    + {static} Lerp4_4(a:float4, b:float4, w:float4) : float
+    + {static} Lerp3_3(a:float3, b:float3, w:float3) : float
+    + {static} Lerp2_2(a:float2, b:float2, w:float2) : float
+    + {static} Mad4(a:float4, b:float4, c:float4) : float
+    + {static} Mad3(a:float3, b:float3, c:float3) : float
+    + {static} Mad2(a:float2, b:float2, c:float2) : float
+    + {static} Mad(a:float, b:float, c:float) : float
+    + {static} Clamp4(x:float4, a:float4, b:float4) : float
+    + {static} Clamp3(x:float3, a:float3, b:float3) : float
+    + {static} Clamp2(x:float2, a:float2, b:float2) : float
+    + {static} Clamp(x:float, a:float, b:float) : float
+    + {static} ClampInt4(x:int4, a:int4, b:int4) : int
+    + {static} ClampInt3(x:int3, a:int3, b:int3) : int
+    + {static} ClampInt2(x:int2, a:int2, b:int2) : int
+    + {static} ClampInt(x:int, a:int, b:int) : int
+    + {static} Saturate4(x:float4) : float
+    + {static} Saturate3(x:float3) : float
+    + {static} Saturate2(x:float2) : float
+    + {static} Saturate(x:float) : float
+    + {static} Abs4(x:float4) : float
+    + {static} Abs3(x:float3) : float
+    + {static} Abs2(x:float2) : float
+    + {static} Abs(x:float) : float
+    + {static} AbsDouble4(x:double4) : double
+    + {static} AbsDouble3(x:double3) : double
+    + {static} AbsDouble2(x:double2) : double
+    + {static} AbsDouble(x:double) : double
+    + {static} AbsInt4(x:int4) : int
+    + {static} AbsInt3(x:int3) : int
+    + {static} AbsInt2(x:int2) : int
+    + {static} AbsInt(x:int) : int
+    + {static} Dot4(a:float4, b:float4) : float
+    + {static} Dot3(a:float3, b:float3) : float
+    + {static} Dot2(a:float2, b:float2) : float
+    + {static} Dot(a:float, b:float) : float
+    + {static} CMin4(input:float4) : float
+    + {static} CMin3(input:float3) : float
+    + {static} CMin2(input:float2) : float
+    + {static} CMinInt4(input:int4) : float
+    + {static} CMinInt3(input:int3) : float
+    + {static} CMinInt2(input:int2) : float
+    + {static} CMax4(input:float4) : float
+    + {static} CMax3(input:float3) : float
+    + {static} CMax2(input:float2) : float
+    + {static} CMaxInt4(input:int4) : float
+    + {static} CMaxInt3(input:int3) : float
+    + {static} CMaxInt2(input:int2) : float
+    + {static} CSum4d(input:double4) : double
+    + {static} CSum4(input:float4) : float
+    + {static} CSum3(input:float3) : float
+    + {static} CSum2(input:float2) : float
+    + {static} CSumInt4(input:int4) : float
+    + {static} CSumInt3(input:int3) : float
+    + {static} CSumInt2(input:int2) : float
+    + {static} ACos4(input:float4) : float
+    + {static} ACos3(input:float3) : float
+    + {static} ACos2(input:float2) : float
+    + {static} ACos(input:float) : float
+    + {static} ASin4(input:float4) : float
+    + {static} ASin3(input:float3) : float
+    + {static} ASin2(input:float2) : float
+    + {static} ASin(input:float) : float
+    + {static} ATan_4(input:float4) : float
+    + {static} ATan_3(input:float3) : float
+    + {static} ATan_2(input:float2) : float
+    + {static} ATan(input:float) : float
+    + {static} ATan2_4(a:float4, b:float4) : float
+    + {static} ATan2_3(a:float3, b:float3) : float
+    + {static} ATan2_2(a:float2, b:float2) : float
+    + {static} ATan2(a:float, b:float) : float
+    + {static} Cos4d(input:double4) : double
+    + {static} Cos4(input:float4) : float
+    + {static} Cos3(input:float3) : float
+    + {static} Cos2(input:float2) : float
+    + {static} Cos(input:float) : float
+    + {static} Cosh4d(input:double4) : double
+    + {static} Cosh4(input:float4) : float
+    + {static} Cosh3(input:float3) : float
+    + {static} Cosh2(input:float2) : float
+    + {static} Cosh(input:float) : float
+    + {static} Sin4d(input:double4) : double
+    + {static} Sin4(input:float4) : float
+    + {static} Sin3(input:float3) : float
+    + {static} Sin2(input:float2) : float
+    + {static} Sin(input:float) : float
+    + {static} Sinh4(input:float4) : float
+    + {static} Sinh3(input:float3) : float
+    + {static} Sinh2(input:float2) : float
+    + {static} Sinh(input:float) : float
+    + {static} SinCos4(input:float4) : float
+    + {static} SinCos3(input:float3) : float
+    + {static} SinCos2(input:float2) : float
+    + {static} SinCos(input:float) : float
+    + {static} Tanh4(input:float4) : float
+    + {static} Tanh3(input:float3) : float
+    + {static} Tanh2(input:float2) : float
+    + {static} Tanh(input:float) : float
+    + {static} Sqrt4(input:float4) : float
+    + {static} Sqrt3(input:float3) : float
+    + {static} Sqrt2(input:float2) : float
+    + {static} Sqrt(input:float) : float
+    + {static} RSqrt4(input:float4) : float
+    + {static} RSqrt3(input:float3) : float
+    + {static} RSqrt2(input:float2) : float
+    + {static} RSqrt(input:float) : float
+    + {static} Floor4(input:float4) : float
+    + {static} Floor3(input:float3) : float
+    + {static} Floor2(input:float2) : float
+    + {static} Floor(input:float) : float
+    + {static} Ceil4(input:float4) : float
+    + {static} Ceil3(input:float3) : float
+    + {static} Ceil2(input:float2) : float
+    + {static} Ceil(input:float) : float
+    + {static} Round4(input:float4) : float
+    + {static} Round3(input:float3) : float
+    + {static} Round2(input:float2) : float
+    + {static} Round(input:float) : float
+    + {static} Frac4(input:float4) : float
+    + {static} Frac3(input:float3) : float
+    + {static} Frac2(input:float2) : float
+    + {static} Frac(input:float) : float
+    + {static} Rcp4(input:float4) : float
+    + {static} Rcp3(input:float3) : float
+    + {static} Rcp2(input:float2) : float
+    + {static} Rcp(input:float) : float
+    + {static} Sign4(input:float4) : float
+    + {static} Sign3(input:float3) : float
+    + {static} Sign2(input:float2) : float
+    + {static} Sign(input:float) : float
+    + {static} Pow4(a:float4, b:float4) : float
+    + {static} Pow3(a:float3, b:float3) : float
+    + {static} Pow2(a:float2, b:float2) : float
+    + {static} Pow(a:float, b:float) : float
+    + {static} Exp4(input:float4) : float
+    + {static} Exp3(input:float3) : float
+    + {static} Exp2(input:float2) : float
+    + {static} Exp(input:float) : float
+    + {static} Mod4(a:float4, b:float4) : float
+    + {static} Mod3(a:float3, b:float3) : float
+    + {static} Mod2(a:float2, b:float2) : float
+    + {static} Mod(a:float, b:float) : float
+    + {static} Normalize4(input:float4) : float
+    + {static} Normalize3(input:float3) : float
+    + {static} Normalize2(input:float2) : float
+    + {static} Length4(input:float4) : float
+    + {static} Length3(input:float3) : float
+    + {static} Length2(input:float2) : float
+    + {static} Length(input:float) : float
+    + {static} Distance4(a:float4, b:float4) : float
+    + {static} Distance3(a:float3, b:float3) : float
+    + {static} Distance2(a:float2, b:float2) : float
+    + {static} Distance(a:float, b:float) : float
+    + {static} Cross3(a:float3, b:float3) : float
+    + {static} Smoothstep4(a:float4, b:float4, w:float) : float
+    + {static} Smoothstep3(a:float3, b:float3, w:float) : float
+    + {static} Smoothstep2(a:float2, b:float2, w:float) : float
+    + {static} Smoothstep(a:float, b:float, w:float) : float
+    + {static} Any4(input:float4) : bool
+    + {static} Any32(input:float3) : bool
+    + {static} Any(input:float2) : bool
+    + {static} AnyInt4(input:int4) : bool
+    + {static} AnyInt3(input:int3) : bool
+    + {static} AnyInt2(input:int2) : bool
+    + {static} AnyBool4(input:bool4) : bool
+    + {static} AnyBool3(input:bool3) : bool
+    + {static} AnyBool2(input:bool2) : bool
+    + {static} All4(input:float4) : bool
+    + {static} All3(input:float3) : bool
+    + {static} All2(input:float2) : bool
+    + {static} AllInt4(input:int4) : bool
+    + {static} AllInt3(input:int3) : bool
+    + {static} AllInt2(input:int2) : bool
+    + {static} AllBool4(input:bool4) : bool
+    + {static} AllBool3(input:bool3) : bool
+    + {static} AllBool2(input:bool2) : bool
+    + {static} Select4(c:bool4, a:float4, b:float4) : float
+    + {static} Select3(c:bool3, a:float3, b:float3) : float
+    + {static} Select(c:bool2, a:float2, b:float2) : float
+    + {static} Step4(a:float4, b:float4) : float
+    + {static} Step3(a:float3, b:float3) : float
+    + {static} Step2(a:float2, b:float2) : float
+    + {static} Step(a:float, b:float) : float
+    + {static} Reflect4(a:float4, b:float4) : float
+    + {static} Reflect3(a:float3, b:float3) : float
+    + {static} Reflect2(a:float2, b:float2) : float
+}
+class TestCompressInt4 <<struct>> {
+    + Value0 : int
+    + Value1 : int
+    + Value2 : int
+    + Value3 : int
+}
+VectorsMaths +-- TestCompressInt4
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class "HashSetPool`1"<T> {
+    + HashSetPool()
+    {static} OnSpawned(items:HashSet<T>) : void
+    {static} OnDespawned(items:HashSet<T>) : void
+}
+class "StaticMemoryPool`1"<T> {
+}
+"StaticMemoryPool`1" "<HashSet<T>>" <|-- "HashSetPool`1"
+"HashSetPool`1" o-> "_instance<T>" "HashSetPool`1"
+"HashSetPool`1" --> "Instance<T>" "HashSetPool`1"
+@enduml

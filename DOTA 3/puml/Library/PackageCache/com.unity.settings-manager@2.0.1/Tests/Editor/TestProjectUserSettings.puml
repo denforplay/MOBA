@@ -1,0 +1,10 @@
+@startuml
+class TestProjectUserSettings {
+    + Setup() : void
+    + Cleanup() : void
+    + ProjectUserSettings_IsCreatedAtCorrectPath() : void
+}
+SettingsTestBase <|-- TestProjectUserSettings
+TestProjectUserSettings --> "m_Settings" Settings
+TestProjectUserSettings --> "m_UserSettingsRepo" ISettingsRepository
+@enduml

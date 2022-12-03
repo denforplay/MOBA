@@ -1,0 +1,11 @@
+@startuml
+class AnimatedTile {
+    + m_MinSpeed : float = 1f
+    + m_MaxSpeed : float = 1f
+    + m_AnimationStartTime : float
+    + m_AnimationStartFrame : int = 0
+    + <<override>> GetTileData(position:Vector3Int, tilemap:ITilemap, tileData:TileData) : void
+    + <<override>> GetTileAnimationData(position:Vector3Int, tilemap:ITilemap, tileAnimationData:TileAnimationData) : bool
+}
+TileBase <|-- AnimatedTile
+@enduml

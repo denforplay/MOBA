@@ -1,0 +1,113 @@
+@startuml
+class TextContent <<static>> {
+    + {static} setMode : string = "Set Mode"
+    + {static} setTool : string = "Set Tool"
+    + {static} pasteData : string = "Paste Data"
+    + {static} generateGeometry : string = "Generate Geometry"
+    + {static} generateWeights : string = "Generate Weights"
+    + {static} normalizeWeights : string = "Normalize Weights"
+    + {static} clearWeights : string = "Clear Weights"
+    + {static} restorePose : string = "Restore Pose"
+    + {static} pivotPose : string = "Pivot Pose"
+    + {static} selection : string = "Selection"
+    + {static} clearSelection : string = "Clear Selection"
+    + {static} editWeights : string = "Edit Weights"
+    + {static} boneName : string = "Bone Name"
+    + {static} boneDepth : string = "Bone Depth"
+    + {static} boneColor : string = "Bone Color"
+    + {static} rotateBone : string = "Rotate Bone"
+    + {static} moveBone : string = "Move Bone"
+    + {static} colorBoneChanged : string = "Bone Color"
+    + {static} freeMoveBone : string = "Free Move Bone"
+    + {static} moveJoint : string = "Move Joint"
+    + {static} moveEndPoint : string = "Move End Point"
+    + {static} boneLength : string = "Bone Length"
+    + {static} createBone : string = "Create Bone"
+    + {static} splitBone : string = "Split Bone"
+    + {static} removeBone : string = "Remove Bone"
+    + {static} moveVertices : string = "Move Vertices"
+    + {static} createVertex : string = "Create Vertex"
+    + {static} createEdge : string = "Create Edge"
+    + {static} splitEdge : string = "Split Edge"
+    + {static} removeEdge : string = "Remove Edge"
+    + {static} removeVertices : string = "Remove Vertices"
+    + {static} selectionChange : string = "Selection Change"
+    + {static} boneVisibility : string = "Bone Visibility"
+    + {static} setParentBone : string = "Set Parent Bone"
+    + {static} visibilityChange : string = "VisibilityChange"
+    + {static} boneSelection : string = "Bone Selection"
+    + {static} expandBones : string = "Expand Bones"
+    + {static} meshVisibility : string = "Mesh Visibility"
+    + {static} meshOpacity : string = "Mesh Opacity"
+    + {static} opacityChange : string = "Opacity Change"
+    + {static} spriteVisibility : string = "SpriteVisibility"
+    + {static} visibilityTab : string = "Visibility Tab"
+    + {static} addBoneInfluence : string = "Add Bone Influence"
+    + {static} removeBoneInfluence : string = "Remove Bone Influence"
+    + {static} reorderBoneInfluence : string = "Reorder Bone Influence"
+    + {static} addSpriteInfluence : string = "Add Sprite Influence"
+    + {static} removeSpriteInfluence : string = "Remove Sprite Influence"
+    + {static} spriteSelection : string = "Sprite selection"
+    + {static} pivotChanged : string = "Pivot changed"
+    + {static} visibilityIconTooltip : string
+    + {static} characterIconTooltip : string
+    + {static} spriteSheetIconTooltip : string
+    + {static} copyTooltip : string
+    + {static} pasteTooltip : string
+    + {static} onTooltip : string
+    + {static} offTooltip : string
+    + {static} addBoneInfluenceTooltip : string
+    + {static} removeBoneInfluenceTooltip : string
+    + {static} addSpriteInfluenceTooltip : string
+    + {static} removeSpriteInfluenceTooltip : string
+    + {static} visibilityIconText : string
+    + {static} spriteSheetIconText : string
+    + {static} copyText : string
+    + {static} pasteText : string
+    + {static} selectedOutlineColor : string
+    + {static} spriteOutlineSize : string
+    + {static} boneOutlineSize : string
+    + {static} convertGroupToCategory : string
+    + {static} newTrailingDots : string
+    + {static} removeEmptyCategory : string
+    + {static} convertLayerToCategory : string
+    + {static} clearAllCategory : string
+    + {static} spriteCategoryChanged : string
+    + {static} spriteCategoryIndexChanged : string
+    + {static} categoryList : string
+    + {static} label : string
+    + {static} spriteLibraryCircularDependency : string
+    + {static} generatingGeometry : string
+    + {static} savePopupTitle : string
+    + {static} savePopupMessage : string
+    + {static} savePopupOptionYes : string
+    + {static} savePopupOptionNo : string
+    + {static} generatingWeights : string
+    + {static} restorePoseLocalized : string
+    + {static} vertexWeight : string
+    + {static} vertexWeightToolTip : string
+    + {static} bone : string
+    + {static} depth : string
+    + {static} color : string
+    + {static} sprite : string
+    + {static} name : string
+    + {static} none : string
+    + {static} size : string
+    + {static} noSpriteSelected : string
+    + {static} weightSlider : string
+    + {static} weightBrush : string
+    + {static} generateAll : string
+    + {static} generate : string
+    + {static} mode : string
+    + {static} modeTooltip : string
+    + {static} boneToolTip : string
+    + {static} pivot : string
+    + {static} noBoneSelected : string
+    + {static} boneInfluences : string
+    + {static} influencedSprites : string
+    + {static} smoothMeshError : string = "Generated mesh could not be smoothed. Please try using different parameters"
+    + {static} copyError1 : string = "Unable to convert copied data to Skinning Module paste data."
+    + {static} copyError2 : string = "There is no copied data to paste."
+    + {static} copyError3 : string = "Target has a different number of Sprites ({0&#125;) compared to copied source ({1&#125;) for Mesh copy."
+}
+@enduml

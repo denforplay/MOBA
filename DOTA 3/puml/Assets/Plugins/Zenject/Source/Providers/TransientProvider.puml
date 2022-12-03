@@ -1,0 +1,20 @@
+@startuml
+class TransientProvider {
+    <<readonly>> _concreteIdentifier : object
+    + TransientProvider(concreteType:Type, container:DiContainer, extraArguments:IEnumerable<TypeValuePair>, bindingContext:string, concreteIdentifier:object, instantiateCallback:Action<InjectContext, object>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+    GetTypeToCreate(contractType:Type) : Type
+}
+class "List`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+IProvider <|-- TransientProvider
+TransientProvider --> "_container" DiContainer
+TransientProvider --> "_concreteType" Type
+TransientProvider --> "_extraArguments<TypeValuePair>" "List`1"
+TransientProvider --> "_instantiateCallback<InjectContext,object>" "Action`2"
+@enduml

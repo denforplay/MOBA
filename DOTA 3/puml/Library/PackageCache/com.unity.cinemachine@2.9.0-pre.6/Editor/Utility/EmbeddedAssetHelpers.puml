@@ -1,0 +1,13 @@
+@startuml
+class "EmbeddeAssetEditor`1"<T> {
+    + EmbeddeAssetEditor(propertyName:string, owner:UnityEditor.Editor)
+    + OnDisable() : void
+    <<const>> kIndentOffset : int = 3
+    + DrawEditorCombo(title:string, defaultName:string, extension:string, message:string, showLabel:string, indent:bool) : void
+    + DestroyEditor() : void
+    + UpdateEditor(property:SerializedProperty) : void
+}
+"EmbeddeAssetEditor`1" --> "OnCreateEditor" OnCreateEditorDelegate
+"EmbeddeAssetEditor`1" --> "OnChanged" OnChangedDelegate
+"EmbeddeAssetEditor`1" --> "m_CreateButtonGUIContent" GUIContent
+@enduml

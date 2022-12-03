@@ -1,0 +1,17 @@
+@startuml
+class ArrayPoolUtil <<static>> {
+    {static} EnsureCapacityCore(array:T[], index:int, pool:ArrayPool<T>) : void
+    + {static} Materialize(source:IEnumerable<T>) : RentArray<T>
+}
+class "RentArray`1"<T> <<struct>> {
+    + <<readonly>> Length : int
+    + RentArray(array:T[], length:int, pool:ArrayPool<T>)
+    + Dispose() : void
+    + DisposeManually(clearArray:bool) : void
+}
+class "ArrayPool`1"<T> {
+}
+ArrayPoolUtil +-- "RentArray`1"
+IDisposable <|-- "RentArray`1"
+"RentArray`1" --> "pool<T>" "ArrayPool`1"
+@enduml

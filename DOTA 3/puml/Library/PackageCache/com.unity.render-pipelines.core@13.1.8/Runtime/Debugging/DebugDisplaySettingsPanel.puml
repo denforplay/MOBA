@@ -1,0 +1,7 @@
+@startuml
+abstract class DebugDisplaySettingsPanel {
+    + {abstract} PanelName : string <<get>>
+    + Dispose() : void
+}
+IDebugDisplaySettingsPanelDisposable <|-- DebugDisplaySettingsPanel
+@enduml

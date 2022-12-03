@@ -1,0 +1,13 @@
+@startuml
+class GraphicEditor {
+    + <<override>> OnInspectorGUI() : void
+    DrawAnchorsOnSceneView(sceneView:SceneView) : void
+    DrawRect(rect:Rect, space:Transform, offset:Vector4) : void
+}
+Editor <|-- GraphicEditor
+GraphicEditor --> "m_PaddingContent" GUIContent
+GraphicEditor --> "m_LeftContent" GUIContent
+GraphicEditor --> "m_RightContent" GUIContent
+GraphicEditor --> "m_TopContent" GUIContent
+GraphicEditor --> "m_BottomContent" GUIContent
+@enduml

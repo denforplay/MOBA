@@ -1,0 +1,9 @@
+@startuml
+interface ICoreRenderPipelinePreferencesProvider {
+    PreferenceGUI() : void
+}
+class "List`1"<T> {
+}
+ICoreRenderPipelinePreferencesProvider --> "keywords<string>" "List`1"
+ICoreRenderPipelinePreferencesProvider --> "header" GUIContent
+@enduml

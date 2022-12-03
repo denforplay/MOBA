@@ -1,0 +1,40 @@
+@startuml
+class CinemachineClearShot {
+    + m_ShowDebugText : bool = false
+    + m_ActivateAfter : float
+    + m_MinDuration : float
+    + m_RandomizeChoice : bool = false
+    + <<override>> Description : string <<get>>
+    + <<override>> IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<override>> InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + OnTransformChildrenChanged() : void
+    + IsBlending : bool <<get>>
+    mActivationTime : float = 0
+    mPendingActivationTime : float = 0
+    InvalidateListOfChildren() : void
+    + ResetRandomization() : void
+    UpdateListOfChildren() : void
+    Randomize(src:CinemachineVirtualCameraBase[]) : CinemachineVirtualCameraBase[]
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+}
+class Pair <<struct>> {
+    + a : int
+    + b : float
+}
+CinemachineVirtualCameraBase <|-- CinemachineClearShot
+CinemachineClearShot o-> "m_LookAt" Transform
+CinemachineClearShot o-> "m_Follow" Transform
+CinemachineClearShot o-> "m_DefaultBlend" CinemachineBlendDefinition
+CinemachineClearShot o-> "m_CustomBlends" CinemachineBlenderSettings
+CinemachineClearShot --> "LiveChild" ICinemachineCamera
+CinemachineClearShot --> "State" CameraState
+CinemachineClearShot --> "LookAt" Transform
+CinemachineClearShot --> "Follow" Transform
+CinemachineClearShot --> "ActiveBlend" CinemachineBlend
+CinemachineClearShot o-> "m_State" CameraState
+CinemachineClearShot --> "mPendingCamera" ICinemachineCamera
+CinemachineClearShot --> "m_TransitioningFrom" ICinemachineCamera
+CinemachineClearShot +-- Pair
+@enduml

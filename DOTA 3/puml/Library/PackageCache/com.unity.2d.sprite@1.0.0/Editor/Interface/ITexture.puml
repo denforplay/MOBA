@@ -1,0 +1,31 @@
+@startuml
+abstract class ITexture2D {
+    + {abstract} width : int <<get>>
+    + {abstract} height : int <<get>>
+    + {abstract} GetPixels32() : Color32[]
+    + {abstract} name : string <<get>>
+    + {abstract} SetPixels(c:Color[]) : void
+    + {abstract} Apply() : void
+    + {abstract} mipMapBias : float <<get>>
+    + <<override>> Equals(other:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class Texture2DWrapper {
+    + Texture2DWrapper(texture:UnityTexture2D)
+    + <<override>> width : int <<get>>
+    + <<override>> height : int <<get>>
+    + <<override>> GetPixels32() : Color32[]
+    + <<override>> mipMapBias : float <<get>>
+    + <<override>> name : string <<get>>
+    + <<override>> Equals(other:object) : bool
+    + <<override>> GetHashCode() : int
+    + <<override>> SetPixels(c:Color[]) : void
+    + <<override>> Apply() : void
+}
+ITexture2D --> "format" TextureFormat
+ITexture2D --> "filterMode" FilterMode
+ITexture2D <|-- Texture2DWrapper
+Texture2DWrapper --> "m_Texture" UnityTexture2D
+Texture2DWrapper --> "format" TextureFormat
+Texture2DWrapper --> "filterMode" FilterMode
+@enduml

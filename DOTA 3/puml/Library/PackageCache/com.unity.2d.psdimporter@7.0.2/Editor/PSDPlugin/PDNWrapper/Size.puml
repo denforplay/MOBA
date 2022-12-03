@@ -1,0 +1,9 @@
+@startuml
+class Size <<struct>> {
+    + Size(width:int, height:int)
+    + IsEmpty : bool <<get>>
+    + Width : int <<get>> <<set>>
+    + Height : int <<get>> <<set>>
+}
+Size o-> "Empty" Size
+@enduml

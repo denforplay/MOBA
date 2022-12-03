@@ -1,0 +1,7 @@
+@startuml
+class HttpServiceConfig <<struct>> {
+    + ServiceId : string
+    + BaseUrl : string
+}
+HttpServiceConfig --> "DefaultOptions" HttpOptions
+@enduml

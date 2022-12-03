@@ -1,0 +1,10 @@
+@startuml
+class HelpFormat {
+}
+enum FormatType {
+    Title,
+    Bold,
+    Underline,
+}
+HelpFormat +-- FormatType
+@enduml

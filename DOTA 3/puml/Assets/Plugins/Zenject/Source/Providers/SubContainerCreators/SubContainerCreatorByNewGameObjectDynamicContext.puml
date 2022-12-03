@@ -1,0 +1,67 @@
+@startuml
+abstract class SubContainerCreatorByNewGameObjectDynamicContext {
+    + SubContainerCreatorByNewGameObjectDynamicContext(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters)
+}
+class SubContainerCreatorByNewGameObjectInstaller {
+    + SubContainerCreatorByNewGameObjectInstaller(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerType:Type, extraArgs:List<TypeValuePair>)
+}
+class SubContainerCreatorByNewGameObjectMethod {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer>)
+}
+class "SubContainerCreatorByNewGameObjectMethod`1"<TParam1> {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer, TParam1>)
+}
+class "SubContainerCreatorByNewGameObjectMethod`2"<TParam1,TParam2> {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer, TParam1, TParam2>)
+}
+class "SubContainerCreatorByNewGameObjectMethod`3"<TParam1,TParam2,TParam3> {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:Action<DiContainer, TParam1, TParam2, TParam3>)
+}
+class "SubContainerCreatorByNewGameObjectMethod`4"<TParam1,TParam2,TParam3,TParam4> {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4>)
+}
+class "SubContainerCreatorByNewGameObjectMethod`5"<TParam1,TParam2,TParam3,TParam4,TParam5> {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5>)
+}
+class "SubContainerCreatorByNewGameObjectMethod`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6> {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6>)
+}
+class "SubContainerCreatorByNewGameObjectMethod`10"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10> {
+    + SubContainerCreatorByNewGameObjectMethod(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, installerMethod:ModestTree.Util.
+#endif
+            Action<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10>)
+}
+class "List`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+class "Action`3"<T1,T2,T3> {
+}
+class "Action`4"<T1,T2,T3,T4> {
+}
+SubContainerCreatorDynamicContext <|-- SubContainerCreatorByNewGameObjectDynamicContext
+SubContainerCreatorByNewGameObjectDynamicContext --> "_gameObjectBindInfo" GameObjectCreationParameters
+SubContainerCreatorByNewGameObjectDynamicContext <|-- SubContainerCreatorByNewGameObjectInstaller
+SubContainerCreatorByNewGameObjectInstaller --> "_installerType" Type
+SubContainerCreatorByNewGameObjectInstaller --> "_extraArgs<TypeValuePair>" "List`1"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- SubContainerCreatorByNewGameObjectMethod
+SubContainerCreatorByNewGameObjectMethod --> "_installerMethod<DiContainer>" "Action`1"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- "SubContainerCreatorByNewGameObjectMethod`1"
+"SubContainerCreatorByNewGameObjectMethod`1" --> "_installerMethod<DiContainer,TParam1>" "Action`2"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- "SubContainerCreatorByNewGameObjectMethod`2"
+"SubContainerCreatorByNewGameObjectMethod`2" --> "_installerMethod<DiContainer,TParam1,TParam2>" "Action`3"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- "SubContainerCreatorByNewGameObjectMethod`3"
+"SubContainerCreatorByNewGameObjectMethod`3" --> "_installerMethod<DiContainer,TParam1,TParam2,TParam3>" "Action`4"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- "SubContainerCreatorByNewGameObjectMethod`4"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- "SubContainerCreatorByNewGameObjectMethod`5"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- "SubContainerCreatorByNewGameObjectMethod`6"
+SubContainerCreatorByNewGameObjectDynamicContext <|-- "SubContainerCreatorByNewGameObjectMethod`10"
+@enduml

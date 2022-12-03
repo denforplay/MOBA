@@ -1,0 +1,19 @@
+@startuml
+class KeyTraverser {
+    m_DirtyStamp : int
+    m_LastHash : int
+    <<readonly>> m_Epsilon : float
+    m_LastIndex : int
+    + lastIndex : int <<get>>
+    + {static} GetClipKeyTimes(clip:TimelineClip) : IEnumerable<float>
+    + {static} GetTrackKeyTimes(track:AnimationTrack) : IEnumerable<float>
+    {static} CalcAnimClipHash(asset:TrackAsset) : int
+    RebuildKeyCache() : void
+    + KeyTraverser(timeline:TimelineAsset, epsilon:float)
+    CheckCache(dirtyStamp:int) : void
+    + GetNextKey(key:float, dirtyStamp:int) : float
+    + GetPrevKey(key:float, dirtyStamp:int) : float
+    + GetKeyCount(dirtyStamp:int) : int
+}
+KeyTraverser --> "m_Asset" TimelineAsset
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class BoneCacheExtensions <<static>> {
+    + {static} ToCharacterIfNeeded(bones:BoneCache[]) : BoneCache[]
+    + {static} ToSpriteSheetIfNeeded(bones:BoneCache[]) : BoneCache[]
+    + {static} ToCharacterIfNeeded(bone:BoneCache) : BoneCache
+    + {static} ToSpriteSheetIfNeeded(bone:BoneCache) : BoneCache
+    + {static} ToSpriteBone(bone:BoneCache, rootTransform:Matrix4x4, parentId:int) : UnityEngine.U2D.SpriteBone
+    + {static} ToSpriteBone(bones:BoneCache[], rootTransform:Matrix4x4) : UnityEngine.U2D.SpriteBone[]
+}
+@enduml

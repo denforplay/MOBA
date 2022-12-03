@@ -1,0 +1,7 @@
+@startuml
+class ProfileAnalyzerEmptyTests {
+    SelectRange(startIndex:int, endIndex:int) : List<int>
+    + ProfileAnalyzer_EmptyData_IsEmpty() : void
+}
+ProfileAnalyzerBaseTest <|-- ProfileAnalyzerEmptyTests
+@enduml

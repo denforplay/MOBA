@@ -1,0 +1,24 @@
+@startuml
+class CinemachinePathEditor <<sealed>> {
+    + {static} kPreferTangentSelectionKey : string = "CinemachinePathEditor.PreferTangentSelection"
+    + {static} PreferTangentSelection : bool <<get>> <<set>>
+    {static} mWaypointsExpanded : bool
+    mPreferTangentSelection : bool
+    OnEnable() : void
+    + HasFrameBounds() : bool
+    + OnGetFrameBounds() : Bounds
+    + <<override>> OnInspectorGUI() : void
+    SetupWaypointList() : void
+    DrawWaypointEditor(rect:Rect, index:int) : void
+    InsertWaypointAtIndex(indexA:int) : void
+    OnSceneGUI() : void
+    DrawSelectionHandle(i:int, localToWorld:Matrix4x4) : void
+    DrawTangentControl(i:int, localToWorld:Matrix4x4, localRotation:Quaternion) : void
+    DrawPositionControl(i:int, localToWorld:Matrix4x4, localRotation:Quaternion) : void
+    + {static} DrawPathGizmo(path:CinemachinePathBase, pathColor:Color, isActive:bool) : void
+    {static} DrawGizmos(path:CinemachinePath, selectionType:GizmoType) : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachinePath>" <|-- CinemachinePathEditor
+@enduml

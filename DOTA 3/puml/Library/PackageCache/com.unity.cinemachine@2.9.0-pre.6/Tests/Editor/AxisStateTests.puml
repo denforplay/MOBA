@@ -1,0 +1,14 @@
+@startuml
+class AxisStateTests {
+    + TestAxisState(minValue:float, maxValue:float, wrap:bool, maxSpeed:float, accelTime:float, decelTime:float, invert:bool, axisValue:float) : float
+    + TestRecentering(minValue:float, maxValue:float, wrap:bool, maxSpeed:float, accelTime:float, decelTime:float, invert:bool, axisValue:float, enabled:bool, recenteringTime:float, expectedValue:float) : void
+}
+class TestAxisProvider <<struct>> {
+    + value : float
+    + TestAxisProvider(value:float)
+    + GetAxisValue(axis:int) : float
+}
+AxisStateTests --> "AxisStateTestCases" IEnumerable
+AxisStateTests --> "RecenteringTestCases" IEnumerable
+AxisStateTests +-- TestAxisProvider
+@enduml

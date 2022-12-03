@@ -1,0 +1,12 @@
+@startuml
+class TMP_UpdateManager {
+    TMP_UpdateManager()
+    + {static} RegisterTextElementForLayoutRebuild(element:TMP_Text) : void
+    + {static} RegisterTextElementForGraphicRebuild(element:TMP_Text) : void
+    + {static} RegisterTextElementForCullingUpdate(element:TMP_Text) : void
+    OnCameraPreCull() : void
+    DoRebuilds() : void
+    + {static} UnRegisterTextElementForRebuild(element:TMP_Text) : void
+}
+TMP_UpdateManager --> "instance" TMP_UpdateManager
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class GenerateGeometryTool {
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+}
+MeshToolWrapper <|-- GenerateGeometryTool
+@enduml

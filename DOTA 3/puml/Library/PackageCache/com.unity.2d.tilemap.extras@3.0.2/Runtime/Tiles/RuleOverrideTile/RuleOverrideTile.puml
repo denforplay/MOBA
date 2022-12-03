@@ -1,0 +1,32 @@
+@startuml
+class RuleOverrideTile {
+    + ApplyOverrides(overrides:IList<KeyValuePair<Sprite, Sprite>>) : void
+    + ApplyOverrides(overrides:IList<KeyValuePair<GameObject, GameObject>>) : void
+    + GetOverrides(overrides:List<KeyValuePair<Sprite, Sprite>>, validCount:int) : void
+    + GetOverrides(overrides:List<KeyValuePair<GameObject, GameObject>>, validCount:int) : void
+    + <<virtual>> Override() : void
+    + PrepareOverride() : void
+    + <<override>> GetTileAnimationData(position:Vector3Int, tilemap:ITilemap, tileAnimationData:TileAnimationData) : bool
+    + <<override>> GetTileData(position:Vector3Int, tilemap:ITilemap, tileData:TileData) : void
+    + <<override>> RefreshTile(position:Vector3Int, tilemap:ITilemap) : void
+    + <<override>> StartUp(position:Vector3Int, tilemap:ITilemap, go:GameObject) : bool
+    + OnEnable() : void
+}
+class TileSpritePair {
+}
+class TileGameObjectPair {
+}
+class "List`1"<T> {
+}
+TileBase <|-- RuleOverrideTile
+RuleOverrideTile --> "m_Tile" RuleTile
+RuleOverrideTile o-> "m_Sprites<TileSpritePair>" "List`1"
+RuleOverrideTile o-> "m_GameObjects<TileGameObjectPair>" "List`1"
+RuleOverrideTile --> "m_InstanceTile" RuleTile
+RuleOverrideTile +-- TileSpritePair
+TileSpritePair --> "m_OriginalSprite" Sprite
+TileSpritePair --> "m_OverrideSprite" Sprite
+RuleOverrideTile +-- TileGameObjectPair
+TileGameObjectPair --> "m_OriginalGameObject" GameObject
+TileGameObjectPair --> "m_OverrideGameObject" GameObject
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class Surface {
+    + Surface(w:int, h:int)
+    + Dispose() : void
+    + width : int <<get>>
+    + height : int <<get>>
+}
+class "NativeArray`1"<T> {
+}
+Surface --> "m_Color<Color32>" "NativeArray`1"
+Surface --> "color<Color32>" "NativeArray`1"
+@enduml

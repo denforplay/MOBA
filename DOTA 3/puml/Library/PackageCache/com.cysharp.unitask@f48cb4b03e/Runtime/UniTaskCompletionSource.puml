@@ -1,0 +1,156 @@
+@startuml
+interface IResolvePromise {
+    TrySetResult() : bool
+}
+interface "IResolvePromise`1"<T> {
+    TrySetResult(value:T) : bool
+}
+interface IRejectPromise {
+    TrySetException(exception:Exception) : bool
+}
+interface ICancelPromise {
+    TrySetCanceled(cancellationToken:CancellationToken) : bool
+}
+interface "IPromise`1"<T> {
+}
+interface IPromise {
+}
+class ExceptionHolder {
+    calledGet : bool = false
+    + ExceptionHolder(exception:ExceptionDispatchInfo)
+    + GetException() : ExceptionDispatchInfo
+}
+class "UniTaskCompletionSourceCore`1"<TResult> <<struct>> {
+    result : TResult
+    error : object
+    version : short
+    hasUnhandledError : bool
+    completedCount : int
+    continuationState : object
+    + Reset() : void
+    ReportUnhandledError() : void
+    + TrySetResult(result:TResult) : bool
+    + TrySetException(error:Exception) : bool
+    + TrySetCanceled(cancellationToken:CancellationToken) : bool
+    + Version : short <<get>>
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + GetResult(token:short) : TResult
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class UniTaskCompletionSourceCoreShared <<static>> {
+}
+class AutoResetUniTaskCompletionSource {
+    {static} AutoResetUniTaskCompletionSource()
+    AutoResetUniTaskCompletionSource()
+    + {static} Create() : AutoResetUniTaskCompletionSource
+    + {static} CreateFromCanceled(cancellationToken:CancellationToken, token:short) : AutoResetUniTaskCompletionSource
+    + {static} CreateFromException(exception:Exception, token:short) : AutoResetUniTaskCompletionSource
+    + {static} CreateCompleted(token:short) : AutoResetUniTaskCompletionSource
+    + TrySetResult() : bool
+    + TrySetCanceled(cancellationToken:CancellationToken) : bool
+    + TrySetException(exception:Exception) : bool
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    TryReturn() : bool
+}
+class "AutoResetUniTaskCompletionSource`1"<T> {
+    {static} AutoResetUniTaskCompletionSource()
+    AutoResetUniTaskCompletionSource()
+    + {static} Create() : AutoResetUniTaskCompletionSource<T>
+    + {static} CreateFromCanceled(cancellationToken:CancellationToken, token:short) : AutoResetUniTaskCompletionSource<T>
+    + {static} CreateFromException(exception:Exception, token:short) : AutoResetUniTaskCompletionSource<T>
+    + {static} CreateFromResult(result:T, token:short) : AutoResetUniTaskCompletionSource<T>
+    + TrySetResult(result:T) : bool
+    + TrySetCanceled(cancellationToken:CancellationToken) : bool
+    + TrySetException(exception:Exception) : bool
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    TryReturn() : bool
+}
+class UniTaskCompletionSource {
+    gate : object
+    singleState : object
+    intStatus : int
+    handled : bool = false
+    + UniTaskCompletionSource()
+    + TrySetResult() : bool
+    + TrySetCanceled(cancellationToken:CancellationToken) : bool
+    + TrySetException(exception:Exception) : bool
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    TrySignalCompletion(status:UniTaskStatus) : bool
+}
+class "UniTaskCompletionSource`1"<T> {
+    result : T
+    gate : object
+    singleState : object
+    intStatus : int
+    handled : bool = false
+    + UniTaskCompletionSource()
+    + TrySetResult(result:T) : bool
+    + TrySetCanceled(cancellationToken:CancellationToken) : bool
+    + TrySetException(exception:Exception) : bool
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    TrySignalCompletion(status:UniTaskStatus) : bool
+}
+class "Action`1"<T> {
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "IUniTaskSource`1"<T> {
+}
+class "UniTask`1"<T> {
+}
+class "List`1"<T> {
+}
+"IResolvePromise`1" "<T>" <|-- "IPromise`1"
+IRejectPromise <|-- "IPromise`1"
+ICancelPromise <|-- "IPromise`1"
+IResolvePromise <|-- IPromise
+IRejectPromise <|-- IPromise
+ICancelPromise <|-- IPromise
+ExceptionHolder --> "exception" ExceptionDispatchInfo
+"UniTaskCompletionSourceCore`1" --> "continuation<object>" "Action`1"
+IUniTaskSource <|-- AutoResetUniTaskCompletionSource
+"ITaskPoolNode`1" "<AutoResetUniTaskCompletionSource>" <|-- AutoResetUniTaskCompletionSource
+IPromise <|-- AutoResetUniTaskCompletionSource
+AutoResetUniTaskCompletionSource --> "pool<AutoResetUniTaskCompletionSource>" "TaskPool`1"
+AutoResetUniTaskCompletionSource --> "nextNode" AutoResetUniTaskCompletionSource
+AutoResetUniTaskCompletionSource --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+AutoResetUniTaskCompletionSource --> "Task" UniTask
+"IUniTaskSource`1" "<T>" <|-- "AutoResetUniTaskCompletionSource`1"
+"ITaskPoolNode`1" "<AutoResetUniTaskCompletionSource<T>>" <|-- "AutoResetUniTaskCompletionSource`1"
+"IPromise`1" "<T>" <|-- "AutoResetUniTaskCompletionSource`1"
+"AutoResetUniTaskCompletionSource`1" --> "pool<AutoResetUniTaskCompletionSource<T>>" "TaskPool`1"
+"AutoResetUniTaskCompletionSource`1" --> "nextNode<T>" "AutoResetUniTaskCompletionSource`1"
+"AutoResetUniTaskCompletionSource`1" --> "core<T>" "UniTaskCompletionSourceCore`1"
+"AutoResetUniTaskCompletionSource`1" --> "Task<T>" "UniTask`1"
+IUniTaskSource <|-- UniTaskCompletionSource
+IPromise <|-- UniTaskCompletionSource
+UniTaskCompletionSource --> "cancellationToken" CancellationToken
+UniTaskCompletionSource --> "exception" ExceptionHolder
+UniTaskCompletionSource --> "singleContinuation<object>" "Action`1"
+UniTaskCompletionSource --> "secondaryContinuationList<(Action<object>, object)>" "List`1"
+UniTaskCompletionSource --> "Task" UniTask
+"IUniTaskSource`1" "<T>" <|-- "UniTaskCompletionSource`1"
+"IPromise`1" "<T>" <|-- "UniTaskCompletionSource`1"
+"UniTaskCompletionSource`1" --> "cancellationToken" CancellationToken
+"UniTaskCompletionSource`1" --> "exception" ExceptionHolder
+"UniTaskCompletionSource`1" --> "singleContinuation<object>" "Action`1"
+"UniTaskCompletionSource`1" --> "secondaryContinuationList<(Action<object>, object)>" "List`1"
+"UniTaskCompletionSource`1" --> "Task<T>" "UniTask`1"
+@enduml

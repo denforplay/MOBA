@@ -1,0 +1,18 @@
+@startuml
+class IncludedAssembliesPopupWindow {
+    <<const>> kWindowHeight : float = 221
+    + Width : float <<get>> <<set>>
+    + IncludedAssembliesPopupWindow(parent:CodeCoverageWindow, assembliesToInclude:string)
+    + <<override>> OnGUI(rect:Rect) : void
+    + <<override>> GetWindowSize() : Vector2
+    + <<override>> OnOpen() : void
+}
+class Styles {
+}
+PopupWindowContent <|-- IncludedAssembliesPopupWindow
+IncludedAssembliesPopupWindow --> "m_SearchField" SearchField
+IncludedAssembliesPopupWindow --> "m_TreeView" IncludedAssembliesTreeView
+IncludedAssembliesPopupWindow +-- Styles
+Styles o-> "SelectAllButtonLabel" GUIContent
+Styles o-> "DeselectAllButtonLabel" GUIContent
+@enduml

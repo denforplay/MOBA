@@ -1,0 +1,75 @@
+@startuml
+abstract class TMP_BaseEditorPanel {
+    + selAlignGridA : int
+    + selAlignGridB : int
+    ON_TEXT_STYLE_CHANGED(isChanged:bool) : void
+    + <<override>> OnInspectorGUI() : void
+    + OnSceneGUI() : void
+    DrawFont() : void
+    DrawColor() : void
+    DrawSpacing() : void
+    DrawAlignment() : void
+    DrawWrappingOverflow() : void
+    DrawMarginField(position:Rect, label:string, value:float) : float
+}
+class "Dictionary`2"<T1,T2> {
+}
+class Foldout <<struct>> {
+    + {static} extraSettings : bool = false
+    + {static} materialInspector : bool = true
+}
+Editor <|-- TMP_BaseEditorPanel
+TMP_BaseEditorPanel o-> "k_RtlToggleLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_FontAssetLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_MaterialPresetLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_StyleLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_AutoSizeLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_FontSizeLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_AutoSizeOptionsLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_MinLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_MaxLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_WdLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_LineLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_FontStyleLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_BoldLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_ItalicLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_UnderlineLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_StrikethroughLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_LowercaseLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_UppercaseLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_SmallcapsLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_ColorModeLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_BaseColorLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_ColorPresetLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_ColorGradientLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_CorenerColorsLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_OverrideTagsLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_SpacingOptionsLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_CharacterSpacingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_WordSpacingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_LineSpacingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_ParagraphSpacingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_AlignmentLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_WrapMixLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_WrappingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_OverflowLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_MarginsLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_GeometrySortingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_IsTextObjectScaleStatic" GUIContent
+TMP_BaseEditorPanel o-> "k_RichTextLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_EscapeCharactersLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_VisibleDescenderLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_SpriteAssetLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_StyleSheetAssetLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_HorizontalMappingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_VerticalMappingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_LineOffsetLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_KerningLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_PaddingLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_LeftLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_TopLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_RightLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_BottomLabel" GUIContent
+TMP_BaseEditorPanel o-> "k_AvailableStyles<int,TMP_Style>" "Dictionary`2"
+TMP_BaseEditorPanel +-- Foldout
+@enduml

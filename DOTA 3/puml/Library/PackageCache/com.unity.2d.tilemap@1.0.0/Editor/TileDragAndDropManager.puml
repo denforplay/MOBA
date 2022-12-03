@@ -1,0 +1,14 @@
+@startuml
+class TileDragAndDropManager {
+    {static} Initialize() : void
+    OnEnable() : void
+    RegisterEventHandlers() : void
+    OnDisable() : void
+    {static} GetOrCreateActiveTilemap() : Tilemap
+    {static} CreateNewTilemap(grid:Grid) : Tilemap
+    {static} GetActiveGrid() : Grid
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<TileDragAndDropManager>" <|-- TileDragAndDropManager
+@enduml

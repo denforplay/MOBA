@@ -1,0 +1,21 @@
+@startuml
+class AxisBase <<struct>> {
+    + m_Value : float
+    + m_MinValue : float
+    + m_MaxValue : float
+    + m_Wrap : bool
+    + Validate() : void
+}
+class CinemachineInputAxisDriver <<struct>> {
+    + multiplier : float
+    + accelTime : float
+    + decelTime : float
+    + name : string
+    + inputValue : float
+    <<const>> Epsilon : float
+    + Validate() : void
+    + Update(deltaTime:float, axis:AxisBase) : bool
+    + Update(deltaTime:float, axis:AxisState) : bool
+    ClampValue(axis:AxisBase, v:float) : float
+}
+@enduml

@@ -1,0 +1,68 @@
+@startuml
+class VolumeComponentEditorAttribute <<sealed>> {
+    + VolumeComponentEditorAttribute(componentType:Type)
+}
+class VolumeComponentEditor {
+    m_OverrideToggleSize : Vector2?
+    + <<virtual>> hasAdditionalProperties : bool <<get>>
+    + showAdditionalProperties : bool <<get>> <<set>>
+    {static} VolumeComponentEditor()
+    {static} OnEditorReload() : void
+    {static} ReloadDecoratorTypes() : void
+    + Repaint() : void
+    InitParameters() : void
+    GetFields(o:object, infos:List<(FieldInfo, SerializedProperty)>, prop:SerializedProperty) : void
+    + <<virtual>> OnEnable() : void
+    + <<virtual>> OnDisable() : void
+    + <<virtual>> OnInspectorGUI() : void
+    + <<virtual>> GetDisplayTitle() : GUIContent
+    AddToogleState(content:GUIContent, state:bool) : void
+    TopRowFields() : void
+    HandleDecorators(property:SerializedDataParameter, title:GUIContent) : void
+    HandleRelativeIndentation(property:SerializedDataParameter) : int
+}
+class Styles {
+    + {static} toggleAllText : string <<get>>
+    + <<const>> overrideCheckboxWidth : int = 14
+    + <<const>> overrideCheckboxOffset : int = 9
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class OverridablePropertyScope <<struct>> {
+    isAdditionalProperty : bool
+    + displayed : bool <<get>>
+    + OverridablePropertyScope(property:SerializedDataParameter, label:GUIContent, editor:VolumeComponentEditor)
+    + OverridablePropertyScope(property:SerializedDataParameter, label:string, editor:VolumeComponentEditor)
+    Init(property:SerializedDataParameter, label:GUIContent, editor:VolumeComponentEditor) : void
+    Dispose() : void
+}
+class IndentLevelScope {
+    m_Offset : int
+    + IndentLevelScope(offset:int)
+}
+Attribute <|-- VolumeComponentEditorAttribute
+VolumeComponentEditorAttribute --> "componentType" Type
+VolumeComponentEditor --> "target" VolumeComponent
+VolumeComponentEditor --> "serializedObject" SerializedObject
+VolumeComponentEditor --> "baseProperty" SerializedProperty
+VolumeComponentEditor --> "activeProperty" SerializedProperty
+VolumeComponentEditor --> "m_AdditionalPropertiesAnimation" AnimFloat
+VolumeComponentEditor --> "m_ShowAdditionalProperties" EditorPrefBool
+VolumeComponentEditor --> "m_VolumeNotAdditionalParameters<VolumeParameter>" "List`1"
+VolumeComponentEditor --> "m_Parameters<(GUIContent displayName, int displayOrder, SerializedDataParameter param)>" "List`1"
+VolumeComponentEditor --> "s_ParameterDrawers<Type,VolumeParameterDrawer>" "Dictionary`2"
+VolumeComponentEditor o-> "s_HeadersGuiContents<string,GUIContent>" "Dictionary`2"
+VolumeComponentEditor +-- Styles
+Styles o-> "overrideSettingText" GUIContent
+Styles o-> "allText" GUIContent
+Styles o-> "noneText" GUIContent
+VolumeComponentEditor +-- OverridablePropertyScope
+IDisposable <|-- OverridablePropertyScope
+OverridablePropertyScope --> "editor" VolumeComponentEditor
+OverridablePropertyScope --> "disabledScope" IDisposable
+OverridablePropertyScope --> "indentScope" IDisposable
+OverridablePropertyScope --> "label" GUIContent
+VolumeComponentEditor +-- IndentLevelScope
+@enduml

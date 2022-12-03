@@ -1,0 +1,35 @@
+@startuml
+class HistoryEntryComponent {
+    + <<const>> UssClassName : string = "history-entry-component"
+    + <<const>> ProfileInitialUssClassName : string
+    + <<const>> AuthorNameUssClassName : string
+    + <<const>> TimestampUssClassName : string
+    + <<const>> RevisionIdUssClassName : string
+    + <<const>> CommitMessageUssClassName : string
+    + <<const>> ChangedFilesCountUssClassName : string
+    + <<const>> ChangedFilesUssClassName : string
+    + <<const>> RollbackButtonUssClassName : string
+    + <<const>> ShowFilesButtonUssClassName : string
+    + <<const>> BuildStatusUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    + HistoryEntryComponent()
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- HistoryEntryComponent
+HistoryEntryComponent --> "profileInitial" Label
+HistoryEntryComponent --> "authorName" Label
+HistoryEntryComponent --> "timestamp" Label
+HistoryEntryComponent --> "revisionId" Label
+HistoryEntryComponent --> "commitMessage" Label
+HistoryEntryComponent --> "gotoButton" Button
+HistoryEntryComponent --> "showFilesButton" Button
+HistoryEntryComponent --> "cloudStatusText" Label
+HistoryEntryComponent --> "changedFilesCount" Label
+HistoryEntryComponent --> "changedFiles" AdapterListView
+HistoryEntryComponent +-- UxmlFactory
+"UxmlFactory`1" "<HistoryEntryComponent>" <|-- UxmlFactory
+@enduml

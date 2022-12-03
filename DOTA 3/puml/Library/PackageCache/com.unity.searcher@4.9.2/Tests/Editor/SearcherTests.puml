@@ -1,0 +1,25 @@
+@startuml
+abstract class SearcherTestsBase {
+    + Init() : void
+    + Cleanup() : void
+}
+class SearcherTests {
+    + {static} SingleTermCases() : IEnumerable<object[]>
+    + {static} MultipleTermCases() : IEnumerable<object[]>
+    + SingleTermSearch(term:string, expectedResultCount:int) : void
+    + MultipleTermsSearch(term:string, expectedResultCount:int) : void
+}
+class MatchTests {
+    {static} Make(prefix:string, input:TestCaseData[]) : TestCaseData[]
+    {static} BasicCases() : TestCaseData[]
+    {static} PrefixCases() : TestCaseData[]
+    {static} CamelCaseSplitCases() : TestCaseData[]
+    {static} AbreviationCases() : TestCaseData[]
+    + Match(path:string, query:string, expectedResult:bool) : void
+    + MatchWithFilter(items:List<SearcherItem>, query:string, filter:Func<string, SearcherItem, bool>, expectedResult:List<SearcherItem>) : void
+}
+class "IEnumerable`1"<T> {
+}
+SearcherTestsBase <|-- SearcherTests
+MatchTests --> "FilterCases<TestCaseData>" "IEnumerable`1"
+@enduml

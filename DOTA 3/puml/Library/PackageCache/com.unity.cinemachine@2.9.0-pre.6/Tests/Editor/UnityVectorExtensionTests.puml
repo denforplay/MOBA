@@ -1,0 +1,16 @@
+@startuml
+class UnityVectorExtensionTests {
+    + FindIntersectionTest(l1_p1:Vector2, l1_p2:Vector2, l2_p1:Vector2, l2_p2:Vector2, expectedIntersectionType:int, expectedIntersectionResult:IntersectionResult) : void
+    + TestAngle(v2:Vector2, expectedAngle:float, compareWithBuiltIn:bool) : void
+    + TestSignedAngle(v2:Vector2, expectedAngle:float, compareWithBuiltIn:bool) : void
+}
+enum IntersectionResult {
+    Zero,
+    Infinity,
+    l1_p1,
+    l1_p2,
+    l2_p1,
+    l2_p2,
+}
+UnityVectorExtensionTests +-- IntersectionResult
+@enduml

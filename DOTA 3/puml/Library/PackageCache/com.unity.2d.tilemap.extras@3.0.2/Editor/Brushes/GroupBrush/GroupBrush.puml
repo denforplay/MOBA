@@ -1,0 +1,11 @@
+@startuml
+class GroupBrush {
+    + <<override>> Pick(grid:GridLayout, brushTarget:GameObject, position:BoundsInt, pickStart:Vector3Int) : void
+}
+class GroupBrushEditor {
+}
+GridBrush <|-- GroupBrush
+GroupBrush --> "gap" Vector3Int
+GroupBrush --> "limit" Vector3Int
+GridBrushEditor <|-- GroupBrushEditor
+@enduml

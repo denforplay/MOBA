@@ -1,0 +1,7 @@
+@startuml
+class NewToolbarCompositeAltActionProvider {
+    + NewToolbarCompositeAltActionProvider(tools:IEnumerable<IPartialAltActionProvider>)
+    + <<override>> IsAvailable() : bool
+}
+CompositeAltActionProvider <|-- NewToolbarCompositeAltActionProvider
+@enduml

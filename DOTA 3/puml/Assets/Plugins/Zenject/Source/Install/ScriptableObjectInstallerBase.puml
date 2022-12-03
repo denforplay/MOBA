@@ -1,0 +1,9 @@
+@startuml
+class ScriptableObjectInstallerBase {
+    IsEnabled : bool <<get>>
+    + <<virtual>> InstallBindings() : void
+}
+ScriptableObject <|-- ScriptableObjectInstallerBase
+IInstaller <|-- ScriptableObjectInstallerBase
+ScriptableObjectInstallerBase o-> "_container" DiContainer
+@enduml

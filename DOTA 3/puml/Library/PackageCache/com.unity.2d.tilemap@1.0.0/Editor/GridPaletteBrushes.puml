@@ -1,0 +1,19 @@
+@startuml
+class GridPaletteBrushes {
+    + GetLastUsedBrush() : GridBrushBase
+    + StoreLastUsedBrush(brush:GridBrushBase) : void
+    + {static} GetDefaultBrushType() : Type
+    + {static} ActiveGridBrushAssetChanged() : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+class "List`1"<T> {
+}
+class AssetProcessor {
+    + <<override>> GetPostprocessOrder() : int
+}
+"ScriptableSingleton`1" "<GridPaletteBrushes>" <|-- GridPaletteBrushes
+GridPaletteBrushes --> "brushes<GridBrushBase>" "List`1"
+GridPaletteBrushes +-- AssetProcessor
+AssetPostprocessor <|-- AssetProcessor
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class IKGizmos {
+    + isDragging : bool <<get>>
+    + DoSolverGUI(solver:Solver2D) : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<IKGizmos>" <|-- IKGizmos
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+class "HexagonalRuleTile`1"<T> {
+}
+class HexagonalRuleTile {
+    + <<override>> m_RotationAngle : int <<get>>
+    + m_FlatTop : bool
+    {static} m_TilemapToWorldYScale : float
+    + {static} TilemapPositionToWorldPosition(tilemapPosition:Vector3Int) : Vector3
+    + {static} WorldPositionToTilemapPosition(worldPosition:Vector3) : Vector3Int
+    + <<override>> GetOffsetPosition(position:Vector3Int, offset:Vector3Int) : Vector3Int
+    + <<override>> GetOffsetPositionReverse(position:Vector3Int, offset:Vector3Int) : Vector3Int
+    + <<override>> GetRotatedPosition(position:Vector3Int, rotation:int) : Vector3Int
+    + <<override>> GetMirroredPosition(position:Vector3Int, mirrorX:bool, mirrorY:bool) : Vector3Int
+}
+HexagonalRuleTile <|-- "HexagonalRuleTile`1"
+"HexagonalRuleTile`1" --> "m_NeighborType" Type
+RuleTile <|-- HexagonalRuleTile
+@enduml

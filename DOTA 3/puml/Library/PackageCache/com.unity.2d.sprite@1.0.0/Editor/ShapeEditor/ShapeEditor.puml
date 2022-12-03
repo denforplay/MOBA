@@ -1,0 +1,106 @@
+@startuml
+interface IShapeEditorFactory {
+    CreateShapeEditor() : ShapeEditor
+}
+class ShapeEditorFactory {
+    + CreateShapeEditor() : ShapeEditor
+}
+class ShapeEditor {
+    + activePoint : int <<get>> <<set>>
+    + inEditMode : bool <<get>> <<set>>
+    + activeEdge : int <<get>> <<set>>
+    + delayedReset : bool <<set>>
+    + ShapeEditor(gu:IGUIUtility, es:IEventSystem)
+    + SetRectSelectionTool(sers:ShapeEditorRectSelectionTool) : void
+    + OnDisable() : void
+    GetDrawBatchList(key:DrawBatchDataKey) : List<Vector3>
+    + OnGUI() : void
+    PrepareEdgePointList() : void
+    DistancePointEdge(point:Vector3, edge:Vector3[]) : float
+    + Edges() : void
+    + Tangents() : void
+    + Points() : void
+    + HandlePointInsertToEdge(closestEdge:int, closestEdgeDist:float) : void
+    DoTangent(p0:Vector3, t0:Vector3, cid:int, pointIndex:int, color:Color) : Vector3
+    + HandlePointClick(pointIndex:int) : void
+    + CycleTangentMode() : void
+    + {static} GetNextTangentMode(current:TangentMode) : TangentMode
+    + RefreshTangentsAfterModeChange(pointIndex:int, oldMode:TangentMode, newMode:TangentMode) : void
+    + FindClosestPointOnEdge(edgeIndex:int, position:Vector3, iterations:int) : Vector3
+    + RectCap(controlID:int, position:Vector3, rotation:Quaternion, size:float, eventType:EventType) : void
+    + CircleCap(controlID:int, position:Vector3, rotation:Quaternion, size:float, eventType:EventType) : void
+    + DiamondCap(controlID:int, position:Vector3, rotation:Quaternion, size:float, eventType:EventType) : void
+    + RegisterToShapeEditor(se:ShapeEditor) : void
+    + UnregisterFromShapeEditor(se:ShapeEditor) : void
+}
+enum SelectionType {
+    Normal,
+    Additive,
+    Subtractive,
+}
+enum Tool {
+    Edit,
+    Create,
+    Break,
+}
+enum TangentMode {
+    Linear,
+    Continuous,
+    Broken,
+}
+class "Func`2"<T1,T2> {
+}
+class "Action`2"<T1,T2> {
+}
+class "Action`1"<T> {
+}
+class "Func`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+enum ColorEnum {
+    EUnselected,
+    EUnselectedHovered,
+    ESelected,
+    ESelectedHovered,
+}
+class DrawBatchDataKey {
+    + glMode : int <<get>>
+    + DrawBatchDataKey(c:Color, mode:int)
+    + <<override>> GetHashCode() : int
+    + <<override>> Equals(obj:object) : bool
+}
+IShapeEditorFactory <|-- ShapeEditorFactory
+ShapeEditor o-> "GetPointPosition<int,Vector3>" "Func`2"
+ShapeEditor o-> "SetPointPosition<int,Vector3>" "Action`2"
+ShapeEditor o-> "GetPointLTangent<int,Vector3>" "Func`2"
+ShapeEditor o-> "SetPointLTangent<int,Vector3>" "Action`2"
+ShapeEditor o-> "GetPointRTangent<int,Vector3>" "Func`2"
+ShapeEditor o-> "SetPointRTangent<int,Vector3>" "Action`2"
+ShapeEditor o-> "GetTangentMode<int,TangentMode>" "Func`2"
+ShapeEditor o-> "SetTangentMode<int,TangentMode>" "Action`2"
+ShapeEditor o-> "InsertPointAt<int,Vector3>" "Action`2"
+ShapeEditor o-> "RemovePointAt<int>" "Action`1"
+ShapeEditor o-> "GetPointsCount<int>" "Func`1"
+ShapeEditor o-> "ScreenToLocal<Vector2,Vector3>" "Func`2"
+ShapeEditor o-> "LocalToScreen<Vector3,Vector2>" "Func`2"
+ShapeEditor o-> "LocalToWorldMatrix<Matrix4x4>" "Func`1"
+ShapeEditor o-> "DistanceToRectangle<DistanceToControl>" "Func`1"
+ShapeEditor o-> "DistanceToDiamond<DistanceToControl>" "Func`1"
+ShapeEditor o-> "DistanceToCircle<DistanceToControl>" "Func`1"
+ShapeEditor o-> "Repaint" Action
+ShapeEditor o-> "RecordUndo" Action
+ShapeEditor o-> "Snap<Vector3,Vector3>" "Func`2"
+ShapeEditor o-> "Frame<Bounds>" "Action`1"
+ShapeEditor o-> "OnPointClick<int>" "Action`1"
+ShapeEditor o-> "OpenEnded<bool>" "Func`1"
+ShapeEditor o-> "GetHandleSize<float>" "Func`1"
+ShapeEditor --> "lineTexture" ITexture2D
+ShapeEditor --> "selectedPoints<int>" "HashSet`1"
+ShapeEditor +-- SelectionType
+ShapeEditor +-- Tool
+ShapeEditor +-- TangentMode
+ShapeEditor +-- ColorEnum
+ShapeEditor +-- DrawBatchDataKey
+DrawBatchDataKey --> "color" Color
+@enduml

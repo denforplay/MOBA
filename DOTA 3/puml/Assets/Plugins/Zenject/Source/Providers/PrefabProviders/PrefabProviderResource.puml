@@ -1,0 +1,8 @@
+@startuml
+class PrefabProviderResource {
+    <<readonly>> _resourcePath : string
+    + PrefabProviderResource(resourcePath:string)
+    + GetPrefab(context:InjectContext) : UnityEngine.Object
+}
+IPrefabProvider <|-- PrefabProviderResource
+@enduml

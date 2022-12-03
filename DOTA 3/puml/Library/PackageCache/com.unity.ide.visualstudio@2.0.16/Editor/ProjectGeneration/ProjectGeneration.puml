@@ -1,0 +1,58 @@
+@startuml
+enum ScriptingLanguage {
+    None,
+    CSharp,
+}
+interface IGenerator {
+    SyncIfNeeded(affectedFiles:IEnumerable<string>, reimportedFiles:IEnumerable<string>) : bool
+    Sync() : void
+    HasSolutionBeenGenerated() : bool
+    IsSupportedFile(path:string) : bool
+    SolutionFile() : string
+    ProjectDirectory : string <<get>>
+}
+class ProjectGeneration {
+    + {static} <<readonly>> MSBuildNamespaceUri : string = "http://schemas.microsoft.com/developer/msbuild/2003"
+    + ProjectDirectory : string <<get>>
+    <<const>> k_WindowsNewline : string = "\r\n"
+    <<const>> m_SolutionProjectEntryTemplate : string = @"Project(""{{{0}}}"") = ""{1&#125;"", ""{2&#125;"", ""{{{3}}}""{4&#125;EndProject"
+    <<readonly>> m_SolutionProjectConfigurationTemplate : string
+    <<readonly>> m_ProjectName : string
+    m_ShouldGenerateAll : bool
+    + ProjectGeneration()
+    + ProjectGeneration(tempDirectory:string)
+    + ProjectGeneration(tempDirectory:string, assemblyNameProvider:IAssemblyNameProvider, fileIoProvider:IFileIO, guidGenerator:IGUIDGenerator)
+    + SyncIfNeeded(affectedFiles:IEnumerable<string>, reimportedFiles:IEnumerable<string>) : bool
+    + Sync() : void
+    + HasSolutionBeenGenerated() : bool
+    + IsSupportedFile(path:string) : bool
+    + GenerateAndWriteSolutionAndProjects() : void
+    {static} OnGeneratedCSProjectFiles() : void
+    + ProjectFile(assembly:Assembly) : string
+    + SolutionFile() : string
+    {static} GetProjectExtension() : string
+}
+class SolutionGuidGenerator <<static>> {
+    + {static} GuidForProject(projectName:string) : string
+    + {static} GuidForSolution(projectName:string, language:ScriptingLanguage) : string
+}
+class "HashSet`1"<T> {
+}
+enum ProjectType {
+    GamePlugins= 3,
+    Game= 1,
+    EditorPlugins= 7,
+    Editor= 5,
+}
+IGenerator --> "AssemblyNameProvider" IAssemblyNameProvider
+IGenerator <|-- ProjectGeneration
+ProjectGeneration --> "AssemblyNameProvider" IAssemblyNameProvider
+ProjectGeneration o-> "m_ProjectSupportedExtensions<string>" "HashSet`1"
+ProjectGeneration o-> "m_BuiltinSupportedExtensions<string>" "HashSet`1"
+ProjectGeneration --> "m_AssemblyNameProvider" IAssemblyNameProvider
+ProjectGeneration --> "m_FileIOProvider" IFileIO
+ProjectGeneration --> "m_GUIDGenerator" IGUIDGenerator
+ProjectGeneration --> "m_CurrentInstallation" IVisualStudioInstallation
+ProjectGeneration o-> "solutionSyncMarker" ProfilerMarker
+ProjectGeneration +-- ProjectType
+@enduml

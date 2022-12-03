@@ -1,0 +1,14 @@
+@startuml
+class AddToExistingGameObjectComponentProvider {
+    + AddToExistingGameObjectComponentProvider(gameObject:GameObject, container:DiContainer, componentType:Type, extraArguments:IEnumerable<TypeValuePair>, concreteIdentifier:object, instantiateCallback:Action<InjectContext, object>)
+}
+class AddToExistingGameObjectComponentProviderGetter {
+    + AddToExistingGameObjectComponentProviderGetter(gameObjectGetter:Func<InjectContext, GameObject>, container:DiContainer, componentType:Type, extraArguments:List<TypeValuePair>, concreteIdentifier:object, instantiateCallback:Action<InjectContext, object>)
+}
+class "Func`2"<T1,T2> {
+}
+AddToGameObjectComponentProviderBase <|-- AddToExistingGameObjectComponentProvider
+AddToExistingGameObjectComponentProvider --> "_gameObject" GameObject
+AddToGameObjectComponentProviderBase <|-- AddToExistingGameObjectComponentProviderGetter
+AddToExistingGameObjectComponentProviderGetter --> "_gameObjectGetter<InjectContext,GameObject>" "Func`2"
+@enduml

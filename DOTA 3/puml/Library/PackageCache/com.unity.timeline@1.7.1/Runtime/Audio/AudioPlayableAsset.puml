@@ -1,0 +1,18 @@
+@startuml
+class AudioPlayableAsset {
+    m_Loop : bool
+    m_bufferingTime : float = 0.1f
+    + loop : bool <<get>> <<set>>
+    + <<override>> duration : double <<get>>
+    + <<override>> CreatePlayable(graph:PlayableGraph, go:GameObject) : Playable
+}
+class "IEnumerable`1"<T> {
+}
+PlayableAsset <|-- AudioPlayableAsset
+ITimelineClipAsset <|-- AudioPlayableAsset
+AudioPlayableAsset --> "m_Clip" AudioClip
+AudioPlayableAsset o-> "m_ClipProperties" AudioClipProperties
+AudioPlayableAsset --> "clip" AudioClip
+AudioPlayableAsset --> "outputs<PlayableBinding>" "IEnumerable`1"
+AudioPlayableAsset --> "clipCaps" ClipCaps
+@enduml

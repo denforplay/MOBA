@@ -1,0 +1,49 @@
+@startuml
+enum RenderGraphResourceType {
+    Texture= 0,
+    ComputeBuffer,
+    Count,
+}
+class ResourceHandle <<struct>> {
+    <<const>> kValidityMask : uint = 0xFFFF0000
+    <<const>> kIndexMask : uint = 0xFFFF
+    m_Value : uint
+    {static} s_CurrentValidBit : uint
+    {static} s_SharedResourceValidBit : uint
+    + index : int <<get>>
+    + iType : int <<get>>
+    + IsValid() : bool
+    {static} + NewFrame(executionIndex:int) : void
+}
+class IRenderGraphResource {
+    + imported : bool
+    + shared : bool
+    + sharedExplicitRelease : bool
+    + requestFallBack : bool
+    + writeCount : uint
+    + cachedHash : int
+    + transientPassIndex : int
+    + sharedResourceLastFrameUsed : int
+    + <<virtual>> Reset(pool:IRenderGraphResourcePool) : void
+    + <<virtual>> GetName() : string
+    + <<virtual>> IsCreated() : bool
+    + <<virtual>> IncrementWriteCount() : void
+    + <<virtual>> NeedsFallBack() : bool
+    + <<virtual>> CreatePooledGraphicsResource() : void
+    + <<virtual>> CreateGraphicsResource(name:string) : void
+    + <<virtual>> ReleasePooledGraphicsResource(frameIndex:int) : void
+    + <<virtual>> ReleaseGraphicsResource() : void
+    + <<virtual>> LogCreation(logger:RenderGraphLogger) : void
+    + <<virtual>> LogRelease(logger:RenderGraphLogger) : void
+    + <<virtual>> GetSortIndex() : int
+}
+abstract class "RenderGraphResource`2"<DescType,ResType> {
+    + desc : DescType
+    + graphicsResource : ResType
+    + <<override>> Reset(pool:IRenderGraphResourcePool) : void
+    + <<override>> IsCreated() : bool
+    + <<override>> ReleaseGraphicsResource() : void
+}
+ResourceHandle --> "type" RenderGraphResourceType
+IRenderGraphResource <|-- "RenderGraphResource`2"
+@enduml

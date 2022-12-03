@@ -1,0 +1,10 @@
+@startuml
+class UnityTestAssemblyBuilder {
+    + UnityTestAssemblyBuilder(orderedTestNames:string[])
+    + Build(assemblies:Assembly[], testPlatforms:TestPlatform[], options:IDictionary<string, object>) : ITest
+    + BuildAsync(assemblies:Assembly[], testPlatforms:TestPlatform[], options:IDictionary<string, object>) : IEnumerator<ITest>
+    + {static} GetNUnitTestBuilderSettings(testPlatform:TestPlatform) : Dictionary<string, object>
+}
+DefaultTestAssemblyBuilder <|-- UnityTestAssemblyBuilder
+IAsyncTestAssemblyBuilder <|-- UnityTestAssemblyBuilder
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+class EditModeInputHandler {
+    + EditModeInputHandler()
+    + ProcessMove(action:InputEvent, value:double) : void
+    + ProcessTrim(action:InputEvent, value:double, stretch:bool) : void
+    + SetValueForEdge(items:IEnumerable<ITimelineItem>, edge:AttractedEdge, value:double) : void
+    + OnGUI(state:WindowState, evt:Event) : void
+    {static} ProcessInputAction(handler:IInputHandler, action:InputEvent, value:double, state:WindowState) : void
+}
+interface IInputHandler {
+    OnEnterDrag(items:IEnumerable<ITimelineItem>, state:WindowState) : void
+    OnDrag(value:double, state:WindowState) : void
+    OnExitDrag() : void
+    OnSetValue(items:IEnumerable<ITimelineItem>, value:double, state:WindowState) : void
+}
+class TrimInputHandler {
+    isDragging : bool <<get>> <<set>>
+    + stretch : bool <<get>> <<set>>
+    + OnEnterDrag(items:IEnumerable<ITimelineItem>, state:WindowState) : void
+    + OnDrag(endValue:double, state:WindowState) : void
+    + OnExitDrag() : void
+    + OnSetValue(items:IEnumerable<ITimelineItem>, endValue:double, state:WindowState) : void
+    + OnGUI(state:WindowState) : void
+}
+class MoveInputHandler {
+    + OnEnterDrag(items:IEnumerable<ITimelineItem>, state:WindowState) : void
+    + OnDrag(value:double, state:WindowState) : void
+    + OnExitDrag() : void
+    + OnSetValue(items:IEnumerable<ITimelineItem>, value:double, state:WindowState) : void
+    + OnGUI(evt:Event) : void
+    + {static} SetValueForEdge(items:IEnumerable<ITimelineItem>, edge:AttractedEdge, value:double, state:WindowState) : void
+}
+class "IEnumerable`1"<T> {
+}
+EditModeInputHandler --> "m_MoveHandler" MoveInputHandler
+EditModeInputHandler --> "m_TrimHandler" TrimInputHandler
+EditModeInputHandler +-- IInputHandler
+EditModeInputHandler +-- TrimInputHandler
+IInputHandler <|-- TrimInputHandler
+TrimInputHandler --> "grabbedItems<ITimelineItem>" "IEnumerable`1"
+EditModeInputHandler +-- MoveInputHandler
+IInputHandler <|-- MoveInputHandler
+MoveInputHandler --> "m_MoveItemHandler" MoveItemHandler
+@enduml

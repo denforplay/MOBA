@@ -1,0 +1,57 @@
+@startuml
+interface ICinemachineTargetGroup {
+    IsEmpty : bool <<get>>
+    GetViewSpaceBoundingBox(observer:Matrix4x4) : Bounds
+    GetViewSpaceAngularBounds(observer:Matrix4x4, minAngles:Vector2, maxAngles:Vector2, zRange:Vector2) : void
+}
+class CinemachineTargetGroup {
+    + IsEmpty : bool <<get>>
+    + AddMember(t:Transform, weight:float, radius:float) : void
+    + RemoveMember(t:Transform) : void
+    + FindMember(t:Transform) : int
+    + GetWeightedBoundsForMember(index:int) : BoundingSphere
+    + GetViewSpaceBoundingBox(observer:Matrix4x4) : Bounds
+    + DoUpdate() : void
+    CalculateBoundingSphere(maxWeight:float) : BoundingSphere
+    CalculateAveragePosition(maxWeight:float) : Vector3
+    CalculateAverageOrientation() : Quaternion
+    CalculateBoundingBox(avgPos:Vector3, maxWeight:float) : Bounds
+    FixedUpdate() : void
+    Update() : void
+    LateUpdate() : void
+    + GetViewSpaceAngularBounds(observer:Matrix4x4, minAngles:Vector2, maxAngles:Vector2, zRange:Vector2) : void
+}
+class Target <<struct>> {
+    + weight : float
+    + radius : float
+}
+enum PositionMode {
+    GroupCenter,
+    GroupAverage,
+}
+enum RotationMode {
+    Manual,
+    GroupAverage,
+}
+enum UpdateMethod {
+    Update,
+    FixedUpdate,
+    LateUpdate,
+}
+ICinemachineTargetGroup --> "Transform" Transform
+ICinemachineTargetGroup --> "BoundingBox" Bounds
+ICinemachineTargetGroup --> "Sphere" BoundingSphere
+MonoBehaviour <|-- CinemachineTargetGroup
+ICinemachineTargetGroup <|-- CinemachineTargetGroup
+CinemachineTargetGroup o-> "m_PositionMode" PositionMode
+CinemachineTargetGroup o-> "m_RotationMode" RotationMode
+CinemachineTargetGroup o-> "m_UpdateMethod" UpdateMethod
+CinemachineTargetGroup --> "Transform" Transform
+CinemachineTargetGroup --> "BoundingBox" Bounds
+CinemachineTargetGroup --> "Sphere" BoundingSphere
+CinemachineTargetGroup +-- Target
+Target --> "target" Transform
+CinemachineTargetGroup +-- PositionMode
+CinemachineTargetGroup +-- RotationMode
+CinemachineTargetGroup +-- UpdateMethod
+@enduml

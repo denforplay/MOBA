@@ -1,0 +1,11 @@
+@startuml
+class ReflectionHelpers <<static>> {
+    + {static} CopyFields(src:System.Object, dst:System.Object, bindingAttr:System.Reflection.BindingFlags) : void
+    + {static} GetTypesInAssembly(assembly:Assembly, predicate:Predicate<Type>) : IEnumerable<Type>
+    + {static} GetTypeInAllDependentAssemblies(typeName:string) : Type
+    + {static} GetTypesInAllDependentAssemblies(predicate:Predicate<Type>) : IEnumerable<Type>
+    + {static} AccessInternalField(type:Type, obj:object, memberName:string) : T
+    + {static} GetParentObject(path:string, obj:object) : object
+    + {static} GetFieldPath(expr:Expression<Func<TType, TValue>>) : string
+}
+@enduml

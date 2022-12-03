@@ -1,0 +1,6 @@
+@startuml
+class Threading <<static>> {
+    + {static} IsMainThread : bool <<get>>
+    + {static} EnsureUiThread(action:Action) : void
+}
+@enduml

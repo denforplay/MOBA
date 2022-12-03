@@ -1,0 +1,7 @@
+@startuml
+enum Direction {
+    Default,
+    Left,
+    Right,
+}
+@enduml

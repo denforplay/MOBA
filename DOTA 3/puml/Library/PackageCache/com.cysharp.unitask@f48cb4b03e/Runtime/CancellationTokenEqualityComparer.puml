@@ -1,0 +1,10 @@
+@startuml
+class CancellationTokenEqualityComparer {
+    + Equals(x:CancellationToken, y:CancellationToken) : bool
+    + GetHashCode(obj:CancellationToken) : int
+}
+class "IEqualityComparer`1"<T> {
+}
+"IEqualityComparer`1" "<CancellationToken>" <|-- CancellationTokenEqualityComparer
+CancellationTokenEqualityComparer o-> "Default<CancellationToken>" "IEqualityComparer`1"
+@enduml

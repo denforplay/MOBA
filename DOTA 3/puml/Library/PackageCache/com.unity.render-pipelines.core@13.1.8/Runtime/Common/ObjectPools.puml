@@ -1,0 +1,56 @@
+@startuml
+class "ObjectPool`1"<T> {
+    <<readonly>> m_CollectionCheck : bool = true
+    + countAll : int <<get>>
+    + countActive : int <<get>>
+    + countInactive : int <<get>>
+    + ObjectPool(actionOnGet:UnityAction<T>, actionOnRelease:UnityAction<T>, collectionCheck:bool)
+    + Get() : T
+    + Get(v:T) : PooledObject
+    + Release(element:T) : void
+}
+class "GenericPool`1"<T> <<static>> {
+    + {static} Get() : T
+    + {static} Get(value:T) : ObjectPool<T>.PooledObject
+    + {static} Release(toRelease:T) : void
+}
+class "UnsafeGenericPool`1"<T> <<static>> {
+    + {static} Get() : T
+    + {static} Get(value:T) : ObjectPool<T>.PooledObject
+    + {static} Release(toRelease:T) : void
+}
+class "ListPool`1"<T> <<static>> {
+    + {static} Get() : List<T>
+    + {static} Get(value:List<T>) : ObjectPool<List<T>>.PooledObject
+    + {static} Release(toRelease:List<T>) : void
+}
+class "HashSetPool`1"<T> <<static>> {
+    + {static} Get() : HashSet<T>
+    + {static} Get(value:HashSet<T>) : ObjectPool<HashSet<T>>.PooledObject
+    + {static} Release(toRelease:HashSet<T>) : void
+}
+class "DictionaryPool`2"<TKey,TValue> <<static>> {
+    + {static} Get() : Dictionary<TKey, TValue>
+    + {static} Get(value:Dictionary<TKey, TValue>) : ObjectPool<Dictionary<TKey, TValue>>.PooledObject
+    + {static} Release(toRelease:Dictionary<TKey, TValue>) : void
+}
+class "Stack`1"<T> {
+}
+class "UnityAction`1"<T> {
+}
+class PooledObject <<struct>> {
+    Dispose() : void
+}
+"ObjectPool`1" o-> "m_Stack<T>" "Stack`1"
+"ObjectPool`1" --> "m_ActionOnGet<T>" "UnityAction`1"
+"ObjectPool`1" --> "m_ActionOnRelease<T>" "UnityAction`1"
+"GenericPool`1" o-> "s_Pool<T>" "ObjectPool`1"
+"UnsafeGenericPool`1" o-> "s_Pool<T>" "ObjectPool`1"
+"ListPool`1" o-> "s_Pool<List<T>>" "ObjectPool`1"
+"HashSetPool`1" o-> "s_Pool<HashSet<T>>" "ObjectPool`1"
+"DictionaryPool`2" o-> "s_Pool<Dictionary<TKey, TValue>>" "ObjectPool`1"
+"ObjectPool`1" +-- PooledObject
+IDisposable <|-- PooledObject
+PooledObject --> "m_ToReturn" T
+PooledObject --> "m_Pool<T>" "ObjectPool`1"
+@enduml

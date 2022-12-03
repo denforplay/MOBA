@@ -1,0 +1,50 @@
+@startuml
+class MaterialGraphEditWindow {
+    <<const>> k_PrevSubGraphPathKey : string = "SHADER_GRAPH_CONVERT_TO_SUB_GRAPH_PATH"
+    <<const>> k_PrevSubGraphPathDefaultValue : string = "?"
+    m_Selected : string
+    m_LastSerializedFileContents : string
+    m_FrameAllAfterLayout : bool
+    m_HasError : bool
+    m_ProTheme : bool
+    m_customInterpWarn : int
+    m_customInterpErr : int
+    m_AssetMaybeChangedOnDisk : bool
+    m_AssetMaybeDeleted : bool
+    + selectedGuid : string <<get>>
+    + assetName : string <<get>>
+    AssetFileExists() : bool
+    DisplayDeletedFromDiskDialog(reopen:bool) : bool
+    Update() : void
+    + ReloadSubGraphsOnNextUpdate(changedFileGUIDs:List<string>) : void
+    UpdateDropdownEntries() : void
+    OnEnable() : void
+    OnDisable() : void
+    + CheckForChanges() : void
+    + AssetWasDeleted() : void
+    + UpdateTitle() : void
+    OnDestroy() : void
+    + PingAsset() : void
+    + IsGraphAssetCheckedOut() : bool
+    + CheckoutAsset() : void
+    + SaveAsset() : bool
+    OnSaveGraph(path:string) : void
+    + SaveAs() : void
+    SaveAsImplementation(openWhenSaved:bool) : string
+    + ToSubGraph() : void
+    + Initialize(other:MaterialGraphEditWindow) : void
+    + Initialize(assetGuid:string) : void
+    + <<override>> SaveChanges() : void
+    OnGeometryChanged(evt:GeometryChangedEvent) : void
+}
+class "HashSet`1"<T> {
+}
+EditorWindow <|-- MaterialGraphEditWindow
+MaterialGraphEditWindow --> "m_GraphObject" GraphObject
+MaterialGraphEditWindow o-> "m_ChangedFileDependencyGUIDs<string>" "HashSet`1"
+MaterialGraphEditWindow --> "m_ColorSpace" ColorSpace
+MaterialGraphEditWindow --> "m_RenderPipelineAsset" RenderPipelineAsset
+MaterialGraphEditWindow --> "m_MessageManager" MessageManager
+MaterialGraphEditWindow --> "messageManager" MessageManager
+MaterialGraphEditWindow --> "m_GraphEditorView" GraphEditorView
+@enduml

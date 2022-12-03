@@ -1,0 +1,7 @@
+@startuml
+class EditorPrefBool <<struct>> {
+    <<readonly>> m_Key : string
+    + value : bool <<get>> <<set>>
+    + EditorPrefBool(key:string, defaultValue:bool)
+}
+@enduml

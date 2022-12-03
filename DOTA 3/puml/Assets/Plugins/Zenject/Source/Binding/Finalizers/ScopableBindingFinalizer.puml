@@ -1,0 +1,11 @@
+@startuml
+class ScopableBindingFinalizer {
+    + ScopableBindingFinalizer(bindInfo:BindInfo, providerFactory:Func<DiContainer, Type, IProvider>)
+    FinalizeBindingConcrete(container:DiContainer, concreteTypes:List<Type>) : void
+    FinalizeBindingSelf(container:DiContainer) : void
+}
+class "Func`3"<T1,T2,T3> {
+}
+ProviderBindingFinalizer <|-- ScopableBindingFinalizer
+ScopableBindingFinalizer --> "_providerFactory<DiContainer,Type,IProvider>" "Func`3"
+@enduml

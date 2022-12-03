@@ -1,0 +1,7 @@
+@startuml
+class ConfigurationCollectionHelper <<static>> {
+    + {static} FillWith(self:IDictionary<string, ConfigurationEntry>, config:SerializableProjectConfiguration) : void
+    + {static} FillWith(self:IDictionary<string, ConfigurationEntry>, options:InitializationOptions) : void
+    {static} SetOrCreateEntry(self:IDictionary<string, ConfigurationEntry>, key:string, entry:ConfigurationEntry) : void
+}
+@enduml

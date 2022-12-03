@@ -1,0 +1,14 @@
+@startuml
+class CopyNonLazyBinder {
+    + CopyNonLazyBinder(bindInfo:BindInfo)
+    + CopyIntoAllSubContainers() : NonLazyBinder
+    + CopyIntoDirectSubContainers() : NonLazyBinder
+    + MoveIntoAllSubContainers() : NonLazyBinder
+    + MoveIntoDirectSubContainers() : NonLazyBinder
+    SetInheritanceMethod(method:BindingInheritanceMethods) : void
+}
+class "List`1"<T> {
+}
+NonLazyBinder <|-- CopyNonLazyBinder
+CopyNonLazyBinder --> "_secondaryBindInfos<BindInfo>" "List`1"
+@enduml

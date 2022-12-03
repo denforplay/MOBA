@@ -1,0 +1,30 @@
+@startuml
+class UnityVectorExtensions <<static>> {
+    + <<const>> Epsilon : float = 0.0001f
+    + {static} IsNaN(v:Vector2) : bool
+    + {static} IsNaN(v:Vector3) : bool
+    + {static} ClosestPointOnSegment(p:Vector3, s0:Vector3, s1:Vector3) : float
+    + {static} ClosestPointOnSegment(p:Vector2, s0:Vector2, s1:Vector2) : float
+    + {static} ProjectOntoPlane(vector:Vector3, planeNormal:Vector3) : Vector3
+    + {static} SquareNormalize(v:Vector2) : Vector2
+    + {static} FindIntersection(p1:Vector2, p2:Vector2, q1:Vector2, q2:Vector2, intersection:Vector2) : int
+    + {static} Abs(v:Vector2) : Vector2
+    + {static} Abs(v:Vector3) : Vector3
+    + {static} IsUniform(v:Vector2) : bool
+    + {static} IsUniform(v:Vector3) : bool
+    + {static} AlmostZero(v:Vector3) : bool
+    + {static} Angle(v1:Vector3, v2:Vector3) : float
+    + {static} SignedAngle(v1:Vector3, v2:Vector3, up:Vector3) : float
+    + {static} SafeFromToRotation(v1:Vector3, v2:Vector3, up:Vector3) : Quaternion
+    + {static} SlerpWithReferenceUp(vA:Vector3, vB:Vector3, t:float, up:Vector3) : Vector3
+}
+class UnityQuaternionExtensions <<static>> {
+    + {static} SlerpWithReferenceUp(qA:Quaternion, qB:Quaternion, t:float, up:Vector3) : Quaternion
+    + {static} Normalized(q:Quaternion) : Quaternion
+    + {static} GetCameraRotationToTarget(orient:Quaternion, lookAtDir:Vector3, worldUp:Vector3) : Vector2
+    + {static} ApplyCameraRotation(orient:Quaternion, rot:Vector2, worldUp:Vector3) : Quaternion
+}
+class UnityRectExtensions <<static>> {
+    + {static} Inflated(r:Rect, delta:Vector2) : Rect
+}
+@enduml

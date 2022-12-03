@@ -1,0 +1,124 @@
+@startuml
+class Sphere <<struct>> {
+    + Sphere(x:float, y:float, z:float, r:float)
+    + Intersects(other:Sphere) : bool
+}
+class SphereCulling <<static>> {
+    + {static} BenchCount : int
+}
+interface "IJob`1"<T> {
+    Result : T <<get>> <<set>>
+}
+class SphereCullingAOSJob <<struct>> {
+    + Result : bool <<get>> <<set>>
+    + Execute() : void
+    + Dispose() : void
+}
+class SphereCullingFloat4AOSJob <<struct>> {
+    + Result : bool <<get>> <<set>>
+    + {static} Intersects(value:float4, other:float4) : bool
+    + Execute() : void
+    + Dispose() : void
+}
+class SphereCullingSOAJob <<struct>> {
+    + Result : bool <<get>> <<set>>
+    + Execute() : void
+    + Dispose() : void
+}
+class SphereCullingChunkSOAJob <<struct>> {
+    + Result : bool <<get>> <<set>>
+    + Execute() : void
+    + Dispose() : void
+}
+class SphereCullingChunkFixedSOAJob <<struct>> {
+    + Result : bool <<get>> <<set>>
+    + <<unsafe>> Execute() : void
+    + Dispose() : void
+}
+class SphereCullingChunkSOAManualJob <<struct>> {
+    + Result : bool <<get>> <<set>>
+    + Execute() : void
+    + Dispose() : void
+}
+class "NativeArray`1"<T> {
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Chunk <<struct>> {
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Chunk <<struct>> {
+    + <<fixed>> X : float
+    + <<fixed>> Y : float
+    + <<fixed>> Z : float
+    + <<fixed>> R : float
+}
+class Provider <<struct>> {
+    + <<unsafe>> Value : object <<get>>
+}
+class Chunk <<struct>> {
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+IJob <|-- "IJob`1"
+"IJob`1" "<bool>" <|-- SphereCullingAOSJob
+IDisposable <|-- SphereCullingAOSJob
+SphereCullingAOSJob --> "Against" Sphere
+SphereCullingAOSJob --> "Spheres<Sphere>" "NativeArray`1"
+"IJob`1" "<bool>" <|-- SphereCullingFloat4AOSJob
+IDisposable <|-- SphereCullingFloat4AOSJob
+SphereCullingFloat4AOSJob --> "Against" float4
+SphereCullingFloat4AOSJob --> "Spheres<float4>" "NativeArray`1"
+"IJob`1" "<bool>" <|-- SphereCullingSOAJob
+IDisposable <|-- SphereCullingSOAJob
+SphereCullingSOAJob --> "X<float>" "NativeArray`1"
+SphereCullingSOAJob --> "Y<float>" "NativeArray`1"
+SphereCullingSOAJob --> "Z<float>" "NativeArray`1"
+SphereCullingSOAJob --> "R<float>" "NativeArray`1"
+SphereCullingSOAJob --> "Against" float4
+"IJob`1" "<bool>" <|-- SphereCullingChunkSOAJob
+IDisposable <|-- SphereCullingChunkSOAJob
+SphereCullingChunkSOAJob --> "Chunks<Chunk>" "NativeArray`1"
+SphereCullingChunkSOAJob --> "Against" float4
+"IJob`1" "<bool>" <|-- SphereCullingChunkFixedSOAJob
+IDisposable <|-- SphereCullingChunkFixedSOAJob
+SphereCullingChunkFixedSOAJob --> "Chunks<Chunk>" "NativeArray`1"
+SphereCullingChunkFixedSOAJob --> "Against" float4
+"IJob`1" "<bool>" <|-- SphereCullingChunkSOAManualJob
+IDisposable <|-- SphereCullingChunkSOAManualJob
+SphereCullingChunkSOAManualJob --> "Chunks<Chunk>" "NativeArray`1"
+SphereCullingChunkSOAManualJob --> "Against" float4
+SphereCullingAOSJob +-- Provider
+IArgumentProvider <|-- Provider
+SphereCullingFloat4AOSJob +-- Provider
+IArgumentProvider <|-- Provider
+SphereCullingSOAJob +-- Provider
+IArgumentProvider <|-- Provider
+SphereCullingChunkSOAJob +-- Chunk
+Chunk --> "X" float4
+Chunk --> "Y" float4
+Chunk --> "Z" float4
+Chunk --> "R" float4
+SphereCullingChunkSOAJob +-- Provider
+IArgumentProvider <|-- Provider
+SphereCullingChunkFixedSOAJob +-- Chunk
+SphereCullingChunkFixedSOAJob +-- Provider
+IArgumentProvider <|-- Provider
+SphereCullingChunkSOAManualJob +-- Chunk
+Chunk --> "X" float4
+Chunk --> "Y" float4
+Chunk --> "Z" float4
+Chunk --> "R" float4
+SphereCullingChunkSOAManualJob +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class BoneSelection {
+}
+class "SerializableSelection`1"<T> {
+}
+"SerializableSelection`1" "<BoneCache>" <|-- BoneSelection
+IBoneSelection <|-- BoneSelection
+BoneSelection --> "root" BoneCache
+@enduml

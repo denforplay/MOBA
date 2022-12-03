@@ -1,0 +1,9 @@
+@startuml
+class SearcherHighlighter <<static>> {
+    <<const>> k_StartHighlightSeparator : char = '{'
+    <<const>> k_EndHighlightSeparator : char = '&#125;'
+    <<const>> k_HighlightedStyleClassName : string = "Highlighted"
+    + {static} HighlightTextBasedOnQuery(container:VisualElement, text:string, query:string) : void
+    {static} BuildHighlightLabels(container:VisualElement, formattedHighlightText:string) : void
+}
+@enduml

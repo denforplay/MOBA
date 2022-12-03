@@ -1,0 +1,6 @@
+@startuml
+class BlendModeMapping <<static>> {
+    + {static} ToPsdBlendMode(pdnBlendMode:LayerBlendMode) : string
+    + {static} FromPsdBlendMode(blendModeKey:string) : LayerBlendMode
+}
+@enduml

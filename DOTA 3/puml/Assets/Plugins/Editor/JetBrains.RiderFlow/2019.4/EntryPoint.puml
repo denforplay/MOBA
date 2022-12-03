@@ -1,0 +1,6 @@
+@startuml
+class DelayedEntryPoint {
+    {static} DelayedEntryPoint()
+    {static} GlobalObjectIdsToInstanceIds(ids:GlobalObjectId[], instanceIds:int[]) : void
+}
+@enduml

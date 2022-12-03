@@ -1,0 +1,18 @@
+@startuml
+class PathsToRemoveDropDownMenu {
+    + PathsToRemoveDropDownMenu(parent:CodeCoverageWindow, type:PathFilterType)
+    + Show(position:Rect, reorderableList:ReorderableList, list:List<string>) : void
+}
+class "List`1"<T> {
+}
+class Styles {
+}
+PathsToRemoveDropDownMenu --> "m_Menu" GenericMenu
+PathsToRemoveDropDownMenu --> "m_ReorderableList" ReorderableList
+PathsToRemoveDropDownMenu --> "m_List<string>" "List`1"
+PathsToRemoveDropDownMenu --> "m_Parent" CodeCoverageWindow
+PathsToRemoveDropDownMenu --> "m_PathFilterType" PathFilterType
+PathsToRemoveDropDownMenu +-- Styles
+Styles o-> "RemoveSelectedLabel" GUIContent
+Styles o-> "RemoveAllLabel" GUIContent
+@enduml

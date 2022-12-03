@@ -1,0 +1,7 @@
+@startuml
+class MemoryConfigurationLoader {
+    GetConfigAsync() : Task<SerializableProjectConfiguration>
+}
+IConfigurationLoader <|-- MemoryConfigurationLoader
+MemoryConfigurationLoader --> "Config" SerializableProjectConfiguration
+@enduml

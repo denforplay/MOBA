@@ -1,0 +1,61 @@
+@startuml
+class AnimationTrackInspector {
+    Evaluate() : void
+    RebuildGraph() : void
+    + <<override>> OnInspectorGUI() : void
+    AnimatesRootTransform() : bool
+    ShouldDrawOffsets() : bool
+    DrawRootTransformOffset() : void
+    SetupOffsetTooltip() : bool
+    DrawRootTransformDropDown() : void
+    DrawMatchFieldsGUI() : void
+    DrawRootMotionOffsetFields() : void
+    DrawRootMotionToolBar() : void
+    UpdateOffsets() : void
+    DrawAvatarProperties() : void
+    + {static} ShowMotionOffsetEditModeToolbar(motionOffset:TimelineAnimationUtilities.OffsetEditMode) : void
+    + <<override>> OnEnable() : void
+    + OnDestroy() : void
+    OnSceneGUI(sceneView:SceneView) : void
+    DoOffsetManipulator() : void
+    + DrawRecordedProperties() : void
+    + {static} MatchTargetsFieldGUI(property:SerializedProperty) : void
+    {static} GetOffsetMode(track:AnimationTrack) : TrackOffset
+    GetOffsetMode(hasMultiple:bool) : TrackOffset
+}
+class Styles <<static>> {
+    + {static} <<readonly>> TransformOffsetInfo : string
+    + {static} <<readonly>> SceneOffsetInfo : string
+    + {static} <<readonly>> AutoOffsetInfo : string
+    + {static} <<readonly>> AutoOffsetWarning : string
+    + {static} <<readonly>> InheritedFromParent : string
+    + {static} <<readonly>> InheritedToolTip : string
+    + {static} <<readonly>> AvatarMaskWarning : string
+    {static} Styles()
+}
+TrackAssetInspector <|-- AnimationTrackInspector
+AnimationTrackInspector --> "m_MatchFieldsProperty" SerializedProperty
+AnimationTrackInspector --> "m_TrackPositionProperty" SerializedProperty
+AnimationTrackInspector --> "m_TrackRotationProperty" SerializedProperty
+AnimationTrackInspector --> "m_AvatarMaskProperty" SerializedProperty
+AnimationTrackInspector --> "m_ApplyAvatarMaskProperty" SerializedProperty
+AnimationTrackInspector --> "m_TrackOffsetProperty" SerializedProperty
+AnimationTrackInspector --> "m_RecordedOffsetPositionProperty" SerializedProperty
+AnimationTrackInspector --> "m_RecordedOffsetEulerProperty" SerializedProperty
+AnimationTrackInspector --> "m_RecordedApplyFootIK" SerializedProperty
+AnimationTrackInspector --> "m_lastPosition" Vector3
+AnimationTrackInspector --> "m_lastRotation" Vector3
+AnimationTrackInspector o-> "m_TempContent" GUIContent
+AnimationTrackInspector +-- Styles
+Styles o-> "MatchTargetFieldsTitle" GUIContent
+Styles o-> "PositionIcon" GUIContent
+Styles o-> "RotationIcon" GUIContent
+Styles o-> "XTitle" GUIContent
+Styles o-> "YTitle" GUIContent
+Styles o-> "ZTitle" GUIContent
+Styles o-> "PositionTitle" GUIContent
+Styles o-> "RotationTitle" GUIContent
+Styles o-> "OffsetModeTitle" GUIContent
+Styles o-> "RecordingOffsets" GUIContent
+Styles o-> "RecordingIkApplied" GUIContent
+@enduml

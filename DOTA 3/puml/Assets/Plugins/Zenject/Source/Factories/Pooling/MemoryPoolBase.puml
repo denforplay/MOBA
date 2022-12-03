@@ -1,0 +1,46 @@
+@startuml
+class PoolExceededFixedSizeException {
+    + PoolExceededFixedSizeException(errorMessage:string)
+}
+class MemoryPoolSettings {
+    + InitialSize : int
+    + MaxSize : int
+    + MemoryPoolSettings()
+    + MemoryPoolSettings(initialSize:int, maxSize:int, expandMethod:PoolExpandMethods)
+}
+class "MemoryPoolBase`1"<TContract> {
+    _activeCount : int
+    Construct(factory:IFactory<TContract>, container:DiContainer, settings:MemoryPoolSettings) : void
+    + NumTotal : int <<get>>
+    + NumInactive : int <<get>>
+    + NumActive : int <<get>>
+    + Dispose() : void
+    Despawn(item:object) : void
+    + Despawn(item:TContract) : void
+    AllocNew() : TContract
+    Validate() : void
+    + Clear() : void
+    + ShrinkBy(numToRemove:int) : void
+    + ExpandBy(numToAdd:int) : void
+    + Resize(desiredPoolSize:int) : void
+    ExpandPool() : void
+}
+class "Stack`1"<T> {
+}
+class "IFactory`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+Exception <|-- PoolExceededFixedSizeException
+MemoryPoolSettings --> "ExpandMethod" PoolExpandMethods
+MemoryPoolSettings o-> "Default" MemoryPoolSettings
+IValidatable <|-- "MemoryPoolBase`1"
+IMemoryPool <|-- "MemoryPoolBase`1"
+IDisposable <|-- "MemoryPoolBase`1"
+"MemoryPoolBase`1" --> "_inactiveItems<TContract>" "Stack`1"
+"MemoryPoolBase`1" --> "_factory<TContract>" "IFactory`1"
+"MemoryPoolBase`1" --> "_settings" MemoryPoolSettings
+"MemoryPoolBase`1" --> "_container" DiContainer
+"MemoryPoolBase`1" --> "InactiveItems<TContract>" "IEnumerable`1"
+"MemoryPoolBase`1" --> "ItemType" Type
+@enduml

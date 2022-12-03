@@ -1,0 +1,45 @@
+@startuml
+class ControlPointSettings {
+    <<const>> kControlPointRKey : string
+    <<const>> kControlPointGKey : string
+    <<const>> kControlPointBKey : string
+    <<const>> kControlPointAKey : string
+    <<const>> kControlPointSRKey : string
+    <<const>> kControlPointSGKey : string
+    <<const>> kControlPointSBKey : string
+    <<const>> kControlPointSAKey : string
+    {static} showHandle : bool = true
+    + OnGUI() : void
+}
+class HandleSettings {
+    <<const>> kSplineRKey : string
+    <<const>> kSplineGKey : string
+    <<const>> kSplineBKey : string
+    <<const>> kSplineAKey : string
+    <<const>> kSplineHRKey : string
+    <<const>> kSplineHGKey : string
+    <<const>> kSplineHBKey : string
+    <<const>> kSplineHAKey : string
+    <<const>> kTangentRKey : string
+    <<const>> kTangentGKey : string
+    <<const>> kTangentBKey : string
+    <<const>> kTangentAKey : string
+    {static} showHandle : bool = true
+    + OnGUI() : void
+}
+class UserSettings {
+    + <<const>> kSettingsUniqueKey : string = "UnityEditor.U2D.SpriteShape/"
+    + UserSettings()
+}
+ControlPointSettings o-> "kControlPointKeyContent" GUIContent
+ControlPointSettings o-> "kControlPointSKeyContent" GUIContent
+ControlPointSettings --> "controlPointColor" Color
+ControlPointSettings --> "controlPointSelectedColor" Color
+HandleSettings o-> "kSplineKeyContent" GUIContent
+HandleSettings o-> "kSplineHKeyContent" GUIContent
+HandleSettings o-> "kTangentKeyContent" GUIContent
+HandleSettings --> "splineColor" Color
+HandleSettings --> "splineHoveredColor" Color
+HandleSettings --> "tangentColor" Color
+SettingsProvider <|-- UserSettings
+@enduml

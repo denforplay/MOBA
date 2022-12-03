@@ -1,0 +1,47 @@
+@startuml
+class CinemachineFreeLook {
+    + m_CommonLens : bool = true
+    + m_SplineCurvature : float = 0.2f
+    mUseLegacyRigDefinitions : bool = false
+    + GetRig(i:int) : CinemachineVirtualCamera
+    mIsDestroyed : bool = false
+    + UpdateInputAxisProvider() : void
+    OnTransformChildrenChanged() : void
+    Reset() : void
+    + <<override>> PreviousStateIsValid : bool <<get>> <<set>>
+    + <<override>> IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    <<override>> + InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    GetYAxisClosestValue(cameraPos:Vector3, up:Vector3) : float
+    InvalidateRigCache() : void
+    m_CachedXAxisHeading : float
+    UpdateXAxisHeading(orbital:CinemachineOrbitalTransposer, deltaTime:float, up:Vector3) : float
+    PushSettingsToRigs() : void
+    + GetLocalPositionForCameraFromInput(t:float) : Vector3
+    m_CachedTension : float
+    UpdateCachedSpline() : void
+}
+class Orbit <<struct>> {
+    + m_Height : float
+    + m_Radius : float
+    + Orbit(h:float, r:float)
+}
+CinemachineVirtualCameraBase <|-- CinemachineFreeLook
+CinemachineFreeLook o-> "m_LookAt" Transform
+CinemachineFreeLook o-> "m_Follow" Transform
+CinemachineFreeLook o-> "m_Lens" LensSettings
+CinemachineFreeLook --> "m_Transitions" TransitionParams
+CinemachineFreeLook o-> "m_YAxis" AxisState
+CinemachineFreeLook o-> "m_XAxis" AxisState
+CinemachineFreeLook --> "State" CameraState
+CinemachineFreeLook --> "LookAt" Transform
+CinemachineFreeLook --> "Follow" Transform
+CinemachineFreeLook o-> "m_State" CameraState
+CinemachineFreeLook --> "mBlendA" CinemachineBlend
+CinemachineFreeLook --> "mBlendB" CinemachineBlend
+CinemachineFreeLook --> "CreateRigOverride" CreateRigDelegate
+CinemachineFreeLook --> "DestroyRigOverride" DestroyRigDelegate
+CinemachineFreeLook +-- Orbit
+@enduml

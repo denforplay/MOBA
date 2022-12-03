@@ -1,0 +1,128 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} FromException(ex:Exception) : UniTask
+    + {static} FromException(ex:Exception) : UniTask<T>
+    + {static} FromResult(value:T) : UniTask<T>
+    + {static} FromCanceled(cancellationToken:CancellationToken) : UniTask
+    + {static} FromCanceled(cancellationToken:CancellationToken) : UniTask<T>
+    + {static} Create(factory:Func<UniTask>) : UniTask
+    + {static} Create(factory:Func<UniTask<T>>) : UniTask<T>
+    + {static} Lazy(factory:Func<UniTask>) : AsyncLazy
+    + {static} Lazy(factory:Func<UniTask<T>>) : AsyncLazy<T>
+    + {static} Void(asyncAction:Func<UniTaskVoid>) : void
+    + {static} Void(asyncAction:Func<CancellationToken, UniTaskVoid>, cancellationToken:CancellationToken) : void
+    + {static} Void(asyncAction:Func<T, UniTaskVoid>, state:T) : void
+    + {static} Action(asyncAction:Func<UniTaskVoid>) : Action
+    + {static} Action(asyncAction:Func<CancellationToken, UniTaskVoid>, cancellationToken:CancellationToken) : Action
+    + {static} Defer(factory:Func<UniTask>) : UniTask
+    + {static} Defer(factory:Func<UniTask<T>>) : UniTask<T>
+    + {static} Never(cancellationToken:CancellationToken) : UniTask
+    + {static} Never(cancellationToken:CancellationToken) : UniTask<T>
+}
+class CompletedTasks <<static>> {
+}
+class "CanceledUniTaskCache`1"<T> <<static>> {
+    {static} CanceledUniTaskCache()
+}
+class ExceptionResultSource <<sealed>> {
+    calledGet : bool
+    + ExceptionResultSource(exception:Exception)
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class "ExceptionResultSource`1"<T> <<sealed>> {
+    calledGet : bool
+    + ExceptionResultSource(exception:Exception)
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class CanceledResultSource <<sealed>> {
+    + CanceledResultSource(cancellationToken:CancellationToken)
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class "CanceledResultSource`1"<T> <<sealed>> {
+    + CanceledResultSource(cancellationToken:CancellationToken)
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+}
+class DeferPromise <<sealed>> {
+    + DeferPromise(factory:Func<UniTask>)
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+}
+class "DeferPromise`1"<T> <<sealed>> {
+    + DeferPromise(factory:Func<UniTask<T>>)
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+}
+class "NeverPromise`1"<T> <<sealed>> {
+    + NeverPromise(cancellationToken:CancellationToken)
+    {static} CancellationCallback(state:object) : void
+    + GetResult(token:short) : T
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    GetResult(token:short) : void
+}
+class "UniTask`1"<T> {
+}
+class "IUniTaskSource`1"<T> {
+}
+class "Func`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+UniTask o-> "CanceledUniTask" UniTask
+UniTask o-> "CompletedTask" UniTask
+CompletedTasks o-> "AsyncUnit<AsyncUnit>" "UniTask`1"
+CompletedTasks o-> "True<bool>" "UniTask`1"
+CompletedTasks o-> "False<bool>" "UniTask`1"
+CompletedTasks o-> "Zero<int>" "UniTask`1"
+CompletedTasks o-> "MinusOne<int>" "UniTask`1"
+CompletedTasks o-> "One<int>" "UniTask`1"
+UniTask +-- "CanceledUniTaskCache`1"
+"CanceledUniTaskCache`1" --> "Task<T>" "UniTask`1"
+UniTask +-- ExceptionResultSource
+IUniTaskSource <|-- ExceptionResultSource
+ExceptionResultSource --> "exception" ExceptionDispatchInfo
+UniTask +-- "ExceptionResultSource`1"
+"IUniTaskSource`1" "<T>" <|-- "ExceptionResultSource`1"
+"ExceptionResultSource`1" --> "exception" ExceptionDispatchInfo
+UniTask +-- CanceledResultSource
+IUniTaskSource <|-- CanceledResultSource
+CanceledResultSource --> "cancellationToken" CancellationToken
+UniTask +-- "CanceledResultSource`1"
+"IUniTaskSource`1" "<T>" <|-- "CanceledResultSource`1"
+"CanceledResultSource`1" --> "cancellationToken" CancellationToken
+UniTask +-- DeferPromise
+IUniTaskSource <|-- DeferPromise
+DeferPromise --> "factory<UniTask>" "Func`1"
+DeferPromise --> "task" UniTask
+UniTask +-- "DeferPromise`1"
+"IUniTaskSource`1" "<T>" <|-- "DeferPromise`1"
+"DeferPromise`1" --> "factory<UniTask<T>>" "Func`1"
+"DeferPromise`1" --> "task<T>" "UniTask`1"
+UniTask +-- "NeverPromise`1"
+"IUniTaskSource`1" "<T>" <|-- "NeverPromise`1"
+"NeverPromise`1" o-> "cancellationCallback<object>" "Action`1"
+"NeverPromise`1" --> "cancellationToken" CancellationToken
+"NeverPromise`1" --> "core<T>" "UniTaskCompletionSourceCore`1"
+@enduml

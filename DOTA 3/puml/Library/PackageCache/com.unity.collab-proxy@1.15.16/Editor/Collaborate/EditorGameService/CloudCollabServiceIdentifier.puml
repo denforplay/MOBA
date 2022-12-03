@@ -1,0 +1,6 @@
+@startuml
+class CloudCollabServiceIdentifier <<struct>> {
+    + GetKey() : string
+}
+IEditorGameServiceIdentifier <|-- CloudCollabServiceIdentifier
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+class TimeoutController <<sealed>> {
+    {static} CancelCancellationTokenSourceState(state:object) : void
+    isDisposed : bool
+    + TimeoutController(delayType:DelayType, delayTiming:PlayerLoopTiming)
+    + TimeoutController(linkCancellationTokenSource:CancellationTokenSource, delayType:DelayType, delayTiming:PlayerLoopTiming)
+    + Timeout(millisecondsTimeout:int) : CancellationToken
+    + Timeout(timeout:TimeSpan) : CancellationToken
+    + IsTimeout() : bool
+    + Reset() : void
+    + Dispose() : void
+}
+class "Action`1"<T> {
+}
+IDisposable <|-- TimeoutController
+TimeoutController o-> "CancelCancellationTokenSourceStateDelegate<object>" "Action`1"
+TimeoutController --> "timeoutSource" CancellationTokenSource
+TimeoutController --> "linkedSource" CancellationTokenSource
+TimeoutController --> "timer" PlayerLoopTimer
+TimeoutController --> "delayType" DelayType
+TimeoutController --> "delayTiming" PlayerLoopTiming
+TimeoutController --> "originalLinkCancellationTokenSource" CancellationTokenSource
+@enduml

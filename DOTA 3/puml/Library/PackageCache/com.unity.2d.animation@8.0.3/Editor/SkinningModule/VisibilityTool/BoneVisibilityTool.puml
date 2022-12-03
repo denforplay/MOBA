@@ -1,0 +1,46 @@
+@startuml
+class BoneVisibilityTool {
+    + name : string <<get>>
+    + isAvailable : bool <<get>>
+    + BoneVisibilityTool(s:SkinningCache)
+    + Setup() : void
+    + Dispose() : void
+    + Activate() : void
+    + Deactivate() : void
+    + SetAvailabilityChangeCallback(callback:Action) : void
+}
+class BoneVisibilityToolView {
+    + BoneVisibilityToolView()
+    InternalGetController() : BoneTreeWidgetController
+    + OnSelectionChange(skeleton:SkeletonCache) : void
+    + OnBoneSelectionChange(bones:SkeletonSelection) : void
+    + OnBoneExpandedChange(bones:BoneCache[]) : void
+    + OnBoneNameChanged(bone:BoneCache) : void
+    + Deactivate() : void
+}
+class BoneTreeView {
+    + BoneTreeView(treeViewState:TreeViewState, columnHeader:MultiColumnHeader)
+    + SetupHierarchy() : void
+    + OnBoneSelectionChanged(boneSelection:SkeletonSelection) : void
+    + OnBoneExpandedChanged(bones:BoneCache[]) : void
+    + OnBoneNameChanged(bone:BoneCache) : void
+    CellGUI(cellRect:Rect, item:TreeViewItem, column:int, args:RowGUIArgs) : void
+    DrawDepthCell(cellRect:Rect, item:TreeViewItem) : void
+    DrawColorCell(cellRect:Rect, item:TreeViewItem) : void
+    {static} DrawCell(cellRect:Rect, item:TreeViewItem) : TreeViewItemBase<BoneCache>
+    DrawVisibilityCell(cellRect:Rect, item:TreeViewItem) : void
+    DrawNameCell(cellRect:Rect, item:TreeViewItem, args:RowGUIArgs) : void
+    <<const>> k_GenericDragID : string = "GenericDragColumnDragging"
+}
+class "Func`1"<T> {
+}
+BoneTreeWidgetModel <|-- BoneVisibilityTool
+IVisibilityTool <|-- BoneVisibilityTool
+BoneVisibilityTool --> "view" VisualElement
+VisibilityToolViewBase <|-- BoneVisibilityToolView
+IBoneVisibilityToolView <|-- BoneVisibilityToolView
+BoneVisibilityToolView o-> "GetController<BoneTreeWidgetController>" "Func`1"
+BoneVisibilityToolView o-> "GetModel<IBoneTreeViewModel>" "Func`1"
+VisibilityTreeViewBase <|-- BoneTreeView
+BoneTreeView o-> "GetController<BoneTreeWidgetController>" "Func`1"
+@enduml

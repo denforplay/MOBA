@@ -1,0 +1,44 @@
+@startuml
+class TimelineTreeView {
+    m_FoldoutWidth : float
+    m_MaxWidthOfRows : float
+    {static} <<readonly>> kMinTrackHeight : float = 25.0f
+    {static} <<readonly>> kFoldOutOffset : float = 14.0f
+    + showInsertionMarker : bool <<get>> <<set>>
+    + <<virtual>> topRowMargin : float <<get>>
+    + <<virtual>> bottomRowMargin : float <<get>>
+    + TimelineTreeView(sequencerWindow:TimelineWindow, treeView:TreeViewController)
+    ContextClickOutsideItemsCallback() : void
+    ContextClickItemCallback(id:int) : void
+    SelectionChangedCallback(ids:int[]) : void
+    + OnInitialize() : void
+    + GetRectForFraming(row:int) : Rect
+    + <<virtual>> BeginRowGUI() : void
+    + <<virtual>> EndRowGUI() : void
+    + <<virtual>> OnRowGUI(rowRect:Rect, item:TreeViewItem, row:int, selected:bool, focused:bool) : void
+    DrawFoldout(item:TreeViewItem, foldoutRect:Rect, indent:float) : void
+    + GetRenameRect(rowRect:Rect, row:int, item:TreeViewItem) : Rect
+    + BeginPingItem(item:TreeViewItem, topPixelOfRow:float, availableWidth:float) : void
+    + EndPingItem() : void
+    + GetRowRect(row:int, rowWidth:float) : Rect
+    + GetRowRect(row:int) : Rect
+    {static} GetSpacing(item:TreeViewItem) : float
+    + CalculateRowRects() : void
+    + <<virtual>> BeginRename(item:TreeViewItem, delay:float) : bool
+    + <<virtual>> EndRename() : void
+    + <<virtual>> GetContentIndent(item:TreeViewItem) : float
+    + GetNumRowsOnPageUpDown(fromItem:TreeViewItem, pageUp:bool, heightOfTreeView:float) : int
+    + GetFirstAndLastRowVisible(firstRowVisible:int, lastRowVisible:int) : void
+    + GetTotalSize() : Vector2
+    + <<virtual>> halfDropBetweenHeight : float <<get>>
+}
+class "List`1"<T> {
+}
+ITreeViewGUI <|-- TimelineTreeView
+TimelineTreeView --> "m_DraggingInsertionMarkerRect" Rect
+TimelineTreeView --> "m_TreeView" TreeViewController
+TimelineTreeView o-> "m_RowRects<Rect>" "List`1"
+TimelineTreeView o-> "m_ExpandedRowRects<Rect>" "List`1"
+TimelineTreeView --> "m_State" WindowState
+TimelineTreeView --> "m_Styles" DirectorStyles
+@enduml

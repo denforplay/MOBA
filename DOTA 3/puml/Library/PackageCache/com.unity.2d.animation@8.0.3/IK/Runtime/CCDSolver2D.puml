@@ -1,0 +1,9 @@
+@startuml
+class CCDSolver2D <<sealed>> {
+    + iterations : int <<get>> <<set>>
+    + tolerance : float <<get>> <<set>>
+    + velocity : float <<get>> <<set>>
+    + <<override>> GetChain(index:int) : IKChain2D
+}
+Solver2D <|-- CCDSolver2D
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+interface IPlaceholderFactory {
+}
+abstract class "PlaceholderFactoryBase`1"<TValue> {
+    Construct(provider:IProvider, injectContext:InjectContext) : void
+    + <<virtual>> Validate() : void
+}
+IValidatable <|-- IPlaceholderFactory
+IPlaceholderFactory <|-- "PlaceholderFactoryBase`1"
+"PlaceholderFactoryBase`1" --> "_provider" IProvider
+"PlaceholderFactoryBase`1" --> "_injectContext" InjectContext
+@enduml

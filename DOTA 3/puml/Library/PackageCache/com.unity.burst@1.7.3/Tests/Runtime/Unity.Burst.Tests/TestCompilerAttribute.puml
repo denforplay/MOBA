@@ -1,0 +1,45 @@
+@startuml
+class TestCompilerAttribute {
+    + TestCompilerAttribute(arguments:object[])
+    + <<const>> GoldFolder : string = "gold/x86"
+    + <<const>> GoldFolderArm : string = "gold/arm"
+    + <<const>> GeneratedFolder : string = "generated/x86"
+    + <<const>> GeneratedFolderArm : string = "generated/arm"
+    + CompileOnly : bool <<get>> <<set>>
+    + ExpectCompilerException : bool <<get>> <<set>>
+    + DisableGold : bool <<get>> <<set>>
+    + FastMath : bool <<get>> <<set>>
+    + OverrideResultOnMono : object <<get>> <<set>>
+    + OverrideManagedResult : object <<get>> <<set>>
+    + OverrideOn32BitNative : object <<get>> <<set>>
+    + IgnoreOnPlatform : object <<get>> <<set>>
+    + IsDeterministic : bool? <<get>> <<set>>
+    BuildFrom(method:IMethodInfo, suite:Test) : IEnumerable<TestMethod>
+    Wrap(command:TestCommand) : TestCommand
+}
+abstract class TestCompilerCommandBase {
+    + <<override>> Execute(context:ExecutionContext) : TestResult
+    + {static} ReportBailedTests(writer:TextWriter) : void
+}
+class TestCompilerCommand {
+    + TestCompilerCommand(attribute:TestCompilerAttribute, test:Test, originalMethod:TestMethod)
+    cachedLog : string = null
+    logPresent : bool = false
+}
+enum TryExpectedExceptionResult {
+    ThrewExpectedException,
+    ThrewUnexpectedException,
+    DidNotThrowException,
+}
+TestCaseAttribute <|-- TestCompilerAttribute
+ITestBuilder <|-- TestCompilerAttribute
+IWrapTestMethod <|-- TestCompilerAttribute
+TestCompilerAttribute --> "ExpectedException" Type
+TestCompilerAttribute --> "ExpectedDiagnosticId" DiagnosticId
+TestCompilerAttribute +-- TestCompilerCommandBase
+TestCommand <|-- TestCompilerCommandBase
+TestCompilerCommandBase --> "Attribute" TestCompilerAttribute
+TestCompilerAttribute +-- TestCompilerCommand
+TestCompilerCommandBase <|-- TestCompilerCommand
+TestCompilerCommandBase +-- TryExpectedExceptionResult
+@enduml

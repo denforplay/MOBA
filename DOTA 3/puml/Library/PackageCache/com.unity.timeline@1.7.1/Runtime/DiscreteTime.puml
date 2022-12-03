@@ -1,0 +1,34 @@
+@startuml
+class DiscreteTime <<struct>> {
+    <<const>> k_Tick : double = 1e-12
+    + {static} tickValue : double <<get>>
+    + DiscreteTime(time:DiscreteTime)
+    DiscreteTime(time:Int64)
+    + DiscreteTime(time:double)
+    + DiscreteTime(time:float)
+    + DiscreteTime(time:int)
+    + DiscreteTime(frame:int, fps:double)
+    + OneTickBefore() : DiscreteTime
+    + OneTickAfter() : DiscreteTime
+    + GetTick() : Int64
+    + {static} FromTicks(ticks:Int64) : DiscreteTime
+    + CompareTo(obj:object) : int
+    + Equals(other:DiscreteTime) : bool
+    + <<override>> Equals(obj:object) : bool
+    {static} DoubleToDiscreteTime(time:double) : Int64
+    {static} FloatToDiscreteTime(time:float) : Int64
+    {static} IntToDiscreteTime(time:int) : Int64
+    {static} ToDouble(time:Int64) : double
+    {static} ToFloat(time:Int64) : float
+    + <<override>> ToString() : string
+    + <<override>> GetHashCode() : int
+    + {static} Min(lhs:DiscreteTime, rhs:DiscreteTime) : DiscreteTime
+    + {static} Max(lhs:DiscreteTime, rhs:DiscreteTime) : DiscreteTime
+    + {static} SnapToNearestTick(time:double) : double
+    + {static} SnapToNearestTick(time:float) : float
+    + {static} GetNearestTick(time:double) : Int64
+}
+IComparable <|-- DiscreteTime
+DiscreteTime o-> "kMaxTime" DiscreteTime
+DiscreteTime --> "m_DiscreteTime" Int64
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class DrawHelpPanel <<static>> {
+    {static} DoHelpPanelToolbar(helpPanel:HelpPanel) : void
+    {static} DoHelpPanelContent(helpPanel:HelpPanel) : void
+    {static} DoHelpPanelLinks(helpPanel:HelpPanel, helpParagraph:GUIStyle) : void
+    {static} OnHelpLinkClicked(helpPanel:HelpPanel, helpLink:HelpLink) : void
+    {static} CopyToClipboard(data:string) : void
+    {static} BuildHelpPanelMenu(cleanText:string) : GenericMenu
+}
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+class CinemachineClearShotEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+    GetColliderState() : ColliderState
+    ObjectHasCollider(obj:object) : bool
+    SetupChildList() : void
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+}
+class "EmbeddeAssetEditor`1"<T> {
+}
+enum ColliderState {
+    NoCollider,
+    ColliderOnAllChildren,
+    ColliderOnSomeChildren,
+    ColliderOnParent,
+    ColliderOnChildrenAndParent,
+}
+"CinemachineVirtualCameraBaseEditor`1" "<CinemachineClearShot>" <|-- CinemachineClearShotEditor
+CinemachineClearShotEditor --> "m_BlendsEditor<CinemachineBlenderSettings>" "EmbeddeAssetEditor`1"
+CinemachineClearShotEditor --> "m_ColliderState" ColliderState
+CinemachineClearShotEditor +-- ColliderState
+@enduml

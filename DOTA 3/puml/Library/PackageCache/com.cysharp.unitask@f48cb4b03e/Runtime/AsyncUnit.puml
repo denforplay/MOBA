@@ -1,0 +1,11 @@
+@startuml
+class AsyncUnit <<struct>> {
+    + <<override>> GetHashCode() : int
+    + Equals(other:AsyncUnit) : bool
+    + <<override>> ToString() : string
+}
+class "IEquatable`1"<T> {
+}
+"IEquatable`1" "<AsyncUnit>" <|-- AsyncUnit
+AsyncUnit o-> "Default" AsyncUnit
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+interface IBoneGizmoToggle {
+    enableGizmos : bool <<get>>
+    OnGUI() : void
+}
+class BoneGizmoToggle {
+    + enableGizmos : bool <<get>>
+    + BoneGizmoToggle()
+    + OnGUI() : void
+}
+IBoneGizmoToggle <|-- BoneGizmoToggle
+@enduml

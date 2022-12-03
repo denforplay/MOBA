@@ -1,0 +1,72 @@
+@startuml
+class Tessellator <<struct>> {
+    m_CellCount : int
+    m_NumEdges : int
+    m_NumHulls : int
+    m_NumPoints : int
+    m_StarCount : int
+    {static} FindSplit(hull:UHull, edge:UEvent) : float
+    SetAllocator(allocator:Allocator) : void
+    AddPoint(hulls:NativeArray<UHull>, hullCount:int, points:NativeArray<float2>, p:float2, idx:int) : bool
+    {static} InsertHull(Hulls:NativeArray<UHull>, Pos:int, Count:int, Value:UHull) : void
+    {static} EraseHull(Hulls:NativeArray<UHull>, Pos:int, Count:int) : void
+    SplitHulls(hulls:NativeArray<UHull>, hullCount:int, points:NativeArray<float2>, evt:UEvent) : bool
+    MergeHulls(hulls:NativeArray<UHull>, hullCount:int, points:NativeArray<float2>, evt:UEvent) : bool
+    {static} InsertUniqueEdge(edges:NativeArray<int2>, e:int2, edgeCount:int) : void
+    PrepareDelaunay(edges:NativeArray<int2>, edgeCount:int) : void
+    OppositeOf(a:int, b:int) : int
+    FindConstraint(a:int, b:int) : int
+    AddTriangle(i:int, j:int, k:int) : void
+    RemovePair(r:int, j:int, k:int) : void
+    RemoveTriangle(i:int, j:int, k:int) : void
+    EdgeFlip(i:int, j:int) : void
+    Flip(points:NativeArray<float2>, stack:NativeArray<int>, stackCount:int, a:int, b:int, x:int) : bool
+    GetCells(count:int) : NativeArray<int3>
+    FindNeighbor(cells:NativeArray<int3>, count:int, a:int, b:int, c:int) : int
+    Constrain(count:int) : NativeArray<int3>
+}
+class "NativeArray`1"<T> {
+}
+class TestHullPointL <<struct>> {
+    + Test(h:UHull, p:float2, t:float) : bool
+}
+class TestHullPointU <<struct>> {
+    + Test(h:UHull, p:float2, t:float) : bool
+}
+class TestHullEventLe <<struct>> {
+    + Test(h:UHull, p:UEvent, t:float) : bool
+}
+class TestHullEventE <<struct>> {
+    + Test(h:UHull, p:UEvent, t:float) : bool
+}
+class TestEdgePointE <<struct>> {
+    + Test(h:int2, p:int2, t:float) : bool
+}
+class TestCellE <<struct>> {
+    + Test(h:int3, p:int3, t:float) : bool
+}
+class "ICondition2`2"<T1,T2> {
+}
+Tessellator --> "m_Edges<int2>" "NativeArray`1"
+Tessellator --> "m_Stars<UStar>" "NativeArray`1"
+Tessellator --> "m_Cells<int3>" "NativeArray`1"
+Tessellator --> "m_ILArray<int>" "NativeArray`1"
+Tessellator --> "m_IUArray<int>" "NativeArray`1"
+Tessellator --> "m_SPArray<int>" "NativeArray`1"
+Tessellator --> "m_Flags<int>" "NativeArray`1"
+Tessellator --> "m_Neighbors<int>" "NativeArray`1"
+Tessellator --> "m_Constraints<int>" "NativeArray`1"
+Tessellator --> "m_Allocator" Allocator
+Tessellator +-- TestHullPointL
+"ICondition2`2" "<UHull,float2>" <|-- TestHullPointL
+Tessellator +-- TestHullPointU
+"ICondition2`2" "<UHull,float2>" <|-- TestHullPointU
+Tessellator +-- TestHullEventLe
+"ICondition2`2" "<UHull,UEvent>" <|-- TestHullEventLe
+Tessellator +-- TestHullEventE
+"ICondition2`2" "<UHull,UEvent>" <|-- TestHullEventE
+Tessellator +-- TestEdgePointE
+"ICondition2`2" "<int2,int2>" <|-- TestEdgePointE
+Tessellator +-- TestCellE
+"ICondition2`2" "<int3,int3>" <|-- TestCellE
+@enduml

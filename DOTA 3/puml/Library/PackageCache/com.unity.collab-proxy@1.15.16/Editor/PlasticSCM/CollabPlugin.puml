@@ -1,0 +1,15 @@
+@startuml
+class CollabPlugin <<static>> {
+    {static} SetCollabEnabledInstanceAs(value:bool) : void
+    {static} RunGetVersion(listRequest:PackageManager.Requests.ListRequest, onGetVersionCompleted:Action<string>) : void
+    {static} SetCollabEnabledInProjectSettingsAs(value:bool) : void
+    {static} IsCollabInstanceEnabled() : bool
+    {static} SetCollabEnabledForCurrentProject(collabInstance:object, enable:bool) : void
+    {static} SetCloudServiceEnabled(setting:string, enable:bool) : void
+    {static} GetCollabInstance() : object
+    {static} IsCollabEnabledForCurrentProject(collabInstance:object) : bool
+    {static} <<readonly>> mCollabPackageName : string = "com.unity.collab-proxy"
+}
+CollabPlugin o-> "CollabType" Type
+CollabPlugin o-> "PlayerSettingsType" Type
+@enduml

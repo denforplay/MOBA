@@ -1,0 +1,5 @@
+@startuml
+class IconUtility <<static>> {
+    + <<const>> IconPath : string = "Packages/com.unity.2d.animation/Editor/Assets/ComponentIcons/"
+}
+@enduml

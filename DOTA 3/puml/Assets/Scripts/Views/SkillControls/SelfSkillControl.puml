@@ -1,0 +1,7 @@
+@startuml
+class SelfSkillControl {
+    + <<override>> UpdateSkillView(newPosition:Vector3) : void
+}
+SkillControlBase <|-- SelfSkillControl
+SelfSkillControl --> "SkillType" SkillType
+@enduml

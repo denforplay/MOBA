@@ -1,0 +1,20 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} Run(action:Action, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} Run(action:Action<object>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} Run(action:Func<UniTask>, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} Run(action:Func<object, UniTask>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} Run(func:Func<T>, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} Run(func:Func<UniTask<T>>, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} Run(func:Func<object, T>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} Run(func:Func<object, UniTask<T>>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} <<async>> RunOnThreadPool(action:Action, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> RunOnThreadPool(action:Action<object>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> RunOnThreadPool(action:Func<UniTask>, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> RunOnThreadPool(action:Func<object, UniTask>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask
+    + {static} <<async>> RunOnThreadPool(func:Func<T>, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} <<async>> RunOnThreadPool(func:Func<UniTask<T>>, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} <<async>> RunOnThreadPool(func:Func<object, T>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+    + {static} <<async>> RunOnThreadPool(func:Func<object, UniTask<T>>, state:object, configureAwait:bool, cancellationToken:CancellationToken) : UniTask<T>
+}
+@enduml

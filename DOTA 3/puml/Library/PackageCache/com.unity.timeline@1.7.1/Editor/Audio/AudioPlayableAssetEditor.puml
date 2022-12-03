@@ -1,0 +1,16 @@
+@startuml
+class AudioPlayableAssetEditor {
+    <<readonly>> k_NoClipAssignedError : string
+    + <<override>> GetClipOptions(clip:TimelineClip) : ClipDrawOptions
+    + <<override>> DrawBackground(clip:TimelineClip, region:ClipBackgroundRegion) : void
+    + GetOrCreateWaveformPreview(clip:TimelineClip, audioClip:AudioClip, rect:Rect, startTime:double, endTime:double) : WaveformPreview
+    + {static} DrawWaveformPreview(preview:WaveformPreview, rect:Rect) : void
+    {static} CreateWaveformPreview(audioClip:AudioClip, quantizedRect:Rect) : WaveformPreview
+    {static} GammaCorrect(color:Color) : Color
+}
+class "Dictionary`2"<T1,T2> {
+}
+ClipEditor <|-- AudioPlayableAssetEditor
+AudioPlayableAssetEditor o-> "m_PersistentPreviews<TimelineClip,WaveformPreview>" "Dictionary`2"
+AudioPlayableAssetEditor o-> "m_ColorSpace" ColorSpace
+@enduml

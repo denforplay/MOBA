@@ -1,0 +1,17 @@
+@startuml
+class Cache {
+    + {static} Create() : T
+    + {static} Destroy(cache:Cache) : void
+    + isUndoOperationSet : bool <<get>>
+    + IncrementCurrentGroup() : void
+    + <<virtual>> BeginUndoOperation(operationName:string) : void
+    + EndUndoOperation() : void
+    + IsRemoved(cacheObject:CacheObject) : bool
+    + CreateCache() : T
+    + Destroy(cacheObject:CacheObject) : void
+    + Destroy() : void
+}
+BaseObject <|-- Cache
+ICacheUndo <|-- Cache
+Cache --> "undoOverride" IUndo
+@enduml

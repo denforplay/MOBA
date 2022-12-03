@@ -1,0 +1,21 @@
+@startuml
+class ZenjectBinding {
+    _identifier : string
+    _useSceneContext : bool = false
+    + UseSceneContext : bool <<get>>
+    + Identifier : string <<get>>
+    + Start() : void
+}
+enum BindTypes {
+    Self,
+    AllInterfaces,
+    AllInterfacesAndSelf,
+    BaseType,
+}
+MonoBehaviour <|-- ZenjectBinding
+ZenjectBinding o-> "_context" Context
+ZenjectBinding o-> "_bindType" BindTypes
+ZenjectBinding --> "Context" Context
+ZenjectBinding --> "BindType" BindTypes
+ZenjectBinding +-- BindTypes
+@enduml

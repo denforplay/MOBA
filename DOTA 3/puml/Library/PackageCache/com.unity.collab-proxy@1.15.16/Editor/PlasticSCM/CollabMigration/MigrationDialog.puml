@@ -1,0 +1,30 @@
+@startuml
+class MigrationDialog {
+    DoIconArea() : void
+    DoContentArea() : void
+    DoButtonsArea() : void
+    DoOkButton() : void
+    DoCloseButton() : void
+    DoOpenPlasticButton() : void
+    GetEventCloudOrganizationInfo() : EventCloudOrganizationInfo
+    DoMigrateButton() : void
+    {static} UpdateProgress(wkPath:string, progress:CreateWorkspaceFromCollab.Progress, progressControls:ProgressControlsForMigration, progressData:BuildProgressSpeedAndRemainingTime.ProgressData) : void
+    LaunchMigration(unityAccessToken:string, projectPath:string, organizationName:string, repId:RepId, changesetId:long, branchId:long, afterWorkspaceMigratedAction:Action, progressControls:ProgressControlsForMigration) : void
+    TrackWorkspaceMigrationFinishedFailureEvent(wkInfo:WorkspaceInfo) : void
+    {static} DisplayException(progressControls:ProgressControlsForMigration, ex:Exception) : void
+    {static} Create(unityAccessToken:string, projectPath:string, user:string, organizationName:string, repId:RepId, changesetId:long, branchId:long, afterWorkspaceMigratedAction:Action, progressControls:ProgressControlsForMigration) : MigrationDialog
+    mIsMigrationCompleted : bool
+    mChangesetId : long
+    mBranchId : long
+    mOrganizationName : string
+    mUser : string
+    mProjectPath : string
+    mUnityAccessToken : string
+}
+PlasticDialog <|-- MigrationDialog
+MigrationDialog --> "mProgressControls" ProgressControlsForMigration
+MigrationDialog --> "mAfterWorkspaceMigratedAction" Action
+MigrationDialog --> "mRepId" RepId
+MigrationDialog --> "mWorkspaceInfo" WorkspaceInfo
+MigrationDialog o-> "mLog" ILog
+@enduml

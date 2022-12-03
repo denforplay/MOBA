@@ -1,0 +1,9 @@
+@startuml
+class InspectorUtils {
+    + {static} DrawSplitter(isBoxed:bool) : void
+    + {static} DrawHeader(title:string) : void
+    + {static} DrawHeader(title:GUIContent) : void
+    + {static} DrawHeaderFoldout(title:string, state:bool, isBoxed:bool, hasMoreOptions:Func<bool>, toggleMoreOption:Action) : bool
+    + {static} DrawHeaderFoldout(title:GUIContent, state:bool, isBoxed:bool, hasMoreOptions:Func<bool>, toggleMoreOptions:Action) : bool
+}
+@enduml

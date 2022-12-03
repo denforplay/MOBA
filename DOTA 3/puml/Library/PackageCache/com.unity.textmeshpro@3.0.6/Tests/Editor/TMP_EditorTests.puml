@@ -1,0 +1,10 @@
+@startuml
+class TMP_EditorTests {
+    + Setup() : void
+    + InternalResourceCheck(filePath:string, guid:string) : void
+    + TextParsing_TextInfoTest_WordWrappingDisabled(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+    + TextParsing_TextInfoTest_WordWrappingEnabled(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+    + TextParsing_TextInfoTest_TopJustifiedAlignment(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+    + TextParsing_TextInfoTest_RichText(sourceTextIndex:int, characterCount:int, spaceCount:int, wordCount:int, lineCount:int) : void
+}
+@enduml

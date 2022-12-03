@@ -1,0 +1,6 @@
+@startuml
+class RemoteTestResultReciever {
+    + RunStarted(messageEventArgs:MessageEventArgs) : void
+    + RunFinished(messageEventArgs:MessageEventArgs) : void
+}
+@enduml

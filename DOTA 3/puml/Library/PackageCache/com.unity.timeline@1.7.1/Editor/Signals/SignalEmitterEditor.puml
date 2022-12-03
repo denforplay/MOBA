@@ -1,0 +1,7 @@
+@startuml
+class SignalEmitterEditor {
+    {static} <<readonly>> MissingAssetError : string
+    + <<override>> GetMarkerOptions(marker:IMarker) : MarkerDrawOptions
+}
+MarkerEditor <|-- SignalEmitterEditor
+@enduml

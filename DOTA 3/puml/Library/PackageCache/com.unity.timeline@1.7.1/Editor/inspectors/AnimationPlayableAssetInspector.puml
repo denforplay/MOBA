@@ -1,0 +1,46 @@
+@startuml
+class AnimationPlayableAssetInspector {
+    + <<override>> OnInspectorGUI() : void
+    ShowAnimationClipField() : void
+    TransformOffsetsMatchFieldsGUI() : void
+    TransformOffsetsGUI() : void
+    Reevaluate() : void
+    SetTimeToClip() : void
+    + OnEnable() : void
+    OnDestroy() : void
+    OnSceneGUI(sceneView:SceneView) : void
+    GetTransform() : Transform
+    DoManipulators() : void
+    ShowAnimationClipWarnings() : void
+    ShouldShowOffsets() : bool
+    ShowRecordableClipRename() : void
+}
+class Styles <<static>> {
+}
+Editor <|-- AnimationPlayableAssetInspector
+AnimationPlayableAssetInspector --> "m_TimelineWindow" TimelineWindow
+AnimationPlayableAssetInspector --> "m_Binding" GameObject
+AnimationPlayableAssetInspector --> "m_EditorClip" EditorClip
+AnimationPlayableAssetInspector --> "m_PositionProperty" SerializedProperty
+AnimationPlayableAssetInspector --> "m_RotationProperty" SerializedProperty
+AnimationPlayableAssetInspector --> "m_AnimClipProperty" SerializedProperty
+AnimationPlayableAssetInspector --> "m_UseTrackMatchFieldsProperty" SerializedProperty
+AnimationPlayableAssetInspector --> "m_MatchTargetFieldsProperty" SerializedProperty
+AnimationPlayableAssetInspector --> "m_SerializedAnimClip" SerializedObject
+AnimationPlayableAssetInspector --> "m_SerializedAnimClipName" SerializedProperty
+AnimationPlayableAssetInspector --> "m_RemoveStartOffsetProperty" SerializedProperty
+AnimationPlayableAssetInspector --> "m_ApplyFootIK" SerializedProperty
+AnimationPlayableAssetInspector --> "m_Loop" SerializedProperty
+AnimationPlayableAssetInspector --> "m_LastPosition" Vector3
+AnimationPlayableAssetInspector --> "m_LastRotation" Vector3
+AnimationPlayableAssetInspector +-- Styles
+Styles o-> "RotationText" GUIContent
+Styles o-> "AnimClipText" GUIContent
+Styles o-> "TransformOffsetTitle" GUIContent
+Styles o-> "AnimationClipName" GUIContent
+Styles o-> "MatchTargetFieldsTitle" GUIContent
+Styles o-> "UseDefaults" GUIContent
+Styles o-> "RemoveStartOffset" GUIContent
+Styles o-> "ApplyFootIK" GUIContent
+Styles o-> "Loop" GUIContent
+@enduml

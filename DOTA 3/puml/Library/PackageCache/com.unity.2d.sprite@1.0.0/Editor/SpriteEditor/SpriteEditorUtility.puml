@@ -1,0 +1,13 @@
+@startuml
+class SpriteEditorUtility <<static>> {
+    + {static} GetPivotValue(alignment:SpriteAlignment, customOffset:Vector2) : Vector2
+    + {static} RoundedRect(rect:Rect) : Rect
+    + {static} RoundToInt(r:Rect) : Rect
+    + {static} ClampedRect(rect:Rect, clamp:Rect, maintainSize:bool) : Rect
+    + {static} DrawBox(position:Rect) : void
+    + {static} DrawLine(p1:Vector3, p2:Vector3) : void
+    + {static} BeginLines(color:Color) : void
+    + {static} EndLines() : void
+    + {static} FourIntFields(rectSize:Vector2, label:GUIContent, labelX:GUIContent, labelY:GUIContent, labelZ:GUIContent, labelW:GUIContent, x:int, y:int, z:int, w:int) : void
+}
+@enduml

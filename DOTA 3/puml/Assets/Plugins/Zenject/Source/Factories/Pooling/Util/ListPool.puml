@@ -1,0 +1,11 @@
+@startuml
+class "ListPool`1"<T> {
+    + ListPool()
+    OnDespawned(list:List<T>) : void
+}
+class "StaticMemoryPool`1"<T> {
+}
+"StaticMemoryPool`1" "<List<T>>" <|-- "ListPool`1"
+"ListPool`1" o-> "_instance<T>" "ListPool`1"
+"ListPool`1" --> "Instance<T>" "ListPool`1"
+@enduml

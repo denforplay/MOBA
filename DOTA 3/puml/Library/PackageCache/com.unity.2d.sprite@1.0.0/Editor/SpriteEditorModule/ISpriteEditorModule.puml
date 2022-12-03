@@ -1,0 +1,38 @@
+@startuml
+abstract class SpriteEditorModuleBase {
+    + {abstract} moduleName : string <<get>>
+    + {abstract} CanBeActivated() : bool
+    + {abstract} DoMainGUI() : void
+    + {abstract} DoToolbarGUI(drawArea:Rect) : void
+    + {abstract} OnModuleActivate() : void
+    + {abstract} OnModuleDeactivate() : void
+    + {abstract} DoPostGUI() : void
+    + {abstract} ApplyRevert(apply:bool) : bool
+}
+interface ISpriteEditor {
+    enableMouseMoveEvent : bool <<set>>
+    editingDisabled : bool <<get>>
+    GetDataProvider() : T
+    HandleSpriteSelection() : bool
+    RequestRepaint() : void
+    SetDataModified() : void
+    ApplyOrRevertModification(apply:bool) : void
+    GetMainVisualContainer() : VisualElement
+    SetPreviewTexture(texture:Texture2D, width:int, height:int) : void
+    ResetZoomAndScroll() : void
+    zoomLevel : float <<get>> <<set>>
+    showAlpha : bool <<get>> <<set>>
+    mipLevel : float <<get>> <<set>>
+}
+class RequireSpriteDataProviderAttribute {
+    + RequireSpriteDataProviderAttribute(types:Type[])
+}
+class "List`1"<T> {
+}
+SpriteEditorModuleBase --> "spriteEditor" ISpriteEditor
+ISpriteEditor --> "spriteRects<SpriteRect>" "List`1"
+ISpriteEditor --> "selectedSpriteRect" SpriteRect
+ISpriteEditor --> "windowDimension" Rect
+ISpriteEditor --> "scrollPosition" Vector2
+Attribute <|-- RequireSpriteDataProviderAttribute
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class VolumeGizmoDrawer {
+    {static} InitVolumeGizmoCallbacks() : void
+    {static} OnDrawGizmos(scr:IVolume, gizmoType:GizmoType) : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+VolumeGizmoDrawer o-> "s_AdditionalGizmoCallbacks<Type,IVolumeAdditionalGizmo>" "Dictionary`2"
+@enduml

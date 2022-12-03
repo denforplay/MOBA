@@ -1,0 +1,7 @@
+@startuml
+class GameObjectCreation <<static>> {
+    <<const>> k_PixelPerfectCameraGameObjectMenuPriority : int = 5
+    {static} GameObjectCreatePixelPerfectCamera(menuCommand:MenuCommand) : void
+    {static} + CreateGameObject(name:string, menuCommand:MenuCommand, components:Type[]) : GameObject
+}
+@enduml

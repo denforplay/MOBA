@@ -1,0 +1,103 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Zip(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>) : IUniTaskAsyncEnumerable<(TFirst First, TSecond Second)>
+    + {static} Zip(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, resultSelector:Func<TFirst, TSecond, TResult>) : IUniTaskAsyncEnumerable<TResult>
+    + {static} ZipAwait(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, selector:Func<TFirst, TSecond, UniTask<TResult>>) : IUniTaskAsyncEnumerable<TResult>
+    + {static} ZipAwaitWithCancellation(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, selector:Func<TFirst, TSecond, CancellationToken, UniTask<TResult>>) : IUniTaskAsyncEnumerable<TResult>
+}
+class "Zip`3"<TFirst,TSecond,TResult> <<sealed>> {
+    + Zip(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, resultSelector:Func<TFirst, TSecond, TResult>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "ZipAwait`3"<TFirst,TSecond,TResult> <<sealed>> {
+    + ZipAwait(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, resultSelector:Func<TFirst, TSecond, UniTask<TResult>>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "ZipAwaitWithCancellation`3"<TFirst,TSecond,TResult> <<sealed>> {
+    + ZipAwaitWithCancellation(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, resultSelector:Func<TFirst, TSecond, CancellationToken, UniTask<TResult>>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "Func`3"<T1,T2,T3> {
+}
+class _Zip <<sealed>> {
+    + _Zip(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, resultSelector:Func<TFirst, TSecond, TResult>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    {static} FirstMoveNextCore(state:object) : void
+    {static} SecondMoveNextCore(state:object) : void
+    + <<async>> DisposeAsync() : UniTask
+}
+class _ZipAwait <<sealed>> {
+    + _ZipAwait(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, resultSelector:Func<TFirst, TSecond, UniTask<TResult>>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    {static} FirstMoveNextCore(state:object) : void
+    {static} SecondMoveNextCore(state:object) : void
+    {static} ResultAwaitCore(state:object) : void
+    + <<async>> DisposeAsync() : UniTask
+}
+class "Func`4"<T1,T2,T3,T4> {
+}
+class _ZipAwaitWithCancellation <<sealed>> {
+    + _ZipAwaitWithCancellation(first:IUniTaskAsyncEnumerable<TFirst>, second:IUniTaskAsyncEnumerable<TSecond>, resultSelector:Func<TFirst, TSecond, CancellationToken, UniTask<TResult>>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    {static} FirstMoveNextCore(state:object) : void
+    {static} SecondMoveNextCore(state:object) : void
+    {static} ResultAwaitCore(state:object) : void
+    + <<async>> DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "Zip`3"
+"Zip`3" --> "first<TFirst>" "IUniTaskAsyncEnumerable`1"
+"Zip`3" --> "second<TSecond>" "IUniTaskAsyncEnumerable`1"
+"Zip`3" --> "resultSelector<TFirst,TSecond,TResult>" "Func`3"
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "ZipAwait`3"
+"ZipAwait`3" --> "first<TFirst>" "IUniTaskAsyncEnumerable`1"
+"ZipAwait`3" --> "second<TSecond>" "IUniTaskAsyncEnumerable`1"
+"ZipAwait`3" --> "resultSelector<TFirst,TSecond,UniTask<TResult>>" "Func`3"
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "ZipAwaitWithCancellation`3"
+"ZipAwaitWithCancellation`3" --> "first<TFirst>" "IUniTaskAsyncEnumerable`1"
+"ZipAwaitWithCancellation`3" --> "second<TSecond>" "IUniTaskAsyncEnumerable`1"
+"ZipAwaitWithCancellation`3" --> "resultSelector<TFirst,TSecond,CancellationToken,UniTask<TResult>>" "Func`4"
+"Zip`3" +-- _Zip
+MoveNextSource <|-- _Zip
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- _Zip
+_Zip o-> "firstMoveNextCoreDelegate<object>" "Action`1"
+_Zip o-> "secondMoveNextCoreDelegate<object>" "Action`1"
+_Zip --> "first<TFirst>" "IUniTaskAsyncEnumerable`1"
+_Zip --> "second<TSecond>" "IUniTaskAsyncEnumerable`1"
+_Zip --> "resultSelector<TFirst,TSecond,TResult>" "Func`3"
+_Zip --> "cancellationToken" CancellationToken
+_Zip --> "firstEnumerator<TFirst>" "IUniTaskAsyncEnumerator`1"
+_Zip --> "secondEnumerator<TSecond>" "IUniTaskAsyncEnumerator`1"
+_Zip --> "Current" TResult
+"ZipAwait`3" +-- _ZipAwait
+MoveNextSource <|-- _ZipAwait
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- _ZipAwait
+_ZipAwait o-> "firstMoveNextCoreDelegate<object>" "Action`1"
+_ZipAwait o-> "secondMoveNextCoreDelegate<object>" "Action`1"
+_ZipAwait o-> "resultAwaitCoreDelegate<object>" "Action`1"
+_ZipAwait --> "first<TFirst>" "IUniTaskAsyncEnumerable`1"
+_ZipAwait --> "second<TSecond>" "IUniTaskAsyncEnumerable`1"
+_ZipAwait --> "resultSelector<TFirst,TSecond,UniTask<TResult>>" "Func`3"
+_ZipAwait --> "cancellationToken" CancellationToken
+_ZipAwait --> "firstEnumerator<TFirst>" "IUniTaskAsyncEnumerator`1"
+_ZipAwait --> "secondEnumerator<TSecond>" "IUniTaskAsyncEnumerator`1"
+_ZipAwait --> "Current" TResult
+"ZipAwaitWithCancellation`3" +-- _ZipAwaitWithCancellation
+MoveNextSource <|-- _ZipAwaitWithCancellation
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- _ZipAwaitWithCancellation
+_ZipAwaitWithCancellation o-> "firstMoveNextCoreDelegate<object>" "Action`1"
+_ZipAwaitWithCancellation o-> "secondMoveNextCoreDelegate<object>" "Action`1"
+_ZipAwaitWithCancellation o-> "resultAwaitCoreDelegate<object>" "Action`1"
+_ZipAwaitWithCancellation --> "first<TFirst>" "IUniTaskAsyncEnumerable`1"
+_ZipAwaitWithCancellation --> "second<TSecond>" "IUniTaskAsyncEnumerable`1"
+_ZipAwaitWithCancellation --> "resultSelector<TFirst,TSecond,CancellationToken,UniTask<TResult>>" "Func`4"
+_ZipAwaitWithCancellation --> "cancellationToken" CancellationToken
+_ZipAwaitWithCancellation --> "firstEnumerator<TFirst>" "IUniTaskAsyncEnumerator`1"
+_ZipAwaitWithCancellation --> "secondEnumerator<TSecond>" "IUniTaskAsyncEnumerator`1"
+_ZipAwaitWithCancellation --> "Current" TResult
+@enduml

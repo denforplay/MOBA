@@ -1,0 +1,12 @@
+@startuml
+interface ICharacterController {
+    ObserveSkill(skillId:int, cancellationToken:CancellationTokenSource) : ISkillObserver
+    Move() : void
+    SetSkillUseState(skillId:int, canBeUsed:bool) : void
+    MoveTo(position:Vector3) : void
+    SetState(animationType:AnimationType) : void
+    IsDestroyed : bool <<get>>
+}
+IController <|-- ICharacterController
+ICharacterController --> "NavigationAgent" NavMeshAgent
+@enduml

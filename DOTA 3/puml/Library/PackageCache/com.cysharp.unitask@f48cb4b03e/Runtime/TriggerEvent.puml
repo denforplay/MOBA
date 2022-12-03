@@ -1,0 +1,23 @@
+@startuml
+interface "ITriggerHandler`1"<T> {
+    OnNext(value:T) : void
+    OnError(ex:Exception) : void
+    OnCompleted() : void
+    OnCanceled(cancellationToken:CancellationToken) : void
+}
+class "TriggerEvent`1"<T> <<struct>> {
+    preserveRemoveSelf : bool
+    LogError(ex:Exception) : void
+    + SetResult(value:T) : void
+    + SetCanceled(cancellationToken:CancellationToken) : void
+    + SetCompleted() : void
+    + SetError(exception:Exception) : void
+    + Add(handler:ITriggerHandler<T>) : void
+    + Remove(handler:ITriggerHandler<T>) : void
+}
+"ITriggerHandler`1" --> "Prev<T>" "ITriggerHandler`1"
+"ITriggerHandler`1" --> "Next<T>" "ITriggerHandler`1"
+"TriggerEvent`1" --> "head<T>" "ITriggerHandler`1"
+"TriggerEvent`1" --> "iteratingHead<T>" "ITriggerHandler`1"
+"TriggerEvent`1" --> "iteratingNode<T>" "ITriggerHandler`1"
+@enduml

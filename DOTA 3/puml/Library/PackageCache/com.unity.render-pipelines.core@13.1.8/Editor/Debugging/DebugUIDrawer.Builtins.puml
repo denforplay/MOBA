@@ -1,0 +1,104 @@
+@startuml
+class DebugUIDrawerValue <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerValueTuple <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerProgressBarValue <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerButton <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerBoolField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerHistoryBoolField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerIntField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerUIntField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerFloatField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerEnumField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerHistoryEnumField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerBitField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerFoldout <<sealed>> {
+    <<const>> k_HeaderVerticalMargin : int = 2
+    + <<override>> Begin(widget:DebugUI.Widget, state:DebugState) : void
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+    + <<override>> End(widget:DebugUI.Widget, state:DebugState) : void
+}
+class DebugUIDrawerColorField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerVector2Field <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerVector3Field <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerVector4Field <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerObjectField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerObjectListField <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerMessageBox <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+class DebugUIDrawerContainer <<sealed>> {
+    + <<override>> Begin(widget:DebugUI.Widget, state:DebugState) : void
+    + <<override>> End(widget:DebugUI.Widget, state:DebugState) : void
+}
+class DebugUIDrawerHBox <<sealed>> {
+    + <<override>> Begin(widget:DebugUI.Widget, state:DebugState) : void
+    + <<override>> End(widget:DebugUI.Widget, state:DebugState) : void
+}
+class DebugUIDrawerVBox <<sealed>> {
+    + <<override>> Begin(widget:DebugUI.Widget, state:DebugState) : void
+    + <<override>> End(widget:DebugUI.Widget, state:DebugState) : void
+}
+class DebugUIDrawerTable <<sealed>> {
+    + <<override>> OnGUI(widget:DebugUI.Widget, state:DebugState) : bool
+}
+DebugUIDrawer <|-- DebugUIDrawerValue
+DebugUIDrawer <|-- DebugUIDrawerValueTuple
+DebugUIDrawer <|-- DebugUIDrawerProgressBarValue
+DebugUIDrawer <|-- DebugUIDrawerButton
+DebugUIDrawer <|-- DebugUIDrawerBoolField
+DebugUIDrawer <|-- DebugUIDrawerHistoryBoolField
+DebugUIDrawer <|-- DebugUIDrawerIntField
+DebugUIDrawer <|-- DebugUIDrawerUIntField
+DebugUIDrawer <|-- DebugUIDrawerFloatField
+DebugUIDrawer <|-- DebugUIDrawerEnumField
+DebugUIDrawer <|-- DebugUIDrawerHistoryEnumField
+DebugUIDrawer <|-- DebugUIDrawerBitField
+DebugUIDrawer <|-- DebugUIDrawerFoldout
+DebugUIDrawer <|-- DebugUIDrawerColorField
+DebugUIDrawer <|-- DebugUIDrawerVector2Field
+DebugUIDrawer <|-- DebugUIDrawerVector3Field
+DebugUIDrawer <|-- DebugUIDrawerVector4Field
+DebugUIDrawer <|-- DebugUIDrawerObjectField
+DebugUIDrawer <|-- DebugUIDrawerObjectListField
+DebugUIDrawer <|-- DebugUIDrawerMessageBox
+DebugUIDrawer <|-- DebugUIDrawerContainer
+DebugUIDrawer <|-- DebugUIDrawerHBox
+DebugUIDrawer <|-- DebugUIDrawerVBox
+DebugUIDrawer <|-- DebugUIDrawerTable
+@enduml

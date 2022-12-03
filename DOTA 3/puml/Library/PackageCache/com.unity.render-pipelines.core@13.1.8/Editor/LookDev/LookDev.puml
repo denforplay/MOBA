@@ -1,0 +1,29 @@
+@startuml
+class LookDev <<static>> {
+    <<const>> lastRenderingDataSavePath : string = "Library/LookDevConfig.asset"
+    {static} TryFindCurrentContext() : Context
+    {static} OpenLookDev() : void
+    {static} LookDevAvailable() : bool
+    + {static} open : bool <<get>>
+    + {static} supported : bool <<get>>
+    + {static} ResetConfig() : void
+    {static} LoadConfigInternal(path:string) : Context
+    + {static} Open() : void
+    + {static} Close() : void
+    {static} OnEditorReload() : void
+    {static} ConfigureLookDev(reloadWithTemporaryID:bool) : void
+    {static} WaitingSRPReloadForConfiguringRenderer(maxAttempt:int, reloadWithTemporaryID:bool, attemptNumber:int) : void
+    {static} ConfigureRenderer(reloadWithTemporaryID:bool) : void
+    {static} LinkViewDisplayer() : void
+    {static} LinkEnvironmentDisplayer() : void
+    {static} UpdateEnvironmentLibrary(library:EnvironmentLibrary) : void
+    {static} ReloadStage(reloadWithTemporaryID:bool) : void
+    {static} ApplyContextChange(index:ViewIndex) : void
+}
+LookDev --> "s_ViewDisplayer" IViewDisplayer
+LookDev --> "s_EnvironmentDisplayer" IEnvironmentDisplayer
+LookDev --> "s_Compositor" Compositer
+LookDev --> "s_Stages" StageCache
+LookDev --> "s_CurrentContext" Context
+LookDev --> "defaultContext" Context
+@enduml

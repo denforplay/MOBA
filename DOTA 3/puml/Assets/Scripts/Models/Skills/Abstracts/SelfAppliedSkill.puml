@@ -1,0 +1,10 @@
+@startuml
+abstract class SelfAppliedSkill {
+    + SelfAppliedSkill(character:Character, skillConfiguration:SkillConfiguration)
+    + CanBeUsed : bool <<get>> <<set>>
+    + {abstract} Apply(position:Vector3) : UniTask
+    + Id : int <<get>>
+}
+ISkill <|-- SelfAppliedSkill
+SelfAppliedSkill --> "SkillType" SkillType
+@enduml

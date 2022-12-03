@@ -1,0 +1,7 @@
+@startuml
+class AssetsPath <<static>> {
+    {static} AssetsPath()
+    {static} mProjectFullPath : string
+    {static} mAssetsFolderLocation : string
+}
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+class ZenPools <<static>> {
+    + {static} SpawnHashSet() : HashSet<T>
+    + {static} SpawnDictionary() : Dictionary<TKey, TValue>
+    + {static} SpawnStatement() : BindStatement
+    + {static} DespawnStatement(statement:BindStatement) : void
+    + {static} SpawnBindInfo() : BindInfo
+    + {static} DespawnBindInfo(bindInfo:BindInfo) : void
+    + {static} DespawnDictionary(dictionary:Dictionary<TKey, TValue>) : void
+    + {static} DespawnHashSet(set:HashSet<T>) : void
+    + {static} SpawnLookupId(provider:IProvider, bindingId:BindingId) : LookupId
+    + {static} DespawnLookupId(lookupId:LookupId) : void
+    + {static} SpawnList() : List<T>
+    + {static} DespawnList(list:List<T>) : void
+    + {static} DespawnArray(arr:T[]) : void
+    + {static} SpawnArray(length:int) : T[]
+    + {static} SpawnInjectContext(container:DiContainer, memberType:Type) : InjectContext
+    + {static} DespawnInjectContext(context:InjectContext) : void
+    + {static} SpawnInjectContext(container:DiContainer, injectableInfo:InjectableInfo, currentContext:InjectContext, targetInstance:object, targetType:Type, concreteIdentifier:object) : InjectContext
+}
+class "StaticMemoryPool`1"<T> {
+}
+ZenPools o-> "_contextPool<InjectContext>" "StaticMemoryPool`1"
+ZenPools o-> "_lookupIdPool<LookupId>" "StaticMemoryPool`1"
+ZenPools o-> "_bindInfoPool<BindInfo>" "StaticMemoryPool`1"
+ZenPools o-> "_bindStatementPool<BindStatement>" "StaticMemoryPool`1"
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+class EnumeratorAsyncExtensions <<static>> {
+    + {static} GetAwaiter(enumerator:T) : UniTask.Awaiter
+    + {static} WithCancellation(enumerator:IEnumerator, cancellationToken:CancellationToken) : UniTask
+    + {static} ToUniTask(enumerator:IEnumerator, timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} ToUniTask(enumerator:IEnumerator, coroutineRunner:MonoBehaviour) : UniTask
+    {static} Core(inner:IEnumerator, coroutineRunner:MonoBehaviour, source:AutoResetUniTaskCompletionSource) : IEnumerator
+}
+class EnumeratorPromise <<sealed>> {
+    {static} EnumeratorPromise()
+    initialFrame : int
+    loopRunning : bool
+    calledGetResult : bool
+    EnumeratorPromise()
+    + {static} Create(innerEnumerator:IEnumerator, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+    {static} ConsumeEnumerator(enumerator:IEnumerator) : IEnumerator
+    {static} UnwrapWaitForSeconds(waitForSeconds:WaitForSeconds) : IEnumerator
+    {static} UnwrapWaitAsyncOperation(asyncOperation:AsyncOperation) : IEnumerator
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+EnumeratorAsyncExtensions +-- EnumeratorPromise
+IUniTaskSource <|-- EnumeratorPromise
+IPlayerLoopItem <|-- EnumeratorPromise
+"ITaskPoolNode`1" "<EnumeratorPromise>" <|-- EnumeratorPromise
+EnumeratorPromise --> "pool<EnumeratorPromise>" "TaskPool`1"
+EnumeratorPromise --> "nextNode" EnumeratorPromise
+EnumeratorPromise --> "innerEnumerator" IEnumerator
+EnumeratorPromise --> "cancellationToken" CancellationToken
+EnumeratorPromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+EnumeratorPromise o-> "waitForSeconds_Seconds" FieldInfo
+@enduml

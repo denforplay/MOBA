@@ -1,0 +1,7 @@
+@startuml
+class TimelineRecording <<static>> <<partial>> {
+    {static} ProcessPlayableAssetModification(mod:UndoPropertyModification, state:WindowState, allowAdd:bool) : bool
+    {static} ProcessPlayableAssetRecording(mod:UndoPropertyModification, state:WindowState, curvesOwner:ICurvesOwner, allowAdd:bool) : bool
+    {static} IsPlayableAssetProperty(property:SerializedProperty) : bool
+}
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class FakeJsonObject {
+    m_Type : string
+    m_ObjectId : string
+    + id : string <<get>> <<set>>
+    + type : string <<get>> <<set>>
+    + Reset() : void
+}
+@enduml

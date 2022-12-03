@@ -1,0 +1,35 @@
+@startuml
+class PlayerLoopRunner <<sealed>> {
+    <<const>> InitialSize : int = 16
+    <<readonly>> runningAndQueueLock : object
+    <<readonly>> arrayLock : object
+    tail : int = 0
+    running : bool = false
+    + PlayerLoopRunner(timing:PlayerLoopTiming)
+    + AddAction(item:IPlayerLoopItem) : void
+    + Clear() : int
+    + Run() : void
+    Initialization() : void
+    LastInitialization() : void
+    EarlyUpdate() : void
+    LastEarlyUpdate() : void
+    FixedUpdate() : void
+    LastFixedUpdate() : void
+    PreUpdate() : void
+    LastPreUpdate() : void
+    Update() : void
+    LastUpdate() : void
+    PreLateUpdate() : void
+    LastPreLateUpdate() : void
+    PostLateUpdate() : void
+    LastPostLateUpdate() : void
+    RunCore() : void
+}
+class "Action`1"<T> {
+}
+class "MinimumQueue`1"<T> {
+}
+PlayerLoopRunner --> "timing" PlayerLoopTiming
+PlayerLoopRunner --> "unhandledExceptionCallback<Exception>" "Action`1"
+PlayerLoopRunner o-> "waitQueue<IPlayerLoopItem>" "MinimumQueue`1"
+@enduml

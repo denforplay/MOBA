@@ -1,0 +1,11 @@
+@startuml
+class "Unselector`1"<T> {
+    + Select() : void
+}
+class "ISelector`1"<T> {
+}
+class "ISelection`1"<T> {
+}
+"ISelector`1" "<T>" <|-- "Unselector`1"
+"Unselector`1" --> "selection<T>" "ISelection`1"
+@enduml

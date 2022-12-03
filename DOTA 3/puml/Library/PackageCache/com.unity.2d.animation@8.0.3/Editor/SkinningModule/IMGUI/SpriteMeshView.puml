@@ -1,0 +1,70 @@
+@startuml
+class SpriteMeshView {
+    <<readonly>> m_VertexHashCode : int
+    <<readonly>> m_EdgeHashCode : int
+    <<const>> kDeleteCommandName : string = "Delete"
+    <<const>> kSoftDeleteCommandName : string = "SoftDelete"
+    <<const>> kEdgeWidth : float = 2f
+    <<const>> kVertexRadius : float = 2.5f
+    m_HoveredEdge : int
+    m_HoveredEdgeControlID : int
+    m_MoveEdgeControlID : int
+    m_HoveredVertex : int
+    m_PrevHoveredVertex : int
+    m_HoveredVertexControlID : int
+    m_MoveVertexControlID : int
+    + defaultControlID : int <<get>> <<set>>
+    + hoveredVertex : int <<get>>
+    + hoveredEdge : int <<get>>
+    + closestEdge : int <<get>>
+    + SpriteMeshView(gw:IGUIWrapper)
+    + CancelMode() : void
+    + BeginLayout() : void
+    + EndLayout() : void
+    + LayoutVertex(position:Vector2, index:int) : void
+    + LayoutEdge(startPosition:Vector2, endPosition:Vector2, index:int) : void
+    + DoCreateVertex() : bool
+    + DoSelectVertex(additive:bool) : bool
+    + DoMoveVertex(delta:Vector2) : bool
+    + DoMoveEdge(delta:Vector2) : bool
+    + DoCreateEdge() : bool
+    + DoSplitEdge() : bool
+    + DoSelectEdge(additive:bool) : bool
+    + DoRemove() : bool
+    + DrawVertex(position:Vector2) : void
+    + DrawVertexHovered(position:Vector2) : void
+    + DrawVertexSelected(position:Vector2) : void
+    + BeginDrawEdges() : void
+    + EndDrawEdges() : void
+    + DrawEdge(startPosition:Vector2, endPosition:Vector2) : void
+    + DrawEdgeHovered(startPosition:Vector2, endPosition:Vector2) : void
+    + DrawEdgeSelected(startPosition:Vector2, endPosition:Vector2) : void
+    + IsActionActive(action:MeshEditorAction) : bool
+    + IsActionHot(action:MeshEditorAction) : bool
+    + IsActionTriggered(action:MeshEditorAction) : bool
+    + WorldToScreen(position:Vector2) : Vector2
+    + DoRepaint() : void
+    + CanRepaint() : bool
+    + CanLayout() : bool
+}
+class Styles {
+    + Styles()
+}
+class "ISelection`1"<T> {
+}
+ISpriteMeshView <|-- SpriteMeshView
+SpriteMeshView o-> "kEdgeColor" Color
+SpriteMeshView o-> "kEdgeHoveredColor" Color
+SpriteMeshView o-> "kEdgeSelectedColor" Color
+SpriteMeshView --> "m_TempColor" Color
+SpriteMeshView o-> "m_HotSliderData" SliderData
+SpriteMeshView o-> "m_PreviousActiveAction" MeshEditorAction
+SpriteMeshView --> "mode" SpriteMeshViewMode
+SpriteMeshView --> "selection<int>" "ISelection`1"
+SpriteMeshView --> "frame" Rect
+SpriteMeshView --> "mouseWorldPosition" Vector2
+SpriteMeshView +-- Styles
+Styles --> "pointNormalStyle" GUIStyle
+Styles --> "pointHoveredStyle" GUIStyle
+Styles --> "pointSelectedStyle" GUIStyle
+@enduml

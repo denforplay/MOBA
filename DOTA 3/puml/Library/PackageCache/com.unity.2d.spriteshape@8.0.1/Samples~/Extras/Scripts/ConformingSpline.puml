@@ -1,0 +1,8 @@
+@startuml
+class ConformingSpline {
+    Start() : void
+    Update() : void
+}
+MonoBehaviour <|-- ConformingSpline
+ConformingSpline --> "m_ParentObject" GameObject
+@enduml

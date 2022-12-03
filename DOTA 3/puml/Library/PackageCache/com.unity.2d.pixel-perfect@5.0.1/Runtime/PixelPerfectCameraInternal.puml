@@ -1,0 +1,19 @@
+@startuml
+interface IPixelPerfectCamera {
+    assetsPPU : int <<get>> <<set>>
+    refResolutionX : int <<get>> <<set>>
+    refResolutionY : int <<get>> <<set>>
+    upscaleRT : bool <<get>> <<set>>
+    pixelSnapping : bool <<get>> <<set>>
+    cropFrameX : bool <<get>> <<set>>
+    cropFrameY : bool <<get>> <<set>>
+    stretchFill : bool <<get>> <<set>>
+}
+class PixelPerfectCameraInternal {
+    + OnBeforeSerialize() : void
+    + OnAfterDeserialize() : void
+}
+ISerializationCallbackReceiver <|-- PixelPerfectCameraInternal
+PixelPerfectCameraInternal --> "m_Component" IPixelPerfectCamera
+PixelPerfectCameraInternal --> "m_SerializableComponent" PixelPerfectCamera
+@enduml

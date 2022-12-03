@@ -1,0 +1,8 @@
+@startuml
+class TMP_EditorPanelUI {
+}
+TMP_BaseEditorPanel <|-- TMP_EditorPanelUI
+TMP_EditorPanelUI o-> "k_RaycastTargetLabel" GUIContent
+TMP_EditorPanelUI o-> "k_MaskableLabel" GUIContent
+TMP_EditorPanelUI --> "m_RaycastTargetProp" SerializedProperty
+@enduml

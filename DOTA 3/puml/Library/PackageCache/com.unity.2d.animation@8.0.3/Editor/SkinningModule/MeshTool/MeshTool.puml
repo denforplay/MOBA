@@ -1,0 +1,32 @@
+@startuml
+class MeshTool {
+    + disable : bool <<set>>
+    + <<override>> defaultControlID : int <<get>>
+    OnSelectedSpriteChanged(sprite:SpriteCache) : void
+    SetupGUI() : void
+    + BeginPositionOverride() : void
+    + EndPositionOverride() : void
+    + UpdateWeights() : void
+    + UpdateMesh() : void
+    InvokeMeshChanged() : void
+}
+class "ISelection`1"<T> {
+}
+class "RectSelectionTool`1"<T> {
+}
+class "UnselectTool`1"<T> {
+}
+BaseTool <|-- MeshTool
+MeshTool --> "m_Mesh" MeshCache
+MeshTool --> "m_SelectionOverride<int>" "ISelection`1"
+MeshTool --> "m_SpriteMeshController" SpriteMeshController
+MeshTool --> "m_SpriteMeshView" SpriteMeshView
+MeshTool o-> "m_RectSelectionTool<int>" "RectSelectionTool`1"
+MeshTool o-> "m_RectVertexSelector" RectVertexSelector
+MeshTool o-> "m_UnselectTool<int>" "UnselectTool`1"
+MeshTool --> "m_Triangulator" ITriangulator
+MeshTool --> "mesh" MeshCache
+MeshTool --> "mode" SpriteMeshViewMode
+MeshTool --> "selectionOverride<int>" "ISelection`1"
+MeshTool --> "selection<int>" "ISelection`1"
+@enduml

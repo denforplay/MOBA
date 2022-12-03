@@ -1,0 +1,15 @@
+@startuml
+class ZenUtilInternal <<static>> {
+    + {static} IsNull(obj:System.Object) : bool
+    + {static} AreFunctionsEqual(left:Delegate, right:Delegate) : bool
+    + {static} GetInheritanceDelta(derived:Type, parent:Type) : int
+    + {static} GetAllSceneContexts() : IEnumerable<SceneContext>
+    + {static} AddStateMachineBehaviourAutoInjectersInScene(scene:Scene) : void
+    + {static} AddStateMachineBehaviourAutoInjectersUnderGameObject(root:GameObject) : void
+    + {static} GetInjectableMonoBehavioursInScene(scene:Scene, monoBehaviours:List<MonoBehaviour>) : void
+    + {static} GetInjectableMonoBehavioursUnderGameObject(gameObject:GameObject, injectableComponents:List<MonoBehaviour>) : void
+    {static} GetInjectableMonoBehavioursUnderGameObjectInternal(gameObject:GameObject, injectableComponents:List<MonoBehaviour>) : void
+    + {static} IsInjectableMonoBehaviourType(type:Type) : bool
+    + {static} GetRootGameObjects(scene:Scene) : IEnumerable<GameObject>
+}
+@enduml

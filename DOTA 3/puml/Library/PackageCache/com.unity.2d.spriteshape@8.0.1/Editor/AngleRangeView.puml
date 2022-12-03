@@ -1,0 +1,54 @@
+@startuml
+enum AngleRangeAction {
+    SelectRange,
+    ModifyRange,
+    CreateRange,
+    ModifySelector,
+    RemoveRange,
+}
+interface IAngleRangeView {
+    hoveredRangeIndex : int <<get>>
+    RequestFocusIndex(index:int) : void
+    GetAngleFromPosition(rect:Rect, angleOffset:float) : float
+    Repaint() : void
+    SetupLayout(rect:Rect, angleOffset:float, radius:float) : void
+    DoAngleRange(index:int, rect:Rect, radius:float, angleOffset:float, start:float, end:float, snap:bool, disabled:bool, gradientMin:Color, gradientMid:Color, gradientMax:Color) : bool
+    DoSelectAngleRange(currentSelected:int, newSelected:int) : bool
+    DoCreateRange(rect:Rect, radius:float, angleOffset:float, start:float, end:float) : bool
+    DoCreateRangeTooltip() : void
+    DoSelector(rect:Rect, angleOffset:float, radius:float, angle:float, newAngle:float) : bool
+    DoRemoveRange() : bool
+    IsActionActive(action:AngleRangeAction) : bool
+    IsActionTriggering(action:AngleRangeAction) : bool
+    IsActionFinishing(action:AngleRangeAction) : bool
+    DrawAngleRangeOutline(rect:Rect, start:float, end:float, angleOffset:float, radius:float) : void
+}
+class AngleRangeView {
+    <<const>> kDeleteCommandName : string = "Delete"
+    <<const>> kSoftDeleteCommandName : string = "SoftDelete"
+    {static} <<readonly>> kAngleRangeHashCode : int
+    {static} <<readonly>> kCreateRangeHashCode : int
+    {static} <<readonly>> kSelectorHashCode : int
+    + hoveredRangeIndex : int <<get>>
+    + RequestFocusIndex(index:int) : void
+    + GetAngleFromPosition(rect:Rect, angleOffset:float) : float
+    + Repaint() : void
+    + SetupLayout(rect:Rect, angleOffset:float, radius:float) : void
+    + DoAngleRange(index:int, rect:Rect, radius:float, angleOffset:float, start:float, end:float, snap:bool, disabled:bool, gradientMin:Color, gradientMid:Color, gradientMax:Color) : bool
+    + DoSelectAngleRange(currentSelected:int, newSelected:int) : bool
+    + DoCreateRange(rect:Rect, radius:float, angleOffset:float, start:float, end:float) : bool
+    + DoCreateRangeTooltip() : void
+    + DoSelector(rect:Rect, angleOffset:float, radius:float, angle:float, newAngle:float) : bool
+    + DoRemoveRange() : bool
+    + IsActionActive(action:AngleRangeAction) : bool
+    + IsActionHot(action:AngleRangeAction) : bool
+    + IsActionTriggering(action:AngleRangeAction) : bool
+    + IsActionFinishing(action:AngleRangeAction) : bool
+    + DrawAngleRangeOutline(rect:Rect, start:float, end:float, angleOffset:float, radius:float) : void
+}
+class Contents <<static>> {
+}
+IAngleRangeView <|-- AngleRangeView
+AngleRangeView +-- Contents
+Contents o-> "addRangeTooltip" GUIContent
+@enduml

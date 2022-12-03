@@ -1,0 +1,20 @@
+@startuml
+class SpriteCacheExtensions <<static>> {
+    + {static} GetMesh(sprite:SpriteCache) : MeshCache
+    + {static} GetMeshPreview(sprite:SpriteCache) : MeshPreviewCache
+    + {static} GetSkeleton(sprite:SpriteCache) : SkeletonCache
+    + {static} GetCharacterPart(sprite:SpriteCache) : CharacterPartCache
+    + {static} IsVisible(sprite:SpriteCache) : bool
+    + {static} GetLocalToWorldMatrixFromMode(sprite:SpriteCache) : Matrix4x4
+    + {static} GetBonesFromMode(sprite:SpriteCache) : BoneCache[]
+    + {static} UpdateMesh(sprite:SpriteCache, bones:BoneCache[]) : void
+    + {static} SmoothFill(sprite:SpriteCache) : void
+    + {static} RestoreBindPose(sprite:SpriteCache) : void
+    + {static} AssociateAllBones(sprite:SpriteCache) : bool
+    + {static} AssociatePossibleBones(sprite:SpriteCache) : bool
+    {static} PointToLineSegmentDistance(p:Vector2, a:Vector2, b:Vector2) : float
+    {static} IntersectsSegment(rect:Rect, p1:Vector2, p2:Vector2) : bool
+    + {static} DeassociateUnusedBones(sprite:SpriteCache) : void
+    + {static} DeassociateAllBones(sprite:SpriteCache) : void
+}
+@enduml

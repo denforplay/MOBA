@@ -1,0 +1,22 @@
+@startuml
+interface ITestRunnerListener {
+    RunStarted(testsToRun:ITest) : void
+    RunFinished(testResults:ITestResult) : void
+    TestStarted(test:ITest) : void
+    TestFinished(result:ITestResult) : void
+}
+class TestFinishedEvent {
+}
+class TestStartedEvent {
+}
+class RunFinishedEvent {
+}
+class RunStartedEvent {
+}
+class "UnityEvent`1"<T> {
+}
+"UnityEvent`1" "<ITestResult>" <|-- TestFinishedEvent
+"UnityEvent`1" "<ITest>" <|-- TestStartedEvent
+"UnityEvent`1" "<ITestResult>" <|-- RunFinishedEvent
+"UnityEvent`1" "<ITest>" <|-- RunStartedEvent
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+abstract class MoveNextSource {
+    + GetResult(token:short) : bool
+    + GetStatus(token:short) : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + UnsafeGetStatus() : UniTaskStatus
+    GetResult(token:short) : void
+}
+class "IUniTaskSource`1"<T> {
+}
+"IUniTaskSource`1" "<bool>" <|-- MoveNextSource
+@enduml

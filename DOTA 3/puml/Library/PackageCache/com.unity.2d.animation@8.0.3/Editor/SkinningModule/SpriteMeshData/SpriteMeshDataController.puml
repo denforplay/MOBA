@@ -1,0 +1,43 @@
+@startuml
+class WeightedTriangle <<struct>> {
+    + p1 : int
+    + p2 : int
+    + p3 : int
+    + weight : float
+    + CompareTo(other:WeightedTriangle) : int
+}
+class SpriteMeshDataController {
+    + CreateVertex(position:Vector2) : void
+    + CreateVertex(position:Vector2, edgeIndex:int) : void
+    + CreateEdge(index1:int, index2:int) : void
+    + RemoveVertex(index:int) : void
+    + RemoveVertex(indices:IEnumerable<int>) : void
+    RemoveEdge(edge:Vector2Int) : void
+    FindEdgesContainsIndex(index:int, result:List<Vector2Int>) : bool
+    + CreateQuad() : void
+    + Triangulate(triangulator:ITriangulator) : void
+    FillMeshDataContainers(vertices:float2[], edges:int2[], weightData:EditableBoneWeight[], hasWeightData:bool) : void
+    + Subdivide(triangulator:ITriangulator, largestAreaFactor:float, areaThreshold:float) : void
+    + ClearWeights(selection:ISelection<int>) : void
+    + OutlineFromAlpha(outlineGenerator:IOutlineGenerator, textureDataProvider:ITextureDataProvider, outlineDetail:float, alphaTolerance:byte) : void
+    + NormalizeWeights(selection:ISelection<int>) : void
+    + CalculateWeights(weightsGenerator:IWeightsGenerator, selection:ISelection<int>, filterTolerance:float) : void
+    + CalculateWeightsSafe(weightsGenerator:IWeightsGenerator, selection:ISelection<int>, filterTolerance:float) : void
+    + SmoothWeights(iterations:int, selection:ISelection<int>) : void
+    + FindTriangle(point:Vector2, indices:Vector3Int, barycentricCoords:Vector3) : bool
+    + SortTrianglesByDepth() : void
+    + GetMultiEditChannelData(selection:ISelection<int>, channel:int, enabled:bool, boneIndex:int, weight:float, isEnabledMixed:bool, isBoneIndexMixed:bool, isWeightMixed:bool) : void
+    + SetMultiEditChannelData(selection:ISelection<int>, channel:int, oldEnabled:bool, newEnabled:bool, oldBoneIndex:int, newBoneIndex:int, oldWeight:float, newWeight:float) : void
+    + GetControlPoints(points:float2[], edges:int2[], pins:int[]) : void
+    {static} FindPoint(points:IReadOnlyList<Vector2>, point:Vector2, distanceTolerance:float) : int
+    + SmoothFill() : void
+}
+class "IComparable`1"<T> {
+}
+class "List`1"<T> {
+}
+"IComparable`1" "<WeightedTriangle>" <|-- WeightedTriangle
+SpriteMeshDataController --> "spriteMeshData" BaseSpriteMeshData
+SpriteMeshDataController o-> "m_VertexOrderList<float>" "List`1"
+SpriteMeshDataController o-> "m_WeightedTriangles<WeightedTriangle>" "List`1"
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class "FactoryToChoiceBinder`1"<TContract> {
+    + FactoryToChoiceBinder(container:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + ToSelf() : FactoryFromBinder<TContract>
+    + To(concreteType:Type) : FactoryFromBinderUntyped
+    + To() : FactoryFromBinder<TConcrete>
+}
+class "FactoryFromBinder`1"<T> {
+}
+"FactoryFromBinder`1" "<TContract>" <|-- "FactoryToChoiceBinder`1"
+@enduml

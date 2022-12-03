@@ -1,0 +1,10 @@
+@startuml
+class "FactoryToChoiceBinder`4"<TParam1,TParam2,TParam3,TContract> {
+    + FactoryToChoiceBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + ToSelf() : FactoryFromBinder<TParam1, TParam2, TParam3, TContract>
+    + To() : FactoryFromBinder<TParam1, TParam2, TParam3, TConcrete>
+}
+class "FactoryFromBinder`4"<T1,T2,T3,T4> {
+}
+"FactoryFromBinder`4" "<TParam1,TParam2,TParam3,TContract>" <|-- "FactoryToChoiceBinder`4"
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+interface IFactory {
+}
+interface "IFactory`1"<out TValue> {
+    Create() : TValue
+}
+interface "IFactory`2"<in TParam1,out TValue> {
+    Create(param:TParam1) : TValue
+}
+interface "IFactory`3"<in TParam1,in TParam2,out TValue> {
+    Create(param1:TParam1, param2:TParam2) : TValue
+}
+interface "IFactory`4"<in TParam1,in TParam2,in TParam3,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3) : TValue
+}
+interface "IFactory`5"<in TParam1,in TParam2,in TParam3,in TParam4,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : TValue
+}
+interface "IFactory`6"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5) : TValue
+}
+interface "IFactory`7"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6) : TValue
+}
+interface "IFactory`8"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,in TParam7,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7) : TValue
+}
+interface "IFactory`9"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,in TParam7,in TParam8,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7, param8:TParam8) : TValue
+}
+interface "IFactory`10"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,in TParam7,in TParam8,in TParam9,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7, param8:TParam8, param9:TParam9) : TValue
+}
+interface "IFactory`11"<in TParam1,in TParam2,in TParam3,in TParam4,in TParam5,in TParam6,in TParam7,in TParam8,in TParam9,in TParam10,out TValue> {
+    Create(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6, param7:TParam7, param8:TParam8, param9:TParam9, param10:TParam10) : TValue
+}
+IFactory <|-- "IFactory`1"
+IFactory <|-- "IFactory`2"
+IFactory <|-- "IFactory`3"
+IFactory <|-- "IFactory`4"
+IFactory <|-- "IFactory`5"
+IFactory <|-- "IFactory`6"
+IFactory <|-- "IFactory`7"
+IFactory <|-- "IFactory`8"
+IFactory <|-- "IFactory`9"
+IFactory <|-- "IFactory`10"
+IFactory <|-- "IFactory`11"
+@enduml

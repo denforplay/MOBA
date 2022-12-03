@@ -1,0 +1,72 @@
+@startuml
+enum SRPLensFlareBlendMode {
+    Additive,
+    Screen,
+    Premultiply,
+    Lerp,
+}
+enum SRPLensFlareDistribution {
+    Uniform,
+    Curve,
+    Random,
+}
+enum SRPLensFlareType {
+    Image,
+    Circle,
+    Polygon,
+}
+class LensFlareDataElementSRP <<sealed>> {
+    + LensFlareDataElementSRP()
+    + visible : bool
+    + position : float
+    + angularOffset : float
+    m_LocalIntensity : float
+    + localIntensity : float <<get>> <<set>>
+    + uniformScale : float
+    + allowMultipleElement : bool
+    m_Count : int
+    + count : int <<get>> <<set>>
+    + preserveAspectRatio : bool
+    + rotation : float
+    + autoRotate : bool
+    + modulateByLightColor : bool
+    isFoldOpened : bool
+    + lengthSpread : float
+    + seed : int
+    m_IntensityVariation : float
+    + intensityVariation : float <<get>> <<set>>
+    + scaleVariation : float
+    + rotationVariation : float
+    + enableRadialDistortion : bool
+    + distortionRelativeToCenter : bool
+    m_FallOff : float
+    + fallOff : float <<get>> <<set>>
+    m_EdgeOffset : float
+    + edgeOffset : float <<get>> <<set>>
+    m_SideCount : int
+    + sideCount : int <<get>> <<set>>
+    m_SdfRoundness : float
+    + sdfRoundness : float <<get>> <<set>>
+    + inverseSDF : bool
+    + uniformAngle : float
+}
+class LensFlareDataSRP <<sealed>> {
+    + LensFlareDataSRP()
+}
+LensFlareDataElementSRP --> "positionOffset" Vector2
+LensFlareDataElementSRP --> "translationScale" Vector2
+LensFlareDataElementSRP --> "lensFlareTexture" Texture
+LensFlareDataElementSRP --> "sizeXY" Vector2
+LensFlareDataElementSRP --> "tint" Color
+LensFlareDataElementSRP --> "blendMode" SRPLensFlareBlendMode
+LensFlareDataElementSRP --> "flareType" SRPLensFlareType
+LensFlareDataElementSRP --> "distribution" SRPLensFlareDistribution
+LensFlareDataElementSRP --> "positionCurve" AnimationCurve
+LensFlareDataElementSRP --> "scaleCurve" AnimationCurve
+LensFlareDataElementSRP --> "colorGradient" Gradient
+LensFlareDataElementSRP --> "positionVariation" Vector2
+LensFlareDataElementSRP --> "targetSizeDistortion" Vector2
+LensFlareDataElementSRP --> "distortionCurve" AnimationCurve
+LensFlareDataElementSRP --> "uniformAngleCurve" AnimationCurve
+ScriptableObject <|-- LensFlareDataSRP
+@enduml

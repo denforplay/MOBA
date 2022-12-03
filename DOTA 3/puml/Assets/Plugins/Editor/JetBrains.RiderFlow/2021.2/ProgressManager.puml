@@ -1,0 +1,9 @@
+@startuml
+class ProgressManager {
+    + CreateProgress(name:string, description:string, isIndefinite:bool) : int
+    + ReportProgress(id:int, progressValue:float, description:string) : void
+    + FinishProgress(id:int) : void
+}
+IProgressManager <|-- ProgressManager
+ProgressManager o-> "Instance" ProgressManager
+@enduml

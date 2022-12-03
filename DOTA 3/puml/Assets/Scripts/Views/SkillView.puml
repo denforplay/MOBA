@@ -1,0 +1,13 @@
+@startuml
+class SkillView {
+    +  <<event>> OnSkillUseStateChanged : Action<int, bool> 
+    + Id : int <<get>>
+    + SetCountdownTime(countdownTime:float) : void
+    + <<async>> Countdown() : UniTask
+    + IsSkillReadyToUse() : bool
+}
+MonoBehaviour <|-- SkillView
+SkillView --> "SkillImg" Image
+SkillView --> "DarkSkillImg" Image
+SkillView --> "CancellationToken" CancellationTokenSource
+@enduml

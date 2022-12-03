@@ -1,0 +1,66 @@
+@startuml
+interface IViewDisplayer {
+    GetRect(index:ViewCompositionIndex) : Rect
+    SetTexture(index:ViewCompositionIndex, texture:Texture) : void
+    Repaint() : void
+     <<event>> OnLayoutChanged : Action<Layout, SidePanel> 
+     <<event>> OnRenderDocAcquisitionTriggered : Action 
+     <<event>> OnMouseEventInView : Action<IMouseEvent> 
+     <<event>> OnChangingObjectInView : Action<GameObject, ViewCompositionIndex, Vector2> 
+     <<event>> OnChangingEnvironmentInView : Action<UnityEngine.Object, ViewCompositionIndex, Vector2> 
+     <<event>> OnClosed : Action 
+     <<event>> OnUpdateRequested : Action 
+}
+class DisplayWindow <<partial>> {
+     <<event>> OnLayoutChangedInternal : Action<Layout, SidePanel> 
+     <<event>> OnRenderDocAcquisitionTriggeredInternal : Action 
+     <<event>> OnMouseEventInViewPortInternal : Action<IMouseEvent> 
+     <<event>> OnChangingObjectInViewInternal : Action<GameObject, ViewCompositionIndex, Vector2> 
+     <<event>> OnChangingEnvironmentInViewInternal : Action<UnityEngine.Object, ViewCompositionIndex, Vector2> 
+     <<event>> OnClosedInternal : Action 
+     <<event>> OnUpdateRequestedInternal : Action 
+    ReloadStyleSheets() : void
+    CreateGUI() : void
+    OnEnable() : void
+    OnDisable() : void
+    CreateToolbar() : void
+    CreateViews() : void
+    CreateDropAreas() : void
+    GetRect(index:ViewCompositionIndex) : Rect
+    SetTexture(index:ViewCompositionIndex, texture:Texture) : void
+    Repaint() : void
+    ApplyLayout(value:Layout) : void
+    ApplySidePanelChange(sidePanel:SidePanel) : void
+    Update() : void
+    OnGUI() : void
+}
+class Style <<static>> <<partial>> {
+}
+class "Action`2"<T1,T2> {
+}
+class "Action`1"<T> {
+}
+class "Action`3"<T1,T2,T3> {
+}
+EditorWindow <|-- DisplayWindow
+IViewDisplayer <|-- DisplayWindow
+DisplayWindow --> "m_MainContainer" VisualElement
+DisplayWindow --> "m_ViewContainer" VisualElement
+DisplayWindow --> "m_DebugContainer" VisualElement
+DisplayWindow --> "m_NoEnvironmentList" Label
+DisplayWindow --> "m_NoObject1" Label
+DisplayWindow --> "m_NoEnvironment1" Label
+DisplayWindow --> "m_NoObject2" Label
+DisplayWindow --> "m_NoEnvironment2" Label
+DisplayWindow --> "layout" LayoutContext
+DisplayWindow --> "viewLayout" Layout
+DisplayWindow --> "sidePanel" SidePanel
+DisplayWindow o-> "styleSheet" StyleSheet
+DisplayWindow o-> "styleSheetLight" StyleSheet
+DisplayWindow --> "m_FirstOrCompositeManipulator" SwitchableCameraController
+DisplayWindow --> "m_SecondManipulator" CameraController
+DisplayWindow --> "m_GizmoManipulator" ComparisonGizmoController
+DisplayWindow o-> "m_LastFirstViewSize" Vector2
+DisplayWindow o-> "m_LastSecondViewSize" Vector2
+DisplayWindow +-- Style
+@enduml

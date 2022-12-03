@@ -1,0 +1,7 @@
+@startuml
+class PopupsInstaller {
+    + <<override>> InstallBindings() : void
+}
+MonoInstaller <|-- PopupsInstaller
+PopupsInstaller --> "_popupSystem" PopupSystem
+@enduml

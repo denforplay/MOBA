@@ -1,0 +1,12 @@
+@startuml
+class ThreadFrameTime <<struct>> {
+    + frameIndex : int
+    + ms : float
+    + msIdle : float
+    + ThreadFrameTime(index:int, msTime:float, msTimeIdle:float)
+    + CompareTo(other:ThreadFrameTime) : int
+}
+class "IComparable`1"<T> {
+}
+"IComparable`1" "<ThreadFrameTime>" <|-- ThreadFrameTime
+@enduml

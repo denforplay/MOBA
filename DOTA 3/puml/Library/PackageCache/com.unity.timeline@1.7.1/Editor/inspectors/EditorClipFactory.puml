@@ -1,0 +1,10 @@
+@startuml
+class EditorClipFactory <<static>> {
+    + {static} GetEditorClip(clip:TimelineClip) : EditorClip
+    + {static} RemoveEditorClip(clip:TimelineClip) : void
+    + {static} Contains(clip:TimelineClip) : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+EditorClipFactory o-> "s_EditorCache<TimelineClip,EditorClip>" "Dictionary`2"
+@enduml

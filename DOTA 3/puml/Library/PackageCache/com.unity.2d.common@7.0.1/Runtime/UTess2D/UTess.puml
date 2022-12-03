@@ -1,0 +1,100 @@
+@startuml
+enum UEventType {
+    EVENT_POINT= 0,
+    EVENT_END= 1,
+    EVENT_START= 2,
+}
+class UEvent <<struct>> {
+    + idx : int
+    + type : int
+}
+class UHull <<struct>> {
+    + idx : int
+    + ilcount : int
+    + iucount : int
+}
+class UStar <<struct>> {
+    + pointCount : int
+}
+class UBounds <<struct>> {
+}
+class UCircle <<struct>> {
+    + radius : float
+}
+class UTriangle <<struct>> {
+    + area : float
+}
+class UEncroachingSegment <<struct>> {
+    + index : int
+}
+interface "ICondition2`2"<in T,in U> {
+    Test(x:T, y:U, t:float) : bool
+}
+class XCompare <<struct>> {
+    + Compare(a:double, b:double) : int
+}
+class IntersectionCompare <<struct>> {
+    + <<fixed>> xvasort : double
+    + <<fixed>> xvbsort : double
+    + Compare(a:int2, b:int2) : int
+}
+class TessEventCompare <<struct>> {
+    + Compare(a:UEvent, b:UEvent) : int
+}
+class TessEdgeCompare <<struct>> {
+    + Compare(a:int2, b:int2) : int
+}
+class TessCellCompare <<struct>> {
+    + Compare(a:int3, b:int3) : int
+}
+class TessJunctionCompare <<struct>> {
+    + Compare(a:int2, b:int2) : int
+}
+class DelaEdgeCompare <<struct>> {
+    + Compare(a:int4, b:int4) : int
+}
+class TessLink <<struct>> {
+}
+class ModuleHandle <<struct>> {
+    {static} CopyGraph(srcPoints:NativeArray<float2>, srcPointCount:int, dstPoints:NativeArray<float2>, dstPointCount:int, srcEdges:NativeArray<int2>, srcEdgeCount:int, dstEdges:NativeArray<int2>, dstEdgeCount:int) : void
+    {static} CopyGeometry(srcIndices:NativeArray<int>, srcIndexCount:int, dstIndices:NativeArray<int>, dstIndexCount:int, srcVertices:NativeArray<float2>, srcVertexCount:int, dstVertices:NativeArray<float2>, dstVertexCount:int) : void
+    {static} TransferOutput(srcEdges:NativeArray<int2>, srcEdgeCount:int, dstEdges:NativeArray<int2>, dstEdgeCount:int, srcIndices:NativeArray<int>, srcIndexCount:int, dstIndices:NativeArray<int>, dstIndexCount:int, srcVertices:NativeArray<float2>, srcVertexCount:int, dstVertices:NativeArray<float2>, dstVertexCount:int) : void
+    {static} GraphConditioner(points:NativeArray<float2>, pgPoints:NativeArray<float2>, pgPointCount:int, pgEdges:NativeArray<int2>, pgEdgeCount:int, resetTopology:bool) : void
+    {static} Reorder(startVertexCount:int, index:int, indices:NativeArray<int>, indexCount:int, vertices:NativeArray<float2>, vertexCount:int) : void
+    + {static} ConvexQuad(allocator:Allocator, points:NativeArray<float2>, edges:NativeArray<int2>, outVertices:NativeArray<float2>, outVertexCount:int, outIndices:NativeArray<int>, outIndexCount:int, outEdges:NativeArray<int2>, outEdgeCount:int) : float4
+    + {static} Tessellate(allocator:Allocator, points:NativeArray<float2>, edges:NativeArray<int2>, outVertices:NativeArray<float2>, outVertexCount:int, outIndices:NativeArray<int>, outIndexCount:int, outEdges:NativeArray<int2>, outEdgeCount:int) : float4
+    + {static} Subdivide(allocator:Allocator, points:NativeArray<float2>, edges:NativeArray<int2>, outVertices:NativeArray<float2>, outVertexCount:int, outIndices:NativeArray<int>, outIndexCount:int, outEdges:NativeArray<int2>, outEdgeCount:int, areaFactor:float, targetArea:float, refineIterations:int, smoothenIterations:int) : float4
+}
+class "ArraySlice`1"<T> {
+}
+class "IComparer`1"<T> {
+}
+class "NativeArray`1"<T> {
+}
+UEvent --> "a" float2
+UEvent --> "b" float2
+UHull --> "a" float2
+UHull --> "b" float2
+UHull --> "ilarray<int>" "ArraySlice`1"
+UHull --> "iuarray<int>" "ArraySlice`1"
+UStar --> "points<int>" "ArraySlice`1"
+UBounds --> "min" double2
+UBounds --> "max" double2
+UCircle --> "center" float2
+UTriangle --> "va" float2
+UTriangle --> "vb" float2
+UTriangle --> "vc" float2
+UTriangle --> "c" UCircle
+UTriangle --> "indices" int3
+UEncroachingSegment --> "a" float2
+UEncroachingSegment --> "b" float2
+"IComparer`1" "<double>" <|-- XCompare
+"IComparer`1" "<int2>" <|-- IntersectionCompare
+IntersectionCompare --> "points<double2>" "NativeArray`1"
+IntersectionCompare --> "edges<int2>" "NativeArray`1"
+"IComparer`1" "<UEvent>" <|-- TessEventCompare
+"IComparer`1" "<int2>" <|-- TessEdgeCompare
+"IComparer`1" "<int3>" <|-- TessCellCompare
+"IComparer`1" "<int2>" <|-- TessJunctionCompare
+"IComparer`1" "<int4>" <|-- DelaEdgeCompare
+@enduml

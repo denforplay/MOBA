@@ -1,0 +1,24 @@
+@startuml
+class UniTaskSynchronizationContext {
+    <<const>> MaxArrayLength : int = 0X7FEFFFFF
+    <<const>> InitialSize : int = 16
+    {static} dequing : bool = false
+    {static} actionListCount : int = 0
+    {static} waitingListCount : int = 0
+    {static} opCount : int
+    + <<override>> Send(d:SendOrPostCallback, state:object) : void
+    + <<override>> Post(d:SendOrPostCallback, state:object) : void
+    + <<override>> OperationStarted() : void
+    + <<override>> OperationCompleted() : void
+    + <<override>> CreateCopy() : SynchronizationContext
+}
+class Callback <<struct>> {
+    <<readonly>> state : object
+    + Callback(callback:SendOrPostCallback, state:object)
+    + Invoke() : void
+}
+SynchronizationContext <|-- UniTaskSynchronizationContext
+UniTaskSynchronizationContext o-> "gate" SpinLock
+UniTaskSynchronizationContext +-- Callback
+Callback --> "callback" SendOrPostCallback
+@enduml

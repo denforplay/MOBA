@@ -1,0 +1,11 @@
+@startuml
+class ValueStopwatch <<struct>> {
+    {static} <<readonly>> TimestampToTicks : double
+    <<readonly>> startTimestamp : long
+    + {static} StartNew() : ValueStopwatch
+    ValueStopwatch(startTimestamp:long)
+    + IsInvalid : bool <<get>>
+    + ElapsedTicks : long <<get>>
+}
+ValueStopwatch --> "Elapsed" TimeSpan
+@enduml

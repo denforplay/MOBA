@@ -1,0 +1,161 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Where(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Where(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Int32, Boolean>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} WhereAwait(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} WhereAwait(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Int32, UniTask<Boolean>>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} WhereAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} WhereAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Int32, CancellationToken, UniTask<Boolean>>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "Where`1"<TSource> <<sealed>> {
+    + Where(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, bool>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "WhereInt`1"<TSource> <<sealed>> {
+    + WhereInt(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, int, bool>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "WhereAwait`1"<TSource> <<sealed>> {
+    + WhereAwait(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<bool>>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "WhereIntAwait`1"<TSource> <<sealed>> {
+    + WhereIntAwait(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, int, UniTask<bool>>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "WhereAwaitWithCancellation`1"<TSource> <<sealed>> {
+    + WhereAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<bool>>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "WhereIntAwaitWithCancellation`1"<TSource> <<sealed>> {
+    + WhereIntAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, int, CancellationToken, UniTask<bool>>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "Func`2"<T1,T2> {
+}
+class _Where <<sealed>> {
+    state : int
+    + _Where(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, bool>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class "Func`3"<T1,T2,T3> {
+}
+class _Where <<sealed>> {
+    state : int
+    index : int
+    + _Where(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, int, bool>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class _WhereAwait <<sealed>> {
+    state : int
+    + _WhereAwait(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<bool>>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class _WhereAwait <<sealed>> {
+    state : int
+    index : int
+    + _WhereAwait(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, int, UniTask<bool>>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class _WhereAwaitWithCancellation <<sealed>> {
+    state : int
+    + _WhereAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<bool>>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class "Func`4"<T1,T2,T3,T4> {
+}
+class _WhereAwaitWithCancellation <<sealed>> {
+    state : int
+    index : int
+    + _WhereAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, int, CancellationToken, UniTask<bool>>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Where`1"
+"Where`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"Where`1" --> "predicate<TSource,bool>" "Func`2"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "WhereInt`1"
+"WhereInt`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"WhereInt`1" --> "predicate<TSource,int,bool>" "Func`3"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "WhereAwait`1"
+"WhereAwait`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"WhereAwait`1" --> "predicate<TSource,UniTask<bool>>" "Func`2"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "WhereIntAwait`1"
+"WhereIntAwait`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"WhereIntAwait`1" --> "predicate<TSource,int,UniTask<bool>>" "Func`3"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "WhereAwaitWithCancellation`1"
+"WhereAwaitWithCancellation`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"WhereAwaitWithCancellation`1" --> "predicate<TSource,CancellationToken,UniTask<bool>>" "Func`3"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "WhereIntAwaitWithCancellation`1"
+"WhereIntAwaitWithCancellation`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"WhereIntAwaitWithCancellation`1" --> "predicate<TSource,int,CancellationToken,UniTask<bool>>" "Func`4"
+"Where`1" +-- _Where
+MoveNextSource <|-- _Where
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _Where
+_Where --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_Where --> "predicate<TSource,bool>" "Func`2"
+_Where --> "cancellationToken" CancellationToken
+_Where --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_Where --> "moveNextAction" Action
+_Where --> "Current" TSource
+"WhereInt`1" +-- _Where
+MoveNextSource <|-- _Where
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _Where
+_Where --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_Where --> "predicate<TSource,int,bool>" "Func`3"
+_Where --> "cancellationToken" CancellationToken
+_Where --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_Where --> "moveNextAction" Action
+_Where --> "Current" TSource
+"WhereAwait`1" +-- _WhereAwait
+MoveNextSource <|-- _WhereAwait
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _WhereAwait
+_WhereAwait --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_WhereAwait --> "predicate<TSource,UniTask<bool>>" "Func`2"
+_WhereAwait --> "cancellationToken" CancellationToken
+_WhereAwait --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_WhereAwait --> "moveNextAction" Action
+_WhereAwait --> "Current" TSource
+"WhereIntAwait`1" +-- _WhereAwait
+MoveNextSource <|-- _WhereAwait
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _WhereAwait
+_WhereAwait --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_WhereAwait --> "predicate<TSource,int,UniTask<bool>>" "Func`3"
+_WhereAwait --> "cancellationToken" CancellationToken
+_WhereAwait --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_WhereAwait --> "moveNextAction" Action
+_WhereAwait --> "Current" TSource
+"WhereAwaitWithCancellation`1" +-- _WhereAwaitWithCancellation
+MoveNextSource <|-- _WhereAwaitWithCancellation
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _WhereAwaitWithCancellation
+_WhereAwaitWithCancellation --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_WhereAwaitWithCancellation --> "predicate<TSource,CancellationToken,UniTask<bool>>" "Func`3"
+_WhereAwaitWithCancellation --> "cancellationToken" CancellationToken
+_WhereAwaitWithCancellation --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_WhereAwaitWithCancellation --> "moveNextAction" Action
+_WhereAwaitWithCancellation --> "Current" TSource
+"WhereIntAwaitWithCancellation`1" +-- _WhereAwaitWithCancellation
+MoveNextSource <|-- _WhereAwaitWithCancellation
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _WhereAwaitWithCancellation
+_WhereAwaitWithCancellation --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_WhereAwaitWithCancellation --> "predicate<TSource,int,CancellationToken,UniTask<bool>>" "Func`4"
+_WhereAwaitWithCancellation --> "cancellationToken" CancellationToken
+_WhereAwaitWithCancellation --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_WhereAwaitWithCancellation --> "moveNextAction" Action
+_WhereAwaitWithCancellation --> "Current" TSource
+@enduml

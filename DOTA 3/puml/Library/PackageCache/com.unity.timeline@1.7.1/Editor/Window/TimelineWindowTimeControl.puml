@@ -1,0 +1,57 @@
+@startuml
+class TimelineWindowTimeControl {
+    OnStateChange() : void
+    + Init(animState:AnimationWindowState, clip:TimelineClip) : void
+    + Init(animState:AnimationWindowState, clip:ClipData) : void
+    + <<override>> OnEnable() : void
+    + OnDisable() : void
+    ChangeTime(newTime:float) : void
+    {static} ChangeFrame(frame:int) : void
+    + <<override>> GoToTime(newTime:float) : void
+    + <<override>> GoToFrame(frame:int) : void
+    + <<override>> StartScrubTime() : void
+    + <<override>> EndScrubTime() : void
+    + <<override>> ScrubTime(newTime:float) : void
+    + <<override>> GoToPreviousFrame() : void
+    + <<override>> GoToNextFrame() : void
+    GetCurves() : AnimationWindowCurve[]
+    + <<override>> GoToPreviousKeyframe() : void
+    + <<override>> GoToNextKeyframe() : void
+    + <<override>> GoToFirstKeyframe() : void
+    + <<override>> GoToLastKeyframe() : void
+    + <<override>> canPlay : bool <<get>>
+    + <<override>> playing : bool <<get>>
+    {static} SetPlaybackState(playbackState:bool) : void
+    + <<override>> StartPlayback() : bool
+    + <<override>> StopPlayback() : void
+    + <<override>> PlaybackUpdate() : bool
+    + <<override>> canRecord : bool <<get>>
+    + <<override>> recording : bool <<get>>
+    + <<override>> canPreview : bool <<get>>
+    + <<override>> previewing : bool <<get>>
+    + <<override>> StartRecording(targetObject:Object) : bool
+    + <<override>> StopRecording() : void
+    + <<override>> OnSelectionChanged() : void
+    + <<override>> ResampleAnimation() : void
+    + <<override>> StartPreview() : bool
+    + <<override>> StopPreview() : void
+    + <<override>> ProcessCandidates() : void
+    + <<override>> ClearCandidates() : void
+    ToGlobalTime(localTime:float) : double
+    ToAnimationClipTime(globalTime:double) : float
+}
+class ClipData <<struct>> {
+    + start : double
+    + duration : double
+}
+IAnimationWindowControl <|-- TimelineWindowTimeControl
+TimelineWindowTimeControl --> "m_ClipData" ClipData
+TimelineWindowTimeControl --> "m_Clip" TimelineClip
+TimelineWindowTimeControl --> "m_AnimWindowState" AnimationWindowState
+TimelineWindowTimeControl --> "track" TrackAsset
+TimelineWindowTimeControl --> "window" TimelineWindow
+TimelineWindowTimeControl --> "state" WindowState
+TimelineWindowTimeControl --> "time" AnimationKeyTime
+TimelineWindowTimeControl +-- ClipData
+ClipData --> "track" TrackAsset
+@enduml

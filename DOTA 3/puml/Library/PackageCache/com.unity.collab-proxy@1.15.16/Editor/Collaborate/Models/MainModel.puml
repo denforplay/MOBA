@@ -1,0 +1,41 @@
+@startuml
+class MainModel {
+    +  <<event>> ConflictStatusChange : Action<bool> 
+    +  <<event>> OperationStatusChange : Action<bool> 
+    +  <<event>> OperationProgressChange : Action<IProgressInfo> 
+    +  <<event>> ErrorOccurred : Action<IErrorInfo> 
+    +  <<event>> ErrorCleared : Action 
+    +  <<event>> RemoteRevisionsAvailabilityChange : Action<bool> 
+    +  <<event>> BackButtonStateUpdated : Action<string> 
+    +  <<event>> StateChanged : Action 
+    m_BackNavigation : (string id, string text, Action backEvent)?
+    + MainModel(provider:ISourceControlProvider)
+    + OnStart() : void
+    + OnStop() : void
+    + RestoreState(cache:IWindowCache) : void
+    + SaveState(cache:IWindowCache) : void
+    + RemoteRevisionsAvailable : bool <<get>>
+    + Conflicted : bool <<get>>
+    + CurrentTabIndex : int <<get>> <<set>>
+    + ConstructHistoryModel() : IHistoryModel
+    + ConstructChangesModel() : IChangesModel
+    + ClearError() : void
+    + RequestSync() : void
+    + RequestCancelJob() : void
+    + GetBackNavigation() : (string id, string text, Action backAction)?
+    + RegisterBackNavigation(id:string, text:string, backAction:Action) : void
+    + UnregisterBackNavigation(id:string) : bool
+    OnUpdatedRemoteRevisionsAvailability(available:bool) : void
+    OnUpdatedConflictState(conflicted:bool) : void
+    OnUpdatedOperationStatus(inProgress:bool) : void
+    OnUpdatedOperationProgress(progressInfo:IProgressInfo) : void
+    OnErrorOccurred(errorInfo:IErrorInfo) : void
+    OnErrorCleared() : void
+}
+IMainModel <|-- MainModel
+MainModel --> "m_Provider" ISourceControlProvider
+MainModel --> "m_HistoryModel" IHistoryModel
+MainModel --> "m_ChangesModel" IChangesModel
+MainModel --> "ProgressInfo" IProgressInfo
+MainModel --> "ErrorInfo" IErrorInfo
+@enduml

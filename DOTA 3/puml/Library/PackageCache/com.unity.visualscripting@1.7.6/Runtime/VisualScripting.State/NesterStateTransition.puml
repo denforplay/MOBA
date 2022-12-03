@@ -1,0 +1,23 @@
+@startuml
+abstract class "NesterStateTransition`2"<TGraph,TMacro> {
+    isSerializationRoot : bool <<get>>
+    + <<override>> GetAotStubs(visited:HashSet<object>) : IEnumerable<object>
+    + {abstract} DefaultGraph() : TGraph
+    DefaultGraph() : IGraph
+    InstantiateNest() : void
+    UninstantiateNest() : void
+}
+class "Macro`1"<T> {
+}
+class "GraphNest`2"<T1,T2> {
+}
+class "IEnumerable`1"<T> {
+}
+StateTransition <|-- "NesterStateTransition`2"
+INesterStateTransition <|-- "NesterStateTransition`2"
+"NesterStateTransition`2" o-> "nest<TGraph,TMacro>" "GraphNest`2"
+"NesterStateTransition`2" --> "nest" IGraphNest
+"NesterStateTransition`2" --> "childGraph" IGraph
+"NesterStateTransition`2" --> "serializedObject" UnityObject
+"NesterStateTransition`2" --> "deserializationDependencies<ISerializationDependency>" "IEnumerable`1"
+@enduml

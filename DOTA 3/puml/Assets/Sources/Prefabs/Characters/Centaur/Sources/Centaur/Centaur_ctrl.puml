@@ -1,0 +1,11 @@
+@startuml
+class Centaur_ctrl {
+    + speed : float = 6.0f
+    + runSpeed : float = 3.0f
+    + turnSpeed : float = 60.0f
+    + gravity : float = 20.0f
+    Start() : void
+    Update() : void
+}
+MonoBehaviour <|-- Centaur_ctrl
+@enduml

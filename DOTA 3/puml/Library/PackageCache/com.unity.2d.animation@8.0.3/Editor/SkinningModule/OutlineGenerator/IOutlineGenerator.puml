@@ -1,0 +1,5 @@
+@startuml
+interface IOutlineGenerator {
+    GenerateOutline(textureDataProvider:ITextureDataProvider, rect:Rect, detail:float, alphaTolerance:byte, holeDetection:bool, paths:Vector2[][]) : void
+}
+@enduml

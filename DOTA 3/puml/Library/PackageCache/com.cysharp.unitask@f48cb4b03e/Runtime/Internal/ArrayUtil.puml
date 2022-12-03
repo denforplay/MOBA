@@ -1,0 +1,7 @@
+@startuml
+class ArrayUtil <<static>> {
+    + {static} EnsureCapacity(array:T[], index:int) : void
+    {static} EnsureCore(array:T[], index:int) : void
+    + {static} Materialize(source:IEnumerable<T>) : (T[] array, int length)
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class ConcreteIdArgConditionCopyNonLazyBinder {
+    + ConcreteIdArgConditionCopyNonLazyBinder(bindInfo:BindInfo)
+    + WithConcreteId(id:object) : ArgConditionCopyNonLazyBinder
+}
+ArgConditionCopyNonLazyBinder <|-- ConcreteIdArgConditionCopyNonLazyBinder
+@enduml

@@ -1,0 +1,59 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Publish(source:IUniTaskAsyncEnumerable<TSource>) : IConnectableUniTaskAsyncEnumerable<TSource>
+}
+class "Publish`1"<TSource> <<sealed>> {
+    isCompleted : bool
+    + Publish(source:IUniTaskAsyncEnumerable<TSource>)
+    + Connect() : IDisposable
+    <<async>> ConsumeEnumerator() : UniTaskVoid
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IConnectableUniTaskAsyncEnumerable`1"<T> {
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "TriggerEvent`1"<T> {
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class ConnectDisposable <<sealed>> {
+    + ConnectDisposable(cancellationTokenSource:CancellationTokenSource)
+    + Dispose() : void
+}
+class _Publish <<sealed>> {
+    isDisposed : bool
+    + _Publish(parent:Publish<TSource>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    {static} OnCanceled(state:object) : void
+    + DisposeAsync() : UniTask
+    + OnNext(value:TSource) : void
+    + OnCanceled(cancellationToken:CancellationToken) : void
+    + OnCompleted() : void
+    + OnError(ex:Exception) : void
+}
+class "ITriggerHandler`1"<T> {
+}
+class "Action`1"<T> {
+}
+"IConnectableUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Publish`1"
+"Publish`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"Publish`1" --> "cancellationTokenSource" CancellationTokenSource
+"Publish`1" --> "trigger<TSource>" "TriggerEvent`1"
+"Publish`1" --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+"Publish`1" --> "connectedDisposable" IDisposable
+"Publish`1" +-- ConnectDisposable
+IDisposable <|-- ConnectDisposable
+ConnectDisposable --> "cancellationTokenSource" CancellationTokenSource
+"Publish`1" +-- _Publish
+MoveNextSource <|-- _Publish
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _Publish
+"ITriggerHandler`1" "<TSource>" <|-- _Publish
+_Publish o-> "CancelDelegate<object>" "Action`1"
+_Publish --> "parent<TSource>" "Publish`1"
+_Publish --> "cancellationToken" CancellationToken
+_Publish --> "cancellationTokenRegistration" CancellationTokenRegistration
+_Publish --> "Current" TSource
+_Publish --> "Prev<TSource>" "ITriggerHandler`1"
+_Publish --> "Next<TSource>" "ITriggerHandler`1"
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class ChooseCharacterConfiguration {
+    + SecondsForChoose : float <<get>>
+    + SecondsBeforeStart : float <<get>>
+}
+ScriptableObject <|-- ChooseCharacterConfiguration
+@enduml

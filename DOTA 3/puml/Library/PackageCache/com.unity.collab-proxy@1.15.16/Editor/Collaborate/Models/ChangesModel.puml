@@ -1,0 +1,59 @@
+@startuml
+class ChangesModel {
+    +  <<event>> UpdatedChangeList : Action 
+    +  <<event>> OnUpdatedSelectedChanges : Action 
+    +  <<event>> BusyStatusUpdated : Action<bool> 
+    +  <<event>> StateChanged : Action 
+    <<const>> k_RequestNewList : string = "request-new-list"
+    + SavedRevisionSummary : string <<get>> <<set>>
+    + SavedSearchQuery : string <<get>> <<set>>
+    + ToggledCount : int <<get>>
+    + TotalCount : int <<get>>
+    + ConflictedCount : int <<get>>
+    + Conflicted : bool <<get>>
+    + Busy : bool <<get>>
+    + ChangesModel(provider:ISourceControlProvider)
+    + OnStart() : void
+    + OnStop() : void
+    + RestoreState(cache:IWindowCache) : void
+    + SaveState(cache:IWindowCache) : void
+    OnUpdatedChangeList() : void
+    OnUpdatedSelectedChangesList(list:IReadOnlyList<string>) : void
+    OnReceivedChangeList(list:IReadOnlyList<IChangeEntry>) : void
+    + <<virtual>> UpdateEntryToggle(path:string, toggled:bool) : bool
+    + GetToggledEntries(query:string) : IReadOnlyList<IChangeEntryData>
+    + GetUntoggledEntries(query:string) : IReadOnlyList<IChangeEntryData>
+    + GetAllEntries(query:string) : IReadOnlyList<IChangeEntryData>
+    + GetConflictedEntries(query:string) : IReadOnlyList<IChangeEntryData>
+    UpdateAllItemToggle() : bool
+    ToggleAllEntries(toggled:bool) : bool
+    AddRequest(requestId:string) : bool
+    RemoveRequest(requestId:string) : void
+    + RequestInitialData() : void
+    + RequestDiffChanges(path:string) : void
+    + RequestDiscard(entry:IChangeEntry) : void
+    + RequestBulkDiscard(entries:IReadOnlyList<IChangeEntry>) : void
+    + RequestPublish(message:string, changes:IReadOnlyList<IChangeEntry>) : void
+    + RequestShowConflictedDifferences(path:string) : void
+    + RequestChooseMerge(path:string) : void
+    + RequestChooseMine(paths:string[]) : void
+    + RequestChooseRemote(paths:string[]) : void
+}
+class "IReadOnlyList`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+class ChangeEntryData {
+    + Toggled : bool <<get>> <<set>>
+    + All : bool <<get>> <<set>>
+    + ToggleReadOnly : bool <<get>>
+    + Conflicted : bool <<get>>
+}
+IChangesModel <|-- ChangesModel
+ChangesModel --> "m_Conflicted<IChangeEntryData>" "IReadOnlyList`1"
+ChangesModel --> "m_AllItem" ChangeEntryData
+ChangesModel --> "m_Requests<string>" "HashSet`1"
+ChangesModel +-- ChangeEntryData
+IChangeEntryData <|-- ChangeEntryData
+ChangeEntryData --> "Entry" IChangeEntry
+@enduml

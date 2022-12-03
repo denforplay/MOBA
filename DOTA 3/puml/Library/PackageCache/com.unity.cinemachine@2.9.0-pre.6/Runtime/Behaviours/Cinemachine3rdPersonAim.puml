@@ -1,0 +1,14 @@
+@startuml
+class Cinemachine3rdPersonAim {
+    + IgnoreTag : string
+    + AimDistance : float
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : bool
+    DrawReticle(brain:CinemachineBrain) : void
+    ComputeLookAtPoint(camPos:Vector3, player:Transform) : Vector3
+    ComputeAimTarget(cameraLookAt:Vector3, player:Transform) : Vector3
+}
+CinemachineExtension <|-- Cinemachine3rdPersonAim
+Cinemachine3rdPersonAim --> "AimCollisionFilter" LayerMask
+Cinemachine3rdPersonAim --> "AimTargetReticle" RectTransform
+Cinemachine3rdPersonAim --> "AimTarget" Vector3
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+class TopBar {
+    + <<const>> UssClassName : string = "top-bar"
+    + <<const>> IconUssClassName : string
+    + <<const>> BranchInfoUssClassName : string
+    + <<const>> OverflowMenuUssClassName : string
+    + <<const>> BackUssClassName : string
+    + <<const>> BackButtonUssClassName : string
+    + <<const>> BackTextUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    +  <<event>> BackButtonClicked : Action 
+    m_BranchName : string
+    + TopBar()
+    + HideBackNavigation() : void
+    + DisplayBackNavigation(text:string) : void
+    ClickableOnClicked() : void
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- TopBar
+TopBar --> "m_Icon" VisualElement
+TopBar --> "m_BranchInfo" TextElement
+TopBar --> "m_OverflowMenu" IconButton
+TopBar --> "m_BackContainer" VisualElement
+TopBar --> "m_BackButton" IconButton
+TopBar --> "m_BackText" TextElement
+TopBar +-- UxmlFactory
+"UxmlFactory`1" "<TopBar>" <|-- UxmlFactory
+@enduml

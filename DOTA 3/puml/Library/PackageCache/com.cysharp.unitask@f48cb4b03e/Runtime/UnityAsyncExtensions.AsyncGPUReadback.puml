@@ -1,0 +1,36 @@
+@startuml
+class UnityAsyncExtensions <<static>> <<partial>> {
+    + {static} GetAwaiter(asyncOperation:AsyncGPUReadbackRequest) : UniTask<AsyncGPUReadbackRequest>.Awaiter
+    + {static} WithCancellation(asyncOperation:AsyncGPUReadbackRequest, cancellationToken:CancellationToken) : UniTask<AsyncGPUReadbackRequest>
+    + {static} ToUniTask(asyncOperation:AsyncGPUReadbackRequest, timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask<AsyncGPUReadbackRequest>
+}
+class AsyncGPUReadbackRequestAwaiterConfiguredSource <<sealed>> {
+    {static} AsyncGPUReadbackRequestAwaiterConfiguredSource()
+    AsyncGPUReadbackRequestAwaiterConfiguredSource()
+    + {static} Create(asyncOperation:AsyncGPUReadbackRequest, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource<AsyncGPUReadbackRequest>
+    + GetResult(token:short) : AsyncGPUReadbackRequest
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class "IUniTaskSource`1"<T> {
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+UnityAsyncExtensions +-- AsyncGPUReadbackRequestAwaiterConfiguredSource
+"IUniTaskSource`1" "<AsyncGPUReadbackRequest>" <|-- AsyncGPUReadbackRequestAwaiterConfiguredSource
+IPlayerLoopItem <|-- AsyncGPUReadbackRequestAwaiterConfiguredSource
+"ITaskPoolNode`1" "<AsyncGPUReadbackRequestAwaiterConfiguredSource>" <|-- AsyncGPUReadbackRequestAwaiterConfiguredSource
+AsyncGPUReadbackRequestAwaiterConfiguredSource --> "pool<AsyncGPUReadbackRequestAwaiterConfiguredSource>" "TaskPool`1"
+AsyncGPUReadbackRequestAwaiterConfiguredSource --> "nextNode" AsyncGPUReadbackRequestAwaiterConfiguredSource
+AsyncGPUReadbackRequestAwaiterConfiguredSource --> "asyncOperation" AsyncGPUReadbackRequest
+AsyncGPUReadbackRequestAwaiterConfiguredSource --> "cancellationToken" CancellationToken
+AsyncGPUReadbackRequestAwaiterConfiguredSource --> "core<AsyncGPUReadbackRequest>" "UniTaskCompletionSourceCore`1"
+@enduml

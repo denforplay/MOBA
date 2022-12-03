@@ -1,0 +1,42 @@
+@startuml
+class RenderGraphResourceRegistry {
+    <<const>> kSharedResourceLifetime : int = 30
+    m_CurrentFrameIndex : int
+    m_ExecutionCount : int
+    <<const>> kInitialRendererListCount : int = 256
+    CheckHandleValidity(res:ResourceHandle) : void
+    CheckHandleValidity(type:RenderGraphResourceType, index:int) : void
+    GetTextureResource(handle:ResourceHandle) : TextureResource
+    GetComputeBufferResource(handle:ResourceHandle) : ComputeBufferResource
+    ManageSharedRenderGraphResources() : void
+    CreateTextureCallback(rgContext:RenderGraphContext, res:IRenderGraphResource) : void
+    ReleaseTextureCallback(rgContext:RenderGraphContext, res:IRenderGraphResource) : void
+    ValidateTextureDesc(desc:TextureDesc) : void
+    ValidateRendererListDesc(desc:CoreRendererListDesc) : void
+    ValidateComputeBufferDesc(desc:ComputeBufferDesc) : void
+    LogResources() : void
+}
+class RenderGraphResourcesData {
+    + sharedResourcesCount : int
+    + Clear(onException:bool, frameIndex:int) : void
+    + Cleanup() : void
+    + PurgeUnusedGraphicsResources(frameIndex:int) : void
+    + AddNewRenderGraphResource(outRes:ResType, pooledResource:bool) : int
+}
+class "DynamicArray`1"<T> {
+}
+class "List`1"<T> {
+}
+RenderGraphResourceRegistry --> "m_CurrentRegistry" RenderGraphResourceRegistry
+RenderGraphResourceRegistry o-> "m_RendererListResources<RendererListResource>" "DynamicArray`1"
+RenderGraphResourceRegistry --> "m_RenderGraphDebug" RenderGraphDebugParams
+RenderGraphResourceRegistry o-> "m_ResourceLogger" RenderGraphLogger
+RenderGraphResourceRegistry --> "m_FrameInformationLogger" RenderGraphLogger
+RenderGraphResourceRegistry --> "m_CurrentBackbuffer" RTHandle
+RenderGraphResourceRegistry o-> "m_ActiveRendererLists<CoreRendererList>" "List`1"
+RenderGraphResourceRegistry +-- RenderGraphResourcesData
+RenderGraphResourcesData o-> "resourceArray<IRenderGraphResource>" "DynamicArray`1"
+RenderGraphResourcesData --> "pool" IRenderGraphResourcePool
+RenderGraphResourcesData --> "createResourceCallback" ResourceCallback
+RenderGraphResourcesData --> "releaseResourceCallback" ResourceCallback
+@enduml

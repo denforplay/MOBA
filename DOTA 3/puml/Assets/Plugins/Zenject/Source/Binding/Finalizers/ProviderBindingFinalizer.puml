@@ -1,0 +1,9 @@
+@startuml
+abstract class ProviderBindingFinalizer {
+    + ProviderBindingFinalizer(bindInfo:BindInfo)
+    + FinalizeBinding(container:DiContainer) : void
+    ValidateBindTypes(concreteType:Type, contractType:Type) : bool
+}
+IBindingFinalizer <|-- ProviderBindingFinalizer
+ProviderBindingFinalizer --> "BindingInheritanceMethod" BindingInheritanceMethods
+@enduml

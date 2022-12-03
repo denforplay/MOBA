@@ -1,0 +1,18 @@
+@startuml
+class "GetterProvider`2"<TObj,TResult> {
+    <<readonly>> _identifier : object
+    <<readonly>> _matchAll : bool
+    + GetterProvider(identifier:object, method:Func<TObj, TResult>, container:DiContainer, sourceType:InjectSources, matchAll:bool)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    GetSubContext(parent:InjectContext) : InjectContext
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "Func`2"<T1,T2> {
+}
+IProvider <|-- "GetterProvider`2"
+"GetterProvider`2" --> "_container" DiContainer
+"GetterProvider`2" --> "_method<TObj,TResult>" "Func`2"
+"GetterProvider`2" --> "_sourceType" InjectSources
+@enduml

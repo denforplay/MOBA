@@ -1,0 +1,18 @@
+@startuml
+class CinemachineShotEditor <<sealed>> {
+    {static} kAutoCreateKey : string = "CM_Timeline_AutoCreateShotFromSceneView"
+    + {static} AutoCreateShotFromSceneView : bool <<get>> <<set>>
+    {static} + CreatePassiveVcamFromSceneView() : CinemachineVirtualCameraBase
+    + <<override>> OnInspectorGUI() : void
+    DrawSubeditors(vcam:CinemachineVirtualCameraBase) : void
+    UpdateComponentEditors(obj:CinemachineVirtualCameraBase) : void
+    DestroyComponentEditors() : void
+}
+class "BaseEditor`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+"BaseEditor`1" "<CinemachineShot>" <|-- CinemachineShotEditor
+CinemachineShotEditor --> "m_cachedReferenceObject" CinemachineVirtualCameraBase
+CinemachineShotEditor o-> "s_EditorExpanded<System.Type,bool>" "Dictionary`2"
+@enduml

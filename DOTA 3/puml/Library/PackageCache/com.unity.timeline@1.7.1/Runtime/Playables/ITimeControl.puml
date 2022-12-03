@@ -1,0 +1,7 @@
+@startuml
+interface ITimeControl {
+    SetTime(time:double) : void
+    OnControlTimeStart() : void
+    OnControlTimeStop() : void
+}
+@enduml

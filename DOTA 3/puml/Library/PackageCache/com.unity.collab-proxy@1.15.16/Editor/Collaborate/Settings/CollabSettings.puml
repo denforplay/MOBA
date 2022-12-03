@@ -1,0 +1,16 @@
+@startuml
+class CollabSettings {
+    + <<const>> settingRelativeTimestamp : string = "general.relativeTimestamps"
+    + <<const>> settingDefaultOpenLocation : string = "general.defaultOpenLocation"
+}
+enum DisplayMode {
+    Simple,
+    Advanced,
+}
+enum OpenLocation {
+    Docked,
+    Window,
+}
+CollabSettings +-- DisplayMode
+CollabSettings +-- OpenLocation
+@enduml

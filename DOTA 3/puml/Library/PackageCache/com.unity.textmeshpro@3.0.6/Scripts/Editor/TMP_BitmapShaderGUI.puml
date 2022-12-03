@@ -1,0 +1,8 @@
+@startuml
+class TMP_BitmapShaderGUI {
+    {static} s_Face : bool = true
+    DoFacePanel() : void
+    DoDebugPanel() : void
+}
+TMP_BaseShaderGUI <|-- TMP_BitmapShaderGUI
+@enduml

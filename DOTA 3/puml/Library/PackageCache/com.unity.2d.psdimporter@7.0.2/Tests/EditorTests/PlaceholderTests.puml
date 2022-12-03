@@ -1,0 +1,5 @@
+@startuml
+class Placeholder {
+    + PlaceHolderTest() : void
+}
+@enduml

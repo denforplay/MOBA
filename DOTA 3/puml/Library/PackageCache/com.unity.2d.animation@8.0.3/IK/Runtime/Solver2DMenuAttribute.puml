@@ -1,0 +1,8 @@
+@startuml
+class Solver2DMenuAttribute <<sealed>> {
+    m_MenuPath : string
+    + menuPath : string <<get>>
+    + Solver2DMenuAttribute(_menuPath:string)
+}
+Attribute <|-- Solver2DMenuAttribute
+@enduml

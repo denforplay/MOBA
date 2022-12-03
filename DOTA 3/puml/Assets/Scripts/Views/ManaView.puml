@@ -1,0 +1,8 @@
+@startuml
+class ManaView {
+    + AttachManaModel(manable:IManable) : void
+    + SetMaxMana(value:float) : void
+    + SetMana(value:float) : void
+}
+MonoBehaviour <|-- ManaView
+@enduml

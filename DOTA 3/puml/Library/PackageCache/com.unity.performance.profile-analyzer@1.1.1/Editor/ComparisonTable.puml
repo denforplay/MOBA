@@ -1,0 +1,188 @@
+@startuml
+class ComparisonTreeViewItem {
+    + ComparisonTreeViewItem(id:int, depth:int, displayName:string, data:MarkerPairing)
+}
+class ComparisonTable {
+    m_DiffRange : float
+    m_CountDiffRange : float
+    m_CountMeanDiffRange : float
+    m_TotalDiffRange : double
+    <<const>> kRowHeights : float = 20f
+    {static} m_MaxColumns : int
+    + ComparisonTable(state:TreeViewState, multicolumnHeader:MultiColumnHeader, left:ProfileDataView, right:ProfileDataView, pairings:List<MarkerPairing>, profileAnalyzerWindow:ProfileAnalyzerWindow, draw2D:Draw2D, leftColor:Color, rightColor:Color)
+    OnSortingChanged(_multiColumnHeader:MultiColumnHeader) : void
+    SortIfNeeded(rows:IList<TreeViewItem>) : void
+    SortByMultipleColumns() : void
+    GetLeftMarker(item:ComparisonTreeViewItem) : MarkerData
+    GetRightMarker(item:ComparisonTreeViewItem) : MarkerData
+    LeftFirstThread(item:ComparisonTreeViewItem) : string
+    RightFirstThread(item:ComparisonTreeViewItem) : string
+    GetThreadNames(marker:MarkerData) : string
+    LeftThreads(item:ComparisonTreeViewItem) : string
+    RightThreads(item:ComparisonTreeViewItem) : string
+    LeftMedianSorting(item:ComparisonTreeViewItem) : float
+    LeftMedian(item:ComparisonTreeViewItem) : float
+    LeftMedianFrameIndex(item:ComparisonTreeViewItem) : int
+    RightMedianSorting(item:ComparisonTreeViewItem) : float
+    RightMedian(item:ComparisonTreeViewItem) : float
+    RightMedianFrameIndex(item:ComparisonTreeViewItem) : int
+    Diff(item:ComparisonTreeViewItem) : float
+    DiffPercent(left:float, right:float) : float
+    DiffPercent(left:double, right:double) : float
+    DiffPercent(item:ComparisonTreeViewItem) : float
+    AbsDiff(item:ComparisonTreeViewItem) : float
+    LeftCount(item:ComparisonTreeViewItem) : float
+    RightCount(item:ComparisonTreeViewItem) : float
+    CountDiff(item:ComparisonTreeViewItem) : float
+    CountDiffPercent(item:ComparisonTreeViewItem) : float
+    AbsCountDiff(item:ComparisonTreeViewItem) : float
+    LeftCountMean(item:ComparisonTreeViewItem) : float
+    RightCountMean(item:ComparisonTreeViewItem) : float
+    CountMeanDiff(item:ComparisonTreeViewItem) : float
+    CountMeanDiffPercent(item:ComparisonTreeViewItem) : float
+    AbsCountMeanDiff(item:ComparisonTreeViewItem) : float
+    LeftTotal(item:ComparisonTreeViewItem) : double
+    RightTotal(item:ComparisonTreeViewItem) : double
+    TotalDiff(item:ComparisonTreeViewItem) : double
+    TotalDiffPercent(item:ComparisonTreeViewItem) : float
+    AbsTotalDiff(item:ComparisonTreeViewItem) : double
+    LeftMinDepth(item:ComparisonTreeViewItem) : int
+    RightMinDepth(item:ComparisonTreeViewItem) : int
+    LeftMaxDepth(item:ComparisonTreeViewItem) : int
+    RightMaxDepth(item:ComparisonTreeViewItem) : int
+    DepthDiff(item:ComparisonTreeViewItem) : int
+    InitialOrder(myTypes:IEnumerable<ComparisonTreeViewItem>, history:int[]) : IOrderedEnumerable<ComparisonTreeViewItem>
+    + ShowingHorizontalScroll : bool <<get>>
+    ToDisplayUnits(ms:float, showUnits:bool, showFullValueWhenBelowZero:bool) : string
+    ToDisplayUnits(ms:double, showUnits:bool, showFullValueWhenBelowZero:bool) : string
+    ToTooltipDisplayUnits(ms:float, showUnits:bool, onFrame:int) : string
+    ToTooltipDisplayUnits(ms:double, showUnits:bool, onFrame:int) : string
+    ToDisplayUnitsWithTooltips(ms:float, showUnits:bool, onFrame:int) : GUIContent
+    ToDisplayUnitsWithTooltips(ms:double, showUnits:bool, onFrame:int) : GUIContent
+    CopyToClipboard(current:Event, text:string) : void
+    GenerateActiveContextMenu(markerName:string, evt:Event, content:GUIContent) : GenericMenu
+    GenerateDisabledContextMenu(markerName:string, content:GUIContent) : GenericMenu
+    ShowContextMenu(cellRect:Rect, markerName:string, content:GUIContent) : void
+    ShowText(rect:Rect, text:string) : void
+    ShowText(rect:Rect, content:GUIContent) : void
+    PercentString(percent:float) : string
+    DiffPercentString(item:ComparisonTreeViewItem) : string
+    CountDiffPercentString(item:ComparisonTreeViewItem) : string
+    CountMeanDiffPercentString(item:ComparisonTreeViewItem) : string
+    TotalDiffPercentString(item:ComparisonTreeViewItem) : string
+    GenerateStrings(item:ComparisonTreeViewItem) : void
+    ShowBar(rect:Rect, ms:float, range:float, content:GUIContent, color:Color, rightAlign:bool) : void
+    CellGUI(cellRect:Rect, item:ComparisonTreeViewItem, column:MyColumns, args:RowGUIArgs) : void
+    + {static} CreateDefaultMultiColumnHeaderState(modeFilter:MarkerColumnFilter) : MultiColumnHeaderState
+    {static} GetDefaultVisibleColumns(mode:MarkerColumnFilter.Mode) : int[]
+    {static} SetMode(modeFilter:MarkerColumnFilter, state:MultiColumnHeaderState) : void
+    + SetMode(modeFilter:MarkerColumnFilter) : void
+}
+class "List`1"<T> {
+}
+enum MyColumns {
+    Name,
+    LeftMedian,
+    LeftBar,
+    RightBar,
+    RightMedian,
+    Diff,
+    DiffPercent,
+    AbsDiff,
+    LeftCount,
+    LeftCountBar,
+    RightCountBar,
+    RightCount,
+    CountDiff,
+    CountDiffPercent,
+    AbsCountDiff,
+    LeftCountMean,
+    LeftCountMeanBar,
+    RightCountMeanBar,
+    RightCountMean,
+    CountMeanDiff,
+    CountMeanDiffPercent,
+    AbsCountMeanDiff,
+    LeftTotal,
+    LeftTotalBar,
+    RightTotalBar,
+    RightTotal,
+    TotalDiff,
+    TotalDiffPercent,
+    AbsTotalDiff,
+    LeftDepth,
+    RightDepth,
+    DepthDiff,
+    LeftThreads,
+    RightThreads,
+}
+enum SortOption {
+    Name,
+    LeftMedian,
+    RightMedian,
+    Diff,
+    ReverseDiff,
+    DiffPercent,
+    AbsDiff,
+    LeftCount,
+    RightCount,
+    CountDiff,
+    ReverseCountDiff,
+    CountDiffPercent,
+    AbsCountDiff,
+    LeftCountMean,
+    RightCountMean,
+    CountMeanDiff,
+    ReverseCountMeanDiff,
+    CountMeanDiffPercent,
+    AbsCountMeanDiff,
+    LeftTotal,
+    RightTotal,
+    TotalDiff,
+    ReverseTotalDiff,
+    TotalDiffPercent,
+    AbsTotalDiff,
+    LeftDepth,
+    RightDepth,
+    DepthDiff,
+    LeftThreads,
+    RightThreads,
+}
+class Styles <<static>> {
+}
+class HeaderData <<struct>> {
+    + <<readonly>> width : float
+    + <<readonly>> minWidth : float
+    + <<readonly>> autoResize : bool
+    + <<readonly>> allowToggleVisibility : bool
+    + <<readonly>> ascending : bool
+    + HeaderData(name:string, tooltip:string, width:float, minWidth:float, autoResize:bool, allowToggleVisibility:bool, ascending:bool)
+}
+TreeViewItem <|-- ComparisonTreeViewItem
+ComparisonTreeViewItem --> "data" MarkerPairing
+TreeView <|-- ComparisonTable
+ComparisonTable --> "m_2D" Draw2D
+ComparisonTable --> "m_LeftDataView" ProfileDataView
+ComparisonTable --> "m_RightDataView" ProfileDataView
+ComparisonTable --> "m_LeftColor" Color
+ComparisonTable --> "m_RightColor" Color
+ComparisonTable --> "m_Pairings<MarkerPairing>" "List`1"
+ComparisonTable --> "m_ProfileAnalyzerWindow" ProfileAnalyzerWindow
+ComparisonTable o-> "m_Rows<TreeViewItem>" "List`1"
+ComparisonTable +-- MyColumns
+ComparisonTable +-- SortOption
+ComparisonTable +-- Styles
+Styles o-> "menuItemSelectFramesInAll" GUIContent
+Styles o-> "menuItemSelectFramesInCurrent" GUIContent
+Styles o-> "menuItemSelectFramesAll" GUIContent
+Styles o-> "menuItemAddToIncludeFilter" GUIContent
+Styles o-> "menuItemAddToExcludeFilter" GUIContent
+Styles o-> "menuItemRemoveFromIncludeFilter" GUIContent
+Styles o-> "menuItemRemoveFromExcludeFilter" GUIContent
+Styles o-> "menuItemSetAsParentMarkerFilter" GUIContent
+Styles o-> "menuItemClearParentMarkerFilter" GUIContent
+Styles o-> "menuItemCopyToClipboard" GUIContent
+Styles o-> "invalidEntry" GUIContent
+ComparisonTable +-- HeaderData
+HeaderData --> "content" GUIContent
+@enduml

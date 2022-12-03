@@ -1,0 +1,8 @@
+@startuml
+class SpriteShapeEditorAnalytics {
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<SpriteShapeEditorAnalytics>" <|-- SpriteShapeEditorAnalytics
+SpriteShapeEditorAnalytics o-> "m_Analytics" SpriteShapeAnalytics
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+class SplinePointMetaData <<struct>> {
+    + height : float
+    + spriteIndex : uint
+    + cornerMode : int
+}
+class Spline {
+    + isOpenEnded : bool <<get>> <<set>>
+    + Clear() : void
+    + GetPointCount() : int
+    + InsertPointAt(index:int, point:Vector3) : void
+    + RemovePointAt(index:int) : void
+    + GetPosition(index:int) : Vector3
+    + SetPosition(index:int, point:Vector3) : void
+    + GetLeftTangent(index:int) : Vector3
+    + SetLeftTangent(index:int, tangent:Vector3) : void
+    + GetRightTangent(index:int) : Vector3
+    + SetRightTangent(index:int, tangent:Vector3) : void
+    + GetTangentMode(index:int) : ShapeTangentMode
+    + SetTangentMode(index:int, mode:ShapeTangentMode) : void
+    + GetHeight(index:int) : float
+    + SetHeight(index:int, value:float) : void
+    + GetSpriteIndex(index:int) : int
+    + SetSpriteIndex(index:int, value:int) : void
+    + GetCorner(index:int) : bool
+    + SetCorner(index:int, value:bool) : void
+    + <<override>> GetHashCode() : int
+}
+@enduml

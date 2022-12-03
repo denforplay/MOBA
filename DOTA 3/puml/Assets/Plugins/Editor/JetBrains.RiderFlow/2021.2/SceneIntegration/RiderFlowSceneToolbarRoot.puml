@@ -1,0 +1,12 @@
+@startuml
+class RiderFlowSceneToolbarRoot {
+    + RiderFlowSceneToolbarRoot()
+    + HasHorizontalAlignment : bool <<get>>
+}
+interface IRiderFlowToolbarElement {
+    GetActiveElements() : IEnumerable<VisualElement>
+    SetVerticalMargin(top:int, bottom:int) : void
+    SetHorizontalMargin(left:int, right:int) : void
+}
+VisualElement <|-- RiderFlowSceneToolbarRoot
+@enduml

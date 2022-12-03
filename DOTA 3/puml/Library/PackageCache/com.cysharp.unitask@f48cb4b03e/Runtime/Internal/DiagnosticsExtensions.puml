@@ -1,0 +1,15 @@
+@startuml
+class DiagnosticsExtensions <<static>> {
+    {static} displayFilenames : bool = true
+    + {static} CleanupAsyncStackTrace(stackTrace:StackTrace) : string
+    {static} IsAsync(methodInfo:MethodBase) : bool
+    {static} TryResolveStateMachineMethod(method:MethodBase, declaringType:Type) : bool
+    {static} BeautifyType(t:Type, shortName:bool) : string
+    {static} IgnoreLine(methodInfo:MethodBase) : bool
+    {static} AppendHyperLink(path:string, line:string) : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+DiagnosticsExtensions o-> "typeBeautifyRegex" Regex
+DiagnosticsExtensions o-> "builtInTypeNames<Type,string>" "Dictionary`2"
+@enduml

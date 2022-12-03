@@ -1,0 +1,43 @@
+@startuml
+class CinemachineSettings <<sealed>> {
+    {static} OnPackageLoadedInEditor() : void
+    {static} CinemachineSettings()
+}
+class CinemachineCoreSettings <<static>> {
+    + {static} ShowInGameGuides : bool <<get>> <<set>>
+    {static} kUseTimelneScrubbingCache : string = "CNMCN_Timeeline_UseTimelineScrubbingCache"
+    + {static} UseTimelneScrubbingCache : bool <<get>> <<set>>
+}
+class ComposerSettings <<static>> {
+    + <<const>> kDefaultOverlayOpacity : float = 0.15f
+    + {static} OverlayOpacity : float <<get>> <<set>>
+    + {static} TargetSize : float <<get>> <<set>>
+}
+class Styles {
+}
+CinemachineSettings o-> "sDraggableText" GUIContent
+CinemachineSettings o-> "sGlobalMuteText" GUIContent
+CinemachineSettings +-- CinemachineCoreSettings
+CinemachineCoreSettings o-> "kDefaultActiveColour" Color
+CinemachineCoreSettings --> "ActiveGizmoColour" Color
+CinemachineCoreSettings o-> "kDefaultInactiveColour" Color
+CinemachineCoreSettings --> "InactiveGizmoColour" Color
+CinemachineCoreSettings o-> "kDefaultBoundaryObjectColour" Color
+CinemachineCoreSettings --> "BoundaryObjectGizmoColour" Color
+CinemachineSettings +-- ComposerSettings
+ComposerSettings o-> "kDefaultHardBoundsColour" Color
+ComposerSettings o-> "kDefaultSoftBoundsColour" Color
+ComposerSettings o-> "kDefaultTargetColour" Color
+ComposerSettings --> "HardBoundsOverlayColour" Color
+ComposerSettings --> "SoftBoundsOverlayColour" Color
+ComposerSettings --> "TargetColour" Color
+CinemachineSettings +-- Styles
+Styles o-> "sCoreActiveGizmosColour" GUIContent
+Styles o-> "sCoreInactiveGizmosColour" GUIContent
+Styles o-> "sCoreBoundaryObjectGizmosColour" GUIContent
+Styles o-> "sComposerOverlayOpacity" GUIContent
+Styles o-> "sComposerHardBoundsOverlay" GUIContent
+Styles o-> "sComposerSoftBoundsOverlay" GUIContent
+Styles o-> "sComposerTargetOverlay" GUIContent
+Styles o-> "sComposerTargetOverlayPixels" GUIContent
+@enduml

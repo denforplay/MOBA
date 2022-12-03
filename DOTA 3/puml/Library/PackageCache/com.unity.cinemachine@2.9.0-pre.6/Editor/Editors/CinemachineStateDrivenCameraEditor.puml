@@ -1,0 +1,29 @@
+@startuml
+class CinemachineStateDrivenCameraEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+    {static} GetControllerFromAnimator(animator:Animator) : AnimatorController
+    SetupInstructionList() : void
+    SetupChildList() : void
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+}
+class "EmbeddeAssetEditor`1"<T> {
+}
+class StateCollector {
+    + CollectStates(ac:AnimatorController, layerIndex:int) : void
+    CollectStatesFromFSM(fsm:AnimatorStateMachine, hashPrefix:string, parentHash:int, displayPrefix:string) : void
+    CollectClips(motion:Motion) : List<AnimationClip>
+    AddState(hash:int, parentHash:int, displayName:string) : int
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+"CinemachineVirtualCameraBaseEditor`1" "<CinemachineStateDrivenCamera>" <|-- CinemachineStateDrivenCameraEditor
+CinemachineStateDrivenCameraEditor --> "m_BlendsEditor<CinemachineBlenderSettings>" "EmbeddeAssetEditor`1"
+CinemachineStateDrivenCameraEditor +-- StateCollector
+StateCollector --> "mStates<int>" "List`1"
+StateCollector --> "mStateNames<string>" "List`1"
+StateCollector --> "mStateIndexLookup<int,int>" "Dictionary`2"
+StateCollector --> "mStateParentLookup<int,int>" "Dictionary`2"
+@enduml

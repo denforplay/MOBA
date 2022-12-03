@@ -1,0 +1,5 @@
+@startuml
+class DefaultGameObjectKernel {
+}
+MonoKernel <|-- DefaultGameObjectKernel
+@enduml

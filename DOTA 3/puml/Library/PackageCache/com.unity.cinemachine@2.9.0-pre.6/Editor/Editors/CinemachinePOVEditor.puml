@@ -1,0 +1,7 @@
+@startuml
+class CinemachinePOVEditor <<sealed>> {
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachinePOV>" <|-- CinemachinePOVEditor
+@enduml

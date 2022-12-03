@@ -1,0 +1,15 @@
+@startuml
+class DefaultAssetCreation <<static>> {
+    <<const>> k_TilePaletteAssetMenuPriority : int = 4
+    {static} MenuItem_AssetsCreate2DTilePaletteRectangular(menuCommand:MenuCommand) : void
+    {static} MenuItem_AssetsCreate2DTilePaletteHexagonalFlatTop(menuCommand:MenuCommand) : void
+    {static} MenuItem_AssetsCreate2DTilePaletteHexagonalPointedTop(menuCommand:MenuCommand) : void
+    {static} MenuItem_AssetsCreate2DTilePaletteIsometric(menuCommand:MenuCommand) : void
+    {static} CreateAssetObject(defaultAssetName:string, layout:GridLayout.CellLayout, swizzle:GridLayout.CellSwizzle, cellSizing:GridPalette.CellSizing, cellSize:Vector3) : void
+}
+class CreateAssetEndNameEditAction {
+    + <<override>> Action(instanceId:int, pathName:string, resourceFile:string) : void
+}
+DefaultAssetCreation +-- CreateAssetEndNameEditAction
+CreateAssetEndNameEditAction --> "cellSize" Vector3
+@enduml

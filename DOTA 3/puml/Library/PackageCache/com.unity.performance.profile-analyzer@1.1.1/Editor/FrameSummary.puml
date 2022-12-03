@@ -1,0 +1,24 @@
+@startuml
+class FrameSummary {
+    + msTotal : double
+    + first : int
+    + last : int
+    + count : int
+    + msMean : float
+    + msMedian : float
+    + msLowerQuartile : float
+    + msUpperQuartile : float
+    + msMin : float
+    + msMax : float
+    + medianFrameIndex : int
+    + minFrameIndex : int
+    + maxFrameIndex : int
+    + maxMarkerDepth : int
+    + totalMarkers : int
+    + markerCountMax : int
+    + markerCountMaxMean : float
+}
+class "List`1"<T> {
+}
+FrameSummary o-> "frames<FrameTime>" "List`1"
+@enduml

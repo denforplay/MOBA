@@ -1,0 +1,8 @@
+@startuml
+class DockEditorWindow <<static>> {
+    {static} DockEditorWindow()
+    {static} InitializeInfo() : void
+}
+DockEditorWindow --> "mAddTabMethod" MethodInfo
+DockEditorWindow --> "mParentField" FieldInfo
+@enduml

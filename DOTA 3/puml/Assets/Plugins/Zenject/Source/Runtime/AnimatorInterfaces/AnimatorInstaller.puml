@@ -1,0 +1,10 @@
+@startuml
+class AnimatorInstaller {
+    + AnimatorInstaller(animator:Animator)
+    + <<override>> InstallBindings() : void
+}
+class "Installer`2"<T1,T2> {
+}
+"Installer`2" "<Animator,AnimatorInstaller>" <|-- AnimatorInstaller
+AnimatorInstaller --> "_animator" Animator
+@enduml

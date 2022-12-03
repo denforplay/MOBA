@@ -1,0 +1,15 @@
+@startuml
+class SubContainerDependencyProvider {
+    <<readonly>> _identifier : object
+    <<readonly>> _resolveAll : bool
+    + SubContainerDependencyProvider(dependencyType:Type, identifier:object, subContainerCreator:ISubContainerCreator, resolveAll:bool)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    CreateSubContext(parent:InjectContext, subContainer:DiContainer) : InjectContext
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+IProvider <|-- SubContainerDependencyProvider
+SubContainerDependencyProvider --> "_subContainerCreator" ISubContainerCreator
+SubContainerDependencyProvider --> "_dependencyType" Type
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class ShaderGraphAssetPostProcessor {
+    {static} RegisterShaders(paths:string[]) : void
+    {static} UpdateAfterAssetChange(newNames:string[]) : void
+    {static} DisplayDeletionDialog(deletedAssets:string[]) : void
+    {static} OnPostprocessAllAssets(importedAssets:string[], deletedAssets:string[], movedAssets:string[], movedFromAssetPaths:string[]) : void
+}
+AssetPostprocessor <|-- ShaderGraphAssetPostProcessor
+@enduml

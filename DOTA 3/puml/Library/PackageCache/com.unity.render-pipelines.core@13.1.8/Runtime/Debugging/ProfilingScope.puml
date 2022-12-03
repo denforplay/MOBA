@@ -1,0 +1,39 @@
+@startuml
+class "TProfilingSampler`1"<TEnum> {
+    {static} TProfilingSampler()
+    + TProfilingSampler(name:string)
+}
+class ProfilingSampler {
+    + {static} Get(marker:TEnum) : ProfilingSampler
+    + ProfilingSampler(name:string)
+    + Begin(cmd:CommandBuffer) : void
+    + End(cmd:CommandBuffer) : void
+    + name : string <<get>>
+    + enableRecording : bool <<set>>
+    + gpuElapsedTime : float <<get>>
+    + gpuSampleCount : int <<get>>
+    + cpuElapsedTime : float <<get>>
+    + cpuSampleCount : int <<get>>
+    + inlineCpuElapsedTime : float <<get>>
+    + inlineCpuSampleCount : int <<get>>
+    ProfilingSampler()
+}
+class ProfilingScope <<struct>> {
+    + ProfilingScope(cmd:CommandBuffer, sampler:ProfilingSampler)
+    + Dispose() : void
+}
+class ProfilingSample <<struct>> {
+    <<readonly>> m_Name : string
+    m_Disposed : bool
+    + ProfilingSample(cmd:CommandBuffer, name:string, sampler:CustomSampler)
+    + ProfilingSample(cmd:CommandBuffer, format:string, arg:object)
+    + ProfilingSample(cmd:CommandBuffer, format:string, args:object[])
+    + Dispose() : void
+    Dispose(disposing:bool) : void
+}
+ProfilingSampler <|-- "TProfilingSampler`1"
+IDisposable <|-- ProfilingScope
+IDisposable <|-- ProfilingSample
+ProfilingSample --> "m_Cmd" CommandBuffer
+ProfilingSample --> "m_Sampler" CustomSampler
+@enduml

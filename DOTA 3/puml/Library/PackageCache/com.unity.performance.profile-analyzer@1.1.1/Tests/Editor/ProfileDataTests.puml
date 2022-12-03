@@ -1,0 +1,7 @@
+@startuml
+class ProfileDataTests {
+    + Save_WithNullData_ReturnsFalse() : void
+    + Save_WithNullFilename_ReturnsFalse() : void
+    + Save_WithEmptyFilename_ReturnsFalse() : void
+}
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class TMPro_CreateObjectMenu <<static>> {
+    {static} CreateTextMeshProObjectPerform(command:MenuCommand) : void
+    {static} CreateTextMeshProGuiObjectPerform(menuCommand:MenuCommand) : void
+    + {static} AddButton(menuCommand:MenuCommand) : void
+    {static} AddTextMeshProInputField(menuCommand:MenuCommand) : void
+    + {static} AddDropdown(menuCommand:MenuCommand) : void
+    + {static} CreateNewUI() : GameObject
+    + {static} GetOrCreateCanvasGameObject() : GameObject
+    {static} IsValidCanvas(canvas:Canvas) : bool
+}
+@enduml

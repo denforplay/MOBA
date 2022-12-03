@@ -1,0 +1,34 @@
+@startuml
+enum UniTaskStatus {
+    Pending= 0,
+    Succeeded= 1,
+    Faulted= 2,
+    Canceled= 3,
+}
+interface IUniTaskSource {
+    GetStatus(token:short) : UniTaskStatus
+    OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    GetResult(token:short) : void
+    UnsafeGetStatus() : UniTaskStatus
+    GetStatus(token:short) : System.Threading.Tasks.Sources.ValueTaskSourceStatus
+    GetResult(token:short) : void
+    OnCompleted(continuation:Action<object>, state:object, token:short, flags:System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags) : void
+}
+interface "IUniTaskSource`1"<out T> {
+    <<new>> GetResult(token:short) : T
+    <<new>> + GetStatus(token:short) : UniTaskStatus
+    <<new>> + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    GetStatus(token:short) : System.Threading.Tasks.Sources.ValueTaskSourceStatus
+    GetResult(token:short) : T
+    OnCompleted(continuation:Action<object>, state:object, token:short, flags:System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags) : void
+}
+class UniTaskStatusExtensions <<static>> {
+    + {static} IsCompleted(status:UniTaskStatus) : bool
+    + {static} IsCompletedSuccessfully(status:UniTaskStatus) : bool
+    + {static} IsCanceled(status:UniTaskStatus) : bool
+    + {static} IsFaulted(status:UniTaskStatus) : bool
+}
+class "IValueTaskSource`1"<T> {
+}
+IUniTaskSource <|-- "IUniTaskSource`1"
+@enduml

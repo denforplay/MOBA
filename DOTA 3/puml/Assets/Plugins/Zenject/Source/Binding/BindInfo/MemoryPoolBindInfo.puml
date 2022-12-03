@@ -1,0 +1,13 @@
+@startuml
+enum PoolExpandMethods {
+    OneAtATime,
+    Double,
+    Disabled,
+}
+class MemoryPoolBindInfo {
+    + MemoryPoolBindInfo()
+    + InitialSize : int <<get>> <<set>>
+    + MaxSize : int <<get>> <<set>>
+}
+MemoryPoolBindInfo --> "ExpandMethod" PoolExpandMethods
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+class TestSystemMath {
+    + {static} TestCos(value:float) : double
+    + {static} TestSin(value:float) : double
+    + {static} TestTan(value:float) : float
+    + {static} TestAcos(value:float) : double
+    + {static} TestAsin(value:float) : double
+    + {static} TestAtan(value:float) : float
+    + {static} TestAtan2(y:float, x:float) : float
+    + {static} TestCosh(value:float) : double
+    + {static} TestSinh(value:float) : double
+    + {static} TestTanh(value:float) : float
+    + {static} TestSqrt(value:float) : double
+    + {static} TestLog(value:float) : double
+    + {static} TestLog10(value:float) : double
+    + {static} TestExp(value:float) : double
+    + {static} TestPow(value:float, power:float) : double
+    + {static} TestAbsSByte(value:sbyte) : sbyte
+    + {static} TestAbsShort(value:short) : short
+    + {static} TestAbsInt(value:int) : int
+    + {static} TestAbsLong(value:long) : long
+    + {static} TestAbsFloat(value:float) : float
+    + {static} TestAbsDouble(value:double) : double
+    + {static} TestMaxInt(left:int, right:int) : int
+    + {static} TestMinInt(left:int, right:int) : int
+    + {static} TestMaxDouble(left:double, right:double) : double
+    + {static} TestMinDouble(left:double, right:double) : double
+    + {static} TestSignInt(value:int) : int
+    + {static} TestSignFloat(value:float) : int
+    + {static} TestSignException(value:float) : int
+    + {static} TestSignDouble(value:double) : int
+    + {static} TestCeilingDouble(value:double) : double
+    + {static} TestFloorDouble(value:double) : double
+    + {static} TestRoundDouble(value:double) : double
+    + {static} TestTruncateDouble(value:double) : double
+    + {static} TestDivRemInt(a:int, b:int) : int
+    + {static} TestBigMulInt(a:int, b:int) : long
+    + {static} TestLogWithBaseDouble(a:double, newBase:double) : double
+    + {static} TestIsNanDouble(a:double) : bool
+    + {static} TestIsNanFloat(a:float) : bool
+    + {static} TestIsInfinityDouble(a:double) : bool
+    + {static} TestIsInfinityFloat(a:float) : bool
+}
+@enduml

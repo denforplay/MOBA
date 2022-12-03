@@ -1,0 +1,7 @@
+@startuml
+class CinemachineShotPlayable <<sealed>> {
+    + IsValid : bool <<get>>
+}
+PlayableBehaviour <|-- CinemachineShotPlayable
+CinemachineShotPlayable --> "VirtualCamera" CinemachineVirtualCameraBase
+@enduml

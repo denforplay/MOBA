@@ -1,0 +1,36 @@
+@startuml
+class Stage {
+    <<const>> k_PreviewCullingLayerIndex : int = 31
+    + Stage(sceneName:string)
+    + MoveIntoStage(gameObject:GameObject, persistent:bool) : void
+    + MoveIntoStage(gameObject:GameObject, position:Vector3, rotation:Quaternion, persistent:bool) : void
+    + InstantiateIntoStage(prefabOrSceneObject:GameObject, persistent:bool) : GameObject
+    + InstantiateIntoStage(prefabOrSceneObject:GameObject, position:Vector3, rotation:Quaternion, persistent:bool) : GameObject
+    + CreateGameObjectIntoStage(persistent:bool) : GameObject
+    + Clear(persistent:bool) : void
+    {static} InitAddedObjectsRecursively(go:GameObject) : void
+    SetGameObjectVisible(visible:bool) : void
+    + OnBeginRendering(dataProvider:IDataProvider) : void
+    + OnEndRendering(dataProvider:IDataProvider) : void
+    CleanUp() : void
+    + Dispose() : void
+}
+class StageCache {
+    <<const>> firstStageName : string = "LookDevFirstView"
+    <<const>> secondStageName : string = "LookDevSecondView"
+    + initialized : bool <<get>>
+    + StageCache(dataProvider:IDataProvider)
+    InitStage(index:ViewIndex, dataProvider:IDataProvider) : Stage
+    + UpdateSceneObjects(index:ViewIndex) : void
+    + UpdateSceneLighting(index:ViewIndex, provider:IDataProvider) : void
+    CleanUp() : void
+    + Dispose() : void
+}
+IDisposable <|-- Stage
+Stage --> "camera" Camera
+Stage --> "sunLight" Light
+Stage --> "scene" Scene
+Stage --> "runtimeInterface" StageRuntimeInterface
+IDisposable <|-- StageCache
+StageCache --> "m_CurrentDataProvider" IDataProvider
+@enduml

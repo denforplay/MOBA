@@ -1,0 +1,18 @@
+@startuml
+class BurstRuntime <<static>> {
+    + {static} GetHashCode32() : int
+    + {static} GetHashCode32(type:Type) : int
+    + {static} GetHashCode64() : long
+    + {static} GetHashCode64(type:Type) : long
+    + {static} LoadAdditionalLibrary(pathToLibBurstGenerated:string) : bool
+    + <<unsafe>> {static} GetUTF8LiteralPointer(str:string, byteCount:int) : byte*
+}
+class "HashCode32`1"<T> <<struct>> {
+    + {static} <<readonly>> Value : int
+}
+class "HashCode64`1"<T> <<struct>> {
+    + {static} <<readonly>> Value : long
+}
+BurstRuntime +-- "HashCode32`1"
+BurstRuntime +-- "HashCode64`1"
+@enduml

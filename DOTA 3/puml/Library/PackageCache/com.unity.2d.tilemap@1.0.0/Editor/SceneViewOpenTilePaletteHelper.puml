@@ -1,0 +1,13 @@
+@startuml
+class SceneViewOpenTilePaletteHelper {
+}
+class "ScriptableSingleton`1"<T> {
+}
+class SceneViewOpenTilePaletteProperties {
+    + {static} <<readonly>> showInSceneViewEditorPref : string = "OpenTilePalette.ShowInSceneView"
+    + {static} <<readonly>> showInSceneViewLookup : string = "Show Open Tile Palette in Scene View"
+}
+"ScriptableSingleton`1" "<SceneViewOpenTilePaletteHelper>" <|-- SceneViewOpenTilePaletteHelper
+SceneViewOpenTilePaletteHelper +-- SceneViewOpenTilePaletteProperties
+SceneViewOpenTilePaletteProperties o-> "showInSceneViewLabel" GUIContent
+@enduml

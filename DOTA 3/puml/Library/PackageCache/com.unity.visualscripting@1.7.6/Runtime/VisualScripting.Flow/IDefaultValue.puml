@@ -1,0 +1,5 @@
+@startuml
+interface "IDefaultValue`1"<out T> {
+    defaultValue : T <<get>>
+}
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+class BindStatement {
+    + BindStatement()
+    + HasFinalizer : bool <<get>>
+    + SetFinalizer(bindingFinalizer:IBindingFinalizer) : void
+    AssertHasFinalizer() : void
+    + AddDisposable(disposable:IDisposable) : void
+    + SpawnBindInfo() : BindInfo
+    + FinalizeBinding(container:DiContainer) : void
+    + Reset() : void
+    + Dispose() : void
+}
+class "List`1"<T> {
+}
+IDisposable <|-- BindStatement
+BindStatement --> "_disposables<IDisposable>" "List`1"
+BindStatement --> "_bindingFinalizer" IBindingFinalizer
+BindStatement --> "BindingInheritanceMethod" BindingInheritanceMethods
+@enduml

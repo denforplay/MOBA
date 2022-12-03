@@ -1,0 +1,7 @@
+@startuml
+class WayPoint {
+}
+MonoBehaviour <|-- WayPoint
+WayPoint --> "NextLeftWayPoint" WayPoint
+WayPoint --> "NextRightWayPoint" WayPoint
+@enduml

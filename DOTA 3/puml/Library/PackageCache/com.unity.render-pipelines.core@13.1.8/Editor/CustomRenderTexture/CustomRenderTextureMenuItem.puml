@@ -1,0 +1,5 @@
+@startuml
+class CoreMenuItems <<static>> {
+    {static} MenuCreateCustomRenderTextureShader() : void
+}
+@enduml

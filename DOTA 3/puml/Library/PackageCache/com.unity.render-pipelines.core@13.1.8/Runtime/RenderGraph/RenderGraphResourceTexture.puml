@@ -1,0 +1,65 @@
+@startuml
+class TextureHandle <<struct>> {
+    + IsValid() : bool
+    + SetFallBackResource(texture:TextureHandle) : void
+}
+enum TextureSizeMode {
+    Explicit,
+    Scale,
+    Functor,
+}
+class TextureDesc <<struct>> {
+    + width : int
+    + height : int
+    + slices : int
+    + enableRandomWrite : bool
+    + useMipMap : bool
+    + autoGenerateMips : bool
+    + isShadowMap : bool
+    + anisoLevel : int
+    + mipMapBias : float
+    + bindTextureMS : bool
+    + useDynamicScale : bool
+    + name : string
+    + fallBackToBlackTexture : bool
+    + clearBuffer : bool
+    InitDefaultValues(dynamicResolution:bool, xrReady:bool) : void
+    + TextureDesc(width:int, height:int, dynamicResolution:bool, xrReady:bool)
+    + TextureDesc(scale:Vector2, dynamicResolution:bool, xrReady:bool)
+    + TextureDesc(func:ScaleFunc, dynamicResolution:bool, xrReady:bool)
+    + TextureDesc(input:TextureDesc)
+    + <<override>> GetHashCode() : int
+}
+class TextureResource {
+    {static} m_TextureCreationIndex : int
+    + <<override>> GetName() : string
+    + <<override>> CreatePooledGraphicsResource() : void
+    + <<override>> ReleasePooledGraphicsResource(frameIndex:int) : void
+    + <<override>> CreateGraphicsResource(name:string) : void
+    + <<override>> ReleaseGraphicsResource() : void
+    + <<override>> LogCreation(logger:RenderGraphLogger) : void
+    + <<override>> LogRelease(logger:RenderGraphLogger) : void
+}
+class TexturePool {
+    <<override>> + PurgeUnusedResources(currentFrameIndex:int) : void
+}
+class "RenderGraphResource`2"<T1,T2> {
+}
+class "RenderGraphResourcePool`1"<T> {
+}
+TextureHandle --> "nullHandle" TextureHandle
+TextureDesc --> "sizeMode" TextureSizeMode
+TextureDesc --> "scale" Vector2
+TextureDesc --> "func" ScaleFunc
+TextureDesc --> "depthBufferBits" DepthBits
+TextureDesc --> "colorFormat" GraphicsFormat
+TextureDesc --> "filterMode" FilterMode
+TextureDesc --> "wrapMode" TextureWrapMode
+TextureDesc --> "dimension" TextureDimension
+TextureDesc --> "msaaSamples" MSAASamples
+TextureDesc --> "memoryless" RenderTextureMemoryless
+TextureDesc --> "vrUsage" VRTextureUsage
+TextureDesc --> "clearColor" Color
+"RenderGraphResource`2" "<TextureDesc,RTHandle>" <|-- TextureResource
+"RenderGraphResourcePool`1" "<RTHandle>" <|-- TexturePool
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+class MainPresenter {
+    m_IsStarted : bool
+    <<const>> k_ErrorOccuredId : string = "error_occured"
+    <<const>> k_ConflictsDetectedId : string = "conflicts_detected"
+    <<const>> k_RevisionsAvailableId : string = "revisions_available"
+    + MainPresenter(view:IMainView, model:IMainModel)
+    + Start() : void
+    + Stop() : void
+    OnStateChanged() : void
+    PopulateInitialData() : void
+    + AssignHistoryPresenter(view:IHistoryView) : IHistoryPresenter
+    + AssignChangesPresenter(view:IChangesView) : IChangesPresenter
+    + RequestCancelJob() : void
+    + UpdateTabIndex(index:int) : void
+    + NavigateBack() : void
+    OnConflictStatusChange(conflicts:bool) : void
+    OnOperationStatusChange(inProgress:bool) : void
+    OnOperationProgressChange(progressInfo:IProgressInfo) : void
+    OnErrorOccurred(errorInfo:IErrorInfo) : void
+    OnErrorCleared() : void
+    OnRemoteRevisionsAvailabilityChange(remoteRevisionsAvailable:bool) : void
+    OnBackButtonStateUpdated(title:string) : void
+}
+IMainPresenter <|-- MainPresenter
+MainPresenter --> "m_View" IMainView
+MainPresenter --> "m_Model" IMainModel
+@enduml

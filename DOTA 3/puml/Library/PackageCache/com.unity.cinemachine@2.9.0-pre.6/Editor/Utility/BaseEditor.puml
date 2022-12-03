@@ -1,0 +1,8 @@
+@startuml
+class "BaseEditor`1"<T> {
+    + <<override>> OnInspectorGUI() : void
+}
+class "List`1"<T> {
+}
+"BaseEditor`1" o-> "mExcluded<string>" "List`1"
+@enduml

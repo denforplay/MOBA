@@ -1,0 +1,38 @@
+@startuml
+class ChangesPresenter {
+    m_IsStarted : bool
+    + ChangesPresenter(view:IChangesView, model:IChangesModel, mainModel:IMainModel)
+    + Start() : void
+    + Stop() : void
+    OnStateChanged() : void
+    PopulateInitialData() : void
+    OnBusyStatusUpdated(busy:bool) : void
+    UpdateChangeList() : void
+    + UpdateEntryToggle(path:string, toggled:bool) : bool
+    + ToggledCount : int <<get>>
+    + TotalCount : int <<get>>
+    + ConflictedCount : int <<get>>
+    + Searching : bool <<get>>
+    + RequestPublish() : void
+    + RequestDiscard(entry:IChangeEntry) : void
+    RequestDiscardToggled() : void
+    UpdatePublishButton() : void
+    + RequestDiffChanges(path:string) : void
+    + SetSearchQuery(query:string) : void
+    + SetRevisionSummary(message:string) : void
+    + GroupOverflowEntryCount : int <<get>>
+    + OnClickGroupOverflow(x:float, y:float) : void
+    + ConflictGroupOverflowEntryCount : int <<get>>
+    + OnClickConflictGroupOverflow(x:float, y:float) : void
+    OnBulkUseMine() : void
+    OnBulkUseRemote() : void
+    + RequestShowConflictedDifferences(path:string) : void
+    + RequestChooseMerge(path:string) : void
+    + RequestChooseMine(path:string) : void
+    + RequestChooseRemote(path:string) : void
+}
+IChangesPresenter <|-- ChangesPresenter
+ChangesPresenter --> "m_View" IChangesView
+ChangesPresenter --> "m_Model" IChangesModel
+ChangesPresenter --> "m_MainModel" IMainModel
+@enduml

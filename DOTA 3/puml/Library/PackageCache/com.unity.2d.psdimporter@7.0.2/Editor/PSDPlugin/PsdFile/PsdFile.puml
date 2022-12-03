@@ -1,0 +1,52 @@
+@startuml
+enum ELoadFlag {
+    Header= 1,
+    ColorMode= Header | 1 << 2,
+    ImageData= ColorMode | 1 << 3,
+    All= Header | ColorMode | ImageData,
+}
+enum PsdColorMode {
+    Bitmap= 0,
+    Grayscale= 1,
+    Indexed= 2,
+    RGB= 3,
+    CMYK= 4,
+    Multichannel= 7,
+    Duotone= 8,
+    Lab= 9,
+}
+enum PsdFileVersion {
+    Psd= 1,
+    PsbLargeDocument= 2,
+}
+class PsdFile {
+    + PsdFile(version:PsdFileVersion)
+    + PsdFile(filename:string, loadContext:LoadContext, loadFlag:ELoadFlag)
+    + PsdFile(stream:Stream, loadContext:LoadContext, loadFlag:ELoadFlag)
+    + IsLargeDocument : bool <<get>>
+    + RowCount : int <<get>> <<set>>
+    + ColumnCount : int <<get>> <<set>>
+    + BitDepth : int <<get>> <<set>>
+    + AbsoluteAlpha : bool <<get>> <<set>>
+    + Cleanup() : void
+    + SetVersionInfo() : void
+}
+enum ImageCompression {
+    Raw= 0,
+    Rle= 1,
+    Zip= 2,
+    ZipPrediction= 3,
+}
+class "List`1"<T> {
+}
+PsdFile --> "m_LoadFlag" ELoadFlag
+PsdFile --> "Version" PsdFileVersion
+PsdFile --> "ChannelCount" Int16
+PsdFile --> "ColorMode" PsdColorMode
+PsdFile --> "ImageResources" ImageResources
+PsdFile --> "Resolution" ResolutionInfo
+PsdFile --> "Layers<Layer>" "List`1"
+PsdFile --> "AdditionalInfo<LayerInfo>" "List`1"
+PsdFile --> "BaseLayer" Layer
+PsdFile --> "ImageCompression" ImageCompression
+@enduml

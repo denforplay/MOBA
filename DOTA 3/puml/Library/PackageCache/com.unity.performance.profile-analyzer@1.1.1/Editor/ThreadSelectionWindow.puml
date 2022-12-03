@@ -1,0 +1,98 @@
+@startuml
+class ThreadTreeViewItem {
+    + ThreadTreeViewItem(id:int, depth:int, displayName:string, threadIdentifier:ThreadIdentifier)
+}
+class ThreadTable {
+    <<const>> kRowHeights : float = 20f
+    + StateChanged : bool <<get>>
+    + ThreadTable(state:TreeViewState, multicolumnHeader:MultiColumnHeader, threadNames:List<string>, threadUINames:List<string>, threadSelection:ThreadSelection)
+    + ClearThreadSelection() : void
+    + SelectMain() : void
+    + SelectCommon() : void
+    + GetThreadSelection() : ThreadSelection
+    BuildRowRecursive(rows:IList<TreeViewItem>, item:TreeViewItem) : void
+    BuildAllRows(rows:IList<TreeViewItem>, rootItem:TreeViewItem) : void
+    OnSortingChanged(_multiColumnHeader:MultiColumnHeader) : void
+    OnVisibleColumnsChanged(_multiColumnHeader:MultiColumnHeader) : void
+    SortIfNeeded(rows:IList<TreeViewItem>) : void
+    GetItemGroupName(item:ThreadTreeViewItem) : string
+    SortChildrenByMultipleColumns(children:List<TreeViewItem>) : List<TreeViewItem>
+    SortByMultipleColumns() : void
+    InitialOrder(myTypes:IEnumerable<ThreadTreeViewItem>, history:int[]) : IOrderedEnumerable<ThreadTreeViewItem>
+    GetStateSort(item:ThreadTreeViewItem) : string
+    GetThreadSelectedState(selectedThreadIdentifier:ThreadIdentifier) : ThreadSelected
+    GetItemDisplayText(item:ThreadTreeViewItem) : string
+    GetThreadTreeViewItemInfo(item:ThreadTreeViewItem, text:string, tooltip:string) : void
+    DrawIndent(rect:Rect, item:ThreadTreeViewItem, args:RowGUIArgs) : Rect
+    CellGUI(cellRect:Rect, item:ThreadTreeViewItem, column:MyColumns, args:RowGUIArgs) : void
+    + {static} CreateDefaultMultiColumnHeaderState(treeViewWidth:float) : MultiColumnHeaderState
+}
+class ThreadSelectionWindow {
+    m_EnableApplyButton : bool = false
+    m_EnableResetButton : bool = false
+    m_RequestClose : bool
+    {static} + IsOpen() : bool
+    {static} + Open(screenX:float, screenY:float, profileAnalyzerWindow:ProfileAnalyzerWindow, threadSelection:ThreadSelection, threadNames:List<string>, threadUINames:List<string>) : ThreadSelectionWindow
+    OnEnable() : void
+    CreateTable(profileAnalyzerWindow:ProfileAnalyzerWindow, threadNames:List<string>, threadUINames:List<string>, threadSelection:ThreadSelection) : void
+    SetData(profileAnalyzerWindow:ProfileAnalyzerWindow, threadSelection:ThreadSelection, threadNames:List<string>, threadUINames:List<string>) : void
+    OnDestroy() : void
+    OnGUI() : void
+    Update() : void
+    OnLostFocus() : void
+}
+class "List`1"<T> {
+}
+enum MyColumns {
+    GroupName,
+    ThreadName,
+    State,
+}
+enum SortOption {
+    GroupName,
+    ThreadName,
+    State,
+}
+enum ThreadSelected {
+    Selected,
+    Partial,
+    NotSelected,
+}
+class HeaderData <<struct>> {
+    + width : float
+    + minWidth : float
+    + autoResize : bool
+    + allowToggleVisibility : bool
+    + HeaderData(name:string, tooltip:string, _width:float, _minWidth:float, _autoResize:bool, _allowToggleVisibility:bool)
+}
+class Styles <<static>> {
+}
+TreeViewItem <|-- ThreadTreeViewItem
+ThreadTreeViewItem --> "threadIdentifier" ThreadIdentifier
+TreeView <|-- ThreadTable
+ThreadTable o-> "m_Rows<TreeViewItem>" "List`1"
+ThreadTable --> "m_ThreadNames<string>" "List`1"
+ThreadTable --> "m_ThreadUINames<string>" "List`1"
+ThreadTable --> "m_AllThreadIdentifier" ThreadIdentifier
+ThreadTable --> "m_ThreadSelection" ThreadSelection
+ThreadTable --> "activeLineStyle" GUIStyle
+EditorWindow <|-- ThreadSelectionWindow
+ThreadSelectionWindow --> "m_ProfileAnalyzerWindow" ProfileAnalyzerWindow
+ThreadSelectionWindow --> "m_ThreadTreeViewState" TreeViewState
+ThreadSelectionWindow --> "m_ThreadMulticolumnHeaderState" MultiColumnHeaderState
+ThreadSelectionWindow --> "m_ThreadTable" ThreadTable
+ThreadSelectionWindow --> "m_ThreadNames<string>" "List`1"
+ThreadSelectionWindow --> "m_ThreadUINames<string>" "List`1"
+ThreadSelectionWindow --> "m_OriginalThreadSelection" ThreadSelection
+ThreadTable +-- MyColumns
+ThreadTable +-- SortOption
+ThreadTable +-- ThreadSelected
+ThreadTable +-- HeaderData
+HeaderData --> "content" GUIContent
+ThreadSelectionWindow +-- Styles
+Styles o-> "reset" GUIContent
+Styles o-> "clear" GUIContent
+Styles o-> "main" GUIContent
+Styles o-> "common" GUIContent
+Styles o-> "apply" GUIContent
+@enduml

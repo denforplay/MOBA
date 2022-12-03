@@ -1,0 +1,9 @@
+@startuml
+class ZenjectStateMachineBehaviourAutoInjecter {
+    + Construct(container:DiContainer) : void
+    + Start() : void
+}
+MonoBehaviour <|-- ZenjectStateMachineBehaviourAutoInjecter
+ZenjectStateMachineBehaviourAutoInjecter --> "_container" DiContainer
+ZenjectStateMachineBehaviourAutoInjecter --> "_animator" Animator
+@enduml

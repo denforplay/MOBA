@@ -1,0 +1,5 @@
+@startuml
+class ValidationUtil <<static>> {
+    + {static} CreateDefaultArgs(argTypes:Type[]) : List<TypeValuePair>
+}
+@enduml

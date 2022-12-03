@@ -1,0 +1,8 @@
+@startuml
+class SpriteSkinUpdateHelper {
+    OnDestroy() : void
+    LateUpdate() : void
+}
+MonoBehaviour <|-- SpriteSkinUpdateHelper
+SpriteSkinUpdateHelper o-> "m_ProfilerMarker" ProfilerMarker
+@enduml

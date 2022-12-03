@@ -1,0 +1,7 @@
+@startuml
+class PrefabProvider {
+    + PrefabProvider(prefab:UnityEngine.Object)
+    + GetPrefab(_:InjectContext) : UnityEngine.Object
+}
+IPrefabProvider <|-- PrefabProvider
+@enduml

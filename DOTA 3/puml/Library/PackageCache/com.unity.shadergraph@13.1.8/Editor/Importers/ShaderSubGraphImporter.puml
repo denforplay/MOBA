@@ -1,0 +1,15 @@
+@startuml
+class ShaderSubGraphImporter {
+    + <<const>> Extension : string = "shadersubgraph"
+    {static} GatherDependenciesFromSourceFile(assetPath:string) : string[]
+    {static} NodeWasUsedByGraph(nodeId:string, graphData:GraphData) : bool
+    + <<override>> OnImportAsset(ctx:AssetImportContext) : void
+    {static} ProcessSubGraph(asset:SubGraphAsset, graph:GraphData, importLog:ShaderGraphImporter.AssetImportErrorLog) : void
+    {static} GatherDescendentsFromGraph(rootAssetGuid:GUID, containsCircularDependency:bool, descendentGuids:HashSet<GUID>) : void
+    {static} GatherDependencyMap(rootAssetGUID:GUID, dependencyMap:Dictionary<GUID, GUID[]>, tempAssetCollection:AssetCollection) : void
+    {static} GatherDescendentsUsingDependencyMap(rootAssetGUID:GUID, descendentGuids:HashSet<GUID>, dependencyMap:Dictionary<GUID, GUID[]>) : void
+    {static} ContainsCircularDependency(assetGUID:GUID, dependencyMap:Dictionary<GUID, GUID[]>, ancestors:List<GUID>) : bool
+    {static} CollectInputCapabilities(asset:SubGraphAsset, graph:GraphData) : void
+}
+ScriptedImporter <|-- ShaderSubGraphImporter
+@enduml

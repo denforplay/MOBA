@@ -1,0 +1,8 @@
+@startuml
+class GenerateWeightsTool {
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    OnModeChanged(mode:SkinningMode) : void
+    OnSpriteSelectionChanged(sprite:SpriteCache) : void
+}
+MeshToolWrapper <|-- GenerateWeightsTool
+@enduml

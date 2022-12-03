@@ -1,0 +1,16 @@
+@startuml
+class ShaderGraphPreferences <<static>> {
+    {static} m_Loaded : bool = false
+    {static} m_VariantLimit : int = 128
+    {static} m_AutoAddRemoveBlocks : bool = true
+    {static} m_AllowDeprecatedBehaviors : bool = false
+    {static} ShaderGraphPreferences()
+    {static} PreferenceGUI() : SettingsProvider
+    {static} OpenGUI() : void
+    {static} Load() : void
+    {static} TrySave(field:T, newValue:T, key:string) : void
+}
+class Keys <<static>> {
+}
+ShaderGraphPreferences +-- Keys
+@enduml

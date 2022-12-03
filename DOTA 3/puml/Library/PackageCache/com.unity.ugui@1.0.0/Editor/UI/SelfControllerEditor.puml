@@ -1,0 +1,7 @@
+@startuml
+class SelfControllerEditor {
+    {static} s_Warning : string = "Parent has a type of layout group component. A child of a layout group should not have a {0&#125; component, since it should be driven by the layout group."
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- SelfControllerEditor
+@enduml

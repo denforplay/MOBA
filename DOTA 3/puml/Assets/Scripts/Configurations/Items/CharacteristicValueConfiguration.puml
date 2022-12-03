@@ -1,0 +1,9 @@
+@startuml
+class CharacteristicValueConfiguration {
+    + ValueDescription : string <<get>>
+    + Value : float <<get>>
+}
+ScriptableObject <|-- CharacteristicValueConfiguration
+CharacteristicValueConfiguration --> "ItemValueType" ItemValueType
+CharacteristicValueConfiguration --> "Characteristic" Characteristic
+@enduml

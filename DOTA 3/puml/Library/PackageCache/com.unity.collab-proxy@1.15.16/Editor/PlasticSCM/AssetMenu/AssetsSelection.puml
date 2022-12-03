@@ -1,0 +1,6 @@
+@startuml
+class AssetsSelection <<static>> {
+    {static} GetAssetStatus(asset:Asset, assetStatusCache:IAssetStatusCache) : AssetStatus
+    {static} GetAssetName(asset:Asset) : string
+}
+@enduml

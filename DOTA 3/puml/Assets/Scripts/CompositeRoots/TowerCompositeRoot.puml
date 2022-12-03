@@ -1,0 +1,7 @@
+@startuml
+class TowerCompositeRoot {
+    + Inject(popupSystem:PopupSystem) : void
+    + <<override>> Compose() : void
+}
+CompositeRoot <|-- TowerCompositeRoot
+@enduml

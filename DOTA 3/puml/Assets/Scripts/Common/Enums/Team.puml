@@ -1,0 +1,8 @@
+@startuml
+enum Team {
+    Neutral,
+    Red,
+    Blue,
+    Tower,
+}
+@enduml

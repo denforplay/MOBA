@@ -1,0 +1,10 @@
+@startuml
+class ChannelCertificateUiImpl {
+    AcceptNewServerCertificate(serverCertificate:PlasticCertInfo) : CertOperationResult
+    AcceptChangedServerCertificate(serverCertificate:PlasticCertInfo) : CertOperationResult
+    AcceptInvalidHostname(certHostname:string, serverHostname:string) : bool
+    GetUserResponse(title:string, message:string, serverCertificate:PlasticCertInfo) : CertOperationResult
+    GetCertificateMessageString(message:string, serverCertificate:PlasticCertInfo) : string
+}
+IChannelCertificateUI <|-- ChannelCertificateUiImpl
+@enduml

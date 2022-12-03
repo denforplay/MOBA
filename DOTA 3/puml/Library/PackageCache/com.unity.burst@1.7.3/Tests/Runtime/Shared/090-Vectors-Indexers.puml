@@ -1,0 +1,14 @@
+@startuml
+class VectorsIndexers <<partial>> {
+    + {static} Float4_get_IndexerLocal(i:int) : float
+    + {static} Float4_get_IndexerByRef(vector:float4) : float
+    + {static} Float4_set_IndexerLocal(i:int) : float
+    + {static} Float4_set_IndexerByRef(vector:float4) : float
+    + {static} Float3_get_IndexerLocal(i:int) : float
+    + {static} Float3_get_IndexerByRef(vector:float3) : float
+    + {static} Float3_set_IndexerLocal(i:int) : float
+    + {static} Float3_set_IndexerByRef(vector:float3) : float
+    + {static} Bool_set_Indexer_Indirect(vec:float4) : int
+    + {static} CheckVector(value:float) : bool
+}
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class FSRUtils <<static>> {
+    + {static} SetEasuConstants(cmd:CommandBuffer, inputViewportSizeInPixels:Vector2, inputImageSizeInPixels:Vector2, outputImageSizeInPixels:Vector2) : void
+    + {static} SetRcasConstants(cmd:CommandBuffer, sharpness:float) : void
+    + {static} IsSupported() : bool
+}
+class ShaderConstants <<static>> {
+    + {static} <<readonly>> _FsrEasuConstants0 : int
+    + {static} <<readonly>> _FsrEasuConstants1 : int
+    + {static} <<readonly>> _FsrEasuConstants2 : int
+    + {static} <<readonly>> _FsrEasuConstants3 : int
+    + {static} <<readonly>> _FsrRcasConstants : int
+}
+FSRUtils +-- ShaderConstants
+@enduml

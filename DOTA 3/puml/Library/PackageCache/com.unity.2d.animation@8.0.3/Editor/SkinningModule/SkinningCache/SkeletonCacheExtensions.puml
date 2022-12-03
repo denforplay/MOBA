@@ -1,0 +1,16 @@
+@startuml
+class SkeletonCacheExtensions <<static>> {
+    + {static} RotateBones(skeleton:SkeletonCache, bones:BoneCache[], deltaAngle:float) : void
+    + {static} MoveBones(skeleton:SkeletonCache, bones:BoneCache[], deltaPosition:Vector3) : void
+    + {static} FreeMoveBones(skeleton:SkeletonCache, bones:BoneCache[], deltaPosition:Vector3) : void
+    + {static} MoveJoints(skeleton:SkeletonCache, bones:BoneCache[], deltaPosition:Vector3) : void
+    + {static} SetEndPosition(skeleton:SkeletonCache, bone:BoneCache, endPosition:Vector3) : void
+    + {static} SplitBone(skeleton:SkeletonCache, boneToSplit:BoneCache, splitLength:float, name:string) : BoneCache
+    + {static} CreateBone(skeleton:SkeletonCache, parentBone:BoneCache, position:Vector3, endPosition:Vector3, isChained:bool, name:string) : BoneCache
+    + {static} SetBones(skeleton:SkeletonCache, bones:BoneCache[]) : void
+    + {static} SetBones(skeleton:SkeletonCache, bones:BoneCache[], worldPositionStays:bool) : void
+    + {static} AddBones(skeleton:SkeletonCache, bones:BoneCache[]) : void
+    + {static} AddBones(skeleton:SkeletonCache, bones:BoneCache[], worldPositionStays:bool) : void
+    + {static} DestroyBones(skeleton:SkeletonCache, bones:BoneCache[]) : void
+}
+@enduml

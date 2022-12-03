@@ -1,0 +1,9 @@
+@startuml
+class GamePopup {
+    + Inject(popupSystem:PopupSystem, virtualCamera:CinemachineVirtualCamera, camera:Camera) : void
+    + Initialize(leftTeamCharacters:List<CharacterInfo>, rightTeamCharacters:List<CharacterInfo>) : void
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- GamePopup
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+class ScriptableObjectInstanceProvider {
+    <<readonly>> _createNew : bool
+    <<readonly>> _concreteIdentifier : object
+    + ScriptableObjectInstanceProvider(resource:UnityEngine.Object, resourceType:Type, container:DiContainer, extraArguments:IEnumerable<TypeValuePair>, createNew:bool, concreteIdentifier:object, instantiateCallback:Action<InjectContext, object>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "List`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+IProvider <|-- ScriptableObjectInstanceProvider
+ScriptableObjectInstanceProvider --> "_container" DiContainer
+ScriptableObjectInstanceProvider --> "_resourceType" Type
+ScriptableObjectInstanceProvider --> "_extraArguments<TypeValuePair>" "List`1"
+ScriptableObjectInstanceProvider --> "_instantiateCallback<InjectContext,object>" "Action`2"
+@enduml

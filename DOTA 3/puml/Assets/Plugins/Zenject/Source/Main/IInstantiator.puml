@@ -1,0 +1,41 @@
+@startuml
+interface IInstantiator {
+    Instantiate() : T
+    Instantiate(extraArgs:IEnumerable<object>) : T
+    Instantiate(concreteType:Type) : object
+    Instantiate(concreteType:Type, extraArgs:IEnumerable<object>) : object
+    InstantiateComponent(gameObject:GameObject) : TContract
+    InstantiateComponent(gameObject:GameObject, extraArgs:IEnumerable<object>) : TContract
+    InstantiateComponent(componentType:Type, gameObject:GameObject) : Component
+    InstantiateComponent(componentType:Type, gameObject:GameObject, extraArgs:IEnumerable<object>) : Component
+    InstantiateComponentOnNewGameObject() : T
+    InstantiateComponentOnNewGameObject(gameObjectName:string) : T
+    InstantiateComponentOnNewGameObject(extraArgs:IEnumerable<object>) : T
+    InstantiateComponentOnNewGameObject(gameObjectName:string, extraArgs:IEnumerable<object>) : T
+    InstantiatePrefab(prefab:UnityEngine.Object) : GameObject
+    InstantiatePrefab(prefab:UnityEngine.Object, parentTransform:Transform) : GameObject
+    InstantiatePrefab(prefab:UnityEngine.Object, position:Vector3, rotation:Quaternion, parentTransform:Transform) : GameObject
+    InstantiatePrefabResource(resourcePath:string) : GameObject
+    InstantiatePrefabResource(resourcePath:string, parentTransform:Transform) : GameObject
+    InstantiatePrefabResource(resourcePath:string, position:Vector3, rotation:Quaternion, parentTransform:Transform) : GameObject
+    InstantiatePrefabForComponent(prefab:UnityEngine.Object) : T
+    InstantiatePrefabForComponent(prefab:UnityEngine.Object, extraArgs:IEnumerable<object>) : T
+    InstantiatePrefabForComponent(prefab:UnityEngine.Object, parentTransform:Transform) : T
+    InstantiatePrefabForComponent(prefab:UnityEngine.Object, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    InstantiatePrefabForComponent(prefab:UnityEngine.Object, position:Vector3, rotation:Quaternion, parentTransform:Transform) : T
+    InstantiatePrefabForComponent(prefab:UnityEngine.Object, position:Vector3, rotation:Quaternion, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    InstantiatePrefabForComponent(concreteType:Type, prefab:UnityEngine.Object, parentTransform:Transform, extraArgs:IEnumerable<object>) : object
+    InstantiatePrefabResourceForComponent(resourcePath:string) : T
+    InstantiatePrefabResourceForComponent(resourcePath:string, extraArgs:IEnumerable<object>) : T
+    InstantiatePrefabResourceForComponent(resourcePath:string, parentTransform:Transform) : T
+    InstantiatePrefabResourceForComponent(resourcePath:string, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    InstantiatePrefabResourceForComponent(resourcePath:string, position:Vector3, rotation:Quaternion, parentTransform:Transform) : T
+    InstantiatePrefabResourceForComponent(resourcePath:string, position:Vector3, rotation:Quaternion, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    InstantiatePrefabResourceForComponent(concreteType:Type, resourcePath:string, parentTransform:Transform, extraArgs:IEnumerable<object>) : object
+    InstantiateScriptableObjectResource(resourcePath:string) : T
+    InstantiateScriptableObjectResource(resourcePath:string, extraArgs:IEnumerable<object>) : T
+    InstantiateScriptableObjectResource(scriptableObjectType:Type, resourcePath:string) : object
+    InstantiateScriptableObjectResource(scriptableObjectType:Type, resourcePath:string, extraArgs:IEnumerable<object>) : object
+    CreateEmptyGameObject(name:string) : GameObject
+}
+@enduml

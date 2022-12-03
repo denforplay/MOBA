@@ -1,0 +1,144 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Join(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, TKey>, innerKeySelector:Func<TInner, TKey>, resultSelector:Func<TOuter, TInner, TResult>) : IUniTaskAsyncEnumerable<TResult>
+    + {static} Join(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, TKey>, innerKeySelector:Func<TInner, TKey>, resultSelector:Func<TOuter, TInner, TResult>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TResult>
+    + {static} JoinAwait(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, UniTask<TKey>>, innerKeySelector:Func<TInner, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, UniTask<TResult>>) : IUniTaskAsyncEnumerable<TResult>
+    + {static} JoinAwait(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, UniTask<TKey>>, innerKeySelector:Func<TInner, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, UniTask<TResult>>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TResult>
+    + {static} JoinAwaitWithCancellation(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, CancellationToken, UniTask<TKey>>, innerKeySelector:Func<TInner, CancellationToken, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, CancellationToken, UniTask<TResult>>) : IUniTaskAsyncEnumerable<TResult>
+    + {static} JoinAwaitWithCancellation(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, CancellationToken, UniTask<TKey>>, innerKeySelector:Func<TInner, CancellationToken, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, CancellationToken, UniTask<TResult>>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TResult>
+}
+class "Join`4"<TOuter,TInner,TKey,TResult> <<sealed>> {
+    + Join(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, TKey>, innerKeySelector:Func<TInner, TKey>, resultSelector:Func<TOuter, TInner, TResult>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "JoinAwait`4"<TOuter,TInner,TKey,TResult> <<sealed>> {
+    + JoinAwait(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, UniTask<TKey>>, innerKeySelector:Func<TInner, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, UniTask<TResult>>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "JoinAwaitWithCancellation`4"<TOuter,TInner,TKey,TResult> <<sealed>> {
+    + JoinAwaitWithCancellation(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, CancellationToken, UniTask<TKey>>, innerKeySelector:Func<TInner, CancellationToken, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, CancellationToken, UniTask<TResult>>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TResult>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "Func`2"<T1,T2> {
+}
+class "Func`3"<T1,T2,T3> {
+}
+class "IEqualityComparer`1"<T> {
+}
+class _Join <<sealed>> {
+    continueNext : bool
+    + _Join(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, TKey>, innerKeySelector:Func<TInner, TKey>, resultSelector:Func<TOuter, TInner, TResult>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    <<async>> CreateInnerHashSet() : UniTaskVoid
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class _JoinAwait <<sealed>> {
+    continueNext : bool
+    + _JoinAwait(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, UniTask<TKey>>, innerKeySelector:Func<TInner, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, UniTask<TResult>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    <<async>> CreateInnerHashSet() : UniTaskVoid
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    {static} OuterSelectCore(state:object) : void
+    {static} ResultSelectCore(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "Func`4"<T1,T2,T3,T4> {
+}
+class _JoinAwaitWithCancellation <<sealed>> {
+    continueNext : bool
+    + _JoinAwaitWithCancellation(outer:IUniTaskAsyncEnumerable<TOuter>, inner:IUniTaskAsyncEnumerable<TInner>, outerKeySelector:Func<TOuter, CancellationToken, UniTask<TKey>>, innerKeySelector:Func<TInner, CancellationToken, UniTask<TKey>>, resultSelector:Func<TOuter, TInner, CancellationToken, UniTask<TResult>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    <<async>> CreateInnerHashSet() : UniTaskVoid
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    {static} OuterSelectCore(state:object) : void
+    {static} ResultSelectCore(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "ILookup`2"<T1,T2> {
+}
+class "IEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "Join`4"
+"Join`4" --> "outer<TOuter>" "IUniTaskAsyncEnumerable`1"
+"Join`4" --> "inner<TInner>" "IUniTaskAsyncEnumerable`1"
+"Join`4" --> "outerKeySelector<TOuter,TKey>" "Func`2"
+"Join`4" --> "innerKeySelector<TInner,TKey>" "Func`2"
+"Join`4" --> "resultSelector<TOuter,TInner,TResult>" "Func`3"
+"Join`4" --> "comparer<TKey>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "JoinAwait`4"
+"JoinAwait`4" --> "outer<TOuter>" "IUniTaskAsyncEnumerable`1"
+"JoinAwait`4" --> "inner<TInner>" "IUniTaskAsyncEnumerable`1"
+"JoinAwait`4" --> "outerKeySelector<TOuter,UniTask<TKey>>" "Func`2"
+"JoinAwait`4" --> "innerKeySelector<TInner,UniTask<TKey>>" "Func`2"
+"JoinAwait`4" --> "resultSelector<TOuter,TInner,UniTask<TResult>>" "Func`3"
+"JoinAwait`4" --> "comparer<TKey>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TResult>" <|-- "JoinAwaitWithCancellation`4"
+"JoinAwaitWithCancellation`4" --> "outer<TOuter>" "IUniTaskAsyncEnumerable`1"
+"JoinAwaitWithCancellation`4" --> "inner<TInner>" "IUniTaskAsyncEnumerable`1"
+"JoinAwaitWithCancellation`4" --> "outerKeySelector<TOuter,CancellationToken,UniTask<TKey>>" "Func`3"
+"JoinAwaitWithCancellation`4" --> "innerKeySelector<TInner,CancellationToken,UniTask<TKey>>" "Func`3"
+"JoinAwaitWithCancellation`4" --> "resultSelector<TOuter,TInner,CancellationToken,UniTask<TResult>>" "Func`4"
+"JoinAwaitWithCancellation`4" --> "comparer<TKey>" "IEqualityComparer`1"
+"Join`4" +-- _Join
+MoveNextSource <|-- _Join
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- _Join
+_Join o-> "MoveNextCoreDelegate<object>" "Action`1"
+_Join --> "outer<TOuter>" "IUniTaskAsyncEnumerable`1"
+_Join --> "inner<TInner>" "IUniTaskAsyncEnumerable`1"
+_Join --> "outerKeySelector<TOuter,TKey>" "Func`2"
+_Join --> "innerKeySelector<TInner,TKey>" "Func`2"
+_Join --> "resultSelector<TOuter,TInner,TResult>" "Func`3"
+_Join --> "comparer<TKey>" "IEqualityComparer`1"
+_Join --> "cancellationToken" CancellationToken
+_Join --> "lookup<TKey,TInner>" "ILookup`2"
+_Join --> "enumerator<TOuter>" "IUniTaskAsyncEnumerator`1"
+_Join --> "currentOuterValue" TOuter
+_Join --> "valueEnumerator<TInner>" "IEnumerator`1"
+_Join --> "Current" TResult
+"JoinAwait`4" +-- _JoinAwait
+MoveNextSource <|-- _JoinAwait
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- _JoinAwait
+_JoinAwait o-> "MoveNextCoreDelegate<object>" "Action`1"
+_JoinAwait o-> "OuterSelectCoreDelegate<object>" "Action`1"
+_JoinAwait o-> "ResultSelectCoreDelegate<object>" "Action`1"
+_JoinAwait --> "outer<TOuter>" "IUniTaskAsyncEnumerable`1"
+_JoinAwait --> "inner<TInner>" "IUniTaskAsyncEnumerable`1"
+_JoinAwait --> "outerKeySelector<TOuter,UniTask<TKey>>" "Func`2"
+_JoinAwait --> "innerKeySelector<TInner,UniTask<TKey>>" "Func`2"
+_JoinAwait --> "resultSelector<TOuter,TInner,UniTask<TResult>>" "Func`3"
+_JoinAwait --> "comparer<TKey>" "IEqualityComparer`1"
+_JoinAwait --> "cancellationToken" CancellationToken
+_JoinAwait --> "lookup<TKey,TInner>" "ILookup`2"
+_JoinAwait --> "enumerator<TOuter>" "IUniTaskAsyncEnumerator`1"
+_JoinAwait --> "currentOuterValue" TOuter
+_JoinAwait --> "valueEnumerator<TInner>" "IEnumerator`1"
+_JoinAwait --> "Current" TResult
+"JoinAwaitWithCancellation`4" +-- _JoinAwaitWithCancellation
+MoveNextSource <|-- _JoinAwaitWithCancellation
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- _JoinAwaitWithCancellation
+_JoinAwaitWithCancellation o-> "MoveNextCoreDelegate<object>" "Action`1"
+_JoinAwaitWithCancellation o-> "OuterSelectCoreDelegate<object>" "Action`1"
+_JoinAwaitWithCancellation o-> "ResultSelectCoreDelegate<object>" "Action`1"
+_JoinAwaitWithCancellation --> "outer<TOuter>" "IUniTaskAsyncEnumerable`1"
+_JoinAwaitWithCancellation --> "inner<TInner>" "IUniTaskAsyncEnumerable`1"
+_JoinAwaitWithCancellation --> "outerKeySelector<TOuter,CancellationToken,UniTask<TKey>>" "Func`3"
+_JoinAwaitWithCancellation --> "innerKeySelector<TInner,CancellationToken,UniTask<TKey>>" "Func`3"
+_JoinAwaitWithCancellation --> "resultSelector<TOuter,TInner,CancellationToken,UniTask<TResult>>" "Func`4"
+_JoinAwaitWithCancellation --> "comparer<TKey>" "IEqualityComparer`1"
+_JoinAwaitWithCancellation --> "cancellationToken" CancellationToken
+_JoinAwaitWithCancellation --> "lookup<TKey,TInner>" "ILookup`2"
+_JoinAwaitWithCancellation --> "enumerator<TOuter>" "IUniTaskAsyncEnumerator`1"
+_JoinAwaitWithCancellation --> "currentOuterValue" TOuter
+_JoinAwaitWithCancellation --> "valueEnumerator<TInner>" "IEnumerator`1"
+_JoinAwaitWithCancellation --> "Current" TResult
+@enduml

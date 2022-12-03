@@ -1,0 +1,31 @@
+@startuml
+class RenderGraphObjectPool <<sealed>> {
+    + GetTempArray(size:int) : T[]
+    + GetTempMaterialPropertyBlock() : MaterialPropertyBlock
+}
+abstract class SharedObjectPoolBase {
+    + {static} ClearAll() : void
+}
+class "SharedObjectPool`1"<T> {
+    + Get() : T
+    + Release(value:T) : void
+    {static} AllocatePool() : SharedObjectPool<T>
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+class "Stack`1"<T> {
+}
+class "Lazy`1"<T> {
+}
+RenderGraphObjectPool o-> "m_ArrayPool<(Type, int),Stack<object>>" "Dictionary`2"
+RenderGraphObjectPool o-> "m_AllocatedArrays<(object, (Type, int))>" "List`1"
+RenderGraphObjectPool o-> "m_AllocatedMaterialPropertyBlocks<MaterialPropertyBlock>" "List`1"
+RenderGraphObjectPool +-- SharedObjectPoolBase
+RenderGraphObjectPool +-- "SharedObjectPool`1"
+SharedObjectPoolBase <|-- "SharedObjectPool`1"
+"SharedObjectPool`1" o-> "m_Pool<T>" "Stack`1"
+"SharedObjectPool`1" o-> "s_Instance<SharedObjectPool<T>>" "Lazy`1"
+"SharedObjectPool`1" --> "sharedPool<T>" "SharedObjectPool`1"
+@enduml

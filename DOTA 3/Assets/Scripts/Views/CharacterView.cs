@@ -227,26 +227,30 @@ namespace Views
 
         private void StartObserveSkill(int skillId)
         {
-            var skill = _characterInfo.SkillConfigurations.FirstOrDefault(x => x.Id == skillId);
+            var skill = _character.Skills.FirstOrDefault(x => x.Id == skillId);
             _currentSkillControlBase = _skillControls.FirstOrDefault(x => x.SkillType == skill.SkillType);
             if (skill is null || _currentSkillControlBase is null)
                 throw new Exception("");
 
-            _cancellationToken?.Dispose();
-            _cancellationToken = new CancellationTokenSource();
-            _currentSkillObserver = _characterController.ObserveSkill(skill.Id, _cancellationToken);
-            if (_currentSkillObserver is null) 
-                return;
+            if (skill.CanBeUsed)
+            {
+                _cancellationToken?.Dispose();
+                _cancellationToken = new CancellationTokenSource();
+                _currentSkillObserver = _characterController.ObserveSkill(skill.Id, _cancellationToken);
+                if (_currentSkillObserver is null) 
+                    return;
             
-            _currentSkillObserver.OnObservedPositionChanged += _currentSkillControlBase.UpdateSkillView;
-            _currentSkillObserver.OnSkillCalled += pos => UseSkill(skillId, pos);
-            _currentSkillControlBase.gameObject.SetActive(true);
+                _currentSkillObserver.OnObservedPositionChanged += _currentSkillControlBase.UpdateSkillView;
+                _currentSkillObserver.OnSkillCalled += pos => UseSkill(skillId, pos, _currentSkillObserver);
+                _currentSkillControlBase.gameObject.SetActive(true);
+            }
         }
 
-        private void UseSkill(int skillId, Vector3 onPosition)
+        private void UseSkill(int skillId, Vector3 onPosition, ISkillObserver skillObserver)
         {
             var skillModel = _character.Skills.First(x => x.Id == skillId);
             UniTask.Create(() => skillModel.Apply(onPosition));
+            skillObserver.ClearSkillLCalled();
         }
 
         public void SubscribeOnDestroy(Action action)

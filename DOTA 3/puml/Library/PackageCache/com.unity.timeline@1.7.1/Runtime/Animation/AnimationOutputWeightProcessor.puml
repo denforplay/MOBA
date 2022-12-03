@@ -1,0 +1,20 @@
+@startuml
+class AnimationOutputWeightProcessor {
+    + AnimationOutputWeightProcessor(output:AnimationPlayableOutput)
+    FindMixers() : void
+    FindMixers(parent:Playable, port:int, node:Playable) : void
+    + Evaluate() : void
+}
+class WeightInfo <<struct>> {
+    + port : int
+}
+class "List`1"<T> {
+}
+ITimelineEvaluateCallback <|-- AnimationOutputWeightProcessor
+AnimationOutputWeightProcessor --> "m_Output" AnimationPlayableOutput
+AnimationOutputWeightProcessor --> "m_MotionXPlayable" AnimationMotionXToDeltaPlayable
+AnimationOutputWeightProcessor o-> "m_Mixers<WeightInfo>" "List`1"
+AnimationOutputWeightProcessor +-- WeightInfo
+WeightInfo --> "mixer" Playable
+WeightInfo --> "parentMixer" Playable
+@enduml

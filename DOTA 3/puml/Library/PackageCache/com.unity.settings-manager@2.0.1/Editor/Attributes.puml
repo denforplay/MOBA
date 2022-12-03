@@ -1,0 +1,27 @@
+@startuml
+class UserSettingAttribute <<sealed>> {
+    m_Category : string
+    m_VisibleInSettingsProvider : bool
+    + category : string <<get>>
+    + visibleInSettingsProvider : bool <<get>>
+    + UserSettingAttribute()
+    + UserSettingAttribute(category:string, title:string, tooltip:string)
+}
+class SettingsKeyAttribute <<sealed>> {
+    m_Key : string
+    + key : string <<get>>
+    + SettingsKeyAttribute(key:string, scope:SettingsScope)
+}
+class UserSettingBlockAttribute <<sealed>> {
+    m_Category : string
+    + category : string <<get>>
+    + UserSettingBlockAttribute(category:string)
+}
+Attribute <|-- UserSettingAttribute
+UserSettingAttribute --> "m_Title" GUIContent
+UserSettingAttribute --> "title" GUIContent
+Attribute <|-- SettingsKeyAttribute
+SettingsKeyAttribute --> "m_Scope" SettingsScope
+SettingsKeyAttribute --> "scope" SettingsScope
+Attribute <|-- UserSettingBlockAttribute
+@enduml

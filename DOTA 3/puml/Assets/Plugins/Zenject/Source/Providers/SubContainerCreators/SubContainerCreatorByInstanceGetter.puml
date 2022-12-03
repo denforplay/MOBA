@@ -1,0 +1,10 @@
+@startuml
+class SubContainerCreatorByInstanceGetter {
+    + SubContainerCreatorByInstanceGetter(subcontainerGetter:Func<InjectContext, DiContainer>)
+    + CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+class "Func`2"<T1,T2> {
+}
+ISubContainerCreator <|-- SubContainerCreatorByInstanceGetter
+SubContainerCreatorByInstanceGetter --> "_subcontainerGetter<InjectContext,DiContainer>" "Func`2"
+@enduml

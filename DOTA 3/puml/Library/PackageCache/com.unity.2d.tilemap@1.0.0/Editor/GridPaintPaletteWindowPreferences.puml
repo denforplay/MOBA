@@ -1,0 +1,19 @@
+@startuml
+class GridPaintPaletteWindowPreferences {
+}
+class GridPaintActiveTargetsPreferences {
+    + {static} <<readonly>> targetSortingModeEditorPref : string = "TilePalette.ActiveTargetsSortingMode"
+    + {static} <<readonly>> targetSortingModeLookup : string = "Active Targets Sorting Mode"
+    + {static} <<readonly>> targetRestoreEditModeSelectionEditorPref : string = "TilePalette.RestoreEditModeSelection"
+    + {static} <<readonly>> targetRestoreEditModeSelectionLookup : string = "Restore Edit Mode Active Target"
+    + {static} <<readonly>> createTileFromPaletteEditorPref : string = "TilePalette.CreateTileFromPalette"
+    + {static} <<readonly>> createTileFromPaletteLookup : string = "Create Tile Method"
+    + {static} <<readonly>> defaultSortingMode : string
+    + {static} restoreEditModeSelection : bool <<get>> <<set>>
+    + {static} GetTargetComparer() : IComparer<GameObject>
+    + {static} GetCreateTileFromPaletteUsingPreferences() : MethodInfo
+}
+GridPaintActiveTargetsPreferences o-> "targetSortingModeLabel" GUIContent
+GridPaintActiveTargetsPreferences o-> "targetRestoreEditModeSelectionLabel" GUIContent
+GridPaintActiveTargetsPreferences o-> "createTileFromPaletteLabel" GUIContent
+@enduml

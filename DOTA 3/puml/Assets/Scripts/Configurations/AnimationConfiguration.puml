@@ -1,0 +1,8 @@
+@startuml
+class AnimationConfiguration {
+}
+class "KeyValuePair`2"<T1,T2> {
+}
+ScriptableObject <|-- AnimationConfiguration
+AnimationConfiguration --> "AnimationInfo<AnimationType,string>" "KeyValuePair`2"
+@enduml

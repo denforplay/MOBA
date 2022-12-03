@@ -1,0 +1,7 @@
+@startuml
+class HealthView {
+    + SetMaxHealth(value:float) : void
+    + SetHealth(value:float) : void
+}
+MonoBehaviour <|-- HealthView
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class RectMask2DEditor {
+    + <<override>> OnInspectorGUI() : void
+    OffsetGUI() : void
+}
+Editor <|-- RectMask2DEditor
+RectMask2DEditor --> "m_Padding" SerializedProperty
+RectMask2DEditor --> "m_Softness" SerializedProperty
+RectMask2DEditor --> "m_PaddingContent" GUIContent
+RectMask2DEditor --> "m_LeftContent" GUIContent
+RectMask2DEditor --> "m_RightContent" GUIContent
+RectMask2DEditor --> "m_TopContent" GUIContent
+RectMask2DEditor --> "m_BottomContent" GUIContent
+@enduml

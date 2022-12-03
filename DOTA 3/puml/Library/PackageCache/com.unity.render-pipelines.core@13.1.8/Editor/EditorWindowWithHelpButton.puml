@@ -1,0 +1,10 @@
+@startuml
+class EditorWindowWithHelpButton {
+    {static} EditorWindowWithHelpButton()
+}
+class "Lazy`1"<T> {
+}
+EditorWindow <|-- EditorWindowWithHelpButton
+EditorWindowWithHelpButton --> "m_IconHelpGUIContent<GUIContent>" "Lazy`1"
+EditorWindowWithHelpButton --> "iconHelpGUIContent" GUIContent
+@enduml

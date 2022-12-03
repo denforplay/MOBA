@@ -1,0 +1,21 @@
+@startuml
+class PlasticSCMWindow {
+    OnEnable() : void
+    OnDestroy() : void
+    Dispose() : void
+    BuildComponents() : void
+    BuildTabview(root:VisualElement) : void
+    RefreshButton_Clicked() : void
+    SettingsButton_Clicked() : void
+    {static} InviteMemberButton_clicked(obj:object) : void
+    BuildStatusBar(root:VisualElement) : void
+}
+EditorWindow <|-- PlasticSCMWindow
+PlasticSCMWindow --> "mRefreshButton" Button
+PlasticSCMWindow --> "mSettingsButton" Button
+PlasticSCMWindow --> "mUpdateNotification" VisualElement
+PlasticSCMWindow --> "mUpdateNotificaionImage" Image
+PlasticSCMWindow --> "mUpdateNotificationLabel" Label
+PlasticSCMWindow --> "mUpdateButton" Button
+PlasticSCMWindow --> "mBranchLabel" Label
+@enduml

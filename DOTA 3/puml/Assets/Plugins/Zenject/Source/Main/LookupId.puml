@@ -1,0 +1,10 @@
+@startuml
+class LookupId {
+    + LookupId()
+    + LookupId(provider:IProvider, bindingId:BindingId)
+    + <<override>> GetHashCode() : int
+    + Reset() : void
+}
+LookupId --> "Provider" IProvider
+LookupId --> "BindingId" BindingId
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+interface ITestRunSettings {
+    Apply() : void
+}
+IDisposable <|-- ITestRunSettings
+@enduml

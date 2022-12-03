@@ -1,0 +1,8 @@
+@startuml
+class CreepSpawnConfiguration {
+    + PackageSize : int <<get>>
+    + SecondsBetweenPackages : float <<get>>
+    + SecondsBetweenCreep : float <<get>>
+}
+ScriptableObject <|-- CreepSpawnConfiguration
+@enduml

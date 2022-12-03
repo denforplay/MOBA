@@ -1,0 +1,42 @@
+@startuml
+class TimelineMarkerHeaderGUI {
+    m_TrackHash : int
+    + TimelineMarkerHeaderGUI(asset:TimelineAsset, state:WindowState)
+    + showMarkers : bool <<get>>
+    + muted : bool <<get>>
+    + locked : bool <<get>>
+    ToWindowSpace(rect:Rect) : Rect
+    + Draw(markerHeaderRect:Rect, markerContentRect:Rect, state:WindowState) : void
+    + Rebuild() : void
+    HandleDragAndDrop() : void
+    {static} ResolveType(types:IEnumerable<Type>, onComplete:Action<Type>, formatString:string) : bool
+    Hash() : int
+    {static} DrawMarkerDrawer(data:DrawData) : void
+    {static} DrawMarkerDrawerHeaderBackground(data:DrawData) : void
+    {static} DrawMarkerDrawerHeader(data:DrawData) : void
+    {static} DrawMarkerDrawerContentBackground(data:DrawData) : void
+    {static} DrawMuteOverlay(data:DrawData) : void
+    {static} DrawTrackDropDownMenu(rect:Rect) : void
+    {static} DrawMuteButton(rect:Rect, data:DrawData) : void
+    IsSelected() : bool
+}
+class DrawData <<struct>> {
+    + isMuted : bool
+    + isSelected : bool
+}
+IRowGUI <|-- TimelineMarkerHeaderGUI
+ILayerable <|-- TimelineMarkerHeaderGUI
+TimelineMarkerHeaderGUI o-> "k_Muted" GUIContent
+TimelineMarkerHeaderGUI --> "timeline" TimelineAsset
+TimelineMarkerHeaderGUI --> "state" WindowState
+TimelineMarkerHeaderGUI --> "m_Layer" MarkersLayer
+TimelineMarkerHeaderGUI o-> "m_ZOrder" LayerZOrder
+TimelineMarkerHeaderGUI --> "asset" TrackAsset
+TimelineMarkerHeaderGUI --> "boundingRect" Rect
+TimelineMarkerHeaderGUI --> "zOrder" LayerZOrder
+TimelineMarkerHeaderGUI +-- DrawData
+DrawData --> "headerRect" Rect
+DrawData --> "contentRect" Rect
+DrawData --> "trackHeaderFont" GUIStyle
+DrawData --> "colorTrackFont" Color
+@enduml

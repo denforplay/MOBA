@@ -1,0 +1,39 @@
+@startuml
+enum WindingRule {
+    EvenOdd,
+    NonZero,
+    Positive,
+    Negative,
+    AbsGeqTwo,
+}
+enum ElementType {
+    Polygons,
+    ConnectedPolygons,
+    BoundaryContours,
+}
+enum ContourOrientation {
+    Original,
+    Clockwise,
+    CounterClockwise,
+}
+class ContourVertex <<struct>> {
+    + Data : object
+    + <<override>> ToString() : string
+}
+class Tess <<partial>> {
+    + NoEmptyPolygons : bool = false
+    + UsePooling : bool = false
+    + VertexCount : int <<get>>
+    + ElementCount : int <<get>>
+    + Tess()
+    + AddContour(vertices:ContourVertex[]) : void
+    + AddContour(vertices:ContourVertex[], forceOrientation:ContourOrientation) : void
+    + Tessellate(windingRule:WindingRule, elementType:ElementType, polySize:int) : void
+    + Tessellate(windingRule:WindingRule, elementType:ElementType, polySize:int, combineCallback:CombineCallback) : void
+}
+ContourVertex --> "Position" Vec3
+Tess --> "Normal" Vec3
+Tess o-> "SUnitX" Real
+Tess o-> "SUnitY" Real
+Tess o-> "SentinelCoord" Real
+@enduml

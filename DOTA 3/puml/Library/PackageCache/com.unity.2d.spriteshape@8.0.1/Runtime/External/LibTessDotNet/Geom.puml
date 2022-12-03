@@ -1,0 +1,20 @@
+@startuml
+class Geom <<static>> {
+    + {static} IsWindingInside(rule:WindingRule, n:int) : bool
+    + {static} VertCCW(u:MeshUtils.Vertex, v:MeshUtils.Vertex, w:MeshUtils.Vertex) : bool
+    + {static} VertEq(lhs:MeshUtils.Vertex, rhs:MeshUtils.Vertex) : bool
+    + {static} VertLeq(lhs:MeshUtils.Vertex, rhs:MeshUtils.Vertex) : bool
+    + {static} EdgeEval(u:MeshUtils.Vertex, v:MeshUtils.Vertex, w:MeshUtils.Vertex) : Real
+    + {static} EdgeSign(u:MeshUtils.Vertex, v:MeshUtils.Vertex, w:MeshUtils.Vertex) : Real
+    + {static} TransLeq(lhs:MeshUtils.Vertex, rhs:MeshUtils.Vertex) : bool
+    + {static} TransEval(u:MeshUtils.Vertex, v:MeshUtils.Vertex, w:MeshUtils.Vertex) : Real
+    + {static} TransSign(u:MeshUtils.Vertex, v:MeshUtils.Vertex, w:MeshUtils.Vertex) : Real
+    + {static} EdgeGoesLeft(e:MeshUtils.Edge) : bool
+    + {static} EdgeGoesRight(e:MeshUtils.Edge) : bool
+    + {static} VertL1dist(u:MeshUtils.Vertex, v:MeshUtils.Vertex) : Real
+    + {static} AddWinding(eDst:MeshUtils.Edge, eSrc:MeshUtils.Edge) : void
+    + {static} Interpolate(a:Real, x:Real, b:Real, y:Real) : Real
+    {static} Swap(a:MeshUtils.Vertex, b:MeshUtils.Vertex) : void
+    + {static} EdgeIntersect(o1:MeshUtils.Vertex, d1:MeshUtils.Vertex, o2:MeshUtils.Vertex, d2:MeshUtils.Vertex, v:MeshUtils.Vertex) : void
+}
+@enduml

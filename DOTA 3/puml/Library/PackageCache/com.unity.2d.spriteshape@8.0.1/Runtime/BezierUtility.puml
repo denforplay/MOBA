@@ -1,0 +1,5 @@
+@startuml
+class BezierUtility <<static>> {
+    + {static} BezierPoint(startRightTangent:Vector3, startPosition:Vector3, endPosition:Vector3, endLeftTangent:Vector3, t:float) : Vector3
+}
+@enduml

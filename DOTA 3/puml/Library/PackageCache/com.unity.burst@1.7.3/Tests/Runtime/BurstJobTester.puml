@@ -1,0 +1,47 @@
+@startuml
+class BurstJobTester2 {
+    + BurstJobTester2()
+    + Dispose() : void
+    + Calculate() : float
+    + CheckFunctionPointer() : float
+    + {static} Add2Numbers(a:float, b:float) : float
+    + {static} Add2NumbersThrows(a:float, b:float) : float
+}
+class MyJob <<struct>> {
+    + Execute() : void
+    + {static} CheckFmaSlow(a:float, b:float, c:float) : float
+    + {static} CheckFmaFast(a:float, b:float, c:float) : float
+}
+class MyJobAsync <<struct>> {
+    + Execute() : void
+}
+class MyJobWithDefaultOptimizations <<struct>> {
+    + Execute() : void
+}
+class MyJobCreatingAndDisposingNativeArray <<struct>> {
+    + Length : int
+    + Execute() : void
+    + {static} DiscardFromManaged(result:int) : void
+}
+class MyJobWithFastOptimizations <<struct>> {
+    + Execute() : void
+}
+class "NativeArray`1"<T> {
+}
+IDisposable <|-- BurstJobTester2
+BurstJobTester2 +-- MyJob
+IJob <|-- MyJob
+MyJob --> "Result<float>" "NativeArray`1"
+BurstJobTester2 +-- MyJobAsync
+IJob <|-- MyJobAsync
+MyJobAsync --> "Result<float>" "NativeArray`1"
+BurstJobTester2 +-- MyJobWithDefaultOptimizations
+IJob <|-- MyJobWithDefaultOptimizations
+MyJobWithDefaultOptimizations --> "Result<float>" "NativeArray`1"
+BurstJobTester2 +-- MyJobCreatingAndDisposingNativeArray
+IJob <|-- MyJobCreatingAndDisposingNativeArray
+MyJobCreatingAndDisposingNativeArray --> "Result<int>" "NativeArray`1"
+BurstJobTester2 +-- MyJobWithFastOptimizations
+IJob <|-- MyJobWithFastOptimizations
+MyJobWithFastOptimizations --> "Result<float>" "NativeArray`1"
+@enduml

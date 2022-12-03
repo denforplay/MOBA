@@ -1,0 +1,5 @@
+@startuml
+interface IAssetsDatabaseHelper {
+    OpenAssetInItsDefaultExternalEditor(assetPath:string, line:int) : void
+}
+@enduml

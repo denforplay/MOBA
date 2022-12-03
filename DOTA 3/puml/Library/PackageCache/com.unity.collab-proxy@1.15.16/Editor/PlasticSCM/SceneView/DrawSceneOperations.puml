@@ -1,0 +1,11 @@
+@startuml
+class DrawSceneOperations <<static>> {
+    {static} Provider_preCheckoutCallback(list:AssetList, changesetID:string, changesetDescription:string) : bool
+    {static} sIsEnabled : bool
+    {static} sIsGluonMode : bool
+}
+DrawSceneOperations --> "sViewHost" ViewHost
+DrawSceneOperations --> "sProgressControls" EditorProgressControls
+DrawSceneOperations --> "sWorkspaceWindow" IWorkspaceWindow
+DrawSceneOperations --> "sNewIncomingChangesUpdater" NewIncomingChangesUpdater
+@enduml

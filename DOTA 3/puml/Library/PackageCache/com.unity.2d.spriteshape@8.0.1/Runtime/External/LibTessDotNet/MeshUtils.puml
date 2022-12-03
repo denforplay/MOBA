@@ -1,0 +1,52 @@
+@startuml
+class Vec3 <<struct>> {
+    + {static} Sub(lhs:Vec3, rhs:Vec3, result:Vec3) : void
+    + {static} Neg(v:Vec3) : void
+    + {static} Dot(u:Vec3, v:Vec3, dot:Real) : void
+    + {static} Normalize(v:Vec3) : void
+    + {static} LongAxis(v:Vec3) : int
+    + <<override>> ToString() : string
+}
+class MeshUtils <<static>> {
+    + <<const>> Undef : int
+    + {static} MakeEdge(eNext:Edge) : Edge
+    + {static} Splice(a:Edge, b:Edge) : void
+    + {static} MakeVertex(eOrig:Edge, vNext:Vertex) : void
+    + {static} MakeFace(eOrig:Edge, fNext:Face) : void
+    + {static} KillEdge(eDel:Edge) : void
+    + {static} KillVertex(vDel:Vertex, newOrg:Vertex) : void
+    + {static} KillFace(fDel:Face, newLFace:Face) : void
+    + {static} FaceArea(f:Face) : Real
+}
+abstract class "Pooled`1"<T> {
+    + {abstract} Reset() : void
+    + <<virtual>> OnFree() : void
+    + {static} Create() : T
+    + Free() : void
+}
+class Vertex {
+    + <<override>> Reset() : void
+}
+class Face {
+    + <<override>> Reset() : void
+}
+class EdgePair <<struct>> {
+    + {static} Create() : EdgePair
+    + Reset() : void
+}
+class Edge {
+    + <<override>> Reset() : void
+}
+Vec3 o-> "Zero" Vec3
+Vec3 --> "X" Real
+Vec3 --> "Y" Real
+Vec3 --> "Z" Real
+MeshUtils +-- "Pooled`1"
+MeshUtils +-- Vertex
+"Pooled`1" "<Vertex>" <|-- Vertex
+MeshUtils +-- Face
+"Pooled`1" "<Face>" <|-- Face
+MeshUtils +-- EdgePair
+MeshUtils +-- Edge
+"Pooled`1" "<Edge>" <|-- Edge
+@enduml

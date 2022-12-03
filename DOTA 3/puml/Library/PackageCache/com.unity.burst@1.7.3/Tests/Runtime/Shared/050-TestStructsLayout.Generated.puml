@@ -1,0 +1,91 @@
+@startuml
+class TestStructsLayout <<partial>> {
+    + {static} Test_CheckHoleInner_Size() : int
+    + {static} <<unsafe>> Test_CheckHoleInner_FieldOffset_m_Ptr() : int
+    + {static} Test_CheckHoleOuter_Size() : int
+    + {static} <<unsafe>> Test_CheckHoleOuter_FieldOffset_a() : int
+    + {static} <<unsafe>> Test_CheckHoleOuter_FieldOffset_b() : int
+    + {static} <<unsafe>> Test_CheckHoleOuter_FieldOffset_c() : int
+    + {static} Test_ExplicitStructWithoutSize2_Size() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithoutSize2_FieldOffset_a() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithoutSize2_FieldOffset_b() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithoutSize2_FieldOffset_c() : int
+    + {static} Test_ExplicitStructWithoutSize_Size() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithoutSize_FieldOffset_a() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithoutSize_FieldOffset_b() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithoutSize_FieldOffset_c() : int
+    + {static} Test_SequentialStructWithSize3_Size() : int
+    + {static} <<unsafe>> Test_SequentialStructWithSize3_FieldOffset_a() : int
+    + {static} <<unsafe>> Test_SequentialStructWithSize3_FieldOffset_b() : int
+    + {static} <<unsafe>> Test_SequentialStructWithSize3_FieldOffset_c() : int
+    + {static} Test_SequentialStructWithoutSize_Size() : int
+    + {static} <<unsafe>> Test_SequentialStructWithoutSize_FieldOffset_a() : int
+    + {static} <<unsafe>> Test_SequentialStructWithoutSize_FieldOffset_b() : int
+    + {static} <<unsafe>> Test_SequentialStructWithoutSize_FieldOffset_c() : int
+    + {static} Test_SequentialStructEmptyNoAttributes_Size() : int
+    + {static} Test_ExplicitStructWithEmptySequentialFields_Size() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithEmptySequentialFields_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_ExplicitStructWithEmptySequentialFields_FieldOffset_FieldB() : int
+    + {static} Test_ExplicitStrictWithEmptyAndNonEmptySequentialFields_Size() : int
+    + {static} <<unsafe>> Test_ExplicitStrictWithEmptyAndNonEmptySequentialFields_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_ExplicitStrictWithEmptyAndNonEmptySequentialFields_FieldOffset_FieldB() : int
+    + {static} Test_StructWithPack8_Size() : int
+    + {static} <<unsafe>> Test_StructWithPack8_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructWithPack8_FieldOffset_FieldB() : int
+    + {static} Test_StructPack2WithBytesAndInt_Size() : int
+    + {static} <<unsafe>> Test_StructPack2WithBytesAndInt_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructPack2WithBytesAndInt_FieldOffset_FieldB() : int
+    + {static} <<unsafe>> Test_StructPack2WithBytesAndInt_FieldOffset_FieldC() : int
+    + {static} Test_StructPack2WithBytesAndInts_Size() : int
+    + {static} <<unsafe>> Test_StructPack2WithBytesAndInts_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructPack2WithBytesAndInts_FieldOffset_FieldB() : int
+    + {static} <<unsafe>> Test_StructPack2WithBytesAndInts_FieldOffset_FieldC() : int
+    + {static} <<unsafe>> Test_StructPack2WithBytesAndInts_FieldOffset_FieldD() : int
+    + {static} Test_StructPack1WithBytesAndInt_Size() : int
+    + {static} <<unsafe>> Test_StructPack1WithBytesAndInt_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructPack1WithBytesAndInt_FieldOffset_FieldB() : int
+    + {static} <<unsafe>> Test_StructPack1WithBytesAndInt_FieldOffset_FieldC() : int
+    + {static} Test_StructPack1WithByteAndInt_Size() : int
+    + {static} <<unsafe>> Test_StructPack1WithByteAndInt_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructPack1WithByteAndInt_FieldOffset_FieldB() : int
+    + {static} Test_StructPack1WithByteAndIntWrapper_Size() : int
+    + {static} <<unsafe>> Test_StructPack1WithByteAndIntWrapper_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructPack1WithByteAndIntWrapper_FieldOffset_FieldB() : int
+    + {static} Test_StructPack1WithByteAndIntWrapper2_Size() : int
+    + {static} <<unsafe>> Test_StructPack1WithByteAndIntWrapper2_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructPack1WithByteAndIntWrapper2_FieldOffset_FieldB() : int
+    + {static} Test_StructWithSizeAndPack_Size() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPack_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPack_FieldOffset_FieldB() : int
+    + {static} Test_StructWithSizeAndPackWrapper_Size() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPackWrapper_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPackWrapper_FieldOffset_FieldB() : int
+    + {static} Test_StructWithSizeAndPack4_Size() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPack4_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPack4_FieldOffset_FieldB() : int
+    + {static} Test_StructWithSizeAndPack4Wrapper_Size() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPack4Wrapper_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructWithSizeAndPack4Wrapper_FieldOffset_FieldB() : int
+    + {static} Test_StructExplicitPack1WithByteAndInt_Size() : int
+    + {static} <<unsafe>> Test_StructExplicitPack1WithByteAndInt_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructExplicitPack1WithByteAndInt_FieldOffset_FieldB() : int
+    + {static} Test_StructExplicitPack1WithByteAndIntWrapper_Size() : int
+    + {static} <<unsafe>> Test_StructExplicitPack1WithByteAndIntWrapper_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructExplicitPack1WithByteAndIntWrapper_FieldOffset_FieldB() : int
+    + {static} Test_StructExplicitPack1WithByteAndIntWrapper2_Size() : int
+    + {static} <<unsafe>> Test_StructExplicitPack1WithByteAndIntWrapper2_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructExplicitPack1WithByteAndIntWrapper2_FieldOffset_FieldB() : int
+    + {static} Test_StructExplicitWithSizeAndPack_Size() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPack_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPack_FieldOffset_FieldB() : int
+    + {static} Test_StructExplicitWithSizeAndPackWrapper_Size() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPackWrapper_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPackWrapper_FieldOffset_FieldB() : int
+    + {static} Test_StructExplicitWithSizeAndPack4_Size() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPack4_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPack4_FieldOffset_FieldB() : int
+    + {static} Test_StructExplicitWithSizeAndPack4Wrapper_Size() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPack4Wrapper_FieldOffset_FieldA() : int
+    + {static} <<unsafe>> Test_StructExplicitWithSizeAndPack4Wrapper_FieldOffset_FieldB() : int
+}
+@enduml

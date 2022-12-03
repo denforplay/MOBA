@@ -1,0 +1,16 @@
+@startuml
+class Image <<sealed>> {
+    position : long
+    Image(stream:Stream)
+    Advance(length:int) : bool
+    MoveTo(position:uint) : bool
+    Dispose() : void
+    ReadUInt16() : ushort
+    ReadUInt32() : uint
+    IsManagedAssembly() : bool
+    + {static} IsAssembly(file:string) : bool
+    + {static} IsAssembly(stream:Stream) : bool
+}
+IDisposable <|-- Image
+Image --> "stream" Stream
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class TexturePlatformSettingsModal <<static>> {
+    {static} TexturePlatformSettingsModal()
+    {static} GetTextureFormatString(format:TextureImporterFormat) : string
+}
+class BuildPlatformData <<struct>> {
+    + buildTargetName : string
+}
+TexturePlatformSettingsModal +-- BuildPlatformData
+BuildPlatformData --> "defaultTextureFormat" TextureImporterFormat
+@enduml

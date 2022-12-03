@@ -1,0 +1,5 @@
+@startuml
+class AnalyticsOptionsExtensions <<static>> {
+    + {static} SetAnalyticsUserId(self:InitializationOptions, id:string) : InitializationOptions
+}
+@enduml

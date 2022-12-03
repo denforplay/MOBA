@@ -1,0 +1,51 @@
+@startuml
+interface IEnvironmentDisplayer {
+    Repaint() : void
+     <<event>> OnChangingEnvironmentLibrary : Action<EnvironmentLibrary> 
+}
+class DisplayWindow <<partial>> {
+     <<event>> OnChangingEnvironmentLibraryInternal : Action<EnvironmentLibrary> 
+    {static} FirstVisibleIndex(listView:ListView) : int
+    CreateEnvironment() : void
+    ScrollToEnd(attemptRemaining:int) : void
+    RefreshLibraryDisplay() : void
+    StartDragging(item:VisualElement, worldPosition:Vector2) : DraggingContext
+    EndDragging(context:DraggingContext, mouseWorldPosition:Vector2) : void
+    Repaint() : void
+    OnFocus() : void
+    FullRefreshEnvironmentList() : void
+}
+class Style <<static>> <<partial>> {
+}
+class "Action`1"<T> {
+}
+class DraggingContext {
+    <<const>> k_CursorFollowerName : string = "cursorFollower"
+    + <<readonly>> draggedIndex : int
+    + DraggingContext(windowContent:VisualElement, draggedElement:Image, draggedIndex:int, worldPosition:Vector2)
+    + UpdateCursorFollower(mouseWorldPosition:Vector2) : void
+    + Dispose() : void
+}
+class EnvironmentPreviewDragger {
+    + EnvironmentPreviewDragger(window:DisplayWindow, dropArea:VisualElement)
+    Release() : void
+    OnMouseDown(evt:MouseDownEvent) : void
+    OnMouseUp(evt:MouseUpEvent) : void
+    OnMouseMove(evt:MouseMoveEvent) : void
+}
+IEnvironmentDisplayer <|-- DisplayWindow
+DisplayWindow --> "m_EnvironmentContainer" VisualElement
+DisplayWindow --> "m_EnvironmentList" ListView
+DisplayWindow --> "m_EnvironmentInspector" EnvironmentElement
+DisplayWindow +-- Style
+DisplayWindow +-- DraggingContext
+IDisposable <|-- DraggingContext
+DraggingContext --> "cursorFollower" Image
+DraggingContext --> "cursorOffset" Vector2
+DraggingContext --> "windowContent" VisualElement
+DisplayWindow +-- EnvironmentPreviewDragger
+Manipulator <|-- EnvironmentPreviewDragger
+EnvironmentPreviewDragger --> "m_DropArea" VisualElement
+EnvironmentPreviewDragger --> "m_Window" DisplayWindow
+EnvironmentPreviewDragger --> "s_Context" DraggingContext
+@enduml

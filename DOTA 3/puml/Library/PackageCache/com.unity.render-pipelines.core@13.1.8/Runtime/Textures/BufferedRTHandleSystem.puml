@@ -1,0 +1,24 @@
+@startuml
+class BufferedRTHandleSystem {
+    m_DisposedValue : bool = false
+    + maxWidth : int <<get>>
+    + maxHeight : int <<get>>
+    + GetFrameRT(bufferId:int, frameIndex:int) : RTHandle
+    + AllocBuffer(bufferId:int, allocator:Func<RTHandleSystem, int, RTHandle>, bufferCount:int) : void
+    + ReleaseBuffer(bufferId:int) : void
+    + SwapAndSetReferenceSize(width:int, height:int) : void
+    + ResetReferenceSize(width:int, height:int) : void
+    + GetNumFramesAllocated(bufferId:int) : int
+    + CalculateRatioAgainstMaxSize(width:int, height:int) : Vector2
+    Swap() : void
+    Dispose(disposing:bool) : void
+    + Dispose() : void
+    + ReleaseAll() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+IDisposable <|-- BufferedRTHandleSystem
+BufferedRTHandleSystem o-> "m_RTHandles<int,RTHandle[]>" "Dictionary`2"
+BufferedRTHandleSystem o-> "m_RTHandleSystem" RTHandleSystem
+BufferedRTHandleSystem --> "rtHandleProperties" RTHandleProperties
+@enduml

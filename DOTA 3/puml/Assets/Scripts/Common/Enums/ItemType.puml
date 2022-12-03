@@ -1,0 +1,7 @@
+@startuml
+enum ItemType {
+    Weapon,
+    Ability,
+    Defense,
+}
+@enduml

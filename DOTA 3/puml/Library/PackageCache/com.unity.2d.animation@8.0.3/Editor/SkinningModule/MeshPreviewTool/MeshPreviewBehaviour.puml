@@ -1,0 +1,19 @@
+@startuml
+class DefaultPreviewBehaviour {
+    + GetWeightMapOpacity(sprite:SpriteCache) : float
+    + DrawWireframe(sprite:SpriteCache) : bool
+    + Overlay(sprite:SpriteCache) : bool
+    + OverlayWireframe(sprite:SpriteCache) : bool
+}
+class MeshPreviewBehaviour {
+    + showWeightMap : bool <<get>> <<set>>
+    + drawWireframe : bool <<get>> <<set>>
+    + overlaySelected : bool <<get>> <<set>>
+    + GetWeightMapOpacity(sprite:SpriteCache) : float
+    + DrawWireframe(sprite:SpriteCache) : bool
+    + Overlay(sprite:SpriteCache) : bool
+    + OverlayWireframe(sprite:SpriteCache) : bool
+}
+IMeshPreviewBehaviour <|-- DefaultPreviewBehaviour
+IMeshPreviewBehaviour <|-- MeshPreviewBehaviour
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+class AddToCurrentGameObjectComponentProvider {
+    <<readonly>> _concreteIdentifier : object
+    + AddToCurrentGameObjectComponentProvider(container:DiContainer, componentType:Type, extraArguments:IEnumerable<TypeValuePair>, concreteIdentifier:object, instantiateCallback:Action<InjectContext, object>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "List`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+IProvider <|-- AddToCurrentGameObjectComponentProvider
+AddToCurrentGameObjectComponentProvider --> "_componentType" Type
+AddToCurrentGameObjectComponentProvider --> "_container" DiContainer
+AddToCurrentGameObjectComponentProvider --> "_extraArguments<TypeValuePair>" "List`1"
+AddToCurrentGameObjectComponentProvider --> "_instantiateCallback<InjectContext,object>" "Action`2"
+@enduml

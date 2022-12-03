@@ -1,0 +1,10 @@
+@startuml
+class TimingOptions {
+    + {static} Tooltip : string = "Marker timings :\n\nTotal : \tIncluding children\nSelf : \tExcluding children"
+}
+enum TimingOption {
+    Time,
+    Self,
+}
+TimingOptions +-- TimingOption
+@enduml

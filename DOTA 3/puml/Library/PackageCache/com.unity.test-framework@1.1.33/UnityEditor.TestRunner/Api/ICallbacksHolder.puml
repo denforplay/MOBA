@@ -1,0 +1,8 @@
+@startuml
+interface ICallbacksHolder {
+    Add(callback:ICallbacks, priority:int) : void
+    Remove(callback:ICallbacks) : void
+    GetAll() : ICallbacks[]
+    Clear() : void
+}
+@enduml

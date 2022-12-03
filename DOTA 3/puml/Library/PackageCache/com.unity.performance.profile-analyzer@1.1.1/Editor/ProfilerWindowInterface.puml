@@ -1,0 +1,60 @@
+@startuml
+class ProfilerWindowInterface {
+    m_ProfilerWindowInitialized : bool = false
+    <<const>> k_NsToMs : float = 1000000
+    m_SendingSelectionEventToProfilerWindowInProgress : bool = false
+    m_LastSelectedFrameInProfilerWindow : int = 0
+    + ProfilerWindowInterface(progressBar:ProgressBarDisplay)
+    + IsReady() : bool
+    + GetProfilerWindowHandle() : void
+    + OpenProfilerOrUseExisting() : void
+    + GetFrameRangeFromProfiler(first:int, last:int) : bool
+    + CloseProfiler() : void
+    GetTimeLineGUI() : object
+    +  <<event>> selectedMarkerChanged : Action<string, string, string> 
+    + PollProfilerWindowMarkerName() : void
+    + PullFromProfiler(firstFrameDisplayIndex:int, lastFrameDisplayIndex:int) : ProfileData
+    + GetThreadCountForFrame(frameIndex:int) : int
+    + GetProfileFrameForThread(frameIndex:int, threadIndex:int) : ProfileFrame
+    GetDataOriginal(data:ProfileData, firstFrameIndex:int, lastFrameIndex:int) : ProfileData
+    GetData(firstFrameIndex:int, lastFrameIndex:int) : ProfileData
+    + GetFrameTime(frameIndex:int) : float
+    GetNextThreadIndexFittingThreadFilters(frameIndex:int, threadFilters:List<string>) : IEnumerator<ThreadIndexIterator>
+    GetMarkerInfo(markerName:string, frameIndex:int, threadFilters:List<string>, outThreadIndex:int, outNativeIndex:int, time:float, duration:float, instanceId:int) : bool
+    + SetProfilerWindowMarkerName(markerName:string, threadFilters:List<string>) : bool
+    + JumpToFrame(index:int) : bool
+    + selectedFrame : int <<get>>
+    +  <<event>> selectedFrameChanged : Action<int> 
+    + PollSelectedFrameChanges() : void
+    + IsRecording() : bool
+    + StopRecording() : void
+    + StartRecording() : void
+    + OnDisable() : void
+}
+class ThreadIndexIterator <<struct>> {
+    + threadIndex : int
+}
+ProfilerWindowInterface --> "m_progressBar" ProgressBarDisplay
+ProfilerWindowInterface --> "m_ProfilerWindowType" Type
+ProfilerWindowInterface --> "m_ProfilerWindow" EditorWindow
+ProfilerWindowInterface --> "m_CurrentFrameFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_TimeLineGUIFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedEntryFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedNameFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedTimeFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedDurationFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedInstanceIdFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedFrameIdFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedThreadIndexFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedNativeIndexFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedInstanceCountFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedInstanceCountForThreadFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedInstanceCountForFrameFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedMetaDataFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedThreadCountFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_SelectedCallstackInfoFieldInfo" FieldInfo
+ProfilerWindowInterface --> "m_GetProfilerModuleInfo" MethodInfo
+ProfilerWindowInterface --> "m_CPUProfilerModuleType" Type
+ProfilerWindowInterface +-- ThreadIndexIterator
+ThreadIndexIterator --> "frameData" ProfilerFrameDataIterator
+@enduml

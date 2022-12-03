@@ -1,0 +1,50 @@
+@startuml
+interface IDebugData {
+    GetReset() : Action
+}
+class DebugManager <<sealed>> <<partial>> {
+    UpdateReadOnlyCollection() : void
+    +  <<event>> onDisplayRuntimeUIChanged : Action<bool> 
+    +  <<event>> onSetDirty : Action 
+     <<event>> resetData : Action 
+    + refreshEditorRequested : bool
+    m_RequestedPanelIndex : int?
+    m_EditorOpen : bool = false
+    + displayEditorUI : bool <<get>>
+    + ToggleEditorUI(open:bool) : void
+    + enableRuntimeUI : bool <<get>> <<set>>
+    + displayRuntimeUI : bool <<get>> <<set>>
+    + displayPersistentRuntimeUI : bool <<get>> <<set>>
+    + isAnyDebugUIActive : bool <<get>>
+    DebugManager()
+    + RefreshEditor() : void
+    + Reset() : void
+    + ReDrawOnScreenDebug() : void
+    + RegisterData(data:IDebugData) : void
+    + UnregisterData(data:IDebugData) : void
+    + GetState() : int
+    EnsurePersistentCanvas() : void
+    OnPanelDirty(panel:DebugUI.Panel) : void
+    + RequestEditorWindowPanelIndex(index:int) : void
+    + GetPanel(displayName:string, createIfNull:bool, groupIndex:int, overrideIfExist:bool) : DebugUI.Panel
+    + RemovePanel(displayName:string) : void
+    + RemovePanel(panel:DebugUI.Panel) : void
+    + GetItem(queryPath:string) : DebugUI.Widget
+    GetItem(queryPath:string, container:DebugUI.IContainer) : DebugUI.Widget
+}
+class "Lazy`1"<T> {
+}
+class "ReadOnlyCollection`1"<T> {
+}
+class "List`1"<T> {
+}
+DebugManager o-> "s_Instance<DebugManager>" "Lazy`1"
+DebugManager --> "instance" DebugManager
+DebugManager --> "m_ReadOnlyPanels<DebugUI.Panel>" "ReadOnlyCollection`1"
+DebugManager o-> "m_Panels<DebugUI.Panel>" "List`1"
+DebugManager --> "panels<DebugUI.Panel>" "ReadOnlyCollection`1"
+DebugManager --> "m_Root" GameObject
+DebugManager --> "m_RootUICanvas" DebugUIHandlerCanvas
+DebugManager --> "m_PersistentRoot" GameObject
+DebugManager --> "m_RootUIPersistentCanvas" DebugUIHandlerPersistentCanvas
+@enduml

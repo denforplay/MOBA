@@ -1,0 +1,10 @@
+@startuml
+class TypeStringFormatter <<static>> {
+    + {static} PrettyName(type:Type) : string
+    {static} PrettyNameInternal(type:Type) : string
+    {static} GetCSharpTypeName(typeName:string) : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+TypeStringFormatter o-> "_prettyNameCache<Type,string>" "Dictionary`2"
+@enduml

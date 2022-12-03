@@ -1,0 +1,17 @@
+@startuml
+class CachedProvider {
+    _isCreatingInstance : bool
+    + CachedProvider(creator:IProvider)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + NumInstances : int <<get>>
+    + ClearCache() : void
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "List`1"<T> {
+}
+IProvider <|-- CachedProvider
+CachedProvider --> "_creator" IProvider
+CachedProvider --> "_instances<object>" "List`1"
+@enduml

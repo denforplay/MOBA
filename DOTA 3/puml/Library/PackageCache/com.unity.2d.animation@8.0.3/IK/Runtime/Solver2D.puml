@@ -1,0 +1,17 @@
+@startuml
+abstract class Solver2D {
+    + chainCount : int <<get>>
+    + constrainRotation : bool <<get>> <<set>>
+    + solveFromDefaultPose : bool <<get>> <<set>>
+    + isValid : bool <<get>>
+    + allChainsHaveTargets : bool <<get>>
+    + weight : float <<get>> <<set>>
+    + Initialize() : void
+    + UpdateIK(globalWeight:float) : void
+    + UpdateIK(positions:List<Vector3>, globalWeight:float) : void
+    + {abstract} GetChain(index:int) : IKChain2D
+    + OnPreviewUpdate() : void
+}
+MonoBehaviour <|-- Solver2D
+IPreviewable <|-- Solver2D
+@enduml

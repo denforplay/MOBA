@@ -1,0 +1,8 @@
+@startuml
+class ProjectileViewFactory {
+    + <<override>> Create(requirement:ProjectileFactoryRequirement) : ProjectileView
+}
+class "ViewFactoryBase`2"<T1,T2> {
+}
+"ViewFactoryBase`2" "<ProjectileView,ProjectileFactoryRequirement>" <|-- ProjectileViewFactory
+@enduml

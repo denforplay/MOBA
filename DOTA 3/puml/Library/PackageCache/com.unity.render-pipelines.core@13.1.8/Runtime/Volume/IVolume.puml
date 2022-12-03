@@ -1,0 +1,8 @@
+@startuml
+interface IVolume {
+    isGlobal : bool <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+IVolume --> "colliders<Collider>" "List`1"
+@enduml

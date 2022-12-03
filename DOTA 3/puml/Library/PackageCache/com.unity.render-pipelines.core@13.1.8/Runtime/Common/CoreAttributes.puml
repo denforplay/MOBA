@@ -1,0 +1,10 @@
+@startuml
+class DisplayInfoAttribute {
+    + name : string
+    + order : int
+}
+class AdditionalPropertyAttribute {
+}
+Attribute <|-- DisplayInfoAttribute
+Attribute <|-- AdditionalPropertyAttribute
+@enduml

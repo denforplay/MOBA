@@ -1,0 +1,9 @@
+@startuml
+class SkeletonToolWrapper {
+    + editBindPose : bool <<get>> <<set>>
+    + <<override>> defaultControlID : int <<get>>
+}
+BaseTool <|-- SkeletonToolWrapper
+SkeletonToolWrapper --> "skeletonTool" SkeletonTool
+SkeletonToolWrapper --> "mode" SkeletonMode
+@enduml

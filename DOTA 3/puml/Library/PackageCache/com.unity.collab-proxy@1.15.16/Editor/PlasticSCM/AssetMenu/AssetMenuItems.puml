@@ -1,0 +1,37 @@
+@startuml
+class AssetMenuItems {
+    {static} AddMenuItems() : void
+    {static} UpdateFilterMenuItems() : void
+    {static} GetPlasticMenuItemName(name:PlasticLocalization.Name) : string
+    {static} PendingChanges() : void
+    {static} ValidatePendingChanges() : bool
+    {static} Add() : void
+    {static} ValidateAdd() : bool
+    {static} Checkout() : void
+    {static} ValidateCheckout() : bool
+    {static} Checkin() : void
+    {static} ValidateCheckin() : bool
+    {static} Undo() : void
+    {static} ValidateUndo() : bool
+    {static} Diff() : void
+    {static} ValidateDiff() : bool
+    {static} History() : void
+    {static} ValidateHistory() : bool
+    {static} ShouldMenuItemBeEnabled(operation:AssetMenuOperations) : bool
+    {static} RemoveMenuItems() : void
+    {static} sIsEnabled : bool
+    <<const>> BASE_MENU_ITEM_PRIORITY : int = 19
+    <<const>> PENDING_CHANGES_MENU_ITEM_PRIORITY : int
+    <<const>> ADD_MENU_ITEM_PRIORITY : int
+    <<const>> CHECKOUT_MENU_ITEM_PRIORITY : int
+    <<const>> CHECKIN_MENU_ITEM_PRIORITY : int
+    <<const>> UNDO_MENU_ITEM_PRIORITY : int
+    <<const>> IGNORE_MENU_ITEMS_PRIORITY : int
+    <<const>> HIDDEN_MENU_ITEMS_PRIORITY : int
+    <<const>> DIFF_MENU_ITEM_PRIORITY : int
+    <<const>> HISTORY_MENU_ITEM_PRIORITY : int
+}
+AssetMenuItems --> "sOperations" AssetMenuRoutingOperations
+AssetMenuItems --> "sAssetSelection" ProjectViewAssetSelection
+AssetMenuItems --> "sFilterMenuBuilder" AssetFilesFilterPatternsMenuBuilder
+@enduml

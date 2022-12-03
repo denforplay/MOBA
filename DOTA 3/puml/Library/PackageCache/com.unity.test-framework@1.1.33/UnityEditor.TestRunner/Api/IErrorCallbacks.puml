@@ -1,0 +1,6 @@
+@startuml
+interface IErrorCallbacks {
+    OnError(message:string) : void
+}
+ICallbacks <|-- IErrorCallbacks
+@enduml

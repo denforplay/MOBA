@@ -1,0 +1,9 @@
+@startuml
+class PlayerLauncherTestRunSettings {
+    + buildOnly : bool <<set>> <<get>>
+    + buildOnlyLocationPath : string <<set>> <<get>>
+    + Dispose() : void
+    Apply() : void
+}
+ITestRunSettings <|-- PlayerLauncherTestRunSettings
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class MultipleProjectSettings {
+    <<const>> k_SettingsFileA : string = "FileA"
+    <<const>> k_SettingsFileB : string = "FileB"
+    + Teardown() : void
+    + NewSettingsInstance_CreatesUserAndProjectSettings() : void
+    + NewSettingsInstance_SupportsMultipleProjectRepositories() : void
+    + MultipleNamedProjectSettings_StoreSettingsSeparately() : void
+}
+SettingsTestBase <|-- MultipleProjectSettings
+@enduml

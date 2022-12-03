@@ -1,0 +1,22 @@
+@startuml
+class UnityThreadUtilsInternal {
+    + {static} PostAsync(action:Action) : Task
+    + {static} PostAsync(action:Action<object>, state:object) : Task
+    + {static} PostAsync(action:Func<T>) : Task<T>
+    + {static} PostAsync(action:Func<object, T>, state:object) : Task<T>
+    + {static} Send(action:Action) : void
+    + {static} Send(action:Action<object>, state:object) : void
+    + {static} Send(action:Func<T>) : T
+    + {static} Send(action:Func<object, T>, state:object) : T
+    IsRunningOnUnityThread : bool <<get>>
+    PostAsync(action:Action) : Task
+    PostAsync(action:Action<object>, state:object) : Task
+    PostAsync(action:Func<T>) : Task<T>
+    PostAsync(action:Func<object, T>, state:object) : Task<T>
+    Send(action:Action) : void
+    Send(action:Action<object>, state:object) : void
+    Send(action:Func<T>) : T
+    Send(action:Func<object, T>, state:object) : T
+}
+IUnityThreadUtils <|-- UnityThreadUtilsInternal
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+class TimelineWindow <<partial>> {
+    {static} <<readonly>> k_FrameRateMenuLabel : string
+    {static} <<readonly>> k_CustomFpsLabel : string
+    m_VerticalScrollBarSize : float
+    m_HorizontalScrollBarSize : float
+    headerHeight : float <<get>>
+    + verticalScrollbarWidth : float <<get>>
+    + horizontalScrollbarHeight : float <<get>>
+    DoLayout() : void
+    SplitterGUI() : void
+    TrackViewsGUI() : void
+    UserOverlaysGUI() : void
+    DrawHeaderBackground() : void
+    HandleBottomFillerDragAndDrop(rect:Rect) : void
+    DrawHeaderBackgroundBottomFiller() : void
+    SequencerGUI() : void
+    DrawToolbar() : void
+    SubTimelineRangeGUI() : void
+    DrawOptions() : void
+    AddStandardFrameRateMenu(menu:GenericMenu, option:StandardFrameRates, label:string, on:bool) : void
+    + AddUserOverlay(marker:IMarker, rect:Rect, editor:MarkerEditor, collapsed:bool, selected:bool) : void
+}
+class MarkerOverlay <<struct>> {
+    + isSelected : bool
+    + isCollapsed : bool
+}
+enum TimelineItemArea {
+    Header,
+    Lines,
+}
+class "List`1"<T> {
+}
+TimelineWindow o-> "m_OverlayQueue<MarkerOverlay>" "List`1"
+TimelineWindow --> "markerHeaderRect" Rect
+TimelineWindow --> "markerContentRect" Rect
+TimelineWindow --> "trackRect" Rect
+TimelineWindow --> "sequenceRect" Rect
+TimelineWindow --> "sequenceHeaderRect" Rect
+TimelineWindow --> "headerSplitterRect" Rect
+TimelineWindow --> "sequenceContentRect" Rect
+TimelineWindow +-- MarkerOverlay
+MarkerOverlay --> "marker" IMarker
+MarkerOverlay --> "rect" Rect
+MarkerOverlay --> "editor" MarkerEditor
+TimelineWindow +-- TimelineItemArea
+@enduml

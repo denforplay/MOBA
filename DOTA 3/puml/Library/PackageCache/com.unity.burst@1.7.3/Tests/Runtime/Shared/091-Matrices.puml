@@ -1,0 +1,9 @@
+@startuml
+class Matrices <<partial>> {
+    + {static} <<unsafe>> TestIdentityFloat4x4(mat:float4x4*) : void
+    + {static} <<unsafe>> TestIdentityFloat3x3(mat:float3x3*) : void
+    + {static} <<unsafe>> TestIdentityFloat2x2(mat:float2x2*) : void
+    + {static} <<unsafe>> TestLookAt(mat:float4x4*) : void
+    + {static} <<unsafe>> TestStaticLoad(mat:float4x4*) : void
+}
+@enduml

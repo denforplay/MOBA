@@ -1,0 +1,108 @@
+@startuml
+class PreviewManager {
+    m_MaxPreviewsCompiling : int = 2
+    m_LastTimedUpdateTime : double = 0.0f
+    m_TopologyDirty : bool
+    m_NewMasterPreviewSize : Vector2?
+    + PreviewManager(graph:GraphData, messenger:MessageManager)
+    {static} GenerateFourSquare(c1:Color, c2:Color) : Texture2D
+    + ResizeMasterPreview(newSize:Vector2) : void
+    + GetPreviewRenderData(node:AbstractMaterialNode) : PreviewRenderData
+    AddMasterPreview() : void
+    + UpdateMasterPreview(scope:ModificationScope) : void
+    AddPreview(node:AbstractMaterialNode) : void
+    OnNodeModified(node:AbstractMaterialNode, scope:ModificationScope) : void
+    {static} ForeachConnectedNode(node:AbstractMaterialNode, dir:PropagationDirection, action:Action<AbstractMaterialNode>) : void
+    + ReloadChangedFiles(ChangedFileDependencyGUIDs:string) : void
+    + HandleGraphChanges() : void
+    CollectPreviewProperties(nodesToCollect:IEnumerable<AbstractMaterialNode>, perMaterialPreviewProperties:PooledList<PreviewProperty>) : void
+    AssignPerMaterialPreviewProperties(mat:Material, perMaterialPreviewProperties:List<PreviewProperty>) : void
+    TimedNodesShouldUpdate(editorWindow:EditorWindow) : bool
+    + RenderPreviews(editorWindow:EditorWindow, requestShaders:bool) : void
+    ProcessCompletedShaderCompilations() : void
+    KickOffShaderCompilations() : void
+    UpdateShaders() : void
+    BeginCompile(renderData:PreviewRenderData, shaderStr:string) : void
+    ProcessUpstreamNodesInDependencyOrder(rootNodes:IEnumerable<AbstractMaterialNode>, process:Action<AbstractMaterialNode, IEnumerable<AbstractMaterialNode>>) : void
+    UpdateTopology() : void
+    RenderPreview(renderData:PreviewRenderData, mesh:Mesh, transform:Matrix4x4, perMaterialPreviewProperties:PooledList<PreviewProperty>) : void
+    InitializeSRPIfNeeded() : void
+    CheckForErrors(shaderData:PreviewShaderData) : void
+    CompileMasterNodeShader() : void
+    DestroyRenderData(renderData:PreviewRenderData) : void
+    DestroyPreview(node:AbstractMaterialNode) : void
+    ReleaseUnmanagedResources() : void
+    + Dispose() : void
+}
+class PreviewShaderData {
+    + shaderString : string
+    + passesCompiling : int
+    + isOutOfDate : bool
+    + hasError : bool
+}
+class PreviewRenderData {
+    + previewName : string
+    + NotifyPreviewChanged() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "HashSet`1"<T> {
+}
+class "Stack`1"<T> {
+}
+class "Action`1"<T> {
+}
+enum PropagationDirection {
+    Upstream,
+    Downstream,
+}
+class NodeProcessor {
+    + NodeProcessor(graphData:GraphData, process:Action<AbstractMaterialNode, IEnumerable<AbstractMaterialNode>>)
+    + ProcessInDependencyOrder(root:AbstractMaterialNode) : void
+    + ProcessInDependencyOrderRecursive(node:AbstractMaterialNode) : void
+}
+class "Action`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+IDisposable <|-- PreviewManager
+PreviewManager --> "m_Graph" GraphData
+PreviewManager --> "m_Messenger" MessageManager
+PreviewManager --> "m_SharedPreviewPropertyBlock" MaterialPropertyBlock
+PreviewManager o-> "m_RenderDatas<AbstractMaterialNode,PreviewRenderData>" "Dictionary`2"
+PreviewManager --> "m_MasterRenderData" PreviewRenderData
+PreviewManager o-> "m_NodesShaderChanged<AbstractMaterialNode>" "HashSet`1"
+PreviewManager o-> "m_NodesPropertyChanged<AbstractMaterialNode>" "HashSet`1"
+PreviewManager o-> "m_PreviewsNeedsRecompile<PreviewRenderData>" "HashSet`1"
+PreviewManager o-> "m_PreviewsCompiling<PreviewRenderData>" "HashSet`1"
+PreviewManager o-> "m_PreviewsToDraw<PreviewRenderData>" "HashSet`1"
+PreviewManager o-> "m_TimedPreviews<PreviewRenderData>" "HashSet`1"
+PreviewManager o-> "m_MasterNodeTempBlocks<BlockNode>" "HashSet`1"
+PreviewManager o-> "m_PreviewTextureGUIDs<string>" "HashSet`1"
+PreviewManager --> "m_SceneResources" PreviewSceneResources
+PreviewManager --> "m_ErrorTexture" Texture2D
+PreviewManager o-> "kMasterProxyNode" AbstractMaterialNode
+PreviewManager --> "masterRenderData" PreviewRenderData
+PreviewManager o-> "m_TempNodeWave<AbstractMaterialNode>" "Stack`1"
+PreviewManager o-> "m_TempAddedToNodeWave<AbstractMaterialNode>" "HashSet`1"
+PreviewManager o-> "AddNextLevelNodesToWave<AbstractMaterialNode>" "Action`1"
+PreviewShaderData --> "node" AbstractMaterialNode
+PreviewShaderData --> "shader" Shader
+PreviewShaderData --> "mat" Material
+PreviewRenderData --> "shaderData" PreviewShaderData
+PreviewRenderData --> "renderTexture" RenderTexture
+PreviewRenderData --> "texture" Texture
+PreviewRenderData --> "previewMode" PreviewMode
+PreviewRenderData --> "onPreviewChanged" OnPreviewChanged
+PreviewManager +-- PropagationDirection
+PreviewManager +-- NodeProcessor
+NodeProcessor --> "graphData" GraphData
+NodeProcessor --> "process<AbstractMaterialNode,IEnumerable<AbstractMaterialNode>>" "Action`2"
+NodeProcessor o-> "processing<AbstractMaterialNode>" "HashSet`1"
+NodeProcessor o-> "processed<AbstractMaterialNode>" "HashSet`1"
+NodeProcessor o-> "nodeStack<AbstractMaterialNode>" "Stack`1"
+NodeProcessor o-> "childStartStack<int>" "Stack`1"
+NodeProcessor o-> "curChildStack<int>" "Stack`1"
+NodeProcessor o-> "stateStack<int>" "Stack`1"
+NodeProcessor o-> "allChildren<AbstractMaterialNode>" "List`1"
+@enduml

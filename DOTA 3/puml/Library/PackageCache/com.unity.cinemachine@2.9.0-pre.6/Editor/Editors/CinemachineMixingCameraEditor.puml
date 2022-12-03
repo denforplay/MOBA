@@ -1,0 +1,10 @@
+@startuml
+class CinemachineMixingCameraEditor <<sealed>> {
+    {static} WeightPropertyName(i:int) : string
+    + <<override>> OnInspectorGUI() : void
+    DrawProportionIndicator(children:CinemachineVirtualCameraBase[], numCameras:int, totalWeight:float) : void
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+}
+"CinemachineVirtualCameraBaseEditor`1" "<CinemachineMixingCamera>" <|-- CinemachineMixingCameraEditor
+@enduml

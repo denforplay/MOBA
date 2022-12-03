@@ -1,0 +1,7 @@
+@startuml
+interface IUtpMessageReporter {
+    ReportTestFinished(result:ITestResultAdaptor) : void
+    ReportTestRunStarted(testsToRun:ITestAdaptor) : void
+    ReportTestStarted(test:ITestAdaptor) : void
+}
+@enduml

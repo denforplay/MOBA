@@ -1,0 +1,17 @@
+@startuml
+class ResolveProvider {
+    <<readonly>> _identifier : object
+    <<readonly>> _isOptional : bool
+    <<readonly>> _matchAll : bool
+    + ResolveProvider(contractType:Type, container:DiContainer, identifier:object, isOptional:bool, source:InjectSources, matchAll:bool)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+    GetSubContext(parent:InjectContext) : InjectContext
+}
+IProvider <|-- ResolveProvider
+ResolveProvider --> "_container" DiContainer
+ResolveProvider --> "_contractType" Type
+ResolveProvider --> "_source" InjectSources
+@enduml

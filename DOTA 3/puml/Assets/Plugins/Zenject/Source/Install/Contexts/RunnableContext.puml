@@ -1,0 +1,10 @@
+@startuml
+abstract class RunnableContext {
+    _autoRun : bool = true
+    {static} _staticAutoRun : bool = true
+    + Initialized : bool <<get>>
+    + Run() : void
+    + {static} CreateComponent(gameObject:GameObject) : T
+}
+Context <|-- RunnableContext
+@enduml

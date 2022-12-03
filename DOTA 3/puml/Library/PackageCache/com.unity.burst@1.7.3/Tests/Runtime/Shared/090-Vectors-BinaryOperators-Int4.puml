@@ -1,0 +1,42 @@
+@startuml
+class VectorsBinOpInt4 <<partial>> {
+    + {static} Add() : int
+    + {static} AddIntRight() : int
+    + {static} AddIntLeft() : int
+    + {static} AddByArgs(left:int4, right:int4) : int
+    + {static} Sub() : int
+    + {static} SubIntLeft() : int
+    + {static} SubIntRight() : int
+    + {static} SubByArgs(left:int4, right:int4) : int
+    + {static} Mul() : int
+    + {static} MulIntLeft() : int
+    + {static} MulIntRight() : int
+    + {static} MulByArgs(left:int4, right:int4) : int
+    + {static} Div() : int
+    + {static} DivIntLeft() : int
+    + {static} DivIntRight() : int
+    + {static} LeftShift() : int
+    + {static} RightShift() : int
+    + {static} DivByArgs(left:int4, right:int4) : int
+    + {static} Neg() : int
+    + {static} Positive() : int
+    + {static} Equality(a:int, b:int) : int
+    + {static} EqualityInt4(a:int4, b:int4) : int
+    + {static} Inequality(a:int, b:int) : int
+    + {static} InequalityInt4(a:int4, b:int4) : int
+    + {static} GreaterThan(a:int, b:int) : int
+    + {static} GreaterThanInt4(a:int4, b:int4) : int
+    + {static} GreaterThanOrEqual(a:int, b:int) : int
+    + {static} GreaterThanOrEqualInt4(a:int4, b:int4) : int
+    + {static} LessThan(a:int, b:int) : int
+    + {static} LessThanInt4(a:int4, b:int4) : int
+    + {static} LessThanOrEqual(a:int, b:int) : int
+    + {static} LessThanOrEqualInt4(a:int4, b:int4) : int
+    + {static} And(a:int4, b:int4) : int
+    + {static} Or(a:int4, b:int4) : int
+    + {static} Xor(a:int4, b:int4) : int
+    + {static} ImplicitBitwiseNot(a:int) : int
+    + {static} ImplicitInt(a:int) : int
+    + {static} ImplicitInt4(a:int4) : int
+}
+@enduml

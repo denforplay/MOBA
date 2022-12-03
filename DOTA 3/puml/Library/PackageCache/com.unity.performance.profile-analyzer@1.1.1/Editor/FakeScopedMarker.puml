@@ -1,0 +1,6 @@
+@startuml
+class FakeScopedMarker <<struct>> {
+    + FakeScopedMarker(markerName:string)
+    + Auto() : IDisposable
+}
+@enduml

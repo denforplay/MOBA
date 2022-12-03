@@ -1,0 +1,7 @@
+@startuml
+class UnityServices <<static>> {
+    + {static} InitializeAsync() : Task
+    + {static} <<async>> InitializeAsync(options:InitializationOptions) : Task
+}
+UnityServices --> "State" ServicesInitializationState
+@enduml

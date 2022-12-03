@@ -1,0 +1,13 @@
+@startuml
+class DefaultTilemapEditorTool <<struct>> {
+    + fullTypeName : string
+}
+class TilemapEditorToolPreferencesAsset {
+}
+class "List`1"<T> {
+}
+DefaultTilemapEditorTool --> "tilemapEditorToolType" Type
+DefaultTilemapEditorTool --> "toolInstance" TilemapEditorTool
+ScriptableObject <|-- TilemapEditorToolPreferencesAsset
+TilemapEditorToolPreferencesAsset --> "m_UserDefaultTools<DefaultTilemapEditorTool>" "List`1"
+@enduml

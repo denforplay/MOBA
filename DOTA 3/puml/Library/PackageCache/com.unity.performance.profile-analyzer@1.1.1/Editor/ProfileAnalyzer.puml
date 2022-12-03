@@ -1,0 +1,20 @@
+@startuml
+class ProfileAnalyzer {
+    + <<const>> kDepthAll : int
+    m_Progress : int = 0
+    + ProfileAnalyzer()
+    + QuickScan() : void
+    + GetThreadNames() : List<string>
+    CalculateFrameTimeStats(data:ProfileData, median:float, mean:float, standardDeviation:float) : void
+    GetClampedOffsetToFrame(profileData:ProfileData, frameIndex:int) : int
+    + {static} MatchThreadFilter(threadNameWithIndex:string, threadFilters:List<string>) : bool
+    + IsNullOrWhiteSpace(s:string) : bool
+    + Analyze(profileData:ProfileData, selectionIndices:List<int>, threadFilters:List<string>, depthFilter:int, selfTimes:bool, parentMarker:string, timeScaleMax:float) : ProfileAnalysis
+    + GetProgress() : int
+}
+class "List`1"<T> {
+}
+ProfileAnalyzer --> "m_frameData" ProfilerFrameDataIterator
+ProfileAnalyzer o-> "m_threadNames<string>" "List`1"
+ProfileAnalyzer --> "m_analysis" ProfileAnalysis
+@enduml

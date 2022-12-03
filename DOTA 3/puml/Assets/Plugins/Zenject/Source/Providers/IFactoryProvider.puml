@@ -1,0 +1,50 @@
+@startuml
+abstract class "IFactoryProviderBase`1"<TContract> {
+    + IFactoryProviderBase(container:DiContainer, factoryId:Guid)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + {abstract} GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`1"<TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`2"<TParam1,TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`3"<TParam1,TParam2,TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`4"<TParam1,TParam2,TParam3,TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`5"<TParam1,TParam2,TParam3,TParam4,TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IFactoryProvider`11"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TContract> {
+    + IFactoryProvider(container:DiContainer, factoryId:Guid)
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+IProvider <|-- "IFactoryProviderBase`1"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`1"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`2"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`3"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`4"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`5"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`6"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`7"
+"IFactoryProviderBase`1" "<TContract>" <|-- "IFactoryProvider`11"
+@enduml

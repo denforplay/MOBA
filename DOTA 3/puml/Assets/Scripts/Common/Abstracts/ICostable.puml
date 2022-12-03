@@ -1,0 +1,5 @@
+@startuml
+interface ICostable {
+    + GetCost() : int
+}
+@enduml

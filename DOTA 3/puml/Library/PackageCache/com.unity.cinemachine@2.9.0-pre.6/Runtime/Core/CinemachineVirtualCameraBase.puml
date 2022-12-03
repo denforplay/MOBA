@@ -1,0 +1,65 @@
+@startuml
+abstract class CinemachineVirtualCameraBase {
+    + ValidatingStreamVersion : int <<get>>
+    + m_Priority : int = 10
+    + FollowTargetAttachment : float
+    + LookAtTargetAttachment : float
+    + <<virtual>> GetMaxDampTime() : float
+    + DetachedFollowTargetDamp(initial:float, dampTime:float, deltaTime:float) : float
+    + DetachedFollowTargetDamp(initial:Vector3, dampTime:Vector3, deltaTime:float) : Vector3
+    + DetachedFollowTargetDamp(initial:Vector3, dampTime:float, deltaTime:float) : Vector3
+    + DetachedLookAtTargetDamp(initial:float, dampTime:float, deltaTime:float) : float
+    + DetachedLookAtTargetDamp(initial:Vector3, dampTime:Vector3, deltaTime:float) : Vector3
+    + DetachedLookAtTargetDamp(initial:Vector3, dampTime:float, deltaTime:float) : Vector3
+    + <<virtual>> AddExtension(extension:CinemachineExtension) : void
+    + <<virtual>> RemoveExtension(extension:CinemachineExtension) : void
+    + Name : string <<get>>
+    + <<virtual>> Description : string <<get>>
+    + Priority : int <<get>> <<set>>
+    + IsValid : bool <<get>>
+    + <<virtual>> IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + <<virtual>> PreviousStateIsValid : bool <<get>> <<set>>
+    + UpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + {abstract} InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    + <<virtual>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    m_WasStarted : bool
+    + GetInputAxisProvider() : AxisState.IInputAxisProvider
+    + ResolveLookAt(localLookAt:Transform) : Transform
+    + ResolveFollow(localFollow:Transform) : Transform
+    + MoveToTopOfPrioritySubqueue() : void
+    + <<virtual>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<virtual>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + FollowTargetChanged : bool <<get>>
+    + LookAtTargetChanged : bool <<get>>
+}
+enum StandbyUpdateMode {
+    Never,
+    Always,
+    RoundRobin,
+}
+enum BlendHint {
+    None,
+    SphericalPosition,
+    CylindricalPosition,
+    ScreenSpaceAimWhenTargetsDiffer,
+}
+class TransitionParams <<struct>> {
+    + m_InheritPosition : bool
+}
+MonoBehaviour <|-- CinemachineVirtualCameraBase
+ICinemachineCamera <|-- CinemachineVirtualCameraBase
+CinemachineVirtualCameraBase o-> "m_StandbyUpdate" StandbyUpdateMode
+CinemachineVirtualCameraBase --> "VirtualCameraGameObject" GameObject
+CinemachineVirtualCameraBase --> "State" CameraState
+CinemachineVirtualCameraBase --> "ParentCamera" ICinemachineCamera
+CinemachineVirtualCameraBase --> "LookAt" Transform
+CinemachineVirtualCameraBase --> "Follow" Transform
+CinemachineVirtualCameraBase --> "AbstractFollowTargetGroup" ICinemachineTargetGroup
+CinemachineVirtualCameraBase --> "FollowTargetAsVcam" CinemachineVirtualCameraBase
+CinemachineVirtualCameraBase --> "AbstractLookAtTargetGroup" ICinemachineTargetGroup
+CinemachineVirtualCameraBase --> "LookAtTargetAsVcam" CinemachineVirtualCameraBase
+CinemachineVirtualCameraBase +-- StandbyUpdateMode
+CinemachineVirtualCameraBase +-- BlendHint
+CinemachineVirtualCameraBase +-- TransitionParams
+TransitionParams --> "m_BlendHint" BlendHint
+@enduml

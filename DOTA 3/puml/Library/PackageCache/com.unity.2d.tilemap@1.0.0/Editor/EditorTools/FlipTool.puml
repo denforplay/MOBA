@@ -1,0 +1,28 @@
+@startuml
+abstract class FlipTool {
+    + <<override>> OnToolGUI(window:EditorWindow) : void
+}
+class FlipXTool <<sealed>> {
+    + <<override>> OnActivated() : void
+}
+class FlipYTool <<sealed>> {
+    + <<override>> OnActivated() : void
+}
+class Styles <<static>> {
+    + {static} tooltipStringFormat : string
+    + {static} shortcutId : string = "Grid Painting/Flip X"
+}
+class Styles <<static>> {
+    + {static} tooltipStringFormat : string
+    + {static} shortcutId : string = "Grid Painting/Flip Y"
+}
+TilemapEditorTool <|-- FlipTool
+FlipTool <|-- FlipXTool
+FlipXTool --> "toolbarIcon" GUIContent
+FlipTool <|-- FlipYTool
+FlipYTool --> "toolbarIcon" GUIContent
+FlipXTool +-- Styles
+Styles o-> "toolContent" GUIContent
+FlipYTool +-- Styles
+Styles o-> "toolContent" GUIContent
+@enduml

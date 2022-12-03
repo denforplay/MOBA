@@ -1,0 +1,78 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} SwitchToThreadPool() : SwitchToThreadPoolAwaitable
+    + {static} SwitchToTaskPool() : SwitchToTaskPoolAwaitable
+    + {static} SwitchToSynchronizationContext(synchronizationContext:SynchronizationContext, cancellationToken:CancellationToken) : SwitchToSynchronizationContextAwaitable
+    + {static} ReturnToSynchronizationContext(synchronizationContext:SynchronizationContext, cancellationToken:CancellationToken) : ReturnToSynchronizationContext
+    + {static} ReturnToCurrentSynchronizationContext(dontPostWhenSameContext:bool, cancellationToken:CancellationToken) : ReturnToSynchronizationContext
+}
+class SwitchToThreadPoolAwaitable <<struct>> {
+    + GetAwaiter() : Awaiter
+}
+class SwitchToTaskPoolAwaitable <<struct>> {
+    + GetAwaiter() : Awaiter
+}
+class SwitchToSynchronizationContextAwaitable <<struct>> {
+    + SwitchToSynchronizationContextAwaitable(synchronizationContext:SynchronizationContext, cancellationToken:CancellationToken)
+    + GetAwaiter() : Awaiter
+}
+class ReturnToSynchronizationContext <<struct>> {
+    <<readonly>> dontPostWhenSameContext : bool
+    + ReturnToSynchronizationContext(syncContext:SynchronizationContext, dontPostWhenSameContext:bool, cancellationToken:CancellationToken)
+    + DisposeAsync() : Awaiter
+}
+class Awaiter <<struct>> {
+    + IsCompleted : bool <<get>>
+    + GetResult() : void
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+    {static} Callback(state:object) : void
+}
+class Awaiter <<struct>> {
+    + IsCompleted : bool <<get>>
+    + GetResult() : void
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+    {static} Callback(state:object) : void
+}
+class Awaiter <<struct>> {
+    + Awaiter(synchronizationContext:SynchronizationContext, cancellationToken:CancellationToken)
+    + IsCompleted : bool <<get>>
+    + GetResult() : void
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+    {static} Callback(state:object) : void
+}
+class Awaiter <<struct>> {
+    <<readonly>> dontPostWhenSameContext : bool
+    + Awaiter(synchronizationContext:SynchronizationContext, dontPostWhenSameContext:bool, cancellationToken:CancellationToken)
+    + GetAwaiter() : Awaiter
+    + IsCompleted : bool <<get>>
+    + GetResult() : void
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+    {static} Callback(state:object) : void
+}
+class "Action`1"<T> {
+}
+SwitchToSynchronizationContextAwaitable --> "synchronizationContext" SynchronizationContext
+SwitchToSynchronizationContextAwaitable --> "cancellationToken" CancellationToken
+ReturnToSynchronizationContext --> "syncContext" SynchronizationContext
+ReturnToSynchronizationContext --> "cancellationToken" CancellationToken
+SwitchToThreadPoolAwaitable +-- Awaiter
+ICriticalNotifyCompletion <|-- Awaiter
+Awaiter o-> "switchToCallback" WaitCallback
+SwitchToTaskPoolAwaitable +-- Awaiter
+ICriticalNotifyCompletion <|-- Awaiter
+Awaiter o-> "switchToCallback<object>" "Action`1"
+SwitchToSynchronizationContextAwaitable +-- Awaiter
+ICriticalNotifyCompletion <|-- Awaiter
+Awaiter o-> "switchToCallback" SendOrPostCallback
+Awaiter --> "synchronizationContext" SynchronizationContext
+Awaiter --> "cancellationToken" CancellationToken
+ReturnToSynchronizationContext +-- Awaiter
+ICriticalNotifyCompletion <|-- Awaiter
+Awaiter o-> "switchToCallback" SendOrPostCallback
+Awaiter --> "synchronizationContext" SynchronizationContext
+Awaiter --> "cancellationToken" CancellationToken
+@enduml

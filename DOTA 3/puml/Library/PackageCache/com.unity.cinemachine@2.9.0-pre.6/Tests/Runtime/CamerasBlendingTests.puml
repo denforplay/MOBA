@@ -1,0 +1,10 @@
+@startuml
+class CamerasBlendingTests {
+    + <<override>> SetUp() : void
+    + BlendingBetweenCameras() : IEnumerator
+    + InterruptedBlendingBetweenCameras() : IEnumerator
+    + DoesInterruptedBlendingBetweenCamerasTakesDoubleTime() : IEnumerator
+    + SetActiveBlend() : IEnumerator
+}
+CinemachineFixtureBase <|-- CamerasBlendingTests
+@enduml

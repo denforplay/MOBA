@@ -1,0 +1,11 @@
+@startuml
+class GeometryCollider {
+    m_UpdateCollider : bool = false
+    m_HashCode : int = 0
+    Start() : void
+    Update() : void
+    {static} + Bake(go:GameObject, forced:bool) : void
+    {static} OuterEdges(polygonCollider:PolygonCollider2D, triangles:NativeArray<ushort>, vertices:NativeSlice<Vector3>, triangleCount:int) : void
+}
+MonoBehaviour <|-- GeometryCollider
+@enduml

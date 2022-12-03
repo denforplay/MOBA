@@ -1,0 +1,113 @@
+@startuml
+class ProfileTreeViewItem {
+    + ProfileTreeViewItem(id:int, depth:int, displayName:string, data:MarkerData)
+}
+class ProfileTable {
+    m_MaxMedian : float
+    m_MaxCount : int
+    m_MaxCountMean : float
+    m_MaxTotal : double
+    <<const>> kRowHeights : float = 20f
+    {static} m_MaxColumns : int
+    + ProfileTable(state:TreeViewState, multicolumnHeader:MultiColumnHeader, dataView:ProfileDataView, profileAnalyzerWindow:ProfileAnalyzerWindow, draw2D:Draw2D, barColor:Color)
+    OnSortingChanged(_multiColumnHeader:MultiColumnHeader) : void
+    SortIfNeeded(rows:IList<TreeViewItem>) : void
+    GetThreadName(item:ProfileTreeViewItem) : string
+    GetThreadNames(item:ProfileTreeViewItem) : string
+    SortByMultipleColumns() : void
+    InitialOrder(myTypes:IEnumerable<ProfileTreeViewItem>, history:int[]) : IOrderedEnumerable<ProfileTreeViewItem>
+    + ShowingHorizontalScroll : bool <<get>>
+    ToDisplayUnits(ms:float, showUnits:bool, showFullValueWhenBelowZero:bool) : string
+    ToDisplayUnits(ms:double, showUnits:bool, showFullValueWhenBelowZero:bool) : string
+    ToTooltipDisplayUnits(ms:float, showUnits:bool, onFrame:int) : string
+    ToTooltipDisplayUnits(ms:double, showUnits:bool, onFrame:int) : string
+    ToDisplayUnitsWithTooltips(ms:float, showUnits:bool, onFrame:int) : GUIContent
+    ToDisplayUnitsWithTooltips(ms:double, showUnits:bool, onFrame:int) : GUIContent
+    CopyToClipboard(current:Event, text:string) : void
+    GenerateActiveContextMenu(markerName:string, evt:Event, content:GUIContent) : GenericMenu
+    GenerateDisabledContextMenu(markerName:string, content:GUIContent) : GenericMenu
+    ShowContextMenu(cellRect:Rect, markerName:string, content:GUIContent) : void
+    ShowText(rect:Rect, text:string) : void
+    ShowText(rect:Rect, content:GUIContent) : void
+    GenerateStrings(item:ProfileTreeViewItem) : void
+    ShowBar(rect:Rect, ms:float, range:float, content:GUIContent) : void
+    CellGUI(cellRect:Rect, item:ProfileTreeViewItem, column:MyColumns, args:RowGUIArgs) : void
+    + {static} CreateDefaultMultiColumnHeaderState(modeFilter:MarkerColumnFilter) : MultiColumnHeaderState
+    {static} GetDefaultVisibleColumns(mode:MarkerColumnFilter.Mode) : int[]
+    {static} SetMode(modeFilter:MarkerColumnFilter, state:MultiColumnHeaderState) : void
+    + SetMode(modeFilter:MarkerColumnFilter) : void
+}
+class MyExtensionMethods <<static>> {
+    + {static} Order(source:IEnumerable<T>, selector:Func<T, TKey>, ascending:bool) : IOrderedEnumerable<T>
+    + {static} ThenBy(source:IOrderedEnumerable<T>, selector:Func<T, TKey>, ascending:bool) : IOrderedEnumerable<T>
+}
+class "List`1"<T> {
+}
+enum MyColumns {
+    Name,
+    Depth,
+    Median,
+    MedianBar,
+    Mean,
+    Min,
+    Max,
+    Range,
+    Count,
+    CountBar,
+    CountMean,
+    CountMeanBar,
+    FirstFrame,
+    AtMedian,
+    Total,
+    TotalBar,
+    Threads,
+}
+enum SortOption {
+    Name,
+    Depth,
+    Median,
+    Mean,
+    Min,
+    Max,
+    Range,
+    Count,
+    CountMean,
+    FirstFrame,
+    AtMedian,
+    Total,
+    Threads,
+}
+class Styles <<static>> {
+}
+class HeaderData <<struct>> {
+    + <<readonly>> width : float
+    + <<readonly>> minWidth : float
+    + <<readonly>> autoResize : bool
+    + <<readonly>> allowToggleVisibility : bool
+    + <<readonly>> ascending : bool
+    + HeaderData(name:string, tooltip:string, width:float, minWidth:float, autoResize:bool, allowToggleVisibility:bool, ascending:bool)
+}
+TreeViewItem <|-- ProfileTreeViewItem
+ProfileTreeViewItem --> "data" MarkerData
+TreeView <|-- ProfileTable
+ProfileTable --> "m_2D" Draw2D
+ProfileTable --> "m_DataView" ProfileDataView
+ProfileTable --> "m_ProfileAnalyzerWindow" ProfileAnalyzerWindow
+ProfileTable --> "m_BarColor" Color
+ProfileTable o-> "m_Rows<TreeViewItem>" "List`1"
+ProfileTable +-- MyColumns
+ProfileTable +-- SortOption
+ProfileTable +-- Styles
+Styles o-> "menuItemSelectFramesInAll" GUIContent
+Styles o-> "menuItemSelectFramesInCurrent" GUIContent
+Styles o-> "menuItemSelectFramesAll" GUIContent
+Styles o-> "menuItemAddToIncludeFilter" GUIContent
+Styles o-> "menuItemAddToExcludeFilter" GUIContent
+Styles o-> "menuItemRemoveFromIncludeFilter" GUIContent
+Styles o-> "menuItemRemoveFromExcludeFilter" GUIContent
+Styles o-> "menuItemSetAsParentMarkerFilter" GUIContent
+Styles o-> "menuItemClearParentMarkerFilter" GUIContent
+Styles o-> "menuItemCopyToClipboard" GUIContent
+ProfileTable +-- HeaderData
+HeaderData --> "content" GUIContent
+@enduml

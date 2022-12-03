@@ -1,0 +1,18 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} SingleAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} SingleAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} SingleAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} SingleAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} SingleOrDefaultAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} SingleOrDefaultAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} SingleOrDefaultAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} SingleOrDefaultAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken) : UniTask<TSource>
+}
+class SingleOperator <<static>> {
+    + {static} <<async>> SingleAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+    + {static} <<async>> SingleAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, Boolean>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+    + {static} <<async>> SingleAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, UniTask<Boolean>>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+    + {static} <<async>> SingleAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, predicate:Func<TSource, CancellationToken, UniTask<Boolean>>, cancellationToken:CancellationToken, defaultIfEmpty:bool) : UniTask<TSource>
+}
+@enduml

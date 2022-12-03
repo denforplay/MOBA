@@ -1,0 +1,5 @@
+@startuml
+class RiderFlowToolbarConstants <<static>> {
+    + <<const>> ToolbarId : string = "RiderFlow.SceneToolbar"
+}
+@enduml

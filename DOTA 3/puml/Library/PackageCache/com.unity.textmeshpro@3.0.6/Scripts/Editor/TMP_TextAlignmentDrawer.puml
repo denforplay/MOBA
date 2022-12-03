@@ -1,0 +1,39 @@
+@startuml
+class TMP_TextAlignmentDrawer {
+    <<const>> k_AlignmentButtonWidth : int = 24
+    <<const>> k_AlignmentButtonHeight : int = 20
+    <<const>> k_WideViewWidth : int = 504
+    <<const>> k_ControlsSpacing : int = 6
+    <<const>> k_GroupWidth : int
+    {static} <<readonly>> k_TextAlignmentHash : int
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+    {static} DoHorizontalAligmentControl(position:Rect, alignment:SerializedProperty) : int
+    {static} DoVerticalAligmentControl(position:Rect, alignment:SerializedProperty) : int
+}
+class TMP_HorizontalAlignmentDrawer {
+    <<const>> k_AlignmentButtonWidth : int = 24
+    <<const>> k_AlignmentButtonHeight : int = 20
+    <<const>> k_WideViewWidth : int = 504
+    <<const>> k_ControlsSpacing : int = 6
+    <<const>> k_GroupWidth : int
+    {static} <<readonly>> k_TextAlignmentHash : int
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+    {static} DoHorizontalAligmentControl(position:Rect, alignment:SerializedProperty) : int
+}
+class TMP_VerticalAlignmentDrawer {
+    <<const>> k_AlignmentButtonWidth : int = 24
+    <<const>> k_AlignmentButtonHeight : int = 20
+    <<const>> k_WideViewWidth : int = 504
+    <<const>> k_ControlsSpacing : int = 6
+    <<const>> k_GroupWidth : int
+    {static} <<readonly>> k_TextAlignmentHash : int
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    + <<override>> OnGUI(position:Rect, property:SerializedProperty, label:GUIContent) : void
+    {static} DoVerticalAligmentControl(position:Rect, alignment:SerializedProperty) : int
+}
+PropertyDrawer <|-- TMP_TextAlignmentDrawer
+PropertyDrawer <|-- TMP_HorizontalAlignmentDrawer
+PropertyDrawer <|-- TMP_VerticalAlignmentDrawer
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class ScopeConcreteIdArgConditionCopyNonLazyBinder {
+    + ScopeConcreteIdArgConditionCopyNonLazyBinder(bindInfo:BindInfo)
+    + AsCached() : ConcreteIdArgConditionCopyNonLazyBinder
+    + AsSingle() : ConcreteIdArgConditionCopyNonLazyBinder
+    + AsTransient() : ConcreteIdArgConditionCopyNonLazyBinder
+}
+ConcreteIdArgConditionCopyNonLazyBinder <|-- ScopeConcreteIdArgConditionCopyNonLazyBinder
+@enduml

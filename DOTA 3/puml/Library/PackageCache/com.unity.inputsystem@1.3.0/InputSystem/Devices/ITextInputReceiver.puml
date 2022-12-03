@@ -1,0 +1,6 @@
+@startuml
+interface ITextInputReceiver {
+    OnTextInput(character:char) : void
+    OnIMECompositionChanged(compositionString:IMECompositionString) : void
+}
+@enduml

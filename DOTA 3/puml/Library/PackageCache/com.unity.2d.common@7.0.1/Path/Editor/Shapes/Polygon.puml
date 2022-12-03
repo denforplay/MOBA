@@ -1,0 +1,10 @@
+@startuml
+class Polygon <<struct>> {
+    + isOpenEnded : bool
+    isOpenEnded : bool <<get>>
+    ToControlPoints() : ControlPoint[]
+}
+IShape <|-- Polygon
+Polygon --> "type" ShapeType
+Polygon o-> "empty" Polygon
+@enduml

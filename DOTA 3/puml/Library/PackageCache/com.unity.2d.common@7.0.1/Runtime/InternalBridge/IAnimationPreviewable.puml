@@ -1,0 +1,5 @@
+@startuml
+interface IPreviewable {
+}
+IAnimationPreviewable <|-- IPreviewable
+@enduml

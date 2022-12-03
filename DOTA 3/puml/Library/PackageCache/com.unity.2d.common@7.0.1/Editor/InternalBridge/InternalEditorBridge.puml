@@ -1,0 +1,34 @@
+@startuml
+class InternalEditorBridge <<static>> {
+    + {static} RenderSortingLayerFields(order:SerializedProperty, layer:SerializedProperty) : void
+    + {static} RepaintImmediately(window:EditorWindow) : void
+    + {static} GetISpriteEditorDataProviderFromPath(importedAsset:string) : ISpriteEditorDataProvider
+    + {static} GenerateOutline(texture:Texture2D, rect:Rect, detail:float, alphaTolerance:byte, holeDetection:bool, paths:Vector2[][]) : void
+    + {static} GenerateOutlineFromSprite(sprite:Sprite, detail:float, alphaTolerance:byte, holeDetection:bool, paths:Vector2[][]) : void
+    + {static} DoesHardwareSupportsFullNPOT() : bool
+    + {static} CreateTemporaryDuplicate(tex:Texture2D, width:int, height:int) : Texture2D
+    + {static} ShowSpriteEditorWindow(obj:UnityEngine.Object) : void
+    + {static} ApplySpriteEditorWindow() : void
+    + {static} ApplyWireMaterial() : void
+    + {static} ResetSpriteEditorView(spriteEditor:ISpriteEditor) : void
+    + {static} RegisterShortcutContext(context:ShortcutContext) : void
+    + {static} UnregisterShortcutContext(context:ShortcutContext) : void
+    + {static} AddEditorApplicationProjectLoadedCallback(callback:UnityAction) : void
+    + {static} RemoveEditorApplicationProjectLoadedCallback(callback:UnityAction) : void
+    + {static} GetProjectWindowActiveFolderPath() : string
+    + {static} GetIconContent() : GUIContent
+    + {static} GetAssetCreationInstanceID_ForNonExistingAssets() : int
+    + {static} SceneViewCameraViewVisualElement(sc:SceneView) : VisualElement
+    + {static} GetOverlaySize(o:UnityEditor.Overlays.Overlay) : Vector2
+    + {static} GetEditorGUILayoutLastRect() : Rect
+}
+class ShortcutContext {
+    + active : bool <<get>>
+    + context : object <<get>> <<set>>
+}
+class "Func`1"<T> {
+}
+InternalEditorBridge +-- ShortcutContext
+IShortcutToolContext <|-- ShortcutContext
+ShortcutContext --> "isActive<bool>" "Func`1"
+@enduml

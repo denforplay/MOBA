@@ -1,0 +1,36 @@
+@startuml
+class Progress <<static>> {
+    + {static} Create(handler:Action<T>) : IProgress<T>
+    + {static} CreateOnlyValueChanged(handler:Action<T>, comparer:IEqualityComparer<T>) : IProgress<T>
+}
+class "NullProgress`1"<T> <<sealed>> {
+    NullProgress()
+    + Report(value:T) : void
+}
+class "AnonymousProgress`1"<T> <<sealed>> {
+    + AnonymousProgress(action:Action<T>)
+    + Report(value:T) : void
+}
+class "OnlyValueChangedProgress`1"<T> <<sealed>> {
+    isFirstCall : bool
+    latestValue : T
+    + OnlyValueChangedProgress(action:Action<T>, comparer:IEqualityComparer<T>)
+    + Report(value:T) : void
+}
+class "IProgress`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "IEqualityComparer`1"<T> {
+}
+Progress +-- "NullProgress`1"
+"IProgress`1" "<T>" <|-- "NullProgress`1"
+"NullProgress`1" o-> "Instance<T>" "IProgress`1"
+Progress +-- "AnonymousProgress`1"
+"IProgress`1" "<T>" <|-- "AnonymousProgress`1"
+"AnonymousProgress`1" --> "action<T>" "Action`1"
+Progress +-- "OnlyValueChangedProgress`1"
+"IProgress`1" "<T>" <|-- "OnlyValueChangedProgress`1"
+"OnlyValueChangedProgress`1" --> "action<T>" "Action`1"
+"OnlyValueChangedProgress`1" --> "comparer<T>" "IEqualityComparer`1"
+@enduml

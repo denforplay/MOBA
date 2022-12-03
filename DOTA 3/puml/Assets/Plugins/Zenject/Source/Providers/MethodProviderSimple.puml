@@ -1,0 +1,13 @@
+@startuml
+class "MethodProviderSimple`1"<TReturn> {
+    + MethodProviderSimple(method:Func<TReturn>)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "Func`1"<T> {
+}
+IProvider <|-- "MethodProviderSimple`1"
+"MethodProviderSimple`1" --> "_method<TReturn>" "Func`1"
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class "ConcreteIdBinderGeneric`1"<TContract> {
+    + ConcreteIdBinderGeneric(bindContainer:DiContainer, bindInfo:BindInfo, bindStatement:BindStatement)
+    + WithId(identifier:object) : ConcreteBinderGeneric<TContract>
+}
+class "ConcreteBinderGeneric`1"<T> {
+}
+"ConcreteBinderGeneric`1" "<TContract>" <|-- "ConcreteIdBinderGeneric`1"
+@enduml

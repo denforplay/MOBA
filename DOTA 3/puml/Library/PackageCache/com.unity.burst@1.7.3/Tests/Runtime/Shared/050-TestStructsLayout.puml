@@ -1,0 +1,154 @@
+@startuml
+class TestStructsLayout <<partial>> {
+}
+class TestGeneratorOverride32BitSizeAttribute <<sealed>> {
+    + <<readonly>> Size : int
+    + TestGeneratorOverride32BitSizeAttribute(size:int)
+}
+class TestGeneratorOverride32BitOffsetAttribute <<sealed>> {
+    + <<readonly>> Offset : int
+    + TestGeneratorOverride32BitOffsetAttribute(offset:int)
+}
+class CheckHoleInner <<struct>> {
+}
+class CheckHoleOuter <<struct>> {
+    + b : int
+}
+class ExplicitStructWithoutSize2 <<struct>> {
+    + a : long
+    + b : sbyte
+    + c : int
+}
+class ExplicitStructWithoutSize <<struct>> {
+    + a : int
+    + b : sbyte
+    + c : int
+}
+class SequentialStructWithSize3 <<struct>> {
+    + a : int
+    + b : int
+    + c : sbyte
+}
+class SequentialStructWithoutSize <<struct>> {
+    + a : int
+    + b : int
+    + c : sbyte
+}
+class SequentialStructEmptyNoAttributes <<struct>> {
+}
+class ExplicitStructWithEmptySequentialFields <<struct>> {
+}
+class ExplicitStrictWithEmptyAndNonEmptySequentialFields <<struct>> {
+}
+class StructWithPack8 <<struct>> {
+    + FieldA : int
+    + FieldB : int
+}
+class StructPack2WithBytesAndInt <<struct>> {
+    + FieldA : byte
+    + FieldB : byte
+    + FieldC : int
+}
+class StructPack2WithBytesAndInts <<struct>> {
+    + FieldA : byte
+    + FieldB : byte
+    + FieldC : int
+    + FieldD : int
+}
+class StructPack1WithBytesAndInt <<struct>> {
+    + FieldA : byte
+    + FieldB : byte
+    + FieldC : int
+}
+class StructPack1WithByteAndInt <<struct>> {
+    + FieldA : byte
+    + FieldB : int
+}
+class StructPack1WithByteAndIntWrapper <<struct>> {
+}
+class StructPack1WithByteAndIntWrapper2 <<struct>> {
+}
+class StructWithSizeAndPack <<struct>> {
+    + FieldA : double
+    + FieldB : int
+}
+class StructWithSizeAndPackWrapper <<struct>> {
+    + FieldA : byte
+}
+class StructWithSizeAndPack4 <<struct>> {
+    + FieldA : double
+    + FieldB : int
+}
+class StructWithSizeAndPack4Wrapper <<struct>> {
+    + FieldA : byte
+}
+class StructExplicitPack1WithByteAndInt <<struct>> {
+    + FieldA : byte
+    + FieldB : int
+}
+class StructExplicitPack1WithByteAndIntWrapper <<struct>> {
+}
+class StructExplicitPack1WithByteAndIntWrapper2 <<struct>> {
+}
+class StructExplicitWithSizeAndPack <<struct>> {
+    + FieldA : double
+    + FieldB : int
+}
+class StructExplicitWithSizeAndPackWrapper <<struct>> {
+    + FieldA : byte
+}
+class StructExplicitWithSizeAndPack4 <<struct>> {
+    + FieldA : double
+    + FieldB : int
+}
+class StructExplicitWithSizeAndPack4Wrapper <<struct>> {
+    + FieldA : byte
+}
+Attribute <|-- TestGeneratorOverride32BitSizeAttribute
+Attribute <|-- TestGeneratorOverride32BitOffsetAttribute
+TestStructsLayout +-- CheckHoleInner
+TestStructsLayout +-- CheckHoleOuter
+CheckHoleOuter --> "a" CheckHoleInner
+CheckHoleOuter --> "c" CheckHoleInner
+TestStructsLayout +-- ExplicitStructWithoutSize2
+TestStructsLayout +-- ExplicitStructWithoutSize
+TestStructsLayout +-- SequentialStructWithSize3
+TestStructsLayout +-- SequentialStructWithoutSize
+TestStructsLayout +-- SequentialStructEmptyNoAttributes
+TestStructsLayout +-- ExplicitStructWithEmptySequentialFields
+ExplicitStructWithEmptySequentialFields --> "FieldA" SequentialStructEmptyNoAttributes
+ExplicitStructWithEmptySequentialFields --> "FieldB" SequentialStructEmptyNoAttributes
+TestStructsLayout +-- ExplicitStrictWithEmptyAndNonEmptySequentialFields
+ExplicitStrictWithEmptyAndNonEmptySequentialFields --> "FieldA" SequentialStructEmptyNoAttributes
+ExplicitStrictWithEmptyAndNonEmptySequentialFields --> "FieldB" SequentialStructWithoutSize
+TestStructsLayout +-- StructWithPack8
+TestStructsLayout +-- StructPack2WithBytesAndInt
+TestStructsLayout +-- StructPack2WithBytesAndInts
+TestStructsLayout +-- StructPack1WithBytesAndInt
+TestStructsLayout +-- StructPack1WithByteAndInt
+TestStructsLayout +-- StructPack1WithByteAndIntWrapper
+StructPack1WithByteAndIntWrapper --> "FieldA" StructPack1WithByteAndInt
+StructPack1WithByteAndIntWrapper --> "FieldB" StructPack1WithByteAndInt
+TestStructsLayout +-- StructPack1WithByteAndIntWrapper2
+StructPack1WithByteAndIntWrapper2 --> "FieldA" StructPack1WithByteAndIntWrapper
+StructPack1WithByteAndIntWrapper2 --> "FieldB" StructPack1WithByteAndIntWrapper
+TestStructsLayout +-- StructWithSizeAndPack
+TestStructsLayout +-- StructWithSizeAndPackWrapper
+StructWithSizeAndPackWrapper --> "FieldB" StructWithSizeAndPack
+TestStructsLayout +-- StructWithSizeAndPack4
+TestStructsLayout +-- StructWithSizeAndPack4Wrapper
+StructWithSizeAndPack4Wrapper --> "FieldB" StructWithSizeAndPack4
+TestStructsLayout +-- StructExplicitPack1WithByteAndInt
+TestStructsLayout +-- StructExplicitPack1WithByteAndIntWrapper
+StructExplicitPack1WithByteAndIntWrapper --> "FieldA" StructExplicitPack1WithByteAndInt
+StructExplicitPack1WithByteAndIntWrapper --> "FieldB" StructExplicitPack1WithByteAndInt
+TestStructsLayout +-- StructExplicitPack1WithByteAndIntWrapper2
+StructExplicitPack1WithByteAndIntWrapper2 --> "FieldA" StructExplicitPack1WithByteAndIntWrapper
+StructExplicitPack1WithByteAndIntWrapper2 --> "FieldB" StructExplicitPack1WithByteAndIntWrapper
+TestStructsLayout +-- StructExplicitWithSizeAndPack
+TestStructsLayout +-- StructExplicitWithSizeAndPackWrapper
+StructExplicitWithSizeAndPackWrapper --> "FieldB" StructExplicitWithSizeAndPack
+TestStructsLayout +-- StructExplicitWithSizeAndPack4
+TestStructsLayout +-- StructExplicitWithSizeAndPack4Wrapper
+StructExplicitWithSizeAndPack4Wrapper --> "FieldB" StructExplicitWithSizeAndPack4
+@enduml

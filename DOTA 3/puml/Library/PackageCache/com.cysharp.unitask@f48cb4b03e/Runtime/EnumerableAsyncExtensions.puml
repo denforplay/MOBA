@@ -1,0 +1,8 @@
+@startuml
+class EnumerableAsyncExtensions <<static>> {
+    + {static} Select(source:IEnumerable<T>, selector:Func<T, UniTask>) : IEnumerable<UniTask>
+    + {static} Select(source:IEnumerable<T>, selector:Func<T, UniTask<TR>>) : IEnumerable<UniTask<TR>>
+    + {static} Select(source:IEnumerable<T>, selector:Func<T, int, UniTask>) : IEnumerable<UniTask>
+    + {static} Select(source:IEnumerable<T>, selector:Func<T, int, UniTask<TR>>) : IEnumerable<UniTask<TR>>
+}
+@enduml

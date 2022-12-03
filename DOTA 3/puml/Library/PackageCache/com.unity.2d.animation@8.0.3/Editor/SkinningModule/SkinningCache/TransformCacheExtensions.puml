@@ -1,0 +1,5 @@
+@startuml
+class TransformCacheExtensions <<static>> {
+    {static} IsDescendant(transform:T, ancestors:T[]) : bool
+}
+@enduml

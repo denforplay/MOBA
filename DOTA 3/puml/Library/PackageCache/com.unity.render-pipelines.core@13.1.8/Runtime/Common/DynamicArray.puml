@@ -1,0 +1,26 @@
+@startuml
+class "DynamicArray`1"<T> {
+    + size : int <<get>>
+    + capacity : int <<get>>
+    + DynamicArray()
+    + DynamicArray(size:int)
+    + Clear() : void
+    + Contains(item:T) : bool
+    + Add(value:T) : int
+    + AddRange(array:DynamicArray<T>) : void
+    + Remove(item:T) : bool
+    + RemoveAt(index:int) : void
+    + RemoveRange(index:int, count:int) : void
+    + FindIndex(startIndex:int, count:int, match:Predicate<T>) : int
+    + IndexOf(item:T, index:int, count:int) : int
+    + IndexOf(item:T, index:int) : int
+    + IndexOf(item:T) : int
+    + Resize(newSize:int, keepContent:bool) : void
+    + Reserve(newCapacity:int, keepContent:bool) : void
+}
+class DynamicArrayExtensions <<static>> {
+    {static} Partition(data:T[], left:int, right:int) : int
+    {static} QuickSort(data:T[], left:int, right:int) : void
+    + {static} QuickSort(array:DynamicArray<T>) : void
+}
+@enduml

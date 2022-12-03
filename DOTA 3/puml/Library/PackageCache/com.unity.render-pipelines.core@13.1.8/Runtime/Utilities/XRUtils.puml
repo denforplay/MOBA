@@ -1,0 +1,5 @@
+@startuml
+class XRUtils <<static>> {
+    + {static} DrawOcclusionMesh(cmd:CommandBuffer, camera:Camera, stereoEnabled:bool) : void
+}
+@enduml

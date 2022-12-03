@@ -1,0 +1,20 @@
+@startuml
+class GridPalettesDropdown {
+    + GridPalettesDropdown(itemProvider:IFlexibleMenuItemProvider, selectionIndex:int, modifyItemUi:FlexibleMenuModifyItemUI, itemClickedCallback:Action<int, object>, minWidth:float)
+}
+class MenuItemProvider {
+    + Count() : int
+    + GetItem(index:int) : object
+    + Add(obj:object) : int
+    + Replace(index:int, newPresetObject:object) : void
+    + Remove(index:int) : void
+    + Create() : object
+    + Move(index:int, destIndex:int, insertAfterDestIndex:bool) : void
+    + GetName(index:int) : string
+    + IsModificationAllowed(index:int) : bool
+    + GetSeperatorIndices() : int[]
+}
+FlexibleMenu <|-- GridPalettesDropdown
+GridPalettesDropdown +-- MenuItemProvider
+IFlexibleMenuItemProvider <|-- MenuItemProvider
+@enduml

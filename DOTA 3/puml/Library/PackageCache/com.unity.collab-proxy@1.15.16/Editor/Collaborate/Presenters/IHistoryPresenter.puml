@@ -1,0 +1,11 @@
+@startuml
+interface IHistoryPresenter {
+    PrevPage() : void
+    NextPage() : void
+    SelectedRevisionId : string <<set>>
+    RequestGoto(revisionId:string, status:HistoryEntryStatus) : void
+    SupportsRevert : bool <<get>>
+    RequestRevert(revisionId:string, files:IReadOnlyList<string>) : void
+}
+IPresenter <|-- IHistoryPresenter
+@enduml

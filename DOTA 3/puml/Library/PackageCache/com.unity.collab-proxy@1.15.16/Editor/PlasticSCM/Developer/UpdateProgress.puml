@@ -1,0 +1,7 @@
+@startuml
+class UpdateProgress {
+    <<readonly>> mWkPath : string
+}
+UpdateProgress --> "mWorkspaceWindow" WorkspaceWindow
+UpdateProgress --> "mNotifier" UpdateNotifier
+@enduml

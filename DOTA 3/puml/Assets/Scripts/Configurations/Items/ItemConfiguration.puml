@@ -1,0 +1,13 @@
+@startuml
+class ItemConfiguration {
+    + ItemName : string <<get>>
+    + ItemDescription : string <<get>>
+    + Cost : int <<get>>
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- ItemConfiguration
+ItemConfiguration --> "ItemSprite" Sprite
+ItemConfiguration --> "ItemType" ItemType
+ItemConfiguration --> "ItemValueConfigurations<CharacteristicValueConfiguration>" "List`1"
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class CoroutineRunner {
+    + CoroutineRunner(playmodeTestsController:MonoBehaviour, context:UnityTestExecutionContext)
+    + HandleEnumerableTest(testEnumerator:IEnumerator) : IEnumerator
+    + HasFailedWithTimeout() : bool
+    + GetDefaultTimeout() : int
+}
+@enduml

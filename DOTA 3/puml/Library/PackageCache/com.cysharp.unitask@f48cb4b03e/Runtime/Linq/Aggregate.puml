@@ -1,0 +1,15 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} AggregateAsync(source:IUniTaskAsyncEnumerable<TSource>, accumulator:Func<TSource, TSource, TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} AggregateAsync(source:IUniTaskAsyncEnumerable<TSource>, seed:TAccumulate, accumulator:Func<TAccumulate, TSource, TAccumulate>, cancellationToken:CancellationToken) : UniTask<TAccumulate>
+    + {static} AggregateAsync(source:IUniTaskAsyncEnumerable<TSource>, seed:TAccumulate, accumulator:Func<TAccumulate, TSource, TAccumulate>, resultSelector:Func<TAccumulate, TResult>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} AggregateAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, accumulator:Func<TSource, TSource, UniTask<TSource>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} AggregateAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, seed:TAccumulate, accumulator:Func<TAccumulate, TSource, UniTask<TAccumulate>>, cancellationToken:CancellationToken) : UniTask<TAccumulate>
+    + {static} AggregateAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, seed:TAccumulate, accumulator:Func<TAccumulate, TSource, UniTask<TAccumulate>>, resultSelector:Func<TAccumulate, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} AggregateAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, accumulator:Func<TSource, TSource, CancellationToken, UniTask<TSource>>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} AggregateAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, seed:TAccumulate, accumulator:Func<TAccumulate, TSource, CancellationToken, UniTask<TAccumulate>>, cancellationToken:CancellationToken) : UniTask<TAccumulate>
+    + {static} AggregateAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, seed:TAccumulate, accumulator:Func<TAccumulate, TSource, CancellationToken, UniTask<TAccumulate>>, resultSelector:Func<TAccumulate, CancellationToken, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+}
+class Aggregate <<static>> {
+}
+@enduml

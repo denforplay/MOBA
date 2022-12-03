@@ -1,0 +1,22 @@
+@startuml
+class PrefabInstantiator {
+    + PrefabInstantiator(container:DiContainer, gameObjectBindInfo:GameObjectCreationParameters, argumentTarget:Type, instantiateCallbackTypes:IEnumerable<Type>, extraArguments:IEnumerable<TypeValuePair>, prefabProvider:IPrefabProvider, instantiateCallback:Action<InjectContext, object>)
+    + GetPrefab(context:InjectContext) : UnityEngine.Object
+    + Instantiate(context:InjectContext, args:List<TypeValuePair>, injectAction:Action) : GameObject
+}
+class "List`1"<T> {
+}
+class "Action`2"<T1,T2> {
+}
+IPrefabInstantiator <|-- PrefabInstantiator
+PrefabInstantiator --> "_prefabProvider" IPrefabProvider
+PrefabInstantiator --> "_container" DiContainer
+PrefabInstantiator --> "_extraArguments<TypeValuePair>" "List`1"
+PrefabInstantiator --> "_gameObjectBindInfo" GameObjectCreationParameters
+PrefabInstantiator --> "_argumentTarget" Type
+PrefabInstantiator --> "_instantiateCallbackTypes<Type>" "List`1"
+PrefabInstantiator --> "_instantiateCallback<InjectContext,object>" "Action`2"
+PrefabInstantiator --> "GameObjectCreationParameters" GameObjectCreationParameters
+PrefabInstantiator --> "ArgumentTarget" Type
+PrefabInstantiator --> "ExtraArguments<TypeValuePair>" "List`1"
+@enduml

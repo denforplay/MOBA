@@ -1,0 +1,7 @@
+@startuml
+class ZenjectException {
+    + ZenjectException(message:string)
+    + ZenjectException(message:string, innerException:Exception)
+}
+Exception <|-- ZenjectException
+@enduml

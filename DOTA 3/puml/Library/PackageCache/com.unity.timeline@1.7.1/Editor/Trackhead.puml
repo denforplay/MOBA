@@ -1,0 +1,52 @@
+@startuml
+class Gaps <<static>> {
+    {static} <<readonly>> kInsertTime : string
+    + {static} Insert(asset:TimelineAsset, at:double, amount:double, tolerance:double) : void
+}
+class PlayheadContextMenu {
+    + PlayheadContextMenu(timeAreaItem:TimeAreaItem)
+    {static} SelectBlendingIntersecting(clip:TimelineClip, time:double) : bool
+    {static} SelectMenuCallback(selector:Func<TimelineClip, bool>, state:WindowState) : void
+}
+class TimeAreaContextMenu {
+    {static} SelectDurationCallback(state:WindowState, mode:TimelineAsset.DurationMode) : void
+}
+class Scrub {
+    m_IsCaptured : bool
+    + Scrub(onMouseDown:Func<Event, WindowState, bool>, onMouseDrag:Action<double>, onMouseUp:System.Action)
+}
+class TimeAreaItem {
+    + drawLine : bool <<get>> <<set>>
+    + drawHead : bool <<get>> <<set>>
+    + canMoveHead : bool <<get>> <<set>>
+    + tooltip : string <<get>> <<set>>
+    widgetHeight : float <<get>>
+    widgetWidth : float <<get>>
+    + showTooltip : bool <<get>> <<set>>
+    + firstDrag : bool <<get>>
+    + TimeAreaItem(style:GUIStyle, onDrag:Action<double>)
+    + Draw(rect:Rect, state:WindowState, time:double) : void
+}
+class "Func`3"<T1,T2,T3> {
+}
+class "Action`1"<T> {
+}
+Manipulator <|-- PlayheadContextMenu
+PlayheadContextMenu --> "m_TimeAreaItem" TimeAreaItem
+PlayheadContextMenu o-> "kSingleFrameGuiContents" GUIContent
+PlayheadContextMenu o-> "kSelectedTimeGuiContents" GUIContent
+Manipulator <|-- TimeAreaContextMenu
+Manipulator <|-- Scrub
+Scrub --> "m_OnMouseDown<Event,WindowState,bool>" "Func`3"
+Scrub --> "m_OnMouseDrag<double>" "Action`1"
+Control <|-- TimeAreaItem
+TimeAreaItem --> "headColor" Color
+TimeAreaItem --> "lineColor" Color
+TimeAreaItem --> "boundOffset" Vector2
+TimeAreaItem o-> "m_HeaderContent" GUIContent
+TimeAreaItem --> "m_Style" GUIStyle
+TimeAreaItem --> "m_Tooltip" Tooltip
+TimeAreaItem --> "m_BoundingRect" Rect
+TimeAreaItem --> "bounds" Rect
+TimeAreaItem --> "style" GUIStyle
+@enduml

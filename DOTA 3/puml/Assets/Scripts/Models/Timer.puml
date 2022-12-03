@@ -1,0 +1,8 @@
+@startuml
+class Timer {
+    +  <<event>> OnTimerEnded : Action 
+    +  <<event>> OnTimerTick : Action<TimeSpan> 
+    + Timer(time:TimeSpan)
+    + <<async>> StartTimer() : UniTask
+}
+@enduml

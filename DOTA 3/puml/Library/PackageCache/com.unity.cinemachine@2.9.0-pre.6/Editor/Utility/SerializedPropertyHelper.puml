@@ -1,0 +1,8 @@
+@startuml
+class SerializedPropertyHelper <<static>> {
+    + {static} PropertyName(exp:Expression<Func<object>>) : string
+    + {static} FindProperty(obj:SerializedObject, exp:Expression<Func<object>>) : SerializedProperty
+    + {static} FindPropertyRelative(obj:SerializedProperty, exp:Expression<Func<object>>) : SerializedProperty
+    + {static} GetPropertyValue(property:SerializedProperty) : object
+}
+@enduml

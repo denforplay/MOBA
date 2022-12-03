@@ -1,0 +1,9 @@
+@startuml
+class ItemEdgeConfiguration {
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- ItemEdgeConfiguration
+ItemEdgeConfiguration --> "CurrentItemConfiguration" ItemConfiguration
+ItemEdgeConfiguration --> "NextItemEdgeConfigurations<ItemEdgeConfiguration>" "List`1"
+@enduml

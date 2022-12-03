@@ -1,0 +1,26 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Return(value:TValue) : IUniTaskAsyncEnumerable<TValue>
+}
+class "Return`1"<TValue> {
+    <<readonly>> value : TValue
+    + Return(value:TValue)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TValue>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Return {
+    called : bool
+    + _Return(value:TValue, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TValue>" <|-- "Return`1"
+"Return`1" +-- _Return
+"IUniTaskAsyncEnumerator`1" "<TValue>" <|-- _Return
+_Return --> "value" TValue
+_Return --> "cancellationToken" CancellationToken
+_Return --> "Current" TValue
+@enduml

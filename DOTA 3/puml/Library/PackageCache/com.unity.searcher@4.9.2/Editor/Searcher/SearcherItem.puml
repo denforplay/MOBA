@@ -1,0 +1,28 @@
+@startuml
+class SearcherItem {
+    m_Id : int
+    m_Name : string
+    m_Help : string
+    m_CollapseEmptyIcon : bool = true
+    + Id : int <<get>>
+    + <<virtual>> Name : string <<get>>
+    + Path : string <<get>>
+    + Help : string <<get>> <<set>>
+    + Depth : int <<get>>
+    + UserData : object <<get>> <<set>>
+    + CollapseEmptyIcon : bool <<get>> <<set>>
+    + HasChildren : bool <<get>>
+    + SearcherItem(name:string, help:string, children:List<SearcherItem>, userData:object, icon:Texture2D, collapseEmptyIcon:bool)
+    + AddChild(child:SearcherItem) : void
+    OverwriteParent(newParent:SearcherItem) : void
+    + <<override>> ToString() : string
+}
+class "List`1"<T> {
+}
+SearcherItem --> "m_ChildrenIds<int>" "List`1"
+SearcherItem --> "m_Icon" Texture2D
+SearcherItem --> "Icon" Texture2D
+SearcherItem --> "Parent" SearcherItem
+SearcherItem --> "Database" SearcherDatabaseBase
+SearcherItem --> "Children<SearcherItem>" "List`1"
+@enduml

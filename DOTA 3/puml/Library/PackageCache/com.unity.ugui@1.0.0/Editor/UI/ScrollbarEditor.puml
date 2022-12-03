@@ -1,0 +1,12 @@
+@startuml
+class ScrollbarEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+SelectableEditor <|-- ScrollbarEditor
+ScrollbarEditor --> "m_HandleRect" SerializedProperty
+ScrollbarEditor --> "m_Direction" SerializedProperty
+ScrollbarEditor --> "m_Value" SerializedProperty
+ScrollbarEditor --> "m_Size" SerializedProperty
+ScrollbarEditor --> "m_NumberOfSteps" SerializedProperty
+ScrollbarEditor --> "m_OnValueChanged" SerializedProperty
+@enduml

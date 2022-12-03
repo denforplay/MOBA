@@ -1,0 +1,7 @@
+@startuml
+interface IUnitDebugData {
+    lastInvokeFrame : int <<get>> <<set>>
+    lastInvokeTime : float <<get>> <<set>>
+}
+IGraphElementDebugData <|-- IUnitDebugData
+@enduml

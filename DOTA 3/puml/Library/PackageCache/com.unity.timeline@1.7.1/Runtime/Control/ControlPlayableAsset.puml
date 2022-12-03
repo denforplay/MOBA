@@ -1,0 +1,42 @@
+@startuml
+class ControlPlayableAsset {
+    <<const>> k_MaxRandInt : int = 10000
+    + updateParticle : bool = true
+    + particleRandomSeed : uint
+    + updateDirector : bool = true
+    + updateITimeControl : bool = true
+    + searchHierarchy : bool = false
+    + active : bool = true
+    m_Duration : double
+    m_SupportLoop : bool
+    + OnEnable() : void
+    + <<override>> duration : double <<get>>
+    + <<override>> CreatePlayable(graph:PlayableGraph, go:GameObject) : Playable
+    {static} ConnectPlayablesToMixer(graph:PlayableGraph, playables:List<Playable>) : Playable
+    CreateActivationPlayable(root:GameObject, graph:PlayableGraph, outplayables:List<Playable>) : void
+    SearchHierarchyAndConnectParticleSystem(particleSystems:IEnumerable<ParticleSystem>, graph:PlayableGraph, outplayables:List<Playable>) : void
+    SearchHierarchyAndConnectDirector(directors:IEnumerable<PlayableDirector>, graph:PlayableGraph, outplayables:List<Playable>, disableSelfReferences:bool) : void
+    {static} SearchHierarchyAndConnectControlableScripts(controlableScripts:IEnumerable<MonoBehaviour>, graph:PlayableGraph, outplayables:List<Playable>) : void
+    {static} ConnectMixerAndPlayable(graph:PlayableGraph, mixer:Playable, playable:Playable, portIndex:int) : void
+    GetControllableParticleSystems(go:GameObject) : IList<ParticleSystem>
+    {static} GetControllableParticleSystems(t:Transform, roots:ICollection<ParticleSystem>, subEmitters:HashSet<ParticleSystem>) : void
+    {static} CacheSubEmitters(ps:ParticleSystem, subEmitters:HashSet<ParticleSystem>) : void
+    + GatherProperties(director:PlayableDirector, driver:IPropertyCollector) : void
+}
+class "List`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+class "ExposedReference`1"<T> {
+}
+PlayableAsset <|-- ControlPlayableAsset
+IPropertyPreview <|-- ControlPlayableAsset
+ITimelineClipAsset <|-- ControlPlayableAsset
+ControlPlayableAsset o-> "k_EmptyDirectorsList<PlayableDirector>" "List`1"
+ControlPlayableAsset o-> "k_EmptyParticlesList<ParticleSystem>" "List`1"
+ControlPlayableAsset o-> "s_SubEmitterCollector<ParticleSystem>" "HashSet`1"
+ControlPlayableAsset --> "sourceGameObject<GameObject>" "ExposedReference`1"
+ControlPlayableAsset --> "prefabGameObject" GameObject
+ControlPlayableAsset --> "m_ControlDirectorAsset" PlayableAsset
+ControlPlayableAsset --> "clipCaps" ClipCaps
+@enduml

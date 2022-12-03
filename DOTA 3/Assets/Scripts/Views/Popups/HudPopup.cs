@@ -41,8 +41,26 @@ namespace Views.Popups
             
             SubscribeOnCharacterEvents();
             _shopButton.onClick.AddListener(OnShopPopupCalled);
+            characterView.Character.OnManaChanged += UpdateSkillsForMana;
         }
 
+        private void UpdateSkillsForMana(float mana)
+        { 
+            foreach (var skillView in _heroPanel.SkillViews)
+            {
+                if (skillView.SkillConfiguration.ManaCost > _characterView.Character.CurrentMana)
+                {
+                    skillView.DisableOnManaNotEnough();
+                    _characterView.SetSkillUseState(skillView.Id, false);
+                }
+                else
+                {
+                    skillView.EnableOnManaEnough();
+                    _characterView.SetSkillUseState(skillView.Id, true);
+                }
+            }
+        }
+        
         public void InitializeBattleGroundPanel(List<Configurations.Character.CharacterInfo> leftTeamCharacters,
             List<Configurations.Character.CharacterInfo> rightTeamCharacters)
         {

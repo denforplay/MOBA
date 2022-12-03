@@ -1,0 +1,26 @@
+@startuml
+class CoverageReportGenerator {
+    + Generate(coverageSettings:CoverageSettings) : void
+}
+class DebugFactory {
+    + DebugFactory()
+    + GetLogger(type:Type) : ILogger
+}
+class DebugLogger {
+    + Debug(message:string) : void
+    + DebugFormat(format:string, args:object[]) : void
+    + Error(message:string) : void
+    + ErrorFormat(format:string, args:object[]) : void
+    + Info(message:string) : void
+    + InfoFormat(format:string, args:object[]) : void
+    + Warn(message:string) : void
+    + WarnFormat(format:string, args:object[]) : void
+    + <<override>> ToString() : string
+}
+ILoggerFactory <|-- DebugFactory
+DebugFactory --> "VerbosityLevel" VerbosityLevel
+DebugFactory --> "Logger" DebugLogger
+ILogger <|-- DebugLogger
+DebugLogger --> "VerbosityLevel" VerbosityLevel
+DebugLogger o-> "m_StringBuilder" StringBuilder
+@enduml

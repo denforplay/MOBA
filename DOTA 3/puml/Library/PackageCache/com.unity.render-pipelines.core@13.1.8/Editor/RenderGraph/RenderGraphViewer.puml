@@ -1,0 +1,88 @@
+@startuml
+class RenderGraphViewer {
+    <<const>> kRenderPassWidth : float = 20.0f
+    <<const>> kResourceHeight : float = 15.0f
+    {static} Init() : void
+    RenderPassLabelChanged(evt:GeometryChangedEvent) : void
+    LastRenderPassLabelChanged(evt:GeometryChangedEvent) : void
+    UpdateResourceLifetimeColor(passIndex:int, colorRead:StyleColor, colorWrite:StyleColor) : void
+    MouseEnterPassCallback(evt:MouseEnterEvent, index:int) : void
+    MouseLeavePassCallback(evt:MouseLeaveEvent, index:int) : void
+    UpdatePassColor(resInfo:(int index, int resourceType), colorRead:StyleColor, colorWrite:StyleColor) : void
+    UpdateResourceLabelColor(resInfo:(int index, int resourceType), color:StyleColor) : void
+    MouseEnterResourceCallback(evt:MouseEnterEvent, info:(int index, int resourceType)) : void
+    MouseLeaveResourceCallback(evt:MouseLeaveEvent, info:(int index, int resourceType)) : void
+    CreateRenderPass(name:string, index:int, culled:bool) : VisualElement
+    ResourceNamesContainerChanged(evt:GeometryChangedEvent) : void
+    CreateResourceLabel(name:string, imported:bool) : VisualElement
+    CreateColorLegend(name:string, color:StyleColor) : VisualElement
+    RenderGraphPopupCallback(rg:RenderGraph) : string
+    EmptyRenderGraphPopupCallback(rg:RenderGraph) : string
+    EmptExecutionListCallback(name:string) : string
+    OnCaptureGraph() : void
+    RebuildHeaderExecutionPopup() : void
+    RebuildHeaderUI() : void
+    GetCurrentRenderGraph() : RenderGraph
+    GetCurrentDebugData() : RenderGraphDebugData
+    CreateTopRowWithPasses(debugData:RenderGraphDebugData, finalPassCount:int) : VisualElement
+    CreateResourceViewer(debugData:RenderGraphDebugData, resourceType:int, passCount:int) : VisualElement
+    RebuildGraphViewerUI() : void
+    RebuildUI() : void
+    OnGraphRegistered(graph:RenderGraph) : void
+    OnGraphUnregistered(graph:RenderGraph) : void
+    OnExecutionRegistered(graph:RenderGraph, name:string) : void
+    OnExecutionUnregistered(graph:RenderGraph, name:string) : void
+    OnEnable() : void
+    OnDisable() : void
+}
+class Style <<static>> {
+}
+class CellElement {
+    + CellElement(idxStart:int, idxEnd:int)
+    + SetColor(color:StyleColor) : void
+}
+enum Filter {
+    ImportedResources= 1 << 0,
+    CulledPasses= 1 << 1,
+    Textures= 1 << 2,
+    ComputeBuffers= 1 << 3,
+}
+class ResourceElementInfo <<struct>> {
+    + Reset() : void
+}
+class PassElementInfo <<struct>> {
+    + remap : int
+    + Reset() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "DynamicArray`1"<T> {
+}
+EditorWindow <|-- RenderGraphViewer
+RenderGraphViewer o-> "m_RegisteredGraphs<RenderGraph,HashSet<string>>" "Dictionary`2"
+RenderGraphViewer --> "m_CurrentDebugData" RenderGraphDebugData
+RenderGraphViewer --> "m_Root" VisualElement
+RenderGraphViewer --> "m_HeaderElement" VisualElement
+RenderGraphViewer --> "m_GraphViewerElement" VisualElement
+RenderGraphViewer o-> "m_ResourceColorRead" StyleColor
+RenderGraphViewer o-> "m_ResourceColorWrite" StyleColor
+RenderGraphViewer o-> "m_ImportedResourceColor" StyleColor
+RenderGraphViewer o-> "m_CulledPassColor" StyleColor
+RenderGraphViewer o-> "m_ResourceHighlightColor" StyleColor
+RenderGraphViewer o-> "m_ResourceLifeHighLightColor" StyleColor
+RenderGraphViewer --> "m_OriginalResourceLifeColor" StyleColor
+RenderGraphViewer --> "m_OriginalPassColor" StyleColor
+RenderGraphViewer --> "m_OriginalResourceColor" StyleColor
+RenderGraphViewer o-> "m_PassElementsInfo<PassElementInfo>" "DynamicArray`1"
+RenderGraphViewer o-> "m_Filter" Filter
+RenderGraphViewer +-- Style
+Style o-> "title" GUIContent
+RenderGraphViewer +-- CellElement
+VisualElement <|-- CellElement
+RenderGraphViewer +-- Filter
+RenderGraphViewer +-- ResourceElementInfo
+ResourceElementInfo --> "lifetime" VisualElement
+ResourceElementInfo --> "resourceLabel" VisualElement
+RenderGraphViewer +-- PassElementInfo
+PassElementInfo --> "pass" VisualElement
+@enduml

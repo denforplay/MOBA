@@ -1,0 +1,27 @@
+@startuml
+class SpriteDataExt {
+    + tessellationDetail : float = 0
+    m_InternalID : long
+    + Apply(so:SerializedObject) : void
+    + Apply(sp:SerializedProperty) : void
+    + CopyFromSpriteRect(spriteRect:SpriteRect) : void
+    + internalID : long <<get>> <<set>>
+}
+class SpriteNameFileIdPairExt {
+    m_InternalId : long
+    + SpriteNameFileIdPairExt(name:string, guid:GUID, internalId:long)
+    + internalID : long <<get>> <<set>>
+    + {static} GetValue(sp:SerializedProperty) : SpriteNameFileIdPairExt
+    + Apply(sp:SerializedProperty) : void
+}
+class "List`1"<T> {
+}
+SpriteRect <|-- SpriteDataExt
+SpriteDataExt --> "spriteOutline<Vector2[]>" "List`1"
+SpriteDataExt --> "vertices<Vertex2DMetaData>" "List`1"
+SpriteDataExt --> "indices<int>" "List`1"
+SpriteDataExt --> "edges<Vector2Int>" "List`1"
+SpriteDataExt --> "spritePhysicsOutline<Vector2[]>" "List`1"
+SpriteDataExt --> "spriteBone<SpriteBone>" "List`1"
+SpriteNameFileIdPair <|-- SpriteNameFileIdPairExt
+@enduml

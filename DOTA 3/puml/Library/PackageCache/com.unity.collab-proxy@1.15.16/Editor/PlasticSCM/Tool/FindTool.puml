@@ -1,0 +1,9 @@
+@startuml
+class FindTool <<static>> {
+    {static} FindToolInPaths(toolName:string, paths:List<string>) : string
+    {static} CleanFolderPath(folderPath:string) : string
+    {static} GetPathsFromEnvVariable(variableName:string, target:EnvironmentVariableTarget) : List<string>
+    {static} EnsureIsInProcessPathEnvVariable(toolPath:string, processPaths:List<string>) : void
+    <<const>> PATH_ENVIRONMENT_VARIABLE : string = "PATH"
+}
+@enduml

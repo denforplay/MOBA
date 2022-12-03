@@ -1,0 +1,5 @@
+@startuml
+class ObjectMenuCreationTests {
+    + ExecuteMenuCommandCreatesGameObjectWithPixelPerfectCamera() : void
+}
+@enduml

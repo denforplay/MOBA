@@ -1,0 +1,7 @@
+@startuml
+class SceneViewGridManager {
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<SceneViewGridManager>" <|-- SceneViewGridManager
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+class VisualStudioEditor {
+    {static} VisualStudioEditor()
+    + CreateIfDoesntExist() : void
+    + Initialize(editorInstallationPath:string) : void
+    + <<virtual>> TryGetInstallationForPath(editorPath:string, installation:CodeEditor.Installation) : bool
+    + OnGUI() : void
+    RegenerateProjectFiles() : void
+    SettingsButton(preference:ProjectGenerationFlag, guiMessage:string, toolTip:string) : void
+    + SyncIfNeeded(addedFiles:string[], deletedFiles:string[], movedFiles:string[], movedFromFiles:string[], importedFiles:string[]) : void
+    + SyncAll() : void
+    IsSupportedPath(path:string) : bool
+    + OpenProject(path:string, line:int, column:int) : bool
+    {static} <<extern>> OpenVisualStudio(appPath:string, solutionPath:string, filePath:string, line:int) : bool
+    OpenOSXApp(path:string, line:int, column:int) : bool
+}
+IExternalCodeEditor <|-- VisualStudioEditor
+@enduml

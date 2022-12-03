@@ -1,0 +1,29 @@
+@startuml
+class ImagePackerDebugEditor {
+    {static} Launch() : void
+    m_TextureActualWidth : int = 0
+    m_TextureActualHeight : int = 0
+    m_PackWidth : int = 0
+    m_PackHeight : int = 0
+    m_Padding : int = 0
+    m_Zoom : float = 1
+    m_PackStep : int
+    OnEnable() : void
+    SetupConfigGUI() : void
+    DrawListElement(rect:Rect, index:int, isactive:bool, isfocused:bool) : void
+    OnConfigGUI() : void
+    UpdateSpriteRect() : void
+    Pack() : void
+    DrawLabel(rect:Rect, label:string) : void
+    OnImagePackerGUI() : void
+    SetupHandlesMatrix() : void
+}
+class "List`1"<T> {
+}
+EditorWindow <|-- ImagePackerDebugEditor
+ImagePackerDebugEditor --> "m_ReorderableList" ReorderableList
+ImagePackerDebugEditor o-> "m_PackRects<RectInt>" "List`1"
+ImagePackerDebugEditor --> "m_Texture" Texture2D
+ImagePackerDebugEditor o-> "m_ConfigScroll" Vector2
+ImagePackerDebugEditor --> "m_PackArea" IMGUIContainer
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class "PriorityQueue`1"<TValue> {
+    + Empty : bool <<get>>
+    + PriorityQueue(initialSize:int, leq:PriorityHeap<TValue>.LessOrEqual)
+    {static} Swap(a:int, b:int) : void
+    + Init() : void
+    + Insert(value:TValue) : PQHandle
+    + ExtractMin() : TValue
+    + Minimum() : TValue
+    + Remove(handle:PQHandle) : void
+}
+class StackItem {
+}
+"PriorityQueue`1" +-- StackItem
+@enduml

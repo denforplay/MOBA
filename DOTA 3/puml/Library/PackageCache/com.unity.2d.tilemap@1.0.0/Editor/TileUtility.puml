@@ -1,0 +1,6 @@
+@startuml
+class TileUtility {
+    + {static} CreateDefaultTile() : Tile
+    + {static} DefaultTile(sprite:Sprite) : TileBase
+}
+@enduml

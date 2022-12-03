@@ -1,0 +1,7 @@
+@startuml
+class MarkerPairing {
+    + name : string
+    + leftIndex : int
+    + rightIndex : int
+}
+@enduml

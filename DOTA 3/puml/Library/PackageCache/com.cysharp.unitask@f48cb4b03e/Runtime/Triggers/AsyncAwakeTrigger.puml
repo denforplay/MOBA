@@ -1,0 +1,12 @@
+@startuml
+class AsyncTriggerExtensions <<static>> <<partial>> {
+    + {static} GetAsyncAwakeTrigger(gameObject:GameObject) : AsyncAwakeTrigger
+    + {static} GetAsyncAwakeTrigger(component:Component) : AsyncAwakeTrigger
+}
+class AsyncAwakeTrigger <<sealed>> {
+    + AwakeAsync() : UniTask
+}
+class "AsyncTriggerBase`1"<T> {
+}
+"AsyncTriggerBase`1" "<AsyncUnit>" <|-- AsyncAwakeTrigger
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class ReportGeneratorStyles {
+}
+ReportGeneratorStyles o-> "ProgressTitle" GUIContent
+ReportGeneratorStyles o-> "ProgressInfo" GUIContent
+ReportGeneratorStyles o-> "ProgressInfoPreparing" GUIContent
+ReportGeneratorStyles o-> "ProgressInfoCreating" GUIContent
+@enduml

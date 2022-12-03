@@ -1,0 +1,9 @@
+@startuml
+class PopupSystem {
+    + Initialize(container:DiContainer) : void
+    + SpawnPopup(layer:int) : T
+    + DeletePopUp() : void
+    + DeleteAllPopups() : void
+}
+MonoBehaviour <|-- PopupSystem
+@enduml

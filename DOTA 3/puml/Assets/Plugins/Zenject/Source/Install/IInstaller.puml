@@ -1,0 +1,6 @@
+@startuml
+interface IInstaller {
+    InstallBindings() : void
+    IsEnabled : bool <<get>>
+}
+@enduml

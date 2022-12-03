@@ -1,0 +1,8 @@
+@startuml
+interface ISkill {
+    CanBeUsed : bool <<get>> <<set>>
+    Apply(position:Vector3) : UniTask
+    Id : int <<get>>
+}
+ISkill --> "SkillType" SkillType
+@enduml

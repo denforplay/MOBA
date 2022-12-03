@@ -1,0 +1,15 @@
+@startuml
+class DropdownMenu {
+}
+class DropdownMenuFactory {
+}
+class DropdownMenuUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- DropdownMenu
+DropdownMenu +-- DropdownMenuFactory
+"UxmlFactory`2" "<DropdownMenu,DropdownMenuUxmlTraits>" <|-- DropdownMenuFactory
+DropdownMenu +-- DropdownMenuUxmlTraits
+UxmlTraits <|-- DropdownMenuUxmlTraits
+@enduml

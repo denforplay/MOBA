@@ -1,0 +1,13 @@
+@startuml
+interface IFileIO {
+    Exists(fileName:string) : bool
+    ReadAllText(fileName:string) : string
+    WriteAllText(fileName:string, content:string) : void
+}
+class FileIOProvider {
+    + Exists(fileName:string) : bool
+    + ReadAllText(fileName:string) : string
+    + WriteAllText(fileName:string, content:string) : void
+}
+IFileIO <|-- FileIOProvider
+@enduml

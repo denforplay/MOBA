@@ -1,0 +1,52 @@
+@startuml
+class PlasticProjectSettingsProvider {
+    + PlasticProjectSettingsProvider(path:string, scope:SettingsScope)
+    + <<override>> OnActivate(searchContext:string, rootElement:VisualElement) : void
+    + <<override>> OnDeactivate() : void
+    + <<override>> OnGUI(searchContext:string) : void
+    + {static} CreateSettingsProvider() : SettingsProvider
+    DoGeneralSettings() : void
+    DoFileChangeSettings() : void
+    DoFileVisibililySettings() : void
+    DoFileDetectionSetings() : void
+    DoFsWatcherMessage(isEnabled:bool) : void
+    CheckFsWatcher(wkInfo:WorkspaceInfo) : void
+    GetOptions() : PendingChangesOptions
+    SetOptions(options:PendingChangesOptions) : void
+    IsDirty(currentOptions:PendingChangesOptions) : bool
+    {static} GetFsWatcherEnabledMessage() : string
+    {static} GetFsWatcherDisabledMessage() : string
+    {static} GetFsWatcherEnabledExplanation() : string
+    {static} GetFsWatcherDisabledExplanation() : string
+    {static} GetHelpLink() : string
+    {static} IsFileSystemWatcherEnabled(wkInfo:WorkspaceInfo) : bool
+    {static} IsEnabled(option:WorkspaceStatusOptions, options:WorkspaceStatusOptions) : bool
+    {static} GetPendingChangesView() : IAutoRefreshView
+    mShowCheckouts : bool
+    mAutoRefresh : bool
+    mFSWatcherEnabled : bool
+    mShowChangedFiles : bool
+    mCheckFileContent : bool
+    mShowPrivateFields : bool
+    mShowIgnoredFiles : bool
+    mShowHiddenFiles : bool
+    mShowDeletedFiles : bool
+    mShowMovedFiles : bool
+    mMatchBinarySameExtension : bool
+    mMatchTextSameExtension : bool
+    mSimilarityPercent : int
+    <<const>> FS_WATCHER_HELP_URL : string = "https://plasticscm.com/download/help/support"
+    <<const>> INOTIFY_HELP_URL : string = "https://plasticscm.com/download/help/inotify"
+}
+interface IAutoRefreshView {
+    DisableAutoRefresh() : void
+    EnableAutoRefresh() : void
+    ForceRefresh() : void
+}
+class Styles {
+}
+SettingsProvider <|-- PlasticProjectSettingsProvider
+PlasticProjectSettingsProvider --> "mInitialOptions" PendingChangesOptions
+PlasticProjectSettingsProvider +-- IAutoRefreshView
+PlasticProjectSettingsProvider +-- Styles
+@enduml

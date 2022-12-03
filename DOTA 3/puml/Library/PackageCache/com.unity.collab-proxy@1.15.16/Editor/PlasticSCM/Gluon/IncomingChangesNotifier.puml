@@ -1,0 +1,13 @@
+@startuml
+class IncomingChangesNotifier {
+    HasNotification : bool <<get>>
+    Hide() : void
+    Show(infoText:string, actionText:string, tooltipText:string, severity:CheckIncomingChanges.Severity) : void
+    {static} UpdateData(data:IncomingChangesNotification, infoText:string, actionText:string, tooltipText:string, status:PlasticNotification.Status) : void
+    mHasNotification : bool
+}
+IIncomingChangesNotifier <|-- IncomingChangesNotifier
+IncomingChangesNotifier --> "Notification" IncomingChangesNotification
+IncomingChangesNotifier o-> "mNotification" IncomingChangesNotification
+IncomingChangesNotifier --> "mPlasticWindow" PlasticWindow
+@enduml

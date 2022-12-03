@@ -1,0 +1,6 @@
+@startuml
+class EditorWaitForSeconds {
+    + WaitTime : float <<get>>
+    + EditorWaitForSeconds(time:float)
+}
+@enduml

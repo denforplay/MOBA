@@ -1,0 +1,12 @@
+@startuml
+class BurstReflectionTestsSeparateAssembly {
+}
+interface "IMyGenericJobSeparateAssembly`1"<T> {
+    Execute() : void
+}
+class "MyJobProducerSeparateAssembly`2"<TJob,T> <<static>> {
+    + {static} Execute(job:TJob) : void
+}
+BurstReflectionTestsSeparateAssembly +-- "IMyGenericJobSeparateAssembly`1"
+BurstReflectionTestsSeparateAssembly +-- "MyJobProducerSeparateAssembly`2"
+@enduml

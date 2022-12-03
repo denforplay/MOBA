@@ -1,0 +1,8 @@
+@startuml
+class ILPostProcessing {
+    + ILPostProcessing(loader:AssemblyResolver, isForEditor:bool, error:ErrorDiagnosticDelegate, log:LogDelegate, logLevel:int)
+    + {static} RecoverManagedMethodFromDirectCall(typeDefinition:TypeDefinition) : MethodReference
+    + IsForEditor : bool <<get>>
+    + Run(assemblyDefinition:AssemblyDefinition) : bool
+}
+@enduml

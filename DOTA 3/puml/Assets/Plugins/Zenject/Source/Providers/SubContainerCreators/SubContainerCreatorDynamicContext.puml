@@ -1,0 +1,8 @@
+@startuml
+abstract class SubContainerCreatorDynamicContext {
+    + SubContainerCreatorDynamicContext(container:DiContainer)
+    + CreateSubContainer(args:List<TypeValuePair>, parentContext:InjectContext, injectAction:Action) : DiContainer
+}
+ISubContainerCreator <|-- SubContainerCreatorDynamicContext
+SubContainerCreatorDynamicContext --> "_container" DiContainer
+@enduml

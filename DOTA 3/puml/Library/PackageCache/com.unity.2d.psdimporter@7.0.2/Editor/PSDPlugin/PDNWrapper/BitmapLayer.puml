@@ -1,0 +1,25 @@
+@startuml
+class Layer <<static>> {
+    + {static} CreateBackgroundLayer(w:int, h:int) : BitmapLayer
+}
+class BitmapLayer {
+    width : int
+    height : int
+    + Dispose() : void
+    + BitmapLayer(w:int, h:int)
+    + LayerID : int <<get>> <<set>>
+    + Collapse : bool <<get>> <<set>>
+    + ImportLayer : bool <<get>> <<set>>
+    + IsGroup : bool <<get>> <<set>>
+    + Name : string <<get>> <<set>>
+    + Opacity : byte <<get>> <<set>>
+    + Visible : bool <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+BitmapLayer --> "Bounds" Rectangle
+BitmapLayer --> "ParentLayer" BitmapLayer
+BitmapLayer --> "ChildLayer<BitmapLayer>" "List`1"
+BitmapLayer --> "BlendMode" LayerBlendMode
+BitmapLayer --> "Surface" Surface
+@enduml

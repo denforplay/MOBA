@@ -1,0 +1,60 @@
+@startuml
+class SpriteMeshController {
+    <<const>> k_SnapDistance : float = 10f
+    + disable : bool <<get>> <<set>>
+    m_Moved : bool
+    + OnGUI() : void
+    ValidateSelectionValues() : void
+    LayoutVertices() : void
+    LayoutEdges() : void
+    DrawEdges() : void
+    SkipDrawEdge(edgeIndex:int) : bool
+    PreviewCreateVertex() : void
+    PreviewCreateEdge() : void
+    PreviewSplitEdge() : void
+    DrawVertices() : void
+    HandleSelectVertex() : void
+    HandleSelectEdge() : void
+    HandleMoveVertex() : void
+    HandleCreateVertex() : void
+    HandleSplitEdge() : void
+    HandleCreateEdge() : void
+    HandleMoveEdge() : void
+    HandleRemoveVertices() : void
+    CreateVertex(position:Vector2, indices:Vector3Int, barycentricCoords:Vector3) : void
+    CreateVertex(position:Vector2, edgeIndex:int) : void
+    SelectVertex(index:int, additiveToggle:bool) : void
+    SelectEdge(index:int, additiveToggle:bool) : void
+    ClearSelection() : void
+    MoveSelectedVertices() : void
+    CreateEdge(fromVertexIndex:int, toVertexIndex:int) : void
+    SplitEdge(position:Vector2, edgeIndex:int) : void
+    IsEdgeSelected() : bool
+    RemoveSelectedVertices() : void
+    Triangulate() : void
+    ClampToFrame(position:Vector2) : Vector2
+    CalculateRectFromSelection() : Rect
+    UpdateEdgeIntersection() : void
+    CalculateEdgeIntersection(vertexIndex:int, hoveredVertexIndex:int, hoveredEdgeIndex:int, targetPosition:Vector2) : EdgeIntersectionResult
+    SegmentIntersectsEdge(p1:Vector2, p2:Vector2, ignoreIndex:int, point:Vector2, intersectingEdgeIndex:int) : bool
+    CacheMovedVertices(deltaPosition:Vector2) : void
+    IsMovedSelectionIntersectingWithEdges() : bool
+}
+class EdgeIntersectionResult <<struct>> {
+    + startVertexIndex : int
+    + endVertexIndex : int
+    + intersectEdgeIndex : int
+}
+class "ISelection`1"<T> {
+}
+SpriteMeshController o-> "m_SpriteMeshDataController" SpriteMeshDataController
+SpriteMeshController --> "m_EdgeIntersectionResult" EdgeIntersectionResult
+SpriteMeshController --> "spriteMeshView" ISpriteMeshView
+SpriteMeshController --> "spriteMeshData" BaseSpriteMeshData
+SpriteMeshController --> "selection<int>" "ISelection`1"
+SpriteMeshController --> "cacheUndo" ICacheUndo
+SpriteMeshController --> "triangulator" ITriangulator
+SpriteMeshController --> "frame" Rect
+SpriteMeshController +-- EdgeIntersectionResult
+EdgeIntersectionResult --> "endPosition" Vector2
+@enduml

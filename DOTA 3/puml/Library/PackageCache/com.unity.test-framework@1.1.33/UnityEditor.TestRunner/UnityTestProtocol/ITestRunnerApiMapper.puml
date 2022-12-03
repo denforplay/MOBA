@@ -1,0 +1,10 @@
+@startuml
+interface ITestRunnerApiMapper {
+    GetRunStateFromResultNunitXml(result:ITestResultAdaptor) : string
+    GetTestStateFromResult(result:ITestResultAdaptor) : TestState
+    FlattenTestNames(testsToRun:ITestAdaptor) : List<string>
+    MapTestToTestPlanMessage(testsToRun:ITestAdaptor) : TestPlanMessage
+    MapTestToTestStartedMessage(test:ITestAdaptor) : TestStartedMessage
+    TestResultToTestFinishedMessage(result:ITestResultAdaptor) : TestFinishedMessage
+}
+@enduml

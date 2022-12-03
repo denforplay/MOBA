@@ -1,0 +1,17 @@
+@startuml
+interface IChangesView {
+    SetBusyStatus(busy:bool) : void
+    SetSearchQuery(query:string) : void
+    SetRevisionSummary(message:string) : void
+    SetConflicts(list:IReadOnlyList<IChangeEntryData>) : void
+    SetSelectedChanges() : void
+    SetChanges(list:IReadOnlyList<IChangeEntryData>) : void
+    SetToggledCount(count:int) : void
+    SetPublishEnabled(enabled:bool, reason:string) : void
+    DisplayDialogue(title:string, message:string, affirmative:string) : bool
+    DisplayDialogue(title:string, message:string, affirmative:string, negative:string) : bool
+}
+class "IView`1"<T> {
+}
+"IView`1" "<IChangesPresenter>" <|-- IChangesView
+@enduml

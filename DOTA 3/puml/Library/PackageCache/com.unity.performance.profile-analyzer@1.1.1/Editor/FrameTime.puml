@@ -1,0 +1,17 @@
+@startuml
+class FrameTime <<struct>> {
+    + ms : float
+    + frameIndex : int
+    + count : int
+    + FrameTime(index:int, msTime:float, _count:int)
+    + FrameTime(t:FrameTime)
+    + CompareTo(other:FrameTime) : int
+    + {static} CompareMs(a:FrameTime, b:FrameTime) : int
+    + {static} CompareCount(a:FrameTime, b:FrameTime) : int
+    + {static} CompareMsDescending(a:FrameTime, b:FrameTime) : int
+    + {static} CompareCountDescending(a:FrameTime, b:FrameTime) : int
+}
+class "IComparable`1"<T> {
+}
+"IComparable`1" "<FrameTime>" <|-- FrameTime
+@enduml

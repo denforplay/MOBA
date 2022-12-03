@@ -1,0 +1,11 @@
+@startuml
+class TestingHelpData <<static>> {
+}
+class HelpLinkData {
+    <<const>> ACTION : string = "action"
+    <<const>> HELP : string = "help"
+    <<const>> LINK : string = "link"
+    <<const>> SEPARATOR : string = ":"
+}
+TestingHelpData +-- HelpLinkData
+@enduml

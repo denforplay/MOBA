@@ -1,0 +1,15 @@
+@startuml
+class GuiRenderableManager {
+    + GuiRenderableManager(renderables:List<IGuiRenderable>, priorities:List<ValuePair<Type, int>>)
+    + OnGui() : void
+}
+class "List`1"<T> {
+}
+class RenderableInfo {
+    + Priority : int
+    + RenderableInfo(renderable:IGuiRenderable, priority:int)
+}
+GuiRenderableManager --> "_renderables<RenderableInfo>" "List`1"
+GuiRenderableManager +-- RenderableInfo
+RenderableInfo --> "Renderable" IGuiRenderable
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class CinemachineBlendListCameraEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+    SetupInstructionList() : void
+    SetupChildList() : void
+}
+class "CinemachineVirtualCameraBaseEditor`1"<T> {
+}
+"CinemachineVirtualCameraBaseEditor`1" "<CinemachineBlendListCamera>" <|-- CinemachineBlendListCameraEditor
+@enduml

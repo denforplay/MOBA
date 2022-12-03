@@ -1,0 +1,39 @@
+@startuml
+abstract class "TaskUpdater`1"<TTask> {
+    + AddTask(task:TTask, priority:int) : void
+    AddTaskInternal(task:TTask, priority:int) : void
+    + RemoveTask(task:TTask) : void
+    + OnFrameStart() : void
+    + UpdateAll() : void
+    + UpdateRange(minPriority:int, maxPriority:int) : void
+    ClearRemovedTasks(tasks:LinkedList<TaskInfo>) : void
+    AddQueuedTasks() : void
+    InsertTaskSorted(task:TaskInfo) : void
+}
+class TickablesTaskUpdater {
+}
+class LateTickablesTaskUpdater {
+}
+class FixedTickablesTaskUpdater {
+}
+class "LinkedList`1"<T> {
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class TaskInfo {
+    + Priority : int
+    + IsRemoved : bool
+    + TaskInfo(task:TTask, priority:int)
+}
+"TaskUpdater`1" o-> "_tasks<TaskInfo>" "LinkedList`1"
+"TaskUpdater`1" o-> "_queuedTasks<TaskInfo>" "List`1"
+"TaskUpdater`1" --> "AllTasks<TaskInfo>" "IEnumerable`1"
+"TaskUpdater`1" --> "ActiveTasks<TaskInfo>" "IEnumerable`1"
+"TaskUpdater`1" "<ITickable>" <|-- TickablesTaskUpdater
+"TaskUpdater`1" "<ILateTickable>" <|-- LateTickablesTaskUpdater
+"TaskUpdater`1" "<IFixedTickable>" <|-- FixedTickablesTaskUpdater
+"TaskUpdater`1" +-- TaskInfo
+TaskInfo --> "Task" TTask
+@enduml

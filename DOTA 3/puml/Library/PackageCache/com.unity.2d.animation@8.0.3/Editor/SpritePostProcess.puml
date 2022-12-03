@@ -1,0 +1,38 @@
+@startuml
+class SpritePostProcess {
+    OnPreprocessAsset() : void
+    OnPostprocessSprites(texture:Texture2D, sprites:Sprite[]) : void
+    {static} RemapCharacterPartsToNewBones(skinningCache:SkinningCache, newBones:SpriteBone[]) : void
+    {static} RefreshSpriteSkinCache() : void
+    {static} CalculateLocaltoWorldMatrix(i:int, spriteRect:SpriteRect, definitionScale:float, pixelsPerUnit:float, spriteBone:List<UnityEngine.U2D.SpriteBone>, outpriteBone:UnityEngine.U2D.SpriteBone?[], bindPose:NativeArray<Matrix4x4>) : void
+    {static} PostProcessBoneData(spriteDataProvider:ISpriteEditorDataProvider, definitionScale:float, sprites:Sprite[]) : bool
+    {static} PostProcessSpriteMeshData(spriteDataProvider:ISpriteEditorDataProvider, definitionScale:float, sprites:Sprite[]) : bool
+    {static} CalculateDefinitionScale(texture:Texture2D, dataProvider:ITextureDataProvider) : float
+    {static} GetSpriteEditorDataProvider(assetPath:string) : ISpriteEditorDataProvider
+}
+class SkinningCachePersistentStateTemp {
+    lastSpriteId : string <<get>> <<set>>
+    lastVisibilityToolActive : bool <<get>> <<set>>
+    lastVisibilityToolIndex : int <<get>> <<set>>
+    lastBrushSize : float <<get>> <<set>>
+    lastBrushHardness : float <<get>> <<set>>
+    lastBrushStep : float <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+class "SerializableDictionary`2"<T1,T2> {
+}
+AssetPostprocessor <|-- SpritePostProcess
+SpritePostProcess +-- SkinningCachePersistentStateTemp
+ISkinningCachePersistentState <|-- SkinningCachePersistentStateTemp
+SkinningCachePersistentStateTemp --> "lastUsedTool" Tools
+SkinningCachePersistentStateTemp --> "lastBoneSelectionIds<int>" "List`1"
+SkinningCachePersistentStateTemp --> "lastTexture" Texture2D
+SkinningCachePersistentStateTemp --> "lastPreviewPose<int,BonePose>" "SerializableDictionary`2"
+SkinningCachePersistentStateTemp --> "lastBoneVisibility<int,bool>" "SerializableDictionary`2"
+SkinningCachePersistentStateTemp --> "lastBoneExpansion<int,bool>" "SerializableDictionary`2"
+SkinningCachePersistentStateTemp --> "lastSpriteVisibility<string,bool>" "SerializableDictionary`2"
+SkinningCachePersistentStateTemp --> "lastGroupVisibility<int,bool>" "SerializableDictionary`2"
+SkinningCachePersistentStateTemp --> "lastMode" SkinningMode
+SkinningCachePersistentStateTemp --> "lastVertexSelection" IndexedSelection
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class GuiRenderer {
+    Construct(renderableManager:GuiRenderableManager) : void
+    + OnGUI() : void
+}
+MonoBehaviour <|-- GuiRenderer
+GuiRenderer --> "_renderableManager" GuiRenderableManager
+@enduml

@@ -1,0 +1,83 @@
+@startuml
+class SpriteShapeControllerEditor {
+    m_ButtonSize : int = 4
+    m_SelectedPoint : int
+    m_SelectedAngleRange : int
+    m_SpriteShapeHashCode : int = 0
+    m_SplineHashCode : int = 0
+    + DrawHeader(content:GUIContent) : void
+    {static} WithinRange(angleRange:ShapeAngleRange, inputAngle:float) : bool
+    {static} RangeFromAngle(angleRanges:List<ShapeAngleRange>, angle:float) : int
+    + GetAngleRange(index:int) : int
+    + OnOverlayGUI() : void
+    + <<override>> OnInspectorGUI() : void
+    BakeCollider() : void
+    ShowMaterials(show:bool) : void
+    {static} RenderSpline(m_SpriteShapeController:SpriteShapeController, gizmoType:GizmoType) : void
+}
+class SceneViewPathOverlay {
+    <<const>> k_OverlayId : string = "Scene View/Path"
+    <<const>> k_DisplayName : string = "Element Inspector"
+    + visible : bool <<get>>
+    + <<override>> OnGUI() : void
+}
+class SpriteShapeUpdateCache <<static>> {
+    {static} SpriteShapeUpdateCache()
+    {static} UpdateSpriteShapeCacheInOpenScenes() : void
+}
+class "PathComponentEditor`1"<T> {
+}
+class Contents <<static>> {
+    + {static} <<readonly>> editSplineLabel : string = "Edit Spline"
+}
+class ShapeSegment <<struct>> {
+    + start : int
+    + end : int
+    + angleRange : int
+}
+class ShapeAngleRange <<struct>> {
+    + start : float
+    + end : float
+    + order : int
+    + index : int
+}
+class "List`1"<T> {
+}
+"PathComponentEditor`1" "<CustomPath>" <|-- SpriteShapeControllerEditor
+SpriteShapeControllerEditor --> "spriteshapeControllerEditor" SpriteShapeControllerEditor
+SpriteShapeControllerEditor o-> "m_ShowStretchOption" AnimBool
+SpriteShapeControllerEditor o-> "m_ShowNonStretchOption" AnimBool
+SpriteShapeControllerEditor o-> "m_ShapeSegments<ShapeSegment>" "List`1"
+SpriteShapeControllerEditor o-> "spriteSelector" SpriteSelector
+IMGUIOverlay <|-- SceneViewPathOverlay
+ITransientOverlay <|-- SceneViewPathOverlay
+SpriteShapeControllerEditor +-- Contents
+Contents o-> "splineLabel" GUIContent
+Contents o-> "fillLabel" GUIContent
+Contents o-> "colliderLabel" GUIContent
+Contents o-> "fillPixelPerUnitLabel" GUIContent
+Contents o-> "spriteShapeProfile" GUIContent
+Contents o-> "materialLabel" GUIContent
+Contents o-> "colorLabel" GUIContent
+Contents o-> "metaDataLabel" GUIContent
+Contents o-> "showComponentsLabel" GUIContent
+Contents o-> "splineDetail" GUIContent
+Contents o-> "openEndedLabel" GUIContent
+Contents o-> "adaptiveUVLabel" GUIContent
+Contents o-> "enableTangentsLabel" GUIContent
+Contents o-> "worldUVLabel" GUIContent
+Contents o-> "stretchUVLabel" GUIContent
+Contents o-> "stretchTilingLabel" GUIContent
+Contents o-> "colliderDetail" GUIContent
+Contents o-> "cornerThresholdDetail" GUIContent
+Contents o-> "colliderOffset" GUIContent
+Contents o-> "updateColliderLabel" GUIContent
+Contents o-> "optimizeColliderLabel" GUIContent
+Contents o-> "optimizeGeometryLabel" GUIContent
+Contents o-> "cacheGeometryLabel" GUIContent
+Contents o-> "uTess2DLabel" GUIContent
+Contents o-> "creatorLabel" GUIContent
+Contents o-> "modifiersLabel" GUIContent
+SpriteShapeControllerEditor +-- ShapeSegment
+SpriteShapeControllerEditor +-- ShapeAngleRange
+@enduml

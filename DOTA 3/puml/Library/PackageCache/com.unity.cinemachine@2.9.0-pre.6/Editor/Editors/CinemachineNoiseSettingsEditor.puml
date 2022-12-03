@@ -1,0 +1,25 @@
+@startuml
+class NoiseSettingsEditor <<sealed>> {
+    + <<override>> OnInspectorGUI() : void
+    ClearComponent(p:SerializedProperty) : void
+    IsClearComponent(p:SerializedProperty) : bool
+}
+class "BaseEditor`1"<T> {
+}
+class SampleCache {
+    + SnapshotSample(areaSize:Vector2, signal:NoiseSettings.TransformNoiseParams[], noiseOffset:float, animated:bool) : void
+    + DrawSamplePreview(r:Rect, channelMask:int) : void
+}
+class ChannelList {
+    + mChannel : int
+    + ChannelList(serializedObject:SerializedObject, elements:SerializedProperty, channel:int, title:GUIContent)
+}
+"BaseEditor`1" "<NoiseSettings>" <|-- NoiseSettingsEditor
+NoiseSettingsEditor o-> "mAnimatedLabel" GUIContent
+NoiseSettingsEditor o-> "mSampleCachePos" SampleCache
+NoiseSettingsEditor o-> "mSampleCacheRot" SampleCache
+NoiseSettingsEditor +-- SampleCache
+NoiseSettingsEditor +-- ChannelList
+ReorderableList <|-- ChannelList
+ChannelList --> "mTitle" GUIContent
+@enduml

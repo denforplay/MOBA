@@ -1,0 +1,9 @@
+@startuml
+enum AnimationType {
+    Idle,
+    Walk,
+    Attack,
+    Skill,
+    Death,
+}
+@enduml

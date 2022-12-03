@@ -1,0 +1,187 @@
+@startuml
+interface "IReadOnlyAsyncReactiveProperty`1"<T> {
+    Value : T <<get>>
+    WithoutCurrent() : IUniTaskAsyncEnumerable<T>
+    WaitAsync(cancellationToken:CancellationToken) : UniTask<T>
+}
+interface "IAsyncReactiveProperty`1"<T> {
+    <<new>> Value : T <<get>> <<set>>
+}
+class "AsyncReactiveProperty`1"<T> {
+    latestValue : T
+    + Value : T <<get>> <<set>>
+    + AsyncReactiveProperty(value:T)
+    + WithoutCurrent() : IUniTaskAsyncEnumerable<T>
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+    + Dispose() : void
+    + <<override>> ToString() : string
+    + WaitAsync(cancellationToken:CancellationToken) : UniTask<T>
+    {static} isValueType : bool
+    {static} AsyncReactiveProperty()
+}
+class "ReadOnlyAsyncReactiveProperty`1"<T> {
+    latestValue : T
+    + Value : T <<get>>
+    + ReadOnlyAsyncReactiveProperty(initialValue:T, source:IUniTaskAsyncEnumerable<T>, cancellationToken:CancellationToken)
+    + ReadOnlyAsyncReactiveProperty(source:IUniTaskAsyncEnumerable<T>, cancellationToken:CancellationToken)
+    <<async>> ConsumeEnumerator(source:IUniTaskAsyncEnumerable<T>, cancellationToken:CancellationToken) : UniTaskVoid
+    + WithoutCurrent() : IUniTaskAsyncEnumerable<T>
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+    + Dispose() : void
+    + <<override>> ToString() : string
+    + WaitAsync(cancellationToken:CancellationToken) : UniTask<T>
+    {static} isValueType : bool
+    {static} ReadOnlyAsyncReactiveProperty()
+}
+class StateExtensions <<static>> {
+    + {static} ToReadOnlyAsyncReactiveProperty(source:IUniTaskAsyncEnumerable<T>, cancellationToken:CancellationToken) : ReadOnlyAsyncReactiveProperty<T>
+    + {static} ToReadOnlyAsyncReactiveProperty(source:IUniTaskAsyncEnumerable<T>, initialValue:T, cancellationToken:CancellationToken) : ReadOnlyAsyncReactiveProperty<T>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "TriggerEvent`1"<T> {
+}
+class WaitAsyncSource <<sealed>> {
+    {static} WaitAsyncSource()
+    WaitAsyncSource()
+    + {static} Create(parent:AsyncReactiveProperty<T>, cancellationToken:CancellationToken, token:short) : IUniTaskSource<T>
+    TryReturn() : bool
+    {static} CancellationCallback(state:object) : void
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCanceled(cancellationToken:CancellationToken) : void
+    + OnCompleted() : void
+    + OnError(ex:Exception) : void
+    + OnNext(value:T) : void
+}
+class WithoutCurrentEnumerable <<sealed>> {
+    + WithoutCurrentEnumerable(parent:AsyncReactiveProperty<T>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class Enumerator <<sealed>> {
+    isDisposed : bool
+    firstCall : bool
+    + Enumerator(parent:AsyncReactiveProperty<T>, cancellationToken:CancellationToken, publishCurrentValue:bool)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + OnNext(value:T) : void
+    + OnCanceled(cancellationToken:CancellationToken) : void
+    + OnCompleted() : void
+    + OnError(ex:Exception) : void
+    {static} CancellationCallback(state:object) : void
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class WaitAsyncSource <<sealed>> {
+    {static} WaitAsyncSource()
+    WaitAsyncSource()
+    + {static} Create(parent:ReadOnlyAsyncReactiveProperty<T>, cancellationToken:CancellationToken, token:short) : IUniTaskSource<T>
+    TryReturn() : bool
+    {static} CancellationCallback(state:object) : void
+    + GetResult(token:short) : T
+    GetResult(token:short) : void
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCanceled(cancellationToken:CancellationToken) : void
+    + OnCompleted() : void
+    + OnError(ex:Exception) : void
+    + OnNext(value:T) : void
+}
+class WithoutCurrentEnumerable <<sealed>> {
+    + WithoutCurrentEnumerable(parent:ReadOnlyAsyncReactiveProperty<T>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class Enumerator <<sealed>> {
+    isDisposed : bool
+    firstCall : bool
+    + Enumerator(parent:ReadOnlyAsyncReactiveProperty<T>, cancellationToken:CancellationToken, publishCurrentValue:bool)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + OnNext(value:T) : void
+    + OnCanceled(cancellationToken:CancellationToken) : void
+    + OnCompleted() : void
+    + OnError(ex:Exception) : void
+    {static} CancellationCallback(state:object) : void
+}
+class "IUniTaskSource`1"<T> {
+}
+class "ITriggerHandler`1"<T> {
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "IReadOnlyAsyncReactiveProperty`1"
+"IReadOnlyAsyncReactiveProperty`1" "<T>" <|-- "IAsyncReactiveProperty`1"
+"IAsyncReactiveProperty`1" "<T>" <|-- "AsyncReactiveProperty`1"
+IDisposable <|-- "AsyncReactiveProperty`1"
+"AsyncReactiveProperty`1" --> "triggerEvent<T>" "TriggerEvent`1"
+"IReadOnlyAsyncReactiveProperty`1" "<T>" <|-- "ReadOnlyAsyncReactiveProperty`1"
+IDisposable <|-- "ReadOnlyAsyncReactiveProperty`1"
+"ReadOnlyAsyncReactiveProperty`1" --> "triggerEvent<T>" "TriggerEvent`1"
+"ReadOnlyAsyncReactiveProperty`1" --> "enumerator<T>" "IUniTaskAsyncEnumerator`1"
+"AsyncReactiveProperty`1" +-- WaitAsyncSource
+"IUniTaskSource`1" "<T>" <|-- WaitAsyncSource
+"ITriggerHandler`1" "<T>" <|-- WaitAsyncSource
+"ITaskPoolNode`1" "<WaitAsyncSource>" <|-- WaitAsyncSource
+WaitAsyncSource o-> "cancellationCallback<object>" "Action`1"
+WaitAsyncSource --> "pool<WaitAsyncSource>" "TaskPool`1"
+WaitAsyncSource --> "nextNode" WaitAsyncSource
+WaitAsyncSource --> "parent<T>" "AsyncReactiveProperty`1"
+WaitAsyncSource --> "cancellationToken" CancellationToken
+WaitAsyncSource --> "cancellationTokenRegistration" CancellationTokenRegistration
+WaitAsyncSource --> "core<T>" "UniTaskCompletionSourceCore`1"
+WaitAsyncSource --> "Prev<T>" "ITriggerHandler`1"
+WaitAsyncSource --> "Next<T>" "ITriggerHandler`1"
+"AsyncReactiveProperty`1" +-- WithoutCurrentEnumerable
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- WithoutCurrentEnumerable
+WithoutCurrentEnumerable --> "parent<T>" "AsyncReactiveProperty`1"
+"AsyncReactiveProperty`1" +-- Enumerator
+MoveNextSource <|-- Enumerator
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- Enumerator
+"ITriggerHandler`1" "<T>" <|-- Enumerator
+Enumerator o-> "cancellationCallback<object>" "Action`1"
+Enumerator --> "parent<T>" "AsyncReactiveProperty`1"
+Enumerator --> "cancellationToken" CancellationToken
+Enumerator --> "cancellationTokenRegistration" CancellationTokenRegistration
+Enumerator --> "value" T
+Enumerator --> "Current" T
+Enumerator --> "Prev<T>" "ITriggerHandler`1"
+Enumerator --> "Next<T>" "ITriggerHandler`1"
+"ReadOnlyAsyncReactiveProperty`1" +-- WaitAsyncSource
+"IUniTaskSource`1" "<T>" <|-- WaitAsyncSource
+"ITriggerHandler`1" "<T>" <|-- WaitAsyncSource
+"ITaskPoolNode`1" "<WaitAsyncSource>" <|-- WaitAsyncSource
+WaitAsyncSource o-> "cancellationCallback<object>" "Action`1"
+WaitAsyncSource --> "pool<WaitAsyncSource>" "TaskPool`1"
+WaitAsyncSource --> "nextNode" WaitAsyncSource
+WaitAsyncSource --> "parent<T>" "ReadOnlyAsyncReactiveProperty`1"
+WaitAsyncSource --> "cancellationToken" CancellationToken
+WaitAsyncSource --> "cancellationTokenRegistration" CancellationTokenRegistration
+WaitAsyncSource --> "core<T>" "UniTaskCompletionSourceCore`1"
+WaitAsyncSource --> "Prev<T>" "ITriggerHandler`1"
+WaitAsyncSource --> "Next<T>" "ITriggerHandler`1"
+"ReadOnlyAsyncReactiveProperty`1" +-- WithoutCurrentEnumerable
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- WithoutCurrentEnumerable
+WithoutCurrentEnumerable --> "parent<T>" "ReadOnlyAsyncReactiveProperty`1"
+"ReadOnlyAsyncReactiveProperty`1" +-- Enumerator
+MoveNextSource <|-- Enumerator
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- Enumerator
+"ITriggerHandler`1" "<T>" <|-- Enumerator
+Enumerator o-> "cancellationCallback<object>" "Action`1"
+Enumerator --> "parent<T>" "ReadOnlyAsyncReactiveProperty`1"
+Enumerator --> "cancellationToken" CancellationToken
+Enumerator --> "cancellationTokenRegistration" CancellationTokenRegistration
+Enumerator --> "value" T
+Enumerator --> "Current" T
+Enumerator --> "Prev<T>" "ITriggerHandler`1"
+Enumerator --> "Next<T>" "ITriggerHandler`1"
+@enduml

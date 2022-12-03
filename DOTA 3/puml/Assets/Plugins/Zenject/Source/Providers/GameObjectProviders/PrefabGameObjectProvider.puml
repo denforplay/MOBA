@@ -1,0 +1,11 @@
+@startuml
+class PrefabGameObjectProvider {
+    + PrefabGameObjectProvider(prefabCreator:IPrefabInstantiator)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+IProvider <|-- PrefabGameObjectProvider
+PrefabGameObjectProvider --> "_prefabCreator" IPrefabInstantiator
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class LevelConfiguration {
+    + ExperienceNeeded : float <<get>>
+    + UpgradePoints : float <<get>>
+    + AdditionalStrength : float <<get>>
+    + AdditionalIntelligence : float <<get>>
+    + AdditionalAgility : float <<get>>
+}
+ScriptableObject <|-- LevelConfiguration
+@enduml

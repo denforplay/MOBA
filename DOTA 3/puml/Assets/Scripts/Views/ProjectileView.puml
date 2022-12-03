@@ -1,0 +1,8 @@
+@startuml
+class ProjectileView {
+    + Setup(damage:float, team:Team) : void
+}
+MonoBehaviour <|-- ProjectileView
+ProjectileView --> "Rigidbody" Rigidbody
+ProjectileView --> "ProjectileType" ProjectileType
+@enduml

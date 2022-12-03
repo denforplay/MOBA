@@ -1,0 +1,52 @@
+@startuml
+enum SettingVisibility {
+    None= 0 << 0,
+    Visible= 1 << 0,
+    Hidden= 1 << 1,
+    Unlisted= 1 << 2,
+    Unregistered= 1 << 3,
+    All= Visible | Hidden | Unlisted | Unregistered,
+}
+interface IUserSetting {
+    key : string <<get>>
+    settingsRepositoryName : string <<get>>
+    GetValue() : object
+    GetDefaultValue() : object
+    SetValue(value:object, saveProjectSettingsImmediately:bool) : void
+    ApplyModifiedProperties() : void
+    Reset(saveProjectSettingsImmediately:bool) : void
+    Delete(saveProjectSettingsImmediately:bool) : void
+}
+class "UserSetting`1"<T> {
+    m_Initialized : bool
+    m_Key : string
+    m_Repository : string
+    m_Value : T
+    m_DefaultValue : T
+    UserSetting()
+    + UserSetting(settings:Settings, key:string, value:T, scope:SettingsScope)
+    + UserSetting(settings:Settings, repository:string, key:string, value:T, scope:SettingsScope)
+    + key : string <<get>>
+    + settingsRepositoryName : string <<get>>
+    + GetDefaultValue() : object
+    + GetValue() : object
+    + SetValue(value:object, saveProjectSettingsImmediately:bool) : void
+    + SetValue(value:T, saveProjectSettingsImmediately:bool) : void
+    + Delete(saveProjectSettingsImmediately:bool) : void
+    + ApplyModifiedProperties() : void
+    + Reset(saveProjectSettingsImmediately:bool) : void
+    Init() : void
+    + defaultValue : T <<get>>
+    + value : T <<get>> <<set>>
+    + <<override>> ToString() : string
+}
+IUserSetting --> "type" Type
+IUserSetting --> "scope" SettingsScope
+IUserSetting --> "settings" Settings
+IUserSetting <|-- "UserSetting`1"
+"UserSetting`1" --> "m_Scope" SettingsScope
+"UserSetting`1" --> "m_Settings" Settings
+"UserSetting`1" --> "type" Type
+"UserSetting`1" --> "scope" SettingsScope
+"UserSetting`1" --> "settings" Settings
+@enduml

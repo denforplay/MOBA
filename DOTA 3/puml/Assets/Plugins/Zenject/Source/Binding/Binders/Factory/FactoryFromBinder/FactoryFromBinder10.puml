@@ -1,0 +1,13 @@
+@startuml
+class "FactoryFromBinder`11"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TParam9,TParam10,TContract> {
+    + FactoryFromBinder(container:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + FromMethod(method:ModestTree.Util.
+#endif
+                Func<DiContainer, TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>) : ConditionCopyNonLazyBinder
+    + FromFactory() : ConditionCopyNonLazyBinder
+    + FromIFactory(factoryBindGenerator:Action<ConcreteBinderGeneric<IFactory<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>>>) : ArgConditionCopyNonLazyBinder
+    + FromSubContainerResolve() : FactorySubContainerBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + FromSubContainerResolve(subIdentifier:object) : FactorySubContainerBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+}
+FactoryFromBinderBase <|-- "FactoryFromBinder`11"
+@enduml

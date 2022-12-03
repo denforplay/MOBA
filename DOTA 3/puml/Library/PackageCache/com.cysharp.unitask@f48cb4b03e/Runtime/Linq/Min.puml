@@ -1,0 +1,14 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, TResult>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+}
+class Min <<static>> <<partial>> {
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, TResult>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+}
+@enduml

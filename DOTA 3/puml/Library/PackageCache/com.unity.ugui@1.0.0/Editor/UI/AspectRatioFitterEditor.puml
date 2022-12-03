@@ -1,0 +1,9 @@
+@startuml
+class AspectRatioFitterEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+SelfControllerEditor <|-- AspectRatioFitterEditor
+AspectRatioFitterEditor --> "m_AspectMode" SerializedProperty
+AspectRatioFitterEditor --> "m_AspectRatio" SerializedProperty
+AspectRatioFitterEditor --> "m_ModeBool" AnimBool
+@enduml

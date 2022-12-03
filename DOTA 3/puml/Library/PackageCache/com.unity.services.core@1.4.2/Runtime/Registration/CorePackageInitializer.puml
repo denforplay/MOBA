@@ -1,0 +1,14 @@
+@startuml
+class CorePackageInitializer {
+    {static} Register() : void
+    + <<async>> Initialize(registry:CoreRegistry) : Task
+    HaveInitOptionsChanged() : bool
+    FreeOptionsDependantComponents() : void
+    + <<async>> CreateDiagnosticsComponents() : Task<IDiagnosticsFactory>
+    LogInitializationInfoJson() : void
+    + <<async>> GetSerializedProjectConfigurationAsync() : Task<string>
+}
+IInitializablePackage <|-- CorePackageInitializer
+IDiagnosticsComponentProvider <|-- CorePackageInitializer
+CorePackageInitializer --> "m_CurrentInitializationOptions" InitializationOptions
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class CinemachineIndependentImpulseListener {
+    + m_ChannelMask : int
+    + m_Gain : float
+    + m_Use2DDistance : bool
+    + m_UseLocalSpace : bool
+}
+MonoBehaviour <|-- CinemachineIndependentImpulseListener
+@enduml

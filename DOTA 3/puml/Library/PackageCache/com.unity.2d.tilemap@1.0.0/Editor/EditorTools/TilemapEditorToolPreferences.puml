@@ -1,0 +1,17 @@
+@startuml
+class TilemapEditorToolPreferences {
+}
+class "ScriptableSingleton`1"<T> {
+}
+class TilemapEditorToolProperties {
+    + {static} <<readonly>> defaultToolsEditorPref : string = "TilemapEditorTool.DefaultTools"
+}
+"ScriptableSingleton`1" "<TilemapEditorToolPreferences>" <|-- TilemapEditorToolPreferences
+TilemapEditorToolPreferences +-- TilemapEditorToolProperties
+TilemapEditorToolProperties o-> "defaultToolsLabel" GUIContent
+TilemapEditorToolProperties o-> "addLabel" GUIContent
+TilemapEditorToolProperties o-> "removeLabel" GUIContent
+TilemapEditorToolProperties o-> "saveLabel" GUIContent
+TilemapEditorToolProperties o-> "revertLabel" GUIContent
+TilemapEditorToolProperties o-> "resetLabel" GUIContent
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+class RuleOverrideTileEditor {
+    + {static} k_SpriteElementHeight : float = 48
+    + {static} k_GameObjectElementHeight : float = 16
+    + {static} k_PaddingBetweenRules : float = 4
+    + <<virtual>> OnEnable() : void
+    + <<virtual>> OnDisable() : void
+    + <<override>> OnInspectorGUI() : void
+    + DrawSpriteListHeader(rect:Rect) : void
+    + DrawGameObjectListHeader(rect:Rect) : void
+    + GetSpriteElementHeight(index:int) : float
+    + GetGameObjectElementHeight(index:int) : float
+    + DrawSpriteElement(rect:Rect, index:int, active:bool, focused:bool) : void
+    + DrawGameObjectElement(rect:Rect, index:int, active:bool, focused:bool) : void
+    + DrawTileField() : void
+    + DrawCustomFields() : void
+    + SaveTile() : void
+    + <<override>> RenderStaticPreview(assetPath:string, subAssets:Object[], width:int, height:int) : Texture2D
+    + <<override>> HasPreviewGUI() : bool
+    + <<override>> OnPreviewSettings() : void
+    + <<override>> OnPreviewGUI(rect:Rect, background:GUIStyle) : void
+}
+class Styles <<static>> {
+}
+class "List`1"<T> {
+}
+Editor <|-- RuleOverrideTileEditor
+RuleOverrideTileEditor --> "overrideTile" RuleOverrideTile
+RuleOverrideTileEditor --> "ruleTileEditor" RuleTileEditor
+RuleOverrideTileEditor --> "m_RuleTileEditor" RuleTileEditor
+RuleOverrideTileEditor --> "m_RuleTileEditorTarget" RuleTile
+RuleOverrideTileEditor o-> "m_Sprites<KeyValuePair<Sprite, Sprite>>" "List`1"
+RuleOverrideTileEditor o-> "m_GameObjects<KeyValuePair<GameObject, GameObject>>" "List`1"
+RuleOverrideTileEditor +-- Styles
+Styles o-> "overrideTile" GUIContent
+@enduml

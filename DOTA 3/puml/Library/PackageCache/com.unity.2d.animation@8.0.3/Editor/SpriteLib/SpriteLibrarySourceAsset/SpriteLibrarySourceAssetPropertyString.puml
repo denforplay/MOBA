@@ -1,0 +1,7 @@
+@startuml
+class SpriteLibrarySourceAssetPropertyString <<static>> {
+    + <<const>> library : string = "m_Library"
+    + <<const>> primaryLibraryGUID : string = "m_PrimaryLibraryGUID"
+    + <<const>> modificationHash : string = "m_ModificationHash"
+}
+@enduml

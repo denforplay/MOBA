@@ -1,0 +1,23 @@
+@startuml
+interface IChangesPresenter {
+    ToggledCount : int <<get>>
+    TotalCount : int <<get>>
+    ConflictedCount : int <<get>>
+    Searching : bool <<get>>
+    UpdateEntryToggle(path:string, toggled:bool) : bool
+    RequestPublish() : void
+    RequestDiscard(entry:IChangeEntry) : void
+    RequestDiffChanges(path:string) : void
+    SetSearchQuery(query:string) : void
+    SetRevisionSummary(message:string) : void
+    GroupOverflowEntryCount : int <<get>>
+    OnClickGroupOverflow(x:float, y:float) : void
+    ConflictGroupOverflowEntryCount : int <<get>>
+    OnClickConflictGroupOverflow(x:float, y:float) : void
+    RequestShowConflictedDifferences(path:string) : void
+    RequestChooseMerge(path:string) : void
+    RequestChooseMine(path:string) : void
+    RequestChooseRemote(path:string) : void
+}
+IPresenter <|-- IChangesPresenter
+@enduml

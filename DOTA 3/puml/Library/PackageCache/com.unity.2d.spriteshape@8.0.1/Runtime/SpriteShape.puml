@@ -1,0 +1,81 @@
+@startuml
+enum ShapeTangentMode {
+    Linear= 0,
+    Continuous= 1,
+    Broken= 2,
+}
+enum CornerType {
+    OuterTopLeft,
+    OuterTopRight,
+    OuterBottomLeft,
+    OuterBottomRight,
+    InnerTopLeft,
+    InnerTopRight,
+    InnerBottomLeft,
+    InnerBottomRight,
+}
+enum QualityDetail {
+    High= 16,
+    Mid= 8,
+    Low= 4,
+}
+enum Corner {
+    Disable= 0,
+    Automatic= 1,
+    Stretched= 2,
+}
+class SplineControlPoint {
+    + height : float = 1f
+    + spriteIndex : int
+    + corner : bool
+    + <<override>> GetHashCode() : int
+}
+class AngleRange {
+    + start : float <<get>> <<set>>
+    + end : float <<get>> <<set>>
+    + order : int <<get>> <<set>>
+    m_Start : float
+    m_End : float
+    m_Order : int
+    + Clone() : object
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class CornerSprite {
+    + Clone() : object
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class SpriteShape {
+    + fillOffset : float <<get>> <<set>>
+    + useSpriteBorders : bool <<get>> <<set>>
+    m_FillOffset : float
+    m_UseSpriteBorders : bool = true
+    ResetCornerList() : void
+    OnValidate() : void
+    Reset() : void
+}
+class "List`1"<T> {
+}
+SplineControlPoint --> "position" Vector3
+SplineControlPoint --> "leftTangent" Vector3
+SplineControlPoint --> "rightTangent" Vector3
+SplineControlPoint --> "mode" ShapeTangentMode
+SplineControlPoint --> "m_CornerMode" Corner
+SplineControlPoint --> "cornerMode" Corner
+ICloneable <|-- AngleRange
+AngleRange --> "sprites<Sprite>" "List`1"
+AngleRange o-> "m_Sprites<Sprite>" "List`1"
+ICloneable <|-- CornerSprite
+CornerSprite --> "cornerType" CornerType
+CornerSprite --> "sprites<Sprite>" "List`1"
+CornerSprite --> "m_CornerType" CornerType
+CornerSprite --> "m_Sprites<Sprite>" "List`1"
+ScriptableObject <|-- SpriteShape
+SpriteShape --> "angleRanges<AngleRange>" "List`1"
+SpriteShape --> "fillTexture" Texture2D
+SpriteShape --> "cornerSprites<CornerSprite>" "List`1"
+SpriteShape o-> "m_Angles<AngleRange>" "List`1"
+SpriteShape --> "m_FillTexture" Texture2D
+SpriteShape o-> "m_CornerSprites<CornerSprite>" "List`1"
+@enduml

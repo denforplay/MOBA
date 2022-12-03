@@ -1,0 +1,11 @@
+@startuml
+class WeightInspector {
+    + controlID : int <<get>>
+    + OnInspectorGUI() : void
+}
+class "ISelection`1"<T> {
+}
+WeightInspector --> "spriteMeshData" BaseSpriteMeshData
+WeightInspector --> "cacheUndo" ICacheUndo
+WeightInspector --> "selection<int>" "ISelection`1"
+@enduml

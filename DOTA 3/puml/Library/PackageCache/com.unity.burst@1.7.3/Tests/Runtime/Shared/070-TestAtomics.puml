@@ -1,0 +1,23 @@
+@startuml
+class TestAtomics {
+    + {static} test_atomic_increment_int(value:int) : int
+    + {static} test_atomic_increment_long(value:long) : long
+    + {static} test_atomic_add_int(value:int) : int
+    + {static} test_atomic_add_long(value:long) : long
+    + {static} test_atomic_compare_and_exchange_int(location:int, value:int, compareAnd:int) : int
+    + {static} test_atomic_compare_and_exchange_long(location:long, value:long, compareAnd:long) : long
+    + {static} test_atomic_decrement_int(value:int) : int
+    + {static} test_atomic_decrement_long(value:long) : long
+    + {static} test_atomic_exchange_int(value:int) : int
+    + {static} test_atomic_exchange_long(value:long) : long
+    + {static} ExchangeIntPtr(value:IntPtr) : IntPtr
+    + {static} CompareExchangeIntPtr(location:IntPtr, value:IntPtr, compareAnd:IntPtr) : IntPtr
+    + {static} test_atomic_memorybarrier() : void
+    + {static} Case1111040(val:int) : int
+    + {static} ExchangeFloat(f:float) : float
+    + {static} ExchangeDouble(d:double) : double
+    + {static} CompareExchangeFloat(f:float) : float
+    + {static} CompareExchangeDouble(d:double) : double
+    + {static} Read(l:long) : double
+}
+@enduml

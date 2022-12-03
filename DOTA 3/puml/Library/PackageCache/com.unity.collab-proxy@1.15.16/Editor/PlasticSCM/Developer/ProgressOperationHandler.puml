@@ -1,0 +1,11 @@
+@startuml
+class ProgressOperationHandler {
+    mSecondsSinceLastProgressUpdate : double = 0
+    <<const>> UPDATE_INTERVAL_SECONDS : double = 0.5
+}
+ProgressOperationHandler --> "mProgress" GenericProgress
+ProgressOperationHandler --> "mUpdateProgress" UpdateProgress
+ProgressOperationHandler --> "mCheckinProgress" CheckinProgress
+ProgressOperationHandler --> "mWkInfo" WorkspaceInfo
+ProgressOperationHandler --> "mWorkspaceWindow" WorkspaceWindow
+@enduml

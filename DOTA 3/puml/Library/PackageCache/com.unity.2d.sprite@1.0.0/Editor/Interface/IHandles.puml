@@ -1,0 +1,24 @@
+@startuml
+interface IHandles {
+    MakeBezierPoints(startPosition:Vector3, endPosition:Vector3, startTangent:Vector3, endTangent:Vector3, division:int) : Vector3[]
+    DrawAAPolyLine(lineTex:ITexture2D, width:float, points:Vector3[]) : void
+    DrawAAPolyLine(lineTex:ITexture2D, points:Vector3[]) : void
+    DrawLine(p1:Vector3, p2:Vector3) : void
+    SetDiscSectionPoints(dest:Vector3[], center:Vector3, normal:Vector3, from:Vector3, angle:float, radius:float) : void
+}
+class HandlesSystem {
+    {static} + SetSystem(system:IHandles) : void
+    {static} + GetSystem() : IHandles
+    + MakeBezierPoints(startPosition:Vector3, endPosition:Vector3, startTangent:Vector3, endTangent:Vector3, division:int) : Vector3[]
+    + DrawAAPolyLine(lineTex:ITexture2D, width:float, points:Vector3[]) : void
+    + DrawAAPolyLine(lineTex:ITexture2D, points:Vector3[]) : void
+    + DrawLine(p1:Vector3, p2:Vector3) : void
+    + SetDiscSectionPoints(dest:Vector3[], center:Vector3, normal:Vector3, from:Vector3, angle:float, radius:float) : void
+}
+IHandles --> "color" Color
+IHandles --> "matrix" Matrix4x4
+IHandles <|-- HandlesSystem
+HandlesSystem --> "m_System" IHandles
+HandlesSystem --> "color" Color
+HandlesSystem --> "matrix" Matrix4x4
+@enduml

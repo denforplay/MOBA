@@ -1,0 +1,59 @@
+@startuml
+enum SpriteMeshViewMode {
+    EditGeometry,
+    CreateVertex,
+    CreateEdge,
+    SplitEdge,
+}
+enum MeshEditorAction {
+    None,
+    CreateVertex,
+    MoveVertex,
+    CreateEdge,
+    SplitEdge,
+    MoveEdge,
+    SelectVertex,
+    SelectEdge,
+    Remove,
+}
+interface ISpriteMeshView {
+    defaultControlID : int <<get>> <<set>>
+    hoveredVertex : int <<get>>
+    hoveredEdge : int <<get>>
+    closestEdge : int <<get>>
+    CancelMode() : void
+    BeginLayout() : void
+    EndLayout() : void
+    LayoutVertex(position:Vector2, index:int) : void
+    LayoutEdge(startPosition:Vector2, endPosition:Vector2, index:int) : void
+    DoCreateVertex() : bool
+    DoSelectVertex(additive:bool) : bool
+    DoMoveVertex(delta:Vector2) : bool
+    DoMoveEdge(delta:Vector2) : bool
+    DoCreateEdge() : bool
+    DoSplitEdge() : bool
+    DoSelectEdge(additive:bool) : bool
+    DoRemove() : bool
+    DrawVertex(position:Vector2) : void
+    DrawVertexHovered(position:Vector2) : void
+    DrawVertexSelected(position:Vector2) : void
+    BeginDrawEdges() : void
+    EndDrawEdges() : void
+    DrawEdge(startPosition:Vector2, endPosition:Vector2) : void
+    DrawEdgeHovered(startPosition:Vector2, endPosition:Vector2) : void
+    DrawEdgeSelected(startPosition:Vector2, endPosition:Vector2) : void
+    IsActionTriggered(action:MeshEditorAction) : bool
+    IsActionActive(action:MeshEditorAction) : bool
+    IsActionHot(action:MeshEditorAction) : bool
+    WorldToScreen(position:Vector2) : Vector2
+    DoRepaint() : void
+    CanRepaint() : bool
+    CanLayout() : bool
+}
+class "ISelection`1"<T> {
+}
+ISpriteMeshView --> "mode" SpriteMeshViewMode
+ISpriteMeshView --> "selection<int>" "ISelection`1"
+ISpriteMeshView --> "frame" Rect
+ISpriteMeshView --> "mouseWorldPosition" Vector2
+@enduml

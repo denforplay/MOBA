@@ -1,0 +1,10 @@
+@startuml
+class PopulateRuleOverideTileWizard {
+    {static} MenuOption(menuCommand:MenuCommand) : void
+    {static} MenuOptionValidation(menuCommand:MenuCommand) : bool
+    + {static} CreateWizard(target:RuleOverrideTile) : void
+    + {static} CloneWizard(oldWizard:PopulateRuleOverideTileWizard) : void
+}
+ScriptableWizard <|-- PopulateRuleOverideTileWizard
+PopulateRuleOverideTileWizard --> "m_spriteSet" Texture2D
+@enduml

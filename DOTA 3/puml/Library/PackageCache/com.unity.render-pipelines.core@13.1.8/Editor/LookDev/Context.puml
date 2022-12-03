@@ -1,0 +1,81 @@
+@startuml
+enum ViewIndex {
+    First,
+    Second,
+}
+enum ViewCompositionIndex {
+    First= ViewIndex.First,
+    Second= ViewIndex.Second,
+    Composite,
+}
+enum Layout {
+    FullFirstView,
+    FullSecondView,
+    HorizontalSplit,
+    VerticalSplit,
+    CustomSplit,
+}
+enum SidePanel {
+    None= -1,
+    Environment,
+    Debug,
+}
+enum TargetDebugView {
+    First,
+    Both,
+    Second,
+}
+class Context {
+    m_EnvironmentLibraryGUID : string = ""
+    m_CameraSynced : bool = true
+    + cameraSynced : bool <<get>> <<set>>
+    + GetViewContent(index:ViewIndex) : ViewContext
+    + UpdateEnvironmentLibrary(library:EnvironmentLibrary) : void
+    LoadEnvironmentLibraryFromGUID() : void
+    + SynchronizeCameraStates(baseCameraState:ViewIndex) : void
+    SynchronizeCameraStates() : void
+    + SetFocusedCamera(index:ViewIndex) : void
+    Dispose() : void
+}
+class LayoutContext {
+}
+class ViewContext {
+    m_EnvironmentGUID : string = ""
+    + hasEnvironment : bool <<get>>
+    viewedObjectAssetGUID : string = ""
+    viewedObjecHierarchytInstanceID : int
+    + hasViewedObject : bool <<get>>
+    + UpdateEnvironment(environmentOrCubemapAsset:UnityEngine.Object) : void
+    LoadEnvironmentFromGUID() : void
+    + UpdateViewedObject(viewedObject:GameObject) : void
+    LoadViewedObject() : void
+    + ResetCameraState() : void
+}
+class DebugContext {
+    + shadow : bool = true
+    + viewMode : int
+}
+class ViewIterator <<struct>> {
+    GetEnumerator() : IEnumerator
+    GetEnumerator() : IEnumerator<ViewContext>
+}
+class "IEnumerable`1"<T> {
+}
+ScriptableObject <|-- Context
+IDisposable <|-- Context
+Context --> "m_EnvironmentLibrary" EnvironmentLibrary
+Context --> "environmentLibrary" EnvironmentLibrary
+Context o-> "layout" LayoutContext
+Context --> "viewContexts" ViewIterator
+LayoutContext --> "viewLayout" Layout
+LayoutContext o-> "lastFocusedView" ViewIndex
+LayoutContext --> "showedSidePanel" SidePanel
+LayoutContext o-> "debugPanelSource" TargetDebugView
+ViewContext o-> "camera" CameraState
+ViewContext o-> "debug" DebugContext
+ViewContext --> "environment" Environment
+ViewContext --> "viewedObjectReference" GameObject
+ViewContext --> "viewedInstanceInPreview" GameObject
+Context +-- ViewIterator
+"IEnumerable`1" "<ViewContext>" <|-- ViewIterator
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+interface ICommandLineOption {
+    ArgName : string <<get>>
+    ApplyValue(value:string) : void
+}
+@enduml

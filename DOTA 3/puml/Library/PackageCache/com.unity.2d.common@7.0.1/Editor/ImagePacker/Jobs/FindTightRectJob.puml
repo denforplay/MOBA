@@ -1,0 +1,13 @@
+@startuml
+class FindTightRectJob <<struct>> {
+    m_Width : int
+    m_Height : int
+    + <<unsafe>> Execute(index:int) : void
+    + {static} <<unsafe>> Execute(buffers:NativeArray<Color32>[], width:int, height:int) : RectInt[]
+}
+class "NativeArray`1"<T> {
+}
+IJobParallelFor <|-- FindTightRectJob
+FindTightRectJob --> "m_Buffers<IntPtr>" "NativeArray`1"
+FindTightRectJob --> "m_Output<RectInt>" "NativeArray`1"
+@enduml

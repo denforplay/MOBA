@@ -1,0 +1,11 @@
+@startuml
+class ConfigurationEntry {
+    m_Value : string
+    + Value : string <<get>>
+    m_IsReadOnly : bool
+    + IsReadOnly : bool <<get>> <<internal set>>
+    + ConfigurationEntry()
+    + ConfigurationEntry(value:string, isReadOnly:bool)
+    + TrySetValue(value:string) : bool
+}
+@enduml

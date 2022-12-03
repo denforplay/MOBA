@@ -1,0 +1,12 @@
+@startuml
+class AnimationPreviewUpdateCallback {
+    + AnimationPreviewUpdateCallback(output:AnimationPlayableOutput)
+    + Evaluate() : void
+}
+class "List`1"<T> {
+}
+ITimelineEvaluateCallback <|-- AnimationPreviewUpdateCallback
+AnimationPreviewUpdateCallback --> "m_Output" AnimationPlayableOutput
+AnimationPreviewUpdateCallback --> "m_Graph" PlayableGraph
+AnimationPreviewUpdateCallback --> "m_PreviewComponents<IAnimationWindowPreview>" "List`1"
+@enduml

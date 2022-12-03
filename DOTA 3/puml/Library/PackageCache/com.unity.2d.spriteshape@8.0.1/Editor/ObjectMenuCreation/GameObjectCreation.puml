@@ -1,0 +1,7 @@
+@startuml
+class GameObjectCreation {
+    <<const>> k_MenuPriority : int = 4
+    {static} MenuItem_GameObject2DObjectSpriteShapeOpenShape(menuCommand:MenuCommand) : void
+    {static} MenuItem_GameObject2DObjectSpriteShapeClosedShape(menuCommand:MenuCommand) : void
+}
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class SubContainerCreatorUtil <<static>> {
+    + {static} ApplyBindSettings(subContainerBindInfo:SubContainerCreatorBindInfo, subContainer:DiContainer) : void
+}
+@enduml

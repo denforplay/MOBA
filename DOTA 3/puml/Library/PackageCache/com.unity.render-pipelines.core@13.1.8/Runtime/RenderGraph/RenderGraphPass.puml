@@ -1,0 +1,42 @@
+@startuml
+abstract class RenderGraphPass {
+    + GetExecuteDelegate() : RenderFunc<PassData>
+    + {abstract} Execute(renderGraphContext:RenderGraphContext) : void
+    + {abstract} Release(pool:RenderGraphObjectPool) : void
+    + {abstract} HasRenderFunc() : bool
+    + name : string <<get>> <<protected set>>
+    + index : int <<get>> <<protected set>>
+    + enableAsyncCompute : bool <<get>> <<protected set>>
+    + allowPassCulling : bool <<get>> <<protected set>>
+    + colorBufferMaxIndex : int <<get>> <<protected set>>
+    + refCount : int <<get>> <<protected set>>
+    + generateDebugData : bool <<get>> <<protected set>>
+    + allowRendererListCulling : bool <<get>> <<protected set>>
+    + RenderGraphPass()
+    + Clear() : void
+    + AddResourceWrite(res:ResourceHandle) : void
+    + AddResourceRead(res:ResourceHandle) : void
+    + AddTransientResource(res:ResourceHandle) : void
+    + UseRendererList(rendererList:RendererListHandle) : void
+    + DependsOnRendererList(rendererList:RendererListHandle) : void
+    + EnableAsyncCompute(value:bool) : void
+    + AllowPassCulling(value:bool) : void
+    + AllowRendererListCulling(value:bool) : void
+    + GenerateDebugData(value:bool) : void
+    + SetColorBuffer(resource:TextureHandle, index:int) : void
+    + SetDepthBuffer(resource:TextureHandle, flags:DepthAccess) : void
+}
+class "RenderGraphPass`1"<PassData> <<sealed>> {
+    + <<override>> Execute(renderGraphContext:RenderGraphContext) : void
+    + Initialize(passIndex:int, passData:PassData, passName:string, sampler:ProfilingSampler) : void
+    + <<override>> Release(pool:RenderGraphObjectPool) : void
+    + <<override>> HasRenderFunc() : bool
+}
+class "List`1"<T> {
+}
+RenderGraphPass --> "customSampler" ProfilingSampler
+RenderGraphPass --> "depthBuffer" TextureHandle
+RenderGraphPass o-> "usedRendererListList<RendererListHandle>" "List`1"
+RenderGraphPass o-> "dependsOnRendererListList<RendererListHandle>" "List`1"
+RenderGraphPass <|-- "RenderGraphPass`1"
+@enduml

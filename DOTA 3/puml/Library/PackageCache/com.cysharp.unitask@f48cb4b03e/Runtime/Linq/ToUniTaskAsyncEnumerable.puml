@@ -1,0 +1,111 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ToUniTaskAsyncEnumerable(source:IEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} ToUniTaskAsyncEnumerable(source:Task<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} ToUniTaskAsyncEnumerable(source:UniTask<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} ToUniTaskAsyncEnumerable(source:IObservable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "ToUniTaskAsyncEnumerable`1"<T> {
+    + ToUniTaskAsyncEnumerable(source:IEnumerable<T>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "ToUniTaskAsyncEnumerableTask`1"<T> {
+    + ToUniTaskAsyncEnumerableTask(source:Task<T>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "ToUniTaskAsyncEnumerableUniTask`1"<T> {
+    + ToUniTaskAsyncEnumerableUniTask(source:UniTask<T>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "ToUniTaskAsyncEnumerableObservable`1"<T> {
+    + ToUniTaskAsyncEnumerableObservable(source:IObservable<T>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class _ToUniTaskAsyncEnumerable {
+    + _ToUniTaskAsyncEnumerable(source:IEnumerable<T>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "Task`1"<T> {
+}
+class _ToUniTaskAsyncEnumerableTask {
+    called : bool
+    + _ToUniTaskAsyncEnumerableTask(source:Task<T>, cancellationToken:CancellationToken)
+    + <<async>> MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "UniTask`1"<T> {
+}
+class _ToUniTaskAsyncEnumerableUniTask {
+    called : bool
+    + _ToUniTaskAsyncEnumerableUniTask(source:UniTask<T>, cancellationToken:CancellationToken)
+    + <<async>> MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "IObservable`1"<T> {
+}
+class _ToUniTaskAsyncEnumerableObservable {
+    useCachedCurrent : bool
+    subscribeCompleted : bool
+    + _ToUniTaskAsyncEnumerableObservable(source:IObservable<T>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+    + OnCompleted() : void
+    + OnError(error:Exception) : void
+    + OnNext(value:T) : void
+    {static} OnCanceled(state:object) : void
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "IEnumerator`1"<T> {
+}
+class "IObserver`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "Queue`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "ToUniTaskAsyncEnumerable`1"
+"ToUniTaskAsyncEnumerable`1" --> "source<T>" "IEnumerable`1"
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "ToUniTaskAsyncEnumerableTask`1"
+"ToUniTaskAsyncEnumerableTask`1" --> "source<T>" "Task`1"
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "ToUniTaskAsyncEnumerableUniTask`1"
+"ToUniTaskAsyncEnumerableUniTask`1" --> "source<T>" "UniTask`1"
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "ToUniTaskAsyncEnumerableObservable`1"
+"ToUniTaskAsyncEnumerableObservable`1" --> "source<T>" "IObservable`1"
+"ToUniTaskAsyncEnumerable`1" +-- _ToUniTaskAsyncEnumerable
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- _ToUniTaskAsyncEnumerable
+_ToUniTaskAsyncEnumerable --> "source<T>" "IEnumerable`1"
+_ToUniTaskAsyncEnumerable --> "cancellationToken" CancellationToken
+_ToUniTaskAsyncEnumerable --> "enumerator<T>" "IEnumerator`1"
+_ToUniTaskAsyncEnumerable --> "Current" T
+"ToUniTaskAsyncEnumerableTask`1" +-- _ToUniTaskAsyncEnumerableTask
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- _ToUniTaskAsyncEnumerableTask
+_ToUniTaskAsyncEnumerableTask --> "source<T>" "Task`1"
+_ToUniTaskAsyncEnumerableTask --> "cancellationToken" CancellationToken
+_ToUniTaskAsyncEnumerableTask --> "current" T
+_ToUniTaskAsyncEnumerableTask --> "Current" T
+"ToUniTaskAsyncEnumerableUniTask`1" +-- _ToUniTaskAsyncEnumerableUniTask
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- _ToUniTaskAsyncEnumerableUniTask
+_ToUniTaskAsyncEnumerableUniTask --> "source<T>" "UniTask`1"
+_ToUniTaskAsyncEnumerableUniTask --> "cancellationToken" CancellationToken
+_ToUniTaskAsyncEnumerableUniTask --> "current" T
+_ToUniTaskAsyncEnumerableUniTask --> "Current" T
+"ToUniTaskAsyncEnumerableObservable`1" +-- _ToUniTaskAsyncEnumerableObservable
+MoveNextSource <|-- _ToUniTaskAsyncEnumerableObservable
+"IUniTaskAsyncEnumerator`1" "<T>" <|-- _ToUniTaskAsyncEnumerableObservable
+"IObserver`1" "<T>" <|-- _ToUniTaskAsyncEnumerableObservable
+_ToUniTaskAsyncEnumerableObservable o-> "OnCanceledDelegate<object>" "Action`1"
+_ToUniTaskAsyncEnumerableObservable --> "source<T>" "IObservable`1"
+_ToUniTaskAsyncEnumerableObservable --> "cancellationToken" CancellationToken
+_ToUniTaskAsyncEnumerableObservable --> "current" T
+_ToUniTaskAsyncEnumerableObservable --> "queuedResult<T>" "Queue`1"
+_ToUniTaskAsyncEnumerableObservable --> "error" Exception
+_ToUniTaskAsyncEnumerableObservable --> "subscription" IDisposable
+_ToUniTaskAsyncEnumerableObservable --> "cancellationTokenRegistration" CancellationTokenRegistration
+_ToUniTaskAsyncEnumerableObservable --> "Current" T
+@enduml

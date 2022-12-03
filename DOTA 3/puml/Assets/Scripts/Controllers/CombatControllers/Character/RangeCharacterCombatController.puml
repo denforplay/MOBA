@@ -1,0 +1,7 @@
+@startuml
+class RangeCharacterCombatController {
+    + Initialize(projectileFactory:ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement>, requirement:ProjectileFactoryRequirement) : void
+    + RangeCharacterCombatController(characterController:ICharacterController, character:Models.Character)
+}
+CharacterCombatController <|-- RangeCharacterCombatController
+@enduml

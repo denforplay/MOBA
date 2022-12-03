@@ -1,0 +1,41 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} TakeUntilCanceled(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : IUniTaskAsyncEnumerable<TSource>
+}
+class "TakeUntilCanceled`1"<TSource> <<sealed>> {
+    + TakeUntilCanceled(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _TakeUntilCanceled <<sealed>> {
+    isCanceled : bool
+    + _TakeUntilCanceled(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken1:CancellationToken, cancellationToken2:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    SourceMoveNext() : void
+    {static} MoveNextCore(state:object) : void
+    {static} OnCanceled1(state:object) : void
+    {static} OnCanceled2(state:object) : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "TakeUntilCanceled`1"
+"TakeUntilCanceled`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"TakeUntilCanceled`1" --> "cancellationToken" CancellationToken
+"TakeUntilCanceled`1" +-- _TakeUntilCanceled
+MoveNextSource <|-- _TakeUntilCanceled
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _TakeUntilCanceled
+_TakeUntilCanceled o-> "CancelDelegate1<object>" "Action`1"
+_TakeUntilCanceled o-> "CancelDelegate2<object>" "Action`1"
+_TakeUntilCanceled o-> "MoveNextCoreDelegate<object>" "Action`1"
+_TakeUntilCanceled --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_TakeUntilCanceled --> "cancellationToken1" CancellationToken
+_TakeUntilCanceled --> "cancellationToken2" CancellationToken
+_TakeUntilCanceled --> "cancellationTokenRegistration1" CancellationTokenRegistration
+_TakeUntilCanceled --> "cancellationTokenRegistration2" CancellationTokenRegistration
+_TakeUntilCanceled --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_TakeUntilCanceled --> "Current" TSource
+@enduml

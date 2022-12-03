@@ -1,0 +1,11 @@
+@startuml
+class UnitsTestFixture {
+}
+class TestData <<struct>> {
+    + <<readonly>> value : float
+    + <<readonly>> expectedOutput : string
+    + TestData(value:float, expectedOutput:string)
+    + <<override>> ToString() : string
+}
+UnitsTestFixture +-- TestData
+@enduml

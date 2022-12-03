@@ -1,0 +1,7 @@
+@startuml
+class AnimationTrackKeyDataSource {
+    <<readonly>> m_TrackOffset : float
+    + AnimationTrackKeyDataSource(track:AnimationTrack)
+}
+BasePropertyKeyDataSource <|-- AnimationTrackKeyDataSource
+@enduml

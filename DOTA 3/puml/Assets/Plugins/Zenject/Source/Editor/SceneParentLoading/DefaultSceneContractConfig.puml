@@ -1,0 +1,14 @@
+@startuml
+class DefaultSceneContractConfig {
+    + <<const>> ResourcePath : string = "ZenjectDefaultSceneContractConfig"
+}
+class "List`1"<T> {
+}
+class ContractInfo {
+    + ContractName : string
+}
+ScriptableObject <|-- DefaultSceneContractConfig
+DefaultSceneContractConfig --> "DefaultContracts<ContractInfo>" "List`1"
+DefaultSceneContractConfig +-- ContractInfo
+ContractInfo --> "Scene" SceneAsset
+@enduml

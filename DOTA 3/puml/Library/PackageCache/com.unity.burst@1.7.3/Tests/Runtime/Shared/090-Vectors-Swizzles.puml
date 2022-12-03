@@ -1,0 +1,13 @@
+@startuml
+class VectorsSwizzles <<partial>> {
+    + {static} SwizzleLoadLocalXyz() : float
+    + {static} SwizzleLoadLoadlZyx() : float
+    + {static} SwizzleStoreLocalZyx() : float
+    + {static} SwizzleLoadIndirectXyz() : float
+    + {static} SwizzleStoreIndirectXyz() : float
+}
+class StructWithFloat4 <<struct>> {
+}
+VectorsSwizzles +-- StructWithFloat4
+StructWithFloat4 --> "Vec4" float4
+@enduml

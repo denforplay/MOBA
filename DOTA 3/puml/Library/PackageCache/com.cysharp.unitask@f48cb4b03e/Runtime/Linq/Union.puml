@@ -1,0 +1,6 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Union(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Union(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+@enduml

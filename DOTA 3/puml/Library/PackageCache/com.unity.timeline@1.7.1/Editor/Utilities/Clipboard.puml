@@ -1,0 +1,37 @@
+@startuml
+class Clipboard {
+    {static} <<readonly>> kListInitialSize : int = 10
+    + Clipboard()
+    + CopyItems(items:IEnumerable<ITimelineItem>) : void
+    CopyItem(clipItem:ClipItem) : ClipItem
+    {static} CopyItem(markerItem:MarkerItem) : MarkerItem
+    + CopyTracks(tracks:IEnumerable<TrackAsset>) : void
+    + GetTracks() : IEnumerable<ClipboardTrackEntry>
+    + GetCopiedItems() : IEnumerable<ItemsPerTrack>
+    + Clear() : void
+    {static} CreateTimeline() : TimelineAsset
+}
+class ExposedReferenceTable {
+    + SetReferenceValue(id:PropertyName, value:Object) : void
+    + GetReferenceValue(id:PropertyName, idValid:bool) : Object
+    + ClearReferenceValue(id:PropertyName) : void
+    + Clear() : void
+}
+class ClipboardTrackEntry <<struct>> {
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+Clipboard o-> "m_ItemsData<ItemsPerTrack>" "List`1"
+Clipboard o-> "m_trackData<ClipboardTrackEntry>" "List`1"
+Clipboard --> "rootTimeline" TimelineAsset
+Clipboard o-> "exposedPropertyTable" IExposedPropertyTable
+Clipboard +-- ExposedReferenceTable
+IExposedPropertyTable <|-- ExposedReferenceTable
+ExposedReferenceTable o-> "m_ReferenceTable<PropertyName,Object>" "Dictionary`2"
+Clipboard +-- ClipboardTrackEntry
+ClipboardTrackEntry --> "item" TrackAsset
+ClipboardTrackEntry --> "parent" TrackAsset
+ClipboardTrackEntry --> "bindings<Object>" "List`1"
+@enduml

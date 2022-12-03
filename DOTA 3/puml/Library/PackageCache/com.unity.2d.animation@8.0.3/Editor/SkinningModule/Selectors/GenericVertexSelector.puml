@@ -1,0 +1,15 @@
+@startuml
+class GenericVertexSelector {
+    + Select() : void
+}
+class "ISelector`1"<T> {
+}
+class "ISelection`1"<T> {
+}
+class "Func`2"<T1,T2> {
+}
+"ISelector`1" "<int>" <|-- GenericVertexSelector
+GenericVertexSelector --> "selection<int>" "ISelection`1"
+GenericVertexSelector --> "spriteMeshData" BaseSpriteMeshData
+GenericVertexSelector --> "SelectionCallback<int,bool>" "Func`2"
+@enduml

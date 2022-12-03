@@ -1,0 +1,12 @@
+@startuml
+class DrawAssetOverlay <<static>> {
+    {static} OnProjectWindowItemGUI(guid:string, selectionRect:Rect) : void
+    {static} sIsEnabled : bool
+}
+class DrawOverlayIcon <<static>> {
+    {static} Inflate(rect:Rect, width:float, height:float) : Rect
+    {static} GetTooltipRect(selectionRect:Rect, overlayRect:Rect) : Rect
+}
+DrawAssetOverlay --> "sRepaintProjectWindow" Action
+DrawAssetOverlay +-- DrawOverlayIcon
+@enduml

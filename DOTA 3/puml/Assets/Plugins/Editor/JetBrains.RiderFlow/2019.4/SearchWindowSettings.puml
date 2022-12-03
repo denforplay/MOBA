@@ -1,0 +1,10 @@
+@startuml
+class SearchWindowSettings {
+    + SaveCache(searchFieldValue:string, chosenTab:int, position:Rect) : void
+    + GetCachedSearchQuery : string <<get>>
+    + IsSettingsCached : bool <<get>>
+    + GetCachedTab : int <<get>>
+}
+ISearchWindowSettings <|-- SearchWindowSettings
+SearchWindowSettings --> "GetCachedSize" Rect
+@enduml

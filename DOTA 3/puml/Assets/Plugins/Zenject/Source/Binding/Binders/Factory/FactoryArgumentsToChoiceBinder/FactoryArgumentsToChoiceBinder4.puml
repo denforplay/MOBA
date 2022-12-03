@@ -1,0 +1,16 @@
+@startuml
+class "FactoryArgumentsToChoiceBinder`5"<TParam1,TParam2,TParam3,TParam4,TContract> {
+    + FactoryArgumentsToChoiceBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + WithFactoryArguments(param:T) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3, param4:TFactoryParam4) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3, param4:TFactoryParam4, param5:TFactoryParam5) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + WithFactoryArguments(param1:TFactoryParam1, param2:TFactoryParam2, param3:TFactoryParam3, param4:TFactoryParam4, param5:TFactoryParam5, param6:TFactoryParam6) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + WithFactoryArguments(args:object[]) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + WithFactoryArgumentsExplicit(extraArgs:IEnumerable<TypeValuePair>) : FactoryToChoiceBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+}
+class "FactoryToChoiceBinder`5"<T1,T2,T3,T4,T5> {
+}
+"FactoryToChoiceBinder`5" "<TParam1,TParam2,TParam3,TParam4,TContract>" <|-- "FactoryArgumentsToChoiceBinder`5"
+@enduml

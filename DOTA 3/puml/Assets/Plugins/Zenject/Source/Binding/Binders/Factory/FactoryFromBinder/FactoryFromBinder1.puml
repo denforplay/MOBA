@@ -1,0 +1,19 @@
+@startuml
+class "FactoryFromBinder`2"<TParam1,TContract> {
+    + FactoryFromBinder(container:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + FromMethod(method:Func<DiContainer, TParam1, TContract>) : ConditionCopyNonLazyBinder
+    + FromFactory() : ConditionCopyNonLazyBinder
+    + FromSubContainerResolve() : FactorySubContainerBinder<TParam1, TContract>
+    + FromSubContainerResolve(subIdentifier:object) : FactorySubContainerBinder<TParam1, TContract>
+}
+class FactoryFromBinder1Extensions <<static>> {
+    + {static} FromIFactory(fromBinder:FactoryFromBinder<TParam1, TContract>, factoryBindGenerator:Action<ConcreteBinderGeneric<IFactory<TParam1, TContract>>>) : ArgConditionCopyNonLazyBinder
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TParam1, TContract>) : ArgConditionCopyNonLazyBinder
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TParam1, TContract>, poolBindGenerator:Action<MemoryPoolInitialSizeMaxSizeBinder<TContract>>) : ArgConditionCopyNonLazyBinder
+    + {static} FromMonoPoolableMemoryPool(fromBinder:FactoryFromBinder<TParam1, TContract>) : ArgConditionCopyNonLazyBinder
+    + {static} FromMonoPoolableMemoryPool(fromBinder:FactoryFromBinder<TParam1, TContract>, poolBindGenerator:Action<MemoryPoolInitialSizeMaxSizeBinder<TContract>>) : ArgConditionCopyNonLazyBinder
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TParam1, TContract>) : ArgConditionCopyNonLazyBinder
+    + {static} FromPoolableMemoryPool(fromBinder:FactoryFromBinder<TParam1, TContract>, poolBindGenerator:Action<MemoryPoolInitialSizeMaxSizeBinder<TContract>>) : ArgConditionCopyNonLazyBinder
+}
+FactoryFromBinderBase <|-- "FactoryFromBinder`2"
+@enduml

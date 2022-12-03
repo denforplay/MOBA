@@ -1,0 +1,8 @@
+@startuml
+interface ITestRunCallback {
+    RunStarted(testsToRun:ITest) : void
+    RunFinished(testResults:ITestResult) : void
+    TestStarted(test:ITest) : void
+    TestFinished(result:ITestResult) : void
+}
+@enduml

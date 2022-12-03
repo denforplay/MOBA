@@ -1,0 +1,23 @@
+@startuml
+class SpriteSkinEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class Contents <<static>> {
+    + {static} <<readonly>> spriteNotFound : string
+    + {static} <<readonly>> spriteHasNoSkinningInformation : string
+    + {static} <<readonly>> spriteHasNoWeights : string
+    + {static} <<readonly>> rootTransformNotFound : string
+    + {static} <<readonly>> rootTransformNotFoundInArray : string
+    + {static} <<readonly>> invalidTransformArray : string
+    + {static} <<readonly>> transformArrayContainsNull : string
+    + {static} <<readonly>> invalidTransformArrayLength : string
+    + {static} <<readonly>> enableBatchingHelp : string
+}
+Editor <|-- SpriteSkinEditor
+SpriteSkinEditor +-- Contents
+Contents o-> "listHeaderLabel" GUIContent
+Contents o-> "rootBoneLabel" GUIContent
+Contents o-> "useManager" GUIContent
+Contents o-> "alwaysUpdate" GUIContent
+Contents o-> "autoRebind" GUIContent
+@enduml

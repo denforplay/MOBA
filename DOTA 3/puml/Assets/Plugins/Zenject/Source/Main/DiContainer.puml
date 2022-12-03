@@ -1,0 +1,266 @@
+@startuml
+class DiContainer {
+    _hasLookedUpContextTransform : bool
+    _hasExplicitDefaultParent : bool
+    _hasResolvedRoots : bool
+    _isFinalizingBinding : bool
+    _isValidating : bool
+    _isInstalling : bool
+    + DiContainer(parentContainersEnumerable:IEnumerable<DiContainer>, isValidating:bool)
+    + DiContainer(isValidating:bool)
+    + DiContainer()
+    + DiContainer(parentContainer:DiContainer, isValidating:bool)
+    + DiContainer(parentContainer:DiContainer)
+    + DiContainer(parentContainers:IEnumerable<DiContainer>)
+    InstallDefaultBindings() : void
+    CreateLazyBinding(context:InjectContext) : object
+    + QueueForValidate(validatable:IValidatable) : void
+    ShouldInheritBinding(binding:BindStatement, ancestorContainer:DiContainer) : bool
+    + AssertOnNewGameObjects : bool <<get>> <<set>>
+    + ChecksForCircularDependencies : bool <<get>>
+    + IsValidating : bool <<get>>
+    + IsInstalling : bool <<get>> <<set>>
+    + ResolveRoots() : void
+    ResolveDependencyRoots() : void
+    ValidateFullResolve() : void
+    FlushValidationQueue() : void
+    + CreateSubContainer() : DiContainer
+    + QueueForInject(instance:object) : void
+    + LazyInject(instance:T) : T
+    CreateSubContainer(isValidating:bool) : DiContainer
+    + RegisterProvider(bindingId:BindingId, condition:BindingCondition, provider:IProvider, nonLazy:bool) : void
+    GetProviderMatches(context:InjectContext, buffer:List<ProviderInfo>) : void
+    TryGetUniqueProvider(context:InjectContext) : ProviderInfo
+    FlattenInheritanceChain() : List<DiContainer>
+    GetLocalProviders(bindingId:BindingId, buffer:List<ProviderInfo>) : void
+    GetProvidersForContract(bindingId:BindingId, sourceType:InjectSources, buffer:List<ProviderInfo>) : void
+    + Install() : void
+    + Install(extraArgs:object[]) : void
+    + ResolveAll(context:InjectContext) : IList
+    + ResolveAll(context:InjectContext, buffer:List<object>) : void
+    CheckForInstallWarning(context:InjectContext) : void
+    + ResolveType() : Type
+    + ResolveType(type:Type) : Type
+    + ResolveType(context:InjectContext) : Type
+    + ResolveTypeAll(type:Type) : List<Type>
+    + ResolveTypeAll(type:Type, identifier:object) : List<Type>
+    + ResolveTypeAll(context:InjectContext) : List<Type>
+    + Resolve(id:BindingId) : object
+    + Resolve(context:InjectContext) : object
+    SafeGetInstances(providerInfo:ProviderInfo, context:InjectContext, instances:List<object>) : void
+    + Decorate() : DecoratorToChoiceFromBinder<TContract>
+    GetDecoratedInstances(provider:IProvider, context:InjectContext, buffer:List<object>) : void
+    TryGetDecoratorProvider(contractType:Type) : IDecoratorProvider
+    GetContainerHeirarchyDistance(container:DiContainer) : int
+    GetContainerHeirarchyDistance(container:DiContainer, depth:int) : int?
+    + GetDependencyContracts() : IEnumerable<Type>
+    + GetDependencyContracts(contract:Type) : IEnumerable<Type>
+    InstantiateInternal(concreteType:Type, autoInject:bool, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object) : object
+    + InjectExplicit(injectable:object, extraArgs:List<TypeValuePair>) : void
+    + InjectExplicit(injectable:object, injectableType:Type, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object) : void
+    CallInjectMethodsTopDown(injectable:object, injectableType:Type, typeInfo:InjectTypeInfo, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object, isDryRun:bool) : void
+    InjectMembersTopDown(injectable:object, injectableType:Type, typeInfo:InjectTypeInfo, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object, isDryRun:bool) : void
+    InjectExplicitInternal(injectable:object, injectableType:Type, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object) : void
+    GetPrefabAsGameObject(prefab:UnityEngine.Object) : GameObject
+    + CreateEmptyGameObject(name:string) : GameObject
+    + CreateEmptyGameObject(gameObjectBindInfo:GameObjectCreationParameters, context:InjectContext) : GameObject
+    GetTransformGroup(gameObjectBindInfo:GameObjectCreationParameters, context:InjectContext) : Transform
+    CreateTransformGroup(groupName:string) : GameObject
+    + Instantiate() : T
+    + Instantiate(extraArgs:IEnumerable<object>) : T
+    + Instantiate(concreteType:Type) : object
+    + Instantiate(concreteType:Type, extraArgs:IEnumerable<object>) : object
+    + InstantiateComponent(gameObject:GameObject) : TContract
+    + InstantiateComponent(gameObject:GameObject, extraArgs:IEnumerable<object>) : TContract
+    + InstantiateComponent(componentType:Type, gameObject:GameObject) : Component
+    + InstantiateComponent(componentType:Type, gameObject:GameObject, extraArgs:IEnumerable<object>) : Component
+    + InstantiateComponentOnNewGameObject() : T
+    + InstantiateComponentOnNewGameObject(extraArgs:IEnumerable<object>) : T
+    + InstantiateComponentOnNewGameObject(gameObjectName:string) : T
+    + InstantiateComponentOnNewGameObject(gameObjectName:string, extraArgs:IEnumerable<object>) : T
+    + InstantiatePrefab(prefab:UnityEngine.Object) : GameObject
+    + InstantiatePrefab(prefab:UnityEngine.Object, parentTransform:Transform) : GameObject
+    + InstantiatePrefab(prefab:UnityEngine.Object, position:Vector3, rotation:Quaternion, parentTransform:Transform) : GameObject
+    + InstantiatePrefab(prefab:UnityEngine.Object, gameObjectBindInfo:GameObjectCreationParameters) : GameObject
+    + InstantiatePrefabResource(resourcePath:string) : GameObject
+    + InstantiatePrefabResource(resourcePath:string, parentTransform:Transform) : GameObject
+    + InstantiatePrefabResource(resourcePath:string, position:Vector3, rotation:Quaternion, parentTransform:Transform) : GameObject
+    + InstantiatePrefabResource(resourcePath:string, creationInfo:GameObjectCreationParameters) : GameObject
+    + InstantiatePrefabForComponent(prefab:UnityEngine.Object) : T
+    + InstantiatePrefabForComponent(prefab:UnityEngine.Object, extraArgs:IEnumerable<object>) : T
+    + InstantiatePrefabForComponent(prefab:UnityEngine.Object, parentTransform:Transform) : T
+    + InstantiatePrefabForComponent(prefab:UnityEngine.Object, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    + InstantiatePrefabForComponent(prefab:UnityEngine.Object, position:Vector3, rotation:Quaternion, parentTransform:Transform) : T
+    + InstantiatePrefabForComponent(prefab:UnityEngine.Object, position:Vector3, rotation:Quaternion, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    + InstantiatePrefabForComponent(concreteType:Type, prefab:UnityEngine.Object, parentTransform:Transform, extraArgs:IEnumerable<object>) : object
+    + InstantiatePrefabForComponent(concreteType:Type, prefab:UnityEngine.Object, extraArgs:IEnumerable<object>, creationInfo:GameObjectCreationParameters) : object
+    + InstantiatePrefabResourceForComponent(resourcePath:string) : T
+    + InstantiatePrefabResourceForComponent(resourcePath:string, extraArgs:IEnumerable<object>) : T
+    + InstantiatePrefabResourceForComponent(resourcePath:string, parentTransform:Transform) : T
+    + InstantiatePrefabResourceForComponent(resourcePath:string, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    + InstantiatePrefabResourceForComponent(resourcePath:string, position:Vector3, rotation:Quaternion, parentTransform:Transform) : T
+    + InstantiatePrefabResourceForComponent(resourcePath:string, position:Vector3, rotation:Quaternion, parentTransform:Transform, extraArgs:IEnumerable<object>) : T
+    + InstantiatePrefabResourceForComponent(concreteType:Type, resourcePath:string, parentTransform:Transform, extraArgs:IEnumerable<object>) : object
+    + InstantiateScriptableObjectResource(resourcePath:string) : T
+    + InstantiateScriptableObjectResource(resourcePath:string, extraArgs:IEnumerable<object>) : T
+    + InstantiateScriptableObjectResource(scriptableObjectType:Type, resourcePath:string) : object
+    + InstantiateScriptableObjectResource(scriptableObjectType:Type, resourcePath:string, extraArgs:IEnumerable<object>) : object
+    + InjectGameObject(gameObject:GameObject) : void
+    + InjectGameObjectForComponent(gameObject:GameObject) : T
+    + InjectGameObjectForComponent(gameObject:GameObject, extraArgs:IEnumerable<object>) : T
+    + InjectGameObjectForComponent(gameObject:GameObject, componentType:Type, extraArgs:IEnumerable<object>) : object
+    + InjectGameObjectForComponentExplicit(gameObject:GameObject, componentType:Type, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object) : Component
+    + Inject(injectable:object) : void
+    + Inject(injectable:object, extraArgs:IEnumerable<object>) : void
+    + Resolve() : TContract
+    + Resolve(contractType:Type) : object
+    + ResolveId(identifier:object) : TContract
+    + ResolveId(contractType:Type, identifier:object) : object
+    + TryResolve() : TContract
+    + TryResolve(contractType:Type) : object
+    + TryResolveId(identifier:object) : TContract
+    + TryResolveId(contractType:Type, identifier:object) : object
+    + ResolveAll() : List<TContract>
+    + ResolveAll(contractType:Type) : IList
+    + ResolveIdAll(identifier:object) : List<TContract>
+    + ResolveIdAll(contractType:Type, identifier:object) : IList
+    + UnbindAll() : void
+    + Unbind() : bool
+    + Unbind(contractType:Type) : bool
+    + UnbindId(identifier:object) : bool
+    + UnbindId(contractType:Type, identifier:object) : bool
+    + UnbindInterfacesTo() : void
+    + UnbindInterfacesTo(concreteType:Type) : void
+    + Unbind() : bool
+    + Unbind(contractType:Type, concreteType:Type) : bool
+    + UnbindId(identifier:object) : bool
+    + UnbindId(contractType:Type, concreteType:Type, identifier:object) : bool
+    + HasBinding() : bool
+    + HasBinding(contractType:Type) : bool
+    + HasBindingId(identifier:object) : bool
+    + HasBindingId(contractType:Type, identifier:object) : bool
+    + HasBindingId(contractType:Type, identifier:object, sourceType:InjectSources) : bool
+    + HasBinding(context:InjectContext) : bool
+    + FlushBindings() : void
+    FinalizeBinding(binding:BindStatement) : void
+    + StartBinding(flush:bool) : BindStatement
+    + Rebind() : ConcreteBinderGeneric<TContract>
+    + RebindId(identifier:object) : ConcreteBinderGeneric<TContract>
+    + Rebind(contractType:Type) : ConcreteBinderNonGeneric
+    + RebindId(contractType:Type, identifier:object) : ConcreteBinderNonGeneric
+    + Bind() : ConcreteIdBinderGeneric<TContract>
+    + BindNoFlush() : ConcreteIdBinderGeneric<TContract>
+    Bind(bindStatement:BindStatement) : ConcreteIdBinderGeneric<TContract>
+    + Bind(contractTypes:Type[]) : ConcreteIdBinderNonGeneric
+    + Bind(contractTypes:IEnumerable<Type>) : ConcreteIdBinderNonGeneric
+    BindInternal(bindInfo:BindInfo, bindingFinalizer:BindStatement) : ConcreteIdBinderNonGeneric
+    + Bind(generator:Action<ConventionSelectTypesBinder>) : ConcreteIdBinderNonGeneric
+    + BindInterfacesTo() : FromBinderNonGeneric
+    + BindInterfacesTo(type:Type) : FromBinderNonGeneric
+    + BindInterfacesAndSelfTo() : FromBinderNonGeneric
+    + BindInterfacesAndSelfTo(type:Type) : FromBinderNonGeneric
+    + BindInstance(instance:TContract) : IdScopeConcreteIdArgConditionCopyNonLazyBinder
+    + BindInstances(instances:object[]) : void
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TContract>
+    + BindMemoryPool() : MemoryPoolIdInitialSizeMaxSizeBinder<TItemContract>
+    + BindMemoryPool() : MemoryPoolIdInitialSizeMaxSizeBinder<TItemContract>
+    + BindMemoryPoolCustomInterface(includeConcreteType:bool) : MemoryPoolIdInitialSizeMaxSizeBinder<TItemContract>
+    BindMemoryPoolCustomInterfaceInternal(includeConcreteType:bool, statement:BindStatement) : MemoryPoolIdInitialSizeMaxSizeBinder<TItemContract>
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TParam1, TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TParam1, TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TParam1, TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TParam1, TContract>
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TParam1, TParam2, TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TParam1, TParam2, TContract>
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TContract>
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TContract>
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TContract>
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TContract>
+    BindFactoryInternal() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + BindIFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + BindFactory() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + BindFactoryCustomInterface() : FactoryToChoiceIdBinder<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9, TParam10, TContract>
+    + InstantiateExplicit(extraArgs:List<TypeValuePair>) : T
+    + InstantiateExplicit(concreteType:Type, extraArgs:List<TypeValuePair>) : object
+    + InstantiateExplicit(concreteType:Type, autoInject:bool, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object) : object
+    + InstantiateComponentExplicit(componentType:Type, gameObject:GameObject, extraArgs:List<TypeValuePair>) : Component
+    + InstantiateScriptableObjectResourceExplicit(scriptableObjectType:Type, resourcePath:string, extraArgs:List<TypeValuePair>) : object
+    + InstantiatePrefabResourceForComponentExplicit(componentType:Type, resourcePath:string, extraArgs:List<TypeValuePair>, creationInfo:GameObjectCreationParameters) : object
+    + InstantiatePrefabResourceForComponentExplicit(componentType:Type, resourcePath:string, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object, creationInfo:GameObjectCreationParameters) : object
+    + InstantiatePrefabForComponentExplicit(componentType:Type, prefab:UnityEngine.Object, extraArgs:List<TypeValuePair>) : object
+    + InstantiatePrefabForComponentExplicit(componentType:Type, prefab:UnityEngine.Object, extraArgs:List<TypeValuePair>, gameObjectBindInfo:GameObjectCreationParameters) : object
+    + InstantiatePrefabForComponentExplicit(componentType:Type, prefab:UnityEngine.Object, extraArgs:List<TypeValuePair>, context:InjectContext, concreteIdentifier:object, gameObjectBindInfo:GameObjectCreationParameters) : object
+    + BindExecutionOrder(order:int) : void
+    + BindExecutionOrder(type:Type, order:int) : void
+    + BindTickableExecutionOrder(order:int) : CopyNonLazyBinder
+    + BindTickableExecutionOrder(type:Type, order:int) : CopyNonLazyBinder
+    + BindInitializableExecutionOrder(order:int) : CopyNonLazyBinder
+    + BindInitializableExecutionOrder(type:Type, order:int) : CopyNonLazyBinder
+    + BindDisposableExecutionOrder(order:int) : CopyNonLazyBinder
+    + BindLateDisposableExecutionOrder(order:int) : CopyNonLazyBinder
+    + BindDisposableExecutionOrder(type:Type, order:int) : CopyNonLazyBinder
+    + BindLateDisposableExecutionOrder(type:Type, order:int) : CopyNonLazyBinder
+    + BindFixedTickableExecutionOrder(order:int) : CopyNonLazyBinder
+    + BindFixedTickableExecutionOrder(type:Type, order:int) : CopyNonLazyBinder
+    + BindLateTickableExecutionOrder(order:int) : CopyNonLazyBinder
+    + BindLateTickableExecutionOrder(type:Type, order:int) : CopyNonLazyBinder
+    + BindPoolableExecutionOrder(order:int) : CopyNonLazyBinder
+    + BindPoolableExecutionOrder(type:Type, order:int) : CopyNonLazyBinder
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "HashSet`1"<T> {
+}
+class "Queue`1"<T> {
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class ProviderInfo {
+    + ProviderInfo(provider:IProvider, condition:BindingCondition, nonLazy:bool, container:DiContainer)
+    + <<readonly>> NonLazy : bool
+}
+IInstantiator <|-- DiContainer
+DiContainer o-> "_decorators<Type,IDecoratorProvider>" "Dictionary`2"
+DiContainer o-> "_providers<BindingId,List<ProviderInfo>>" "Dictionary`2"
+DiContainer o-> "_resolvesInProgress<LookupId>" "HashSet`1"
+DiContainer o-> "_resolvesTwiceInProgress<LookupId>" "HashSet`1"
+DiContainer --> "_lazyInjector" LazyInstanceInjector
+DiContainer o-> "_singletonMarkRegistry" SingletonMarkRegistry
+DiContainer o-> "_currentBindings<BindStatement>" "Queue`1"
+DiContainer o-> "_childBindings<BindStatement>" "List`1"
+DiContainer o-> "_validatedTypes<Type>" "HashSet`1"
+DiContainer o-> "_validationQueue<IValidatable>" "List`1"
+DiContainer --> "_contextTransform" Transform
+DiContainer --> "_inheritedDefaultParent" Transform
+DiContainer --> "_explicitDefaultParent" Transform
+DiContainer --> "_settings" ZenjectSettings
+DiContainer --> "Settings" ZenjectSettings
+DiContainer --> "AllProviders<IProvider>" "IEnumerable`1"
+DiContainer --> "ContextTransform" Transform
+DiContainer --> "InheritedDefaultParent" Transform
+DiContainer --> "DefaultParent" Transform
+DiContainer --> "AllContracts<BindingId>" "IEnumerable`1"
+DiContainer +-- ProviderInfo
+ProviderInfo --> "Container" DiContainer
+ProviderInfo --> "Provider" IProvider
+ProviderInfo --> "Condition" BindingCondition
+@enduml

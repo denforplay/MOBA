@@ -1,0 +1,8 @@
+@startuml
+class ValidationMarker {
+    + ValidationMarker(markedType:Type, instantiateFailed:bool)
+    + ValidationMarker(markedType:Type)
+    + InstantiateFailed : bool <<get>>
+}
+ValidationMarker --> "MarkedType" Type
+@enduml

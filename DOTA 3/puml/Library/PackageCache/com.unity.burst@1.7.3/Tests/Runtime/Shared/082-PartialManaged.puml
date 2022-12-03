@@ -1,0 +1,40 @@
+@startuml
+class PartialManaged {
+    + {static} AssignNullToLocalVariableClass() : void
+    + {static} GetIndexOfCharFomString() : int
+    + {static} AccessClassFromStruct() : int
+    + {static} AccessStringFromStruct() : void
+    + {static} AccessObjectFromStruct() : void
+    + {static} AccessArrayFromStruct() : void
+    + {static} GetValueFromStructWithClassField() : int
+    + {static} NewMyClass() : void
+    + {static} DoSomethingThatUsesMixedStatics() : int
+    + {static} DoSomethingThatUsesMixedStaticsWithExplicitStaticConstructor() : int
+}
+class StructWithManaged <<struct>> {
+    + stringValue : string
+    + objectValue : object
+    + value : int
+}
+class MyClass {
+    + value : int
+}
+class SomeClassWithMixedStatics {
+    + {static} SomeInt : int = 42
+    + {static} DoSomething() : int
+}
+class SomeClassWithMixedStaticsWithExplicitStaticConstructor {
+    + {static} SomeInt : int = 42
+    {static} SomeClassWithMixedStaticsWithExplicitStaticConstructor()
+    + {static} DoSomething() : int
+}
+class "SharedStatic`1"<T> {
+}
+PartialManaged +-- StructWithManaged
+StructWithManaged --> "myClassValue" MyClass
+PartialManaged +-- MyClass
+PartialManaged +-- SomeClassWithMixedStatics
+SomeClassWithMixedStatics o-> "SomeSharedStatic<int>" "SharedStatic`1"
+PartialManaged +-- SomeClassWithMixedStaticsWithExplicitStaticConstructor
+SomeClassWithMixedStaticsWithExplicitStaticConstructor o-> "SomeSharedStatic<int>" "SharedStatic`1"
+@enduml

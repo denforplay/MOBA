@@ -1,0 +1,11 @@
+@startuml
+class ToggleEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+SelectableEditor <|-- ToggleEditor
+ToggleEditor --> "m_OnValueChangedProperty" SerializedProperty
+ToggleEditor --> "m_TransitionProperty" SerializedProperty
+ToggleEditor --> "m_GraphicProperty" SerializedProperty
+ToggleEditor --> "m_GroupProperty" SerializedProperty
+ToggleEditor --> "m_IsOnProperty" SerializedProperty
+@enduml

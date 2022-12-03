@@ -1,0 +1,12 @@
+@startuml
+class FactoryBindInfo {
+    + FactoryBindInfo(factoryType:Type)
+}
+class "Func`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+FactoryBindInfo --> "FactoryType" Type
+FactoryBindInfo --> "ProviderFunc<DiContainer,IProvider>" "Func`2"
+FactoryBindInfo --> "Arguments<TypeValuePair>" "List`1"
+@enduml

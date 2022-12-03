@@ -1,0 +1,87 @@
+@startuml
+class UnityAsyncExtensions <<static>> <<partial>> {
+    + {static} GetAwaiter(asyncOperation:AsyncOperation) : AsyncOperationAwaiter
+    + {static} WithCancellation(asyncOperation:AsyncOperation, cancellationToken:CancellationToken) : UniTask
+    + {static} ToUniTask(asyncOperation:AsyncOperation, progress:IProgress<float>, timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} GetAwaiter(asyncOperation:ResourceRequest) : ResourceRequestAwaiter
+    + {static} WithCancellation(asyncOperation:ResourceRequest, cancellationToken:CancellationToken) : UniTask<UnityEngine.Object>
+    + {static} ToUniTask(asyncOperation:ResourceRequest, progress:IProgress<float>, timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask<UnityEngine.Object>
+}
+class AsyncOperationAwaiter <<struct>> {
+    + AsyncOperationAwaiter(asyncOperation:AsyncOperation)
+    + IsCompleted : bool <<get>>
+    + GetResult() : void
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+}
+class AsyncOperationConfiguredSource <<sealed>> {
+    {static} AsyncOperationConfiguredSource()
+    AsyncOperationConfiguredSource()
+    + {static} Create(asyncOperation:AsyncOperation, timing:PlayerLoopTiming, progress:IProgress<float>, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class ResourceRequestAwaiter <<struct>> {
+    + ResourceRequestAwaiter(asyncOperation:ResourceRequest)
+    + IsCompleted : bool <<get>>
+    + GetResult() : UnityEngine.Object
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+}
+class ResourceRequestConfiguredSource <<sealed>> {
+    {static} ResourceRequestConfiguredSource()
+    ResourceRequestConfiguredSource()
+    + {static} Create(asyncOperation:ResourceRequest, timing:PlayerLoopTiming, progress:IProgress<float>, cancellationToken:CancellationToken, token:short) : IUniTaskSource<UnityEngine.Object>
+    + GetResult(token:short) : UnityEngine.Object
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class "Action`1"<T> {
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "IProgress`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+class "IUniTaskSource`1"<T> {
+}
+UnityAsyncExtensions +-- AsyncOperationAwaiter
+ICriticalNotifyCompletion <|-- AsyncOperationAwaiter
+AsyncOperationAwaiter --> "asyncOperation" AsyncOperation
+AsyncOperationAwaiter --> "continuationAction<AsyncOperation>" "Action`1"
+UnityAsyncExtensions +-- AsyncOperationConfiguredSource
+IUniTaskSource <|-- AsyncOperationConfiguredSource
+IPlayerLoopItem <|-- AsyncOperationConfiguredSource
+"ITaskPoolNode`1" "<AsyncOperationConfiguredSource>" <|-- AsyncOperationConfiguredSource
+AsyncOperationConfiguredSource --> "pool<AsyncOperationConfiguredSource>" "TaskPool`1"
+AsyncOperationConfiguredSource --> "nextNode" AsyncOperationConfiguredSource
+AsyncOperationConfiguredSource --> "asyncOperation" AsyncOperation
+AsyncOperationConfiguredSource --> "progress<float>" "IProgress`1"
+AsyncOperationConfiguredSource --> "cancellationToken" CancellationToken
+AsyncOperationConfiguredSource --> "core<AsyncUnit>" "UniTaskCompletionSourceCore`1"
+UnityAsyncExtensions +-- ResourceRequestAwaiter
+ICriticalNotifyCompletion <|-- ResourceRequestAwaiter
+ResourceRequestAwaiter --> "asyncOperation" ResourceRequest
+ResourceRequestAwaiter --> "continuationAction<AsyncOperation>" "Action`1"
+UnityAsyncExtensions +-- ResourceRequestConfiguredSource
+"IUniTaskSource`1" "<UnityEngine.Object>" <|-- ResourceRequestConfiguredSource
+IPlayerLoopItem <|-- ResourceRequestConfiguredSource
+"ITaskPoolNode`1" "<ResourceRequestConfiguredSource>" <|-- ResourceRequestConfiguredSource
+ResourceRequestConfiguredSource --> "pool<ResourceRequestConfiguredSource>" "TaskPool`1"
+ResourceRequestConfiguredSource --> "nextNode" ResourceRequestConfiguredSource
+ResourceRequestConfiguredSource --> "asyncOperation" ResourceRequest
+ResourceRequestConfiguredSource --> "progress<float>" "IProgress`1"
+ResourceRequestConfiguredSource --> "cancellationToken" CancellationToken
+ResourceRequestConfiguredSource --> "core<UnityEngine.Object>" "UniTaskCompletionSourceCore`1"
+@enduml

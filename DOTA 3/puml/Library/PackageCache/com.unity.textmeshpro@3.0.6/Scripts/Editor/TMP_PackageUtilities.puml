@@ -1,0 +1,74 @@
+@startuml
+class AssetConversionRecord <<struct>> {
+    + referencedResource : string
+    + target : string
+    + replacement : string
+}
+class AssetConversionData {
+}
+class TMP_ProjectTextSpacingConversionTool {
+    {static} ShowConverterWindow() : void
+    OnEnable() : void
+    OnGUI() : void
+    OnInspectorUpdate() : void
+    SetEditorWindowSize() : void
+    {static} ScanProjectFile(fileRecord:AssetFileRecord) : void
+}
+class TMP_ProjectConversionUtility {
+    {static} ShowConverterWindow() : void
+    OnEnable() : void
+    OnGUI() : void
+    OnInspectorUpdate() : void
+    SetEditorWindowSize() : void
+    {static} ScanProjectFileAsync(fileRecord:AssetFileRecord) : void
+}
+class TMP_PackageUtilities {
+    + {static} ImportProjectResourcesMenu() : void
+    + {static} ImportExamplesContentMenu() : void
+}
+class "List`1"<T> {
+}
+class AssetModificationRecord <<struct>> {
+    + assetFilePath : string
+    + assetDataFile : string
+}
+class AssetFileRecord <<struct>> {
+    + assetFilePath : string
+    + AssetFileRecord(filePath:string, metaFilePath:string)
+}
+class AssetModificationRecord <<struct>> {
+    + assetFilePath : string
+    + assetDataFile : string
+}
+class AssetFileRecord <<struct>> {
+    + assetFilePath : string
+    + assetMetaFilePath : string
+    + AssetFileRecord(filePath:string, metaFilePath:string)
+}
+enum SaveAssetDialogueOptions {
+    Unset= 0,
+    Save= 1,
+    SaveAll= 2,
+    DoNotSave= 3,
+}
+class AssetRemappingRecord <<struct>> {
+    + oldGuid : string
+    + newGuid : string
+    + assetPath : string
+}
+class AssetModificationRecord <<struct>> {
+    + assetFilePath : string
+    + assetDataFile : string
+}
+AssetConversionData --> "assetRecords<AssetConversionRecord>" "List`1"
+EditorWindow <|-- TMP_ProjectTextSpacingConversionTool
+EditorWindow <|-- TMP_ProjectConversionUtility
+Editor <|-- TMP_PackageUtilities
+TMP_ProjectTextSpacingConversionTool +-- AssetModificationRecord
+TMP_ProjectTextSpacingConversionTool +-- AssetFileRecord
+TMP_ProjectConversionUtility +-- AssetModificationRecord
+TMP_ProjectConversionUtility +-- AssetFileRecord
+TMP_PackageUtilities +-- SaveAssetDialogueOptions
+TMP_PackageUtilities +-- AssetRemappingRecord
+TMP_PackageUtilities +-- AssetModificationRecord
+@enduml

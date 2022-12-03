@@ -1,0 +1,30 @@
+@startuml
+class SpriteLibraryInspector {
+    m_PreviousModificationHash : long
+    + OnEnable() : void
+    UpdateMasterLibraryObject() : void
+    CacheTargets() : void
+    UpdateSpriteLibraryDataCache() : void
+    + <<override>> OnInspectorGUI() : void
+    RefreshMasterLibraryAssetData() : void
+    UpdateSpriteResolvers() : void
+    {static} CopySpriteLibraryToOverride(libOverride:List<SpriteLibCategoryOverride>, lib:SerializedProperty) : void
+    {static} CopyOverrideToSpriteLibrary(libOverride:List<SpriteLibCategoryOverride>, lib:SerializedProperty) : void
+}
+class Style <<static>> {
+    + {static} libraryDifferentValue : string
+}
+class "List`1"<T> {
+}
+Editor <|-- SpriteLibraryInspector
+SpriteLibraryInspector --> "m_OverrideLibraryObject" SpriteLibCombineCache
+SpriteLibraryInspector --> "m_OverrideLibraryCache" SerializedObject
+SpriteLibraryInspector --> "m_MasterLibraryProperty" SerializedProperty
+SpriteLibraryInspector --> "m_MasterLibraryObject" SpriteLibraryAsset
+SpriteLibraryInspector --> "m_MasterLibraryCategories" SerializedProperty
+SpriteLibraryInspector --> "m_OverrideLibraryCategories" SerializedProperty
+SpriteLibraryInspector --> "m_SpriteLibraryDataInspector" SpriteLibraryDataInspector
+SpriteLibraryInspector o-> "m_CachedLibraryTargets<SpriteLibrary>" "List`1"
+SpriteLibraryInspector o-> "m_CachedResolvers<SpriteResolver>" "List`1"
+SpriteLibraryInspector +-- Style
+@enduml

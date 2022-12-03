@@ -1,0 +1,8 @@
+@startuml
+interface IEventBus {
+    Subscribe(subscriber:Action<T>) : void
+    Unsubscibe(subscriber:Action<T>) : void
+    Invoke(invocator:T) : void
+    Clear() : void
+}
+@enduml

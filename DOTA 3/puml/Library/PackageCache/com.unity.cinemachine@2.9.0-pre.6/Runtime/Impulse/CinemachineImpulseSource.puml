@@ -1,0 +1,16 @@
+@startuml
+class CinemachineImpulseSource {
+    OnValidate() : void
+    Reset() : void
+    + GenerateImpulseAtPositionWithVelocity(position:Vector3, velocity:Vector3) : void
+    + GenerateImpulseWithVelocity(velocity:Vector3) : void
+    + GenerateImpulseWithForce(force:float) : void
+    + GenerateImpulse() : void
+    + GenerateImpulseAt(position:Vector3, velocity:Vector3) : void
+    + GenerateImpulse(velocity:Vector3) : void
+    + GenerateImpulse(force:float) : void
+}
+MonoBehaviour <|-- CinemachineImpulseSource
+CinemachineImpulseSource o-> "m_ImpulseDefinition" CinemachineImpulseDefinition
+CinemachineImpulseSource o-> "m_DefaultVelocity" Vector3
+@enduml

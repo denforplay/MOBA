@@ -1,0 +1,74 @@
+@startuml
+class WidgetStateDictionary <<sealed>> {
+}
+class DebugWindowSettings <<sealed>> {
+    + currentStateHash : int
+    + selectedPanel : int
+    OnEnable() : void
+}
+class DebugWindow <<sealed>> {
+    {static} splitterPos : float = 150f
+    <<const>> minSideBarWidth : float = 100
+    <<const>> minContentWidth : float = 100
+    dragging : bool = false
+    m_DebugTreeState : int
+    m_IsDirty : bool
+    {static} s_TypeMapDirty : bool
+    {static} s_Open : bool
+    + {static} open : bool <<get>>
+    {static}  <<event>> OnDebugWindowToggled : Action<bool> 
+    {static} OnEditorReload() : void
+    {static} RebuildTypeMaps() : void
+    {static} Init() : void
+    {static} ValidateMenuItem() : bool
+    OnEnable() : void
+    OnDestroy() : void
+    + DestroyWidgetStates() : void
+    AreWidgetStatesValid() : bool
+    MarkDirty() : void
+    UpdateWidgetStates() : void
+    UpdateWidgetStates(container:DebugUI.IContainer) : void
+    + ApplyStates(forceApplyAll:bool) : void
+    ApplyState(queryPath:string, state:DebugState) : void
+    OnUndoRedoPerformed() : void
+    ComputeStateHash() : int
+    Update() : void
+    OnGUI() : void
+    OnWidgetGUI(widget:DebugUI.Widget) : void
+    TraverseContainerGUI(container:DebugUI.IContainer) : void
+    + AddItemsToMenu(menu:GenericMenu) : void
+    SetExpanded(value:bool) : void
+}
+class "SerializedDictionary`2"<T1,T2> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+class Styles {
+    + {static} s_DefaultLabelWidth : float = 0.5f
+    + {static} singleRowHeight : float
+    + {static} foldoutColumnWidth : int = 70
+    + Styles()
+}
+"SerializedDictionary`2" "<string,DebugState>" <|-- WidgetStateDictionary
+ScriptableObject <|-- DebugWindowSettings
+EditorWindow <|-- DebugWindow
+IHasCustomMenu <|-- DebugWindow
+DebugWindow --> "s_Styles" Styles
+DebugWindow --> "s_SplitterLeft" GUIStyle
+DebugWindow --> "m_WidgetStates" WidgetStateDictionary
+DebugWindow --> "m_Settings" DebugWindowSettings
+DebugWindow --> "m_PanelScroll" Vector2
+DebugWindow --> "m_ContentScroll" Vector2
+DebugWindow --> "s_WidgetStateMap<Type,Type>" "Dictionary`2"
+DebugWindow --> "s_WidgetDrawerMap<Type,DebugUIDrawer>" "Dictionary`2"
+DebugWindow +-- Styles
+Styles o-> "windowTitle" GUIContent
+Styles o-> "resetButtonContent" GUIContent
+Styles o-> "foldoutHeaderStyle" GUIStyle
+Styles o-> "sectionScrollView" GUIStyle
+Styles o-> "sectionElement" GUIStyle
+Styles o-> "selected" GUIStyle
+Styles o-> "sectionHeader" GUIStyle
+Styles --> "skinBackgroundColor" Color
+Styles o-> "centeredLeft" GUIStyle
+@enduml

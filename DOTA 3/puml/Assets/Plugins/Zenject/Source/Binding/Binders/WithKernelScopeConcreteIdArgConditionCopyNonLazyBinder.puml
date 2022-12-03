@@ -1,0 +1,9 @@
+@startuml
+class WithKernelScopeConcreteIdArgConditionCopyNonLazyBinder {
+    + WithKernelScopeConcreteIdArgConditionCopyNonLazyBinder(subContainerBindInfo:SubContainerCreatorBindInfo, bindInfo:BindInfo)
+    + WithKernel() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + WithKernel() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+ScopeConcreteIdArgConditionCopyNonLazyBinder <|-- WithKernelScopeConcreteIdArgConditionCopyNonLazyBinder
+WithKernelScopeConcreteIdArgConditionCopyNonLazyBinder --> "_subContainerBindInfo" SubContainerCreatorBindInfo
+@enduml

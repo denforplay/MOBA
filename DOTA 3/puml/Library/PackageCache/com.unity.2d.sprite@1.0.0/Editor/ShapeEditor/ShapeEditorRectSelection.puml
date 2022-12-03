@@ -1,0 +1,35 @@
+@startuml
+class ShapeEditorRectSelectionTool {
+    m_RectSelecting : bool
+    m_RectSelectionID : int
+    <<const>> k_MinSelectionSize : float = 6f
+    +  <<event>> RectSelect : Action<Rect, SelectionType> 
+    +  <<event>> ClearSelection : Action 
+    + ShapeEditorRectSelectionTool(gu:IGUIUtility)
+    + OnGUI() : void
+    + isSelecting : bool <<get>>
+}
+class ShapeEditorSelection {
+    + ShapeEditorSelection(owner:ShapeEditor)
+    + Contains(i:int) : bool
+    + Count : int <<get>>
+    + DeleteSelection() : void
+    + MoveSelection(delta:Vector3) : void
+    + Clear() : void
+    + SelectPoint(i:int, type:SelectionType) : void
+    + RectSelect(rect:Rect, type:SelectionType) : void
+    + GetEnumerator() : IEnumerator<int>
+    GetEnumerator() : IEnumerator
+}
+class "IEnumerable`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+ShapeEditorRectSelectionTool --> "m_SelectStartPoint" Vector2
+ShapeEditorRectSelectionTool --> "m_SelectMousePoint" Vector2
+ShapeEditorRectSelectionTool --> "guiUtility" IGUIUtility
+"IEnumerable`1" "<int>" <|-- ShapeEditorSelection
+ShapeEditorSelection o-> "m_SelectedPoints<int>" "HashSet`1"
+ShapeEditorSelection --> "m_ShapeEditor" ShapeEditor
+ShapeEditorSelection --> "indices<int>" "HashSet`1"
+@enduml

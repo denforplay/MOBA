@@ -1,0 +1,21 @@
+@startuml
+class "FromBinderGeneric`1"<TContract> {
+    + FromBinderGeneric(bindContainer:DiContainer, bindInfo:BindInfo, bindStatement:BindStatement)
+    + FromFactory() : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromIFactory(factoryBindGenerator:Action<ConcreteBinderGeneric<IFactory<TContract>>>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromMethod(method:Func<TContract>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromMethod(method:Func<InjectContext, TContract>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromMethodMultiple(method:Func<InjectContext, IEnumerable<TContract>>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveGetter(method:Func<TObj, TContract>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveGetter(identifier:object, method:Func<TObj, TContract>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveGetter(identifier:object, method:Func<TObj, TContract>, source:InjectSources) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveAllGetter(method:Func<TObj, TContract>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveAllGetter(identifier:object, method:Func<TObj, TContract>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromResolveAllGetter(identifier:object, method:Func<TObj, TContract>, source:InjectSources) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromInstance(instance:TContract) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsInChildren(predicate:Func<TContract, bool>, includeInactive:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsInChildren(excludeSelf:bool, predicate:Func<TContract, bool>, includeInactive:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentsInHierarchy(predicate:Func<TContract, bool>, includeInactive:bool) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+FromBinder <|-- "FromBinderGeneric`1"
+@enduml

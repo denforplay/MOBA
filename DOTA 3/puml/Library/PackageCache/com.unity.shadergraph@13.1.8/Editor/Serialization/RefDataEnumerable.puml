@@ -1,0 +1,27 @@
+@startuml
+class "DataValueEnumerable`1"<T> <<struct>> {
+    + DataValueEnumerable(list:List<JsonData<T>>)
+    + Sort(comparison:System.Comparison<T>) : void
+    + GetEnumerator() : Enumerator
+    GetEnumerator() : IEnumerator<T>
+    GetEnumerator() : IEnumerator
+}
+class "IEnumerable`1"<T> {
+}
+class "List`1"<T> {
+}
+class Enumerator <<struct>> {
+    + Enumerator(enumerator:List<JsonData<T>>.Enumerator)
+    + MoveNext() : bool
+    Reset() : void
+    Current : object <<get>>
+    + Dispose() : void
+}
+class "IEnumerator`1"<T> {
+}
+"IEnumerable`1" "<T>" <|-- "DataValueEnumerable`1"
+"DataValueEnumerable`1" --> "m_List<JsonData<T>>" "List`1"
+"DataValueEnumerable`1" +-- Enumerator
+"IEnumerator`1" "<T>" <|-- Enumerator
+Enumerator --> "Current" T
+@enduml

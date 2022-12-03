@@ -1,0 +1,107 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} OrderBy(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderBy(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByDescending(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByDescending(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByDescendingAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByDescendingAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByDescendingAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} OrderByDescendingAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenBy(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenBy(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByAwait(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByAwait(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByAwaitWithCancellation(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByAwaitWithCancellation(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByDescending(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByDescending(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByDescendingAwait(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByDescendingAwait(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByDescendingAwaitWithCancellation(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>) : IUniTaskOrderedAsyncEnumerable<TSource>
+    + {static} ThenByDescendingAwaitWithCancellation(source:IUniTaskOrderedAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IComparer<TKey>) : IUniTaskOrderedAsyncEnumerable<TSource>
+}
+abstract class "AsyncEnumerableSorter`1"<TElement> {
+    QuickSort(map:int[], left:int, right:int) : void
+}
+class "SyncSelectorAsyncEnumerableSorter`2"<TElement,TKey> {
+    <<readonly>> descending : bool
+}
+class "AsyncSelectorEnumerableSorter`2"<TElement,TKey> {
+    <<readonly>> descending : bool
+}
+class "AsyncSelectorWithCancellationEnumerableSorter`2"<TElement,TKey> {
+    <<readonly>> descending : bool
+}
+abstract class "OrderedAsyncEnumerable`1"<TElement> {
+    + OrderedAsyncEnumerable(source:IUniTaskAsyncEnumerable<TElement>)
+    + CreateOrderedEnumerable(keySelector:Func<TElement, TKey>, comparer:IComparer<TKey>, descending:bool) : IUniTaskOrderedAsyncEnumerable<TElement>
+    + CreateOrderedEnumerable(keySelector:Func<TElement, UniTask<TKey>>, comparer:IComparer<TKey>, descending:bool) : IUniTaskOrderedAsyncEnumerable<TElement>
+    + CreateOrderedEnumerable(keySelector:Func<TElement, CancellationToken, UniTask<TKey>>, comparer:IComparer<TKey>, descending:bool) : IUniTaskOrderedAsyncEnumerable<TElement>
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TElement>
+}
+class "OrderedAsyncEnumerable`2"<TElement,TKey> {
+    <<readonly>> descending : bool
+    + OrderedAsyncEnumerable(source:IUniTaskAsyncEnumerable<TElement>, keySelector:Func<TElement, TKey>, comparer:IComparer<TKey>, descending:bool, parent:OrderedAsyncEnumerable<TElement>)
+}
+class "OrderedAsyncEnumerableAwait`2"<TElement,TKey> {
+    <<readonly>> descending : bool
+    + OrderedAsyncEnumerableAwait(source:IUniTaskAsyncEnumerable<TElement>, keySelector:Func<TElement, UniTask<TKey>>, comparer:IComparer<TKey>, descending:bool, parent:OrderedAsyncEnumerable<TElement>)
+}
+class "OrderedAsyncEnumerableAwaitWithCancellation`2"<TElement,TKey> {
+    <<readonly>> descending : bool
+    + OrderedAsyncEnumerableAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TElement>, keySelector:Func<TElement, CancellationToken, UniTask<TKey>>, comparer:IComparer<TKey>, descending:bool, parent:OrderedAsyncEnumerable<TElement>)
+}
+class "Func`2"<T1,T2> {
+}
+class "IComparer`1"<T> {
+}
+class "Func`3"<T1,T2,T3> {
+}
+class "IUniTaskOrderedAsyncEnumerable`1"<T> {
+}
+class _OrderedAsyncEnumerator {
+    index : int
+    + _OrderedAsyncEnumerator(parent:OrderedAsyncEnumerable<TElement>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    <<async>> CreateSortSource() : UniTaskVoid
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"AsyncEnumerableSorter`1" "<TElement>" <|-- "SyncSelectorAsyncEnumerableSorter`2"
+"SyncSelectorAsyncEnumerableSorter`2" --> "keySelector<TElement,TKey>" "Func`2"
+"SyncSelectorAsyncEnumerableSorter`2" --> "comparer<TKey>" "IComparer`1"
+"SyncSelectorAsyncEnumerableSorter`2" --> "next<TElement>" "AsyncEnumerableSorter`1"
+"AsyncEnumerableSorter`1" "<TElement>" <|-- "AsyncSelectorEnumerableSorter`2"
+"AsyncSelectorEnumerableSorter`2" --> "keySelector<TElement,UniTask<TKey>>" "Func`2"
+"AsyncSelectorEnumerableSorter`2" --> "comparer<TKey>" "IComparer`1"
+"AsyncSelectorEnumerableSorter`2" --> "next<TElement>" "AsyncEnumerableSorter`1"
+"AsyncEnumerableSorter`1" "<TElement>" <|-- "AsyncSelectorWithCancellationEnumerableSorter`2"
+"AsyncSelectorWithCancellationEnumerableSorter`2" --> "keySelector<TElement,CancellationToken,UniTask<TKey>>" "Func`3"
+"AsyncSelectorWithCancellationEnumerableSorter`2" --> "comparer<TKey>" "IComparer`1"
+"AsyncSelectorWithCancellationEnumerableSorter`2" --> "next<TElement>" "AsyncEnumerableSorter`1"
+"AsyncSelectorWithCancellationEnumerableSorter`2" --> "cancellationToken" CancellationToken
+"IUniTaskOrderedAsyncEnumerable`1" "<TElement>" <|-- "OrderedAsyncEnumerable`1"
+"OrderedAsyncEnumerable`1" "<TElement>" <|-- "OrderedAsyncEnumerable`2"
+"OrderedAsyncEnumerable`2" --> "keySelector<TElement,TKey>" "Func`2"
+"OrderedAsyncEnumerable`2" --> "comparer<TKey>" "IComparer`1"
+"OrderedAsyncEnumerable`2" --> "parent<TElement>" "OrderedAsyncEnumerable`1"
+"OrderedAsyncEnumerable`1" "<TElement>" <|-- "OrderedAsyncEnumerableAwait`2"
+"OrderedAsyncEnumerableAwait`2" --> "keySelector<TElement,UniTask<TKey>>" "Func`2"
+"OrderedAsyncEnumerableAwait`2" --> "comparer<TKey>" "IComparer`1"
+"OrderedAsyncEnumerableAwait`2" --> "parent<TElement>" "OrderedAsyncEnumerable`1"
+"OrderedAsyncEnumerable`1" "<TElement>" <|-- "OrderedAsyncEnumerableAwaitWithCancellation`2"
+"OrderedAsyncEnumerableAwaitWithCancellation`2" --> "keySelector<TElement,CancellationToken,UniTask<TKey>>" "Func`3"
+"OrderedAsyncEnumerableAwaitWithCancellation`2" --> "comparer<TKey>" "IComparer`1"
+"OrderedAsyncEnumerableAwaitWithCancellation`2" --> "parent<TElement>" "OrderedAsyncEnumerable`1"
+"OrderedAsyncEnumerable`1" +-- _OrderedAsyncEnumerator
+MoveNextSource <|-- _OrderedAsyncEnumerator
+"IUniTaskAsyncEnumerator`1" "<TElement>" <|-- _OrderedAsyncEnumerator
+_OrderedAsyncEnumerator --> "cancellationToken" CancellationToken
+_OrderedAsyncEnumerator --> "Current" TElement
+@enduml

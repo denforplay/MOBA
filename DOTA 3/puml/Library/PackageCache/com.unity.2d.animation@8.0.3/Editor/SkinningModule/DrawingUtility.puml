@@ -1,0 +1,20 @@
+@startuml
+class DrawingUtility {
+    + {static} DrawLine(p1:Vector3, p2:Vector3, normal:Vector3, width:float) : void
+    + {static} DrawLine(p1:Vector3, p2:Vector3, normal:Vector3, widthP1:float, widthP2:float) : void
+    + {static} DrawLine(p1:Vector3, p2:Vector3, normal:Vector3, widthP1:float, widthP2:float, color:Color) : void
+    + {static} BeginLines(color:Color) : void
+    + {static} BeginSolidLines() : void
+    + {static} EndLines() : void
+    + {static} DrawLine(p1:Vector3, p2:Vector3) : void
+    + {static} DrawSolidLine(width:float, p1:Vector3, p2:Vector3) : void
+    + {static} DrawSolidLine(p1:Vector3, p2:Vector3, normal:Vector3, widthP1:float, widthP2:float) : void
+    + {static} DrawBox(position:Rect) : void
+    + {static} DrawMesh(mesh:Mesh, material:Material, matrix:Matrix4x4) : void
+    + {static} DrawGUIStyleCap(controlID:int, position:Vector3, rotation:Quaternion, size:float, guiStyle:GUIStyle) : void
+    + {static} DrawRect(rect:Rect, position:Vector3, rotation:Quaternion, color:Color, rectAlpha:float, outlineAlpha:float) : void
+    + {static} DrawSolidArc(center:Vector3, normal:Vector3, from:Vector3, angle:float, radius:float, numSamples:int) : void
+    + {static} DrawSolidArc(center:Vector3, normal:Vector3, from:Vector3, angle:float, radius:float, outlineScale:float, numSamples:int) : void
+}
+DrawingUtility o-> "kSpriteBorderColor" Color
+@enduml

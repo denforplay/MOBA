@@ -1,0 +1,21 @@
+@startuml
+class BoneToolbar {
+    +  <<event>> SetSkeletonTool : Action<Tools> 
+    + {static} GenerateFromUXML() : BoneToolbar
+    + BoneToolbar()
+    + Setup(s:SkinningCache) : void
+    + UpdateToggleState() : void
+}
+class BoneToolbarFactory {
+}
+class BoneToolbarUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+Toolbar <|-- BoneToolbar
+BoneToolbar --> "skinningCache" SkinningCache
+BoneToolbar +-- BoneToolbarFactory
+"UxmlFactory`2" "<BoneToolbar,BoneToolbarUxmlTraits>" <|-- BoneToolbarFactory
+BoneToolbar +-- BoneToolbarUxmlTraits
+UxmlTraits <|-- BoneToolbarUxmlTraits
+@enduml

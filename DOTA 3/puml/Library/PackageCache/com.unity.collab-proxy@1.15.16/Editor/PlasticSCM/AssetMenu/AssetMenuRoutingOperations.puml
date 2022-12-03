@@ -1,0 +1,14 @@
+@startuml
+class AssetMenuRoutingOperations {
+    ShowPendingChanges() : void
+    Add() : void
+    Checkout() : void
+    Checkin() : void
+    Undo() : void
+    ShowDiff() : void
+    ShowHistory() : void
+    AddFilesFilterPatterns(type:FilterTypes, action:FilterActions, operation:FilterOperationType) : void
+}
+IAssetMenuOperations <|-- AssetMenuRoutingOperations
+IAssetFilesFilterPatternsMenuOperations <|-- AssetMenuRoutingOperations
+@enduml

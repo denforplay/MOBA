@@ -1,0 +1,5 @@
+@startuml
+class ExceptionExtensions <<static>> {
+    + {static} IsOperationCanceledException(exception:Exception) : bool
+}
+@enduml

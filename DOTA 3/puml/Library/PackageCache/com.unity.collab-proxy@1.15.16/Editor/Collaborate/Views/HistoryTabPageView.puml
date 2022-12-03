@@ -1,0 +1,26 @@
+@startuml
+class HistoryTabPageView {
+    + <<const>> UssClassName : string = "history-page"
+    + <<const>> PaginatorUssClassName : string
+    + <<const>> ContentUssClassName : string
+    + <<const>> NoticeUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    m_Active : bool
+    + HistoryTabPageView()
+    + SetBusyStatus(busy:bool) : void
+    + SetHistoryList(list:IReadOnlyList<IHistoryEntry>) : void
+    OnClickedMovePage(pageChange:int) : void
+    + SetPage(page:int, max:int) : void
+    + SetSelection(entry:IHistoryEntry) : void
+    CreateHistoryEntry(entry:IHistoryEntry, expanded:bool) : HistoryEntryComponent
+    + DisplayDialogue(title:string, message:string, affirmative:string) : bool
+    + DisplayDialogue(title:string, message:string, affirmative:string, negative:string) : bool
+}
+TabPageComponent <|-- HistoryTabPageView
+IHistoryView <|-- HistoryTabPageView
+HistoryTabPageView --> "m_Presenter" IHistoryPresenter
+HistoryTabPageView --> "m_Content" ScrollView
+HistoryTabPageView --> "m_ListNotice" ListNotice
+HistoryTabPageView --> "m_Paginator" Paginator
+HistoryTabPageView --> "Presenter" IHistoryPresenter
+@enduml

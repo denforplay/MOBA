@@ -1,0 +1,9 @@
+@startuml
+interface ISerializedLight {
+    Update() : void
+    Apply() : void
+}
+ISerializedLight --> "serializedObject" SerializedObject
+ISerializedLight --> "serializedAdditionalDataObject" SerializedObject
+ISerializedLight --> "intensity" SerializedProperty
+@enduml

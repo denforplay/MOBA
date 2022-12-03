@@ -1,0 +1,10 @@
+@startuml
+class SingletonMarkRegistry {
+    + MarkNonSingleton(type:Type) : void
+    + MarkSingleton(type:Type) : void
+}
+class "HashSet`1"<T> {
+}
+SingletonMarkRegistry o-> "_boundSingletons<Type>" "HashSet`1"
+SingletonMarkRegistry o-> "_boundNonSingletons<Type>" "HashSet`1"
+@enduml

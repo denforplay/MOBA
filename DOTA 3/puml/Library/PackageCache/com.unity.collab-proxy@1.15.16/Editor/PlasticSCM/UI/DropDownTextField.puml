@@ -1,0 +1,5 @@
+@startuml
+class DropDownTextField <<static>> {
+    <<const>> BUTTON_WIDTH : int = 16
+}
+@enduml

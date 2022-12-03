@@ -1,0 +1,14 @@
+@startuml
+interface ICallbacksDelegator {
+    RunStarted(testsToRun:ITest) : void
+    RunStartedRemotely(testsToRunData:byte[]) : void
+    RunFinished(testResults:ITestResult) : void
+    RunFinishedRemotely(testResultsData:byte[]) : void
+    RunFailed(failureMessage:string) : void
+    TestStarted(test:ITest) : void
+    TestStartedRemotely(testStartedData:byte[]) : void
+    TestFinished(result:ITestResult) : void
+    TestFinishedRemotely(testResultsData:byte[]) : void
+    TestTreeRebuild(test:ITest) : void
+}
+@enduml

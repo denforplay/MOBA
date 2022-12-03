@@ -1,0 +1,48 @@
+@startuml
+interface IVisibilityTool {
+    name : string <<get>>
+    Activate() : void
+    Deactivate() : void
+    isAvailable : bool <<get>>
+    SetAvailabilityChangeCallback(callback:Action) : void
+    Setup() : void
+    Dispose() : void
+}
+class VisibilityToolViewBase {
+    + VisibilityToolViewBase()
+    DoSearchField() : void
+    DoOpacitySlider() : void
+    OnGUI() : void
+}
+class "TreeViewItemBase`1"<T> {
+    + customData : T
+    + TreeViewItemBase(id:int, depth:int, name:string, data:T)
+}
+class VisibilityTreeViewBase {
+    + VisibilityTreeViewBase(treeViewState:TreeViewState, multiColumn:MultiColumnHeader)
+    + VisibilityTreeViewBase(treeViewState:TreeViewState)
+    Init() : void
+}
+class "Action`1"<T> {
+}
+class "Func`1"<T> {
+}
+class Styles <<static>> {
+}
+class VisibilityIconStyle <<static>> {
+}
+IVisibilityTool --> "view" VisualElement
+VisualElement <|-- VisibilityToolViewBase
+VisibilityToolViewBase --> "m_Container" IMGUIContainer
+VisibilityToolViewBase --> "m_SearchField" SearchField
+VisibilityToolViewBase o-> "SetOpacityValue<float>" "Action`1"
+VisibilityToolViewBase o-> "GetOpacityValue<float>" "Func`1"
+TreeViewItem <|-- "TreeViewItemBase`1"
+VisibilityToolViewBase +-- Styles
+Styles o-> "preLabel" GUIStyle
+Styles o-> "preSlider" GUIStyle
+Styles o-> "preSliderThumb" GUIStyle
+VisibilityTreeViewBase +-- VisibilityIconStyle
+VisibilityIconStyle o-> "visibilityOnIcon" GUIContent
+VisibilityIconStyle o-> "visibilityOffIcon" GUIContent
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class SceneOccurrenceEffectToggle {
+    + SceneOccurrenceEffectToggle(tool:SceneOccurrenceExplorerTool)
+}
+RiderFlowEditorToolbarToggle <|-- SceneOccurrenceEffectToggle
+@enduml

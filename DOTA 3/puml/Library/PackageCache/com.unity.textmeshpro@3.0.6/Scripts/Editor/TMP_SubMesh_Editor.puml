@@ -1,0 +1,11 @@
+@startuml
+class TMP_SubMesh_Editor {
+    + OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class m_foldout <<struct>> {
+    + {static} fontSettings : bool = true
+}
+Editor <|-- TMP_SubMesh_Editor
+TMP_SubMesh_Editor +-- m_foldout
+@enduml

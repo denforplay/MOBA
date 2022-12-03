@@ -1,0 +1,9 @@
+@startuml
+class Refinery <<struct>> {
+    {static} RequiresRefining(tri:UTriangle, maxArea:float) : bool
+    {static} FetchEncroachedSegments(pgPoints:NativeArray<float2>, pgPointCount:int, pgEdges:NativeArray<int2>, pgEdgeCount:int, encroach:NativeArray<UEncroachingSegment>, encroachCount:int, c:UCircle) : void
+    {static} InsertVertex(pgPoints:NativeArray<float2>, pgPointCount:int, newVertex:float2, nid:int) : void
+    {static} FindSegment(pgPoints:NativeArray<float2>, pgPointCount:int, pgEdges:NativeArray<int2>, pgEdgeCount:int, es:UEncroachingSegment) : int
+    {static} SplitSegments(pgPoints:NativeArray<float2>, pgPointCount:int, pgEdges:NativeArray<int2>, pgEdgeCount:int, es:UEncroachingSegment) : void
+}
+@enduml

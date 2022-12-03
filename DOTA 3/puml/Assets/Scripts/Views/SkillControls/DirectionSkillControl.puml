@@ -1,0 +1,7 @@
+@startuml
+class DirectionSkillControl {
+    + <<override>> UpdateSkillView(newPosition:Vector3) : void
+}
+SkillControlBase <|-- DirectionSkillControl
+DirectionSkillControl --> "SkillType" SkillType
+@enduml

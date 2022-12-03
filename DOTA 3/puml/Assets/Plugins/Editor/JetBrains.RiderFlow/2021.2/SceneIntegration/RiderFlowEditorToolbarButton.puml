@@ -1,0 +1,12 @@
+@startuml
+class RiderFlowEditorToolbarButton {
+    + NumberOfActions : int <<get>>
+    + SetOnClick(action:Action) : void
+    + AltAction(i:int) : void
+    + IsAltActionValid(i:int) : bool
+}
+EditorToolbarButton <|-- RiderFlowEditorToolbarButton
+IPartialAltActionProvider <|-- RiderFlowEditorToolbarButton
+IPositionProvider <|-- RiderFlowEditorToolbarButton
+RiderFlowEditorToolbarButton --> "Position" Vector2
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+class RTHandle {
+    + SetCustomHandleProperties(properties:RTHandleProperties) : void
+    + ClearCustomHandleProperties() : void
+    + useScaling : bool <<get>> <<internal set>>
+    + name : string <<get>>
+    + isMSAAEnabled : bool <<get>>
+    + GetInstanceID() : int
+    + Release() : void
+    + GetScaledSize(refSize:Vector2Int) : Vector2Int
+    + GetScaledSize() : Vector2Int
+}
+RTHandle --> "scaleFactor" Vector2
+RTHandle --> "referenceSize" Vector2Int
+RTHandle --> "rtHandleProperties" RTHandleProperties
+RTHandle --> "rt" RenderTexture
+RTHandle --> "nameID" RenderTargetIdentifier
+@enduml

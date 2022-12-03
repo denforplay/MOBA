@@ -1,0 +1,26 @@
+@startuml
+class StartPageView {
+    + <<const>> UssClassName : string = "start-page-view"
+    + <<const>> UssTitleClassName : string
+    + <<const>> UssButtonClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    + StartPageView()
+    SetupEvents() : void
+    + Text : string <<set>>
+    + ButtonText : string <<set>>
+    + SetButtonVisible(isVisible:bool) : void
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+PageComponent <|-- StartPageView
+IStartView <|-- StartPageView
+StartPageView --> "m_Presenter" IStartPresenter
+StartPageView --> "m_Text" Label
+StartPageView --> "m_Button" Button
+StartPageView --> "Presenter" IStartPresenter
+StartPageView +-- UxmlFactory
+"UxmlFactory`1" "<StartPageView>" <|-- UxmlFactory
+@enduml

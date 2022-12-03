@@ -1,0 +1,10 @@
+@startuml
+abstract class RangeTargetZoneSkill {
+    + CanBeUsed : bool <<get>> <<set>>
+    + RangeTargetZoneSkill(skillId:int, skillConfiguration:SkillConfiguration)
+    + {abstract} Apply(position:Vector3) : UniTask
+    + Id : int <<get>>
+}
+ISkill <|-- RangeTargetZoneSkill
+RangeTargetZoneSkill --> "SkillType" SkillType
+@enduml

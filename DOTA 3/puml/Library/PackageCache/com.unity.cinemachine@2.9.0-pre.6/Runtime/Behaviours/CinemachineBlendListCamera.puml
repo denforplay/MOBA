@@ -1,0 +1,34 @@
+@startuml
+class CinemachineBlendListCamera {
+    + m_ShowDebugText : bool
+    + m_Loop : bool
+    + <<override>> Description : string <<get>>
+    Reset() : void
+    + <<override>> IsLiveChild(vcam:ICinemachineCamera, dominantChildOnly:bool) : bool
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : void
+    + <<override>> InternalUpdateCameraState(worldUp:Vector3, deltaTime:float) : void
+    OnTransformChildrenChanged() : void
+    + IsBlending : bool <<get>>
+    mActivationTime : float
+    mCurrentInstruction : int = 0
+    InvalidateListOfChildren() : void
+    UpdateListOfChildren() : void
+}
+class Instruction <<struct>> {
+    + m_Hold : float
+}
+CinemachineVirtualCameraBase <|-- CinemachineBlendListCamera
+CinemachineBlendListCamera --> "m_LookAt" Transform
+CinemachineBlendListCamera --> "m_Follow" Transform
+CinemachineBlendListCamera --> "LiveChild" ICinemachineCamera
+CinemachineBlendListCamera --> "State" CameraState
+CinemachineBlendListCamera --> "LookAt" Transform
+CinemachineBlendListCamera --> "Follow" Transform
+CinemachineBlendListCamera --> "m_TransitioningFrom" ICinemachineCamera
+CinemachineBlendListCamera o-> "m_State" CameraState
+CinemachineBlendListCamera +-- Instruction
+Instruction --> "m_VirtualCamera" CinemachineVirtualCameraBase
+Instruction --> "m_Blend" CinemachineBlendDefinition
+@enduml

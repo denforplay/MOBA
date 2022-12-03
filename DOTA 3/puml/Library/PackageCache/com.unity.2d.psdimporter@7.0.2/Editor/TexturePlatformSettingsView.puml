@@ -1,0 +1,24 @@
+@startuml
+class TexturePlatformSettingsView {
+    + buildPlatformTitle : string <<get>> <<set>>
+    + <<virtual>> DrawResizeAlgorithm(defaultValue:TextureResizeAlgorithm, isMixedValue:bool, isDisabled:bool, changed:bool) : TextureResizeAlgorithm
+    + <<virtual>> DrawCompression(defaultValue:TextureImporterCompression, isMixedValue:bool, changed:bool) : TextureImporterCompression
+    + <<virtual>> DrawUseCrunchedCompression(defaultValue:bool, isMixedValue:bool, changed:bool) : bool
+    + <<virtual>> DrawOverride(defaultValue:bool, isMixedValue:bool, changed:bool) : bool
+    + <<virtual>> DrawMaxSize(defaultValue:int, isMixedValue:bool, isDisabled:bool, changed:bool) : int
+    + <<virtual>> DrawFormat(defaultValue:TextureImporterFormat, displayValues:int[], displayStrings:string[], isMixedValue:bool, isDisabled:bool, changed:bool) : TextureImporterFormat
+    + <<virtual>> DrawCompressionQualityPopup(defaultValue:int, isMixedValue:bool, changed:bool) : int
+    + <<virtual>> DrawCompressionQualitySlider(defaultValue:int, isMixedValue:bool, changed:bool) : int
+}
+class Styles {
+    + Styles()
+}
+TexturePlatformSettingsView +-- Styles
+Styles o-> "textureFormatLabel" GUIContent
+Styles o-> "maxTextureSizeLabel" GUIContent
+Styles o-> "compressionLabel" GUIContent
+Styles o-> "resizeAlgorithmLabel" GUIContent
+Styles o-> "useCrunchedCompressionLabel" GUIContent
+Styles o-> "compressionQualityLabel" GUIContent
+Styles o-> "compressionQualitySliderLabel" GUIContent
+@enduml

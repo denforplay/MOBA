@@ -1,0 +1,37 @@
+@startuml
+class ResultData <<struct>> {
+    + message : string
+    + ResultData(type:LogType, message:string)
+}
+enum ResultID {
+    Log_ResultsSaved= 0,
+    Log_ReportSaved= 1,
+    Error_FailedReport= 2,
+    Error_FailedReportNoTests= 3,
+    Error_FailedReportNoAssemblies= 4,
+    Assert_NullAssemblyTypes= 5,
+    Warning_DebugCodeOptimization= 6,
+    Warning_AssemblyFiltersNotPrefixed= 7,
+    Warning_PathFiltersNotPrefixed= 8,
+    Warning_MultipleResultsPaths= 9,
+    Warning_MultipleHistoryPaths= 10,
+    Warning_NoCoverageResultsSaved= 11,
+    Warning_FailedToDeleteDir= 12,
+    Warning_FailedToDeleteFile= 13,
+    Warning_FailedReportNullCoverageSettings= 14,
+    Warning_BurstCompilationEnabled= 15,
+    Warning_ExcludeAttributeAssembly= 16,
+    Warning_ExcludeAttributeClass= 17,
+    Warning_ExcludeAttributeMethod= 18,
+    Warning_StandaloneUnsupported= 19,
+    Warning_UseProjectSettingsNonBatchmode= 20,
+}
+class ResultsLogger <<static>> {
+    + {static} Log(resultId:ResultID, extraParams:string[]) : bool
+    + {static} LogSessionItem(message:string, logLevel:LogVerbosityLevel) : bool
+}
+class "Dictionary`2"<T1,T2> {
+}
+ResultData --> "type" LogType
+ResultsLogger o-> "s_Results<ResultID,ResultData>" "Dictionary`2"
+@enduml

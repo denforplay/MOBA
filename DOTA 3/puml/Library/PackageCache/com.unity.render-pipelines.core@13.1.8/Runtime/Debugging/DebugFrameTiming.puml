@@ -1,0 +1,13 @@
+@startuml
+class DebugFrameTiming {
+    <<const>> k_FpsFormatString : string = "{0:F1&#125;"
+    <<const>> k_MsFormatString : string = "{0:F2&#125;ms"
+    <<const>> k_RefreshRate : float
+    + bottleneckHistorySize : int <<get>> <<set>> = 60
+    + sampleHistorySize : int <<get>> <<set>> = 30
+    + DebugFrameTiming()
+    + UpdateFrameTiming() : void
+    + RegisterDebugUI(list:List<DebugUI.Widget>) : void
+}
+DebugFrameTiming o-> "m_Sample" FrameTimeSample
+@enduml

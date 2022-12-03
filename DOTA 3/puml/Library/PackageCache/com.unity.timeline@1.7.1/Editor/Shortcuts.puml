@@ -1,0 +1,75 @@
+@startuml
+class Shortcuts <<static>> {
+    {static} GetState(args:ShortcutManagement.ShortcutArguments) : WindowState
+}
+class Clip <<static>> {
+    + <<const>> split : string = "Timeline/Editing/Split"
+    + <<const>> trimStart : string = "Timeline/Editing/TrimStart"
+    + <<const>> trimEnd : string = "Timeline/Editing/TrimEnd"
+    {static} Split(args:ShortcutManagement.ShortcutArguments) : void
+    {static} TrimStart(args:ShortcutManagement.ShortcutArguments) : void
+    {static} TrimEnd(args:ShortcutManagement.ShortcutArguments) : void
+}
+class Timeline <<static>> {
+    + <<const>> play : string = "Timeline/Play"
+    + <<const>> previousFrame : string = "Timeline/PrevFrame"
+    + <<const>> nextFrame : string = "Timeline/NextFrame"
+    + <<const>> frameAll : string = "Timeline/FrameAll"
+    + <<const>> previousKey : string = "Timeline/PrevKey"
+    + <<const>> nextKey : string = "Timeline/NextKey"
+    + <<const>> goToStart : string = "Timeline/GotoStart"
+    + <<const>> goToEnd : string = "Timeline/GotoEnd"
+    + <<const>> zoomIn : string = "Timeline/ZoomIn"
+    + <<const>> zoomOut : string = "Timeline/ZoomOut"
+    + <<const>> navigateLeft : string = "Timeline/NavigateLeft"
+    + <<const>> navigateRight : string = "Timeline/NavigateRight"
+    + <<const>> toggleCollapseTrack : string = "Timeline/Toggle Collapse Track"
+    + <<const>> selectLeftItem : string = "Timeline/SelectLeftItem"
+    + <<const>> selectRightItem : string = "Timeline/SelectRightItem"
+    + <<const>> selectUpItem : string = "Timeline/SelectUpItem"
+    + <<const>> selectUpTrack : string = "Timeline/SelectUpTrack"
+    + <<const>> selectDownItem : string = "Timeline/SelectDownItem"
+    + <<const>> selectDownTrack : string = "Timeline/SelectDownTrack"
+    + <<const>> multiSelectLeft : string = "Timeline/SelectLeft"
+    + <<const>> multiSelectRight : string = "Timeline/SelectRight"
+    + <<const>> multiSelectUp : string = "Timeline/SelectUp"
+    + <<const>> multiSelectDown : string = "Timeline/SelectDown"
+    + <<const>> toggleClipTrackArea : string = "Timeline/ToggleClipTrackArea"
+    + <<const>> matchContent : string = "Timeline/MatchContent"
+    + <<const>> toggleLock : string = "Timeline/ToggleLock"
+    + <<const>> toggleMute : string = "Timeline/ToggleMute"
+    + <<const>> collapseTrack : string = "Timeline/Collapse Track"
+    + <<const>> expandTrack : string = "Timeline/Expand Track"
+    + <<const>> moveLeft : string = "Timeline/MoveLeft"
+    + <<const>> moveRight : string = "Timeline/MoveRight"
+    + <<const>> moveUp : string = "Timeline/MoveUp"
+    + <<const>> moveDown : string = "Timeline/MoveDown"
+    + <<const>> keyAllAnimated : string = "Timeline/KeyAllAnimated"
+    {static} Play(args:ShortcutManagement.ShortcutArguments) : void
+    {static} PreviousFrame(args:ShortcutManagement.ShortcutArguments) : void
+    {static} NextFrame(args:ShortcutManagement.ShortcutArguments) : void
+    {static} FrameAll(args:ShortcutManagement.ShortcutArguments) : void
+    {static} PrevKey(args:ShortcutManagement.ShortcutArguments) : void
+    {static} NextKey(args:ShortcutManagement.ShortcutArguments) : void
+    {static} GoToStart(args:ShortcutManagement.ShortcutArguments) : void
+    {static} GoToEnd(args:ShortcutManagement.ShortcutArguments) : void
+    {static} ZoomIn(args:ShortcutManagement.ShortcutArguments) : void
+    {static} ZoomOut(args:ShortcutManagement.ShortcutArguments) : void
+    {static} SelectLeft(args:ShortcutManagement.ShortcutArguments) : void
+    {static} SelectRight(args:ShortcutManagement.ShortcutArguments) : void
+    {static} SelectUp(args:ShortcutManagement.ShortcutArguments) : void
+    {static} SelectDown(args:ShortcutManagement.ShortcutArguments) : void
+    {static} MultiSelectLeft(args:ShortcutManagement.ShortcutArguments) : void
+    {static} MultiSelectRight(args:ShortcutManagement.ShortcutArguments) : void
+    {static} MultiSelectUp(args:ShortcutManagement.ShortcutArguments) : void
+    {static} MultiSelectDown(args:ShortcutManagement.ShortcutArguments) : void
+    {static} ToggleClipTrackArea(args:ShortcutManagement.ShortcutArguments) : void
+    {static} Shortcut(args:ShortcutManagement.ShortcutArguments) : void
+    {static} Lock(args:ShortcutManagement.ShortcutArguments) : void
+    {static} Mute(args:ShortcutManagement.ShortcutArguments) : void
+    {static} CollapseGroup(args:ShortcutManagement.ShortcutArguments) : void
+    {static} ExpandGroup(args:ShortcutManagement.ShortcutArguments) : void
+}
+Shortcuts +-- Clip
+Shortcuts +-- Timeline
+@enduml

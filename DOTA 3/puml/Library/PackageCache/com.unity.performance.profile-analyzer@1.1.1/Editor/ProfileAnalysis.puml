@@ -1,0 +1,29 @@
+@startuml
+class ProfileAnalysis {
+    + ProfileAnalysis()
+    + SetRange(firstFrameIndex:int, lastFrameIndex:int) : void
+    + AddMarker(marker:MarkerData) : void
+    + AddThread(thread:ThreadData) : void
+    + UpdateSummary(frameIndex:int, msFrame:float) : void
+    GetPercentageOffset(frames:List<FrameTime>, percent:float, outputFrameIndex:int) : FrameTime
+    GetThreadPercentageOffset(frames:List<ThreadFrameTime>, percent:float, outputFrameIndex:int) : float
+    + SetupMarkers() : void
+    + SetupMarkerBuckets() : void
+    + SetupFrameBuckets(timeScaleMax:float) : void
+    CalculateThreadMedians() : void
+    + Finalise(timeScaleMax:float, maxMarkerDepth:int) : void
+    SortByAtMedian(a:MarkerData, b:MarkerData) : int
+    + GetMarkers() : List<MarkerData>
+    + GetThreads() : List<ThreadData>
+    + GetThreadByName(threadNameWithIndex:string) : ThreadData
+    + GetFrameSummary() : FrameSummary
+    + GetMarker(index:int) : MarkerData
+    + GetMarkerIndexByName(markerName:string) : int
+    + GetMarkerByName(markerName:string) : MarkerData
+}
+class "List`1"<T> {
+}
+ProfileAnalysis o-> "m_FrameSummary" FrameSummary
+ProfileAnalysis o-> "m_Markers<MarkerData>" "List`1"
+ProfileAnalysis o-> "m_Threads<ThreadData>" "List`1"
+@enduml

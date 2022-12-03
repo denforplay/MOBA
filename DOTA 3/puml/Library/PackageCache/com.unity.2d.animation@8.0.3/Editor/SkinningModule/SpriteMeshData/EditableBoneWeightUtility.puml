@@ -1,0 +1,25 @@
+@startuml
+class BoneWeightData <<struct>> {
+    + boneIndex : int
+    + weight : float
+    + CompareTo(other:BoneWeightData) : int
+}
+class EditableBoneWeightUtility <<static>> {
+    + {static} CreateFromBoneWeight(boneWeight:BoneWeight) : EditableBoneWeight
+    + {static} SetFromBoneWeight(editableBoneWeight:EditableBoneWeight, boneWeight:BoneWeight) : void
+    + {static} ToBoneWeight(editableBoneWeight:EditableBoneWeight, sortByWeight:bool) : BoneWeight
+    + {static} ContainsBoneIndex(editableBoneWeight:EditableBoneWeight, boneIndex:int) : bool
+    + {static} GetChannelFromBoneIndex(editableBoneWeight:EditableBoneWeight, boneIndex:int) : int
+    + {static} Clamp(editableBoneWeight:EditableBoneWeight, numChannels:int, sortChannels:bool) : void
+    + {static} ValidateChannels(editableBoneWeight:EditableBoneWeight) : void
+    + {static} Sum(editableBoneWeight:EditableBoneWeight) : float
+    + {static} Normalize(editableBoneWeight:EditableBoneWeight) : void
+    + {static} CompensateOtherChannels(editableBoneWeight:EditableBoneWeight, masterChannel:int) : void
+    + {static} UnifyChannelsWithSameBoneIndex(editableBoneWeight:EditableBoneWeight) : void
+    + {static} FilterChannels(editableBoneWeight:EditableBoneWeight, weightTolerance:float) : void
+    + {static} Lerp(first:BoneWeight, second:BoneWeight, t:float) : BoneWeight
+}
+class "IComparable`1"<T> {
+}
+"IComparable`1" "<BoneWeightData>" <|-- BoneWeightData
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+enum SpriteSkinValidationResult {
+    SpriteNotFound,
+    SpriteHasNoSkinningInformation,
+    SpriteHasNoWeights,
+    RootTransformNotFound,
+    InvalidTransformArray,
+    InvalidTransformArrayLength,
+    TransformArrayContainsNull,
+    RootNotFoundInTransformArray,
+    Ready,
+}
+class NativeByteArray {
+    + Length : int <<get>>
+    + IsCreated : bool <<get>>
+    + NativeByteArray(array:NativeArray<byte>)
+    + Dispose() : void
+}
+class SpriteSkinUtility <<static>> {
+    {static} CreateGameObject(index:int, spriteBones:SpriteBone[], transforms:Transform[], root:Transform) : void
+    {static} GetHash(matrix:Matrix4x4) : int
+}
+class "NativeArray`1"<T> {
+}
+NativeByteArray --> "array<byte>" "NativeArray`1"
+@enduml

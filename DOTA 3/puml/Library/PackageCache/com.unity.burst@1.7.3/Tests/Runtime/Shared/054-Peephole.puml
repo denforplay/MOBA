@@ -1,0 +1,36 @@
+@startuml
+class Peephole {
+    + {static} SqrtEqualFast(f:float) : int
+    + {static} SqrtNotEqualFast(f:float) : int
+    + {static} SqrtLessThan(f:float) : int
+    + {static} SqrtLessThanFast(f:float) : int
+    + {static} SqrtLessThanLargeConstant(f:float) : int
+    + {static} SqrtLessThanFastVector(f:float4) : int
+    + {static} SqrtLessThanLargeConstantVector(f:float4) : int
+    + {static} SqrtGreaterThan(f:float) : int
+    + {static} SqrtGreaterThanFast(f:float) : int
+    + {static} SqrtGreaterThanLargeConstant(f:float) : int
+    + {static} SqrtGreaterThanFastVector(f:float4) : int
+    + {static} SqrtGreaterThanLargeConstantVector(f:float4) : int
+    + {static} SqrtLessThanEqual(f:float) : int
+    + {static} SqrtLessThanEqualFast(f:float) : int
+    + {static} SqrtLessThanEqualLargeConstant(f:float) : int
+    + {static} SqrtLessThanEqualFastVector(f:float4) : int
+    + {static} SqrtLessThanEqualLargeConstantVector(f:float4) : int
+    + {static} SqrtGreaterThanEqual(f:float) : int
+    + {static} SqrtGreaterThanEqualFast(f:float) : int
+    + {static} SqrtGreaterThanEqualLargeConstant(f:float) : int
+    + {static} SqrtGreaterThanEqualFastVector(f:float4) : int
+    + {static} SqrtGreaterThanEqualLargeConstantVector(f:float4) : int
+    + {static} SqrtAndSqrtFast(a:float4, b:float4) : int
+    + {static} FloatExp2FromInt(a:int) : float
+    + {static} DoubleExp2FromInt(a:int) : double
+    + {static} FloatExp2FromUShort(a:ushort) : float
+    + {static} DoubleExp2FromUShort(a:ushort) : double
+    + {static} FloatPowFromInt(a:int) : float
+    + {static} DoublePowFromInt(a:int) : double
+    + {static} FloatPowFromUInt(a:uint) : float
+    + {static} DoublePowFromUInt(a:uint) : double
+    + {static} AShrToLShr(a:int) : int
+}
+@enduml

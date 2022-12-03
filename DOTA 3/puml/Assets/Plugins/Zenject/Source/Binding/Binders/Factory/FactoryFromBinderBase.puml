@@ -1,0 +1,26 @@
+@startuml
+class FactoryFromBinderBase {
+    + FactoryFromBinderBase(bindContainer:DiContainer, contractType:Type, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + FromNew() : ConditionCopyNonLazyBinder
+    + FromResolve() : ConditionCopyNonLazyBinder
+    + FromInstance(instance:object) : ConditionCopyNonLazyBinder
+    + FromResolve(subIdentifier:object) : ConditionCopyNonLazyBinder
+    + FromComponentOn(gameObject:GameObject) : ConditionCopyNonLazyBinder
+    + FromComponentOn(gameObjectGetter:Func<InjectContext, GameObject>) : ConditionCopyNonLazyBinder
+    + FromComponentOnRoot() : ConditionCopyNonLazyBinder
+    + FromNewComponentOn(gameObject:GameObject) : ConditionCopyNonLazyBinder
+    + FromNewComponentOn(gameObjectGetter:Func<InjectContext, GameObject>) : ConditionCopyNonLazyBinder
+    + FromNewComponentOnNewGameObject() : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOnNewPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentInNewPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromComponentInNewPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewComponentOnNewPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + FromNewScriptableObjectResource(resourcePath:string) : ConditionCopyNonLazyBinder
+    + FromScriptableObjectResource(resourcePath:string) : ConditionCopyNonLazyBinder
+    + FromResource(resourcePath:string) : ConditionCopyNonLazyBinder
+}
+class "IEnumerable`1"<T> {
+}
+ScopeConcreteIdArgConditionCopyNonLazyBinder <|-- FactoryFromBinderBase
+FactoryFromBinderBase --> "AllParentTypes<Type>" "IEnumerable`1"
+@enduml

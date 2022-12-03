@@ -1,0 +1,44 @@
+@startuml
+class CoreLightEditorUtilities <<static>> {
+    + {static} DrawDirectionalLightGizmo(light:Light) : void
+    + {static} DrawPointLightGizmo(light:Light) : void
+    {static} DrawPointLight(light:Light, outerColor:Color) : void
+    {static} DrawPointHandlesAndLabels(light:Light) : void
+    + {static} DrawRectangleLightGizmo(light:Light) : void
+    {static} DrawRectangleLight(light:Light, outerColor:Color) : void
+    {static} DrawRectangleHandlesAndLabels(light:Light) : void
+    + {static} DrawDiscLightGizmo(light:Light) : void
+    {static} DrawDiscLight(light:Light, outerColor:Color) : void
+    {static} DrawDiscHandlesAndLabels(light:Light) : void
+    {static} DrawWithZTest(primitiveHandle:PrimitiveBoundsHandle, alpha:float) : void
+    {static} DrawZTestedLine(range:float, outerColor:Color, innerColor:Color) : void
+    {static} DrawHandleLabel(handlePosition:Vector3, labelText:string, offsetFromHandle:float) : void
+    {static} DoRectHandles(size:Vector2) : Vector2
+    {static} DoDiscHandles(radius:float) : float
+    {static} DoPointHandles(range:float) : float
+    {static} drawInnerConeAngle : bool = true
+    + {static} DrawSpotLightGizmo(light:Light) : void
+    {static} DrawHandlesAndLabels(light:Light, color:Color) : void
+    {static} GetLightInnerConeColor(wireframeColor:Color) : Color
+    {static} GetLightAboveObjectWireframeColor(wireframeColor:Color) : Color
+    {static} GetLightBehindObjectWireframeColor(wireframeColor:Color) : Color
+    {static} RemapLightColor(src:Color) : Color
+    {static} DrawSpotlightWireframe(spotlight:Light, outerColor:Color, innerColor:Color) : void
+    {static} DrawShadowNearPlane(spotlight:Light, color:Color) : void
+    {static} DrawConeWireframe(radius:float, height:float, handleDirections:HandleDirections) : void
+    {static} DrawConeHandles(position:Vector3, angle:float, range:float, handleDirections:HandleDirections, controlName:string) : float
+    {static} SliderLineHandle(id:int, position:Vector3, direction:Vector3, value:float, labelText:string) : float
+    {static} SizeSliderSpotAngle(position:Vector3, forward:Vector3, axis:Vector3, range:float, spotAngle:float, controlName:string) : float
+}
+enum HandleDirections {
+    Left= 1 << 0,
+    Up= 1 << 1,
+    Right= 1 << 2,
+    Down= 1 << 3,
+    All= Left | Up | Right | Down,
+}
+CoreLightEditorUtilities o-> "s_AreaLightHandle" BoxBoundsHandle
+CoreLightEditorUtilities o-> "s_DiscLightHandle" SphereBoundsHandle
+CoreLightEditorUtilities o-> "s_PointLightHandle" SphereBoundsHandle
+CoreLightEditorUtilities +-- HandleDirections
+@enduml

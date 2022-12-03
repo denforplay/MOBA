@@ -1,0 +1,61 @@
+@startuml
+class SpriteLibraryDataInspector {
+    + SpriteLibraryDataInspector(so:SerializedObject, library:SerializedProperty)
+    + {static} UpdateLibraryWithNewMainLibrary(newMainLibrary:SpriteLibraryAsset, destLibrary:SerializedProperty) : void
+    + OnGUI() : void
+    HandleCategoryCreateSpriteDragAndDrop() : void
+    IsCategoryNameInUsed(name:string) : SerializedProperty
+    DrawElement(rect:Rect, index:int, selected:bool, focused:bool) : void
+    DrawCategory(rect:Rect, index:int) : void
+    OnAddCallback(list:ReorderableList) : void
+    AddCategory(categoryName:string, createNew:bool) : SerializedProperty
+    HandleSpriteDragAndDropToCategory(rect:Rect, category:SerializedProperty) : bool
+    {static} GetRowColumnCount(drawWidth:float, size:float, contentCount:int, column:int, row:int, columnf:float) : void
+    DrawCategorySpriteList(rect:Rect, index:int, category:SerializedProperty) : void
+    {static} IsLabelVisible(viewPortMinY:float, viewPortMaxY:float, labelRect:Rect) : bool
+    DrawLabel(index:int, spriteListProp:SerializedProperty, spriteOverrideProperty:SerializedProperty, gridState:SpriteCategoryGridState, spriteOverride:bool, entryFromMain:bool, backgroundSelectedRect:Rect, spriteObjectFieldRect:Rect, labelTextfieldRect:Rect, canRemoveSelectedEntry:bool, selectedEntryIsOverwrite:bool) : void
+    IsEntryNameUsed(name:string, spriteList:SerializedProperty, duplicateAllow:int) : bool
+    {static} DeleteSpriteEntryOverride(spriteList:SerializedProperty, gridState:SpriteCategoryGridState) : void
+    {static} DeleteSpriteEntry(spriteList:SerializedProperty, gridState:SpriteCategoryGridState) : void
+    DrawCategorySpriteListHeader(rect:Rect, text:string) : void
+    DrawCategorySpriteListFooter(rect:Rect, category:SerializedProperty, gridState:SpriteCategoryGridState, canRemove:bool, onRemove:Action<SerializedProperty, SpriteCategoryGridState>) : void
+    GetUniqueEntryName(list:SerializedProperty, name:string) : string
+    AddSpriteToCategory(category:SerializedProperty, sprite:Sprite) : void
+    {static} SetPropertyName(sp:SerializedProperty, newName:string) : void
+    OnCanRemoveCallback(list:ReorderableList) : bool
+}
+class Style {
+    + lineSpacing : int = 3
+    + spriteGridSize : int = 64
+    + gridPadding : float
+    + gridHeaderSize : int = 20
+    + gridFooterSize : int = 20
+    + gridHeight : float
+    + newCategoryText : string
+    + categoryLabel : string
+    + categoryElementHeight : float
+    + categoryTextFieldHeight : float
+    + newEntryText : string
+    + categoryLabelWidth : float = 100
+    + Style()
+    + InitStyle(currentEvent:Event) : void
+}
+class SpriteCategoryGridState {
+    + selectedIndex : int
+}
+SpriteLibraryDataInspector +-- Style
+Style o-> "duplicateWarningText" GUIContent
+Style --> "duplicateWarning" GUIContent
+Style --> "gridSize" Vector2
+Style --> "footerBackground" GUIStyle
+Style --> "boxBackground" GUIStyle
+Style --> "preButton" GUIStyle
+Style --> "headerBackground" GUIStyle
+Style --> "gridList" GUIStyle
+Style o-> "iconToolbarPlus" GUIContent
+Style o-> "iconToolbarMinus" GUIContent
+Style o-> "overrideIcon" GUIContent
+SpriteLibraryDataInspector +-- SpriteCategoryGridState
+SpriteCategoryGridState --> "scrollPos" Vector2
+SpriteCategoryGridState --> "Default" SpriteCategoryGridState
+@enduml

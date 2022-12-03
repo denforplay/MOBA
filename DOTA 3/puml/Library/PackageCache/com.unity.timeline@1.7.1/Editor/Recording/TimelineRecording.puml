@@ -1,0 +1,29 @@
+@startuml
+class TimelineRecording <<static>> <<partial>> {
+    {static} GetTarget(undo:UndoPropertyModification) : UnityEngine.Object
+    {static} GetTrackForGameObject(gameObject:GameObject, state:WindowState) : TrackAsset
+    + {static} GetRecordingTrack(property:SerializedProperty, state:WindowState) : TrackAsset
+    {static} GatherModifications(property:SerializedProperty, modifications:List<PropertyModification>) : void
+    + {static} AddKey(prop:SerializedProperty, state:WindowState) : void
+    + {static} AddKey(modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    {static} PropertyModificationToUndoPropertyModification(prop:PropertyModification) : UndoPropertyModification
+    {static} GetRecordingClip(asset:TrackAsset, state:WindowState, startTime:double, timeScale:double) : AnimationClip
+    {static} GetClipAndRelativeTime(target:UnityEngine.Object, state:WindowState, outClip:AnimationClip, keyTime:double, keyInRange:bool) : bool
+    + {static} HasCurve(modifications:IList<PropertyModification>, target:UnityEngine.Object, state:WindowState) : bool
+    + {static} HasKey(modifications:IList<PropertyModification>, state:WindowState) : bool
+    {static} HasBinding(target:UnityEngine.Object, modification:PropertyModification, clip:AnimationClip, binding:EditorCurveBinding) : bool
+    + {static} RemoveKey(target:UnityEngine.Object, modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    {static} GetKeyTimes(modifications:IList<PropertyModification>, state:WindowState) : HashSet<double>
+    + {static} NextKey(target:UnityEngine.Object, modifications:IList<PropertyModification>, state:WindowState) : void
+    + {static} PrevKey(target:UnityEngine.Object, modifications:IList<PropertyModification>, state:WindowState) : void
+    + {static} RemoveCurve(target:UnityEngine.Object, modifications:IEnumerable<PropertyModification>, state:WindowState) : void
+    + {static} KeyAllProperties(target:Component, state:WindowState) : void
+    + {static} KeyProperties(go:GameObject, state:WindowState, bindings:IList<EditorCurveBinding>) : void
+    {static} GetRotationBindings(path:string) : IEnumerable<EditorCurveBinding>
+    {static} GetTargetFromEditorBinding(root:GameObject, binding:EditorCurveBinding) : Component
+    + {static} GetRecordableGameObjects(state:WindowState) : IEnumerable<GameObject>
+}
+class "List`1"<T> {
+}
+TimelineRecording o-> "s_TempPropertyModifications<PropertyModification>" "List`1"
+@enduml

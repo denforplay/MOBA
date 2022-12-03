@@ -1,0 +1,8 @@
+@startuml
+class TimelineClipExtensions <<static>> {
+    {static} <<readonly>> k_UndoSetParentTrackText : string = "Move Clip"
+    + {static} MoveToTrack(clip:TimelineClip, destinationTrack:TrackAsset) : void
+    + {static} TryMoveToTrack(clip:TimelineClip, destinationTrack:TrackAsset) : bool
+    {static} MoveToTrack_Impl(clip:TimelineClip, destinationTrack:TrackAsset, asset:Object, parentTrack:TrackAsset) : void
+}
+@enduml

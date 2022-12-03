@@ -1,0 +1,8 @@
+@startuml
+interface ITestRunnerApi {
+    Execute(executionSettings:ExecutionSettings) : string
+    RegisterCallbacks(testCallbacks:T, priority:int) : void
+    UnregisterCallbacks(testCallbacks:T) : void
+    RetrieveTestList(testMode:TestMode, callback:Action<ITestAdaptor>) : void
+}
+@enduml

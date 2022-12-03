@@ -1,0 +1,18 @@
+@startuml
+class MarkerColumnFilter {
+    + MarkerColumnFilter(newMode:Mode)
+}
+enum Mode {
+    TimeAndCount,
+    Time,
+    Totals,
+    TimeWithTotals,
+    CountTotals,
+    CountPerFrame,
+    Depth,
+    Threads,
+    Custom,
+}
+MarkerColumnFilter --> "mode" Mode
+MarkerColumnFilter +-- Mode
+@enduml

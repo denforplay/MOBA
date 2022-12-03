@@ -1,0 +1,6 @@
+@startuml
+class TMP_ProjectTextSettings <<static>> {
+    + {static} SelectProjectTextSettings() : void
+    {static} ON_RESOURCES_LOADED() : void
+}
+@enduml

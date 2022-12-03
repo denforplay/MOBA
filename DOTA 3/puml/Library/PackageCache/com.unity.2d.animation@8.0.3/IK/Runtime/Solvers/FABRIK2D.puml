@@ -1,0 +1,19 @@
+@startuml
+class FABRIKChain2D <<struct>> {
+    + sqrTolerance : float
+}
+class FABRIK2D <<static>> {
+    + {static} Solve(targetPosition:Vector2, solverLimit:int, tolerance:float, lengths:float[], positions:Vector2[]) : bool
+    + {static} SolveChain(solverLimit:int, chains:FABRIKChain2D[]) : bool
+    {static} ValidateChain(chains:FABRIKChain2D[]) : bool
+    {static} SolveForwardsChain(idx:int, chains:FABRIKChain2D[]) : void
+    {static} SolveBackwardsChain(idx:int, chains:FABRIKChain2D[]) : bool
+    {static} Forward(targetPosition:Vector2, lengths:float[], positions:Vector2[]) : void
+    {static} Backward(originPosition:Vector2, lengths:float[], positions:Vector2[]) : void
+    {static} ValidateJoint(endPosition:Vector2, startPosition:Vector2, right:Vector2, min:float, max:float) : Vector2
+}
+FABRIKChain2D --> "first" Vector2
+FABRIKChain2D --> "last" Vector2
+FABRIKChain2D --> "origin" Vector2
+FABRIKChain2D --> "target" Vector2
+@enduml

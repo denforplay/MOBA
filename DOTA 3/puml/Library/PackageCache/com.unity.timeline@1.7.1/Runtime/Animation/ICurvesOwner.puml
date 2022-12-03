@@ -1,0 +1,12 @@
+@startuml
+interface ICurvesOwner {
+    hasCurves : bool <<get>>
+    duration : double <<get>>
+    CreateCurves(curvesClipName:string) : void
+    defaultCurvesName : string <<get>>
+}
+ICurvesOwner --> "curves" AnimationClip
+ICurvesOwner --> "asset" Object
+ICurvesOwner --> "assetOwner" Object
+ICurvesOwner --> "targetTrack" TrackAsset
+@enduml

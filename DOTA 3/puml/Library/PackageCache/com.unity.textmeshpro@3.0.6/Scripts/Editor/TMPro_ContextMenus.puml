@@ -1,0 +1,22 @@
+@startuml
+class TMP_ContextMenus {
+    {static} CopyTexture(command:MenuCommand) : void
+    {static} SelectMaterial(command:MenuCommand) : void
+    {static} DuplicateMaterial(command:MenuCommand) : void
+    {static} CopyMaterialProperties(command:MenuCommand) : void
+    {static} PasteMaterialPropertiesValidate(command:MenuCommand) : bool
+    {static} PasteMaterialProperties(command:MenuCommand) : void
+    {static} ResetSettingsValidate(command:MenuCommand) : bool
+    {static} ResetSettings(command:MenuCommand) : void
+    {static} CopyAtlas(command:MenuCommand) : void
+    {static} PasteAtlasValidate(command:MenuCommand) : bool
+    {static} PasteAtlas(command:MenuCommand) : void
+    {static} ExtractAtlas(command:MenuCommand) : void
+    {static} RegenerateFontAsset(command:MenuCommand) : void
+    {static} ForceFontAssetUpgrade(command:MenuCommand) : void
+    {static} ClearFontAssetDataValidate(command:MenuCommand) : bool
+    {static} ClearFontAssetData(command:MenuCommand) : void
+    {static} CreateFontAsset(command:MenuCommand) : void
+}
+Editor <|-- TMP_ContextMenus
+@enduml

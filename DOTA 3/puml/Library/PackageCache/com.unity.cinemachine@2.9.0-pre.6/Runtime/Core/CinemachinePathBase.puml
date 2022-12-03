@@ -1,0 +1,40 @@
+@startuml
+abstract class CinemachinePathBase {
+    + m_Resolution : int = 20
+    + {abstract} MinPos : float <<get>>
+    + {abstract} MaxPos : float <<get>>
+    + {abstract} Looped : bool <<get>>
+    + <<virtual>> StandardizePos(pos:float) : float
+    + {abstract} EvaluatePosition(pos:float) : Vector3
+    + {abstract} EvaluateTangent(pos:float) : Vector3
+    + {abstract} EvaluateOrientation(pos:float) : Quaternion
+    + <<virtual>> FindClosestPoint(p:Vector3, startSegment:int, searchRadius:int, stepsPerSegment:int) : float
+    + MinUnit(units:PositionUnits) : float
+    + MaxUnit(units:PositionUnits) : float
+    + <<virtual>> StandardizeUnit(pos:float, units:PositionUnits) : float
+    + EvaluatePositionAtUnit(pos:float, units:PositionUnits) : Vector3
+    + EvaluateTangentAtUnit(pos:float, units:PositionUnits) : Vector3
+    + EvaluateOrientationAtUnit(pos:float, units:PositionUnits) : Quaternion
+    + {abstract} DistanceCacheSampleStepsPerSegment : int <<get>>
+    + <<virtual>> InvalidateDistanceCache() : void
+    + DistanceCacheIsValid() : bool
+    + PathLength : float <<get>>
+    + StandardizePathDistance(distance:float) : float
+    + ToNativePathUnits(pos:float, units:PositionUnits) : float
+    + FromPathNativeUnits(pos:float, units:PositionUnits) : float
+}
+class Appearance {
+    + width : float = 0.2f
+}
+enum PositionUnits {
+    PathUnits,
+    Distance,
+    Normalized,
+}
+MonoBehaviour <|-- CinemachinePathBase
+CinemachinePathBase o-> "m_Appearance" Appearance
+CinemachinePathBase +-- Appearance
+Appearance o-> "pathColor" Color
+Appearance o-> "inactivePathColor" Color
+CinemachinePathBase +-- PositionUnits
+@enduml

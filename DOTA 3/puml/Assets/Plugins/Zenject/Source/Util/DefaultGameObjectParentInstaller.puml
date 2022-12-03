@@ -1,0 +1,17 @@
+@startuml
+class DefaultGameObjectParentInstaller {
+    <<readonly>> _name : string
+    + DefaultGameObjectParentInstaller(name:string)
+    + <<override>> InstallBindings() : void
+}
+class "Installer`2"<T1,T2> {
+}
+class DefaultParentObjectDestroyer {
+    + DefaultParentObjectDestroyer(gameObject:GameObject)
+    + Dispose() : void
+}
+"Installer`2" "<string,DefaultGameObjectParentInstaller>" <|-- DefaultGameObjectParentInstaller
+DefaultGameObjectParentInstaller +-- DefaultParentObjectDestroyer
+IDisposable <|-- DefaultParentObjectDestroyer
+DefaultParentObjectDestroyer --> "_gameObject" GameObject
+@enduml

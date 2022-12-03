@@ -1,0 +1,11 @@
+@startuml
+class CinemachineImpulseSourceEditor <<sealed>> {
+    m_TestForce : float = 1
+    + <<override>> OnInspectorGUI() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineImpulseSource>" <|-- CinemachineImpulseSourceEditor
+CinemachineImpulseSourceEditor o-> "m_TestButton" GUIContent
+CinemachineImpulseSourceEditor o-> "m_TestLabel" GUIContent
+@enduml

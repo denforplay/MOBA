@@ -1,0 +1,7 @@
+@startuml
+class AddToNewGameObjectComponentProvider {
+    + AddToNewGameObjectComponentProvider(container:DiContainer, componentType:Type, extraArguments:IEnumerable<TypeValuePair>, gameObjectBindInfo:GameObjectCreationParameters, concreteIdentifier:object, instantiateCallback:Action<InjectContext, object>)
+}
+AddToGameObjectComponentProviderBase <|-- AddToNewGameObjectComponentProvider
+AddToNewGameObjectComponentProvider --> "_gameObjectBindInfo" GameObjectCreationParameters
+@enduml

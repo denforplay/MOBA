@@ -1,0 +1,56 @@
+@startuml
+class SettingsTests {
+    {static} projectSettingsPath : string <<get>>
+    + Setup() : void
+    + Cleanup() : void
+    + {static} DefaultsAreCorrect() : void
+    + {static} SetValue() : void
+    + {static} SetAndReset() : void
+    + {static} SerializeAndLoad() : void
+    + {static} DeleteKeys() : void
+    + {static} KeysExistInSettingsInstance() : void
+    + {static} KeysExistInSerializedForm() : void
+    + {static} ChangingClassValuesSaves() : void
+}
+class DummyStruct <<struct>> {
+    + stringValue : string
+    + intValue : int
+    + DummyStruct(s:string, i:int)
+    + Equals(other:DummyStruct) : bool
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+    + <<override>> ToString() : string
+}
+class DummyClass {
+    + stringValue : string
+    + intValue : int
+    + DummyClass(s:string, i:int)
+    + Equals(other:DummyClass) : bool
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+    + <<override>> ToString() : string
+}
+class "UserSetting`1"<T> {
+}
+class "IEquatable`1"<T> {
+}
+SettingsTestBase <|-- SettingsTests
+IPrebuildSetup <|-- SettingsTests
+IPostBuildCleanup <|-- SettingsTests
+SettingsTests --> "s_Settings" Settings
+SettingsTests --> "settings" Settings
+SettingsTests o-> "s_StaticBoolUser<bool>" "UserSetting`1"
+SettingsTests o-> "s_StaticBoolProject<bool>" "UserSetting`1"
+SettingsTests o-> "s_StaticStringUser<string>" "UserSetting`1"
+SettingsTests o-> "s_StaticStringProject<string>" "UserSetting`1"
+SettingsTests o-> "s_StaticStructUser<DummyStruct>" "UserSetting`1"
+SettingsTests o-> "s_StaticStructProject<DummyStruct>" "UserSetting`1"
+SettingsTests o-> "s_StaticClassUser<DummyClass>" "UserSetting`1"
+SettingsTests o-> "s_StaticClassProject<DummyClass>" "UserSetting`1"
+SettingsTests +-- DummyStruct
+"IEquatable`1" "<DummyStruct>" <|-- DummyStruct
+DummyStruct --> "defaultValue" DummyStruct
+SettingsTests +-- DummyClass
+"IEquatable`1" "<DummyClass>" <|-- DummyClass
+DummyClass --> "defaultValue" DummyClass
+@enduml

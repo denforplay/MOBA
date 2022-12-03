@@ -1,0 +1,8 @@
+@startuml
+interface IVolumeAdditionalGizmo {
+    OnBoxColliderDraw(scr:IVolume, c:BoxCollider) : void
+    OnSphereColliderDraw(scr:IVolume, c:SphereCollider) : void
+    OnMeshColliderDraw(scr:IVolume, c:MeshCollider) : void
+}
+IVolumeAdditionalGizmo --> "type" Type
+@enduml

@@ -1,0 +1,108 @@
+@startuml
+class ProfileAnalyzerAnalytics {
+    <<const>> k_MaxEventsPerHour : int = 100
+    <<const>> k_MaxEventItems : int = 1000
+    <<const>> k_VendorKey : string = "unity.profileanalyzer"
+    <<const>> k_EventTopicName : string = "usability"
+    {static} s_EnableAnalytics : bool = false
+    + {static} EnableAnalytics() : void
+    {static} SecondsToTicks(durationInSeconds:float) : float
+    + {static} SendUIButtonEvent(uiButton:UIButton, durationInSeconds:float) : bool
+    + {static} SendUIUsageModeEvent(uiUsageMode:UIUsageMode, durationInSeconds:float) : bool
+    + {static} SendUIVisibilityEvent(uiVisibility:UIVisibility, durationInSeconds:float, show:bool) : bool
+    + {static} SendUIResizeEvent(uiResizeView:UIResizeView, durationInSeconds:float, width:float, height:float, isDocked:bool) : bool
+    {static} + BeginAnalytic() : Analytic
+    {static} + SendUIButtonEvent(uiButton:UIButton, instance:Analytic) : void
+    {static} + SendUIUsageModeEvent(uiUsageMode:UIUsageMode, instance:Analytic) : void
+}
+enum UIButton {
+    Pull,
+    OpenProfiler,
+    CloseProfiler,
+    JumpToFrame,
+    ExportSingleFrames,
+    ExportComparisonFrames,
+}
+enum UIUsageMode {
+    Single,
+    Comparison,
+}
+enum UIVisibility {
+    FrameTimeContextMenu,
+    Filters,
+    TopTen,
+    Frames,
+    Threads,
+    Markers,
+}
+enum UIResizeView {
+    Single,
+    Comparison,
+}
+class ProfileAnalyzerUIButtonEventParameters <<struct>> {
+    + name : string
+    + ProfileAnalyzerUIButtonEventParameters(name:string)
+}
+class ProfileAnalyzerUIButtonEvent <<struct>> {
+    + ProfileAnalyzerUIButtonEvent(name:string, durationInTicks:float)
+    + subtype : string
+    + duration : float
+}
+class ProfileAnalyzerUIUsageEventParameters <<struct>> {
+    + name : string
+    + ProfileAnalyzerUIUsageEventParameters(name:string)
+}
+class ProfileAnalyzerUIUsageEvent <<struct>> {
+    + ProfileAnalyzerUIUsageEvent(name:string, durationInTicks:float)
+    + subtype : string
+    + duration : float
+}
+class ProfileAnalyzerUIVisibilityEventParameters <<struct>> {
+    + name : string
+    + show : bool
+    + ProfileAnalyzerUIVisibilityEventParameters(name:string, show:bool)
+}
+class ProfileAnalyzerUIVisibilityEvent <<struct>> {
+    + ProfileAnalyzerUIVisibilityEvent(name:string, durationInTicks:float, show:bool)
+    + subtype : string
+    + duration : float
+}
+class ProfileAnalyzerUIResizeEventParameters <<struct>> {
+    + name : string
+    + width : float
+    + height : float
+    + screenWidth : float
+    + screenHeight : float
+    + docked : bool
+    + ProfileAnalyzerUIResizeEventParameters(name:string, width:float, height:float, screenWidth:float, screenHeight:float, isDocked:bool)
+}
+class ProfileAnalyzerUIResizeEvent <<struct>> {
+    + ProfileAnalyzerUIResizeEvent(name:string, durationInTicks:float, width:float, height:float, screenWidth:float, screenHeight:float, isDocked:bool)
+    + subtype : string
+    + duration : float
+}
+class Analytic {
+    m_StartTime : double
+    m_DurationInSeconds : float
+    + Analytic()
+    + End() : void
+    + GetDurationInSeconds() : float
+}
+ProfileAnalyzerAnalytics +-- UIButton
+ProfileAnalyzerAnalytics +-- UIUsageMode
+ProfileAnalyzerAnalytics +-- UIVisibility
+ProfileAnalyzerAnalytics +-- UIResizeView
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIButtonEventParameters
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIButtonEvent
+ProfileAnalyzerUIButtonEvent --> "parameters" ProfileAnalyzerUIButtonEventParameters
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIUsageEventParameters
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIUsageEvent
+ProfileAnalyzerUIUsageEvent --> "parameters" ProfileAnalyzerUIUsageEventParameters
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIVisibilityEventParameters
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIVisibilityEvent
+ProfileAnalyzerUIVisibilityEvent --> "parameters" ProfileAnalyzerUIVisibilityEventParameters
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIResizeEventParameters
+ProfileAnalyzerAnalytics +-- ProfileAnalyzerUIResizeEvent
+ProfileAnalyzerUIResizeEvent --> "parameters" ProfileAnalyzerUIResizeEventParameters
+ProfileAnalyzerAnalytics +-- Analytic
+@enduml

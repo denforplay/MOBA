@@ -1,0 +1,12 @@
+@startuml
+class GridSelectionEditor {
+    + <<override>> OnInspectorGUI() : void
+    + HasFrameBounds() : bool
+    + OnGetFrameBounds() : Bounds
+}
+class Styles <<static>> {
+}
+Editor <|-- GridSelectionEditor
+GridSelectionEditor +-- Styles
+Styles o-> "gridSelectionLabel" GUIContent
+@enduml

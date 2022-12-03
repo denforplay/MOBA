@@ -1,0 +1,9 @@
+@startuml
+class "IsometricRuleTile`1"<T> {
+}
+class IsometricRuleTile {
+}
+IsometricRuleTile <|-- "IsometricRuleTile`1"
+"IsometricRuleTile`1" --> "m_NeighborType" Type
+RuleTile <|-- IsometricRuleTile
+@enduml

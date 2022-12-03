@@ -1,0 +1,35 @@
+@startuml
+class CancellationTokenExtensions <<static>> {
+    + {static} ToCancellationToken(task:UniTask) : CancellationToken
+    + {static} ToCancellationToken(task:UniTask, linkToken:CancellationToken) : CancellationToken
+    + {static} ToCancellationToken(task:UniTask<T>) : CancellationToken
+    + {static} ToCancellationToken(task:UniTask<T>, linkToken:CancellationToken) : CancellationToken
+    {static} <<async>> ToCancellationTokenCore(task:UniTask, cts:CancellationTokenSource) : UniTaskVoid
+    + {static} ToUniTask(cancellationToken:CancellationToken) : (UniTask, CancellationTokenRegistration)
+    {static} Callback(state:object) : void
+    + {static} WaitUntilCanceled(cancellationToken:CancellationToken) : CancellationTokenAwaitable
+    + {static} RegisterWithoutCaptureExecutionContext(cancellationToken:CancellationToken, callback:Action) : CancellationTokenRegistration
+    + {static} RegisterWithoutCaptureExecutionContext(cancellationToken:CancellationToken, callback:Action<object>, state:object) : CancellationTokenRegistration
+    + {static} AddTo(disposable:IDisposable, cancellationToken:CancellationToken) : CancellationTokenRegistration
+    {static} DisposeCallback(state:object) : void
+}
+class CancellationTokenAwaitable <<struct>> {
+    + CancellationTokenAwaitable(cancellationToken:CancellationToken)
+    + GetAwaiter() : Awaiter
+}
+class "Action`1"<T> {
+}
+class Awaiter <<struct>> {
+    + Awaiter(cancellationToken:CancellationToken)
+    + IsCompleted : bool <<get>>
+    + GetResult() : void
+    + OnCompleted(continuation:Action) : void
+    + UnsafeOnCompleted(continuation:Action) : void
+}
+CancellationTokenExtensions o-> "cancellationTokenCallback<object>" "Action`1"
+CancellationTokenExtensions o-> "disposeCallback<object>" "Action`1"
+CancellationTokenAwaitable --> "cancellationToken" CancellationToken
+CancellationTokenAwaitable +-- Awaiter
+ICriticalNotifyCompletion <|-- Awaiter
+Awaiter --> "cancellationToken" CancellationToken
+@enduml

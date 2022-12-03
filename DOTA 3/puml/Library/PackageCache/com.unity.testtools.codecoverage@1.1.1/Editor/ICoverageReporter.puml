@@ -1,0 +1,11 @@
+@startuml
+interface ICoverageReporter {
+    OnInitialise(settings:CoverageSettings) : void
+    OnRunStarted(testsToRun:ITestAdaptor) : void
+    OnRunFinished(testResults:ITestResultAdaptor) : void
+    OnTestStarted(test:ITestAdaptor) : void
+    OnTestFinished(result:ITestResultAdaptor) : void
+    OnBeforeAssemblyReload() : void
+    OnCoverageRecordingPaused() : void
+}
+@enduml

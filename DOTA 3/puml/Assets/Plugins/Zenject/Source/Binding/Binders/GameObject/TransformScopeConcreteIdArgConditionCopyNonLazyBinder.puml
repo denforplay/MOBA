@@ -1,0 +1,9 @@
+@startuml
+class TransformScopeConcreteIdArgConditionCopyNonLazyBinder {
+    + TransformScopeConcreteIdArgConditionCopyNonLazyBinder(bindInfo:BindInfo, gameObjectInfo:GameObjectCreationParameters)
+    + UnderTransform(parent:Transform) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + UnderTransform(parentGetter:Func<InjectContext, Transform>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + UnderTransformGroup(transformGroupname:string) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+ScopeConcreteIdArgConditionCopyNonLazyBinder <|-- TransformScopeConcreteIdArgConditionCopyNonLazyBinder
+@enduml

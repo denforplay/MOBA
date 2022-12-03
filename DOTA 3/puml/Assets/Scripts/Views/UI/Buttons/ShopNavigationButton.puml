@@ -1,0 +1,7 @@
+@startuml
+class ShopNavigationButton {
+}
+MonoBehaviour <|-- ShopNavigationButton
+ShopNavigationButton --> "NavigationButton" Button
+ShopNavigationButton --> "ItemType" ItemType
+@enduml

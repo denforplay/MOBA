@@ -1,0 +1,16 @@
+@startuml
+class CoreRPHelpURLAttribute {
+    + CoreRPHelpURLAttribute(pageName:string, packageName:string, pageHash:string)
+}
+class DocumentationInfo {
+    <<const>> fallbackVersion : string = "13.1"
+    <<const>> url : string = "https://docs.unity3d.com/Packages/{0&#125;@{1&#125;/manual/{2&#125;.html{3&#125;"
+    + {static} version : string <<get>>
+    + {static} GetPageLink(packageName:string, pageName:string, pageHash:string) : string
+}
+class DocumentationUtils <<static>> {
+    + {static} GetHelpURL(mask:TEnum) : string
+    + {static} TryGetHelpURL(type:Type, url:string) : bool
+}
+HelpURLAttribute <|-- CoreRPHelpURLAttribute
+@enduml

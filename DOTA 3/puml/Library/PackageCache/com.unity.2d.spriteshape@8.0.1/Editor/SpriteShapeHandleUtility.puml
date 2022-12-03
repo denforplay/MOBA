@@ -1,0 +1,22 @@
+@startuml
+class SpriteShapeHandleUtility {
+    + {static} PosToAngle(position:Vector2, center:Vector2, angleOffset:float) : float
+    + {static} Slider2D(id:int, position:Vector2, capOffset:Vector3, rotation:Quaternion, size:float, drawCapFunction:Handles.CapFunction) : Vector2
+    + {static} DrawRangeOutline(start:float, end:float, angleOffset:float, center:Vector2, radius:float, width:float) : void
+    {static} SetDiscSectionPoints(dest:Vector3[], center:Vector3, normal:Vector3, from:Vector3, angle:float, radius:float) : void
+    + {static} DrawSolidArc(center:Vector3, normal:Vector3, from:Vector3, angle:float, radius:float, width:float) : void
+    + {static} DrawTextureArc(texture:Texture, pixelsPerRadius:float, center:Vector3, normal:Vector3, from:Vector3, angle:float, radius:float) : void
+    + {static} PlayHeadCap(controlID:int, position:Vector3, rotation:Quaternion, size:float, eventType:EventType) : void
+    + {static} RangeLeftCap(controlID:int, position:Vector3, rotation:Quaternion, size:float, eventType:EventType) : void
+    + {static} RangeRightCap(controlID:int, position:Vector3, rotation:Quaternion, size:float, eventType:EventType) : void
+    + {static} GUITextureCap(controlID:int, texture:Texture, position:Vector3, rotation:Quaternion, size:float, eventType:EventType) : void
+    + {static} DistanceToArcWidth(position:Vector2, center:Vector2, start:float, end:float, radius:float, width:float, angleOffet:float) : float
+    + {static} DistanceToRectangle(position:Vector3, rotation:Quaternion, size:Vector2) : float
+}
+class Styles {
+}
+SpriteShapeHandleUtility +-- Styles
+Styles --> "playheadTex" Texture
+Styles --> "handRightTex" Texture
+Styles --> "handLeftTex" Texture
+@enduml

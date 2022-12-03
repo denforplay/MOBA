@@ -1,0 +1,17 @@
+@startuml
+class UnityBindingExtensions <<static>> {
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<string>, text:Text, rebindOnError:bool) : void
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<string>, text:Text, cancellationToken:CancellationToken, rebindOnError:bool) : void
+    {static} <<async>> BindToCore(source:IUniTaskAsyncEnumerable<string>, text:Text, cancellationToken:CancellationToken, rebindOnError:bool) : UniTaskVoid
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<T>, text:Text, rebindOnError:bool) : void
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<T>, text:Text, cancellationToken:CancellationToken, rebindOnError:bool) : void
+    + {static} BindTo(source:AsyncReactiveProperty<T>, text:Text, rebindOnError:bool) : void
+    {static} <<async>> BindToCore(source:IUniTaskAsyncEnumerable<T>, text:Text, cancellationToken:CancellationToken, rebindOnError:bool) : UniTaskVoid
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<bool>, selectable:Selectable, rebindOnError:bool) : void
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<bool>, selectable:Selectable, cancellationToken:CancellationToken, rebindOnError:bool) : void
+    {static} <<async>> BindToCore(source:IUniTaskAsyncEnumerable<bool>, selectable:Selectable, cancellationToken:CancellationToken, rebindOnError:bool) : UniTaskVoid
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<TSource>, monoBehaviour:TObject, bindAction:Action<TObject, TSource>, rebindOnError:bool) : void
+    + {static} BindTo(source:IUniTaskAsyncEnumerable<TSource>, bindTarget:TObject, bindAction:Action<TObject, TSource>, cancellationToken:CancellationToken, rebindOnError:bool) : void
+    {static} <<async>> BindToCore(source:IUniTaskAsyncEnumerable<TSource>, bindTarget:TObject, bindAction:Action<TObject, TSource>, cancellationToken:CancellationToken, rebindOnError:bool) : UniTaskVoid
+}
+@enduml

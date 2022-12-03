@@ -1,0 +1,10 @@
+@startuml
+class "PopupFactory`1"<T> {
+    + PopupFactory(container:DiContainer)
+    + <<override>> Create(param1:Object, param2:Transform) : T
+}
+class "PlaceholderFactory`3"<T1,T2,T3> {
+}
+"PlaceholderFactory`3" "<Object,Transform,T>" <|-- "PopupFactory`1"
+"PopupFactory`1" --> "_container" DiContainer
+@enduml

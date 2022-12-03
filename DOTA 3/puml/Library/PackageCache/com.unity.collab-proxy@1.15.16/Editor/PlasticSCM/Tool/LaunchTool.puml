@@ -1,0 +1,13 @@
+@startuml
+class LaunchTool <<static>> {
+    {static} ExecuteGUI(program:string, args:string, commandFileArg:string, commandFileName:string, processId:int) : Process
+    {static} ExecuteWindowsGUI(program:string, args:string, processId:int) : Process
+    {static} ExecuteProcess(program:string, args:string) : Process
+    {static} BuildProcess(program:string, args:string) : Process
+    {static} GetGUIProcess(program:string, processId:int) : Process
+    {static} mPlasticProcessId : int
+    {static} mGluonProcessId : int
+    {static} mBrexProcessId : int
+}
+LaunchTool o-> "mLog" ILog
+@enduml

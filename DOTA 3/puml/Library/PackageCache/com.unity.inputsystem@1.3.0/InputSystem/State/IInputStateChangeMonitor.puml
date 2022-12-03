@@ -1,0 +1,6 @@
+@startuml
+interface IInputStateChangeMonitor {
+    NotifyControlStateChanged(control:InputControl, time:double, eventPtr:InputEventPtr, monitorIndex:long) : void
+    NotifyTimerExpired(control:InputControl, time:double, monitorIndex:long, timerIndex:int) : void
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class SubContainerCreatorByInstance {
+    + SubContainerCreatorByInstance(subcontainer:DiContainer)
+    + CreateSubContainer(args:List<TypeValuePair>, context:InjectContext, injectAction:Action) : DiContainer
+}
+ISubContainerCreator <|-- SubContainerCreatorByInstance
+SubContainerCreatorByInstance --> "_subcontainer" DiContainer
+@enduml

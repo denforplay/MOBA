@@ -1,0 +1,14 @@
+@startuml
+class MethodMultipleProviderUntyped {
+    + MethodMultipleProviderUntyped(method:Func<InjectContext, IEnumerable<object>>, container:DiContainer)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "Func`2"<T1,T2> {
+}
+IProvider <|-- MethodMultipleProviderUntyped
+MethodMultipleProviderUntyped --> "_container" DiContainer
+MethodMultipleProviderUntyped --> "_method<InjectContext,IEnumerable<object>>" "Func`2"
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class SceneSearchToggle {
+    + SceneSearchToggle(tool:SceneSearchPopupTool, lifetime:Lifetime)
+}
+RiderFlowEditorToolbarToggle <|-- SceneSearchToggle
+@enduml

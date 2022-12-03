@@ -1,0 +1,12 @@
+@startuml
+class "LazyInject`1"<T> {
+    _hasValue : bool
+    _value : T
+    + LazyInject(container:DiContainer, context:InjectContext)
+    Validate() : void
+    + Value : T <<get>>
+}
+IValidatable <|-- "LazyInject`1"
+"LazyInject`1" --> "_container" DiContainer
+"LazyInject`1" --> "_context" InjectContext
+@enduml

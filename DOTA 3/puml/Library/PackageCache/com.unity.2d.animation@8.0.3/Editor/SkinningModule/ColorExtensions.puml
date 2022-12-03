@@ -1,0 +1,5 @@
+@startuml
+class ColorExtensions <<static>> {
+    + {static} AlphaMultiplied(c:Color, multiplier:float) : Color
+}
+@enduml

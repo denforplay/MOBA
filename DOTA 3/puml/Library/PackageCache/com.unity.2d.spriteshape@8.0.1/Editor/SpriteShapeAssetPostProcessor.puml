@@ -1,0 +1,6 @@
+@startuml
+class SpriteShapeAssetPostProcessor {
+    {static} OnPostprocessAllAssets(importedAssets:string[], deletedAssets:string[], movedAssets:string[], movedFromAssetPaths:string[]) : void
+}
+AssetPostprocessor <|-- SpriteShapeAssetPostProcessor
+@enduml

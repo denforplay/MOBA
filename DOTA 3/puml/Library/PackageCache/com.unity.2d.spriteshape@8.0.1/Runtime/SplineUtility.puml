@@ -1,0 +1,8 @@
+@startuml
+class SplineUtility {
+    + {static} SlopeAngle(start:Vector2, end:Vector2) : float
+    + {static} CalculateTangents(point:Vector3, prevPoint:Vector3, nextPoint:Vector3, forward:Vector3, scale:float, rightTangent:Vector3, leftTangent:Vector3) : void
+}
+class "SpriteShapeCopyUtility`1"<T> {
+}
+@enduml

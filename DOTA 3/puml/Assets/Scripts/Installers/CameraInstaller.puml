@@ -1,0 +1,6 @@
+@startuml
+class CameraInstaller {
+    + <<override>> InstallBindings() : void
+}
+MonoInstaller <|-- CameraInstaller
+@enduml

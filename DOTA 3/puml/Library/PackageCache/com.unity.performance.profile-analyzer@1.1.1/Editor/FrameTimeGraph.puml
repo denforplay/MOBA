@@ -1,0 +1,214 @@
+@startuml
+class FrameTimeGraphGlobalSettings {
+    + showThreads : bool = false
+    + showSelectedMarker : bool = true
+    + showFrameLines : bool = true
+    + showFrameLineText : bool = true
+    + showOrderedByFrameDuration : bool = false
+}
+class FrameTimeGraph {
+    {static} + SetGlobalSettings(globalSettings:FrameTimeGraphGlobalSettings) : void
+    m_DragBeginFirstOffset : int
+    m_DragBeginLastOffset : int
+    m_Dragging : bool
+    m_DragFirstOffset : int
+    m_DragLastOffset : int
+    m_Moving : bool
+    m_MoveHandleOffset : int
+    m_SingleControlAction : bool
+    m_ClickCount : int
+    m_LastClickTime : double
+    m_MouseReleased : bool
+    m_Zoomed : bool
+    m_ZoomStartOffset : int
+    m_ZoomEndOffset : int
+    <<const>> kXAxisWidth : int = 80
+    <<const>> kYAxisDetailThreshold : int = 40
+    <<const>> kOverrunHeight : int = 3
+    {static} m_YAxisMs : float
+    m_IsOrderedByFrameDuration : bool
+    m_CurrentSelectionFirstDataOffset : int
+    m_CurrentSelectionLastDataOffset : int
+    m_GraphId : int
+    m_ControlID : int
+    {static} s_LastSelectedGraphId : int
+    {static} s_CurrentSelectedGraphId : int
+    m_Enabled : bool
+    m_MaxFrames : int
+    DisplayUnits() : string
+    ToDisplayUnits(ms:float, showUnits:bool, limitToNDigits:int) : string
+    + SetUnits(units:Units) : void
+    + Reset() : void
+    Init() : void
+    + MakeGraphActive(activate:bool) : void
+    + IsGraphActive() : bool
+    + FrameTimeGraph(graphID:int, draw2D:Draw2D, units:Units, background:Color, backgroundSelected:Color, barColor:Color, barSelected:Color, barMarker:Color, barMarkerSelected:Color, barThreads:Color, barThreadsSelected:Color, colorGridlines:Color)
+    ClampToRange(value:int, min:int, max:int) : int
+    GetDataOffsetForXUnclamped(xPosition:int, width:int, totalDataSize:int) : int
+    GetDataOffsetForX(xPosition:int, width:int, totalDataSize:int) : int
+    GetXForDataOffset(dataOffset:int, width:int, totalDataSize:int) : int
+    SetDragMovement(startOffset:int, endOffset:int, currentSelectionFirstDataOffset:int, currentSelectionLastDataOffset:int) : void
+    SetDragSelection(startOffset:int, endOffset:int, dragDirection:DragDirection) : void
+    + SetDragSelection(startOffset:int, endOffset:int) : void
+    + ClearDragSelection() : void
+    + HasDragRegion() : bool
+    + GetSelectedRange(frameOffsets:List<int>, firstDataOffset:int, lastDataOffset:int, firstFrameOffset:int, lastFrameOffset:int) : void
+    + IsMultiSelectControlHeld() : bool
+    + ProcessInput() : State
+    + GetDataRange() : float
+    + PairWith(otherFrameTimeGraph:FrameTimeGraph) : void
+    + GetPairedWith() : FrameTimeGraph
+    + GetYAxisRange(yMax:float) : float
+    + SetData(values:List<Data>) : void
+    GetDataOffset(frameOffset:int) : int
+    + HasData() : bool
+    + SetActiveCallback(setActive:SetActive) : void
+    + SetRangeCallback(setRange:SetRange) : void
+    CallSetRange(startDataOffset:int, endDataOffset:int, clickCount:int, singleControlAction:bool, inputStatus:FrameTimeGraph.State, append:bool, effectPaired:bool) : void
+    HasNoSelection() : bool
+    HasSelectedAll() : bool
+    HasSubsetSelected() : bool
+    RegenerateBars(x:float, y:float, width:float, height:float, yRange:float) : void
+    + SetEnabled(enabled:bool) : void
+    + IsEnabled() : bool
+    GetTotalSelectionTime(selectedFrameOffsets:List<int>) : float
+    GetTotalSelectionTime(firstOffset:int, lastOffset:int) : float
+    ShowFrameLines(x:float, y:float, yRange:float, width:float, height:float) : void
+    InSelectedRegion(startDataOffset:int, endDataOffset:int, selectedFirstOffset:int, selectedLastOffset:int, frameOffsetToSelectionIndex:Dictionary<int, int>, subsetSelected:bool) : bool
+    + Draw(rect:Rect, analysis:ProfileAnalysis, selectedFrameOffsets:List<int>, yMax:float, offsetToDisplayMapping:int, offsetToIndexMapping:int, selectedMarkerName:string, maxFrames:int, fullAnalysis:ProfileAnalysis) : void
+    ShowThreads(height:float, yRange:float, bar:BarData, full:bool, threads:List<ThreadData>, subsetSelected:bool, selectedFirstOffset:int, selectedLastOffset:int, offsetToIndexMapping:int, frameOffsetToSelectionIndex:Dictionary<int, int>) : void
+    ShowSelectedMarker(height:float, yRange:float, bar:BarData, full:bool, selectedMarker:MarkerData, subsetSelected:bool, selectedFirstOffset:int, selectedLastOffset:int, offsetToIndexMapping:int, frameOffsetToSelectionIndex:Dictionary<int, int>) : void
+    ShowFrameLinesText(rect:Rect, xStart:float, yStart:float, yRange:float, width:float, height:float, subsetSelected:bool, selectedFirstOffset:int, selectedLastOffset:int) : void
+    ShowSelectionMenuItem(subsetSelected:bool, menu:GenericMenu, style:GUIContent, state:bool, func:GenericMenu.MenuFunction) : void
+    ShowContextMenu(subsetSelected:bool, selectionCount:int) : void
+    GetYMaxText(value:float) : string
+    DrawYAxisRangeSelector(rect:Rect, yMax:float) : void
+    ShowAxis(rect:Rect, xStart:float, width:float, startOffset:int, endOffset:int, selectedFirstOffset:int, selectedLastOffset:int, selectedCount:int, totalSelectedCount:int, yMax:float, totalDataSize:int, offsetToDisplayMapping:int) : void
+    ClearSelection(effectPaired:bool) : void
+    SelectAll(effectPaired:bool) : void
+    InvertSelection(effectPaired:bool) : void
+    ZoomSelection(effectPaired:bool) : void
+    ZoomAll(effectPaired:bool) : void
+    SelectMin(effectPaired:bool) : void
+    SelectMax(effectPaired:bool) : void
+    GetPercentageOffset(data:List<Data>, percent:float, outputFrameOffset:int) : float
+    SelectMedian(effectPaired:bool) : void
+    + SelectPrevious(step:int, effectPaired:bool) : void
+    + SelectNext(step:int, effectPaired:bool) : void
+    + SelectGrow(step:int, effectPaired:bool) : void
+    + SelectGrowLeft(step:int, effectPaired:bool) : void
+    + SelectGrowRight(step:int, effectPaired:bool) : void
+    + SelectShrink(step:int, effectPaired:bool) : void
+    + SelectShrinkLeft(step:int, effectPaired:bool) : void
+    + SelectShrinkRight(step:int, effectPaired:bool) : void
+    + ToggleShowThreads() : void
+    + ToggleShowSelectedMarker() : void
+    + ToggleShowFrameLines() : void
+    + ToggleShowFrameLinesText() : void
+    + ToggleShowOrderedByFrameDuration() : void
+    MoveSelectedRange(offset:int, clickCount:int, singleControlAction:bool, inputStatus:State) : void
+    ResizeSelectedRange(leftOffset:int, rightOffset:int, clickCount:int, singleControlAction:bool, inputState:State) : void
+    MoveSelectionEdge(startDataOffset:int, endDataOffset:int, isGrowingFromEdge:bool, selection:List<int>) : void
+}
+class Data <<struct>> {
+    + <<readonly>> ms : float
+    + <<readonly>> frameOffset : int
+    + Data(_ms:float, _index:int)
+}
+class "List`1"<T> {
+}
+enum State {
+    None,
+    Dragging,
+    DragComplete,
+}
+enum DragDirection {
+    Start,
+    Forward,
+    Backward,
+    None,
+}
+enum AxisMode {
+    One60HzFrame,
+    Two60HzFrames,
+    Four60HzFrames,
+    Max,
+    Custom,
+}
+class Styles <<static>> {
+}
+class BarData <<struct>> {
+    + x : float
+    + y : float
+    + w : float
+    + h : float
+    + startDataOffset : int
+    + endDataOffset : int
+    + yMin : float
+    + yMax : float
+    + BarData(_x:float, _y:float, _w:float, _h:float, _startDataOffset:int, _endDataOffset:int, _yMin:float, _yMax:float)
+}
+class SelectedRangeState <<struct>> {
+    + currentSelectionFirstDataOffset : int
+    + currentSelectionLastDataOffset : int
+}
+FrameTimeGraph o-> "m_GlobalSettings" FrameTimeGraphGlobalSettings
+FrameTimeGraph --> "m_2D" Draw2D
+FrameTimeGraph --> "m_ColorBarBackground" Color
+FrameTimeGraph --> "m_ColorBarBackgroundSelected" Color
+FrameTimeGraph --> "m_ColorBar" Color
+FrameTimeGraph --> "m_ColorBarOutOfRange" Color
+FrameTimeGraph --> "m_ColorBarSelected" Color
+FrameTimeGraph --> "m_ColorBarThreads" Color
+FrameTimeGraph --> "m_ColorBarThreadsOutOfRange" Color
+FrameTimeGraph --> "m_ColorBarThreadsSelected" Color
+FrameTimeGraph --> "m_ColorBarMarker" Color
+FrameTimeGraph --> "m_ColorBarMarkerOutOfRange" Color
+FrameTimeGraph --> "m_ColorBarMarkerSelected" Color
+FrameTimeGraph --> "m_ColorGridLine" Color
+FrameTimeGraph --> "m_PairedWithFrameTimeGraph" FrameTimeGraph
+FrameTimeGraph --> "s_YAxisMode" AxisMode
+FrameTimeGraph o-> "m_Values<Data>" "List`1"
+FrameTimeGraph o-> "m_LastSelectedFrameOffsets<int>" "List`1"
+FrameTimeGraph --> "m_SetRange" SetRange
+FrameTimeGraph --> "m_SetActive" SetActive
+FrameTimeGraph o-> "m_CurrentSelection<int>" "List`1"
+FrameTimeGraph o-> "m_Bars<BarData>" "List`1"
+FrameTimeGraph --> "m_Units" DisplayUnits
+FrameTimeGraph --> "m_LastRect" Rect
+FrameTimeGraph +-- Data
+FrameTimeGraph +-- State
+FrameTimeGraph +-- DragDirection
+FrameTimeGraph +-- AxisMode
+FrameTimeGraph +-- Styles
+Styles o-> "menuItemClearSelection" GUIContent
+Styles o-> "menuItemSelectAll" GUIContent
+Styles o-> "menuItemInvertSelection" GUIContent
+Styles o-> "menuItemZoomSelection" GUIContent
+Styles o-> "menuItemZoomAll" GUIContent
+Styles o-> "menuItemSelectMin" GUIContent
+Styles o-> "menuItemSelectMax" GUIContent
+Styles o-> "menuItemSelectMedian" GUIContent
+Styles o-> "menuItemSelectPrevious" GUIContent
+Styles o-> "menuItemSelectNext" GUIContent
+Styles o-> "menuItemSelectGrow" GUIContent
+Styles o-> "menuItemSelectShrink" GUIContent
+Styles o-> "menuItemSelectGrowLeft" GUIContent
+Styles o-> "menuItemSelectGrowRight" GUIContent
+Styles o-> "menuItemSelectShrinkLeft" GUIContent
+Styles o-> "menuItemSelectShrinkRight" GUIContent
+Styles o-> "menuItemSelectGrowFast" GUIContent
+Styles o-> "menuItemSelectShrinkFast" GUIContent
+Styles o-> "menuItemSelectGrowLeftFast" GUIContent
+Styles o-> "menuItemSelectGrowRightFast" GUIContent
+Styles o-> "menuItemSelectShrinkLeftFast" GUIContent
+Styles o-> "menuItemSelectShrinkRightFast" GUIContent
+Styles o-> "menuItemShowSelectedMarker" GUIContent
+Styles o-> "menuItemShowThreads" GUIContent
+Styles o-> "menuItemShowFrameLines" GUIContent
+Styles o-> "menuItemShowFrameLineText" GUIContent
+Styles o-> "menuItemShowOrderedByFrameDuration" GUIContent
+FrameTimeGraph +-- BarData
+FrameTimeGraph +-- SelectedRangeState
+SelectedRangeState --> "lastSelectedFrameOffsets<int>" "List`1"
+@enduml

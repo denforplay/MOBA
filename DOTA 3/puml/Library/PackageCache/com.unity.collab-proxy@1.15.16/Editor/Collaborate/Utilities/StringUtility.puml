@@ -1,0 +1,5 @@
+@startuml
+class StringUtility <<static>> {
+    + {static} TrimAndToLower(value:string) : string
+}
+@enduml

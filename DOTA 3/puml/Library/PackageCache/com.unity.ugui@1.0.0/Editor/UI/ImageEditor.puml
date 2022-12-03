@@ -1,0 +1,33 @@
+@startuml
+class ImageEditor {
+    m_bIsDriven : bool
+    + <<override>> OnInspectorGUI() : void
+    SetShowNativeSize(instant:bool) : void
+    + <<override>> HasPreviewGUI() : bool
+    + <<override>> OnPreviewGUI(rect:Rect, background:GUIStyle) : void
+    + <<override>> GetInfoString() : string
+}
+class Styles {
+}
+GraphicEditor <|-- ImageEditor
+ImageEditor --> "m_FillMethod" SerializedProperty
+ImageEditor --> "m_FillOrigin" SerializedProperty
+ImageEditor --> "m_FillAmount" SerializedProperty
+ImageEditor --> "m_FillClockwise" SerializedProperty
+ImageEditor --> "m_Type" SerializedProperty
+ImageEditor --> "m_FillCenter" SerializedProperty
+ImageEditor --> "m_Sprite" SerializedProperty
+ImageEditor --> "m_PreserveAspect" SerializedProperty
+ImageEditor --> "m_UseSpriteMesh" SerializedProperty
+ImageEditor --> "m_PixelsPerUnitMultiplier" SerializedProperty
+ImageEditor --> "m_SpriteContent" GUIContent
+ImageEditor --> "m_SpriteTypeContent" GUIContent
+ImageEditor --> "m_ClockwiseContent" GUIContent
+ImageEditor --> "m_ShowSlicedOrTiled" AnimBool
+ImageEditor --> "m_ShowSliced" AnimBool
+ImageEditor --> "m_ShowTiled" AnimBool
+ImageEditor --> "m_ShowFilled" AnimBool
+ImageEditor --> "m_ShowType" AnimBool
+ImageEditor +-- Styles
+Styles o-> "text" GUIContent
+@enduml

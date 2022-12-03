@@ -1,0 +1,24 @@
+@startuml
+class EmbeddedAssetPropertyDrawer <<sealed>> {
+    <<const>> vSpace : float = 2
+    <<const>> kIndentAmount : float = 15
+    <<const>> kBoxMargin : float = 3
+    HelpBoxHeight : float <<get>>
+    mExpanded : bool = false
+    WarnIfNull : bool <<get>>
+    HeaderHeight : float <<get>>
+    DrawHeader(rect:Rect, text:string) : float
+    HeaderText(property:SerializedProperty) : string
+    AssetHasCustomEditor(property:SerializedProperty) : bool
+    + <<override>> GetPropertyHeight(property:SerializedProperty, label:GUIContent) : float
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+    EmbeddedAssetType(property:SerializedProperty) : Type
+    RebuildPresetList() : void
+    AssetFieldWithCreateButton(r:Rect, property:SerializedProperty, warnIfNull:bool, defaultName:string) : void
+    CreateAsset(assetType:Type, copyFrom:ScriptableObject, defaultName:string, dialogTitle:string) : ScriptableObject
+}
+class "List`1"<T> {
+}
+PropertyDrawer <|-- EmbeddedAssetPropertyDrawer
+EmbeddedAssetPropertyDrawer --> "mAssetPresets<ScriptableObject>" "List`1"
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class CheckinProgress {
+}
+CheckinProgress --> "mProgressRender" CheckinUploadProgressRender
+CheckinProgress --> "mWorkspaceWindow" WorkspaceWindow
+CheckinProgress --> "mWkInfo" WorkspaceInfo
+@enduml

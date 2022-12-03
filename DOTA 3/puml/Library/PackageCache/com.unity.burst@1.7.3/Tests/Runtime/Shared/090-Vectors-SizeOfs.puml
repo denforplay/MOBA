@@ -1,0 +1,16 @@
+@startuml
+class VectorsSizeOfs <<partial>> {
+    + {static} Float4() : int
+    + {static} Float3() : int
+    + {static} Float2() : int
+    + {static} UInt4() : int
+    + {static} UInt3() : int
+    + {static} UInt2() : int
+    + {static} Int4() : int
+    + {static} Int3() : int
+    + {static} Int2() : int
+    + {static} Bool4() : int
+    + {static} Bool3() : int
+    + {static} Bool2() : int
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class VectorsBools <<partial>> {
+    + {static} Bool4Not(a:bool4) : int
+    + {static} Bool3Not(a:bool3) : int
+    + {static} Bool2Not(a:bool2) : int
+}
+@enduml

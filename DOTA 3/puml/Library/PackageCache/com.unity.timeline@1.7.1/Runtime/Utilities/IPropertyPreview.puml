@@ -1,0 +1,5 @@
+@startuml
+interface IPropertyPreview {
+    GatherProperties(director:PlayableDirector, driver:IPropertyCollector) : void
+}
+@enduml

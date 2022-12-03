@@ -1,0 +1,6 @@
+@startuml
+interface IAsyncTestAssemblyBuilder {
+    BuildAsync(assemblies:Assembly[], testPlatforms:TestPlatform[], options:IDictionary<string, object>) : IEnumerator<ITest>
+}
+ITestAssemblyBuilder <|-- IAsyncTestAssemblyBuilder
+@enduml

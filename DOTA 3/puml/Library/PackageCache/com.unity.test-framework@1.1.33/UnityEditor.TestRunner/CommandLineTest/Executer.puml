@@ -1,0 +1,17 @@
+@startuml
+class Executer {
+    + Executer(testRunnerApi:ITestRunnerApi, settingsBuilder:ISettingsBuilder, logErrorFormat:Action<string, object[]>, logException:Action<Exception>, exitEditorApplication:Action<int>, scriptCompilationFailedCheck:Func<bool>)
+    HandleSetupException(exception:SetupException) : void
+}
+enum ReturnCodes {
+    Ok= 0,
+    Failed= 2,
+    RunError= 3,
+    PlatformNotFoundReturnCode= 4,
+}
+class ExceptionHandling {
+    + ExceptionHandling(exceptionType:SetupException.ExceptionType, message:string, returnCode:ReturnCodes)
+}
+Executer +-- ReturnCodes
+Executer +-- ExceptionHandling
+@enduml

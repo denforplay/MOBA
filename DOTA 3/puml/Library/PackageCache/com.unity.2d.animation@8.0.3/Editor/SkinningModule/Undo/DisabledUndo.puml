@@ -1,0 +1,12 @@
+@startuml
+class DisabledUndo {
+    + RecordObject(o:object, name:string) : void
+    + RegisterCompleteObjectUndo(o:object, name:string) : void
+    + RegisterCompleteObjectUndo(o:object[], name:string) : void
+    + RegisterCreatedObjectUndo(o:object, name:string) : void
+    + DestroyObjectImmediate(o:object) : void
+    + ClearUndo(o:object) : void
+    + IncrementCurrentGroup() : void
+}
+IUndo <|-- DisabledUndo
+@enduml

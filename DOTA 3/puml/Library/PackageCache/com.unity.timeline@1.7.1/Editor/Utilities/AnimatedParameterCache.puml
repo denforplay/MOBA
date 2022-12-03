@@ -1,0 +1,30 @@
+@startuml
+class AnimatedParameterCache <<static>> {
+    + {static} TryGetScriptPlayableFields(type:Type, scriptPlayableFields:FieldInfo[]) : bool
+    + {static} SetScriptPlayableFields(type:Type, scriptPlayableFields:FieldInfo[]) : void
+    + {static} TryGetFieldInfoForProperty(property:SerializedProperty, fieldInfo:FieldInfo) : bool
+    + {static} SetFieldInfoForProperty(property:SerializedProperty, fieldInfo:FieldInfo) : void
+    + {static} TryGetIsPropertyAnimatable(property:SerializedProperty, isAnimatable:bool) : bool
+    + {static} SetIsPropertyAnimatable(property:SerializedProperty, isAnimatable:bool) : void
+    + {static} TryGetBindingName(type:Type, path:string, bindingName:string) : bool
+    + {static} SetBindingName(type:Type, path:string, bindingName:string) : void
+}
+class PropertyKey <<struct>> {
+    <<readonly>> m_Path : string
+    + PropertyKey(property:SerializedProperty)
+    + PropertyKey(type:Type, path:string)
+    + Equals(other:PropertyKey) : bool
+    + <<override>> Equals(obj:object) : bool
+    + <<override>> GetHashCode() : int
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "IEquatable`1"<T> {
+}
+AnimatedParameterCache o-> "k_ScriptPlayableFieldsCache<Type,FieldInfo[]>" "Dictionary`2"
+AnimatedParameterCache o-> "k_PropertyFieldInfoCache<PropertyKey,FieldInfo>" "Dictionary`2"
+AnimatedParameterCache o-> "k_PropertyIsAnimatableCache<PropertyKey,bool>" "Dictionary`2"
+AnimatedParameterCache o-> "k_BindingNameCache<PropertyKey,string>" "Dictionary`2"
+"IEquatable`1" "<PropertyKey>" <|-- PropertyKey
+PropertyKey --> "m_Type" Type
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class SaveAssets <<static>> {
+    {static} ForPaths(paths:List<string>, askForUserConfirmation:bool, isCancelled:bool) : void
+    {static} SaveDirtyScenes(paths:List<string>, askForUserConfirmation:bool, isCancelled:bool) : void
+    {static} GetDirtyScenes() : List<Scene>
+    {static} Contains(paths:List<string>, scene:Scene) : bool
+    {static} GetPaths(changeInfos:List<ChangeInfo>) : List<string>
+}
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+abstract class CinemachineExtension {
+    + <<virtual>> PrePipelineMutateCameraStateCallback(vcam:CinemachineVirtualCameraBase, curState:CameraState, deltaTime:float) : void
+    + InvokePostPipelineStageCallback(vcam:CinemachineVirtualCameraBase, stage:CinemachineCore.Stage, state:CameraState, deltaTime:float) : void
+    + <<virtual>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<virtual>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<virtual>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float) : bool
+    + <<virtual>> GetMaxDampTime() : float
+    + <<virtual>> RequiresUserInput : bool <<get>>
+}
+MonoBehaviour <|-- CinemachineExtension
+CinemachineExtension --> "VirtualCamera" CinemachineVirtualCameraBase
+CinemachineExtension --> "m_vcamOwner" CinemachineVirtualCameraBase
+@enduml

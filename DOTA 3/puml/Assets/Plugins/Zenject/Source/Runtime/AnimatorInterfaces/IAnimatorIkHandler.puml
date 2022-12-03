@@ -1,0 +1,5 @@
+@startuml
+interface IAnimatorIkHandler {
+    OnAnimatorIk() : void
+}
+@enduml

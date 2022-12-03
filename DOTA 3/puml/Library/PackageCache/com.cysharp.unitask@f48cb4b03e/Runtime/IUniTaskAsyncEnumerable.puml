@@ -1,0 +1,35 @@
+@startuml
+interface "IUniTaskAsyncEnumerable`1"<out T> {
+    GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<T>
+}
+interface "IUniTaskAsyncEnumerator`1"<out T> {
+    Current : T <<get>>
+    MoveNextAsync() : UniTask<bool>
+}
+interface IUniTaskAsyncDisposable {
+    DisposeAsync() : UniTask
+}
+interface "IUniTaskOrderedAsyncEnumerable`1"<TElement> {
+    CreateOrderedEnumerable(keySelector:Func<TElement, TKey>, comparer:IComparer<TKey>, descending:bool) : IUniTaskOrderedAsyncEnumerable<TElement>
+    CreateOrderedEnumerable(keySelector:Func<TElement, UniTask<TKey>>, comparer:IComparer<TKey>, descending:bool) : IUniTaskOrderedAsyncEnumerable<TElement>
+    CreateOrderedEnumerable(keySelector:Func<TElement, CancellationToken, UniTask<TKey>>, comparer:IComparer<TKey>, descending:bool) : IUniTaskOrderedAsyncEnumerable<TElement>
+}
+interface "IConnectableUniTaskAsyncEnumerable`1"<out T> {
+    Connect() : IDisposable
+}
+class UniTaskAsyncEnumerableExtensions <<static>> {
+    + {static} WithCancellation(source:IUniTaskAsyncEnumerable<T>, cancellationToken:CancellationToken) : UniTaskCancelableAsyncEnumerable<T>
+}
+class "UniTaskCancelableAsyncEnumerable`1"<T> <<struct>> {
+    + GetAsyncEnumerator() : Enumerator
+}
+class Enumerator <<struct>> {
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+IUniTaskAsyncDisposable <|-- "IUniTaskAsyncEnumerator`1"
+"IUniTaskAsyncEnumerable`1" "<TElement>" <|-- "IUniTaskOrderedAsyncEnumerable`1"
+"IUniTaskAsyncEnumerable`1" "<T>" <|-- "IConnectableUniTaskAsyncEnumerable`1"
+"UniTaskCancelableAsyncEnumerable`1" +-- Enumerator
+Enumerator --> "Current" T
+@enduml

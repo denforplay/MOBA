@@ -1,0 +1,11 @@
+@startuml
+class Sprinkler {
+    + m_RandomFactor : float = 10.0f
+    + m_UseNormals : bool = false
+    Angle(a:Vector3, b:Vector3) : float
+    Start() : void
+    Update() : void
+}
+MonoBehaviour <|-- Sprinkler
+Sprinkler --> "m_Prefab" GameObject
+@enduml

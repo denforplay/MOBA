@@ -1,0 +1,57 @@
+@startuml
+class TestUnityMath {
+    + {static} TestCos(value:float) : float
+    + {static} TestSin(value:float) : float
+    + {static} TestTan(value:float) : float
+    + {static} TestTan2(value:float) : float
+    + {static} TestAcos(value:float) : float
+    + {static} TestAsin(value:float) : float
+    + {static} TestAtan(value:float) : float
+    + {static} TestCosh(value:float) : float
+    + {static} TestSinh(value:float) : float
+    + {static} TestTanh(value:float) : float
+    + {static} TestSqrt(value:float) : float
+    + {static} TestLog(value:float) : float
+    + {static} TestLog10(value:float) : float
+    + {static} TestExp(value:float) : float
+    + {static} TestPow(value:float, power:float) : float
+    + {static} TestAbsFloat(value:float) : float
+    + {static} TestMaxInt(left:int, right:int) : int
+    + {static} TestMinInt(left:int, right:int) : int
+    + {static} TestMaxfloat(left:float, right:float) : float
+    + {static} TestMinfloat(left:float, right:float) : float
+    + {static} TestSignFloat(value:float) : float
+    + {static} TestSignDouble(value:double) : double
+    + {static} TestCeilingfloat(value:float) : float
+    + {static} TestFloorfloat(value:float) : float
+    + {static} TestRoundfloat(value:float) : float
+    + {static} TestTruncatefloat(value:float) : float
+    + {static} TestStaticLoad() : bool
+    + {static} TestLongCountbits(value:long) : long
+    + {static} TestLongLzcnt(value:long) : long
+    + {static} TestLongTzcnt(value:long) : long
+    + {static} <<unsafe>> TestUshortAddInt2(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestInt2AddUshort(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestUshortSubInt2(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestInt2SubUshort(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestUshortMulInt2(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestInt2MulUshort(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestUshortDivInt2(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestInt2DivUshort(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestUshortModInt2(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestInt2ModUshort(o:int2*, i:ushort) : void
+    + {static} <<unsafe>> TestUshortEqInt2(i:ushort) : int
+    + {static} <<unsafe>> TestInt2EqUshort(i:ushort) : int
+    + {static} <<unsafe>> TestUshortNeInt2(i:ushort) : int
+    + {static} <<unsafe>> TestInt2NeUshort(i:ushort) : int
+    + {static} <<unsafe>> TestUshortGeInt2(i:ushort) : int
+    + {static} <<unsafe>> TestInt2GeUshort(i:ushort) : int
+    + {static} <<unsafe>> TestUshortGtInt2(i:ushort) : int
+    + {static} <<unsafe>> TestInt2GtUshort(i:ushort) : int
+    + {static} <<unsafe>> TestUshortLtInt2(i:ushort) : int
+    + {static} <<unsafe>> TestInt2LtUshort(i:ushort) : int
+    + {static} <<unsafe>> TestUshortLeInt2(i:ushort) : int
+    + {static} <<unsafe>> TestInt2LeUshort(i:ushort) : int
+    + {static} TestSqrtAndAcosIsDefinedBehaviour(a:float) : float
+}
+@enduml

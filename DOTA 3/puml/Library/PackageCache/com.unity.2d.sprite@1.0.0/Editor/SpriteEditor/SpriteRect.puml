@@ -1,0 +1,30 @@
+@startuml
+class SpriteRect {
+    m_Name : string
+    m_OriginalName : string
+    m_SpriteID : string
+    + name : string <<get>> <<set>>
+    + {static} GetSpriteIDFromSerializedProperty(sp:SerializedProperty) : GUID
+}
+class SpriteRectCache {
+    + Count : int <<get>>
+    + RectAt(i:int) : SpriteRect
+    + AddRect(r:SpriteRect) : void
+    + RemoveRect(r:SpriteRect) : void
+    + ClearAll() : void
+    + GetIndex(spriteRect:SpriteRect) : int
+    + Contains(spriteRect:SpriteRect) : bool
+    OnEnable() : void
+}
+SpriteRect --> "m_Pivot" Vector2
+SpriteRect --> "m_Alignment" SpriteAlignment
+SpriteRect --> "m_Border" Vector4
+SpriteRect --> "m_Rect" Rect
+SpriteRect --> "m_GUID" GUID
+SpriteRect --> "pivot" Vector2
+SpriteRect --> "alignment" SpriteAlignment
+SpriteRect --> "border" Vector4
+SpriteRect --> "rect" Rect
+SpriteRect --> "spriteID" GUID
+ScriptableObject <|-- SpriteRectCache
+@enduml

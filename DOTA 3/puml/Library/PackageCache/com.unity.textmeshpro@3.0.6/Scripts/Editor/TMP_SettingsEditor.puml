@@ -1,0 +1,77 @@
+@startuml
+class TMP_SettingsEditor {
+    + OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class Styles {
+}
+Editor <|-- TMP_SettingsEditor
+TMP_SettingsEditor --> "m_PropFontAsset" SerializedProperty
+TMP_SettingsEditor --> "m_PropDefaultFontAssetPath" SerializedProperty
+TMP_SettingsEditor --> "m_PropDefaultFontSize" SerializedProperty
+TMP_SettingsEditor --> "m_PropDefaultAutoSizeMinRatio" SerializedProperty
+TMP_SettingsEditor --> "m_PropDefaultAutoSizeMaxRatio" SerializedProperty
+TMP_SettingsEditor --> "m_PropDefaultTextMeshProTextContainerSize" SerializedProperty
+TMP_SettingsEditor --> "m_PropDefaultTextMeshProUITextContainerSize" SerializedProperty
+TMP_SettingsEditor --> "m_PropAutoSizeTextContainer" SerializedProperty
+TMP_SettingsEditor --> "m_PropEnableRaycastTarget" SerializedProperty
+TMP_SettingsEditor --> "m_PropIsTextObjectScaleStatic" SerializedProperty
+TMP_SettingsEditor --> "m_PropSpriteAsset" SerializedProperty
+TMP_SettingsEditor --> "m_PropMissingSpriteCharacterUnicode" SerializedProperty
+TMP_SettingsEditor --> "m_PropEnableEmojiSupport" SerializedProperty
+TMP_SettingsEditor --> "m_PropSpriteAssetPath" SerializedProperty
+TMP_SettingsEditor --> "m_PropStyleSheet" SerializedProperty
+TMP_SettingsEditor --> "m_PropStyleSheetsResourcePath" SerializedProperty
+TMP_SettingsEditor --> "m_List" ReorderableList
+TMP_SettingsEditor --> "m_PropColorGradientPresetsPath" SerializedProperty
+TMP_SettingsEditor --> "m_PropMatchMaterialPreset" SerializedProperty
+TMP_SettingsEditor --> "m_PropWordWrapping" SerializedProperty
+TMP_SettingsEditor --> "m_PropKerning" SerializedProperty
+TMP_SettingsEditor --> "m_PropExtraPadding" SerializedProperty
+TMP_SettingsEditor --> "m_PropTintAllSprites" SerializedProperty
+TMP_SettingsEditor --> "m_PropParseEscapeCharacters" SerializedProperty
+TMP_SettingsEditor --> "m_PropMissingGlyphCharacter" SerializedProperty
+TMP_SettingsEditor --> "m_GetFontFeaturesAtRuntime" SerializedProperty
+TMP_SettingsEditor --> "m_PropWarningsDisabled" SerializedProperty
+TMP_SettingsEditor --> "m_PropLeadingCharacters" SerializedProperty
+TMP_SettingsEditor --> "m_PropFollowingCharacters" SerializedProperty
+TMP_SettingsEditor --> "m_PropUseModernHangulLineBreakingRules" SerializedProperty
+TMP_SettingsEditor +-- Styles
+Styles o-> "defaultFontAssetLabel" GUIContent
+Styles o-> "defaultFontAssetPathLabel" GUIContent
+Styles o-> "fallbackFontAssetsLabel" GUIContent
+Styles o-> "fallbackFontAssetsListLabel" GUIContent
+Styles o-> "fallbackMaterialSettingsLabel" GUIContent
+Styles o-> "matchMaterialPresetLabel" GUIContent
+Styles o-> "containerDefaultSettingsLabel" GUIContent
+Styles o-> "textMeshProLabel" GUIContent
+Styles o-> "textMeshProUiLabel" GUIContent
+Styles o-> "enableRaycastTarget" GUIContent
+Styles o-> "autoSizeContainerLabel" GUIContent
+Styles o-> "isTextObjectScaleStaticLabel" GUIContent
+Styles o-> "textComponentDefaultSettingsLabel" GUIContent
+Styles o-> "defaultFontSize" GUIContent
+Styles o-> "autoSizeRatioLabel" GUIContent
+Styles o-> "minLabel" GUIContent
+Styles o-> "maxLabel" GUIContent
+Styles o-> "wordWrappingLabel" GUIContent
+Styles o-> "kerningLabel" GUIContent
+Styles o-> "extraPaddingLabel" GUIContent
+Styles o-> "tintAllSpritesLabel" GUIContent
+Styles o-> "parseEscapeCharactersLabel" GUIContent
+Styles o-> "dynamicFontSystemSettingsLabel" GUIContent
+Styles o-> "getFontFeaturesAtRuntime" GUIContent
+Styles o-> "dynamicAtlasTextureGroup" GUIContent
+Styles o-> "missingGlyphLabel" GUIContent
+Styles o-> "disableWarningsLabel" GUIContent
+Styles o-> "defaultSpriteAssetLabel" GUIContent
+Styles o-> "missingSpriteCharacterUnicodeLabel" GUIContent
+Styles o-> "enableEmojiSupportLabel" GUIContent
+Styles o-> "spriteAssetsPathLabel" GUIContent
+Styles o-> "defaultStyleSheetLabel" GUIContent
+Styles o-> "styleSheetResourcePathLabel" GUIContent
+Styles o-> "colorGradientPresetsLabel" GUIContent
+Styles o-> "colorGradientsPathLabel" GUIContent
+Styles o-> "lineBreakingLabel" GUIContent
+Styles o-> "koreanSpecificRules" GUIContent
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+class IncludedAssembliesTreeView {
+    m_AssembliesToInclude : string
+    <<const>> kCheckBoxWidth : float = 42f
+    + Width : float <<get>> <<set>> = 100f
+    + IncludedAssembliesTreeView(parent:CodeCoverageWindow, assembliesToInclude:string)
+    + SelectAll() : void
+    + DeselectAll() : void
+    ApplyChanges() : void
+}
+class AssembliesTreeViewItem {
+    + Enabled : bool <<get>> <<set>>
+}
+TreeView <|-- IncludedAssembliesTreeView
+IncludedAssembliesTreeView --> "m_Parent" CodeCoverageWindow
+TreeViewItem <|-- AssembliesTreeViewItem
+@enduml

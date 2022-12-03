@@ -1,0 +1,7 @@
+@startuml
+class EditorCoroutineUtility <<static>> {
+    + {static} StartCoroutine(routine:IEnumerator, owner:object) : EditorCoroutine
+    + {static} StartCoroutineOwnerless(routine:IEnumerator) : EditorCoroutine
+    + {static} StopCoroutine(coroutine:EditorCoroutine) : void
+}
+@enduml

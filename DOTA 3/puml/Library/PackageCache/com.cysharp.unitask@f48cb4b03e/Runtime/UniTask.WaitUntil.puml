@@ -1,0 +1,131 @@
+@startuml
+class UniTask <<struct>> {
+    + {static} WaitUntil(predicate:Func<bool>, timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} WaitWhile(predicate:Func<bool>, timing:PlayerLoopTiming, cancellationToken:CancellationToken) : UniTask
+    + {static} WaitUntilCanceled(cancellationToken:CancellationToken, timing:PlayerLoopTiming) : UniTask
+    + {static} WaitUntilValueChanged(target:T, monitorFunction:Func<T, U>, monitorTiming:PlayerLoopTiming, equalityComparer:IEqualityComparer<U>, cancellationToken:CancellationToken) : UniTask<U>
+}
+class WaitUntilPromise <<sealed>> {
+    {static} WaitUntilPromise()
+    WaitUntilPromise()
+    + {static} Create(predicate:Func<bool>, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class WaitWhilePromise <<sealed>> {
+    {static} WaitWhilePromise()
+    WaitWhilePromise()
+    + {static} Create(predicate:Func<bool>, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class WaitUntilCanceledPromise <<sealed>> {
+    {static} WaitUntilCanceledPromise()
+    WaitUntilCanceledPromise()
+    + {static} Create(cancellationToken:CancellationToken, timing:PlayerLoopTiming, token:short) : IUniTaskSource
+    + GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class "WaitUntilValueChangedUnityObjectPromise`2"<T,U> <<sealed>> {
+    {static} WaitUntilValueChangedUnityObjectPromise()
+    target : T
+    currentValue : U
+    WaitUntilValueChangedUnityObjectPromise()
+    + {static} Create(target:T, monitorFunction:Func<T, U>, equalityComparer:IEqualityComparer<U>, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource<U>
+    + GetResult(token:short) : U
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class "WaitUntilValueChangedStandardObjectPromise`2"<T,U> <<sealed>> {
+    {static} WaitUntilValueChangedStandardObjectPromise()
+    currentValue : U
+    WaitUntilValueChangedStandardObjectPromise()
+    + {static} Create(target:T, monitorFunction:Func<T, U>, equalityComparer:IEqualityComparer<U>, timing:PlayerLoopTiming, cancellationToken:CancellationToken, token:short) : IUniTaskSource<U>
+    + GetResult(token:short) : U
+    GetResult(token:short) : void
+    + GetStatus(token:short) : UniTaskStatus
+    + UnsafeGetStatus() : UniTaskStatus
+    + OnCompleted(continuation:Action<object>, state:object, token:short) : void
+    + MoveNext() : bool
+    TryReturn() : bool
+}
+class "ITaskPoolNode`1"<T> {
+}
+class "TaskPool`1"<T> {
+}
+class "Func`1"<T> {
+}
+class "UniTaskCompletionSourceCore`1"<T> {
+}
+class "IUniTaskSource`1"<T> {
+}
+class "Func`2"<T1,T2> {
+}
+class "IEqualityComparer`1"<T> {
+}
+class "WeakReference`1"<T> {
+}
+UniTask +-- WaitUntilPromise
+IUniTaskSource <|-- WaitUntilPromise
+IPlayerLoopItem <|-- WaitUntilPromise
+"ITaskPoolNode`1" "<WaitUntilPromise>" <|-- WaitUntilPromise
+WaitUntilPromise --> "pool<WaitUntilPromise>" "TaskPool`1"
+WaitUntilPromise --> "nextNode" WaitUntilPromise
+WaitUntilPromise --> "predicate<bool>" "Func`1"
+WaitUntilPromise --> "cancellationToken" CancellationToken
+WaitUntilPromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+UniTask +-- WaitWhilePromise
+IUniTaskSource <|-- WaitWhilePromise
+IPlayerLoopItem <|-- WaitWhilePromise
+"ITaskPoolNode`1" "<WaitWhilePromise>" <|-- WaitWhilePromise
+WaitWhilePromise --> "pool<WaitWhilePromise>" "TaskPool`1"
+WaitWhilePromise --> "nextNode" WaitWhilePromise
+WaitWhilePromise --> "predicate<bool>" "Func`1"
+WaitWhilePromise --> "cancellationToken" CancellationToken
+WaitWhilePromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+UniTask +-- WaitUntilCanceledPromise
+IUniTaskSource <|-- WaitUntilCanceledPromise
+IPlayerLoopItem <|-- WaitUntilCanceledPromise
+"ITaskPoolNode`1" "<WaitUntilCanceledPromise>" <|-- WaitUntilCanceledPromise
+WaitUntilCanceledPromise --> "pool<WaitUntilCanceledPromise>" "TaskPool`1"
+WaitUntilCanceledPromise --> "nextNode" WaitUntilCanceledPromise
+WaitUntilCanceledPromise --> "cancellationToken" CancellationToken
+WaitUntilCanceledPromise --> "core<object>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WaitUntilValueChangedUnityObjectPromise`2"
+"IUniTaskSource`1" "<U>" <|-- "WaitUntilValueChangedUnityObjectPromise`2"
+IPlayerLoopItem <|-- "WaitUntilValueChangedUnityObjectPromise`2"
+"ITaskPoolNode`1" "<WaitUntilValueChangedUnityObjectPromise<T, U>>" <|-- "WaitUntilValueChangedUnityObjectPromise`2"
+"WaitUntilValueChangedUnityObjectPromise`2" --> "pool<WaitUntilValueChangedUnityObjectPromise<T, U>>" "TaskPool`1"
+"WaitUntilValueChangedUnityObjectPromise`2" --> "nextNode<T,U>" "WaitUntilValueChangedUnityObjectPromise`2"
+"WaitUntilValueChangedUnityObjectPromise`2" --> "monitorFunction<T,U>" "Func`2"
+"WaitUntilValueChangedUnityObjectPromise`2" --> "equalityComparer<U>" "IEqualityComparer`1"
+"WaitUntilValueChangedUnityObjectPromise`2" --> "cancellationToken" CancellationToken
+"WaitUntilValueChangedUnityObjectPromise`2" --> "core<U>" "UniTaskCompletionSourceCore`1"
+UniTask +-- "WaitUntilValueChangedStandardObjectPromise`2"
+"IUniTaskSource`1" "<U>" <|-- "WaitUntilValueChangedStandardObjectPromise`2"
+IPlayerLoopItem <|-- "WaitUntilValueChangedStandardObjectPromise`2"
+"ITaskPoolNode`1" "<WaitUntilValueChangedStandardObjectPromise<T, U>>" <|-- "WaitUntilValueChangedStandardObjectPromise`2"
+"WaitUntilValueChangedStandardObjectPromise`2" --> "pool<WaitUntilValueChangedStandardObjectPromise<T, U>>" "TaskPool`1"
+"WaitUntilValueChangedStandardObjectPromise`2" --> "nextNode<T,U>" "WaitUntilValueChangedStandardObjectPromise`2"
+"WaitUntilValueChangedStandardObjectPromise`2" --> "target<T>" "WeakReference`1"
+"WaitUntilValueChangedStandardObjectPromise`2" --> "monitorFunction<T,U>" "Func`2"
+"WaitUntilValueChangedStandardObjectPromise`2" --> "equalityComparer<U>" "IEqualityComparer`1"
+"WaitUntilValueChangedStandardObjectPromise`2" --> "cancellationToken" CancellationToken
+"WaitUntilValueChangedStandardObjectPromise`2" --> "core<U>" "UniTaskCompletionSourceCore`1"
+@enduml

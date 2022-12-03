@@ -18,3 +18,6 @@ MonoBehaviour:
   _skillType: 0
   _skillAnimation: {fileID: 0}
   _effectValue: 35
+  _range: 0
+  _manaCost: 15
+  _particle: {fileID: 0}

@@ -1,0 +1,31 @@
+@startuml
+interface ITimelineItem {
+    start : double <<get>> <<set>>
+    end : double <<get>>
+    duration : double <<get>>
+    IsCompatibleWithTrack(track:TrackAsset) : bool
+    Delete() : void
+    CloneTo(parent:TrackAsset, time:double) : ITimelineItem
+    PushUndo(operation:string) : void
+}
+interface ITrimmable {
+    SetStart(time:double, affectTimeScale:bool) : void
+    SetEnd(time:double, affectTimeScale:bool) : void
+    TrimStart(time:double) : void
+    TrimEnd(time:double) : void
+}
+interface IBlendable {
+    supportsBlending : bool <<get>>
+    hasLeftBlend : bool <<get>>
+    hasRightBlend : bool <<get>>
+    leftBlendDuration : double <<get>>
+    rightBlendDuration : double <<get>>
+}
+class "IEquatable`1"<T> {
+}
+"IEquatable`1" "<ITimelineItem>" <|-- ITimelineItem
+ITimelineItem --> "parentTrack" TrackAsset
+ITimelineItem --> "gui" TimelineItemGUI
+ITimelineItem <|-- ITrimmable
+ITimelineItem <|-- IBlendable
+@enduml

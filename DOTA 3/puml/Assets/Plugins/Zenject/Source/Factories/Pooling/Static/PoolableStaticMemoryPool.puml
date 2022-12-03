@@ -1,0 +1,80 @@
+@startuml
+class "PoolableStaticMemoryPool`1"<TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "PoolableStaticMemoryPool`2"<TParam1,TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(p1:TParam1, value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "PoolableStaticMemoryPool`3"<TParam1,TParam2,TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(p1:TParam1, p2:TParam2, value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "PoolableStaticMemoryPool`4"<TParam1,TParam2,TParam3,TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(p1:TParam1, p2:TParam2, p3:TParam3, value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "PoolableStaticMemoryPool`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "PoolableStaticMemoryPool`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "PoolableStaticMemoryPool`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6, value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "PoolableStaticMemoryPool`8"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue> {
+    + PoolableStaticMemoryPool()
+    {static} OnSpawned(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6, p7:TParam7, value:TValue) : void
+    {static} OnDespawned(value:TValue) : void
+}
+class "StaticMemoryPool`1"<T> {
+}
+class "StaticMemoryPool`2"<T1,T2> {
+}
+class "IPoolable`1"<T> {
+}
+class "StaticMemoryPool`3"<T1,T2,T3> {
+}
+class "IPoolable`2"<T1,T2> {
+}
+class "StaticMemoryPool`4"<T1,T2,T3,T4> {
+}
+class "IPoolable`3"<T1,T2,T3> {
+}
+class "StaticMemoryPool`5"<T1,T2,T3,T4,T5> {
+}
+class "IPoolable`4"<T1,T2,T3,T4> {
+}
+class "StaticMemoryPool`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "IPoolable`5"<T1,T2,T3,T4,T5> {
+}
+class "StaticMemoryPool`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "IPoolable`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "StaticMemoryPool`8"<T1,T2,T3,T4,T5,T6,T7,T8> {
+}
+class "IPoolable`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+"StaticMemoryPool`1" "<TValue>" <|-- "PoolableStaticMemoryPool`1"
+"StaticMemoryPool`2" "<TParam1,TValue>" <|-- "PoolableStaticMemoryPool`2"
+"StaticMemoryPool`3" "<TParam1,TParam2,TValue>" <|-- "PoolableStaticMemoryPool`3"
+"StaticMemoryPool`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "PoolableStaticMemoryPool`4"
+"StaticMemoryPool`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "PoolableStaticMemoryPool`5"
+"StaticMemoryPool`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "PoolableStaticMemoryPool`6"
+"StaticMemoryPool`7" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue>" <|-- "PoolableStaticMemoryPool`7"
+"StaticMemoryPool`8" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue>" <|-- "PoolableStaticMemoryPool`8"
+@enduml

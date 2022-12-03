@@ -1,0 +1,8 @@
+@startuml
+class SessionEventInfo {
+}
+class "List`1"<T> {
+}
+SessionEventInfo --> "SessionMode" SessionMode
+SessionEventInfo --> "SessionResultPaths<string>" "List`1"
+@enduml

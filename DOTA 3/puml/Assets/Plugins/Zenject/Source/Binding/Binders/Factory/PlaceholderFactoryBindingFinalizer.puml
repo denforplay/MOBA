@@ -1,0 +1,7 @@
+@startuml
+class "PlaceholderFactoryBindingFinalizer`1"<TContract> {
+    + PlaceholderFactoryBindingFinalizer(bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+}
+ProviderBindingFinalizer <|-- "PlaceholderFactoryBindingFinalizer`1"
+"PlaceholderFactoryBindingFinalizer`1" --> "_factoryBindInfo" FactoryBindInfo
+@enduml

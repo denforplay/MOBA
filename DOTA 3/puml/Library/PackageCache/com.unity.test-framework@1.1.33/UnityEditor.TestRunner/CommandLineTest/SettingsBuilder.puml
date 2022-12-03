@@ -1,0 +1,13 @@
+@startuml
+class SettingsBuilder {
+    + SettingsBuilder(testSettingsDeserializer:ITestSettingsDeserializer, logAction:Action<string>, logWarningAction:Action<string>, scriptCompilationFailedCheck:Func<bool>)
+    + BuildApiExecutionSettings(commandLineArgs:string[]) : Api.ExecutionSettings
+    + BuildExecutionSettings(commandLineArgs:string[]) : ExecutionSettings
+    DisplayQuitWarningIfQuitIsGiven(quitIsGiven:bool) : void
+    CheckForScriptCompilationErrors() : void
+    LogParametersForRun(testPlatform:string, testFilters:string[], testCategories:string[], testSettingsFilePath:string) : void
+    GetTestSettings(testSettingsFilePath:string) : ITestSettings
+    {static} SetFilterAndGetBuildTarget(testPlatform:string, filter:Filter) : BuildTarget?
+}
+ISettingsBuilder <|-- SettingsBuilder
+@enduml

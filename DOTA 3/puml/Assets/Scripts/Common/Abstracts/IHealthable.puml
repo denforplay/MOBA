@@ -1,0 +1,10 @@
+@startuml
+interface IHealthable {
+     <<event>> OnMaxHealthChanged : Action<float> 
+     <<event>> OnHealthChanged : Action<float> 
+     <<event>> OnHealthEnded : Action 
+    MaxHealth : float <<get>>
+    CurrentHealth : float <<get>>
+    ChangeHealth(value:float) : void
+}
+@enduml

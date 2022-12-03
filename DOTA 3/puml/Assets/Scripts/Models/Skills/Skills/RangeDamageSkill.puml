@@ -1,0 +1,8 @@
+@startuml
+class RangeDamageSkill {
+    + RangeDamageSkill(skillId:int, skillConfiguration:SkillConfiguration, character:Character)
+    + <<override>> <<async>> Apply(position:Vector3) : UniTask
+}
+RangeTargetZoneSkill <|-- RangeDamageSkill
+RangeDamageSkill --> "SkillType" SkillType
+@enduml

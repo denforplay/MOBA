@@ -1,0 +1,91 @@
+@startuml
+class InspectorCurveEditor <<sealed>> {
+    m_SelectedKeyframeIndex : int
+    m_Dirty : bool
+    + InspectorCurveEditor()
+    + InspectorCurveEditor(settings:Settings)
+    + Add(curves:SerializedProperty[]) : void
+    + Add(curve:SerializedProperty) : void
+    + Add(curve:SerializedProperty, state:CurveState) : void
+    + Remove(curve:SerializedProperty) : void
+    + RemoveAll() : void
+    + GetCurveState(curve:SerializedProperty) : CurveState
+    + SetCurveState(curve:SerializedProperty, state:CurveState) : void
+    + GetSelection() : Selection
+    + SetKeyframe(curve:SerializedProperty, keyframeIndex:int, keyframe:Keyframe) : void
+    + OnGUI(rect:Rect) : bool
+    OnCurveGUI(rect:Rect, curve:SerializedProperty, state:CurveState) : void
+    OnGeneralUI() : void
+    SaveCurve(prop:SerializedProperty, curve:AnimationCurve) : void
+    Invalidate() : void
+    SelectKeyframe(curve:SerializedProperty, keyframeIndex:int) : void
+    ContextMenuAddKey(hit:Vector3, createOnCurve:bool) : void
+    EditCreateKeyframe(curve:AnimationCurve, position:Vector3, createOnCurve:bool, zeroKeyConstantValue:float) : void
+    EditDeleteKeyframe(curve:AnimationCurve, keyframeIndex:int) : void
+    AddKeyframe(curve:AnimationCurve, newValue:Keyframe) : void
+    RemoveKeyframe(curve:AnimationCurve, keyframeIndex:int) : void
+    SetKeyframe(curve:AnimationCurve, keyframeIndex:int, newValue:Keyframe) : void
+    EditMoveKeyframe(curve:AnimationCurve, keys:Keyframe[], keyframeIndex:int) : void
+    EditMoveTangent(curve:AnimationCurve, keys:Keyframe[], keyframeIndex:int, targetTangent:Tangent, linkTangents:bool) : void
+    CurveToCanvas(keyframe:Keyframe) : Vector3
+    CurveToCanvas(position:Vector3) : Vector3
+    CanvasToCurve(position:Vector3) : Vector3
+    CurveTangentToCanvas(tangent:float) : Vector3
+    BezierSegment(start:Keyframe, end:Keyframe) : Vector3[]
+    HardSegment(start:Keyframe, end:Keyframe) : Vector3[]
+    ProjectTangent(inPosition:float, inValue:float, inTangent:float, projPosition:float) : float
+    EvaluateTangent(curve:AnimationCurve, time:float) : float
+}
+enum EditMode {
+    None,
+    Moving,
+    TangentEdit,
+}
+enum Tangent {
+    In,
+    Out,
+}
+class Settings <<struct>> {
+    + curvePickingDistance : float
+    + keyTimeClampingDistance : float
+}
+class CurveState <<struct>> {
+    + visible : bool
+    + editable : bool
+    + minPointCount : uint
+    + zeroKeyConstantValue : float
+    + width : float
+    + handleWidth : float
+    + showNonEditableHandles : bool
+    + onlyShowHandlesOnSelection : bool
+    + loopInBounds : bool
+}
+class Selection <<struct>> {
+    + keyframeIndex : int
+    + keyframe : Keyframe?
+    + Selection(curve:SerializedProperty, keyframeIndex:int, keyframe:Keyframe?)
+}
+class MenuAction <<struct>> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+InspectorCurveEditor --> "settings" Settings
+InspectorCurveEditor --> "m_Curves<SerializedProperty,CurveState>" "Dictionary`2"
+InspectorCurveEditor --> "m_CurveArea" Rect
+InspectorCurveEditor --> "m_SelectedCurve" SerializedProperty
+InspectorCurveEditor o-> "m_EditMode" EditMode
+InspectorCurveEditor --> "m_TangentEditMode" Tangent
+InspectorCurveEditor +-- EditMode
+InspectorCurveEditor +-- Tangent
+InspectorCurveEditor +-- Settings
+Settings --> "bounds" Rect
+Settings --> "padding" RectOffset
+Settings --> "selectionColor" Color
+Settings --> "defaultSettings" Settings
+InspectorCurveEditor +-- CurveState
+CurveState --> "color" Color
+CurveState --> "defaultState" CurveState
+InspectorCurveEditor +-- Selection
+Selection --> "curve" SerializedProperty
+InspectorCurveEditor +-- MenuAction
+@enduml

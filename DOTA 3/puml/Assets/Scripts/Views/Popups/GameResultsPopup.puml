@@ -1,0 +1,8 @@
+@startuml
+class GameResultsPopup {
+    + Inject(popupSystem:PopupSystem) : void
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- GameResultsPopup
+@enduml

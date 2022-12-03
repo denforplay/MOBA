@@ -1,0 +1,12 @@
+@startuml
+class DropArea {
+    droppable : bool
+    + DropArea(acceptedTypes:Type[], area:VisualElement, OnDrop:Action<UnityEngine.Object, Vector2>)
+    DragEnter(evt:DragEnterEvent) : void
+    DragLeave(evt:DragLeaveEvent) : void
+    DragExit(evt:DragExitedEvent) : void
+    DragUpdate(evt:DragUpdatedEvent) : void
+    Drop(evt:DragPerformEvent, OnDrop:Action<UnityEngine.Object, Vector2>) : void
+    IsInAcceptedTypes(testedType:Type) : bool
+}
+@enduml

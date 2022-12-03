@@ -1,0 +1,5 @@
+@startuml
+class MigrationProgressRender {
+}
+MigrationProgressRender o-> "mLog" ILog
+@enduml

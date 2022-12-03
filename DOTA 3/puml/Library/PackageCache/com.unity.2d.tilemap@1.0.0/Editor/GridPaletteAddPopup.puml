@@ -1,0 +1,18 @@
+@startuml
+class GridPaletteAddPopup {
+    Init(buttonRect:Rect, owner:GridPaintPaletteWindow) : void
+}
+class Styles <<static>> {
+}
+EditorWindow <|-- GridPaletteAddPopup
+GridPaletteAddPopup +-- Styles
+Styles o-> "nameLabel" GUIContent
+Styles o-> "ok" GUIContent
+Styles o-> "cancel" GUIContent
+Styles o-> "header" GUIContent
+Styles o-> "gridLabel" GUIContent
+Styles o-> "sizeLabel" GUIContent
+Styles o-> "hexagonLabel" GUIContent
+Styles o-> "transparencySortModeLabel" GUIContent
+Styles o-> "transparencySortAxisLabel" GUIContent
+@enduml

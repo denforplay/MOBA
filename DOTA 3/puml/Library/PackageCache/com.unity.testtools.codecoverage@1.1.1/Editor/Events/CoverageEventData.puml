@@ -1,0 +1,18 @@
+@startuml
+class CoverageEventDataImplementation {
+    + StartSession(coverageSessionMode:SessionMode) : void
+    + AddSessionResultPath(path:string) : void
+}
+class CoverageEventData {
+    + StartSession(coverageSessionMode:SessionMode) : void
+    + AddSessionResultPath(path:string) : void
+    + GetCoverageSessionInfo() : SessionEventInfo
+}
+class "List`1"<T> {
+}
+class "ScriptableSingleton`1"<T> {
+}
+CoverageEventDataImplementation --> "CoverageSessionMode" SessionMode
+CoverageEventDataImplementation --> "CoverageSessionResultPaths<string>" "List`1"
+"ScriptableSingleton`1" "<CoverageEventData>" <|-- CoverageEventData
+@enduml

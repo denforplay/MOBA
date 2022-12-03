@@ -1,0 +1,6 @@
+@startuml
+enum CombatType {
+    Melee,
+    Range,
+}
+@enduml

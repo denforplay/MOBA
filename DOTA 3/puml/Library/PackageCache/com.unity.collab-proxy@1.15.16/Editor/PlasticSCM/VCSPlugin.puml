@@ -1,0 +1,6 @@
+@startuml
+class VCSPlugin <<static>> {
+    {static} GetVersionControl() : string
+    {static} SetVersionControl(versionControl:string) : void
+}
+@enduml

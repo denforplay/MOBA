@@ -1,0 +1,18 @@
+@startuml
+class Mesh {
+    + Mesh()
+    + <<override>> Reset() : void
+    + <<override>> OnFree() : void
+    + MakeEdge() : MeshUtils.Edge
+    + Splice(eOrg:MeshUtils.Edge, eDst:MeshUtils.Edge) : void
+    + Delete(eDel:MeshUtils.Edge) : void
+    + AddEdgeVertex(eOrg:MeshUtils.Edge) : MeshUtils.Edge
+    + SplitEdge(eOrg:MeshUtils.Edge) : MeshUtils.Edge
+    + Connect(eOrg:MeshUtils.Edge, eDst:MeshUtils.Edge) : MeshUtils.Edge
+    + ZapFace(fZap:MeshUtils.Face) : void
+    + MergeConvexFaces(maxVertsPerFace:int) : void
+    + Check() : void
+}
+class "Pooled`1"<T> {
+}
+@enduml

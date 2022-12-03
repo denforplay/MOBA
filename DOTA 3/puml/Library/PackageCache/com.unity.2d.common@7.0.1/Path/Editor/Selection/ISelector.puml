@@ -1,0 +1,5 @@
+@startuml
+interface "ISelector`1"<T> {
+    Select(element:T) : bool
+}
+@enduml

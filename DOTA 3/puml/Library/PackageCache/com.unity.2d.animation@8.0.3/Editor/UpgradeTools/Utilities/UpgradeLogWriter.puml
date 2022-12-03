@@ -1,0 +1,7 @@
+@startuml
+class UpgradeLogWriter <<static>> {
+    <<const>> k_LogSavePath : string = "/Logs/"
+    + {static} Generate(content:string) : string
+    {static} AddHeaderToContent(content:string) : string
+}
+@enduml

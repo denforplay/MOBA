@@ -1,0 +1,12 @@
+@startuml
+class PickingTool <<sealed>> {
+}
+class Styles <<static>> {
+    + {static} tooltipStringFormat : string = "|Pick or marquee select new brush ({0&#125;)"
+    + {static} shortcutId : string = "Grid Painting/Picker"
+}
+TilemapEditorTool <|-- PickingTool
+PickingTool --> "toolbarIcon" GUIContent
+PickingTool +-- Styles
+Styles o-> "toolContent" GUIContent
+@enduml

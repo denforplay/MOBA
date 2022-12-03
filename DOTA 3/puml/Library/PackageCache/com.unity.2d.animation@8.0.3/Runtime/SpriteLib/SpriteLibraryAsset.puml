@@ -1,0 +1,40 @@
+@startuml
+interface INameHash {
+    name : string <<get>> <<set>>
+    hash : int <<get>>
+}
+class SpriteCategoryEntry {
+    m_Name : string
+    m_Hash : int
+    + name : string <<get>> <<set>>
+    + hash : int <<get>>
+    + UpdateHash() : void
+}
+class SpriteLibCategory {
+    m_Name : string
+    m_Hash : int
+    + name : string <<get>> <<set>>
+    + hash : int <<get>>
+    + UpdateHash() : void
+}
+class SpriteLibraryAsset {
+    m_Version : int
+    OnEnable() : void
+    UpdateToVersionOne() : void
+    + GetSprite(category:string, label:string) : Sprite
+    + GetCategoryNames() : IEnumerable<string>
+    + GetCategorylabelNames(category:string) : IEnumerable<string>
+    + GetCategoryLabelNames(category:string) : IEnumerable<string>
+    + AddCategoryLabel(sprite:Sprite, category:string, label:string) : void
+    + RemoveCategoryLabel(category:string, label:string, deleteCategory:bool) : void
+}
+class "List`1"<T> {
+}
+INameHash <|-- SpriteCategoryEntry
+SpriteCategoryEntry --> "m_Sprite" Sprite
+SpriteCategoryEntry --> "sprite" Sprite
+INameHash <|-- SpriteLibCategory
+SpriteLibCategory --> "m_CategoryList<SpriteCategoryEntry>" "List`1"
+SpriteLibCategory --> "categoryList<SpriteCategoryEntry>" "List`1"
+ScriptableObject <|-- SpriteLibraryAsset
+@enduml

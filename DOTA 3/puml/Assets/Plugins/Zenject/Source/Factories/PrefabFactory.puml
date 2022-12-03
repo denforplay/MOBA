@@ -1,0 +1,42 @@
+@startuml
+class "PrefabFactory`1"<T> {
+    + <<virtual>> Create(prefab:UnityEngine.Object) : T
+}
+class "PrefabFactory`2"<P1,T> {
+    + <<virtual>> Create(prefab:UnityEngine.Object, param:P1) : T
+}
+class "PrefabFactory`3"<P1,P2,T> {
+    + <<virtual>> Create(prefab:UnityEngine.Object, param:P1, param2:P2) : T
+}
+class "PrefabFactory`4"<P1,P2,P3,T> {
+    + <<virtual>> Create(prefab:UnityEngine.Object, param:P1, param2:P2, param3:P3) : T
+}
+class "PrefabFactory`5"<P1,P2,P3,P4,T> {
+    + <<virtual>> Create(prefab:UnityEngine.Object, param:P1, param2:P2, param3:P3, param4:P4) : T
+}
+class "IFactory`2"<T1,T2> {
+}
+class "IFactory`3"<T1,T2,T3> {
+}
+class "IFactory`4"<T1,T2,T3,T4> {
+}
+class "IFactory`5"<T1,T2,T3,T4,T5> {
+}
+class "IFactory`6"<T1,T2,T3,T4,T5,T6> {
+}
+"IFactory`2" "<UnityEngine.Object,T>" <|-- "PrefabFactory`1"
+"PrefabFactory`1" o-> "_container" DiContainer
+"PrefabFactory`1" --> "Container" DiContainer
+"IFactory`3" "<UnityEngine.Object,P1,T>" <|-- "PrefabFactory`2"
+"PrefabFactory`2" o-> "_container" DiContainer
+"PrefabFactory`2" --> "Container" DiContainer
+"IFactory`4" "<UnityEngine.Object,P1,P2,T>" <|-- "PrefabFactory`3"
+"PrefabFactory`3" o-> "_container" DiContainer
+"PrefabFactory`3" --> "Container" DiContainer
+"IFactory`5" "<UnityEngine.Object,P1,P2,P3,T>" <|-- "PrefabFactory`4"
+"PrefabFactory`4" o-> "_container" DiContainer
+"PrefabFactory`4" --> "Container" DiContainer
+"IFactory`6" "<UnityEngine.Object,P1,P2,P3,P4,T>" <|-- "PrefabFactory`5"
+"PrefabFactory`5" o-> "_container" DiContainer
+"PrefabFactory`5" --> "Container" DiContainer
+@enduml

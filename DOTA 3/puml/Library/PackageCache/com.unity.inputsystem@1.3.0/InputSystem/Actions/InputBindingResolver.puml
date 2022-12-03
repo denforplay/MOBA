@@ -1,0 +1,16 @@
+@startuml
+class InputBindingResolver <<struct>> {
+    + totalProcessorCount : int
+    + totalCompositeCount : int
+    + totalInteractionCount : int
+    + totalMapCount : int <<get>>
+    + totalActionCount : int <<get>>
+    + totalBindingCount : int <<get>>
+    + totalControlCount : int <<get>>
+    + bindingMask : InputBinding?
+    + Dispose() : void
+    + StartWithArraysFrom(state:InputActionState) : void
+    + <<unsafe>> AddActionMap(map:InputActionMap) : void
+}
+IDisposable <|-- InputBindingResolver
+@enduml

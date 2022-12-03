@@ -1,0 +1,8 @@
+@startuml
+class ChooseCharacterPopup {
+    + Inject(popupSystem:PopupSystem) : void
+    + <<override>> EnableInput() : void
+    + <<override>> DisableInput() : void
+}
+Popup <|-- ChooseCharacterPopup
+@enduml

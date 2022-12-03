@@ -1,0 +1,6 @@
+@startuml
+class CharacterPartCacheExtensions <<static>> {
+    + {static} SyncSpriteSheetSkeleton(characterPart:CharacterPartCache) : void
+    + {static} DissociateUnusedBones(characterPart:CharacterPartCache) : void
+}
+@enduml

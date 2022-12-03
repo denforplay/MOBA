@@ -1,0 +1,11 @@
+@startuml
+class ItemCreationUtility <<static>> {
+    {static} + CreateGameObject(name:string, menuCommand:MenuCommand, components:Type[]) : GameObject
+    {static} + CreateAssetObjectFromTemplate(sourcePath:string) : T
+    {static} + CreateAssetObject(name:string) : T
+}
+class CreateAssetEndNameEditAction {
+    + <<override>> Action(instanceId:int, pathName:string, resourceFile:string) : void
+}
+ItemCreationUtility +-- CreateAssetEndNameEditAction
+@enduml

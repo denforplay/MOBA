@@ -1,0 +1,10 @@
+@startuml
+class CinemachineOrbitalTransposerEditor {
+    + <<override>> OnInspectorGUI() : void
+    {static} DrawTransposerGizmos(target:CinemachineOrbitalTransposer, selectionType:GizmoType) : void
+    + {static} DrawCircleAtPointWithRadius(point:Vector3, orient:Quaternion, radius:float) : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineOrbitalTransposer>" <|-- CinemachineOrbitalTransposerEditor
+@enduml

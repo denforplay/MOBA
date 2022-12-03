@@ -1,0 +1,14 @@
+@startuml
+class MigrateCollabProject <<static>> {
+    {static} ShouldProjectBeMigrated(projectPath:string, projectGuid:string) : bool
+    {static} Execute(unityAccessToken:string, projectPath:string, projectGuid:string) : void
+    {static} LaunchMigrationIfProjectIsArchivedAndMigrated(unityAccessToken:string, projectPath:string, projectGuid:string, headCommitSha:string) : void
+    {static} AfterWorkspaceMigrated() : void
+    {static} GetCollabHeadCommitSha(projectPath:string, projectGuid:string) : string
+    {static} GetCollabSnapshotFile(projectPath:string, projectGuid:string) : string
+    <<const>> IS_PROJECT_MIGRATED_ALREADY_CALCULATED_KEY : string = "PlasticSCM.MigrateCollabProject.IsAlreadyCalculated"
+    <<const>> MIGRATED_NOT_CALCULATED : int = 0
+    <<const>> MIGRATED_NOTHING_TO_DO : int = 1
+}
+MigrateCollabProject o-> "mLog" ILog
+@enduml

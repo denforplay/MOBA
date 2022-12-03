@@ -1,0 +1,18 @@
+@startuml
+class GroupTrackInspector {
+    + <<override>> OnInspectorGUI() : void
+    + <<override>> OnEnable() : void
+    {static} OnDrawHeader(rect:Rect) : void
+    OnDrawSubTrack(rect:Rect, index:int, selected:bool, focused:bool) : void
+}
+class Styles <<static>> {
+}
+TrackAssetInspector <|-- GroupTrackInspector
+GroupTrackInspector --> "m_SubTracks" ReorderableList
+GroupTrackInspector +-- Styles
+Styles o-> "GroupSubTrackHeaderName" GUIContent
+Styles o-> "GroupSubTrackHeaderType" GUIContent
+Styles o-> "GroupSubTrackHeaderDuration" GUIContent
+Styles o-> "GroupSubTrackHeaderFrames" GUIContent
+Styles o-> "GroupInvalidTrack" GUIContent
+@enduml

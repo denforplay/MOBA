@@ -1,0 +1,19 @@
+@startuml
+class TestRunnerUIFilter {
+    + PassedCount : int <<get>>
+    + FailedCount : int <<get>>
+    + NotRunCount : int <<get>>
+    + PassedHidden : bool
+    + FailedHidden : bool
+    + NotRunHidden : bool
+    + IsFiltering : bool <<get>>
+    + UpdateCounters(resultList:List<TestRunnerResult>) : void
+    + Draw() : void
+    + Clear() : void
+}
+class "Action`1"<T> {
+}
+TestRunnerUIFilter --> "RebuildTestList" Action
+TestRunnerUIFilter --> "SearchStringChanged<string>" "Action`1"
+TestRunnerUIFilter --> "SearchStringCleared" Action
+@enduml

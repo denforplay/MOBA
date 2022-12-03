@@ -1,0 +1,12 @@
+@startuml
+class RemoteTestRunController {
+    + Init(buildTarget:BuildTarget, heartbeatTimeout:int) : void
+    + PostBuildAction() : void
+    + PostSuccessfulBuildAction() : void
+    + PostSuccessfulLaunchAction() : void
+    + CleanUp() : void
+}
+class "ScriptableSingleton`1"<T> {
+}
+"ScriptableSingleton`1" "<RemoteTestRunController>" <|-- RemoteTestRunController
+@enduml

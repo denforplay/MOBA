@@ -1,0 +1,35 @@
+@startuml
+abstract class "AsyncEnumeratorBase`2"<TSource,TResult> {
+    + AsyncEnumeratorBase(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken)
+    + Current : TResult <<get>> <<protected set>>
+    + MoveNextAsync() : UniTask<bool>
+    {static} MoveNextCallBack(state:object) : void
+    + <<virtual>> DisposeAsync() : UniTask
+}
+abstract class "AsyncEnumeratorAwaitSelectorBase`3"<TSource,TResult,TAwait> {
+    + AsyncEnumeratorAwaitSelectorBase(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken)
+    + Current : TResult <<get>> <<protected set>>
+    + MoveNextAsync() : UniTask<bool>
+    TryMoveNextCore(sourceHasCurrent:bool, result:bool) : (bool waitCallback, bool requireNextIteration)
+    {static} MoveNextCallBack(state:object) : void
+    {static} SetCurrentCallBack(state:object) : void
+    + <<virtual>> DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+MoveNextSource <|-- "AsyncEnumeratorBase`2"
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- "AsyncEnumeratorBase`2"
+"AsyncEnumeratorBase`2" o-> "moveNextCallbackDelegate<object>" "Action`1"
+"AsyncEnumeratorBase`2" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"AsyncEnumeratorBase`2" --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+MoveNextSource <|-- "AsyncEnumeratorAwaitSelectorBase`3"
+"IUniTaskAsyncEnumerator`1" "<TResult>" <|-- "AsyncEnumeratorAwaitSelectorBase`3"
+"AsyncEnumeratorAwaitSelectorBase`3" o-> "moveNextCallbackDelegate<object>" "Action`1"
+"AsyncEnumeratorAwaitSelectorBase`3" o-> "setCurrentCallbackDelegate<object>" "Action`1"
+"AsyncEnumeratorAwaitSelectorBase`3" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"AsyncEnumeratorAwaitSelectorBase`3" --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+@enduml

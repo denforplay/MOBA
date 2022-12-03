@@ -1,0 +1,27 @@
+@startuml
+class SkeletonCache {
+    m_IsPosePreview : bool = false
+    + isPosePreview : bool <<get>>
+    + boneCount : int <<get>>
+    + AddBone(bone:BoneCache, worldPositionStays:bool) : void
+    + ReorderBones(boneCache:IEnumerable<BoneCache>) : void
+    + DestroyBone(bone:BoneCache) : void
+    + SetDefaultPose() : void
+    + RestoreDefaultPose() : void
+    + SetPosePreview() : void
+    + GetLocalPose() : BonePose[]
+    + SetLocalPose(pose:BonePose[]) : void
+    + GetWorldPose() : BonePose[]
+    + SetWorldPose(pose:BonePose[]) : void
+    + GetBone(index:int) : BoneCache
+    + IndexOf(bone:BoneCache) : int
+    + Contains(bone:BoneCache) : bool
+    + Clear() : void
+    + GetUniqueName(bone:BoneCache) : string
+    DestroyHierarchy(root:TransformCache) : void
+}
+class "List`1"<T> {
+}
+TransformCache <|-- SkeletonCache
+SkeletonCache o-> "m_Bones<BoneCache>" "List`1"
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+class ContinuationQueue <<sealed>> {
+    <<const>> MaxArrayLength : int = 0X7FEFFFFF
+    <<const>> InitialSize : int = 16
+    dequing : bool = false
+    actionListCount : int = 0
+    waitingListCount : int = 0
+    + ContinuationQueue(timing:PlayerLoopTiming)
+    + Enqueue(continuation:Action) : void
+    + Clear() : int
+    + Run() : void
+    Initialization() : void
+    LastInitialization() : void
+    EarlyUpdate() : void
+    LastEarlyUpdate() : void
+    FixedUpdate() : void
+    LastFixedUpdate() : void
+    PreUpdate() : void
+    LastPreUpdate() : void
+    Update() : void
+    LastUpdate() : void
+    PreLateUpdate() : void
+    LastPreLateUpdate() : void
+    PostLateUpdate() : void
+    LastPostLateUpdate() : void
+    RunCore() : void
+}
+ContinuationQueue --> "timing" PlayerLoopTiming
+ContinuationQueue o-> "gate" SpinLock
+@enduml

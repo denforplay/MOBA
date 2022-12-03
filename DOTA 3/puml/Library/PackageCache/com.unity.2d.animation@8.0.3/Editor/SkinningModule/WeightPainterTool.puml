@@ -1,0 +1,13 @@
+@startuml
+enum WeightPainterMode {
+    Brush,
+    Slider,
+}
+class WeightPainterTool {
+    + <<override>> defaultControlID : int <<get>>
+    + panelTitle : string <<set>>
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+}
+MeshToolWrapper <|-- WeightPainterTool
+WeightPainterTool --> "paintMode" WeightPainterMode
+@enduml

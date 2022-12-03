@@ -1,0 +1,11 @@
+@startuml
+class CoverageReporterManager {
+    + CoverageReporterManager(coverageSettings:CoverageSettings)
+    + CreateCoverageReporter() : void
+    + ShouldAutoGenerateReport(afterCoverageSession:bool) : bool
+    + GenerateReport() : void
+}
+CoverageReporterManager o-> "m_ReportGenerator" CoverageReportGenerator
+CoverageReporterManager --> "CoverageReporter" ICoverageReporter
+CoverageReporterManager --> "ReportGenerator" CoverageReportGenerator
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class "MemoryPoolExpandBinder`1"<TContract> {
+    + MemoryPoolExpandBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, poolBindInfo:MemoryPoolBindInfo)
+    + ExpandByOneAtATime() : FactoryArgumentsToChoiceBinder<TContract>
+    + ExpandByDoubling() : FactoryArgumentsToChoiceBinder<TContract>
+}
+class "FactoryArgumentsToChoiceBinder`1"<T> {
+}
+"FactoryArgumentsToChoiceBinder`1" "<TContract>" <|-- "MemoryPoolExpandBinder`1"
+@enduml

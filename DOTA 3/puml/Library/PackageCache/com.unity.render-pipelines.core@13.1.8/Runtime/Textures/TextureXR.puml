@@ -1,0 +1,41 @@
+@startuml
+class TextureXR <<static>> {
+    + {static} maxViews : int <<set>>
+    + {static} slices : int <<get>>
+    + {static} useTexArray : bool <<get>>
+    + {static} GetBlackUIntTexture() : RTHandle
+    + {static} GetClearTexture() : RTHandle
+    + {static} GetMagentaTexture() : RTHandle
+    + {static} GetBlackTexture() : RTHandle
+    + {static} GetBlackTextureArray() : RTHandle
+    + {static} GetBlackTexture3D() : RTHandle
+    + {static} GetWhiteTexture() : RTHandle
+    + {static} Initialize(cmd:CommandBuffer, clearR32_UIntShader:ComputeShader) : void
+    {static} CreateTexture2DArrayFromTexture2D(source:Texture2D, name:string) : Texture2DArray
+    {static} CreateBlackUIntTextureArray(cmd:CommandBuffer, clearR32_UIntShader:ComputeShader) : Texture
+    {static} CreateBlackUintTexture(cmd:CommandBuffer, clearR32_UIntShader:ComputeShader) : Texture
+    {static} CreateBlackTexture3D(name:string) : Texture3D
+}
+TextureXR --> "dimension" TextureDimension
+TextureXR --> "m_BlackUIntTexture2DArray" Texture
+TextureXR --> "m_BlackUIntTexture" Texture
+TextureXR --> "m_BlackUIntTexture2DArrayRTH" RTHandle
+TextureXR --> "m_BlackUIntTextureRTH" RTHandle
+TextureXR --> "m_ClearTexture2DArray" Texture2DArray
+TextureXR --> "m_ClearTexture" Texture2D
+TextureXR --> "m_ClearTexture2DArrayRTH" RTHandle
+TextureXR --> "m_ClearTextureRTH" RTHandle
+TextureXR --> "m_MagentaTexture2DArray" Texture2DArray
+TextureXR --> "m_MagentaTexture" Texture2D
+TextureXR --> "m_MagentaTexture2DArrayRTH" RTHandle
+TextureXR --> "m_MagentaTextureRTH" RTHandle
+TextureXR --> "m_BlackTexture" Texture2D
+TextureXR --> "m_BlackTexture3D" Texture3D
+TextureXR --> "m_BlackTexture2DArray" Texture2DArray
+TextureXR --> "m_BlackTexture2DArrayRTH" RTHandle
+TextureXR --> "m_BlackTextureRTH" RTHandle
+TextureXR --> "m_BlackTexture3DRTH" RTHandle
+TextureXR --> "m_WhiteTexture2DArray" Texture2DArray
+TextureXR --> "m_WhiteTexture2DArrayRTH" RTHandle
+TextureXR --> "m_WhiteTextureRTH" RTHandle
+@enduml

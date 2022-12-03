@@ -1,0 +1,86 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<decimal?>
+    + {static} AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<decimal?>
+    + {static} AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<decimal?>
+    + {static} AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<decimal?>
+}
+class Average <<static>> {
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<float>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<double>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<decimal>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<float?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<double?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<decimal?>
+    + {static} <<async>> AverageAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<decimal?>
+    + {static} <<async>> AverageAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<decimal?>
+    + {static} <<async>> AverageAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<decimal?>
+}
+@enduml

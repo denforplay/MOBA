@@ -1,0 +1,11 @@
+@startuml
+class ItemsGroup {
+    + start : double <<get>> <<set>>
+    + end : double <<get>>
+    + ItemsGroup(items:IEnumerable<ITimelineItem>)
+}
+ItemsGroup --> "m_LeftMostItem" ITimelineItem
+ItemsGroup --> "m_RightMostItem" ITimelineItem
+ItemsGroup --> "leftMostItem" ITimelineItem
+ItemsGroup --> "rightMostItem" ITimelineItem
+@enduml

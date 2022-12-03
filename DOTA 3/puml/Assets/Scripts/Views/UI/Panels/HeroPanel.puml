@@ -1,0 +1,15 @@
+@startuml
+class HeroPanel {
+    + SetSkills(skillConfigurations:IEnumerable<SkillConfiguration>) : void
+    + SetCharacterIcon(sprite:Sprite) : void
+    + SetCharacterStrength(value:int) : void
+    + SetCharacterIntelligence(value:int) : void
+    + SetCharacterDefense(value:int) : void
+    + SetCharacterLevel(value:int) : void
+    + ResetSkill(skillId:int) : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- HeroPanel
+HeroPanel --> "SkillViews<SkillView>" "List`1"
+@enduml

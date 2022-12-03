@@ -1,0 +1,9 @@
+@startuml
+class EventBus {
+    + Invoke(invokator:T) : void
+    + Clear() : void
+    + Subscribe(subscriber:Action<T>) : void
+    + Unsubscibe(subscriber:Action<T>) : void
+}
+IEventBus <|-- EventBus
+@enduml

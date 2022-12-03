@@ -1,0 +1,9 @@
+@startuml
+class Hint {
+    + {static} <<unsafe>> CheckLikely(val:int) : double
+    + {static} <<unsafe>> CheckUnlikely(val:int) : double
+    + {static} <<unsafe>> CheckAssume(val:int) : double
+    + {static} CheckLikelyMatches(val:int) : int
+    + {static} CheckUnlikelyMatches(val:int) : int
+}
+@enduml

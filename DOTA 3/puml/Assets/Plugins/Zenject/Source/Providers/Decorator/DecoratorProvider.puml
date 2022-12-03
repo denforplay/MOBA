@@ -1,0 +1,22 @@
+@startuml
+interface IDecoratorProvider {
+    GetAllInstances(provider:IProvider, context:InjectContext, buffer:List<object>) : void
+}
+class "DecoratorProvider`1"<TContract> {
+    + DecoratorProvider(container:DiContainer)
+    + AddFactoryId(factoryBindId:Guid) : void
+    LazyInitializeDecoratorFactories() : void
+    + GetAllInstances(provider:IProvider, context:InjectContext, buffer:List<object>) : void
+    WrapProviderInstances(provider:IProvider, context:InjectContext, buffer:List<object>) : void
+    DecorateInstance(instance:object, context:InjectContext) : object
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+IDecoratorProvider <|-- "DecoratorProvider`1"
+"DecoratorProvider`1" o-> "_cachedInstances<IProvider,List<object>>" "Dictionary`2"
+"DecoratorProvider`1" --> "_container" DiContainer
+"DecoratorProvider`1" o-> "_factoryBindIds<Guid>" "List`1"
+"DecoratorProvider`1" --> "_decoratorFactories<IFactory<TContract, TContract>>" "List`1"
+@enduml

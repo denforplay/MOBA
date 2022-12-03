@@ -1,0 +1,8 @@
+@startuml
+class PathStripping {
+    + PathStripping()
+    + Parse(strippingPatterns:string) : void
+    + StripPath(path:string) : string
+    CreateFilterRegex(filter:string) : Regex
+}
+@enduml

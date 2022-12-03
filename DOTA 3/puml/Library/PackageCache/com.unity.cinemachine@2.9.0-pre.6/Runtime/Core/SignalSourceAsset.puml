@@ -1,0 +1,12 @@
+@startuml
+interface ISignalSource6D {
+    SignalDuration : float <<get>>
+    GetSignal(timeSinceSignalStart:float, pos:Vector3, rot:Quaternion) : void
+}
+abstract class SignalSourceAsset {
+    + {abstract} SignalDuration : float <<get>>
+    + {abstract} GetSignal(timeSinceSignalStart:float, pos:Vector3, rot:Quaternion) : void
+}
+ScriptableObject <|-- SignalSourceAsset
+ISignalSource6D <|-- SignalSourceAsset
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+class CharacterView {
+    +  <<event>> OnSkillActivated : Action<int> 
+    + IsDestroyed : bool <<get>>
+    + Inject(popupSystem:PopupSystem, projectileViewFactory:ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement>) : void
+    + InitializePlayer(camera:Camera, startPosition:Transform, team:Team) : void
+    + InitializeAI(camera:Camera, startPosition:Transform, startWayPoint:WayPoint, team:Team, direction:Direction) : void
+    + SetSkillUseState(skillId:int, canBeUsed:bool) : void
+    + SubscribeOnDestroy(action:Action) : void
+    + UnSubscribeOnDestroy(action:Action) : void
+    + SubscribeOnMoneyChanged(action:Action<int>) : void
+    + SubscribeOnInventoryChanged(action:Action<int, Item>) : void
+    + EnableInput() : void
+    + DisableInput() : void
+}
+MonoBehaviour <|-- CharacterView
+CharacterView --> "CharacterInfo" CharacterInfo
+CharacterView --> "Team" Team
+CharacterView --> "Character" Character
+CharacterView --> "AnimationController" AnimationController
+CharacterView --> "NavigationAgent" NavMeshAgent
+@enduml

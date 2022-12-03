@@ -1,0 +1,66 @@
+@startuml
+class TestConstArrays {
+    + {static} ReadFromIntArray() : int
+    + {static} <<unsafe>> ReadViaFixed() : int
+    + {static} ReadFromColorArray() : int
+    + {static} ReadFromColorArray2() : int
+    + {static} TestStaticReadonlyArrayLength() : int
+    + {static} TestStaticReadonlyArrayNonConstantLength() : int
+    + {static} TestStaticReadonlyArrayWithNonConstantStelemIndex() : int
+    + {static} TestStaticReadonlyArrayExplicitConstructionOfUninitialized() : int
+    + {static} TestStaticReadonlyArrayExplicitConstruction() : int
+    + {static} TestStaticReadonlyArrayLdelem() : int
+    + {static} TestStaticReadonlyArrayWithElementRef() : int
+    + {static} TestStaticReadonlyArrayWithElementVectorRef() : int
+    + {static} TestStaticReadonlyArrayWithDynamicLdelem(count:int) : int
+    + {static} TestStaticReadonlyArrayOfStructOfStructs() : int
+    + {static} TestStaticReadonlyNullArray() : int
+}
+class StructWithConstArray1 <<struct>> {
+}
+class StructWithConstArrayWithStruct1 <<struct>> {
+}
+class Color <<struct>> {
+    + Color(r:byte, g:byte, b:byte, a:byte)
+    + R : byte
+    + G : byte
+    + B : byte
+    + A : byte
+}
+class StaticArrayStruct <<struct>> {
+}
+class StructP <<struct>> {
+    + {static} One() : int
+}
+class StructQ <<struct>> {
+    + {static} One() : int
+    {static} StructQ()
+}
+class StructR <<struct>> {
+    {static} StructR()
+}
+class StructS <<struct>> {
+    {static} StructS()
+}
+class ContainerStruct <<struct>> {
+}
+class SmallStruct <<struct>> {
+    + a : int
+    + b : int
+}
+class NullArrayHolder <<struct>> {
+}
+TestConstArrays +-- StructWithConstArray1
+TestConstArrays +-- StructWithConstArrayWithStruct1
+TestConstArrays +-- Color
+TestConstArrays +-- StaticArrayStruct
+TestConstArrays +-- StructP
+TestConstArrays +-- StructQ
+TestConstArrays +-- StructR
+TestConstArrays +-- StructS
+TestConstArrays +-- ContainerStruct
+ContainerStruct --> "A" SmallStruct
+ContainerStruct --> "B" SmallStruct
+TestConstArrays +-- SmallStruct
+TestConstArrays +-- NullArrayHolder
+@enduml

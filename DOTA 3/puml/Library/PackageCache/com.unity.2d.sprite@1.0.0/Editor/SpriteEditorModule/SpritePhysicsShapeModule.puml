@@ -1,0 +1,8 @@
+@startuml
+class SpritePhysicsShapeModule {
+    + SpritePhysicsShapeModule(sem:ISpriteEditor, ege:IEventSystem, us:IUndoSystem, ad:IAssetDatabase, gu:IGUIUtility, sef:IShapeEditorFactory, outlineTexture:ITexture2D)
+    + <<override>> moduleName : string <<get>>
+    + <<override>> ApplyRevert(apply:bool) : bool
+}
+SpriteOutlineModule <|-- SpritePhysicsShapeModule
+@enduml

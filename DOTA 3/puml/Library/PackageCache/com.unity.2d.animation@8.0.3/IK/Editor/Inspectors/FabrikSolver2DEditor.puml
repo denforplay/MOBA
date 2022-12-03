@@ -1,0 +1,21 @@
+@startuml
+class FabrikSolver2DEditor {
+    OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+class Contents <<static>> {
+}
+Solver2DEditor <|-- FabrikSolver2DEditor
+FabrikSolver2DEditor --> "m_TargetProperty" SerializedProperty
+FabrikSolver2DEditor --> "m_EffectorProperty" SerializedProperty
+FabrikSolver2DEditor --> "m_TransformCountProperty" SerializedProperty
+FabrikSolver2DEditor --> "m_IterationsProperty" SerializedProperty
+FabrikSolver2DEditor --> "m_ToleranceProperty" SerializedProperty
+FabrikSolver2DEditor --> "m_Solver" FabrikSolver2D
+FabrikSolver2DEditor +-- Contents
+Contents o-> "effectorLabel" GUIContent
+Contents o-> "targetLabel" GUIContent
+Contents o-> "chainLengthLabel" GUIContent
+Contents o-> "iterationsLabel" GUIContent
+Contents o-> "toleranceLabel" GUIContent
+@enduml

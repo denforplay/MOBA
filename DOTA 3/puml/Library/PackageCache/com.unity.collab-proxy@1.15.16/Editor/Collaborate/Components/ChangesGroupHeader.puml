@@ -1,0 +1,23 @@
+@startuml
+class ChangesGroupHeader {
+    + <<const>> UssClassName : string = "changes-group-header"
+    + <<const>> NameUssClassName : string
+    + <<const>> OverflowButtonUssClassName : string
+    {static} <<readonly>> k_LayoutPath : string
+    {static} <<readonly>> k_StylePath : string
+    +  <<event>> OnOverflowButtonClicked : Action<float, float> 
+    + ChangesGroupHeader()
+    + SetEnableOverflowMenu(enable:bool) : void
+    TriggerOverflowMenu() : void
+    + UpdateGroupName(text:string) : void
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`1"<T> {
+}
+VisualElement <|-- ChangesGroupHeader
+ChangesGroupHeader --> "m_GroupName" Label
+ChangesGroupHeader --> "m_OverflowButton" IconButton
+ChangesGroupHeader +-- UxmlFactory
+"UxmlFactory`1" "<ChangesGroupHeader>" <|-- UxmlFactory
+@enduml

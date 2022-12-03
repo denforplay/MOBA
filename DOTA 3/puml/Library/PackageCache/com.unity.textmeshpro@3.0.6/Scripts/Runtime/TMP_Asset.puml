@@ -1,0 +1,9 @@
+@startuml
+abstract class TMP_Asset {
+    + instanceID : int <<get>>
+    + hashCode : int
+    + materialHashCode : int
+}
+ScriptableObject <|-- TMP_Asset
+TMP_Asset --> "material" Material
+@enduml

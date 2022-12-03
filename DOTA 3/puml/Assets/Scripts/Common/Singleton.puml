@@ -1,0 +1,8 @@
+@startuml
+class "Singleton`1"<T> {
+    + {static} IsDestroy : bool = false
+    + {static} GetInstance : T <<get>>
+    + Awake() : void
+}
+MonoBehaviour <|-- "Singleton`1"
+@enduml

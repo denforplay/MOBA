@@ -1,0 +1,24 @@
+@startuml
+class RenderGraphLogIndent <<struct>> {
+    m_Indentation : int
+    m_Disposed : bool
+    + RenderGraphLogIndent(logger:RenderGraphLogger, indentation:int)
+    + Dispose() : void
+    Dispose(disposing:bool) : void
+}
+class RenderGraphLogger {
+    m_CurrentIndentation : int
+    + Initialize(logName:string) : void
+    + IncrementIndentation(value:int) : void
+    + DecrementIndentation(value:int) : void
+    + LogLine(format:string, args:object[]) : void
+    + GetLog(logName:string) : string
+    + GetAllLogs() : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+IDisposable <|-- RenderGraphLogIndent
+RenderGraphLogIndent --> "m_Logger" RenderGraphLogger
+RenderGraphLogger o-> "m_LogMap<string,StringBuilder>" "Dictionary`2"
+RenderGraphLogger --> "m_CurrentBuilder" StringBuilder
+@enduml

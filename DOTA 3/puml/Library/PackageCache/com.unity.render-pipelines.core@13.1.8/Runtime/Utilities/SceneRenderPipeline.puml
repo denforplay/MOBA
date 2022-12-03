@@ -1,0 +1,8 @@
+@startuml
+class SceneRenderPipeline {
+    OnEnable() : void
+    OnValidate() : void
+}
+MonoBehaviour <|-- SceneRenderPipeline
+SceneRenderPipeline --> "renderPipelineAsset" RenderPipelineAsset
+@enduml

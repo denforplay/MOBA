@@ -1,0 +1,7 @@
+@startuml
+class OrderedTestSuiteModifier {
+    + OrderedTestSuiteModifier(orderedTestNames:string[])
+    + ModifySuite(root:TestSuite) : TestSuite
+}
+ITestSuiteModifier <|-- OrderedTestSuiteModifier
+@enduml

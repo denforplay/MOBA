@@ -1,0 +1,34 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Intersect(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Intersect(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "Intersect`1"<TSource> <<sealed>> {
+    + Intersect(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "IEqualityComparer`1"<T> {
+}
+class _Intersect {
+    + _Intersect(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>, cancellationToken:CancellationToken)
+    {static} HashSetAsyncCore(state:object) : void
+}
+class "AsyncEnumeratorBase`2"<T1,T2> {
+}
+class "Action`1"<T> {
+}
+class "HashSet`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Intersect`1"
+"Intersect`1" --> "first<TSource>" "IUniTaskAsyncEnumerable`1"
+"Intersect`1" --> "second<TSource>" "IUniTaskAsyncEnumerable`1"
+"Intersect`1" --> "comparer<TSource>" "IEqualityComparer`1"
+"Intersect`1" +-- _Intersect
+"AsyncEnumeratorBase`2" "<TSource,TSource>" <|-- _Intersect
+_Intersect o-> "HashSetAsyncCoreDelegate<object>" "Action`1"
+_Intersect --> "comparer<TSource>" "IEqualityComparer`1"
+_Intersect --> "second<TSource>" "IUniTaskAsyncEnumerable`1"
+_Intersect --> "set<TSource>" "HashSet`1"
+@enduml

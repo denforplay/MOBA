@@ -1,0 +1,30 @@
+@startuml
+class Functions {
+    + {static} CheckFunctionCall() : int
+    + {static} Boxing() : void
+    + {static} NotDiscardable() : int
+    + {static} Discardable() : void
+    + {static} TestCallsOfDiscardedMethodRegression() : int
+    + {static} NoInline(x:int) : int
+    + {static} TestNoInline(x:int) : int
+    + {static} NoOptimization(x:int) : int
+    + {static} TestNoOptimization(x:int) : int
+    + {static} TestImplicitCapture(x:int) : int
+    + {static} TestImplicitCaptureInLoop(x:int, rp:Pair) : int
+    + {static} NoWarningsWithSingle(i:int) : void
+    + {static} NoWarningsWithMultiple(i:int) : void
+}
+class CustomStruct <<struct>> {
+}
+class Pair <<struct>> {
+    + X : int
+    + Y : int
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+Functions +-- CustomStruct
+Functions +-- Pair
+Pair +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

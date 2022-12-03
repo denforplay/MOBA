@@ -1,0 +1,22 @@
+@startuml
+class PathEditorToolContents <<static>> {
+}
+interface IDuringSceneGuiTool {
+    DuringSceneGui(sceneView:SceneView) : void
+    IsAvailable() : bool
+}
+class EditorToolManager {
+    {static} EditorToolManager()
+}
+abstract class "PathEditorTool`1"<T> {
+    + <<override>> gridSnapEnabled : bool <<get>>
+    + <<override>> IsAvailable() : bool
+    + GetPath(targetObject:UnityObject) : T
+    + SetPath(target:UnityObject) : void
+    DuringSceneGui(sceneView:SceneView) : void
+}
+PathEditorToolContents --> "icon" GUIContent
+EditorTool <|-- "PathEditorTool`1"
+IDuringSceneGuiTool <|-- "PathEditorTool`1"
+"PathEditorTool`1" --> "toolbarIcon" GUIContent
+@enduml

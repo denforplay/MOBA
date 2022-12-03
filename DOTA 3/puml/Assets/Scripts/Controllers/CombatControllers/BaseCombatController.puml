@@ -1,0 +1,5 @@
+@startuml
+abstract class BaseCombatController {
+}
+IController <|-- BaseCombatController
+@enduml

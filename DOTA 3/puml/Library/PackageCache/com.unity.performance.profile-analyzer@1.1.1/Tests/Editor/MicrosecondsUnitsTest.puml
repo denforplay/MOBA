@@ -1,0 +1,14 @@
+@startuml
+class MicrosecondsUnitsFixture {
+    + SetupTest() : void
+}
+class MicrosecondsUnitsTest {
+    + DecimalLimit(testData:TestData) : void
+    + ShowFullValueWhenBelowZero(testData:TestData) : void
+    + WithUnits(testData:TestData) : void
+    + LimitedTo5Digits(testData:TestData) : void
+    + WithUnitsLimitedTo5DigitsAndShowFullValueWhenBelowZero(testData:TestData) : void
+}
+UnitsTestFixture <|-- MicrosecondsUnitsFixture
+MicrosecondsUnitsFixture <|-- MicrosecondsUnitsTest
+@enduml

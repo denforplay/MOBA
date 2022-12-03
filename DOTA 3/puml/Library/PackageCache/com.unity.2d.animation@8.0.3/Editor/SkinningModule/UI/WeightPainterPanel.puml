@@ -1,0 +1,36 @@
+@startuml
+class WeightPainterPanel {
+    + {static} <<readonly>> kNone : string = "None"
+    +  <<event>> bonePopupChanged : Action<int> 
+    +  <<event>> sliderStarted : Action 
+    +  <<event>> sliderChanged : Action<float> 
+    +  <<event>> sliderEnded : Action 
+    +  <<event>> weightsChanged : Action 
+    + title : string <<set>>
+    + boneIndex : int <<get>>
+    + size : int <<get>> <<set>>
+    + hardness : int <<get>> <<set>>
+    + step : int <<get>> <<set>>
+    + normalize : bool <<get>> <<set>>
+    + amount : float <<get>> <<set>>
+    + WeightPainterPanel()
+    + BindElements() : void
+    + SetActive(active:bool) : void
+    + UpdateWeightInspector(spriteMeshData:BaseSpriteMeshData, boneNames:string[], selection:ISelection<int>, cacheUndo:ICacheUndo) : void
+    + UpdatePanel(boneNames:string[]) : void
+    + {static} GenerateFromUXML() : WeightPainterPanel
+}
+class WeightPainterPanelFactory {
+}
+class WeightPainterPanelUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+VisualElement <|-- WeightPainterPanel
+WeightPainterPanel --> "paintMode" WeightPainterMode
+WeightPainterPanel --> "mode" WeightEditorMode
+WeightPainterPanel +-- WeightPainterPanelFactory
+"UxmlFactory`2" "<WeightPainterPanel,WeightPainterPanelUxmlTraits>" <|-- WeightPainterPanelFactory
+WeightPainterPanel +-- WeightPainterPanelUxmlTraits
+UxmlTraits <|-- WeightPainterPanelUxmlTraits
+@enduml

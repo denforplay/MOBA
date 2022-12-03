@@ -1,0 +1,126 @@
+@startuml
+enum FoldoutOption {
+    None= 0,
+    Indent= 1 << 0,
+    Boxed= 1 << 2,
+    SubFoldout= 1 << 3,
+    NoSpaceAtEnd= 1 << 4,
+}
+enum GroupOption {
+    None= 0,
+    Indent= 1 << 0,
+}
+class "CoreEditorDrawer`1"<TData> <<static>> {
+    + {static} Conditional(enabler:Enabler, contentDrawers:IDrawer[]) : IDrawer
+    + {static} Conditional(enabler:Enabler, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} TernaryConditional(@switch:Enabler, drawIfTrue:IDrawer, drawIfFalse:IDrawer) : IDrawer
+    + {static} TernaryConditional(@switch:Enabler, drawIfTrue:ActionDrawer, drawIfFalse:ActionDrawer) : IDrawer
+    + {static} Group(contentDrawers:IDrawer[]) : IDrawer
+    + {static} Group(contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} Group(labelWidth:float, contentDrawers:IDrawer[]) : IDrawer
+    + {static} Group(header:GUIContent, contentDrawers:IDrawer[]) : IDrawer
+    + {static} Group(labelWidth:float, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} Group(header:GUIContent, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} Group(options:GroupOption, contentDrawers:IDrawer[]) : IDrawer
+    + {static} Group(options:GroupOption, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} Group(labelWidth:float, options:GroupOption, contentDrawers:IDrawer[]) : IDrawer
+    + {static} Group(header:GUIContent, options:GroupOption, contentDrawers:IDrawer[]) : IDrawer
+    + {static} Group(labelWidth:float, options:GroupOption, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} Group(header:GUIContent, options:GroupOption, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} Select(dataSelect:DataSelect<T2Data>, otherDrawers:CoreEditorDrawer<T2Data>.IDrawer[]) : IDrawer
+    + {static} Select(dataSelect:DataSelect<T2Data>, otherDrawers:CoreEditorDrawer<T2Data>.ActionDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:string, mask:TEnum, state:ExpandedState<TEnum, TState>, contentDrawers:IDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:string, mask:TEnum, state:ExpandedState<TEnum, TState>, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:string, mask:TEnum, state:ExpandedState<TEnum, TState>, options:FoldoutOption, contentDrawers:IDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:string, mask:TEnum, state:ExpandedState<TEnum, TState>, options:FoldoutOption, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:GUIContent, mask:TEnum, state:ExpandedState<TEnum, TState>, contentDrawers:IDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:GUIContent, mask:TEnum, state:ExpandedState<TEnum, TState>, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:GUIContent, mask:TEnum, state:ExpandedState<TEnum, TState>, options:FoldoutOption, contentDrawers:IDrawer[]) : IDrawer
+    + {static} FoldoutGroup(title:GUIContent, mask:TEnum, state:ExpandedState<TEnum, TState>, options:FoldoutOption, contentDrawers:ActionDrawer[]) : IDrawer
+    {static} FoldoutGroup(title:GUIContent, mask:TEnum, state:ExpandedState<TEnum, TState>, options:FoldoutOption, showAdditionalProperties:Enabler, switchAdditionalProperties:SwitchEnabler, contentDrawers:ActionDrawer[]) : IDrawer
+    + {static} AdvancedFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, isAdvanced:Enabler, switchAdvanced:SwitchEnabler, normalContent:IDrawer, advancedContent:IDrawer, options:FoldoutOption) : IDrawer
+    + {static} AdvancedFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, isAdvanced:Enabler, switchAdvanced:SwitchEnabler, normalContent:ActionDrawer, advancedContent:IDrawer, options:FoldoutOption) : IDrawer
+    + {static} AdvancedFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, isAdvanced:Enabler, switchAdvanced:SwitchEnabler, normalContent:IDrawer, advancedContent:ActionDrawer, options:FoldoutOption) : IDrawer
+    + {static} AdvancedFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, isAdvanced:Enabler, switchAdvanced:SwitchEnabler, normalContent:ActionDrawer, advancedContent:ActionDrawer, options:FoldoutOption) : IDrawer
+    + {static} AdditionalPropertiesFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, additionalPropertiesMask:TAPEnum, additionalPropertiesState:AdditionalPropertiesState<TAPEnum, TAPState>, normalContent:IDrawer, additionalContent:IDrawer, options:FoldoutOption) : IDrawer
+    + {static} AdditionalPropertiesFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, additionalPropertiesMask:TAPEnum, additionalPropertiesState:AdditionalPropertiesState<TAPEnum, TAPState>, normalContent:ActionDrawer, additionalContent:IDrawer, options:FoldoutOption) : IDrawer
+    + {static} AdditionalPropertiesFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, additionalPropertiesMask:TAPEnum, additionalPropertiesState:AdditionalPropertiesState<TAPEnum, TAPState>, normalContent:IDrawer, additionalContent:ActionDrawer, options:FoldoutOption) : IDrawer
+    + {static} AdditionalPropertiesFoldoutGroup(foldoutTitle:GUIContent, foldoutMask:TEnum, foldoutState:ExpandedState<TEnum, TState>, additionalPropertiesMask:TAPEnum, additionalPropertiesState:AdditionalPropertiesState<TAPEnum, TAPState>, normalContent:ActionDrawer, additionalContent:ActionDrawer, options:FoldoutOption) : IDrawer
+}
+class CoreEditorDrawersExtensions <<static>> {
+    + {static} Draw(drawers:IEnumerable<CoreEditorDrawer<TData>.IDrawer>, data:TData, owner:Editor) : void
+}
+interface IDrawer {
+    Draw(serializedProperty:TData, owner:Editor) : void
+    Expand(mask:int) : bool
+}
+class ConditionalDrawerInternal {
+    + ConditionalDrawerInternal(enabler:Enabler, actionDrawers:ActionDrawer[])
+    Draw(data:TData, owner:Editor) : void
+    Expand(mask:int) : bool
+}
+class ConditionalDrawerWithAdditionalPropertiesInternal {
+    + ConditionalDrawerWithAdditionalPropertiesInternal(enabler:Enabler, anim:AnimFloat, actionDrawers:ActionDrawer[])
+    Draw(data:TData, owner:Editor) : void
+    Expand(mask:int) : bool
+}
+class TernaryConditionalDrawerInternal {
+    + TernaryConditionalDrawerInternal(@switch:Enabler, drawIfTrue:ActionDrawer, drawIfFalse:ActionDrawer)
+    Draw(data:TData, owner:Editor) : void
+    Expand(mask:int) : bool
+}
+class GroupDrawerInternal {
+    m_LabelWidth : float
+    isIndented : bool
+    + GroupDrawerInternal(labelWidth:float, header:GUIContent, options:GroupOption, actionDrawers:ActionDrawer[])
+    Draw(data:TData, owner:Editor) : void
+    Expand(mask:int) : bool
+}
+class "FoldoutGroupDrawerInternal`2"<TEnum,TState> {
+    <<readonly>> m_IsBoxed : bool
+    <<readonly>> m_IsSubFoldout : bool
+    <<readonly>> m_NoSpaceAtEnd : bool
+    <<readonly>> m_IsIndented : bool
+    <<readonly>> m_HelpUrl : string
+    <<readonly>> m_Mask : TEnum
+    + FoldoutGroupDrawerInternal(title:GUIContent, mask:TEnum, state:ExpandedState<TEnum, TState>, enabler:Enabler, switchEnabler:SwitchEnabler, options:FoldoutOption, actionDrawers:ActionDrawer[])
+    Draw(data:TData, owner:Editor) : void
+    Expand(mask:int) : bool
+}
+class "SelectDrawerInternal`1"<T2Data> {
+    + SelectDrawerInternal(dataSelect:DataSelect<T2Data>, otherDrawers:CoreEditorDrawer<T2Data>.ActionDrawer[])
+    Draw(data:TData, o:Editor) : void
+    Expand(mask:int) : bool
+}
+class "ExpandedState`2"<T1,T2> {
+}
+class "DataSelect`1"<T> {
+}
+"CoreEditorDrawer`1" o-> "space" IDrawer
+"CoreEditorDrawer`1" o-> "noop" IDrawer
+"CoreEditorDrawer`1" +-- IDrawer
+"CoreEditorDrawer`1" +-- ConditionalDrawerInternal
+IDrawer <|-- ConditionalDrawerInternal
+ConditionalDrawerInternal --> "m_Enabler" Enabler
+"CoreEditorDrawer`1" +-- ConditionalDrawerWithAdditionalPropertiesInternal
+IDrawer <|-- ConditionalDrawerWithAdditionalPropertiesInternal
+ConditionalDrawerWithAdditionalPropertiesInternal --> "m_Enabler" Enabler
+ConditionalDrawerWithAdditionalPropertiesInternal --> "m_Anim" AnimFloat
+"CoreEditorDrawer`1" +-- TernaryConditionalDrawerInternal
+IDrawer <|-- TernaryConditionalDrawerInternal
+TernaryConditionalDrawerInternal --> "drawIfTrue" ActionDrawer
+TernaryConditionalDrawerInternal --> "drawIfFalse" ActionDrawer
+TernaryConditionalDrawerInternal --> "m_Switch" Enabler
+"CoreEditorDrawer`1" +-- GroupDrawerInternal
+IDrawer <|-- GroupDrawerInternal
+GroupDrawerInternal --> "header" GUIContent
+"CoreEditorDrawer`1" +-- "FoldoutGroupDrawerInternal`2"
+IDrawer <|-- "FoldoutGroupDrawerInternal`2"
+"FoldoutGroupDrawerInternal`2" --> "m_Title" GUIContent
+"FoldoutGroupDrawerInternal`2" --> "m_State<TEnum,TState>" "ExpandedState`2"
+"FoldoutGroupDrawerInternal`2" --> "m_Enabler" Enabler
+"FoldoutGroupDrawerInternal`2" --> "m_SwitchEnabler" SwitchEnabler
+"CoreEditorDrawer`1" +-- "SelectDrawerInternal`1"
+IDrawer <|-- "SelectDrawerInternal`1"
+"SelectDrawerInternal`1" --> "m_DataSelect<T2Data>" "DataSelect`1"
+@enduml

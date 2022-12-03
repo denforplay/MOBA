@@ -1,0 +1,25 @@
+@startuml
+class TopMarkerList {
+    m_WidthColumn0 : int
+    m_WidthColumn1 : int
+    m_WidthColumn2 : int
+    m_WidthColumn3 : int
+    + TopMarkerList(draw2D:Draw2D, units:Units, widthColumn0:int, widthColumn1:int, widthColumn2:int, widthColumn3:int, colorBar:Color, colorBarBackground:Color, drawFrameIndexButton:DrawFrameIndexButton)
+    SetUnits(units:Units) : void
+    + DrawTopNumber(topNumber:int, topStrings:string[], topValues:int[]) : int
+    + GetTopNByCount(marker:MarkerData, n:int) : List<FrameTime>
+    + GetTopNByTime(marker:MarkerData, n:int) : List<FrameTime>
+    + GetTopN(marker:MarkerData, n:int, showCount:bool) : List<FrameTime>
+    + Draw(marker:MarkerData, markerContext:ProfileDataView, topNumber:int, topStrings:string[], topValues:int[]) : int
+}
+class Styles <<static>> {
+}
+TopMarkerList --> "m_DrawFrameIndexButton" DrawFrameIndexButton
+TopMarkerList --> "m_2D" Draw2D
+TopMarkerList --> "m_Units" DisplayUnits
+TopMarkerList --> "colorBar" Color
+TopMarkerList --> "colorBarBackground" Color
+TopMarkerList +-- Styles
+Styles o-> "frameCosts" GUIContent
+Styles o-> "frameCounts" GUIContent
+@enduml

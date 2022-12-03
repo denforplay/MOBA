@@ -1,0 +1,31 @@
+@startuml
+class VolumeComponentProvider {
+    + VolumeComponentProvider(target:VolumeProfile, targetEditor:VolumeComponentListEditor)
+    + CreateComponentTree(tree:List<Element>) : void
+    + GoToChild(element:Element, addIfComponent:bool) : bool
+    AddNode(root:PathNode, path:string, type:Type) : void
+    Traverse(node:PathNode, depth:int, tree:List<Element>) : void
+}
+class VolumeComponentElement {
+    + VolumeComponentElement(level:int, label:string, type:Type)
+}
+class PathNode {
+    + name : string
+    + CompareTo(other:PathNode) : int
+}
+class "IComparable`1"<T> {
+}
+class "List`1"<T> {
+}
+IProvider <|-- VolumeComponentProvider
+VolumeComponentProvider --> "position" Vector2
+VolumeComponentProvider --> "m_Target" VolumeProfile
+VolumeComponentProvider --> "m_TargetEditor" VolumeComponentListEditor
+VolumeComponentProvider +-- VolumeComponentElement
+Element <|-- VolumeComponentElement
+VolumeComponentElement --> "type" Type
+VolumeComponentProvider +-- PathNode
+"IComparable`1" "<PathNode>" <|-- PathNode
+PathNode o-> "nodes<PathNode>" "List`1"
+PathNode --> "type" Type
+@enduml

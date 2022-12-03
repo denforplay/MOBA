@@ -1,0 +1,45 @@
+@startuml
+class CinemachineEditorAnalytics <<static>> {
+    <<const>> k_MaxEventsPerHour : int = 360
+    <<const>> k_MaxNumberOfElements : int = 1000
+    <<const>> k_VendorKey : string = "unity.cinemachine"
+    {static} CinemachineEditorAnalytics()
+    + {static} SendCreateEvent(name:string) : void
+    {static} SendAnalyticsOnPlayEnter(state:PlayModeStateChange) : void
+    {static} CollectData(vcamBase:CinemachineVirtualCameraBase, id:string, vcamDatas:List<VcamData>) : void
+}
+class CreateEventData <<struct>> {
+    + vcam_created : string
+}
+class ProjectData <<struct>> {
+    + brain_count : int
+    + vcam_count : int
+    + cam_count : int
+    + time_elapsed : float
+}
+class VcamData <<struct>> {
+    + id : string
+    + vcam_class : string
+    + has_follow_target : bool
+    + has_lookat_target : bool
+    + blend_hint : string
+    + inherit_position : bool
+    + standby_update : string
+    + mode_overwrite : string
+    + body_component : string
+    + aim_component : string
+    + noise_component : string
+    + custom_component_count : int
+    + custom_extension_count : int
+    + VcamData(id:string, vcamBase:CinemachineVirtualCameraBase)
+    + SetTransitionsAndLens(transitions:CinemachineVirtualCameraBase.TransitionParams, lens:LensSettings) : void
+    + SetComponents(cmComps:CinemachineComponentBase[]) : void
+    {static} GetTypeName(type:Type, customTypeCount:int) : string
+}
+class "List`1"<T> {
+}
+CinemachineEditorAnalytics +-- CreateEventData
+CinemachineEditorAnalytics +-- ProjectData
+ProjectData --> "vcams<VcamData>" "List`1"
+CinemachineEditorAnalytics +-- VcamData
+@enduml

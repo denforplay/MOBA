@@ -1,0 +1,30 @@
+@startuml
+class SubContainerBinder {
+    <<readonly>> _subIdentifier : object
+    <<readonly>> _resolveAll : bool
+    + SubContainerBinder(bindInfo:BindInfo, bindStatement:BindStatement, subIdentifier:object, resolveAll:bool)
+    + ByInstance(subContainer:DiContainer) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByInstanceGetter(subContainerGetter:Func<InjectContext, DiContainer>) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByInstaller() : WithKernelDefaultParentScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByInstaller(installerType:Type) : WithKernelDefaultParentScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByMethod(installerMethod:Action<DiContainer>) : WithKernelDefaultParentScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewGameObjectMethod(installerMethod:Action<DiContainer>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabMethod(prefabGetter:Func<InjectContext, UnityEngine.Object>, installerMethod:Action<DiContainer>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabMethod(prefab:UnityEngine.Object, installerMethod:Action<DiContainer>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewGameObjectInstaller() : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewGameObjectInstaller(installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefabGetter:Func<InjectContext, UnityEngine.Object>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefabGetter:Func<InjectContext, UnityEngine.Object>, installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabInstaller(prefab:UnityEngine.Object, installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResourceMethod(resourcePath:string, installerMethod:Action<DiContainer>) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResourceInstaller(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResourceInstaller(resourcePath:string, installerType:Type) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewContextPrefab(prefab:UnityEngine.Object) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+    + ByNewContextPrefabResource(resourcePath:string) : NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+SubContainerBinder --> "_bindInfo" BindInfo
+SubContainerBinder --> "_bindStatement" BindStatement
+@enduml

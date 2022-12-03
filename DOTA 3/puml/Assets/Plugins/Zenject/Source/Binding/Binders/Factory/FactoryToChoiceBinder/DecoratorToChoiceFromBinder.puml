@@ -1,0 +1,9 @@
+@startuml
+class "DecoratorToChoiceFromBinder`1"<TContract> {
+    + DecoratorToChoiceFromBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + With() : FactoryFromBinder<TContract, TConcrete>
+}
+"DecoratorToChoiceFromBinder`1" --> "_bindContainer" DiContainer
+"DecoratorToChoiceFromBinder`1" --> "_bindInfo" BindInfo
+"DecoratorToChoiceFromBinder`1" --> "_factoryBindInfo" FactoryBindInfo
+@enduml

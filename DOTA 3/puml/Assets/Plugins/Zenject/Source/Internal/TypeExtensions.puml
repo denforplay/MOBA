@@ -1,0 +1,46 @@
+@startuml
+class TypeExtensions <<static>> {
+    + {static} DerivesFrom(a:Type) : bool
+    + {static} DerivesFrom(a:Type, b:Type) : bool
+    + {static} DerivesFromOrEqual(a:Type) : bool
+    + {static} DerivesFromOrEqual(a:Type, b:Type) : bool
+    + {static} IsAssignableToGenericType(givenType:Type, genericType:Type) : bool
+    + {static} IsEnum(type:Type) : bool
+    + {static} IsValueType(type:Type) : bool
+    + {static} DeclaredInstanceMethods(type:Type) : MethodInfo[]
+    + {static} DeclaredInstanceProperties(type:Type) : PropertyInfo[]
+    + {static} DeclaredInstanceFields(type:Type) : FieldInfo[]
+    + {static} BaseType(type:Type) : Type
+    + {static} IsGenericType(type:Type) : bool
+    + {static} IsGenericTypeDefinition(type:Type) : bool
+    + {static} IsPrimitive(type:Type) : bool
+    + {static} IsInterface(type:Type) : bool
+    + {static} ContainsGenericParameters(type:Type) : bool
+    + {static} IsAbstract(type:Type) : bool
+    + {static} IsSealed(type:Type) : bool
+    + {static} Method(del:Delegate) : MethodInfo
+    + {static} GenericArguments(type:Type) : Type[]
+    + {static} Interfaces(type:Type) : Type[]
+    + {static} Constructors(type:Type) : ConstructorInfo[]
+    + {static} GetDefaultValue(type:Type) : object
+    + {static} IsClosedGenericType(type:Type) : bool
+    + {static} GetParentTypes(type:Type) : IEnumerable<Type>
+    + {static} IsOpenGenericType(type:Type) : bool
+    + {static} GetAttribute(provider:MemberInfo) : T
+    + {static} TryGetAttribute(provider:MemberInfo) : T
+    + {static} HasAttribute(provider:MemberInfo, attributeTypes:Type[]) : bool
+    + {static} HasAttribute(provider:MemberInfo) : bool
+    + {static} AllAttributes(provider:MemberInfo) : IEnumerable<T>
+    + {static} AllAttributes(provider:MemberInfo, attributeTypes:Type[]) : IEnumerable<Attribute>
+    + {static} HasAttribute(provider:ParameterInfo, attributeTypes:Type[]) : bool
+    + {static} HasAttribute(provider:ParameterInfo) : bool
+    + {static} AllAttributes(provider:ParameterInfo) : IEnumerable<T>
+    + {static} AllAttributes(provider:ParameterInfo, attributeTypes:Type[]) : IEnumerable<Attribute>
+}
+class "Dictionary`2"<T1,T2> {
+}
+TypeExtensions o-> "_isClosedGenericType<Type,bool>" "Dictionary`2"
+TypeExtensions o-> "_isOpenGenericType<Type,bool>" "Dictionary`2"
+TypeExtensions o-> "_isValueType<Type,bool>" "Dictionary`2"
+TypeExtensions o-> "_interfaces<Type,Type[]>" "Dictionary`2"
+@enduml

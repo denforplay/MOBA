@@ -1,0 +1,7 @@
+@startuml
+class ProjectUserSettings {
+    + ProjectUserSettings(package:string, name:string)
+    + {static} GetUserSettingsPath(package:string, name:string) : string
+}
+FileSettingsRepository <|-- ProjectUserSettings
+@enduml

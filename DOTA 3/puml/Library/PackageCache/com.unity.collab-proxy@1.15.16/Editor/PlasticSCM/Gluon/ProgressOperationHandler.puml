@@ -1,0 +1,16 @@
+@startuml
+class ProgressOperationHandler {
+    ShowProgress() : void
+    RefreshProgress(progress:CheckinProgressData) : void
+    EndProgress() : void
+    ShowNoCancelableProgress() : void
+    ShowCancelableProgress() : void
+    RefreshProgress(updateProgress:Codice.Client.BaseCommands.UpdateProgress, updateProgressData:UpdateProgressData) : void
+    EndProgress() : void
+}
+IUpdateProgress <|-- ProgressOperationHandler
+ICheckinProgress <|-- ProgressOperationHandler
+ProgressOperationHandler --> "mUpdateProgress" UpdateProgress
+ProgressOperationHandler --> "mCheckinProgress" CheckinProgress
+ProgressOperationHandler --> "mWorkspaceWindow" WorkspaceWindow
+@enduml

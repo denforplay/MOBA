@@ -1,0 +1,26 @@
+@startuml
+class SceneParentAutomaticLoader <<static>> {
+    {static} SceneParentAutomaticLoader()
+    {static} OnPlayModeStateChanged(state:PlayModeStateChange) : void
+    + {static} ValidateMultiSceneSetupAndLoadDefaultSceneParents() : void
+    {static} GetCurrentSceneContractsMap(sceneInfos:List<LoadedSceneInfo>) : Dictionary<string, LoadedSceneInfo>
+    {static} ProcessScene(sceneInfo:LoadedSceneInfo, contractMap:Dictionary<string, LoadedSceneInfo>, defaultContractsMap:Dictionary<string, string>) : void
+    {static} ProcessSceneDecorators(sceneInfo:LoadedSceneInfo, contractMap:Dictionary<string, LoadedSceneInfo>, defaultContractsMap:Dictionary<string, string>) : void
+    {static} ProcessSceneParents(sceneInfo:LoadedSceneInfo, contractMap:Dictionary<string, LoadedSceneInfo>, defaultContractsMap:Dictionary<string, string>) : void
+    {static} LoadDefaultSceneForContract(sceneInfo:LoadedSceneInfo, contractName:string, defaultContractsMap:Dictionary<string, string>) : LoadedSceneInfo
+    {static} ValidateDecoratedSceneMatch(decoratorInfo:LoadedSceneInfo, decoratedInfo:LoadedSceneInfo) : void
+    {static} ValidateParentChildMatch(parentSceneInfo:LoadedSceneInfo, sceneInfo:LoadedSceneInfo) : void
+    {static} GetSceneIndex(scene:Scene) : int
+    {static} LoadDefaultContractsMap() : Dictionary<string, string>
+    {static} CreateLoadedSceneInfo(scene:Scene) : LoadedSceneInfo
+    {static} TryCreateLoadedSceneInfo(scene:Scene) : LoadedSceneInfo
+    {static} GetLoadedZenjectSceneInfos() : List<LoadedSceneInfo>
+    {static} AddToContractMap(contractMap:Dictionary<string, LoadedSceneInfo>, info:LoadedSceneInfo) : void
+}
+class LoadedSceneInfo {
+}
+SceneParentAutomaticLoader +-- LoadedSceneInfo
+LoadedSceneInfo --> "SceneContext" SceneContext
+LoadedSceneInfo --> "DecoratorContext" SceneDecoratorContext
+LoadedSceneInfo --> "Scene" Scene
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class CloudCollabService {
+    + CloudCollabService()
+    + Name : string <<get>> = "Collaborate"
+    + RequiresCoppaCompliance : bool <<get>> = false
+    + HasDashboard : bool <<get>> = true
+    + GetFormattedDashboardUrl() : string
+    OnCollabStateChanged(collabInfo:CollabInfo) : void
+}
+IEditorGameService <|-- CloudCollabService
+CloudCollabService o-> "Identifier" IEditorGameServiceIdentifier
+CloudCollabService o-> "Enabler" IEditorGameServiceEnabler
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Distinct(source:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Distinct(source:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Distinct(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} Distinct(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "Distinct`1"<TSource> <<sealed>> {
+    + Distinct(source:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "Distinct`2"<TSource,TKey> <<sealed>> {
+    + Distinct(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "DistinctAwait`2"<TSource,TKey> <<sealed>> {
+    + DistinctAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "DistinctAwaitWithCancellation`2"<TSource,TKey> <<sealed>> {
+    + DistinctAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "IEqualityComparer`1"<T> {
+}
+class _Distinct {
+    + _Distinct(source:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>, cancellationToken:CancellationToken)
+}
+class "Func`2"<T1,T2> {
+}
+class _Distinct {
+    + _Distinct(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+}
+class _DistinctAwait {
+    + _DistinctAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+}
+class "Func`3"<T1,T2,T3> {
+}
+class _DistinctAwaitWithCancellation {
+    + _DistinctAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+}
+class "AsyncEnumeratorBase`2"<T1,T2> {
+}
+class "HashSet`1"<T> {
+}
+class "AsyncEnumeratorAwaitSelectorBase`3"<T1,T2,T3> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Distinct`1"
+"Distinct`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"Distinct`1" --> "comparer<TSource>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "Distinct`2"
+"Distinct`2" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"Distinct`2" --> "keySelector<TSource,TKey>" "Func`2"
+"Distinct`2" --> "comparer<TKey>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "DistinctAwait`2"
+"DistinctAwait`2" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"DistinctAwait`2" --> "keySelector<TSource,UniTask<TKey>>" "Func`2"
+"DistinctAwait`2" --> "comparer<TKey>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "DistinctAwaitWithCancellation`2"
+"DistinctAwaitWithCancellation`2" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"DistinctAwaitWithCancellation`2" --> "keySelector<TSource,CancellationToken,UniTask<TKey>>" "Func`3"
+"DistinctAwaitWithCancellation`2" --> "comparer<TKey>" "IEqualityComparer`1"
+"Distinct`1" +-- _Distinct
+"AsyncEnumeratorBase`2" "<TSource,TSource>" <|-- _Distinct
+_Distinct --> "set<TSource>" "HashSet`1"
+"Distinct`2" +-- _Distinct
+"AsyncEnumeratorBase`2" "<TSource,TSource>" <|-- _Distinct
+_Distinct --> "set<TKey>" "HashSet`1"
+_Distinct --> "keySelector<TSource,TKey>" "Func`2"
+"DistinctAwait`2" +-- _DistinctAwait
+"AsyncEnumeratorAwaitSelectorBase`3" "<TSource,TSource,TKey>" <|-- _DistinctAwait
+_DistinctAwait --> "set<TKey>" "HashSet`1"
+_DistinctAwait --> "keySelector<TSource,UniTask<TKey>>" "Func`2"
+"DistinctAwaitWithCancellation`2" +-- _DistinctAwaitWithCancellation
+"AsyncEnumeratorAwaitSelectorBase`3" "<TSource,TSource,TKey>" <|-- _DistinctAwaitWithCancellation
+_DistinctAwaitWithCancellation --> "set<TKey>" "HashSet`1"
+_DistinctAwaitWithCancellation --> "keySelector<TSource,CancellationToken,UniTask<TKey>>" "Func`3"
+@enduml

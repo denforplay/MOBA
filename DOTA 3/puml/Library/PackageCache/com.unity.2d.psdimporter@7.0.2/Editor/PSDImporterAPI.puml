@@ -1,0 +1,29 @@
+@startuml
+class PSDImporter <<partial>> {
+    + isReadable : bool <<get>> <<set>>
+    + anisoLevel : int <<get>> <<set>>
+    + borderMipmap : bool <<get>> <<set>>
+    + fadeout : bool <<get>> <<set>>
+    + mipMapBias : float <<get>> <<set>>
+    + mipmapEnabled : bool <<get>> <<set>>
+    + mipmapFadeDistanceEnd : int <<get>> <<set>>
+    + mipmapFadeDistanceStart : int <<get>> <<set>>
+    + mipMapsPreserveCoverage : bool <<get>> <<set>>
+    + spritePixelsPerUnit : float <<get>> <<set>>
+    + GetImporterPlatformSettings(buildTarget:BuildTarget) : TextureImporterPlatformSettings
+    + SetImporterPlatformSettings(setting:TextureImporterPlatformSettings) : void
+    + useCharacterMode : bool <<get>> <<set>>
+    + useMosaicMode : bool <<get>> <<set>>
+    SetDirty() : void
+}
+ScriptedImporter <|-- PSDImporter
+ISpriteEditorDataProvider <|-- PSDImporter
+PSDImporter --> "filterMode" FilterMode
+PSDImporter --> "mipmapFilter" TextureImporterMipFilter
+PSDImporter --> "spriteImportMode" SpriteImportMode
+PSDImporter --> "textureType" TextureImporterType
+PSDImporter --> "wrapMode" TextureWrapMode
+PSDImporter --> "wrapModeU" TextureWrapMode
+PSDImporter --> "wrapModeV" TextureWrapMode
+PSDImporter --> "wrapModeW" TextureWrapMode
+@enduml

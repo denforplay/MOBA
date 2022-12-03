@@ -1,0 +1,120 @@
+@startuml
+abstract class "StaticMemoryPoolBaseBase`1"<TValue> {
+    _activeCount : int
+    + StaticMemoryPoolBaseBase(onDespawnedMethod:Action<TValue>)
+    + NumTotal : int <<get>>
+    + NumActive : int <<get>>
+    + NumInactive : int <<get>>
+    + Resize(desiredPoolSize:int) : void
+    ResizeInternal(desiredPoolSize:int) : void
+    + Dispose() : void
+    + ClearActiveCount() : void
+    + Clear() : void
+    + ShrinkBy(numToRemove:int) : void
+    + ExpandBy(numToAdd:int) : void
+    Despawn(item:object) : void
+    + Despawn(element:TValue) : void
+}
+abstract class "StaticMemoryPoolBase`1"<TValue> {
+    + StaticMemoryPoolBase(onDespawnedMethod:Action<TValue>)
+}
+class "StaticMemoryPool`1"<TValue> {
+    + StaticMemoryPool(onSpawnMethod:Action<TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn() : TValue
+}
+class "StaticMemoryPool`2"<TParam1,TValue> {
+    + StaticMemoryPool(onSpawnMethod:Action<TParam1, TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn(param:TParam1) : TValue
+}
+class "StaticMemoryPool`3"<TParam1,TParam2,TValue> {
+    + StaticMemoryPool(onSpawnMethod:Action<TParam1, TParam2, TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn(p1:TParam1, p2:TParam2) : TValue
+}
+class "StaticMemoryPool`4"<TParam1,TParam2,TParam3,TValue> {
+    + StaticMemoryPool(onSpawnMethod:Action<TParam1, TParam2, TParam3, TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn(p1:TParam1, p2:TParam2, p3:TParam3) : TValue
+}
+class "StaticMemoryPool`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+    + StaticMemoryPool(onSpawnMethod:ModestTree.Util.
+#endif
+            Action<TParam1, TParam2, TParam3, TParam4, TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4) : TValue
+}
+class "StaticMemoryPool`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+    + StaticMemoryPool(onSpawnMethod:ModestTree.Util.
+#endif
+            Action<TParam1, TParam2, TParam3, TParam4, TParam5, TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5) : TValue
+}
+class "StaticMemoryPool`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue> {
+    + StaticMemoryPool(onSpawnMethod:ModestTree.Util.
+#endif
+            Action<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6) : TValue
+}
+class "StaticMemoryPool`8"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue> {
+    + StaticMemoryPool(onSpawnMethod:ModestTree.Util.
+#endif
+            Action<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TValue>, onDespawnedMethod:Action<TValue>)
+    + Spawn(p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5, p6:TParam6, p7:TParam7) : TValue
+}
+class "IDespawnableMemoryPool`1"<T> {
+}
+class "Stack`1"<T> {
+}
+class "Action`1"<T> {
+}
+class "IMemoryPool`1"<T> {
+}
+class "IMemoryPool`2"<T1,T2> {
+}
+class "Action`2"<T1,T2> {
+}
+class "IMemoryPool`3"<T1,T2,T3> {
+}
+class "Action`3"<T1,T2,T3> {
+}
+class "IMemoryPool`4"<T1,T2,T3,T4> {
+}
+class "Action`4"<T1,T2,T3,T4> {
+}
+class "IMemoryPool`5"<T1,T2,T3,T4,T5> {
+}
+class "IMemoryPool`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "IMemoryPool`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "IMemoryPool`8"<T1,T2,T3,T4,T5,T6,T7,T8> {
+}
+"IDespawnableMemoryPool`1" "<TValue>" <|-- "StaticMemoryPoolBaseBase`1"
+IDisposable <|-- "StaticMemoryPoolBaseBase`1"
+"StaticMemoryPoolBaseBase`1" o-> "_stack<TValue>" "Stack`1"
+"StaticMemoryPoolBaseBase`1" --> "_onDespawnedMethod<TValue>" "Action`1"
+"StaticMemoryPoolBaseBase`1" --> "OnDespawnedMethod<TValue>" "Action`1"
+"StaticMemoryPoolBaseBase`1" --> "ItemType" Type
+"StaticMemoryPoolBaseBase`1" "<TValue>" <|-- "StaticMemoryPoolBase`1"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`1"
+"IMemoryPool`1" "<TValue>" <|-- "StaticMemoryPool`1"
+"StaticMemoryPool`1" --> "_onSpawnMethod<TValue>" "Action`1"
+"StaticMemoryPool`1" --> "OnSpawnMethod<TValue>" "Action`1"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`2"
+"IMemoryPool`2" "<TParam1,TValue>" <|-- "StaticMemoryPool`2"
+"StaticMemoryPool`2" --> "_onSpawnMethod<TParam1,TValue>" "Action`2"
+"StaticMemoryPool`2" --> "OnSpawnMethod<TParam1,TValue>" "Action`2"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`3"
+"IMemoryPool`3" "<TParam1,TParam2,TValue>" <|-- "StaticMemoryPool`3"
+"StaticMemoryPool`3" --> "_onSpawnMethod<TParam1,TParam2,TValue>" "Action`3"
+"StaticMemoryPool`3" --> "OnSpawnMethod<TParam1,TParam2,TValue>" "Action`3"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`4"
+"IMemoryPool`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "StaticMemoryPool`4"
+"StaticMemoryPool`4" --> "_onSpawnMethod<TParam1,TParam2,TParam3,TValue>" "Action`4"
+"StaticMemoryPool`4" --> "OnSpawnMethod<TParam1,TParam2,TParam3,TValue>" "Action`4"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`5"
+"IMemoryPool`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "StaticMemoryPool`5"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`6"
+"IMemoryPool`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "StaticMemoryPool`6"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`7"
+"IMemoryPool`7" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue>" <|-- "StaticMemoryPool`7"
+"StaticMemoryPoolBase`1" "<TValue>" <|-- "StaticMemoryPool`8"
+"IMemoryPool`8" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue>" <|-- "StaticMemoryPool`8"
+@enduml

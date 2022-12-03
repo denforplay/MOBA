@@ -1,0 +1,18 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} ToDictionaryAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TSource>>
+    + {static} ToDictionaryAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TSource>>
+    + {static} ToDictionaryAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, elementSelector:Func<TSource, TElement>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TElement>>
+    + {static} ToDictionaryAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, elementSelector:Func<TSource, TElement>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TElement>>
+    + {static} ToDictionaryAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TSource>>
+    + {static} ToDictionaryAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TSource>>
+    + {static} ToDictionaryAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, elementSelector:Func<TSource, UniTask<TElement>>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TElement>>
+    + {static} ToDictionaryAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, elementSelector:Func<TSource, UniTask<TElement>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TElement>>
+    + {static} ToDictionaryAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TSource>>
+    + {static} ToDictionaryAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TSource>>
+    + {static} ToDictionaryAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, elementSelector:Func<TSource, CancellationToken, UniTask<TElement>>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TElement>>
+    + {static} ToDictionaryAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, elementSelector:Func<TSource, CancellationToken, UniTask<TElement>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken) : UniTask<Dictionary<TKey, TElement>>
+}
+class ToDictionary <<static>> {
+}
+@enduml

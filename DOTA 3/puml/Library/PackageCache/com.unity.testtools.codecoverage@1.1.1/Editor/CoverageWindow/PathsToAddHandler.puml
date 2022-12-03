@@ -1,0 +1,15 @@
+@startuml
+class PathsToAddHandler {
+    m_PathsToFilter : string
+    + PathsToAddHandler(parent:CodeCoverageWindow, type:PathFilterType)
+    + BrowseForDir(pathsToFilter:string) : void
+    + BrowseForFile(pathsToFilter:string) : void
+}
+class Styles {
+}
+PathsToAddHandler --> "m_Parent" CodeCoverageWindow
+PathsToAddHandler --> "m_PathFilterType" PathFilterType
+PathsToAddHandler +-- Styles
+Styles o-> "PathsToFilterAddFolderLabel" GUIContent
+Styles o-> "PathsToFilterAddFileLabel" GUIContent
+@enduml

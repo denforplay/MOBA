@@ -1,0 +1,31 @@
+@startuml
+interface ISkeletonStyle {
+    GetColor(bone:BoneCache) : Color
+    GetPreviewColor(index:int) : Color
+    GetParentLinkColor(bone:BoneCache) : Color
+    GetParentLinkPreviewColor(index:int) : Color
+    GetOutlineColor(bone:BoneCache, isSelected:bool, isHovered:bool) : Color
+    GetPreviewOutlineColor(index:int) : Color
+    GetOutlineScale(isSelected:bool) : float
+}
+abstract class SkeletonStyleBase {
+    + GetColor(bone:BoneCache) : Color
+    + GetPreviewColor(index:int) : Color
+    + GetParentLinkColor(bone:BoneCache) : Color
+    + GetParentLinkPreviewColor(index:int) : Color
+    + GetOutlineColor(bone:BoneCache, isSelected:bool, isHovered:bool) : Color
+    + GetPreviewOutlineColor(index:int) : Color
+    + GetOutlineScale(isSelected:bool) : float
+}
+class BoneColorSkeletonStyle {
+}
+class WeightmapSkeletonStyle {
+}
+class SkeletonStyles <<static>> {
+}
+ISkeletonStyle <|-- SkeletonStyleBase
+SkeletonStyleBase <|-- BoneColorSkeletonStyle
+SkeletonStyleBase <|-- WeightmapSkeletonStyle
+SkeletonStyles o-> "Default" ISkeletonStyle
+SkeletonStyles o-> "WeightMap" ISkeletonStyle
+@enduml

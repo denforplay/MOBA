@@ -1,0 +1,9 @@
+@startuml
+interface IBoneVisibilityToolView {
+    OnBoneSelectionChange(skeleton:SkeletonSelection) : void
+    OnBoneExpandedChange(bones:BoneCache[]) : void
+    OnBoneNameChanged(bone:BoneCache) : void
+    OnSelectionChange(skeleton:SkeletonCache) : void
+    Deactivate() : void
+}
+@enduml

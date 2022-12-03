@@ -1,0 +1,7 @@
+@startuml
+class AssociateBonesScope {
+    + AssociateBonesScope(sprite:SpriteCache)
+    + Dispose() : void
+}
+IDisposable <|-- AssociateBonesScope
+@enduml

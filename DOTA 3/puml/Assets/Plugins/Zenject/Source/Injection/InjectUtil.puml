@@ -1,0 +1,18 @@
+@startuml
+class TypeValuePair <<struct>> {
+    + Value : object
+    + TypeValuePair(type:Type, value:object)
+}
+class InjectUtil <<static>> {
+    + {static} CreateArgList(args:IEnumerable<object>) : List<TypeValuePair>
+    + {static} CreateTypePair(param:T) : TypeValuePair
+    + {static} CreateArgListExplicit(param:T) : List<TypeValuePair>
+    + {static} CreateArgListExplicit(param1:TParam1, param2:TParam2) : List<TypeValuePair>
+    + {static} CreateArgListExplicit(param1:TParam1, param2:TParam2, param3:TParam3) : List<TypeValuePair>
+    + {static} CreateArgListExplicit(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : List<TypeValuePair>
+    + {static} CreateArgListExplicit(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5) : List<TypeValuePair>
+    + {static} CreateArgListExplicit(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6) : List<TypeValuePair>
+    + {static} PopValueWithType(extraArgMap:List<TypeValuePair>, injectedFieldType:Type, value:object) : bool
+}
+TypeValuePair --> "Type" Type
+@enduml

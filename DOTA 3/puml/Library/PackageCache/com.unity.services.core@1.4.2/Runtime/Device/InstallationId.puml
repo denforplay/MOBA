@@ -1,0 +1,12 @@
+@startuml
+class InstallationId {
+    <<const>> k_UnityInstallationIdKey : string = "UnityInstallationId"
+    + InstallationId()
+    + GetOrCreateIdentifier() : string
+    + CreateIdentifier() : void
+    {static} ReadIdentifierFromFile() : string
+    {static} WriteIdentifierToFile(identifier:string) : void
+    {static} GenerateGuid() : string
+}
+IInstallationId <|-- InstallationId
+@enduml

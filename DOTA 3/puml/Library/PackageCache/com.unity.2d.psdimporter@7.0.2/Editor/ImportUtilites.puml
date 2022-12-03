@@ -1,0 +1,18 @@
+@startuml
+class UniqueNameGenerator {
+    + ContainHash(i:int) : bool
+    + AddHash(i:int) : void
+    + AddHash(name:string) : void
+    + GetUniqueName(name:string, logNewNameGenerated:bool, context:UnityEngine.Object) : string
+    {static} GetUniqueName(name:string, stringHash:List<int>, logNewNameGenerated:bool, context:UnityEngine.Object) : string
+    {static} SanitizeName(name:string) : string
+    {static} GetStringHash(str:string) : int
+}
+class GameObjectCreationFactory {
+    + CreateGameObject(name:string, components:System.Type[]) : GameObject
+}
+class "List`1"<T> {
+}
+UniqueNameGenerator o-> "m_NameHash<int>" "List`1"
+UniqueNameGenerator <|-- GameObjectCreationFactory
+@enduml

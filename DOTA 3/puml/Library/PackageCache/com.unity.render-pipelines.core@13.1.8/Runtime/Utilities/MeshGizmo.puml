@@ -1,0 +1,21 @@
+@startuml
+class MeshGizmo {
+    + {static} <<readonly>> vertexCountPerCube : int = 24
+    + MeshGizmo(capacity:int)
+    + Clear() : void
+    + AddWireCube(center:Vector3, size:Vector3, color:Color) : void
+    DrawMesh(trs:Matrix4x4, mat:Material, topology:MeshTopology, depthTest:CompareFunction, gizmoName:string) : void
+    + RenderWireframe(trs:Matrix4x4, depthTest:CompareFunction, gizmoName:string) : void
+    + Dispose() : void
+}
+class "List`1"<T> {
+}
+IDisposable <|-- MeshGizmo
+MeshGizmo --> "mesh" Mesh
+MeshGizmo --> "vertices<Vector3>" "List`1"
+MeshGizmo --> "indices<int>" "List`1"
+MeshGizmo --> "colors<Color>" "List`1"
+MeshGizmo --> "wireMaterial" Material
+MeshGizmo --> "dottedWireMaterial" Material
+MeshGizmo --> "solidMaterial" Material
+@enduml

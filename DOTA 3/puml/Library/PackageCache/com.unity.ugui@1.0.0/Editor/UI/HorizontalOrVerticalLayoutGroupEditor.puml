@@ -1,0 +1,17 @@
+@startuml
+class HorizontalOrVerticalLayoutGroupEditor {
+    + <<override>> OnInspectorGUI() : void
+    ToggleLeft(position:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+Editor <|-- HorizontalOrVerticalLayoutGroupEditor
+HorizontalOrVerticalLayoutGroupEditor --> "m_Padding" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_Spacing" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ChildAlignment" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ChildControlWidth" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ChildControlHeight" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ChildScaleWidth" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ChildScaleHeight" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ChildForceExpandWidth" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ChildForceExpandHeight" SerializedProperty
+HorizontalOrVerticalLayoutGroupEditor --> "m_ReverseArrangement" SerializedProperty
+@enduml

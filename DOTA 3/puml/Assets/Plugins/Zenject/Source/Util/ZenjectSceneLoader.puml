@@ -1,0 +1,17 @@
+@startuml
+enum LoadSceneRelationship {
+    None,
+    Child,
+    Sibling,
+}
+class ZenjectSceneLoader {
+    + ZenjectSceneLoader(sceneRoot:SceneContext, projectKernel:ProjectKernel)
+    + LoadScene(sceneName:string, loadMode:LoadSceneMode, extraBindings:Action<DiContainer>, containerMode:LoadSceneRelationship, extraBindingsLate:Action<DiContainer>) : void
+    + LoadSceneAsync(sceneName:string, loadMode:LoadSceneMode, extraBindings:Action<DiContainer>, containerMode:LoadSceneRelationship, extraBindingsLate:Action<DiContainer>) : AsyncOperation
+    PrepareForLoadScene(loadMode:LoadSceneMode, extraBindings:Action<DiContainer>, extraBindingsLate:Action<DiContainer>, containerMode:LoadSceneRelationship) : void
+    + LoadScene(sceneIndex:int, loadMode:LoadSceneMode, extraBindings:Action<DiContainer>, containerMode:LoadSceneRelationship, extraBindingsLate:Action<DiContainer>) : void
+    + LoadSceneAsync(sceneIndex:int, loadMode:LoadSceneMode, extraBindings:Action<DiContainer>, containerMode:LoadSceneRelationship, extraBindingsLate:Action<DiContainer>) : AsyncOperation
+}
+ZenjectSceneLoader --> "_projectKernel" ProjectKernel
+ZenjectSceneLoader --> "_sceneContainer" DiContainer
+@enduml

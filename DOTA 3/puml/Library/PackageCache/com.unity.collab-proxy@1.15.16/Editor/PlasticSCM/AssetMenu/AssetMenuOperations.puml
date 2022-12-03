@@ -1,0 +1,24 @@
+@startuml
+enum AssetMenuOperations {
+    None=                   0,
+    Checkout=               1 << 0,
+    Diff=                   1 << 1,
+    History=                1 << 2,
+    Add=                    1 << 3,
+    Checkin=                1 << 4,
+    Undo=                   1 << 5,
+}
+class SelectedAssetGroupInfo {
+}
+interface IAssetMenuOperations {
+    ShowPendingChanges() : void
+    Add() : void
+    Checkout() : void
+    Checkin() : void
+    Undo() : void
+    ShowDiff() : void
+    ShowHistory() : void
+}
+class AssetMenuUpdater <<static>> {
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class NativeArrayHelpers <<static>> {
+    + {static} <<unsafe>> ResizeIfNeeded(nativeArray:NativeArray<T>, size:int, allocator:Allocator) : void
+    + {static} ResizeAndCopyIfNeeded(nativeArray:NativeArray<T>, size:int, allocator:Allocator) : void
+    + {static} <<unsafe>> DisposeIfCreated(nativeArray:NativeArray<T>) : void
+    + {static} <<unsafe>> CopyFromNativeSlice(nativeArray:NativeArray<T>, dstStartIndex:int, dstEndIndex:int, slice:NativeSlice<S>, srcStartIndex:int, srcEndIndex:int) : void
+}
+@enduml

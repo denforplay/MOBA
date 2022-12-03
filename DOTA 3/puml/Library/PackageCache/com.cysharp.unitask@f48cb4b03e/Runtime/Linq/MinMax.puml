@@ -1,0 +1,170 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+}
+class Min <<static>> <<partial>> {
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> MinAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> MinAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> MinAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+}
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+}
+class Max <<static>> <<partial>> {
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32>>, cancellationToken:CancellationToken) : UniTask<Int32>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64>>, cancellationToken:CancellationToken) : UniTask<Int64>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single>>, cancellationToken:CancellationToken) : UniTask<Single>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double>>, cancellationToken:CancellationToken) : UniTask<Double>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal>>, cancellationToken:CancellationToken) : UniTask<Decimal>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int32?>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int32?>>, cancellationToken:CancellationToken) : UniTask<Int32?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Int64?>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Int64?>>, cancellationToken:CancellationToken) : UniTask<Int64?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Single?>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Single?>>, cancellationToken:CancellationToken) : UniTask<Single?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Double?>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Double?>>, cancellationToken:CancellationToken) : UniTask<Double?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, Decimal?>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<Decimal?>>, cancellationToken:CancellationToken) : UniTask<Decimal?>
+}
+@enduml

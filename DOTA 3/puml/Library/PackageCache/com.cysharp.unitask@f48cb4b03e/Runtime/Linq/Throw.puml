@@ -1,0 +1,25 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} Throw(exception:Exception) : IUniTaskAsyncEnumerable<TValue>
+}
+class "Throw`1"<TValue> {
+    + Throw(exception:Exception)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TValue>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class _Throw {
+    + _Throw(exception:Exception, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TValue>" <|-- "Throw`1"
+"Throw`1" --> "exception" Exception
+"Throw`1" +-- _Throw
+"IUniTaskAsyncEnumerator`1" "<TValue>" <|-- _Throw
+_Throw --> "exception" Exception
+_Throw --> "cancellationToken" CancellationToken
+_Throw --> "Current" TValue
+@enduml

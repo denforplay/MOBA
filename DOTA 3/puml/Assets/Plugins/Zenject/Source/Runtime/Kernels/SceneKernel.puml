@@ -1,0 +1,5 @@
+@startuml
+class SceneKernel {
+}
+MonoKernel <|-- SceneKernel
+@enduml

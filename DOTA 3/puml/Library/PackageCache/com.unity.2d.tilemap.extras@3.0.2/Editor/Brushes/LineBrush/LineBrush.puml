@@ -1,0 +1,19 @@
+@startuml
+class LineBrush {
+    + lineStartActive : bool
+    + fillGaps : bool
+    + IsMoving : bool <<get>>
+    + <<override>> Paint(grid:GridLayout, brushTarget:GameObject, position:Vector3Int) : void
+    + <<override>> MoveStart(grid:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + <<override>> MoveEnd(grid:GridLayout, brushTarget:GameObject, position:BoundsInt) : void
+    + {static} GetPointsOnLine(startPos:Vector2Int, endPos:Vector2Int, fillGaps:bool) : IEnumerable<Vector2Int>
+    + {static} GetPointsOnLine(p1:Vector2Int, p2:Vector2Int) : IEnumerable<Vector2Int>
+}
+class LineBrushEditor {
+    + <<override>> OnPaintSceneGUI(grid:GridLayout, brushTarget:GameObject, position:BoundsInt, tool:GridBrushBase.Tool, executing:bool) : void
+    + <<override>> ClearPreview() : void
+}
+GridBrush <|-- LineBrush
+LineBrush o-> "lineStart" Vector3Int
+GridBrushEditor <|-- LineBrushEditor
+@enduml

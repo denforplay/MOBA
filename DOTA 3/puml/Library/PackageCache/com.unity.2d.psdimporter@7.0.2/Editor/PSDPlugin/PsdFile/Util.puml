@@ -1,0 +1,37 @@
+@startuml
+class Util <<static>> {
+    + {static} IntersectWith(thisRect:Rectangle, rect:Rectangle) : Rectangle
+    {static} + Fill(ptr:byte[], start:int, end:int, value:byte) : void
+    {static} + Invert(ptr:byte[], ptrStart:int, ptrEnd:int) : void
+    {static} + Fill(ptr:NativeArray<byte>, start:int, end:int, value:byte) : void
+    {static} + Invert(ptr:NativeArray<byte>, ptrStart:int, ptrEnd:int) : void
+    {static} + SwapBytes2(ptr:byte[], start:int) : void
+    {static} + SwapBytes4(ptr:byte[], start:int) : void
+    {static} + SwapBytes(ptr:byte[], start:int, nLength:int) : void
+    + {static} SwapByteArray(bitDepth:int, byteArray:byte[], startIdx:int, count:int) : void
+    + {static} SwapByteArray2(byteArray:byte[], startIdx:int, count:int) : void
+    + {static} SwapByteArray4(byteArray:byte[], startIdx:int, count:int) : void
+    + {static} BytesPerRow(size:Size, bitDepth:int) : int
+    + {static} RoundUp(value:int, multiple:int) : int
+    + {static} GetPadding(length:int, padMultiple:int) : int
+    + {static} BytesFromBitDepth(depth:int) : int
+    + {static} MinChannelCount(colorMode:PsdColorMode) : short
+    + {static} CheckBufferBounds(data:byte[], offset:int, count:int) : bool
+    + {static} CheckByteArrayLength(length:long) : void
+    + {static} DebugMessage(stream:Stream, message:string, args:object[]) : void
+}
+class UFixed16_16 {
+    + UFixed16_16(integer:UInt16, fraction:UInt16)
+    + UFixed16_16(value:UInt32)
+    + UFixed16_16(value:double)
+}
+class RectanglePosition <<struct>> {
+    + Top : int <<get>> <<set>>
+    + Bottom : int <<get>> <<set>>
+    + Left : int <<get>> <<set>>
+    + Right : int <<get>> <<set>>
+}
+UFixed16_16 --> "Integer" UInt16
+UFixed16_16 --> "Fraction" UInt16
+Util +-- RectanglePosition
+@enduml

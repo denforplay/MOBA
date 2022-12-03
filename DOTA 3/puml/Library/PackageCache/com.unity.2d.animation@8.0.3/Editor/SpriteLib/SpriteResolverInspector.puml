@@ -1,0 +1,39 @@
+@startuml
+class SpriteResolverInspector {
+    m_CategorySelectionIndex : int = 0
+    m_LabelSelectionIndex : int = 0
+    m_PreviousCategoryValue : string
+    m_PreviousLabelValue : string
+    m_IgnoreNextDeserializeCallback : bool
+    m_ReInitOnNextGUI : bool
+    + OnEnable() : void
+    SpriteResolverDeserializedCallback() : void
+    GetCategoryAndLabelStringValue(categoryName:string, labelName:string) : void
+    UpdateSpriteLibrary() : void
+    ValidateCategorySelectionIndexValue() : void
+    + <<override>> OnInspectorGUI() : void
+    ApplyModifiedProperty() : void
+}
+class Style <<static>> {
+}
+class SpriteCategorySelectionList <<struct>> {
+    + categoryName : string
+}
+class "Dictionary`2"<T1,T2> {
+}
+Editor <|-- SpriteResolverInspector
+SpriteResolverInspector --> "m_SpriteHash" SerializedProperty
+SpriteResolverInspector --> "m_SpriteKey" SerializedProperty
+SpriteResolverInspector --> "m_LabelHash" SerializedProperty
+SpriteResolverInspector --> "m_CategoryHash" SerializedProperty
+SpriteResolverInspector --> "m_SpriteSkin" SpriteSkin
+SpriteResolverInspector o-> "m_SpriteLibSelection<string,SpriteCategorySelectionList>" "Dictionary`2"
+SpriteResolverInspector o-> "m_SpriteSelectorWidget" SpriteSelectorWidget
+SpriteResolverInspector --> "spriteResolver" SpriteResolver
+SpriteResolverInspector +-- Style
+Style o-> "categoryLabel" GUIContent
+Style o-> "labelLabel" GUIContent
+Style o-> "categoryIsEmptyLabel" GUIContent
+Style o-> "noCategory" GUIContent
+SpriteResolverInspector +-- SpriteCategorySelectionList
+@enduml

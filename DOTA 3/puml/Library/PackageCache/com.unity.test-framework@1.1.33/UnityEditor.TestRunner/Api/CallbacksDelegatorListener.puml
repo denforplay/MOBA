@@ -1,0 +1,10 @@
+@startuml
+class CallbacksDelegatorListener {
+    + RunStarted(testsToRun:NUnit.Framework.Interfaces.ITest) : void
+    + RunFinished(testResults:NUnit.Framework.Interfaces.ITestResult) : void
+    + TestStarted(test:NUnit.Framework.Interfaces.ITest) : void
+    + TestFinished(result:NUnit.Framework.Interfaces.ITestResult) : void
+}
+ScriptableObject <|-- CallbacksDelegatorListener
+ITestRunnerListener <|-- CallbacksDelegatorListener
+@enduml

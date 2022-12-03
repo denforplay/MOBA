@@ -1,0 +1,27 @@
+@startuml
+abstract class CinemachineComponentBase {
+    + {abstract} IsValid : bool <<get>>
+    + <<virtual>> PrePipelineMutateCameraState(curState:CameraState, deltaTime:float) : void
+    + <<virtual>> BodyAppliesAfterAim : bool <<get>>
+    + {abstract} MutateCameraState(curState:CameraState, deltaTime:float) : void
+    + <<virtual>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float, transitionParams:CinemachineVirtualCameraBase.TransitionParams) : bool
+    + <<virtual>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<virtual>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<virtual>> GetMaxDampTime() : float
+    + <<virtual>> RequiresUserInput : bool <<get>>
+}
+MonoBehaviour <|-- CinemachineComponentBase
+CinemachineComponentBase --> "VirtualCamera" CinemachineVirtualCameraBase
+CinemachineComponentBase --> "m_vcamOwner" CinemachineVirtualCameraBase
+CinemachineComponentBase --> "FollowTarget" Transform
+CinemachineComponentBase --> "LookAtTarget" Transform
+CinemachineComponentBase --> "AbstractFollowTargetGroup" ICinemachineTargetGroup
+CinemachineComponentBase --> "FollowTargetGroup" CinemachineTargetGroup
+CinemachineComponentBase --> "FollowTargetPosition" Vector3
+CinemachineComponentBase --> "FollowTargetRotation" Quaternion
+CinemachineComponentBase --> "AbstractLookAtTargetGroup" ICinemachineTargetGroup
+CinemachineComponentBase --> "LookAtTargetGroup" CinemachineTargetGroup
+CinemachineComponentBase --> "LookAtTargetPosition" Vector3
+CinemachineComponentBase --> "LookAtTargetRotation" Quaternion
+CinemachineComponentBase --> "VcamState" CameraState
+@enduml

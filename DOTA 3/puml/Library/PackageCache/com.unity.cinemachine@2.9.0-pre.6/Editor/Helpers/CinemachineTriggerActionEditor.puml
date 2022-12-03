@@ -1,0 +1,15 @@
+@startuml
+class CinemachineTriggerActionEditor {
+    <<const>> vSpace : int = 2
+    {static} mEnterExpanded : bool
+    {static} mExitExpanded : bool
+    + <<override>> OnInspectorGUI() : void
+    DrawActionSettings(property:SerializedProperty, expanded:bool) : bool
+    GetTargetComponent(obj:UnityEngine.Object) : T
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineTriggerAction>" <|-- CinemachineTriggerActionEditor
+CinemachineTriggerActionEditor --> "mRepeatLabel" GUIContent
+CinemachineTriggerActionEditor --> "mFoldoutStyle" GUIStyle
+@enduml

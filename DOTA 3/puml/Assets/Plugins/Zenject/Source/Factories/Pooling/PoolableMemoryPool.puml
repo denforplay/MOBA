@@ -1,0 +1,63 @@
+@startuml
+class "PoolableMemoryPool`1"<TValue> {
+}
+class "PoolableMemoryPool`2"<TParam1,TValue> {
+}
+class "PoolableMemoryPool`3"<TParam1,TParam2,TValue> {
+}
+class "PoolableMemoryPool`4"<TParam1,TParam2,TParam3,TValue> {
+}
+class "PoolableMemoryPool`5"<TParam1,TParam2,TParam3,TParam4,TValue> {
+}
+class "PoolableMemoryPool`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TValue> {
+}
+class "PoolableMemoryPool`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue> {
+}
+class "PoolableMemoryPool`8"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue> {
+}
+class "PoolableMemoryPool`9"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TValue> {
+}
+class "MemoryPool`1"<T> {
+}
+class "MemoryPool`2"<T1,T2> {
+}
+class "IPoolable`1"<T> {
+}
+class "MemoryPool`3"<T1,T2,T3> {
+}
+class "IPoolable`2"<T1,T2> {
+}
+class "MemoryPool`4"<T1,T2,T3,T4> {
+}
+class "IPoolable`3"<T1,T2,T3> {
+}
+class "MemoryPool`5"<T1,T2,T3,T4,T5> {
+}
+class "IPoolable`4"<T1,T2,T3,T4> {
+}
+class "MemoryPool`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "IPoolable`5"<T1,T2,T3,T4,T5> {
+}
+class "MemoryPool`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "IPoolable`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "MemoryPool`8"<T1,T2,T3,T4,T5,T6,T7,T8> {
+}
+class "IPoolable`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "MemoryPool`9"<T1,T2,T3,T4,T5,T6,T7,T8,T9> {
+}
+class "IPoolable`8"<T1,T2,T3,T4,T5,T6,T7,T8> {
+}
+"MemoryPool`1" "<TValue>" <|-- "PoolableMemoryPool`1"
+"MemoryPool`2" "<TParam1,TValue>" <|-- "PoolableMemoryPool`2"
+"MemoryPool`3" "<TParam1,TParam2,TValue>" <|-- "PoolableMemoryPool`3"
+"MemoryPool`4" "<TParam1,TParam2,TParam3,TValue>" <|-- "PoolableMemoryPool`4"
+"MemoryPool`5" "<TParam1,TParam2,TParam3,TParam4,TValue>" <|-- "PoolableMemoryPool`5"
+"MemoryPool`6" "<TParam1,TParam2,TParam3,TParam4,TParam5,TValue>" <|-- "PoolableMemoryPool`6"
+"MemoryPool`7" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TValue>" <|-- "PoolableMemoryPool`7"
+"MemoryPool`8" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TValue>" <|-- "PoolableMemoryPool`8"
+"MemoryPool`9" "<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TParam7,TParam8,TValue>" <|-- "PoolableMemoryPool`9"
+@enduml

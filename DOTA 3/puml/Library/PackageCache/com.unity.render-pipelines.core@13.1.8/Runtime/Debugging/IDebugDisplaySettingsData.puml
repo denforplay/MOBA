@@ -1,0 +1,6 @@
+@startuml
+interface IDebugDisplaySettingsData {
+    CreatePanel() : IDebugDisplaySettingsPanelDisposable
+}
+IDebugDisplaySettingsQuery <|-- IDebugDisplaySettingsData
+@enduml

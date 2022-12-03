@@ -1,0 +1,8 @@
+@startuml
+class DefaultSpriteNameFileIdDataProvider {
+    + DefaultSpriteNameFileIdDataProvider(spriteRects:IEnumerable<SpriteRect>)
+    + GetNameFileIdPairs() : IEnumerable<SpriteNameFileIdPair>
+    + SetNameFileIdPairs(nameFileIdPairs:IEnumerable<SpriteNameFileIdPair>) : void
+}
+ISpriteNameFileIdDataProvider <|-- DefaultSpriteNameFileIdDataProvider
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class GridSelection {
+    + {static} kUpdateGridSelection : string
+    + {static}  <<event>> gridSelectionChanged : Action 
+    + {static} active : bool <<get>>
+    + {static} Select(target:Object, bounds:BoundsInt) : void
+    + {static} Clear() : void
+}
+ScriptableObject <|-- GridSelection
+GridSelection --> "position" BoundsInt
+GridSelection --> "target" GameObject
+GridSelection --> "grid" Grid
+@enduml

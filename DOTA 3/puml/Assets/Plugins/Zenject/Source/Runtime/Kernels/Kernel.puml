@@ -1,0 +1,19 @@
+@startuml
+class Kernel {
+    + <<virtual>> Initialize() : void
+    + <<virtual>> Dispose() : void
+    + <<virtual>> LateDispose() : void
+    + <<virtual>> Tick() : void
+    + <<virtual>> LateTick() : void
+    + <<virtual>> FixedTick() : void
+}
+IInitializable <|-- Kernel
+IDisposable <|-- Kernel
+ITickable <|-- Kernel
+ILateTickable <|-- Kernel
+IFixedTickable <|-- Kernel
+ILateDisposable <|-- Kernel
+Kernel o-> "_tickableManager" TickableManager
+Kernel o-> "_initializableManager" InitializableManager
+Kernel o-> "_disposablesManager" DisposableManager
+@enduml

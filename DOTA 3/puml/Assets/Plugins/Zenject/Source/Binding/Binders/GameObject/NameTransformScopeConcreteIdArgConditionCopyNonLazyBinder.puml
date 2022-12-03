@@ -1,0 +1,7 @@
+@startuml
+class NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder {
+    + NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder(bindInfo:BindInfo, gameObjectInfo:GameObjectCreationParameters)
+    + WithGameObjectName(gameObjectName:string) : TransformScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+TransformScopeConcreteIdArgConditionCopyNonLazyBinder <|-- NameTransformScopeConcreteIdArgConditionCopyNonLazyBinder
+@enduml

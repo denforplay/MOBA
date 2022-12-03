@@ -1,0 +1,11 @@
+@startuml
+class ActivationTrackEditor {
+    {static} <<readonly>> ClipText : string
+    {static} <<readonly>> k_ErrorParentString : string
+    {static} <<readonly>> k_ErrorString : string
+    + <<override>> GetTrackOptions(track:TrackAsset, binding:Object) : TrackDrawOptions
+    GetErrorText(track:TrackAsset, binding:Object) : string
+    + <<override>> OnCreate(track:TrackAsset, copiedFrom:TrackAsset) : void
+}
+TrackEditor <|-- ActivationTrackEditor
+@enduml

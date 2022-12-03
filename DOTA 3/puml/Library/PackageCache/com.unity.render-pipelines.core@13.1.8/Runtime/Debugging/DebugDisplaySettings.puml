@@ -1,0 +1,12 @@
+@startuml
+abstract class "DebugDisplaySettings`1"<T> {
+    + {static} Instance : T <<get>>
+    + <<virtual>> AreAnySettingsActive : bool <<get>>
+    + <<virtual>> IsPostProcessingAllowed : bool <<get>>
+    + <<virtual>> IsLightingActive : bool <<get>>
+    + ForEach(onExecute:Action<IDebugDisplaySettingsData>) : void
+    + <<virtual>> Reset() : void
+    + <<virtual>> TryGetScreenClearColor(color:Color) : bool
+}
+IDebugDisplaySettings <|-- "DebugDisplaySettings`1"
+@enduml

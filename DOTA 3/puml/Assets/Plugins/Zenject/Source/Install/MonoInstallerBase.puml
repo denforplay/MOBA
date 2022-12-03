@@ -1,0 +1,9 @@
+@startuml
+class MonoInstallerBase {
+    + <<virtual>> IsEnabled : bool <<get>>
+    + <<virtual>> Start() : void
+    + <<virtual>> InstallBindings() : void
+}
+MonoBehaviour <|-- MonoInstallerBase
+IInstaller <|-- MonoInstallerBase
+@enduml

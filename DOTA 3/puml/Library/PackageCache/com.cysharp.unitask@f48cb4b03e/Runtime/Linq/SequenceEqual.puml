@@ -1,0 +1,8 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} SequenceEqualAsync(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<Boolean>
+    + {static} SequenceEqualAsync(first:IUniTaskAsyncEnumerable<TSource>, second:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>, cancellationToken:CancellationToken) : UniTask<Boolean>
+}
+class SequenceEqual <<static>> {
+}
+@enduml

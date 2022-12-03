@@ -1,0 +1,23 @@
+@startuml
+class AudioTrackInspector {
+    + <<override>> OnEnable() : void
+    DrawMixInfoSection() : void
+    ShouldDisableSpatialBlend() : bool
+}
+class Styles <<static>> {
+    + <<const>> VolumeControl : string = "AudioTrackInspector.volume"
+    + <<const>> StereoPanControl : string = "AudioTrackInspector.stereoPan"
+    + <<const>> SpatialBlendControl : string = "AudioTrackInspector.spatialBlend"
+    <<const>> k_Indent : string = "    "
+    + <<const>> valuesFormatter : string = "0.###"
+    + <<const>> mixInfoSectionSeparator : string = "\n\n"
+    + {static} mixedPropertiesInfo : string
+}
+TrackAssetInspector <|-- AudioTrackInspector
+AudioTrackInspector o-> "s_MixInfoBuilder" StringBuilder
+AudioTrackInspector --> "m_VolumeProperty" SerializedProperty
+AudioTrackInspector --> "m_StereoPanProperty" SerializedProperty
+AudioTrackInspector --> "m_SpatialBlendProperty" SerializedProperty
+AudioTrackInspector --> "m_Director" PlayableDirector
+AudioTrackInspector +-- Styles
+@enduml

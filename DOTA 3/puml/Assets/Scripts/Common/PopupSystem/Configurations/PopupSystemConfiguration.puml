@@ -1,0 +1,8 @@
+@startuml
+class PopupSystemConfiguration {
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- PopupSystemConfiguration
+PopupSystemConfiguration --> "PopupPrefabs<Popup>" "List`1"
+@enduml

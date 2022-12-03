@@ -1,0 +1,24 @@
+@startuml
+class "MinimumBinaryHeap`1"<T> {
+    <<const>> k_IncreaseFactor : float = 1.5f
+    <<const>> k_DecreaseFactor : float = 2.0f
+    <<readonly>> m_MinimumCapacity : int
+    m_Count : int
+    + Count : int <<get>>
+    + Min : T <<get>>
+    + MinimumBinaryHeap(capacity:int)
+    + Insert(data:T) : void
+    IncreaseHeapCapacityWhenFull() : void
+    + Remove(data:T) : void
+    + ExtractMin() : T
+    DecreaseHeapCapacityWhenSpare() : void
+    GetKey(data:T) : int
+    MinHeapify(key:int) : void
+    {static} Swap(lhs:T, rhs:T) : void
+    {static} Parent(key:int) : int
+    {static} LeftChild(key:int) : int
+    {static} RightChild(key:int) : int
+}
+class "IComparable`1"<T> {
+}
+@enduml

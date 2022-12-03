@@ -1,0 +1,111 @@
+@startuml
+class PerfNotes <<static>> {
+    + {static} BenchArraySize : int
+}
+class PartialWrite <<struct>> {
+    + Execute() : void
+    + Dispose() : void
+}
+class PartialWriteWorkaround <<struct>> {
+    + Execute() : void
+    + Dispose() : void
+}
+class IntToFloatPenalty <<struct>> {
+    + Execute() : void
+    + Dispose() : void
+}
+class DivisionByScalar <<struct>> {
+    divisor : float
+    + Execute() : void
+    + Dispose() : void
+}
+class SquareRoot <<struct>> {
+    + Execute() : void
+    + Dispose() : void
+}
+class SquareRootRecip <<struct>> {
+    + Execute() : void
+    + Dispose() : void
+}
+class RedundantStore <<struct>> {
+    + sum : int
+    + Execute() : void
+    + Dispose() : void
+}
+class RedundantStoreWorkaround <<struct>> {
+    + sum : int
+    + Execute() : void
+    + Dispose() : void
+}
+class "NativeArray`1"<T> {
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+class Provider <<struct>> {
+    + Value : object <<get>>
+}
+IJob <|-- PartialWrite
+IDisposable <|-- PartialWrite
+PartialWrite --> "a<int>" "NativeArray`1"
+PartialWrite --> "b<int>" "NativeArray`1"
+IJob <|-- PartialWriteWorkaround
+IDisposable <|-- PartialWriteWorkaround
+PartialWriteWorkaround --> "a<int>" "NativeArray`1"
+PartialWriteWorkaround --> "b<int>" "NativeArray`1"
+IJob <|-- IntToFloatPenalty
+IDisposable <|-- IntToFloatPenalty
+IntToFloatPenalty --> "b<float>" "NativeArray`1"
+IJob <|-- DivisionByScalar
+IDisposable <|-- DivisionByScalar
+DivisionByScalar --> "a<float>" "NativeArray`1"
+DivisionByScalar --> "b<float>" "NativeArray`1"
+IJob <|-- SquareRoot
+IDisposable <|-- SquareRoot
+SquareRoot --> "a<float>" "NativeArray`1"
+SquareRoot --> "b<float>" "NativeArray`1"
+IJob <|-- SquareRootRecip
+IDisposable <|-- SquareRootRecip
+SquareRootRecip --> "a<float>" "NativeArray`1"
+SquareRootRecip --> "b<float>" "NativeArray`1"
+IJob <|-- RedundantStore
+IDisposable <|-- RedundantStore
+RedundantStore --> "a<int>" "NativeArray`1"
+IJob <|-- RedundantStoreWorkaround
+IDisposable <|-- RedundantStoreWorkaround
+RedundantStoreWorkaround --> "a<int>" "NativeArray`1"
+PartialWrite +-- Provider
+IArgumentProvider <|-- Provider
+PartialWriteWorkaround +-- Provider
+IArgumentProvider <|-- Provider
+IntToFloatPenalty +-- Provider
+IArgumentProvider <|-- Provider
+DivisionByScalar +-- Provider
+IArgumentProvider <|-- Provider
+SquareRoot +-- Provider
+IArgumentProvider <|-- Provider
+SquareRootRecip +-- Provider
+IArgumentProvider <|-- Provider
+RedundantStore +-- Provider
+IArgumentProvider <|-- Provider
+RedundantStoreWorkaround +-- Provider
+IArgumentProvider <|-- Provider
+@enduml

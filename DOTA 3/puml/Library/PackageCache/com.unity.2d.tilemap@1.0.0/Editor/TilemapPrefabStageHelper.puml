@@ -1,0 +1,26 @@
+@startuml
+class TilemapPrefabStageHelper {
+}
+class "ScriptableSingleton`1"<T> {
+}
+class OpenTilemapInPrefabModeProperties {
+    + {static} <<readonly>> cellSizeXEditorPref : string = "OpenTilemapInPrefabMode.CellSize.X"
+    + {static} <<readonly>> cellSizeYEditorPref : string = "OpenTilemapInPrefabMode.CellSize.Y"
+    + {static} <<readonly>> cellSizeZEditorPref : string = "OpenTilemapInPrefabMode.CellSize.Z"
+    + {static} <<readonly>> cellGapXEditorPref : string = "OpenTilemapInPrefabMode.CellGap.X"
+    + {static} <<readonly>> cellGapYEditorPref : string = "OpenTilemapInPrefabMode.CellGap.Y"
+    + {static} <<readonly>> cellGapZEditorPref : string = "OpenTilemapInPrefabMode.CellGap.Z"
+    + {static} <<readonly>> cellLayoutEditorPref : string = "OpenTilemapInPrefabMode.CellLayout"
+    + {static} <<readonly>> cellSwizzleEditorPref : string = "OpenTilemapInPrefabMode.CellSwizzle"
+    + {static} <<readonly>> cellSizeLookup : string = "Prefab Mode Grid Cell Size"
+    + {static} <<readonly>> cellGapLookup : string = "Prefab Mode Grid Cell Gap"
+    + {static} <<readonly>> cellLayoutLookup : string = "Prefab Mode Grid Cell Layout"
+    + {static} <<readonly>> cellSwizzleLookup : string = "Prefab Mode Grid Cell Swizzle"
+}
+"ScriptableSingleton`1" "<TilemapPrefabStageHelper>" <|-- TilemapPrefabStageHelper
+TilemapPrefabStageHelper +-- OpenTilemapInPrefabModeProperties
+OpenTilemapInPrefabModeProperties o-> "cellSizeLabel" GUIContent
+OpenTilemapInPrefabModeProperties o-> "cellGapLabel" GUIContent
+OpenTilemapInPrefabModeProperties o-> "cellLayoutLabel" GUIContent
+OpenTilemapInPrefabModeProperties o-> "cellSwizzleLabel" GUIContent
+@enduml

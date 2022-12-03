@@ -1,0 +1,29 @@
+@startuml
+class RenderGraphBuilder <<struct>> {
+    m_Disposed : bool
+    + UseColorBuffer(input:TextureHandle, index:int) : TextureHandle
+    + UseDepthBuffer(input:TextureHandle, flags:DepthAccess) : TextureHandle
+    + ReadTexture(input:TextureHandle) : TextureHandle
+    + WriteTexture(input:TextureHandle) : TextureHandle
+    + ReadWriteTexture(input:TextureHandle) : TextureHandle
+    + CreateTransientTexture(desc:TextureDesc) : TextureHandle
+    + CreateTransientTexture(texture:TextureHandle) : TextureHandle
+    + UseRendererList(input:RendererListHandle) : RendererListHandle
+    + ReadComputeBuffer(input:ComputeBufferHandle) : ComputeBufferHandle
+    + WriteComputeBuffer(input:ComputeBufferHandle) : ComputeBufferHandle
+    + CreateTransientComputeBuffer(desc:ComputeBufferDesc) : ComputeBufferHandle
+    + CreateTransientComputeBuffer(computebuffer:ComputeBufferHandle) : ComputeBufferHandle
+    + SetRenderFunc(renderFunc:RenderFunc<PassData>) : void
+    + EnableAsyncCompute(value:bool) : void
+    + AllowPassCulling(value:bool) : void
+    + Dispose() : void
+    + AllowRendererListCulling(value:bool) : void
+    + DependsOn(input:RendererListHandle) : RendererListHandle
+    Dispose(disposing:bool) : void
+    CheckResource(res:ResourceHandle, dontCheckTransientReadWrite:bool) : void
+}
+IDisposable <|-- RenderGraphBuilder
+RenderGraphBuilder --> "m_RenderPass" RenderGraphPass
+RenderGraphBuilder --> "m_Resources" RenderGraphResourceRegistry
+RenderGraphBuilder --> "m_RenderGraph" RenderGraph
+@enduml

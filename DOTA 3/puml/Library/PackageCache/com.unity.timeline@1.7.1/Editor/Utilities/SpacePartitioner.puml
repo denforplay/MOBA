@@ -1,0 +1,33 @@
+@startuml
+interface IBounds {
+}
+class SpacePartitioner {
+    + Clear() : void
+    + AddBounds(bounds:IBounds) : void
+    + AddBounds(item:object, rect:Rect) : void
+    + GetItemsAtPosition(position:Vector2) : IEnumerable<T>
+    + GetItemsInArea(area:Rect) : IEnumerable<T>
+    + DebugDraw(fillColor:Color, outlineColor:Color) : void
+}
+class "CachedList`1"<T> {
+}
+class Entry <<struct>> {
+    + item : object <<get>> <<set>>
+    + intervalStart : long <<get>> <<set>>
+    + intervalEnd : long <<get>> <<set>>
+    {static} + FromFloat(f:float) : Int64
+}
+class "IntervalTree`1"<T> {
+}
+class "List`1"<T> {
+}
+IBounds --> "boundingRect" Rect
+SpacePartitioner o-> "k_GuiEventLock" EventType
+SpacePartitioner o-> "m_Tree<Entry>" "IntervalTree`1"
+SpacePartitioner o-> "m_CacheList<Entry>" "List`1"
+SpacePartitioner +-- "CachedList`1"
+"CachedList`1" o-> "Instance<T>" "List`1"
+SpacePartitioner +-- Entry
+IInterval <|-- Entry
+Entry --> "bounds" Rect
+@enduml

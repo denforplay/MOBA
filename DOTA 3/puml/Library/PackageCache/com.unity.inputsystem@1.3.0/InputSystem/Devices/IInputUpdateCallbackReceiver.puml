@@ -1,0 +1,5 @@
+@startuml
+interface IInputUpdateCallbackReceiver {
+    OnUpdate() : void
+}
+@enduml

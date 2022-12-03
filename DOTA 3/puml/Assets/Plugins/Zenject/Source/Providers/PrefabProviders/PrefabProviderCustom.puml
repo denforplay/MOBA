@@ -1,0 +1,10 @@
+@startuml
+class PrefabProviderCustom {
+    + PrefabProviderCustom(getter:Func<InjectContext, UnityEngine.Object>)
+    + GetPrefab(context:InjectContext) : UnityEngine.Object
+}
+class "Func`2"<T1,T2> {
+}
+IPrefabProvider <|-- PrefabProviderCustom
+PrefabProviderCustom --> "_getter<InjectContext,UnityEngine.Object>" "Func`2"
+@enduml

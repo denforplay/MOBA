@@ -1,0 +1,25 @@
+@startuml
+class ConventionFilterTypesBinder {
+    + ConventionFilterTypesBinder(bindInfo:ConventionBindInfo)
+    + DerivingFromOrEqual() : ConventionFilterTypesBinder
+    + DerivingFromOrEqual(parentType:Type) : ConventionFilterTypesBinder
+    + DerivingFrom() : ConventionFilterTypesBinder
+    + DerivingFrom(parentType:Type) : ConventionFilterTypesBinder
+    + WithAttribute() : ConventionFilterTypesBinder
+    + WithAttribute(attribute:Type) : ConventionFilterTypesBinder
+    + WithoutAttribute() : ConventionFilterTypesBinder
+    + WithoutAttribute(attribute:Type) : ConventionFilterTypesBinder
+    + WithAttributeWhere(predicate:Func<T, bool>) : ConventionFilterTypesBinder
+    + Where(predicate:Func<Type, bool>) : ConventionFilterTypesBinder
+    + InNamespace(ns:string) : ConventionFilterTypesBinder
+    + InNamespaces(namespaces:string[]) : ConventionFilterTypesBinder
+    + InNamespaces(namespaces:IEnumerable<string>) : ConventionFilterTypesBinder
+    + WithSuffix(suffix:string) : ConventionFilterTypesBinder
+    + WithPrefix(prefix:string) : ConventionFilterTypesBinder
+    + MatchingRegex(pattern:string) : ConventionFilterTypesBinder
+    + MatchingRegex(pattern:string, options:RegexOptions) : ConventionFilterTypesBinder
+    + MatchingRegex(regex:Regex) : ConventionFilterTypesBinder
+    {static} IsInNamespace(type:Type, requiredNs:string) : bool
+}
+ConventionAssemblySelectionBinder <|-- ConventionFilterTypesBinder
+@enduml

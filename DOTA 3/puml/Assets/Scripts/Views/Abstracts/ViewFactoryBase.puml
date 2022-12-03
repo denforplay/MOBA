@@ -1,0 +1,10 @@
+@startuml
+abstract class "ViewFactoryBase`2"<T,TRequirement> {
+    + {abstract} Create(requirement:TRequirement) : T
+    + CreateOnPosition(position:Vector3, requirement:TRequirement) : T
+}
+class "IFactory`2"<T1,T2> {
+}
+MonoBehaviour <|-- "ViewFactoryBase`2"
+"IFactory`2" "<T,TRequirement>" <|-- "ViewFactoryBase`2"
+@enduml

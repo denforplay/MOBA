@@ -1,0 +1,33 @@
+@startuml
+class CinemachineOrbitalTransposer {
+    + m_HeadingIsSlave : bool = false
+    + UpdateHeading(deltaTime:float, up:Vector3, axis:AxisState) : float
+    + UpdateHeading(deltaTime:float, up:Vector3, axis:AxisState, recentering:AxisState.Recentering, isLive:bool) : float
+    + UpdateInputAxisProvider() : void
+    + <<override>> OnTargetObjectWarped(target:Transform, positionDelta:Vector3) : void
+    + <<override>> ForceCameraPosition(pos:Vector3, rot:Quaternion) : void
+    + <<override>> OnTransitionFromCamera(fromCam:ICinemachineCamera, worldUp:Vector3, deltaTime:float, transitionParams:CinemachineVirtualCameraBase.TransitionParams) : bool
+    + GetAxisClosestValue(cameraPos:Vector3, up:Vector3) : float
+    m_LastHeading : float
+    + <<override>> MutateCameraState(curState:CameraState, deltaTime:float) : void
+    + <<override>> GetTargetCameraPosition(worldUp:Vector3) : Vector3
+    + <<override>> RequiresUserInput : bool <<get>>
+}
+class Heading <<struct>> {
+    + m_VelocityFilterStrength : int
+    + m_Bias : float
+    + Heading(def:HeadingDefinition, filterStrength:int, bias:float)
+}
+enum HeadingDefinition {
+    PositionDelta,
+    Velocity,
+    TargetForward,
+    WorldForward,
+}
+CinemachineTransposer <|-- CinemachineOrbitalTransposer
+CinemachineOrbitalTransposer o-> "m_Heading" Heading
+CinemachineOrbitalTransposer o-> "m_XAxis" AxisState
+CinemachineOrbitalTransposer +-- Heading
+Heading --> "m_Definition" HeadingDefinition
+Heading +-- HeadingDefinition
+@enduml

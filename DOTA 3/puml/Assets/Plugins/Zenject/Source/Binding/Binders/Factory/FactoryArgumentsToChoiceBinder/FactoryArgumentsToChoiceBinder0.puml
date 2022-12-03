@@ -1,0 +1,16 @@
+@startuml
+class "FactoryArgumentsToChoiceBinder`1"<TContract> {
+    + FactoryArgumentsToChoiceBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo)
+    + WithFactoryArguments(param:T) : FactoryToChoiceBinder<TContract>
+    + WithFactoryArguments(param1:TParam1, param2:TParam2) : FactoryToChoiceBinder<TContract>
+    + WithFactoryArguments(param1:TParam1, param2:TParam2, param3:TParam3) : FactoryToChoiceBinder<TContract>
+    + WithFactoryArguments(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4) : FactoryToChoiceBinder<TContract>
+    + WithFactoryArguments(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5) : FactoryToChoiceBinder<TContract>
+    + WithFactoryArguments(param1:TParam1, param2:TParam2, param3:TParam3, param4:TParam4, param5:TParam5, param6:TParam6) : FactoryToChoiceBinder<TContract>
+    + WithFactoryArguments(args:object[]) : FactoryToChoiceBinder<TContract>
+    + WithFactoryArgumentsExplicit(extraArgs:IEnumerable<TypeValuePair>) : FactoryToChoiceBinder<TContract>
+}
+class "FactoryToChoiceBinder`1"<T> {
+}
+"FactoryToChoiceBinder`1" "<TContract>" <|-- "FactoryArgumentsToChoiceBinder`1"
+@enduml

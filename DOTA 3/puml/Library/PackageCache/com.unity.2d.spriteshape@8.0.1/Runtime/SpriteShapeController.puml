@@ -1,0 +1,86 @@
+@startuml
+class SpriteShapeController {
+    <<const>> s_DistanceTolerance : float = 0.001f
+    m_DynamicOcclusionLocal : bool
+    m_DynamicOcclusionOverriden : bool
+    m_ActiveSplineHash : int = 0
+    m_ActiveSpriteShapeHash : int = 0
+    m_MaxArrayCount : int = 0
+    m_FillPixelPerUnit : float = 100.0f
+    m_StretchTiling : float = 1.0f
+    m_SplineDetail : int
+    m_AdaptiveUV : bool
+    m_StretchUV : bool
+    m_WorldSpaceUV : bool
+    m_CornerAngleThreshold : float = 30.0f
+    m_ColliderDetail : int
+    m_ColliderOffset : float
+    m_UpdateCollider : bool = true
+    m_OptimizeCollider : bool = true
+    m_OptimizeGeometry : bool = true
+    m_EnableTangents : bool = false
+    m_GeometryCached : bool = false
+    m_UTess2D : bool = false
+    + spriteShapeHashCode : int <<get>>
+    + worldSpaceUVs : bool <<get>> <<set>>
+    + fillPixelsPerUnit : float <<get>> <<set>>
+    + enableTangents : bool <<get>> <<set>>
+    + stretchTiling : float <<get>> <<set>>
+    + splineDetail : int <<get>> <<set>>
+    + colliderDetail : int <<get>> <<set>>
+    + colliderOffset : float <<get>> <<set>>
+    + cornerAngleThreshold : float <<get>> <<set>>
+    + autoUpdateCollider : bool <<get>> <<set>>
+    + optimizeCollider : bool <<get>>
+    + optimizeGeometry : bool <<get>>
+    + hasCollider : bool <<get>>
+    DisposeInternal() : void
+    OnApplicationQuit() : void
+    OnEnable() : void
+    OnDisable() : void
+    OnDestroy() : void
+    Reset() : void
+    {static} SmartDestroy(o:UnityEngine.Object) : void
+    + RefreshSpriteShape() : void
+    ValidateSpline() : bool
+    ValidateSpriteShapeTexture() : bool
+    HasSpriteShapeChanged() : bool
+    HasSpriteShapeDataChanged() : bool
+    HasSplineDataChanged() : bool
+    LateUpdate() : void
+    OnWillRenderObject() : void
+    + BakeMesh() : JobHandle
+    + UpdateSpriteShapeParameters() : bool
+    UpdateSpriteData() : void
+    <<unsafe>> ScheduleBake() : JobHandle
+    + BakeCollider() : void
+    GetTextureFromIndex(index:int) : Texture2D
+    GetSpriteTexture(sprite:Sprite) : Texture2D
+}
+class "NativeArray`1"<T> {
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- SpriteShapeController
+SpriteShapeController --> "m_ActiveSpriteShape" SpriteShape
+SpriteShapeController --> "m_EdgeCollider2D" EdgeCollider2D
+SpriteShapeController --> "m_PolygonCollider2D" PolygonCollider2D
+SpriteShapeController --> "m_SpriteShapeRenderer" SpriteShapeRenderer
+SpriteShapeController --> "m_SpriteShapeGeometryCache" SpriteShapeGeometryCache
+SpriteShapeController --> "m_ColliderData<float2>" "NativeArray`1"
+SpriteShapeController --> "m_TangentData<Vector4>" "NativeArray`1"
+SpriteShapeController --> "m_Statistics<SpriteShapeGeneratorStats>" "NativeArray`1"
+SpriteShapeController --> "m_JobHandle" JobHandle
+SpriteShapeController --> "m_ActiveShapeParameters" SpriteShapeParameters
+SpriteShapeController o-> "m_Spline" Spline
+SpriteShapeController --> "m_SpriteShape" SpriteShape
+SpriteShapeController --> "m_Creator" SpriteShapeGeometryCreator
+SpriteShapeController o-> "m_Modifiers<SpriteShapeGeometryModifier>" "List`1"
+SpriteShapeController --> "spriteShapeCreator" SpriteShapeGeometryCreator
+SpriteShapeController --> "modifiers<SpriteShapeGeometryModifier>" "List`1"
+SpriteShapeController --> "spline" Spline
+SpriteShapeController --> "spriteShape" SpriteShape
+SpriteShapeController --> "edgeCollider" EdgeCollider2D
+SpriteShapeController --> "polygonCollider" PolygonCollider2D
+SpriteShapeController --> "spriteShapeRenderer" SpriteShapeRenderer
+@enduml

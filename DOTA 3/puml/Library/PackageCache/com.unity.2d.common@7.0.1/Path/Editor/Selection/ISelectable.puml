@@ -1,0 +1,5 @@
+@startuml
+interface "ISelectable`1"<T> {
+    Select(selector:ISelector<T>) : bool
+}
+@enduml

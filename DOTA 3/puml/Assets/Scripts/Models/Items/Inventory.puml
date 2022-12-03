@@ -1,0 +1,8 @@
+@startuml
+class Inventory {
+    +  <<event>> OnItemChanged : Action<int, Item> 
+    + Inventory(size:int)
+    + AddItem(item:Item, slot:int) : void
+    + RemoveItem(slot:int) : void
+}
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class SpriteShapeEditorGUI {
+    + {static} s_FoldoutHash : int
+    + {static} MultiDelayedIntField(position:Rect, subLabels:GUIContent[], values:int[], labelWidth:float) : void
+}
+@enduml

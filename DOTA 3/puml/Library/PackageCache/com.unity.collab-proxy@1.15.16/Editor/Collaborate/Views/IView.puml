@@ -1,0 +1,5 @@
+@startuml
+interface "IView`1"<in T> {
+    Presenter : T <<set>>
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class DefaultParentScopeConcreteIdArgConditionCopyNonLazyBinder {
+    + DefaultParentScopeConcreteIdArgConditionCopyNonLazyBinder(subContainerBindInfo:SubContainerCreatorBindInfo, bindInfo:BindInfo)
+    + WithDefaultGameObjectParent(defaultParentName:string) : ScopeConcreteIdArgConditionCopyNonLazyBinder
+}
+ScopeConcreteIdArgConditionCopyNonLazyBinder <|-- DefaultParentScopeConcreteIdArgConditionCopyNonLazyBinder
+@enduml

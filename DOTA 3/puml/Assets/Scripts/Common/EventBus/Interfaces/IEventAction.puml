@@ -1,0 +1,8 @@
+@startuml
+interface "IEventAction`1"<T> {
+    AddSubscriber(subscriber:Action<T>) : void
+    RemoveSubscriber(subscriber:Action<T>) : void
+    HasSubscriber(subscriber:Action<T>) : bool
+    Invoke(invokator:T) : void
+}
+@enduml

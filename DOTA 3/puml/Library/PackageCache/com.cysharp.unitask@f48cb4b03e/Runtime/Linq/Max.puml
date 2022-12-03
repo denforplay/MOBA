@@ -1,0 +1,14 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, TResult>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+}
+class Max <<static>> <<partial>> {
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, cancellationToken:CancellationToken) : UniTask<TSource>
+    + {static} <<async>> MaxAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, TResult>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} <<async>> MaxAwaitAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+    + {static} <<async>> MaxAwaitWithCancellationAsync(source:IUniTaskAsyncEnumerable<TSource>, selector:Func<TSource, CancellationToken, UniTask<TResult>>, cancellationToken:CancellationToken) : UniTask<TResult>
+}
+@enduml

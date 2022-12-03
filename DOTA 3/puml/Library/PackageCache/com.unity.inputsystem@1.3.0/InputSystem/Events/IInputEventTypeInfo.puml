@@ -1,0 +1,5 @@
+@startuml
+interface IInputEventTypeInfo {
+}
+IInputEventTypeInfo --> "typeStatic" FourCC
+@enduml

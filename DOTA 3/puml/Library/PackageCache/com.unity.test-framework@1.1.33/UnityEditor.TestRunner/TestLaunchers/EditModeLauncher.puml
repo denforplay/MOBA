@@ -1,0 +1,20 @@
+@startuml
+class EditModeLauncher {
+    + {static} IsRunning : bool
+    + launchedOutsideApi : bool
+    + EditModeLauncher(filter:UITestRunnerFilter, platform:TestPlatform)
+    + EditModeLauncher(filters:Filter[], platform:TestPlatform, runSynchronously:bool, orderedTestNames:string[])
+    + <<override>> Run() : void
+    + AddEventHandler() : T
+}
+class BackgroundListener {
+    + RunStarted(testsToRun:ITest) : void
+    + RunFinished(testResults:ITestResult) : void
+    + TestStarted(test:ITest) : void
+    + TestFinished(result:ITestResult) : void
+}
+TestLauncherBase <|-- EditModeLauncher
+EditModeLauncher +-- BackgroundListener
+ScriptableObject <|-- BackgroundListener
+ITestRunnerListener <|-- BackgroundListener
+@enduml

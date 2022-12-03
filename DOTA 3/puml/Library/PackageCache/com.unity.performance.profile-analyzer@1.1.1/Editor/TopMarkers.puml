@@ -1,0 +1,101 @@
+@startuml
+class TopMarkers {
+    m_TimeRange : float
+    m_TimeRangeDirty : bool
+    + TopMarkers(profileAnalyzerWindow:ProfileAnalyzerWindow, draw2D:Draw2D, backgroundColor:Color, textColor:Color)
+    ToDisplayUnits(ms:float, showUnits:bool, limitToDigits:int) : string
+    + SetData(dataView:ProfileDataView, depthFilter:int, nameFilters:List<string>, nameExcludes:List<string>, timingOption:TimingOptions.TimingOption, threadSelectionCount:int) : void
+    CalculateTopMarkerTimeRange(rangeSettings:RangeSettings) : float
+    + GetTopMarkerTimeRange() : float
+    + CalculateTopMarkers() : MarkerSummary
+    GenerateActiveContextMenu(markerName:string, evt:Event) : GenericMenu
+    GenerateDisabledContextMenu(markerName:string) : GenericMenu
+    + ConstructTimeRangeText() : GUIContent
+    + Draw(rect:Rect, barColor:Color, barCount:int, timeRange:float, selectedBackground:Color, selectedBorder:Color, selectedText:Color, includeOthers:bool, includeUnaccounted:bool) : void
+    {static} CaculateWidth(x:float, msTime:float, msToWidth:float, width:float) : float
+    DrawBar(x:float, y:float, w:float, height:float, barColor:Color, selectedBorder:Color, withBorder:bool) : float
+    DrawBarText(rect:Rect, x:float, w:float, msTime:float, name:string, timeRange:float, leftAlignStyle:GUIStyle, medianFrameIndex:int) : float
+    CopyToClipboard(current:Event, text:string) : void
+}
+class RangeSettings {
+    + <<readonly>> depthFilter : int
+    + <<readonly>> threadSelectionCount : int
+    + RangeSettings(dataView:ProfileDataView, depthFilter:int, nameFilters:List<string>, nameExcludes:List<string>, timingOption:TimingOptions.TimingOption, threadSelectionCount:int)
+    + <<override>> GetHashCode() : int
+    + <<override>> Equals(b:object) : bool
+    IsEqual(b:RangeSettings) : bool
+}
+class Settings {
+    + <<readonly>> barCount : int
+    + <<readonly>> timeRange : float
+    + <<readonly>> includeOthers : bool
+    + <<readonly>> includeUnaccounted : bool
+    + Settings(rangeSettings:RangeSettings, barCount:int, timeRange:float, includeOthers:bool, includeUnaccounted:bool)
+    + <<override>> GetHashCode() : int
+    + <<override>> Equals(b:object) : bool
+    IsEqual(b:Settings) : bool
+}
+enum SummaryType {
+    Marker,
+    Other,
+    Unaccounted,
+}
+class MarkerSummaryEntry <<struct>> {
+    + <<readonly>> name : string
+    + <<readonly>> msAtMedian : float
+    + <<readonly>> msMedian : float
+    + <<readonly>> x : float
+    + <<readonly>> w : float
+    + <<readonly>> medianFrameIndex : int
+    + MarkerSummaryEntry(name:string, msAtMedian:float, msMedian:float, x:float, w:float, medianFrameIndex:int, summaryType:SummaryType)
+}
+class MarkerSummary {
+    + totalTime : float
+    + MarkerSummary()
+}
+class Styles <<static>> {
+}
+class Content <<static>> {
+    + {static} <<readonly>> frameTime : string
+    + {static} <<readonly>> multipleThreads : string
+    + {static} <<readonly>> totalTimeAllDepths : string
+    + {static} <<readonly>> totalTimeAtSpecificDepth : string
+    + {static} <<readonly>> selectSelf : string
+    + {static} <<readonly>> selectTotal : string
+    + {static} <<readonly>> selfTimeAllDepths : string
+    + {static} <<readonly>> selfTimeAtSpecificDepth : string
+    + {static} <<readonly>> tooltip : string
+}
+class "List`1"<T> {
+}
+TopMarkers --> "m_CurrentSettings" Settings
+TopMarkers --> "m_RequestedRangeSettings" RangeSettings
+TopMarkers --> "m_MarkerSummary" MarkerSummary
+TopMarkers --> "m_ProfileAnalyzerWindow" ProfileAnalyzerWindow
+TopMarkers --> "m_2D" Draw2D
+TopMarkers --> "m_BackgroundColor" Color
+TopMarkers --> "m_TextColor" Color
+TopMarkers +-- RangeSettings
+RangeSettings --> "dataView" ProfileDataView
+RangeSettings --> "nameFilters<string>" "List`1"
+RangeSettings --> "nameExcludes<string>" "List`1"
+TopMarkers +-- Settings
+Settings --> "rangeSettings" RangeSettings
+TopMarkers +-- SummaryType
+TopMarkers +-- MarkerSummaryEntry
+MarkerSummaryEntry --> "summaryType" SummaryType
+TopMarkers +-- MarkerSummary
+MarkerSummary --> "entry<MarkerSummaryEntry>" "List`1"
+TopMarkers +-- Styles
+Styles o-> "menuItemSelectFramesInAll" GUIContent
+Styles o-> "menuItemSelectFramesInCurrent" GUIContent
+Styles o-> "menuItemSelectFramesAll" GUIContent
+Styles o-> "menuItemAddToIncludeFilter" GUIContent
+Styles o-> "menuItemAddToExcludeFilter" GUIContent
+Styles o-> "menuItemRemoveFromIncludeFilter" GUIContent
+Styles o-> "menuItemRemoveFromExcludeFilter" GUIContent
+Styles o-> "menuItemSetAsParentMarkerFilter" GUIContent
+Styles o-> "menuItemClearParentMarkerFilter" GUIContent
+Styles o-> "menuItemCopyToClipboard" GUIContent
+TopMarkers +-- Content
+@enduml

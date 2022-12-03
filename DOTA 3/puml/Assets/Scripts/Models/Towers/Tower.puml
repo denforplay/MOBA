@@ -1,0 +1,15 @@
+@startuml
+class Tower {
+    +  <<event>> OnHealthChanged : Action<float> 
+    +  <<event>> OnHealthEnded : Action 
+    +  <<event>> OnMaxHealthChanged : Action<float> 
+    + CurrentHealth : float <<get>>
+    + MaxHealth : float <<get>> <<set>>
+    + ChangeHealth(value:float) : void
+    + Tower(towerConfiguration:TowerConfiguration)
+    + Damage : float <<get>> <<set>>
+    + Range : float <<get>> <<set>>
+    + ShootingDelay : float <<get>> <<set>>
+}
+IHealthable <|-- Tower
+@enduml

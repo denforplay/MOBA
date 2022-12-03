@@ -1,0 +1,14 @@
+@startuml
+class PlaymodeLauncher {
+    + {static} IsRunning : bool
+    + PlaymodeLauncher(settings:PlaymodeTestsControllerSettings)
+    + <<override>> Run() : void
+    + UpdateCallback() : void
+    + AddEventHandler() : void
+}
+class BackgroundWatcher {
+    {static} BackgroundWatcher()
+}
+RuntimeTestLauncherBase <|-- PlaymodeLauncher
+PlaymodeLauncher +-- BackgroundWatcher
+@enduml

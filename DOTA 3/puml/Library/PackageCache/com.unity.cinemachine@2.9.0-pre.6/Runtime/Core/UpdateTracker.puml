@@ -1,0 +1,33 @@
+@startuml
+class UpdateTracker {
+    {static} InitializeModule() : void
+    {static} UpdateTargets(currentClock:UpdateClock) : void
+    + {static} GetPreferredUpdate(target:Transform) : UpdateClock
+    {static} mLastUpdateTime : float
+    + {static} OnUpdate(currentClock:UpdateClock) : void
+}
+enum UpdateClock {
+    Fixed,
+    Late,
+}
+class UpdateStatus {
+    <<const>> kWindowSize : int = 30
+    windowStart : int
+    numWindowLateUpdateMoves : int
+    numWindowFixedUpdateMoves : int
+    numWindows : int
+    lastFrameUpdated : int
+    + UpdateStatus(currentFrame:int, pos:Matrix4x4)
+    + OnUpdate(currentFrame:int, currentClock:UpdateClock, pos:Matrix4x4) : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+UpdateTracker o-> "mUpdateStatus<Transform,UpdateStatus>" "Dictionary`2"
+UpdateTracker o-> "sToDelete<Transform>" "List`1"
+UpdateTracker +-- UpdateClock
+UpdateTracker +-- UpdateStatus
+UpdateStatus --> "lastPos" Matrix4x4
+UpdateStatus --> "PreferredUpdate" UpdateClock
+@enduml

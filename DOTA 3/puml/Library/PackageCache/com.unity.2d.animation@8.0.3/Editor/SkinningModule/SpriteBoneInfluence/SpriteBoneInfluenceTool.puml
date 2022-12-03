@@ -1,0 +1,55 @@
+@startuml
+class SpriteBoneInfluenceToolController {
+    + SpriteBoneInfluenceToolController(model:ISpriteBoneInfluenceToolModel, events:SkinningEvents)
+    + Activate() : void
+    + Deactivate() : void
+    OnMeshChanged(mesh:MeshCache) : void
+    OnSpriteSelectionChanged(sprite:SpriteCache) : void
+    OnBoneSelectionChanged() : void
+    OnBoneNameChanged(bone:BoneCache) : void
+    OnSkeletonTopologyChanged(skeleton:SkeletonCache) : void
+    UpdateAddRemoveButtons() : void
+    + OnViewCreated() : void
+    OnSkinningModeChanged(skinningMode:SkinningMode) : void
+    AddSelectedBoneInfluenceToSprite() : void
+    RemoveSelectedBoneInfluenceFromSprite() : void
+    OnReorderBoneInfluenceFromSprite(transformCache:IEnumerable<TransformCache>) : void
+    SelectedBonesFromList(selectedBones:IEnumerable<object>) : void
+    SetViewHeaderText() : void
+    UpdateSelectedSpriteBoneInfluence() : void
+    + ShouldEnableAddButton() : bool
+}
+interface ISpriteBoneInfluenceToolModel {
+    hasCharacter : bool <<get>>
+    UndoScope(description:string) : UndoScope
+    GetSpriteCharacterPart(sprite:SpriteCache) : CharacterPartCache
+}
+class SpriteBoneInfluenceTool {
+    hasCharacter : bool <<get>>
+    UndoScope(description:string) : UndoScope
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+    + GetSpriteCharacterPart(sprite:SpriteCache) : CharacterPartCache
+}
+class "IEnumerable`1"<T> {
+}
+class "List`1"<T> {
+}
+SpriteBoneInfluenceToolController --> "m_Events" SkinningEvents
+SpriteBoneInfluenceToolController --> "m_Model" ISpriteBoneInfluenceToolModel
+ISpriteBoneInfluenceToolModel --> "view" IInfluenceWindow
+ISpriteBoneInfluenceToolModel --> "selectedBones<BoneCache>" "IEnumerable`1"
+ISpriteBoneInfluenceToolModel --> "selectionInfluencedBones<TransformCache>" "List`1"
+ISpriteBoneInfluenceToolModel --> "selectedSprite" SpriteCache
+ISpriteBoneInfluenceToolModel --> "skinningMode" SkinningMode
+ISpriteBoneInfluenceToolModel --> "characterSkeleton" SkeletonCache
+BaseTool <|-- SpriteBoneInfluenceTool
+ISpriteBoneInfluenceToolModel <|-- SpriteBoneInfluenceTool
+SpriteBoneInfluenceTool --> "skeletonTool" SkeletonTool
+SpriteBoneInfluenceTool --> "previewBehaviour" IMeshPreviewBehaviour
+SpriteBoneInfluenceTool --> "view" IInfluenceWindow
+SpriteBoneInfluenceTool --> "selectedBones<BoneCache>" "IEnumerable`1"
+SpriteBoneInfluenceTool --> "selectionInfluencedBones<TransformCache>" "List`1"
+SpriteBoneInfluenceTool --> "selectedSprite" SpriteCache
+SpriteBoneInfluenceTool --> "skinningMode" SkinningMode
+SpriteBoneInfluenceTool --> "characterSkeleton" SkeletonCache
+@enduml

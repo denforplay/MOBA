@@ -1,0 +1,24 @@
+@startuml
+class ZenUnityEditorUtil <<static>> {
+    + {static} SaveThenRunPreserveSceneSetup(action:Action) : bool
+    + {static} ValidateCurrentSceneSetup() : void
+    + {static} ValidateAllActiveScenes() : int
+    + {static} RunCurrentSceneSetup() : void
+    + {static} GetSceneContextForScene(scene:Scene) : SceneContext
+    + {static} TryGetSceneContextForScene(scene:Scene) : SceneContext
+    + {static} GetDecoratorContextForScene(scene:Scene) : SceneDecoratorContext
+    + {static} TryGetDecoratorContextForScene(scene:Scene) : SceneDecoratorContext
+    {static} GetAllSceneContexts() : IEnumerable<SceneContext>
+    + {static} ConvertAssetPathToAbsolutePath(assetPath:string) : string
+    + {static} ConvertFullAbsolutePathToAssetPath(fullPath:string) : string
+    + {static} GetCurrentDirectoryAssetPathFromSelection() : string
+    + {static} GetCurrentDirectoryAbsolutePathFromSelection() : string
+    + {static} TryGetSelectedFilePathInProjectsTab() : string
+    + {static} GetSelectedFilePathsInProjectsTab() : List<string>
+    + {static} GetSelectedAssetPathsInProjectsTab() : List<string>
+    + {static} GetSelectedPathsInProjectsTab() : List<string>
+    + {static} SaveScriptableObjectAsset(path:string, asset:ScriptableObject) : void
+    + {static} GetSelectedFolderPathsInProjectsTab() : List<string>
+    + {static} TryGetSelectedFolderPathInProjectsTab() : string
+}
+@enduml

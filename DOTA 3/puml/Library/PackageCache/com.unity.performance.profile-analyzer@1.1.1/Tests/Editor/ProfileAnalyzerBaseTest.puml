@@ -1,0 +1,10 @@
+@startuml
+class ProfileAnalyzerBaseTest {
+    + SetupTest() : void
+    + TearDownTest() : void
+    SelectRange(startIndex:int, endIndex:int) : List<int>
+}
+class FrameSetupData <<struct>> {
+}
+ProfileAnalyzerBaseTest +-- FrameSetupData
+@enduml

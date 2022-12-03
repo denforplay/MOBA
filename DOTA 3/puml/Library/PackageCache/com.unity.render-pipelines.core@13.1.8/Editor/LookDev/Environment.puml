@@ -1,0 +1,55 @@
+@startuml
+class Environment {
+    m_CubemapGUID : string
+    + rotation : float = 0.0f
+    + exposure : float = 0f
+    m_Latitude : float = 60.0f
+    m_Longitude : float = 299.0f
+    + sunLatitude : float <<get>> <<set>>
+    + sunLongitude : float <<get>> <<set>>
+    + ResetToBrightestSpot() : void
+    LoadCubemap() : void
+}
+class EnvironmentEditor {
+    + <<sealed>> <<override>> CreateInspectorGUI() : VisualElement
+    + <<sealed>> <<override>> OnInspectorGUI() : void
+    <<override>> + RenderStaticPreview(assetPath:string, subAssets:UnityEngine.Object[], width:int, height:int) : Texture2D
+}
+interface "IBendable`1"<T> {
+    Bind(data:T) : void
+}
+class EnvironmentElement {
+    + EnvironmentElement()
+    + EnvironmentElement(withPreview:bool, OnChangeCallback:Action)
+    + EnvironmentElement(environment:Environment)
+    Create(withPreview:bool) : void
+    + Bind(environment:Environment) : void
+    + Bind(environment:Environment, deportedLatlong:Image) : void
+    {static} + PositionToLatLong(position:Vector2) : Vector2
+    + {static} ResetToBrightestSpot(environment:Environment) : void
+    + GetLatLongThumbnailTexture() : Texture2D
+    + {static} GetLatLongThumbnailTexture(environment:Environment, width:int) : Texture2D
+    + GetDefaultInspector() : VisualElement
+    RegisterChange(reflectedVariable:TValueType, newValue:TValueType, resyncField:BaseField<TValueType>, updatePreview:bool, customResync:Action) : void
+}
+ScriptableObject <|-- Environment
+Environment --> "m_Cubemap" Cubemap
+Environment o-> "shadowColor" Color
+Environment --> "cubemap" Cubemap
+Editor <|-- EnvironmentEditor
+VisualElement <|-- EnvironmentElement
+"IBendable`1" "<Environment>" <|-- EnvironmentElement
+EnvironmentElement --> "s_cubeToLatlongMaterial" Material
+EnvironmentElement --> "cubeToLatlongMaterial" Material
+EnvironmentElement --> "environmentParams" VisualElement
+EnvironmentElement --> "environment" Environment
+EnvironmentElement --> "latlong" Image
+EnvironmentElement --> "skyCubemapField" ObjectField
+EnvironmentElement --> "skyRotationOffset" FloatField
+EnvironmentElement --> "skyExposureField" FloatField
+EnvironmentElement --> "sunPosition" Vector2Field
+EnvironmentElement --> "shadowColor" ColorField
+EnvironmentElement --> "environmentName" TextField
+EnvironmentElement --> "OnChangeCallback" Action
+EnvironmentElement --> "target" Environment
+@enduml

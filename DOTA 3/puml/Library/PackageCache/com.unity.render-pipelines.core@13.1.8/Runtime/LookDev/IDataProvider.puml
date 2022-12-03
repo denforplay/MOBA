@@ -1,0 +1,26 @@
+@startuml
+interface IDataProvider {
+    FirstInitScene(stage:StageRuntimeInterface) : void
+    UpdateSky(camera:Camera, sky:Sky, stage:StageRuntimeInterface) : void
+    UpdateDebugMode(debugIndex:int) : void
+    GetShadowMask(output:RenderTexture, stage:StageRuntimeInterface) : void
+    OnBeginRendering(stage:StageRuntimeInterface) : void
+    OnEndRendering(stage:StageRuntimeInterface) : void
+    Cleanup(SRI:StageRuntimeInterface) : void
+}
+class Sky <<struct>> {
+    + longitudeOffset : float
+    + exposure : float
+}
+class StageRuntimeInterface {
+    + StageRuntimeInterface(AddGameObject:System.Func<bool, GameObject>, GetCamera:System.Func<Camera>, GetSunLight:System.Func<Light>)
+    + AddGameObject(persistent:bool) : GameObject
+    + SRPData : object
+}
+class "IEnumerable`1"<T> {
+}
+IDataProvider --> "supportedDebugModes<string>" "IEnumerable`1"
+Sky --> "cubemap" Cubemap
+StageRuntimeInterface --> "camera" Camera
+StageRuntimeInterface --> "sunLight" Light
+@enduml

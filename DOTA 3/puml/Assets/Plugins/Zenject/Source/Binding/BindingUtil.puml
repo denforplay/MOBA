@@ -1,0 +1,35 @@
+@startuml
+class BindingUtil <<static>> {
+    + {static} AssertIsValidPrefab(prefab:UnityEngine.Object) : void
+    + {static} AssertIsValidGameObject(gameObject:GameObject) : void
+    + {static} AssertIsNotComponent(types:IEnumerable<Type>) : void
+    + {static} AssertIsNotComponent() : void
+    + {static} AssertIsNotComponent(type:Type) : void
+    + {static} AssertDerivesFromUnityObject(types:IEnumerable<Type>) : void
+    + {static} AssertDerivesFromUnityObject() : void
+    + {static} AssertDerivesFromUnityObject(type:Type) : void
+    + {static} AssertTypesAreNotComponents(types:IEnumerable<Type>) : void
+    + {static} AssertIsValidResourcePath(resourcePath:string) : void
+    + {static} AssertIsInterfaceOrScriptableObject(types:IEnumerable<Type>) : void
+    + {static} AssertIsInterfaceOrScriptableObject() : void
+    + {static} AssertIsInterfaceOrScriptableObject(type:Type) : void
+    + {static} AssertIsInterfaceOrComponent(types:IEnumerable<Type>) : void
+    + {static} AssertIsInterfaceOrComponent() : void
+    + {static} AssertIsInterfaceOrComponent(type:Type) : void
+    + {static} AssertIsComponent(types:IEnumerable<Type>) : void
+    + {static} AssertIsComponent() : void
+    + {static} AssertIsComponent(type:Type) : void
+    + {static} AssertTypesAreNotAbstract(types:IEnumerable<Type>) : void
+    + {static} AssertIsNotAbstract(types:IEnumerable<Type>) : void
+    + {static} AssertIsNotAbstract() : void
+    + {static} AssertIsNotAbstract(type:Type) : void
+    + {static} AssertIsDerivedFromType(concreteType:Type, parentType:Type) : void
+    + {static} AssertConcreteTypeListIsNotEmpty(concreteTypes:IEnumerable<Type>) : void
+    + {static} AssertIsDerivedFromTypes(concreteTypes:IEnumerable<Type>, parentTypes:IEnumerable<Type>, invalidBindResponse:InvalidBindResponses) : void
+    + {static} AssertIsDerivedFromTypes(concreteTypes:IEnumerable<Type>, parentTypes:IEnumerable<Type>) : void
+    + {static} AssertIsDerivedFromTypes(concreteType:Type, parentTypes:IEnumerable<Type>) : void
+    + {static} AssertInstanceDerivesFromOrEqual(instance:object, parentTypes:IEnumerable<Type>) : void
+    + {static} AssertInstanceDerivesFromOrEqual(instance:object, baseType:Type) : void
+    + {static} CreateCachedProvider(creator:IProvider) : IProvider
+}
+@enduml

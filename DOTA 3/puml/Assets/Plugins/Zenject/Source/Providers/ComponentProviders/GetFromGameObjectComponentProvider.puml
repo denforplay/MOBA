@@ -1,0 +1,13 @@
+@startuml
+class GetFromGameObjectComponentProvider {
+    <<readonly>> _matchSingle : bool
+    + GetFromGameObjectComponentProvider(componentType:Type, gameObject:GameObject, matchSingle:bool)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+IProvider <|-- GetFromGameObjectComponentProvider
+GetFromGameObjectComponentProvider --> "_gameObject" GameObject
+GetFromGameObjectComponentProvider --> "_componentType" Type
+@enduml

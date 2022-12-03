@@ -1,0 +1,32 @@
+@startuml
+class TestSystemThreading {
+    + {static} TestMemoryBarrier() : void
+    + {static} TestReadBool() : int
+    + {static} TestReadByte(data:byte) : int
+    + {static} TestReadSByte(data:sbyte) : int
+    + {static} TestReadShort(data:short) : int
+    + {static} TestReadUShort(data:ushort) : int
+    + {static} TestReadInt(data:int) : int
+    + {static} TestReadUInt(data:uint) : uint
+    + {static} TestReadLong(data:long) : long
+    + {static} TestReadULong(data:ulong) : ulong
+    + {static} TestReadFloat(data:float) : float
+    + {static} TestReadDouble(data:double) : double
+    + {static} TestReadUIntPtr(data:UIntPtr) : UIntPtr
+    + {static} TestWriteBool() : int
+    + {static} TestWriteByte(data:byte) : int
+    + {static} TestWriteSByte(data:sbyte) : int
+    + {static} TestWriteShort(data:short) : int
+    + {static} TestWriteUShort(data:ushort) : int
+    + {static} TestWriteInt(data:int) : int
+    + {static} TestWriteLong(data:long) : long
+    + {static} TestWriteFloat(data:float) : float
+    + {static} TestWriteDouble(data:double) : double
+    + {static} TestWriteUIntPtr(data:UIntPtr) : UIntPtr
+}
+class UIntPtrProvider <<struct>> {
+    + Value : object <<get>>
+}
+TestSystemThreading +-- UIntPtrProvider
+IArgumentProvider <|-- UIntPtrProvider
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class SceneContextEditor {
+    + <<override>> OnEnable() : void
+}
+RunnableContextEditor <|-- SceneContextEditor
+SceneContextEditor --> "_contractNameProperty" SerializedProperty
+SceneContextEditor --> "_parentNamesProperty" SerializedProperty
+SceneContextEditor --> "_parentNewObjectsUnderSceneContextProperty" SerializedProperty
+@enduml

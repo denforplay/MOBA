@@ -1,0 +1,20 @@
+@startuml
+class "MemoryPoolMaxSizeBinder`1"<TContract> {
+    + MemoryPoolMaxSizeBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, poolBindInfo:MemoryPoolBindInfo)
+    + WithMaxSize(size:int) : MemoryPoolExpandBinder<TContract>
+}
+class "MemoryPoolInitialSizeMaxSizeBinder`1"<TContract> {
+    + MemoryPoolInitialSizeMaxSizeBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, poolBindInfo:MemoryPoolBindInfo)
+    + WithInitialSize(size:int) : MemoryPoolMaxSizeBinder<TContract>
+    + WithFixedSize(size:int) : FactoryArgumentsToChoiceBinder<TContract>
+}
+class "MemoryPoolIdInitialSizeMaxSizeBinder`1"<TContract> {
+    + MemoryPoolIdInitialSizeMaxSizeBinder(bindContainer:DiContainer, bindInfo:BindInfo, factoryBindInfo:FactoryBindInfo, poolBindInfo:MemoryPoolBindInfo)
+    + WithId(identifier:object) : MemoryPoolInitialSizeMaxSizeBinder<TContract>
+}
+class "MemoryPoolExpandBinder`1"<T> {
+}
+"MemoryPoolExpandBinder`1" "<TContract>" <|-- "MemoryPoolMaxSizeBinder`1"
+"MemoryPoolMaxSizeBinder`1" "<TContract>" <|-- "MemoryPoolInitialSizeMaxSizeBinder`1"
+"MemoryPoolInitialSizeMaxSizeBinder`1" "<TContract>" <|-- "MemoryPoolIdInitialSizeMaxSizeBinder`1"
+@enduml

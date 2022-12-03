@@ -1,0 +1,53 @@
+@startuml
+class AtlasAllocatorDynamic {
+    + AtlasAllocatorDynamic(width:int, height:int, capacityAllocations:int)
+    + Allocate(result:Vector4, key:int, width:int, height:int) : bool
+    + Release(key:int) : void
+    + Release() : void
+    + DebugStringFromRoot(depthMax:int) : string
+}
+class Texture2DAtlasDynamic {
+    + Texture2DAtlasDynamic(width:int, height:int, capacity:int, format:GraphicsFormat)
+    + Texture2DAtlasDynamic(width:int, height:int, capacity:int, atlasTexture:RTHandle)
+    + Release() : void
+    + ResetAllocator() : void
+    + AddTexture(cmd:CommandBuffer, scaleOffset:Vector4, texture:Texture) : bool
+    + IsCached(scaleOffset:Vector4, key:int) : bool
+    + EnsureTextureSlot(isUploadNeeded:bool, scaleOffset:Vector4, key:int, width:int, height:int) : bool
+    + ReleaseTextureSlot(key:int) : void
+}
+class AtlasNodePool {
+    + AtlasNodePool(capacity:Int16)
+    + Dispose() : void
+    + Clear() : void
+    + AtlasNodeCreate(parent:Int16) : Int16
+    + AtlasNodeFree(index:Int16) : void
+}
+class AtlasNode <<struct>> {
+    + AtlasNode(self:Int16, parent:Int16)
+    + IsOccupied() : bool
+    + SetIsOccupied() : void
+    + ClearIsOccupied() : void
+    + IsLeafNode() : bool
+    + Allocate(pool:AtlasNodePool, width:int, height:int) : Int16
+    + ReleaseChildren(pool:AtlasNodePool) : void
+    + ReleaseAndMerge(pool:AtlasNodePool) : void
+    + IsMergeNeeded(pool:AtlasNodePool) : bool
+}
+enum AtlasNodeFlags {
+    IsOccupied= 1 << 0,
+}
+Texture2DAtlasDynamic --> "AtlasTexture" RTHandle
+AtlasAllocatorDynamic +-- AtlasNodePool
+AtlasNodePool --> "m_Next" Int16
+AtlasNodePool --> "m_FreelistHead" Int16
+AtlasAllocatorDynamic +-- AtlasNode
+AtlasNode --> "m_Self" Int16
+AtlasNode --> "m_Parent" Int16
+AtlasNode --> "m_LeftChild" Int16
+AtlasNode --> "m_RightChild" Int16
+AtlasNode --> "m_FreelistNext" Int16
+AtlasNode --> "m_Flags" UInt16
+AtlasNode --> "m_Rect" Vector4
+AtlasNode +-- AtlasNodeFlags
+@enduml

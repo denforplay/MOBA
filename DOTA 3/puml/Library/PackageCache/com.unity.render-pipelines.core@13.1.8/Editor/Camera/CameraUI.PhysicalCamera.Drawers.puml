@@ -1,0 +1,14 @@
+@startuml
+class CameraUI <<static>> <<partial>> {
+}
+class PhysicalCamera <<static>> <<partial>> {
+    + {static} Drawer_PhysicalCamera_CameraBody_Sensor(p:ISerializedCamera, owner:Editor) : void
+    + {static} Drawer_PhysicalCamera_CameraBody_GateFit(p:ISerializedCamera, owner:Editor) : void
+    + {static} Drawer_PhysicalCamera_Lens_FocalLength(p:ISerializedCamera, owner:Editor) : void
+    + {static} Drawer_PhysicalCamera_Lens_Shift(p:ISerializedCamera, owner:Editor) : void
+}
+class "ConditionalWeakTable`2"<T1,T2> {
+}
+CameraUI +-- PhysicalCamera
+PhysicalCamera o-> "s_PerCameraSensorSizeHistory<Camera,object>" "ConditionalWeakTable`2"
+@enduml

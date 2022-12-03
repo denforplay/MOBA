@@ -1,0 +1,5 @@
+@startuml
+class SceneOccurrenceToolExtensions <<static>> {
+    + {static} MakeVisualElements(tool:SceneOccurrenceExplorerTool, lifetime:Lifetime, isHorizontal:bool) : IEnumerable<VisualElement>
+}
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+abstract class Installer {
+}
+abstract class "Installer`1"<TDerived> {
+    + {static} Install(container:DiContainer) : void
+}
+abstract class "Installer`2"<TParam1,TDerived> {
+    + {static} Install(container:DiContainer, p1:TParam1) : void
+}
+abstract class "Installer`3"<TParam1,TParam2,TDerived> {
+    + {static} Install(container:DiContainer, p1:TParam1, p2:TParam2) : void
+}
+abstract class "Installer`4"<TParam1,TParam2,TParam3,TDerived> {
+    + {static} Install(container:DiContainer, p1:TParam1, p2:TParam2, p3:TParam3) : void
+}
+abstract class "Installer`5"<TParam1,TParam2,TParam3,TParam4,TDerived> {
+    + {static} Install(container:DiContainer, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4) : void
+}
+abstract class "Installer`6"<TParam1,TParam2,TParam3,TParam4,TParam5,TDerived> {
+    + {static} Install(container:DiContainer, p1:TParam1, p2:TParam2, p3:TParam3, p4:TParam4, p5:TParam5) : void
+}
+InstallerBase <|-- Installer
+InstallerBase <|-- "Installer`1"
+InstallerBase <|-- "Installer`2"
+InstallerBase <|-- "Installer`3"
+InstallerBase <|-- "Installer`4"
+InstallerBase <|-- "Installer`5"
+InstallerBase <|-- "Installer`6"
+@enduml

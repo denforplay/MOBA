@@ -1,0 +1,5 @@
+@startuml
+class Bootstrap {
+    {static} Bootstrap()
+}
+@enduml

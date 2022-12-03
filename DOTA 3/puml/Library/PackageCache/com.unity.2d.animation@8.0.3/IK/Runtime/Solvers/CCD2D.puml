@@ -1,0 +1,7 @@
+@startuml
+class CCD2D <<static>> {
+    + {static} Solve(targetPosition:Vector3, forward:Vector3, solverLimit:int, tolerance:float, velocity:float, positions:Vector3[]) : bool
+    {static} DoIteration(targetPosition:Vector3, forward:Vector3, last:int, velocity:float, positions:Vector3[]) : void
+    {static} RotatePositionFrom(position:Vector3, pivot:Vector3, rotation:Quaternion) : Vector3
+}
+@enduml

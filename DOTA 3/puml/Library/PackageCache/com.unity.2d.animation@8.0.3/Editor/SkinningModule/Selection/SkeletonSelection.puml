@@ -1,0 +1,13 @@
+@startuml
+class SkeletonSelection {
+    + Count : int <<get>>
+    + BeginSelection() : void
+    + Clear() : void
+    + Contains(element:BoneCache) : bool
+    + EndSelection(select:bool) : void
+    + Select(element:BoneCache, select:bool) : void
+}
+IBoneSelection <|-- SkeletonSelection
+SkeletonSelection --> "activeElement" BoneCache
+SkeletonSelection --> "root" BoneCache
+@enduml

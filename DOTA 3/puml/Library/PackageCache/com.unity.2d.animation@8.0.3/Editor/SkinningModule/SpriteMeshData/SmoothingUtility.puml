@@ -1,0 +1,7 @@
+@startuml
+class SmoothingUtility {
+    + {static} SmoothWeights(boneWeightIn:BoneWeight[], indices:IList<int>, boneCount:int, boneWeightOut:BoneWeight[]) : void
+    + {static} SmoothWeights(boneWeightIn:BoneWeight[], indices:IList<int>, boneCount:int, iterations:int, boneWeightOut:BoneWeight[]) : void
+    + {static} SmoothPerVertexData(indices:IList<int>, dataIn:float[,], dataOut:float[,]) : void
+}
+@enduml

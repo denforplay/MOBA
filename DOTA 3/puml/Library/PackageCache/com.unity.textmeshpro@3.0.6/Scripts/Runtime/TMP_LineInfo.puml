@@ -1,0 +1,23 @@
+@startuml
+class TMP_LineInfo <<struct>> {
+    + characterCount : int
+    + visibleCharacterCount : int
+    + spaceCount : int
+    + wordCount : int
+    + firstCharacterIndex : int
+    + firstVisibleCharacterIndex : int
+    + lastCharacterIndex : int
+    + lastVisibleCharacterIndex : int
+    + length : float
+    + lineHeight : float
+    + ascender : float
+    + baseline : float
+    + descender : float
+    + maxAdvance : float
+    + width : float
+    + marginLeft : float
+    + marginRight : float
+}
+TMP_LineInfo --> "alignment" HorizontalAlignmentOptions
+TMP_LineInfo --> "lineExtents" Extents
+@enduml

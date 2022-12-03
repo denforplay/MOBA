@@ -1,0 +1,11 @@
+@startuml
+class MaterialHeaderScope <<struct>> {
+    + <<readonly>> expanded : bool
+    spaceAtEnd : bool
+    oldIndentLevel : int
+    + MaterialHeaderScope(title:GUIContent, bitExpanded:uint, materialEditor:MaterialEditor, spaceAtEnd:bool, subHeader:bool, defaultExpandedState:uint, documentationURL:string)
+    + MaterialHeaderScope(title:string, bitExpanded:uint, materialEditor:MaterialEditor, spaceAtEnd:bool, subHeader:bool)
+    Dispose() : void
+}
+IDisposable <|-- MaterialHeaderScope
+@enduml

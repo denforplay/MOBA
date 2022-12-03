@@ -1,0 +1,6 @@
+@startuml
+class CinemachinePixelPerfectEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- CinemachinePixelPerfectEditor
+@enduml

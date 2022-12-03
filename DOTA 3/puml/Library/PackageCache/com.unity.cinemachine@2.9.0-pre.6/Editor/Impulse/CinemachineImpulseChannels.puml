@@ -1,0 +1,9 @@
+@startuml
+class CinemachineImpulseChannels {
+    EnsureDefaultLayer() : void
+}
+ScriptableObject <|-- CinemachineImpulseChannels
+CinemachineImpulseChannels o-> "sInstance" CinemachineImpulseChannels
+CinemachineImpulseChannels --> "InstanceIfExists" CinemachineImpulseChannels
+CinemachineImpulseChannels --> "Instance" CinemachineImpulseChannels
+@enduml

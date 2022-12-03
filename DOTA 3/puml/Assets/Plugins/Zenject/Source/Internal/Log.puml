@@ -1,0 +1,11 @@
+@startuml
+class Log <<static>> {
+    + {static} Debug(message:string, args:object[]) : void
+    + {static} Info(message:string, args:object[]) : void
+    + {static} Warn(message:string, args:object[]) : void
+    + {static} Trace(message:string, args:object[]) : void
+    + {static} ErrorException(e:Exception) : void
+    + {static} ErrorException(message:string, e:Exception) : void
+    + {static} Error(message:string, args:object[]) : void
+}
+@enduml

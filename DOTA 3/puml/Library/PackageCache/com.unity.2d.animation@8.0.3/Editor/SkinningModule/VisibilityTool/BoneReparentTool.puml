@@ -1,0 +1,52 @@
+@startuml
+class BoneReparentToolController {
+    + BoneReparentToolController(model:IBoneTreeViewModel, eventSystem:SkinningEvents)
+    + <<override>> CanDrag() : bool
+    + <<override>> CanRename() : bool
+}
+class BoneReparentToolModel {
+    + BoneReparentToolModel(cache:SkinningCache, view:IBoneVisibilityToolView)
+}
+class BoneReparentTool {
+    + <<override>> Initialize(layout:LayoutOverlay) : void
+}
+class BoneReparentToolWindow {
+    InternalGetModel() : IBoneTreeViewModel
+    InternalGetController() : BoneTreeWidgetController
+    + OnBoneSelectionChange(skeleton:SkeletonSelection) : void
+    + OnBoneExpandedChange(bones:BoneCache[]) : void
+    + OnBoneNameChanged(bone:BoneCache) : void
+    + OnSelectionChange(skeleton:SkeletonCache) : void
+    + Deactivate() : void
+}
+class BoneReparentToolView {
+}
+class CustomUxmlFactory {
+}
+class "Func`1"<T> {
+}
+class CustomUxmlFactory {
+}
+class CustomUxmlTraits {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+BoneTreeWidgetController <|-- BoneReparentToolController
+BoneTreeWidgetModel <|-- BoneReparentToolModel
+SkeletonToolWrapper <|-- BoneReparentTool
+BoneReparentTool --> "m_View" BoneReparentToolWindow
+BoneReparentTool --> "m_Model" BoneReparentToolModel
+VisualElement <|-- BoneReparentToolWindow
+IBoneVisibilityToolView <|-- BoneReparentToolWindow
+BoneReparentToolWindow --> "m_ToolView" BoneReparentToolView
+BoneReparentToolWindow o-> "GetModel<IBoneTreeViewModel>" "Func`1"
+BoneReparentToolWindow o-> "GetController<BoneTreeWidgetController>" "Func`1"
+BoneReparentToolWindow --> "toolView" BoneReparentToolView
+BoneVisibilityToolView <|-- BoneReparentToolView
+BoneReparentToolWindow +-- CustomUxmlFactory
+"UxmlFactory`2" "<BoneReparentToolWindow,UxmlTraits>" <|-- CustomUxmlFactory
+BoneReparentToolView +-- CustomUxmlFactory
+"UxmlFactory`2" "<BoneReparentToolView,CustomUxmlTraits>" <|-- CustomUxmlFactory
+BoneReparentToolView +-- CustomUxmlTraits
+UxmlTraits <|-- CustomUxmlTraits
+@enduml

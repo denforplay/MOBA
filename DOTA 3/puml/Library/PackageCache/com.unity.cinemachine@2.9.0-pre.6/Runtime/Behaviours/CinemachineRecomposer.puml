@@ -1,0 +1,12 @@
+@startuml
+class CinemachineRecomposer {
+    + m_Tilt : float
+    + m_Pan : float
+    + m_Dutch : float
+    + m_ZoomScale : float
+    + m_FollowAttachment : float
+    + m_LookAtAttachment : float
+    + <<override>> PrePipelineMutateCameraStateCallback(vcam:CinemachineVirtualCameraBase, curState:CameraState, deltaTime:float) : void
+}
+CinemachineExtension <|-- CinemachineRecomposer
+@enduml

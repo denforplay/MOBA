@@ -1,0 +1,17 @@
+@startuml
+class IsExeAvailable <<static>> {
+}
+class PlasticInstallPath <<static>> {
+    {static} GetToolCommand(tool:string) : string
+    {static} GetExistingDir(directory:string) : string
+    {static} GetWindowsInstallationFolder() : string
+    <<const>> PLASTICSCM_FOLDER : string = "PlasticSCM5"
+    <<const>> PLASTICSCM_SUBFOLDER : string = "client"
+}
+class Plastic {
+}
+class Gluon {
+}
+PlasticInstallPath +-- Plastic
+PlasticInstallPath +-- Gluon
+@enduml

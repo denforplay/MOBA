@@ -1,0 +1,40 @@
+@startuml
+class SequenceHierarchy {
+    + count : int <<get>>
+    + {static} CreateInstance() : SequenceHierarchy
+    + Init(owner:WindowState) : void
+    OnValidate() : void
+    + Add(asset:TimelineAsset, director:PlayableDirector, hostClip:TimelineClip) : void
+    + Remove() : void
+    + GetStateAtIndex(index:int) : ISequenceState
+    + RemoveUntilCount(expectedCount:int) : void
+    + Clear() : void
+    + ToSequencePath() : SequencePath
+    + NeedsUpdate(path:SequencePath, forceRebuild:bool) : bool
+    + FromSequencePath(path:SequencePath, forceRebuild:bool) : void
+    Add_Internal(asset:TimelineAsset, director:PlayableDirector, hostClip:TimelineClip) : void
+    Remove_Internal() : void
+    RemoveUntilCount_Internal(expectedCount:int) : void
+    Clear_Internal() : void
+    UpdateSerializedPath() : void
+    {static} ValidateSubElements(subElements:List<SequencePathSubElement>, director:PlayableDirector, buildingBlocks:List<SequenceBuildingBlock>) : bool
+    {static} AddToCurrentUndoGroup(target:Object) : void
+}
+class "List`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class SequenceBuildingBlock <<struct>> {
+}
+ScriptableObject <|-- SequenceHierarchy
+SequenceHierarchy o-> "m_Sequences<ISequenceState>" "List`1"
+SequenceHierarchy --> "m_WindowState" WindowState
+SequenceHierarchy --> "m_SerializedPath" SequencePath
+SequenceHierarchy --> "masterSequence" ISequenceState
+SequenceHierarchy --> "editSequence" ISequenceState
+SequenceHierarchy --> "allSequences<ISequenceState>" "IEnumerable`1"
+SequenceHierarchy +-- SequenceBuildingBlock
+SequenceBuildingBlock --> "asset" TimelineAsset
+SequenceBuildingBlock --> "director" PlayableDirector
+SequenceBuildingBlock --> "hostClip" TimelineClip
+@enduml

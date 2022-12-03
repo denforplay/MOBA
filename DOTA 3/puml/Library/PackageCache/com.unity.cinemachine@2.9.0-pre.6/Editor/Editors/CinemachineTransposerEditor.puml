@@ -1,0 +1,8 @@
+@startuml
+class CinemachineTransposerEditor {
+    + <<override>> OnInspectorGUI() : void
+}
+class "BaseEditor`1"<T> {
+}
+"BaseEditor`1" "<CinemachineTransposer>" <|-- CinemachineTransposerEditor
+@enduml

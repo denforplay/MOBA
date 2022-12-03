@@ -1,0 +1,59 @@
+@startuml
+class AxisState <<struct>> {
+    + Value : float
+    + m_MaxSpeed : float
+    + m_AccelTime : float
+    + m_DecelTime : float
+    + m_InputAxisName : string
+    + m_InputAxisValue : float
+    + m_InvertInput : bool
+    + m_MinValue : float
+    + m_MaxValue : float
+    + m_Wrap : bool
+    m_CurrentSpeed : float
+    m_LastUpdateTime : float
+    m_LastUpdateFrame : int
+    + AxisState(minValue:float, maxValue:float, wrap:bool, rangeLocked:bool, maxSpeed:float, accelTime:float, decelTime:float, name:string, invert:bool)
+    + Validate() : void
+    <<const>> Epsilon : float
+    + Reset() : void
+    m_InputAxisIndex : int
+    + SetInputAxisProvider(axis:int, provider:IInputAxisProvider) : void
+    + HasInputProvider : bool <<get>>
+    + Update(deltaTime:float) : bool
+    ClampValue(v:float) : float
+    MaxSpeedUpdate(input:float, deltaTime:float) : bool
+    GetMaxSpeed() : float
+    + ValueRangeLocked : bool <<get>> <<set>>
+    + HasRecentering : bool <<get>> <<set>>
+}
+enum SpeedMode {
+    MaxSpeed,
+    InputValueGain,
+}
+interface IInputAxisProvider {
+    GetAxisValue(axis:int) : float
+}
+class Recentering <<struct>> {
+    + m_enabled : bool
+    + m_WaitTime : float
+    + m_RecenteringTime : float
+    m_LastUpdateTime : float
+    + Recentering(enabled:bool, waitTime:float, recenteringTime:float)
+    + Validate() : void
+    mLastAxisInputTime : float
+    mRecenteringVelocity : float
+    + CopyStateFrom(other:Recentering) : void
+    + CancelRecentering() : void
+    + RecenterNow() : void
+    + DoRecentering(axis:AxisState, deltaTime:float, recenterTarget:float) : void
+    m_LegacyHeadingDefinition : int
+    m_LegacyVelocityFilterStrength : int
+}
+AxisState --> "m_SpeedMode" SpeedMode
+AxisState --> "m_Recentering" Recentering
+AxisState --> "m_InputAxisProvider" IInputAxisProvider
+AxisState +-- SpeedMode
+AxisState +-- IInputAxisProvider
+AxisState +-- Recentering
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class CreepCombatController {
+    + CreepCombatController(creepController:CreepController, creep:Creep)
+}
+AICombatControllerBase <|-- CreepCombatController
+@enduml

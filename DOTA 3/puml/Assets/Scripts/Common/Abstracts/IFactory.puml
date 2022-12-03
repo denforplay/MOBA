@@ -1,0 +1,7 @@
+@startuml
+interface IFactoryRequirement {
+}
+interface "IFactory`2"<out T,in TFactoryRequirement> {
+    Create(requirement:TFactoryRequirement) : T
+}
+@enduml

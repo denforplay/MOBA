@@ -1,0 +1,5 @@
+@startuml
+interface IVirtualTexturingEnabledRenderPipeline {
+    virtualTexturingEnabled : bool <<get>>
+}
+@enduml

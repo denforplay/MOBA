@@ -1,0 +1,52 @@
+@startuml
+class SpriteEditorMenuSetting {
+    + autoSlicingMethod : int
+    + spriteAlignment : int
+    + keepEmptyRects : bool
+    + isAlternate : bool
+}
+class SpriteEditorMenu {
+    OnEnable() : void
+}
+enum SlicingType {
+    Automatic= 0,
+    GridByCellSize= 1,
+    GridByCellCount= 2,
+    IsometricGrid= 3,
+}
+class Styles {
+    + Styles()
+    + <<readonly>> deleteExistingTitle : string
+    + <<readonly>> deleteExistingMessage : string
+    + <<readonly>> yes : string
+    + <<readonly>> no : string
+}
+ScriptableObject <|-- SpriteEditorMenuSetting
+SpriteEditorMenuSetting o-> "gridCellCount" Vector2
+SpriteEditorMenuSetting o-> "gridSpriteSize" Vector2
+SpriteEditorMenuSetting o-> "gridSpriteOffset" Vector2
+SpriteEditorMenuSetting o-> "gridSpritePadding" Vector2
+SpriteEditorMenuSetting o-> "pivot" Vector2
+SpriteEditorMenuSetting --> "slicingType" SlicingType
+EditorWindow <|-- SpriteEditorMenu
+SpriteEditorMenuSetting +-- SlicingType
+SpriteEditorMenu +-- Styles
+Styles o-> "background" GUIStyle
+Styles --> "notice" GUIStyle
+Styles o-> "methodLabel" GUIContent
+Styles o-> "pivotLabel" GUIContent
+Styles o-> "typeLabel" GUIContent
+Styles o-> "sliceButtonLabel" GUIContent
+Styles o-> "columnAndRowLabel" GUIContent
+Styles o-> "columnLabel" GUIContent
+Styles o-> "rowLabel" GUIContent
+Styles o-> "pixelSizeLabel" GUIContent
+Styles o-> "xLabel" GUIContent
+Styles o-> "yLabel" GUIContent
+Styles o-> "offsetLabel" GUIContent
+Styles o-> "paddingLabel" GUIContent
+Styles o-> "automaticSlicingHintLabel" GUIContent
+Styles o-> "customPivotLabel" GUIContent
+Styles o-> "keepEmptyRectsLabel" GUIContent
+Styles o-> "isAlternateLabel" GUIContent
+@enduml

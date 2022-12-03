@@ -1,0 +1,25 @@
+@startuml
+class TimelineAssetInspector {
+    <<const>> k_MinWidth : int = 140
+    InitializeProperties() : void
+    + OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+    DrawIgnorePreviewProperty() : void
+    {static} ResetWindowState(state:WindowState) : void
+    {static} ContainsMasterAsset(asset:Object[]) : bool
+}
+class Styles <<static>> {
+}
+Editor <|-- TimelineAssetInspector
+TimelineAssetInspector --> "m_FrameRateProperty" SerializedProperty
+TimelineAssetInspector --> "m_DurationModeProperty" SerializedProperty
+TimelineAssetInspector --> "m_FixedDurationProperty" SerializedProperty
+TimelineAssetInspector --> "m_ScenePreviewProperty" SerializedProperty
+TimelineAssetInspector +-- Styles
+Styles o-> "FrameRate" GUIContent
+Styles o-> "DurationMode" GUIContent
+Styles o-> "Duration" GUIContent
+Styles o-> "HeaderTitleMultiselection" GUIContent
+Styles o-> "IgnorePreviewWarning" GUIContent
+Styles o-> "ScenePreviewLabel" GUIContent
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class "ConcreteBinderGeneric`1"<TContract> {
+    + ConcreteBinderGeneric(bindContainer:DiContainer, bindInfo:BindInfo, bindStatement:BindStatement)
+    + ToSelf() : FromBinderGeneric<TContract>
+    + To() : FromBinderGeneric<TConcrete>
+    + To(concreteTypes:Type[]) : FromBinderNonGeneric
+    + To(concreteTypes:IEnumerable<Type>) : FromBinderNonGeneric
+    + To(generator:Action<ConventionSelectTypesBinder>) : FromBinderNonGeneric
+}
+class "FromBinderGeneric`1"<T> {
+}
+"FromBinderGeneric`1" "<TContract>" <|-- "ConcreteBinderGeneric`1"
+@enduml

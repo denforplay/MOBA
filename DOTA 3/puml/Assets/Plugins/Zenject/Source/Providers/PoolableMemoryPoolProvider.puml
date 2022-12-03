@@ -1,0 +1,94 @@
+@startuml
+abstract class "PoolableMemoryPoolProviderBase`1"<TContract> {
+    + PoolableMemoryPoolProviderBase(container:DiContainer, poolId:Guid)
+    + IsCached : bool <<get>>
+    + TypeVariesBasedOnMemberType : bool <<get>>
+    + GetInstanceType(context:InjectContext) : Type
+    + {abstract} GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "PoolableMemoryPoolProvider`2"<TContract,TMemoryPool> {
+    _pool : TMemoryPool
+    + PoolableMemoryPoolProvider(container:DiContainer, poolId:Guid)
+    + Validate() : void
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "PoolableMemoryPoolProvider`3"<TParam1,TContract,TMemoryPool> {
+    _pool : TMemoryPool
+    + PoolableMemoryPoolProvider(container:DiContainer, poolId:Guid)
+    + Validate() : void
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "PoolableMemoryPoolProvider`4"<TParam1,TParam2,TContract,TMemoryPool> {
+    _pool : TMemoryPool
+    + PoolableMemoryPoolProvider(container:DiContainer, poolId:Guid)
+    + Validate() : void
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "PoolableMemoryPoolProvider`5"<TParam1,TParam2,TParam3,TContract,TMemoryPool> {
+    _pool : TMemoryPool
+    + PoolableMemoryPoolProvider(container:DiContainer, poolId:Guid)
+    + Validate() : void
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "PoolableMemoryPoolProvider`6"<TParam1,TParam2,TParam3,TParam4,TContract,TMemoryPool> {
+    _pool : TMemoryPool
+    + PoolableMemoryPoolProvider(container:DiContainer, poolId:Guid)
+    + Validate() : void
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "PoolableMemoryPoolProvider`7"<TParam1,TParam2,TParam3,TParam4,TParam5,TContract,TMemoryPool> {
+    _pool : TMemoryPool
+    + PoolableMemoryPoolProvider(container:DiContainer, poolId:Guid)
+    + Validate() : void
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "PoolableMemoryPoolProvider`8"<TParam1,TParam2,TParam3,TParam4,TParam5,TParam6,TContract,TMemoryPool> {
+    _pool : TMemoryPool
+    + PoolableMemoryPoolProvider(container:DiContainer, poolId:Guid)
+    + Validate() : void
+    + <<override>> GetAllInstancesWithInjectSplit(context:InjectContext, args:List<TypeValuePair>, injectAction:Action, buffer:List<object>) : void
+}
+class "IPoolable`1"<T> {
+}
+class "MemoryPool`2"<T1,T2> {
+}
+class "IPoolable`2"<T1,T2> {
+}
+class "MemoryPool`3"<T1,T2,T3> {
+}
+class "IPoolable`3"<T1,T2,T3> {
+}
+class "MemoryPool`4"<T1,T2,T3,T4> {
+}
+class "IPoolable`4"<T1,T2,T3,T4> {
+}
+class "MemoryPool`5"<T1,T2,T3,T4,T5> {
+}
+class "IPoolable`5"<T1,T2,T3,T4,T5> {
+}
+class "MemoryPool`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "IPoolable`6"<T1,T2,T3,T4,T5,T6> {
+}
+class "MemoryPool`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "IPoolable`7"<T1,T2,T3,T4,T5,T6,T7> {
+}
+class "MemoryPool`8"<T1,T2,T3,T4,T5,T6,T7,T8> {
+}
+IProvider <|-- "PoolableMemoryPoolProviderBase`1"
+"PoolableMemoryPoolProviderBase`1" "<TContract>" <|-- "PoolableMemoryPoolProvider`2"
+IValidatable <|-- "PoolableMemoryPoolProvider`2"
+"PoolableMemoryPoolProviderBase`1" "<TContract>" <|-- "PoolableMemoryPoolProvider`3"
+IValidatable <|-- "PoolableMemoryPoolProvider`3"
+"PoolableMemoryPoolProviderBase`1" "<TContract>" <|-- "PoolableMemoryPoolProvider`4"
+IValidatable <|-- "PoolableMemoryPoolProvider`4"
+"PoolableMemoryPoolProviderBase`1" "<TContract>" <|-- "PoolableMemoryPoolProvider`5"
+IValidatable <|-- "PoolableMemoryPoolProvider`5"
+"PoolableMemoryPoolProviderBase`1" "<TContract>" <|-- "PoolableMemoryPoolProvider`6"
+IValidatable <|-- "PoolableMemoryPoolProvider`6"
+"PoolableMemoryPoolProviderBase`1" "<TContract>" <|-- "PoolableMemoryPoolProvider`7"
+IValidatable <|-- "PoolableMemoryPoolProvider`7"
+"PoolableMemoryPoolProviderBase`1" "<TContract>" <|-- "PoolableMemoryPoolProvider`8"
+IValidatable <|-- "PoolableMemoryPoolProvider`8"
+@enduml

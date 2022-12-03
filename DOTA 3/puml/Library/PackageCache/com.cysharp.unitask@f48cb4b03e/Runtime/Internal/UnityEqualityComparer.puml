@@ -1,0 +1,77 @@
+@startuml
+class UnityEqualityComparer <<static>> {
+    + {static} GetDefault() : IEqualityComparer<T>
+    {static} GetDefaultHelper(type:Type) : object
+}
+class "IEqualityComparer`1"<T> {
+}
+class "Cache`1"<T> <<static>> {
+    {static} Cache()
+}
+class Vector2EqualityComparer <<sealed>> {
+    + Equals(self:Vector2, vector:Vector2) : bool
+    + GetHashCode(obj:Vector2) : int
+}
+class Vector3EqualityComparer <<sealed>> {
+    + Equals(self:Vector3, vector:Vector3) : bool
+    + GetHashCode(obj:Vector3) : int
+}
+class Vector4EqualityComparer <<sealed>> {
+    + Equals(self:Vector4, vector:Vector4) : bool
+    + GetHashCode(obj:Vector4) : int
+}
+class ColorEqualityComparer <<sealed>> {
+    + Equals(self:Color, other:Color) : bool
+    + GetHashCode(obj:Color) : int
+}
+class RectEqualityComparer <<sealed>> {
+    + Equals(self:Rect, other:Rect) : bool
+    + GetHashCode(obj:Rect) : int
+}
+class BoundsEqualityComparer <<sealed>> {
+    + Equals(self:Bounds, vector:Bounds) : bool
+    + GetHashCode(obj:Bounds) : int
+}
+class QuaternionEqualityComparer <<sealed>> {
+    + Equals(self:Quaternion, vector:Quaternion) : bool
+    + GetHashCode(obj:Quaternion) : int
+}
+class Color32EqualityComparer <<sealed>> {
+    + Equals(self:Color32, vector:Color32) : bool
+    + GetHashCode(obj:Color32) : int
+}
+UnityEqualityComparer o-> "Vector2<Vector2>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "Vector3<Vector3>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "Vector4<Vector4>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "Color<Color>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "Color32<Color32>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "Rect<Rect>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "Bounds<Bounds>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "Quaternion<Quaternion>" "IEqualityComparer`1"
+UnityEqualityComparer o-> "vector2Type" RuntimeTypeHandle
+UnityEqualityComparer o-> "vector3Type" RuntimeTypeHandle
+UnityEqualityComparer o-> "vector4Type" RuntimeTypeHandle
+UnityEqualityComparer o-> "colorType" RuntimeTypeHandle
+UnityEqualityComparer o-> "color32Type" RuntimeTypeHandle
+UnityEqualityComparer o-> "rectType" RuntimeTypeHandle
+UnityEqualityComparer o-> "boundsType" RuntimeTypeHandle
+UnityEqualityComparer o-> "quaternionType" RuntimeTypeHandle
+UnityEqualityComparer +-- "Cache`1"
+"Cache`1" --> "Comparer<T>" "IEqualityComparer`1"
+UnityEqualityComparer +-- Vector2EqualityComparer
+"IEqualityComparer`1" "<Vector2>" <|-- Vector2EqualityComparer
+UnityEqualityComparer +-- Vector3EqualityComparer
+"IEqualityComparer`1" "<Vector3>" <|-- Vector3EqualityComparer
+UnityEqualityComparer +-- Vector4EqualityComparer
+"IEqualityComparer`1" "<Vector4>" <|-- Vector4EqualityComparer
+UnityEqualityComparer +-- ColorEqualityComparer
+"IEqualityComparer`1" "<Color>" <|-- ColorEqualityComparer
+UnityEqualityComparer +-- RectEqualityComparer
+"IEqualityComparer`1" "<Rect>" <|-- RectEqualityComparer
+UnityEqualityComparer +-- BoundsEqualityComparer
+"IEqualityComparer`1" "<Bounds>" <|-- BoundsEqualityComparer
+UnityEqualityComparer +-- QuaternionEqualityComparer
+"IEqualityComparer`1" "<Quaternion>" <|-- QuaternionEqualityComparer
+UnityEqualityComparer +-- Color32EqualityComparer
+"IEqualityComparer`1" "<Color32>" <|-- Color32EqualityComparer
+@enduml

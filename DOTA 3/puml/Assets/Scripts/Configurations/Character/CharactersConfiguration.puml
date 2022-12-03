@@ -1,0 +1,8 @@
+@startuml
+class CharactersConfiguration {
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- CharactersConfiguration
+CharactersConfiguration --> "CharacterInfos<CharacterInfo>" "List`1"
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class PrefabInstantiatorCached {
+    + PrefabInstantiatorCached(subInstantiator:IPrefabInstantiator)
+    + GetPrefab(context:InjectContext) : UnityEngine.Object
+    + Instantiate(context:InjectContext, args:List<TypeValuePair>, injectAction:Action) : GameObject
+}
+class "List`1"<T> {
+}
+IPrefabInstantiator <|-- PrefabInstantiatorCached
+PrefabInstantiatorCached --> "_subInstantiator" IPrefabInstantiator
+PrefabInstantiatorCached --> "_gameObject" GameObject
+PrefabInstantiatorCached --> "ExtraArguments<TypeValuePair>" "List`1"
+PrefabInstantiatorCached --> "ArgumentTarget" Type
+PrefabInstantiatorCached --> "GameObjectCreationParameters" GameObjectCreationParameters
+@enduml

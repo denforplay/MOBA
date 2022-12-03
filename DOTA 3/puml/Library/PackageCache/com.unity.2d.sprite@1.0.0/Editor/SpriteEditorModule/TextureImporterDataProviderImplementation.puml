@@ -1,0 +1,63 @@
+@startuml
+class SpriteDataProviderBase {
+    + SpriteDataProviderBase(dp:TextureImporterDataProvider)
+}
+class SpriteBoneDataTransfer {
+    + SpriteBoneDataTransfer(dp:TextureImporterDataProvider)
+    + GetBones(guid:GUID) : List<SpriteBone>
+    + SetBones(guid:GUID, bones:List<SpriteBone>) : void
+    + {static} Apply(rectSP:SerializedProperty, spriteBone:List<SpriteBone>) : void
+}
+class SpriteOutlineDataTransfer {
+    + SpriteOutlineDataTransfer(dp:TextureImporterDataProvider)
+    + GetOutlines(guid:GUID) : List<Vector2[]>
+    + SetOutlines(guid:GUID, data:List<Vector2[]>) : void
+    + GetTessellationDetail(guid:GUID) : float
+    + SetTessellationDetail(guid:GUID, value:float) : void
+    + {static} Apply(rectSP:SerializedProperty, outline:List<Vector2[]>) : void
+}
+class SpriteMeshDataTransfer {
+    + SpriteMeshDataTransfer(dp:TextureImporterDataProvider)
+    + GetVertices(guid:GUID) : Vertex2DMetaData[]
+    + SetVertices(guid:GUID, data:Vertex2DMetaData[]) : void
+    + GetIndices(guid:GUID) : int[]
+    + SetIndices(guid:GUID, indices:int[]) : void
+    + GetEdges(guid:GUID) : Vector2Int[]
+    + SetEdges(guid:GUID, edges:Vector2Int[]) : void
+    + {static} Apply(rectSP:SerializedProperty, vertices:List<Vertex2DMetaData>, indices:List<int>, edges:List<Vector2Int>) : void
+}
+class SpritePhysicsOutlineDataTransfer {
+    + SpritePhysicsOutlineDataTransfer(dp:TextureImporterDataProvider)
+    + GetOutlines(guid:GUID) : List<Vector2[]>
+    + SetOutlines(guid:GUID, data:List<Vector2[]>) : void
+    + GetTessellationDetail(guid:GUID) : float
+    + SetTessellationDetail(guid:GUID, value:float) : void
+    + {static} Apply(rectSP:SerializedProperty, value:List<Vector2[]>) : void
+}
+class SpriteSecondaryTextureDataTransfer {
+    + SpriteSecondaryTextureDataTransfer(dp:TextureImporterDataProvider)
+    + {static} Load(so:SerializedObject) : SecondarySpriteTexture[]
+    + {static} Apply(so:SerializedObject, values:SecondarySpriteTexture[]) : void
+}
+class SpriteTextureDataTransfer {
+    + SpriteTextureDataTransfer(dp:TextureImporterDataProvider)
+    + GetTextureActualWidthAndHeight(width:int, height:int) : void
+    + GetReadableTexture2D() : Texture2D
+}
+SpriteDataProviderBase <|-- SpriteBoneDataTransfer
+ISpriteBoneDataProvider <|-- SpriteBoneDataTransfer
+SpriteDataProviderBase <|-- SpriteOutlineDataTransfer
+ISpriteOutlineDataProvider <|-- SpriteOutlineDataTransfer
+SpriteDataProviderBase <|-- SpriteMeshDataTransfer
+ISpriteMeshDataProvider <|-- SpriteMeshDataTransfer
+SpriteDataProviderBase <|-- SpritePhysicsOutlineDataTransfer
+ISpritePhysicsOutlineDataProvider <|-- SpritePhysicsOutlineDataTransfer
+SpriteDataProviderBase <|-- SpriteSecondaryTextureDataTransfer
+ISecondaryTextureDataProvider <|-- SpriteSecondaryTextureDataTransfer
+SpriteDataProviderBase <|-- SpriteTextureDataTransfer
+ITextureDataProvider <|-- SpriteTextureDataTransfer
+SpriteTextureDataTransfer --> "m_ReadableTexture" Texture2D
+SpriteTextureDataTransfer --> "m_OriginalTexture" Texture2D
+SpriteTextureDataTransfer --> "texture" Texture2D
+SpriteTextureDataTransfer --> "previewTexture" Texture2D
+@enduml

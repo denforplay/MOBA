@@ -1,0 +1,20 @@
+@startuml
+class TestRunnerWindow {
+    + {static} ShowWindow() : void
+    {static} TestRunnerWindow()
+    + AddItemsToMenu(menu:GenericMenu) : void
+}
+class Styles <<static>> {
+    {static} Styles()
+}
+enum TestRunnerMenuLabels {
+    PlayMode= 0,
+    EditMode= 1,
+}
+EditorWindow <|-- TestRunnerWindow
+IHasCustomMenu <|-- TestRunnerWindow
+TestRunnerWindow +-- Styles
+Styles --> "info" GUIStyle
+Styles --> "testList" GUIStyle
+TestRunnerWindow +-- TestRunnerMenuLabels
+@enduml

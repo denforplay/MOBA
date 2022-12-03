@@ -1,0 +1,26 @@
+@startuml
+class InterceptedEventsPreview {
+    + <<override>> Initialize(targets:UnityEngine.Object[]) : void
+    + <<override>> GetPreviewTitle() : GUIContent
+    + <<override>> HasPreviewGUI() : bool
+    + <<override>> OnPreviewGUI(r:Rect, background:GUIStyle) : void
+}
+class ComponentInterceptedEvents {
+}
+class Styles {
+    + Styles()
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+ObjectPreview <|-- InterceptedEventsPreview
+InterceptedEventsPreview o-> "s_EventSystemInterfaces<Type>" "List`1"
+InterceptedEventsPreview o-> "s_InterfaceEventSystemEvents<Type,List<int>>" "Dictionary`2"
+InterceptedEventsPreview o-> "s_ComponentEvents2<Type,ComponentInterceptedEvents>" "Dictionary`2"
+InterceptedEventsPreview +-- ComponentInterceptedEvents
+ComponentInterceptedEvents --> "componentName" GUIContent
+InterceptedEventsPreview +-- Styles
+Styles o-> "labelStyle" GUIStyle
+Styles o-> "componentName" GUIStyle
+@enduml

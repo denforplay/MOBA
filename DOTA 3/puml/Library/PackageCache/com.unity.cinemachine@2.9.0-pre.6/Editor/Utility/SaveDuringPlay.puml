@@ -1,0 +1,46 @@
+@startuml
+class ObjectTreeUtil <<static>> {
+    + {static} GetFullName(current:GameObject) : string
+    + {static} FindObjectFromFullName(fullName:string, roots:GameObject[]) : GameObject
+    + {static} FindAllRootObjectsInScene() : GameObject[]
+    + {static} FindAllBehavioursInScene() : T[]
+}
+class GameObjectFieldScanner {
+    ScanFields(fullName:string, type:Type, obj:object) : bool
+    ScanFields(fullName:string, b:MonoBehaviour) : bool
+    + ScanFields(go:GameObject, prefix:string) : bool
+}
+class ObjectStateSaver {
+    mObjectFullPath : string
+    + CollectFieldValues(go:GameObject) : void
+    + FindSavedGameObject(roots:GameObject[]) : GameObject
+    + PutFieldValues(go:GameObject, roots:GameObject[]) : bool
+    {static} FilterField(fullName:string, fieldInfo:FieldInfo) : bool
+    + {static} HasSaveDuringPlay(b:MonoBehaviour) : bool
+    {static} LeafObjectFromString(type:Type, value:string, roots:GameObject[]) : object
+    {static} StringFromLeafObject(obj:object) : string
+}
+class SaveDuringPlay {
+    + {static} kEnabledKey : string = "SaveDuringPlay_Enabled"
+    + {static} Enabled : bool <<get>> <<set>>
+    {static} SaveDuringPlay()
+    {static} OnPlayStateChanged() : void
+    {static} sWaitStartTime : float = 0
+    {static} OnEditorUpdate() : void
+    {static} FindInterestingObjects() : HashSet<GameObject>
+    {static} SaveAllInterestingStates() : void
+    {static} RestoreAllInterestingStates() : void
+}
+class "Dictionary`2"<T1,T2> {
+}
+class "List`1"<T> {
+}
+GameObjectFieldScanner --> "OnLeafField" OnLeafFieldDelegate
+GameObjectFieldScanner --> "OnFieldValueChanged" OnFieldValueChangedDelegate
+GameObjectFieldScanner --> "FilterField" FilterFieldDelegate
+GameObjectFieldScanner --> "FilterComponent" FilterComponentDelegate
+GameObjectFieldScanner o-> "kBindingFlags" BindingFlags
+ObjectStateSaver o-> "mValues<string,string>" "Dictionary`2"
+SaveDuringPlay --> "OnHotSave" OnHotSaveDelegate
+SaveDuringPlay o-> "sSavedStates<ObjectStateSaver>" "List`1"
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class MeshToolWrapper {
+    + disableMeshEditor : bool <<get>> <<set>>
+    + <<override>> defaultControlID : int <<get>>
+}
+BaseTool <|-- MeshToolWrapper
+MeshToolWrapper --> "meshTool" MeshTool
+MeshToolWrapper --> "skeletonTool" SkeletonTool
+MeshToolWrapper --> "meshMode" SpriteMeshViewMode
+MeshToolWrapper --> "skeletonMode" SkeletonMode
+MeshToolWrapper --> "previewBehaviour" IMeshPreviewBehaviour
+@enduml

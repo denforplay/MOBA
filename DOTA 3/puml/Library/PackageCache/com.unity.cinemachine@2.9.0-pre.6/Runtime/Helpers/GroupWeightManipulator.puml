@@ -1,0 +1,18 @@
+@startuml
+class GroupWeightManipulator {
+    + m_Weight0 : float = 1
+    + m_Weight1 : float = 1
+    + m_Weight2 : float = 1
+    + m_Weight3 : float = 1
+    + m_Weight4 : float = 1
+    + m_Weight5 : float = 1
+    + m_Weight6 : float = 1
+    + m_Weight7 : float = 1
+    Start() : void
+    OnValidate() : void
+    Update() : void
+    UpdateWeights() : void
+}
+MonoBehaviour <|-- GroupWeightManipulator
+GroupWeightManipulator --> "m_group" CinemachineTargetGroup
+@enduml

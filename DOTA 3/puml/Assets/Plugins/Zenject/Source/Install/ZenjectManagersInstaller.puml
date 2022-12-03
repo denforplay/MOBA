@@ -1,0 +1,8 @@
+@startuml
+class ZenjectManagersInstaller {
+    + <<override>> InstallBindings() : void
+}
+class "Installer`1"<T> {
+}
+"Installer`1" "<ZenjectManagersInstaller>" <|-- ZenjectManagersInstaller
+@enduml

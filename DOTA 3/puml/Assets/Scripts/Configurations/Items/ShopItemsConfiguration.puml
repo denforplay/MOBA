@@ -1,0 +1,8 @@
+@startuml
+class ShopItemsConfiguration {
+}
+class "List`1"<T> {
+}
+ScriptableObject <|-- ShopItemsConfiguration
+ShopItemsConfiguration --> "StartItemConfiguration<ItemEdgeConfiguration>" "List`1"
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class RuntimeTestRunnerFilter {
+    + synchronousOnly : bool = false
+    + BuildNUnitFilter() : ITestFilter
+    {static} OptimizedGroupFilter(s:string) : FullNameFilter
+}
+@enduml

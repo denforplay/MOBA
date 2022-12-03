@@ -1,0 +1,6 @@
+@startuml
+class VcamTargetPropertyDrawer <<sealed>> {
+    + <<override>> OnGUI(rect:Rect, property:SerializedProperty, label:GUIContent) : void
+}
+PropertyDrawer <|-- VcamTargetPropertyDrawer
+@enduml

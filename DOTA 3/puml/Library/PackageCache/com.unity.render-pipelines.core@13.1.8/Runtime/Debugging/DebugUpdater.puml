@@ -1,0 +1,18 @@
+@startuml
+class DebugUpdater {
+    m_RuntimeUiWasVisibleLastFrame : bool = false
+    {static} RuntimeInit() : void
+    {static} EnableRuntime() : void
+    {static} DisableRuntime() : void
+    EnsureExactlyOneEventSystem() : void
+    DoAfterInputModuleUpdated(action:Action) : IEnumerator
+    CheckInputModuleExists() : void
+    CreateDebugEventSystem() : void
+    DestroyDebugEventSystem() : void
+    Update() : void
+    {static} RefreshRuntimeUINextFrame() : IEnumerator
+}
+MonoBehaviour <|-- DebugUpdater
+DebugUpdater o-> "s_Instance" DebugUpdater
+DebugUpdater --> "m_Orientation" ScreenOrientation
+@enduml

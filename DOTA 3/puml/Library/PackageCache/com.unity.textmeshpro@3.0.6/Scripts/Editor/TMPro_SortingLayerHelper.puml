@@ -1,0 +1,5 @@
+@startuml
+class SortingLayerHelper <<static>> {
+    {static} GetSortingLayerNames() : string[]
+}
+@enduml

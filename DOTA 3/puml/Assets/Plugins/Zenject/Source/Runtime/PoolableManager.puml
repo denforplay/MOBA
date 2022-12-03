@@ -1,0 +1,98 @@
+@startuml
+class PoolableManager {
+    _isSpawned : bool
+    + PoolableManager(poolables:List<IPoolable>, priorities:List<ValuePair<Type, int>>)
+    CreatePoolableInfo(poolable:IPoolable, priorities:List<ValuePair<Type, int>>) : PoolableInfo
+    + TriggerOnSpawned() : void
+    + TriggerOnDespawned() : void
+}
+class "PoolableManager`1"<T> {
+    _isSpawned : bool
+    + PoolableManager(poolables:List<IPoolable<T>>, priorities:List<ValuePair<Type, int>>)
+    CreatePoolableInfo(poolable:IPoolable<T>, priorities:List<ValuePair<Type, int>>) : PoolableInfo
+    + TriggerOnSpawned(param:T) : void
+    + TriggerOnDespawned() : void
+}
+class "PoolableManager`2"<T1,T2> {
+    _isSpawned : bool
+    + PoolableManager(poolables:List<IPoolable<T1, T2>>, priorities:List<ValuePair<Type, int>>)
+    CreatePoolableInfo(poolable:IPoolable<T1, T2>, priorities:List<ValuePair<Type, int>>) : PoolableInfo
+    + TriggerOnSpawned(p1:T1, p2:T2) : void
+    + TriggerOnDespawned() : void
+}
+class "PoolableManager`3"<T1,T2,T3> {
+    _isSpawned : bool
+    + PoolableManager(poolables:List<IPoolable<T1, T2, T3>>, priorities:List<ValuePair<Type, int>>)
+    CreatePoolableInfo(poolable:IPoolable<T1, T2, T3>, priorities:List<ValuePair<Type, int>>) : PoolableInfo
+    + TriggerOnSpawned(p1:T1, p2:T2, p3:T3) : void
+    + TriggerOnDespawned() : void
+}
+class "PoolableManager`4"<T1,T2,T3,T4> {
+    _isSpawned : bool
+    + PoolableManager(poolables:List<IPoolable<T1, T2, T3, T4>>, priorities:List<ValuePair<Type, int>>)
+    CreatePoolableInfo(poolable:IPoolable<T1, T2, T3, T4>, priorities:List<ValuePair<Type, int>>) : PoolableInfo
+    + TriggerOnSpawned(p1:T1, p2:T2, p3:T3, p4:T4) : void
+    + TriggerOnDespawned() : void
+}
+class "PoolableManager`5"<T1,T2,T3,T4,T5> {
+    _isSpawned : bool
+    + PoolableManager(poolables:List<IPoolable<T1, T2, T3, T4, T5>>, priorities:List<ValuePair<Type, int>>)
+    CreatePoolableInfo(poolable:IPoolable<T1, T2, T3, T4, T5>, priorities:List<ValuePair<Type, int>>) : PoolableInfo
+    + TriggerOnSpawned(p1:T1, p2:T2, p3:T3, p4:T4, p5:T5) : void
+    + TriggerOnDespawned() : void
+}
+class "List`1"<T> {
+}
+class PoolableInfo <<struct>> {
+    + Priority : int
+    + PoolableInfo(poolable:IPoolable, priority:int)
+}
+class PoolableInfo <<struct>> {
+    + Priority : int
+    + PoolableInfo(poolable:IPoolable<T>, priority:int)
+}
+class PoolableInfo <<struct>> {
+    + Priority : int
+    + PoolableInfo(poolable:IPoolable<T1, T2>, priority:int)
+}
+class PoolableInfo <<struct>> {
+    + Priority : int
+    + PoolableInfo(poolable:IPoolable<T1, T2, T3>, priority:int)
+}
+class PoolableInfo <<struct>> {
+    + Priority : int
+    + PoolableInfo(poolable:IPoolable<T1, T2, T3, T4>, priority:int)
+}
+class PoolableInfo <<struct>> {
+    + Priority : int
+    + PoolableInfo(poolable:IPoolable<T1, T2, T3, T4, T5>, priority:int)
+}
+class "IPoolable`1"<T> {
+}
+class "IPoolable`2"<T1,T2> {
+}
+class "IPoolable`3"<T1,T2,T3> {
+}
+class "IPoolable`4"<T1,T2,T3,T4> {
+}
+class "IPoolable`5"<T1,T2,T3,T4,T5> {
+}
+PoolableManager --> "_poolables<IPoolable>" "List`1"
+"PoolableManager`1" --> "_poolables<IPoolable<T>>" "List`1"
+"PoolableManager`2" --> "_poolables<IPoolable<T1, T2>>" "List`1"
+"PoolableManager`3" --> "_poolables<IPoolable<T1, T2, T3>>" "List`1"
+"PoolableManager`4" --> "_poolables<IPoolable<T1, T2, T3, T4>>" "List`1"
+"PoolableManager`5" --> "_poolables<IPoolable<T1, T2, T3, T4, T5>>" "List`1"
+PoolableManager +-- PoolableInfo
+PoolableInfo --> "Poolable" IPoolable
+"PoolableManager`1" +-- PoolableInfo
+PoolableInfo --> "Poolable<T>" "IPoolable`1"
+"PoolableManager`2" +-- PoolableInfo
+PoolableInfo --> "Poolable<T1,T2>" "IPoolable`2"
+"PoolableManager`3" +-- PoolableInfo
+PoolableInfo --> "Poolable<T1,T2,T3>" "IPoolable`3"
+"PoolableManager`4" +-- PoolableInfo
+PoolableInfo --> "Poolable<T1,T2,T3,T4>" "IPoolable`4"
+"PoolableManager`5" +-- PoolableInfo
+PoolableInfo --> "Poolable<T1,T2,T3,T4,T5>" "IPoolable`5"
+@enduml

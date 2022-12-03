@@ -1,0 +1,11 @@
+@startuml
+class UIFoldoutEditor <<sealed>> {
+    OnEnable() : void
+    + <<override>> OnInspectorGUI() : void
+}
+Editor <|-- UIFoldoutEditor
+UIFoldoutEditor --> "m_IsOn" SerializedProperty
+UIFoldoutEditor --> "m_Content" SerializedProperty
+UIFoldoutEditor --> "m_ArrowClosed" SerializedProperty
+UIFoldoutEditor --> "m_ArrowOpened" SerializedProperty
+@enduml

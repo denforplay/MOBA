@@ -1,0 +1,13 @@
+@startuml
+class TestListGUIHelper {
+    + {static} MenuItemAddFolderAndAsmDefForTesting() : void
+    + {static} MenuItemAddFolderAndAsmDefForTestingWithValidation() : bool
+    + {static} AddFolderAndAsmDefForTesting(isEditorOnly:bool) : void
+    + {static} SelectedFolderContainsTestAssembly() : bool
+    + {static} AddTest() : void
+    + {static} CanAddScriptAndItWillCompile() : bool
+    + {static} CanAddEditModeTestScriptAndItWillCompile() : bool
+    + {static} CanAddPlayModeTestScriptAndItWillCompile() : bool
+    + {static} GetActiveFolderPath() : string
+}
+@enduml

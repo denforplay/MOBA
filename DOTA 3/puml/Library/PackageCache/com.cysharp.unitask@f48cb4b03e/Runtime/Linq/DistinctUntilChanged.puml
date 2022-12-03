@@ -1,0 +1,125 @@
+@startuml
+class UniTaskAsyncEnumerable <<static>> <<partial>> {
+    + {static} DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctUntilChangedAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctUntilChangedAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctUntilChangedAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>) : IUniTaskAsyncEnumerable<TSource>
+    + {static} DistinctUntilChangedAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>) : IUniTaskAsyncEnumerable<TSource>
+}
+class "DistinctUntilChanged`1"<TSource> <<sealed>> {
+    + DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "DistinctUntilChanged`2"<TSource,TKey> <<sealed>> {
+    + DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "DistinctUntilChangedAwait`2"<TSource,TKey> <<sealed>> {
+    + DistinctUntilChangedAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "DistinctUntilChangedAwaitWithCancellation`2"<TSource,TKey> <<sealed>> {
+    + DistinctUntilChangedAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>)
+    + GetAsyncEnumerator(cancellationToken:CancellationToken) : IUniTaskAsyncEnumerator<TSource>
+}
+class "IUniTaskAsyncEnumerable`1"<T> {
+}
+class "IEqualityComparer`1"<T> {
+}
+class _DistinctUntilChanged <<sealed>> {
+    state : int
+    + _DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>, comparer:IEqualityComparer<TSource>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class "Func`2"<T1,T2> {
+}
+class _DistinctUntilChanged <<sealed>> {
+    state : int
+    + _DistinctUntilChanged(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, TKey>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class _DistinctUntilChangedAwait <<sealed>> {
+    state : int
+    + _DistinctUntilChangedAwait(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class "Func`3"<T1,T2,T3> {
+}
+class _DistinctUntilChangedAwaitWithCancellation <<sealed>> {
+    state : int
+    + _DistinctUntilChangedAwaitWithCancellation(source:IUniTaskAsyncEnumerable<TSource>, keySelector:Func<TSource, CancellationToken, UniTask<TKey>>, comparer:IEqualityComparer<TKey>, cancellationToken:CancellationToken)
+    + MoveNextAsync() : UniTask<bool>
+    MoveNext() : void
+    + DisposeAsync() : UniTask
+}
+class "IUniTaskAsyncEnumerator`1"<T> {
+}
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "DistinctUntilChanged`1"
+"DistinctUntilChanged`1" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"DistinctUntilChanged`1" --> "comparer<TSource>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "DistinctUntilChanged`2"
+"DistinctUntilChanged`2" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"DistinctUntilChanged`2" --> "keySelector<TSource,TKey>" "Func`2"
+"DistinctUntilChanged`2" --> "comparer<TKey>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "DistinctUntilChangedAwait`2"
+"DistinctUntilChangedAwait`2" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"DistinctUntilChangedAwait`2" --> "keySelector<TSource,UniTask<TKey>>" "Func`2"
+"DistinctUntilChangedAwait`2" --> "comparer<TKey>" "IEqualityComparer`1"
+"IUniTaskAsyncEnumerable`1" "<TSource>" <|-- "DistinctUntilChangedAwaitWithCancellation`2"
+"DistinctUntilChangedAwaitWithCancellation`2" --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+"DistinctUntilChangedAwaitWithCancellation`2" --> "keySelector<TSource,CancellationToken,UniTask<TKey>>" "Func`3"
+"DistinctUntilChangedAwaitWithCancellation`2" --> "comparer<TKey>" "IEqualityComparer`1"
+"DistinctUntilChanged`1" +-- _DistinctUntilChanged
+MoveNextSource <|-- _DistinctUntilChanged
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _DistinctUntilChanged
+_DistinctUntilChanged --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_DistinctUntilChanged --> "comparer<TSource>" "IEqualityComparer`1"
+_DistinctUntilChanged --> "cancellationToken" CancellationToken
+_DistinctUntilChanged --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_DistinctUntilChanged --> "moveNextAction" Action
+_DistinctUntilChanged --> "Current" TSource
+"DistinctUntilChanged`2" +-- _DistinctUntilChanged
+MoveNextSource <|-- _DistinctUntilChanged
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _DistinctUntilChanged
+_DistinctUntilChanged --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_DistinctUntilChanged --> "keySelector<TSource,TKey>" "Func`2"
+_DistinctUntilChanged --> "comparer<TKey>" "IEqualityComparer`1"
+_DistinctUntilChanged --> "cancellationToken" CancellationToken
+_DistinctUntilChanged --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_DistinctUntilChanged --> "moveNextAction" Action
+_DistinctUntilChanged --> "prev" TKey
+_DistinctUntilChanged --> "Current" TSource
+"DistinctUntilChangedAwait`2" +-- _DistinctUntilChangedAwait
+MoveNextSource <|-- _DistinctUntilChangedAwait
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _DistinctUntilChangedAwait
+_DistinctUntilChangedAwait --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_DistinctUntilChangedAwait --> "keySelector<TSource,UniTask<TKey>>" "Func`2"
+_DistinctUntilChangedAwait --> "comparer<TKey>" "IEqualityComparer`1"
+_DistinctUntilChangedAwait --> "cancellationToken" CancellationToken
+_DistinctUntilChangedAwait --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_DistinctUntilChangedAwait --> "moveNextAction" Action
+_DistinctUntilChangedAwait --> "enumeratorCurrent" TSource
+_DistinctUntilChangedAwait --> "prev" TKey
+_DistinctUntilChangedAwait --> "Current" TSource
+"DistinctUntilChangedAwaitWithCancellation`2" +-- _DistinctUntilChangedAwaitWithCancellation
+MoveNextSource <|-- _DistinctUntilChangedAwaitWithCancellation
+"IUniTaskAsyncEnumerator`1" "<TSource>" <|-- _DistinctUntilChangedAwaitWithCancellation
+_DistinctUntilChangedAwaitWithCancellation --> "source<TSource>" "IUniTaskAsyncEnumerable`1"
+_DistinctUntilChangedAwaitWithCancellation --> "keySelector<TSource,CancellationToken,UniTask<TKey>>" "Func`3"
+_DistinctUntilChangedAwaitWithCancellation --> "comparer<TKey>" "IEqualityComparer`1"
+_DistinctUntilChangedAwaitWithCancellation --> "cancellationToken" CancellationToken
+_DistinctUntilChangedAwaitWithCancellation --> "enumerator<TSource>" "IUniTaskAsyncEnumerator`1"
+_DistinctUntilChangedAwaitWithCancellation --> "moveNextAction" Action
+_DistinctUntilChangedAwaitWithCancellation --> "enumeratorCurrent" TSource
+_DistinctUntilChangedAwaitWithCancellation --> "prev" TKey
+_DistinctUntilChangedAwaitWithCancellation --> "Current" TSource
+@enduml

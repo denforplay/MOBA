@@ -1,0 +1,18 @@
+@startuml
+class TextButton {
+    + <<const>> UssClassName : string = "unity-text-button"
+    {static} <<readonly>> k_StylePath : string
+    +  <<event>> Clicked : Action 
+    + TextButton()
+    + TextButton(clickEvent:Action)
+    OnClick() : void
+    + <<override>> canGrabFocus : bool <<get>> = true
+}
+class UxmlFactory <<new>> {
+}
+class "UxmlFactory`2"<T1,T2> {
+}
+TextElement <|-- TextButton
+TextButton +-- UxmlFactory
+"UxmlFactory`2" "<TextButton,UxmlTraits>" <|-- UxmlFactory
+@enduml
