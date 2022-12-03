@@ -28,6 +28,7 @@ MonoBehaviour:
   _baseDefense: 2
   _baseAgility: 3
   _baseIntelligence: 5
+  _regenerateManaPerSecond: 5
   _skillConfigurations:
   - {fileID: 11400000, guid: b5242efe874db1548b0aa84e14f9aa97, type: 2}
   - {fileID: 11400000, guid: 5b51f3ad03d5a4b4f8001454dcc8a28e, type: 2}

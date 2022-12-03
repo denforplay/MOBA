@@ -20,6 +20,7 @@ namespace Configurations.Character
         [SerializeField] private int _baseDefense;
         [SerializeField] private int _baseAgility;
         [SerializeField] private int _baseIntelligence;
+        [SerializeField] private float _regenerateManaPerSecond;
         [SerializeField] private List<SkillConfiguration> _skillConfigurations;
         [SerializeField] private CombatType _combatType;
         [SerializeField] private ProjectileType _projectileType;
@@ -54,5 +55,6 @@ namespace Configurations.Character
         public LevelsConfiguration LevelsConfiguration => _levelsConfiguration;
         public Sprite CharacterIcon => _characterIcon;
         public GameObject CharacterPrefab => _characterPrefab;
+        public float RegenerateManaPerSecond => _regenerateManaPerSecond;
     }
 }

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Common.Abstracts;
 using Common.Enums;
 using Configurations;
 using Configurations.Levels;
+using Cysharp.Threading.Tasks;
 using Models.Items;
 using Models.Skills.Skills;
 using UnityEngine;
@@ -15,6 +17,8 @@ namespace Models
 {
     public class Character : IHealthable, IManable, ILevelable
     {
+        private CancellationTokenSource _cancellationToken;
+        
         #region Health
         public event Action<float> OnHealthChanged;
         public event Action OnHealthEnded;
@@ -71,6 +75,7 @@ namespace Models
 
         private float _maxMana;
         private float _currentMana;
+        private float _regenerateManaPerSecond;
         public event Action<float> OnMaxManaChanged;
         public event Action<float> OnManaChanged;
         public float MaxMana => _maxMana;
@@ -174,6 +179,8 @@ namespace Models
 
         public Character(CharacterInfo characterInfo, NavMeshAgent navMeshAgent, Camera camera)
         {
+            _cancellationToken = new CancellationTokenSource();
+            _regenerateManaPerSecond = characterInfo.RegenerateManaPerSecond;
             _maxHealth = characterInfo.MaxHealth;
             _currentHealth = _maxHealth;
             _maxMana = characterInfo.MaxMana;
@@ -190,6 +197,7 @@ namespace Models
             AttackRange = characterInfo.AttackRange;
             _inventory = new Inventory(characterInfo.InventorySize);
             _navMeshAgent = navMeshAgent;
+            UniTask.Create(RegenerateMana);
         }
 
         private void InitializeSkills(List<SkillConfiguration> skillConfigurations)
@@ -256,8 +264,23 @@ namespace Models
        
         public Team Team { get; set; }
 
-        public void CancelAllEvents()
+        private async UniTask RegenerateMana()
         {
+            while (!_cancellationToken.IsCancellationRequested)
+            {
+                if (_currentMana + _regenerateManaPerSecond <= _maxMana)
+                {
+                    ChangeMana(_regenerateManaPerSecond);
+                }
+                
+                await UniTask.Delay(1000);
+            }
+        }
+        
+        public void Destroy()
+        {
+            _cancellationToken.Cancel();
+            _cancellationToken.Dispose();
             foreach(var method in OnHealthEnded.GetInvocationList())
             {
                 OnHealthEnded -= (Action)method;
