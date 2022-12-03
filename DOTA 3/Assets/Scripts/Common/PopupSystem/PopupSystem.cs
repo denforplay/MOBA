@@ -24,14 +24,12 @@ namespace Common.PopupSystem
 
         private void Awake()
         {
-            ShowStartPopup();
-            //
-            // var cutScene = SpawnPopup<VideoPopup>();
-            // cutScene.OnVideoEnded += () =>
-            // {
-            //     cutScene.Hide();
-            // };
-
+            var cutScene = SpawnPopup<VideoPopup>();
+            cutScene.OnVideoEnded += () =>
+            {
+                cutScene.Hide();
+                ShowStartPopup();
+            };
         }
 
         private void ShowStartPopup()
