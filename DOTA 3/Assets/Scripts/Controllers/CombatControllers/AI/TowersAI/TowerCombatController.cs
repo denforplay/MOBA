@@ -36,7 +36,7 @@ namespace Controllers.CombatControllers.AI.TowersAI
         
         public async UniTask Observe()
         {
-            while (!_observeCancellationToken.IsCancellationRequested && _towerView.IsDestroyed)
+            while (!_observeCancellationToken.IsCancellationRequested && !_towerView.IsDestroyed)
             {
                 var colliders = Physics.OverlapSphere(_towerView.transform.position, _tower.Range);
                 var foundedTarget = colliders.Select(x => x.GetComponent<TargetableView>()).

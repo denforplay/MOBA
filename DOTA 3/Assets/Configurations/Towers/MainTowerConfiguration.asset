@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MainTowerConfiguration
   m_EditorClassIdentifier: 
   _maxHeatlh: 7500
-  _damage: 75
+  _damage: 125
   _observableRange: 15
   _rotationSpeed: 100
   _shootDelay: 3

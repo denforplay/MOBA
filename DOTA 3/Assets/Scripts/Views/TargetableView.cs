@@ -65,13 +65,16 @@ namespace Views
                 }
             }
         }
-        
+
         public void UnSubscribeAll()
         {
             foreach (var action in _isTargetFor.Values)
                 action?.Invoke();
 
             _isTargetFor.Clear();
+
+            _targetMark.enabled = false;
+            _targetMark.gameObject.SetActive(false);
         }
 
         public IHealthable Healthable => _healthable;

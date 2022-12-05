@@ -88,6 +88,7 @@ namespace Views
             _levelView.AttachLevelableModel(_character);
             _manaView.AttachManaModel(_character);
             _targetableView.AttachHealthableModel(_character);
+            _targetableView.AttachCostableModel(_character);
             _targetableView.SetTeam(team);
             CombatFactory =
                 new Dictionary<CombatType, Func<ICharacterController, Character, CharacterCombatController>>()
@@ -157,6 +158,7 @@ namespace Views
             _levelView.AttachLevelableModel(_character);
             _manaView.AttachManaModel(_character);
             _targetableView.AttachHealthableModel(_character);
+            _targetableView.AttachCostableModel(_character);
             _targetableView.SetTeam(team);
             CombatFactory =
                 new Dictionary<CombatType, Func<ICharacterController, Character, CharacterCombatController>>()
@@ -197,6 +199,7 @@ namespace Views
             {
                 _isDestroyed = true;
                 _characterCombatController.Cancel();
+                _targetableView.UnSubscribeAll();
                 gameObject.transform.parent.gameObject.SetActive(false);
                 if (_characterType == CharacterType.Player)
                 {

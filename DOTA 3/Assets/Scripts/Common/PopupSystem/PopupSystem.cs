@@ -27,7 +27,7 @@ namespace Common.PopupSystem
             var cutScene = SpawnPopup<VideoPopup>();
             cutScene.OnVideoEnded += () =>
             {
-                cutScene.Hide();
+                DeletePopUp();
                 ShowStartPopup();
             };
         }

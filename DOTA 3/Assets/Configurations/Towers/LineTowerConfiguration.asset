@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LineTowerConfiguration
   m_EditorClassIdentifier: 
   _maxHeatlh: 1500
-  _damage: 30
+  _damage: 60
   _observableRange: 15
   _rotationSpeed: 100
-  _shootDelay: 5
+  _shootDelay: 3
