@@ -10,11 +10,13 @@ namespace Configurations.Towers
         [SerializeField] private float _observableRange;
         [SerializeField] private float _rotationSpeed;
         [SerializeField] private float _shootDelay;
+        [SerializeField] private int _cost;
         
         public float MaxHealth => _maxHeatlh;
         public float Damage => _damage;
         public float ObservableRange => _observableRange;
         public float RotationSpeed => _rotationSpeed;
         public float ShootDelay => _shootDelay;
+        public int Cost => _cost;
     }
 }

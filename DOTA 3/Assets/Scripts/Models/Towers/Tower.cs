@@ -4,8 +4,10 @@ using Configurations.Towers;
 
 namespace Models.Towers
 {
-    public class Tower : IHealthable
+    public class Tower : IHealthable, ICostable
     {
+        private readonly int _cost;
+
         #region Health
         public event Action<float> OnHealthChanged;
         public event Action OnHealthEnded;
@@ -13,7 +15,7 @@ namespace Models.Towers
         
         private float _currentHealth;
         private float _maxHealth;
-        
+
         public float CurrentHealth => _currentHealth;
         
         public float MaxHealth
@@ -46,6 +48,7 @@ namespace Models.Towers
         {
             _maxHealth = towerConfiguration.MaxHealth;
             _currentHealth = _maxHealth;
+            _cost = towerConfiguration.Cost;
             Damage = towerConfiguration.Damage;
             Range = towerConfiguration.ObservableRange;
             ShootingDelay = towerConfiguration.ShootDelay;
@@ -54,5 +57,6 @@ namespace Models.Towers
         public float Damage { get; set; }
         public float Range { get; set; }
         public float ShootingDelay { get; set; }
+        public int GetCost() => _cost;
     }
 }

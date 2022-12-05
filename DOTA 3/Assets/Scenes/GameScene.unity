@@ -350,10 +350,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -25
       objectReference: {fileID: 0}
-    - target: {fileID: 169449841, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -4.6499023
-      objectReference: {fileID: 0}
     - target: {fileID: 229140822, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -403,18 +399,18 @@ PrefabInstance:
       value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 472990076, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.634
+      objectReference: {fileID: 0}
+    - target: {fileID: 472990076, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 524663130, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.645
+      value: 0.771
       objectReference: {fileID: 0}
     - target: {fileID: 524663130, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 676744779, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
@@ -609,18 +605,6 @@ PrefabInstance:
     - target: {fileID: 1927669448, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1961665497, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.645
-      objectReference: {fileID: 0}
-    - target: {fileID: 1961665497, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1961665497, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.645
       objectReference: {fileID: 0}
     - target: {fileID: 441953535828187926, guid: 8f80e172c3f50694db5fce28316d96c8, type: 3}
       propertyPath: m_Pivot.x
@@ -1356,7 +1340,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.778897, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

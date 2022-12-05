@@ -35,6 +35,7 @@ namespace Views.Towers
         {
             _tower = new Tower(_configuration);
             _targetableView.AttachHealthableModel(_tower);
+            _targetableView.AttachCostableModel(_tower);
             _targetableView.SetTeam(_team);
             _tower.OnHealthEnded += Destroy;
             _combatController = new TowerCombatController(this, _tower, _projectileFactory, new ProjectileFactoryRequirement{ProjectileType = ProjectileType.CannonBall});

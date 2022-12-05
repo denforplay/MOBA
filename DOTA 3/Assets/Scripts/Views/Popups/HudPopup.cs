@@ -24,6 +24,12 @@ namespace Views.Popups
         public void Initialize(CharacterView characterView)
         {
             _characterView = characterView;
+            var character = characterView.Character;
+            _heroPanel.Initialize(character);
+            character.OnManaChanged += _heroPanel.SetCurrentMana;
+            character.OnMaxManaChanged += _heroPanel.SetCurrentMaxMana;
+            character.OnHealthChanged += _heroPanel.SetCurrentHealth;
+            character.OnMaxHealthChanged += _heroPanel.SetMaxHealth;
             _heroPanel.SetCharacterIcon(characterView.CharacterInfo.CharacterIcon);
             _heroPanel.SetSkills(characterView.CharacterInfo.SkillConfigurations);
             _heroPanel.SetCharacterStrength(characterView.CharacterInfo.BaseStrength);
@@ -105,6 +111,15 @@ namespace Views.Popups
         public override void DisableInput()
         {
             enabled = false;
+        }
+
+        public override void Hide()
+        {
+            _characterView.Character.OnManaChanged -= _heroPanel.SetCurrentMana;
+            _characterView.Character.OnMaxManaChanged -= _heroPanel.SetCurrentMaxMana;
+            _characterView.Character.OnHealthChanged -= _heroPanel.SetCurrentHealth;
+            _characterView.Character.OnMaxHealthChanged -= _heroPanel.SetMaxHealth;
+            base.Hide();
         }
     }
 }
