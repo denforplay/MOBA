@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading;
+using Assets.Scripts.Common.Abstracts;
 using Common.Enums;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Object = System.Object;
 
 namespace Views
 {
@@ -14,9 +16,11 @@ namespace Views
         [SerializeField] private float _lifeTime;
         private float _damage;
         private Team _team;
+        private IMoneyable _projectileSource;
 
-        public void Setup(float damage, Team team)
+        public void Setup(float damage, Team team, IMoneyable projectileSource = null)
         {
+            _projectileSource = projectileSource;
             _team = team;
             _damage = damage;
             _cancellationTokenSource = new CancellationTokenSource();
@@ -38,6 +42,14 @@ namespace Views
                 targetableView.Team != _team)
             {
                 targetableView.ApplyDamage(_damage);
+                if (targetableView.Healthable.CurrentHealth <= 0)
+                {
+                    if (_projectileSource is not null)
+                    {
+                        _projectileSource.Money += targetableView.GetCost();
+                    }
+                }
+
                 if (!_cancellationTokenSource.IsCancellationRequested)
                 {
                     _cancellationTokenSource?.Cancel();

@@ -24,6 +24,8 @@ namespace Models
                 await UniTask.Delay(secondSpan);
                 _time -= secondSpan;
             }
+
+            OnTimerEnded?.Invoke();
         }
     }
 }

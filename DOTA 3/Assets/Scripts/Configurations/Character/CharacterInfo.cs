@@ -32,6 +32,7 @@ namespace Configurations.Character
         [SerializeField] private LevelsConfiguration _levelsConfiguration;
         [SerializeField] private Sprite _characterIcon;
         [SerializeField] private GameObject _characterPrefab;
+        [SerializeField] private int _characterCost;
 
         public string HeroName => _heroName;
         public string HeroDescription => _heroDescription;
@@ -56,5 +57,6 @@ namespace Configurations.Character
         public Sprite CharacterIcon => _characterIcon;
         public GameObject CharacterPrefab => _characterPrefab;
         public float RegenerateManaPerSecond => _regenerateManaPerSecond;
+        public int CharacterCost => _characterCost;
     }
 }

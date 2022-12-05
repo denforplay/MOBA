@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Assets.Scripts.Common.Abstracts;
 using Common.Abstracts;
 using Common.Enums;
 using Configurations;
@@ -15,7 +16,7 @@ using CharacterInfo = Configurations.Character.CharacterInfo;
 
 namespace Models
 {
-    public class Character : IHealthable, IManable, ILevelable
+    public class Character : IHealthable, IManable, ILevelable, IMoneyable, ICostable
     {
         private CancellationTokenSource _cancellationToken;
         
@@ -135,7 +136,7 @@ namespace Models
 
         private int _strength;
         private int _intelligence;
-        private int _defense;
+        private float _defense;
         public event Action<int> OnStrengthChanged;
         public event Action<int> OnIntelligenceChanged;
         public event Action<int> OnDefenseChanged;
@@ -159,9 +160,41 @@ namespace Models
             }
         }
         
-        public int Defense
+        public float Defense
         {
-            get => _defense;
+            get
+            {
+                var currentDefense = _defense;
+                var additionalPercents = 0f;
+
+
+                for (int i = 0; i < _inventory.Items.Length; i++)
+                {
+                    var currentItem = _inventory.Items[i];
+
+                    if (currentItem is not null)
+                    {
+                        foreach (var valueConfig in currentItem.ValueConfigurations.Where(x => x.Characteristic == Characteristic.Defense))
+                        {
+                            switch (valueConfig.ItemValueType)
+                            {
+                                case ItemValueType.Value:
+                                {
+                                    currentDefense += valueConfig.Value;
+                                    break;
+                                }
+                                case ItemValueType.Percentage:
+                                {
+                                    additionalPercents += valueConfig.Value;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return currentDefense;
+            }
             set
             {
                 _defense = value;
@@ -174,11 +207,13 @@ namespace Models
         private List<ISkill> _skills;
         private Inventory _inventory;
         private readonly NavMeshAgent _navMeshAgent;
+        private readonly int _cost;
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
         public Character(CharacterInfo characterInfo, NavMeshAgent navMeshAgent, Camera camera)
         {
+            _cost = characterInfo.CharacterCost;
             _cancellationToken = new CancellationTokenSource();
             _regenerateManaPerSecond = characterInfo.RegenerateManaPerSecond;
             _maxHealth = characterInfo.MaxHealth;
@@ -229,6 +264,7 @@ namespace Models
         public float Agility { get; set; }
         public float AttackDelay { get; set; }
         public float AttackRange { get; set; }
+
         public float CurrentDamage()
         {
             float currentDamage = Strength * BasePhysicalDamage;
@@ -296,5 +332,7 @@ namespace Models
                 OnNeedForNextLevelExperienceChanged -= (Action<float>)method;
             }
         }
+
+        public int GetCost() => _cost;
     }
 }

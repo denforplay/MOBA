@@ -22,40 +22,44 @@ namespace Controllers.CombatControllers.Character
             _character = character;
             _characterController = characterController;
             _navigationAgent = _characterController.NavigationAgent;
+            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public virtual void Attack(TargetableView target)
         {
-            if (target == _previousTarget && target is not null)
+            if (_navigationAgent.gameObject.transform.parent.gameObject.activeSelf)
             {
+                if (target == _previousTarget && target is not null)
+                {
 
-                if (_canAttack && !(_cancellationTokenSource is null || _cancellationTokenSource.IsCancellationRequested))
+                    if (_canAttack && !(_cancellationTokenSource is null || _cancellationTokenSource.IsCancellationRequested))
+                    {
+                        UniTask.Create(() => Attack(_cancellationTokenSource.Token));
+                    }
+
+                    return;
+                }
+
+                DeatachTarget();
+
+                if (target is null)
+                    return;
+
+                target.Healthable.OnHealthEnded += DeatachTarget;
+                _cancellationTokenSource = new CancellationTokenSource();
+                target.Subscribe(_character, OnUntargeted, true);
+                _previousTarget = target;
+                if (_canAttack)
                 {
                     UniTask.Create(() => Attack(_cancellationTokenSource.Token));
                 }
-                
-                return;
-            }
-            
-            DeatachTarget();
-            
-            if (target is null)
-                return;
+                else
+                {
+                    _navigationAgent.stoppingDistance = _character.AttackRange;
+                }
 
-            target.Healthable.OnHealthEnded += DeatachTarget;
-            _cancellationTokenSource = new CancellationTokenSource();
-            target.Subscribe(_character, OnUntargeted, true);
-            _previousTarget = target;
-            if (_canAttack)
-            {
-                UniTask.Create(() => Attack(_cancellationTokenSource.Token));
+                UniTask.Create(() => Move(_cancellationTokenSource.Token));
             }
-            else
-            {
-                _navigationAgent.stoppingDistance = _character.AttackRange;
-            }
-            
-            UniTask.Create(() => Move(_cancellationTokenSource.Token));
         }
 
         private void OnUntargeted()
@@ -105,6 +109,7 @@ namespace Controllers.CombatControllers.Character
 
         public void Cancel()
         {
+            DeatachTarget();
             _cancellationTokenSource?.Cancel();
         }
     }

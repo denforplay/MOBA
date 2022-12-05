@@ -25,7 +25,7 @@ namespace Models.Items
             _items[slot] = item;
             OnItemChanged?.Invoke(slot, item);
         }
-        
+
         public void RemoveItem(int slot)
         {
             if (slot == -1 && (slot = FindFreeSlot()) == -1)

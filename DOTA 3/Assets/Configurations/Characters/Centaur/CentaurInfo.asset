@@ -19,7 +19,7 @@ MonoBehaviour:
     the waist to the body and legs of a horse. They represented barbarism and unbridled
     chaos and were frequently represented in Greek architectural sculpture and pottery
     decoration.
-  _speed: 7
+  _speed: 8
   _maxHealth: 1000
   _basePhysicalDamage: 30
   _baseMagicalDamage: 30
@@ -27,6 +27,7 @@ MonoBehaviour:
   _baseDefense: 4
   _baseAgility: 3
   _baseIntelligence: 2
+  _regenerateManaPerSecond: 0
   _skillConfigurations:
   - {fileID: 11400000, guid: 9f0950cbf421e494ca869e63059557a2, type: 2}
   - {fileID: 11400000, guid: a64e67ebd94175f4a83a3f4f485f4b3e, type: 2}
@@ -45,3 +46,4 @@ MonoBehaviour:
   _levelsConfiguration: {fileID: 11400000, guid: 2deff7f442be9d8439f437e9dd1a1b9b, type: 2}
   _characterIcon: {fileID: 99600128, guid: ced08c8d15c46da47aa386d9a8544787, type: 3}
   _characterPrefab: {fileID: 231850577555918021, guid: 3e7aed2b80ef62143841b7e647aa60af, type: 3}
+  _characterCost: 150

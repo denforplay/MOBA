@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startItemEdgeConfigurations:
   - {fileID: 11400000, guid: cc115d3972f16024dbca3dbd2a5a6990, type: 2}
+  - {fileID: 11400000, guid: 7917dc9261e0af447a2216786deed36e, type: 2}
+  - {fileID: 11400000, guid: 63b031057132e6348b3237894ac85926, type: 2}
+  - {fileID: 11400000, guid: 2b11a0346f554d24884fc58f9918732d, type: 2}

@@ -208,6 +208,7 @@ namespace Views
                 {
                     Timer timer = new Timer(TimeSpan.FromSeconds(10));
                     timer.OnTimerEnded += EnableCharacter;
+                    UniTask.Create(timer.StartTimer);
                 }
             }
         }

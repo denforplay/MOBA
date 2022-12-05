@@ -3897,7 +3897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetableView: {fileID: 1406603912}
-  _configuration: {fileID: 11400000, guid: 4877959afae17494cb6a57388fabac21, type: 2}
+  _configuration: {fileID: 11400000, guid: 7c674fdd9db66414fa2eabca241a4a3a, type: 2}
   _towerHead: {fileID: 62055973}
   _towerGun: {fileID: 1300855865}
   _team: 1
@@ -5842,7 +5842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetableView: {fileID: 1268729983}
-  _configuration: {fileID: 11400000, guid: 4877959afae17494cb6a57388fabac21, type: 2}
+  _configuration: {fileID: 11400000, guid: 7c674fdd9db66414fa2eabca241a4a3a, type: 2}
   _towerHead: {fileID: 1090003005}
   _towerGun: {fileID: 1522492393}
   _team: 2

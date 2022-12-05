@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3b94d1b6434d40a899892fac87f097, type: 3}
+  m_Name: MiddleShieldItem
+  m_EditorClassIdentifier: 
+  _itemType: 2
+  _itemName: Glacial Buckler
+  _cost: 575
+  _itemDescription: 
+  _itemSprite: {fileID: 384609677, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
+  _itemValueConfigurations:
+  - {fileID: 11400000, guid: 44c8dc487d76aec459f7e6ba522e7102, type: 2}
+  - {fileID: 11400000, guid: c477c8abb488b0d48adfbcddcfca7ee2, type: 2}
+  - {fileID: 11400000, guid: 4eb120bae32983d4585a73c4a82edbbb, type: 2}

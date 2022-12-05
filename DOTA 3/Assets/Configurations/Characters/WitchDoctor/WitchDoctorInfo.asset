@@ -20,7 +20,7 @@ MonoBehaviour:
     of physician, magician, and priest. These responsibilities stemmed from the primitive
     belief that all physical phenomena were controlled by supernatural powers. These
     beliefs persist in primitive cultures today."
-  _speed: 5
+  _speed: 13
   _maxHealth: 1000
   _basePhysicalDamage: 50
   _baseMagicalDamage: 10
@@ -48,3 +48,4 @@ MonoBehaviour:
   _levelsConfiguration: {fileID: 11400000, guid: 2deff7f442be9d8439f437e9dd1a1b9b, type: 2}
   _characterIcon: {fileID: 1377604591, guid: ced08c8d15c46da47aa386d9a8544787, type: 3}
   _characterPrefab: {fileID: 4335943977640594344, guid: 35757af557a4c374da77d08dd8b35023, type: 3}
+  _characterCost: 150
