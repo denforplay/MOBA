@@ -20,14 +20,17 @@ namespace Inputs
         
         public void CheckTargetOnClick()
         {
+            Debug.Log("click somewhere");
             if (Physics.Raycast(_camera.ScreenPointToRay(Mouse.current.position.ReadValue()), out var hit, Mathf.Infinity));
             {
                 if (hit.collider.TryGetComponent(out TargetableView enemy) && enemy.Team != _currentCharacter.Team)
                 {
+                    Debug.Log("enemy detected");
                     OnTargetedEnemy?.Invoke(enemy);
                 }
                 else
                 {
+                    Debug.Log("enemy not detected");
                     OnTargetedEnemy?.Invoke(null);
                 }
             }

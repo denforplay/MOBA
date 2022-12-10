@@ -119,7 +119,12 @@ namespace Views
             {
                 if (!EventSystem.current.IsPointerOverGameObject()) //check if click is over ui
                 {
+                    Debug.Log("click is over ui");
                     _targetingInputs.CheckTargetOnClick();
+                }
+                else
+                {
+                    Debug.Log("click is not over ui");
                 }
             };
             _targetingInputs.OnTargetedEnemy += _characterCombatController.Attack;
@@ -245,16 +250,17 @@ namespace Views
                     return;
             
                 _currentSkillObserver.OnObservedPositionChanged += _currentSkillControlBase.UpdateSkillView;
-                _currentSkillObserver.OnSkillCalled += pos => UseSkill(skillId, pos, _currentSkillObserver);
+                _currentSkillObserver.OnSkillCalled += pos => UseSkill(skillId, pos);
                 _currentSkillControlBase.gameObject.SetActive(true);
             }
         }
 
-        private void UseSkill(int skillId, Vector3 onPosition, ISkillObserver skillObserver)
+        private void UseSkill(int skillId, Vector3 onPosition)
         {
             var skillModel = _character.Skills.First(x => x.Id == skillId);
             UniTask.Create(() => skillModel.Apply(onPosition));
-            skillObserver.ClearSkillLCalled();
+            _currentSkillObserver.ClearSkillLCalled();
+            _currentSkillObserver = null;
         }
 
         public void SubscribeOnDestroy(Action action)
@@ -287,7 +293,7 @@ namespace Views
             _cancellationToken.Cancel();
             _currentSkillObserver.OnObservedPositionChanged -= _currentSkillControlBase.UpdateSkillView;
             //_currentSkillObserver.OnSkillCalled -= _character.Skills.FirstOrDefault(x => x.Id == skillId).Apply;
-            _currentSkillObserver = null;
+            //_currentSkillObserver = null;???????????
             _currentSkillControlBase = null;
             OnSkillActivated?.Invoke(skillId);
         }

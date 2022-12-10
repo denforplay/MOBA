@@ -53,10 +53,10 @@ namespace Controllers.CombatControllers.Character
                 {
                     UniTask.Create(() => Attack(_cancellationTokenSource.Token));
                 }
-                else
-                {
-                    _navigationAgent.stoppingDistance = _character.AttackRange;
-                }
+                // else
+                // {
+                //     _navigationAgent.stoppingDistance = _character.AttackRange - 0.5f;
+                // }
 
                 UniTask.Create(() => Move(_cancellationTokenSource.Token));
             }
@@ -75,15 +75,13 @@ namespace Controllers.CombatControllers.Character
                     _previousTarget.gameObject.transform.position);
 
 
-                if (distance > _character.AttackRange)
+                if (distance >= _character.AttackRange)
                 {
                     _characterController.MoveTo(_previousTarget.transform.position);
                     _characterController.SetState(AnimationType.Walk);
                 }
-                else
-                {
-                    _navigationAgent.transform.LookAt(_previousTarget.transform);
-                }
+
+                _navigationAgent.transform.LookAt(_previousTarget.transform);
 
                 await UniTask.Delay(TimeSpan.FromMilliseconds(10));
             }

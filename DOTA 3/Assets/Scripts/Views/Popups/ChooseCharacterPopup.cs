@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Common.PopupSystem;
 using Configurations;
@@ -91,11 +92,13 @@ namespace Views.Popups
             }
             finally
             {
+                var lastCharacters = _charactersConfiguration.CharacterInfos.Where(x => x != _currentCharacterInfo);
+
                 var leftTeam = new List<CharacterInfo>
                 {
                     _currentCharacterInfo,
-                    _charactersConfiguration.CharacterInfos[1],
-                    _charactersConfiguration.CharacterInfos[0]
+                    lastCharacters.ElementAt(0),
+                    lastCharacters.ElementAt(1)
                 };
 
                 for (int i = 0; i < _leftTeamPanel.CharactersImages.Count; i++)
@@ -105,9 +108,9 @@ namespace Views.Popups
                 
                 var rightTeam = new List<CharacterInfo>()
                 {
-                    _charactersConfiguration.CharacterInfos[1],
                     _charactersConfiguration.CharacterInfos[0],
-                    _charactersConfiguration.CharacterInfos[0]
+                    _charactersConfiguration.CharacterInfos[1],
+                    _charactersConfiguration.CharacterInfos[2]
                 };
                 
                 for (int i = 0; i < _rightTeamPanel.CharactersImages.Count; i++)

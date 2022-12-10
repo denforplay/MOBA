@@ -37,7 +37,7 @@ namespace Views
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Projectile collide with " + other.gameObject);
+            //Debug.Log("Projectile collide with " + other.gameObject);
             if (other.gameObject.TryGetComponent<TargetableView>(out var targetableView) &&
                 targetableView.Team != _team)
             {

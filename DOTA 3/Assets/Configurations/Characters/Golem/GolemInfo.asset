@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3adc720bf94e6a838436fe688a2eb7, type: 3}
+  m_Name: GolemInfo
+  m_EditorClassIdentifier: 
+  _id: 2
+  _heroName: Golem
+  _heroDescription: A golem is a creature formed out of a lifeless substance such
+    as dust or earth that is brought to life by ritual incantations and sequences
+    of Hebrew letters. The golem, brought into being by a human creator, becomes
+    a helper, a companion, or a rescuer of an imperiled Jewish community. In many
+    golem stories, the creature runs amok and the golem itself becomes a threat to
+    its creator.
+  _speed: 6
+  _maxHealth: 1700
+  _basePhysicalDamage: 30
+  _baseMagicalDamage: 30
+  _baseStrength: 3
+  _baseDefense: 7
+  _baseAgility: 2
+  _baseIntelligence: 2
+  _regenerateManaPerSecond: 5
+  _skillConfigurations:
+  - {fileID: 11400000, guid: 6fc789ef340b9a84cbcae92ebcbfe28f, type: 2}
+  - {fileID: 11400000, guid: 1a894925a484fa949946a619f5d7ab5a, type: 2}
+  - {fileID: 11400000, guid: e74b631519430df46bb10b1f911ebeee, type: 2}
+  _combatType: 0
+  _projectileType: 0
+  _attackRange: 4
+  _attackDelay: 1.25
+  _animations:
+  - {fileID: 11400000, guid: b34e2f539da01b143a7c928e968b8e81, type: 2}
+  - {fileID: 11400000, guid: ee43b7371c0ecf24c9ebe6c2698a67a4, type: 2}
+  - {fileID: 11400000, guid: 5a9ed078efc897a499a0b5b3288cb51e, type: 2}
+  - {fileID: 11400000, guid: 4a58df30681c8144fb0d1959391d4ed7, type: 2}
+  _inventorySize: 6
+  _maxMana: 100
+  _levelsConfiguration: {fileID: 11400000, guid: 2deff7f442be9d8439f437e9dd1a1b9b, type: 2}
+  _characterIcon: {fileID: 216147744, guid: ced08c8d15c46da47aa386d9a8544787, type: 3}
+  _characterPrefab: {fileID: 9177341528466196462, guid: 893b87326b9e87e40b56a0fef81c47c2, type: 3}
+  _characterCost: 150
