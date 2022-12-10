@@ -43,6 +43,11 @@ namespace Controllers
             // _skillObservers.Add(SkillType.Dash, new DirectedSkillObserver(_camera));
             // _skillObservers.Add(SkillType.RangeDamage, new RangeTargetZoneSkillObserver(_camera));
         }
+
+        public void SetCurrentPoint(WayPoint wayPoint)
+        {
+            _currentWayPoint = wayPoint;
+        }
         
         public void StartMove()
         {
@@ -50,7 +55,6 @@ namespace Controllers
             UniTask.Create(Move);
             UniTask.Create(ObserveEnemies);
         }
-
 
         private async UniTask Move()
         {

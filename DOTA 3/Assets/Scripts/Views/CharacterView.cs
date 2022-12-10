@@ -64,7 +64,8 @@ namespace Views
         private Transform _startPosition;
 
         private CharacterType _characterType;
-        
+        private WayPoint _startWayPoint;
+
         public void Inject(PopupSystem popupSystem, ViewFactoryBase<ProjectileView, ProjectileFactoryRequirement> projectileViewFactory)
         {
             _popupSystem = popupSystem;
@@ -150,6 +151,7 @@ namespace Views
         public void InitializeAI(Camera camera, Transform startPosition, WayPoint startWayPoint, Team team, Direction direction)
         {
             _startPosition = startPosition;
+            _startWayPoint = startWayPoint;
             gameObject.transform.parent.gameObject.SetActive(false);
             gameObject.transform.position = startPosition.position;
             gameObject.transform.parent.gameObject.SetActive(true);
@@ -225,6 +227,10 @@ namespace Views
         {
             _isDestroyed = false;
             _character.ChangeHealth(_character.MaxHealth - _character.CurrentHealth);
+            if (_characterType == CharacterType.AI)
+            {
+                (_characterController as CharacterAIController).SetCurrentPoint(_startWayPoint);
+            }
             gameObject.transform.position = _startPosition.position;
             gameObject.transform.parent.gameObject.SetActive(true);
         }
