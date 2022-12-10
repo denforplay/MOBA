@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df8f7d74e6d434d9ecf7f821db9cf96, type: 3}
   m_Name: MiddleHookEdge
   m_EditorClassIdentifier: 
-  _currentItem: {fileID: 11400000, guid: 410d759080dfc3d4981f004176baf86a, type: 2}
+  _currentItem: {fileID: 11400000, guid: 55da0aea4853780438d3927d368e8702, type: 2}
   _nextItemsEdgeConfigurations:
-  - {fileID: 11400000, guid: e95ad33a31bb08e4f9c21bbb3e5f2f15, type: 2}
+  - {fileID: 11400000, guid: 4753b9f51854edd48bce09b4337b9fe4, type: 2}

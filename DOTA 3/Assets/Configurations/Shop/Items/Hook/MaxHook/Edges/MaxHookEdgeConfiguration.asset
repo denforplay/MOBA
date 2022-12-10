@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df8f7d74e6d434d9ecf7f821db9cf96, type: 3}
   m_Name: MaxHookEdgeConfiguration
   m_EditorClassIdentifier: 
-  _currentItem: {fileID: 11400000, guid: 90d9a6ed152343f408e83705303e7a05, type: 2}
+  _currentItem: {fileID: 11400000, guid: caf9cb882aff63846ae73f6d5d3e3d36, type: 2}
   _nextItemsEdgeConfigurations: []

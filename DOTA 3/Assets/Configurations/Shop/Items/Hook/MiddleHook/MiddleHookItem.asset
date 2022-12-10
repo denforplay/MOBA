@@ -18,6 +18,6 @@ MonoBehaviour:
   _itemDescription: 
   _itemSprite: {fileID: -13184425, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:
-  - {fileID: 11400000, guid: f9e5a5f7ee761914ebad6ce231eaabec, type: 2}
-  - {fileID: 11400000, guid: e756f95b0e04d5449bb858711ed6e8db, type: 2}
-  - {fileID: 11400000, guid: 4c5c3a74921cf6243af9ff08ecb3f53a, type: 2}
+  - {fileID: 11400000, guid: ec04f4a67147ea54b8b0d62c78484e0d, type: 2}
+  - {fileID: 11400000, guid: bfa0c3d538b304a44a0c6811afc60d0c, type: 2}
+  - {fileID: 11400000, guid: d207889a966cd2344927db142957ff53, type: 2}

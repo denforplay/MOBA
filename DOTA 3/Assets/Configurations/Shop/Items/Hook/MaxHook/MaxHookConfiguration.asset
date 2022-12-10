@@ -18,4 +18,6 @@ MonoBehaviour:
   _itemDescription: 
   _itemSprite: {fileID: -516590069, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: d4e442e744c84a349bd965ce5ed02908, type: 2}
+  - {fileID: 11400000, guid: 9283e63cdc94f6047ab4f3a92deea201, type: 2}
+  - {fileID: 11400000, guid: cdc61fc60236fd44c9491eda5e735390, type: 2}
