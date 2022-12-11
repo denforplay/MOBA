@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 2
   _itemName: Armor 1
-  _cost: 75
+  _cost: 35
   _itemDescription: 
   _itemSprite: {fileID: 626206797, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:

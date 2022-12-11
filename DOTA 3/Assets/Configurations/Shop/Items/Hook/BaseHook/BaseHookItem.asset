@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 0
   _itemName: Spectral sickle
-  _cost: 50
+  _cost: 25
   _itemDescription: 
   _itemSprite: {fileID: 427606887, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:

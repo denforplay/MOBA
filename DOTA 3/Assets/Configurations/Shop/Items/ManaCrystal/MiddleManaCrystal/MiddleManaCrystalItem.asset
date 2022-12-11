@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 1
   _itemName: Lost Chapter
-  _cost: 675
+  _cost: 120
   _itemDescription: 
   _itemSprite: {fileID: 1782525070, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3b94d1b6434d40a899892fac87f097, type: 3}
   m_Name: MaxManaCrystalConfiguration
   m_EditorClassIdentifier: 
-  _itemType: 2
+  _itemType: 1
   _itemName: Everfrost
-  _cost: 1800
+  _cost: 300
   _itemDescription: 
   _itemSprite: {fileID: -311797018, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:

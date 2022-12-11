@@ -43,8 +43,7 @@ namespace Views.Towers
             _combatController.StartObserve();
             EventBusManager.GetInstance.Subscribe<OnGameEndedEvent>(Destroy);
         }
-        
-        
+
         public void RotateInDirection(Vector3 direction)
         {
             if (direction != Vector3.zero)

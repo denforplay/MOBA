@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 1
   _itemName: Sapphire Crystal
-  _cost: 150
+  _cost: 40
   _itemDescription: 
   _itemSprite: {fileID: 2033509617, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:

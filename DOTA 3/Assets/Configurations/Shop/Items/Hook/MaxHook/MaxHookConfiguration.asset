@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 0
   _itemName: Black mist scythe
-  _cost: 1500
+  _cost: 250
   _itemDescription: 
   _itemSprite: {fileID: -516590069, guid: 9de21ad72a6c4e14b9e06370886cdedc, type: 3}
   _itemValueConfigurations:

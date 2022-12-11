@@ -22,7 +22,7 @@ MonoBehaviour:
     beliefs persist in primitive cultures today."
   _speed: 13
   _maxHealth: 1000
-  _basePhysicalDamage: 50
+  _basePhysicalDamage: 30
   _baseMagicalDamage: 10
   _baseStrength: 5
   _baseDefense: 2
