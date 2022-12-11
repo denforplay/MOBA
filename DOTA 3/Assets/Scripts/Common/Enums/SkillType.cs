@@ -4,6 +4,6 @@
     {
         Dash,
         RangeDamage,
-        Self
+        Self,
     }
 }

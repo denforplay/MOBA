@@ -79,14 +79,50 @@ namespace Models
         private float _regenerateManaPerSecond;
         public event Action<float> OnMaxManaChanged;
         public event Action<float> OnManaChanged;
-        public float MaxMana => _maxMana;
+
+        public float MaxMana
+        {
+            get
+            {
+                var maxManaWithItem = _maxMana;
+                
+                for (int i = 0; i < _inventory.Items.Length; i++)
+                {
+                    var currentItem = _inventory.Items[i];
+
+                    if (currentItem is not null)
+                    {
+                        foreach (var valueConfig in currentItem.ValueConfigurations.Where(x => x.Characteristic == Characteristic.Mana))
+                        {
+                            switch (valueConfig.ItemValueType)
+                            {
+                                case ItemValueType.Value:
+                                {
+                                    maxManaWithItem += valueConfig.Value;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                SetMaxMana(maxManaWithItem);
+                return maxManaWithItem;
+            }
+        }
+
         public float CurrentMana => _currentMana;
         public void ChangeMana(float value)
         {
             _currentMana += value;
             OnManaChanged?.Invoke(_currentMana);
         }
-        
+
+        private void SetMaxMana(float value)
+        {
+            OnMaxManaChanged?.Invoke(value);
+        }
+
         #endregion
 
         #region Level-Experience
@@ -251,6 +287,11 @@ namespace Models
                     case SkillType.RangeDamage:
                     {
                         _skills.Add(new RangeDamageSkill(skill.Id, skill, this));
+                        continue;
+                    }
+                    case SkillType.Self:
+                    {
+                        _skills.Add(new FullRegenerateManaSkill(skill.Id, skill, this));
                         continue;
                     }
                 }

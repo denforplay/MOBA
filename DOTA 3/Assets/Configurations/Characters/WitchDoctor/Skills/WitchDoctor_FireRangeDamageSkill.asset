@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WitchDoctor_FireRangeDamageSkill
   m_EditorClassIdentifier: 
   _id: 1
-  _skillSprite: {fileID: 341611710, guid: 2ad9e28b8265520408000e374f34ce10, type: 3}
+  _skillSprite: {fileID: -172119012, guid: 2ad9e28b8265520408000e374f34ce10, type: 3}
   _countdownTime: 1
   _skillType: 1
   _skillAnimation: {fileID: 0}

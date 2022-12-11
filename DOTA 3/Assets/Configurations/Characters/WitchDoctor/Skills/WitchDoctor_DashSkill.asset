@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WitchDoctor_DashSkill
   m_EditorClassIdentifier: 
   _id: 0
-  _skillSprite: {fileID: 260905855, guid: 2ad9e28b8265520408000e374f34ce10, type: 3}
+  _skillSprite: {fileID: -1906301437, guid: 2ad9e28b8265520408000e374f34ce10, type: 3}
   _countdownTime: 5
   _skillType: 0
   _skillAnimation: {fileID: 0}

@@ -6,8 +6,6 @@ namespace Views.SkillControls
 {
     public class SelfSkillControl : SkillControlBase
     {
-        
-        
         public override void UpdateSkillView(Vector3 newPosition)
         {
         }

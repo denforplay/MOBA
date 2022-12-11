@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using Views;
+using Views.SkillControls;
 
 namespace Controllers
 {
@@ -39,6 +40,7 @@ namespace Controllers
             _skillObservers = new Dictionary<SkillType, ISkillObserver>();
             _skillObservers.Add(SkillType.Dash, new DirectedSkillObserver(_camera));
             _skillObservers.Add(SkillType.RangeDamage, new RangeTargetZoneSkillObserver(_camera));
+            _skillObservers.Add(SkillType.Self, new SelfSkillObserver());
         }
 
         public bool IsDestroyed => _characterView.IsDestroyed;

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LevelsConfiguration
   m_EditorClassIdentifier: 
   _levelsConfigurations:
-  - {fileID: 11400000, guid: 51a0e9fe1b2dcfd469c4028d4c434ef4, type: 2}
-  - {fileID: 11400000, guid: 139489eaadc53f04dbed0d699a9014ba, type: 2}
-  - {fileID: 11400000, guid: 352911efd27aa354fbcb50728d06af12, type: 2}
-  - {fileID: 11400000, guid: c435fbc95c5f5904e928956e5cb8a062, type: 2}
-  - {fileID: 11400000, guid: 800a973e5e6e2b449a458f1e2cd57187, type: 2}
+  - {fileID: 11400000, guid: 2652a3f14cc67da4b8aa8f7b0636a5f5, type: 2}
+  - {fileID: 11400000, guid: c492d66f92c086a43aedb321ee95cbd6, type: 2}
+  - {fileID: 11400000, guid: 8cddc065ba9d0a14aabac5bce484a312, type: 2}
+  - {fileID: 11400000, guid: 7cbedba667221ca4ca7c5ab2e2b666ee, type: 2}
+  - {fileID: 11400000, guid: 1c4f1cce0743df54db112cf607a748d0, type: 2}
