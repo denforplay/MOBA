@@ -20,7 +20,17 @@ namespace Views.Popups
         [SerializeField] private Button _shopButton;
         [SerializeField] private InventoryView _inventoryView;
         private CharacterView _characterView;
-
+        
+        public void SetLeftTeamCounter(int count)
+        {
+            _battlegroundPanel.SetLeftTeamCounter(count);
+        }
+        
+        public void SetRightTeamCounter(int count)
+        {
+            _battlegroundPanel.SetRightTeamCounter(count);
+        }
+        
         public void Initialize(CharacterView characterView)
         {
             _characterView = characterView;

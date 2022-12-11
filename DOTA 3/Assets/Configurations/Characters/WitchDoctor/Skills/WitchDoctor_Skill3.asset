@@ -15,3 +15,9 @@ MonoBehaviour:
   _id: 2
   _skillSprite: {fileID: -1571799431, guid: 2ad9e28b8265520408000e374f34ce10, type: 3}
   _countdownTime: 30
+  _skillType: 2
+  _skillAnimation: {fileID: 0}
+  _effectValue: 0
+  _range: 0
+  _manaCost: 0
+  _particle: {fileID: 0}

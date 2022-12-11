@@ -4,6 +4,7 @@ using Cinemachine;
 using Common.Enums;
 using Common.PopupSystem;
 using Configurations.Items;
+using Models;
 using UnityEngine;
 using Views.Abstracts;
 using Views.Abstracts.FactoryRequirements;
@@ -26,6 +27,8 @@ namespace Views.Popups
         private PopupSystem _popupSystem;
         private CharacterView _controlledCharacterView;
         private CinemachineVirtualCamera _virtualCamera;
+        private Counter _leftTeamCounter;
+        private Counter _rightTeamCounter;
 
         [Inject]
         public void Inject(PopupSystem popupSystem, CinemachineVirtualCamera virtualCamera, Camera camera)
@@ -43,8 +46,12 @@ namespace Views.Popups
 
         public void Initialize(List<CharacterInfo> leftTeamCharacters, List<CharacterInfo> rightTeamCharacters)
         {
+            _leftTeamCounter = new Counter();
+            _rightTeamCounter = new Counter();
             ConfigureActivePlayer(leftTeamCharacters[0]);
             ConfigureTeams(leftTeamCharacters, rightTeamCharacters);
+            _rightTeamCounter.OnCountChanged += _hudPopup.SetRightTeamCounter;
+            _leftTeamCounter.OnCountChanged += _hudPopup.SetLeftTeamCounter;
         }
 
         private void ConfigureActivePlayer(CharacterInfo info)
@@ -55,11 +62,26 @@ namespace Views.Popups
             _controlledCharacterView.Inject(_popupSystem, _projectileViewFactory);
             _hudPopup = _popupSystem.SpawnPopup<HudPopup>(0);
             _controlledCharacterView.InitializePlayer(_camera, spawnPosition, Team.Blue);
+            var team = _controlledCharacterView.Team;
+            _controlledCharacterView.Character.OnHealthEnded +=
+                () => AddPointToOppositeTeam(team);
             var characterTransform = _controlledCharacterView.transform;
             _virtualCamera.LookAt = characterTransform;
             _virtualCamera.Follow = characterTransform;
             _hudPopup.Initialize(_controlledCharacterView);
             _hudPopup.OnShopCalled += ShowShopPopup;
+        }
+
+        private void AddPointToOppositeTeam(Team team)
+        {
+            if (team == Team.Blue)
+            {
+                _rightTeamCounter.AddCount(1);
+            }
+            else
+            {
+                _leftTeamCounter.AddCount(1);
+            }
         }
         
         private void ConfigureTeams(List<CharacterInfo> leftTeamCharacters, List<CharacterInfo> rightTeamCharacters)
@@ -72,6 +94,8 @@ namespace Views.Popups
                 aiCharacterView.Inject(_popupSystem, _projectileViewFactory);
                 var startWayPoint = GetStartWayPoint(_wayPointsToPlayerNumber[i], Direction.Right);
                 aiCharacterView.InitializeAI(_camera, spawnPosition, startWayPoint, Team.Blue, Direction.Right);
+                var team = aiCharacterView.Team;
+                aiCharacterView.Character.OnHealthChanged += _ => AddPointToOppositeTeam(team);
             }
             
             for (int i = 0; i < rightTeamCharacters.Count; i++)
@@ -82,6 +106,8 @@ namespace Views.Popups
                 aiCharacterView.Inject(_popupSystem, _projectileViewFactory);
                 var startWayPoint = GetStartWayPoint(_wayPointsToPlayerNumber[i], Direction.Left);
                 aiCharacterView.InitializeAI(_camera, spawnPosition, startWayPoint, Team.Red, Direction.Left);
+                var team = aiCharacterView.Team;
+                aiCharacterView.Character.OnHealthChanged += _ => AddPointToOppositeTeam(team);
             }
             
             _hudPopup.InitializeBattleGroundPanel(leftTeamCharacters, rightTeamCharacters);

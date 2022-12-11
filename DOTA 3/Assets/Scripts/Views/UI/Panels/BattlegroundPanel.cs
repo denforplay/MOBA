@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Views.UI.Images;
 using CharacterInfo = Configurations.Character.CharacterInfo;
 
@@ -13,6 +12,16 @@ namespace Views.UI.Panels
         [SerializeField] private TextMeshProUGUI _rightTeamCounterText;
         [SerializeField] private List<CharacterBattlegroundInfoImage> _leftTeamImages;
         [SerializeField] private List<CharacterBattlegroundInfoImage> _rightTeamImages;
+
+        public void SetLeftTeamCounter(int count)
+        {
+            _leftTeamCounterText.text = count.ToString();
+        }
+        
+        public void SetRightTeamCounter(int count)
+        {
+            _rightTeamCounterText.text = count.ToString();
+        }
         
         public void Initialize(List<CharacterInfo> leftTeamCharacters, List<CharacterInfo> rightTeamCharacters)
         {
